@@ -1,7 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRCREV = "398e8169ea6d3d854af0173b1e66bf13c124f901"
-
 SRC_URI += "  \
 			file://smbnetfs.common.conf \
 			file://smbnetfs.user.conf \
