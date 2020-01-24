@@ -7,3 +7,6 @@
 [submodule "openembedded-core"]
 	path = openembedded-core
 	url = git://git.openembedded.org/openembedded-core
+[submodule "meta-python2"]
+	path = meta-python2
+	url = https://git.openembedded.org/meta-python2
