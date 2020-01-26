@@ -115,7 +115,6 @@ SRC_URI = " ${GITHUB_URI}/OpenVisionE2/enigma2-openvision.git;branch=${ENIGMA2_B
 			file://006-make-PLi-FullNightHD-skin-default.patch \
 			file://011-fix-hardware-name.patch \
 			file://012-set-default-hide-channel-list-radio.patch \
-			file://013-Revert-startwizard.xml-Add-PESpeedUp.patch \
 			"
 
 LDFLAGS_prepend = " -lxml2 "
