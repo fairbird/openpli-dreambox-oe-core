@@ -8,7 +8,7 @@ require conf/license/openpli-gplv2.inc
 DISTRO_FEED_PREXIX = "openpli"
 
 # feeds to be generated
-FEEDS = "picons 3rd-party 3rd-party-${TUNE_PKGARCH} 3rd-party-${MACHINE}"
+FEEDS = "picons 3rd-party 3rd-party-${TUNE_PKGARCH}"
 
 # the 3rd party plugins originate here.
 DISTRO_FEED_URI = "http://downloads.openpli.org/feeds/openpli-7-release"
