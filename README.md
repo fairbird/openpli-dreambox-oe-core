@@ -30,7 +30,7 @@ cd openvision-dm920-oe-core
 
 make image
 ```
-When the build is finished, the image openvision-enigma2-9.1-dm920.rootfs.tar.bz2 is in the:
+When the build is finished, the image openvision-enigma2-9.3-dm920.rootfs.tar.bz2 is in the:
 ```
 build/tmp/deploy/images/dm920/
 ```
@@ -51,7 +51,7 @@ Create symlinks to your build-environment:
 ```
 cd /var/www/html
 
-sudo mkdir feeds;cd feeds;sudo mkdir openvision-9.2;cd openvision-9.2;
+sudo mkdir feeds;cd feeds;sudo mkdir openvision-9.3;cd openvision-9.3;
 
 sudo ln -s /home/<your username>/openvision-dm920-oe-core/build/tmp/deploy/ipk/dm920 dm920 
 
