@@ -4,9 +4,9 @@ https://github.com/OpenVisionE2/openvision-oe
 
 In comparison to official Open Vision this build environment has:<br>
 -Submodules bitbake, openembedded-core and meta-openembedded from master branch,<br>
-&nbsp;with git snapshot of January 24th, 2019.<br>
--GCC 9.2.0<br>
--Glibc 2.30<br>
+&nbsp;with git snapshot of March 14th, 2020.<br>
+-GCC 9.3.0<br>
+-Glibc 2.31<br>
 -GStreamer 1.17.0.1<br>
 -Python 2.7.17<br>
 -OpenSSL 1.1.1d<br>
@@ -16,7 +16,7 @@ and more.<br>
 <br>
 Feel free to send pull-request.
 
-Tested on Ubuntu 19.10.
+Tested with Ubuntu 20.04.
 <br>
 <br>
 Dependencies:
