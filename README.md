@@ -2,7 +2,6 @@ Experimental build environment for dreambox 920 based on Open Vision (unofficial
 
 https://github.com/OpenVisionE2/openvision-oe
 
-In comparison to official Open Vision this build environment has:<br>
 -Submodules bitbake, openembedded-core and meta-openembedded from master branch,<br>
 &nbsp;with git snapshot of March 14th, 2020.<br>
 -GCC 9.3.0<br>
@@ -10,7 +9,7 @@ In comparison to official Open Vision this build environment has:<br>
 -GStreamer 1.17.0.1<br>
 -Python 2.7.17<br>
 -OpenSSL 1.1.1d<br>
--Busybox 1.31.0<br>
+-Busybox 1.31.1<br>
 and more.<br>
 <br>
 <br>
