@@ -7,5 +7,3 @@ RDEPENDS_${PN}-client = "rpcbind"
 # The startup script does a check that doesn't work, replace it. It's
 # also overly complex, so simplified it too.
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-
-SRC_URI_remove = "file://0001-Don-t-build-tools-with-CC_FOR_BUILD.patch"
