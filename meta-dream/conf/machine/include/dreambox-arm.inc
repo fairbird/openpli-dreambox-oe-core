@@ -42,6 +42,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     dreambox-dvb-modules-${MACHINE} \
     libpagecache \
     libpassthrough \
+    flash-nrf52 \
     "
 
 KERNEL_MODULE_AUTOLOAD += "xfs"
