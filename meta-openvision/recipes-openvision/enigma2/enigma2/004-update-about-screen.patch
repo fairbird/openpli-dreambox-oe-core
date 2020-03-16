@@ -1,15 +1,25 @@
-Get rid of flash type, version, revision and VisionModule since we don't have versioninfo.bb
+Get rid of flash type, revision and VisionModule since we don't have versioninfo.bb
 and we don't use a revision number.
 Also we known it's a normal image and not a small flash image.
-Use the old way to display version number (after image name).
-Add 'unofficial'  to image name to make it clear it's not an official Open Vision image.
-Restore time of update.
 
+diff --git a/lib/python/Components/About.py b/lib/python/Components/About.py
+index f53f11960..e8b0b10a7 100644
+--- a/lib/python/Components/About.py
++++ b/lib/python/Components/About.py
+@@ -114,7 +114,7 @@ def getHardwareBrand():
+ 
+ def getImageTypeString():
+ 	try:
+-		image_type = open("/etc/issue").readlines()[-2].strip()[:-6]
++		image_type = open("/etc/issue").readlines()[-2].strip()[-9:-6]
+ 		return image_type.capitalize()
+ 	except:
+ 		return _("undefined")
 diff --git a/lib/python/Screens/About.py b/lib/python/Screens/About.py
-index f4e24db0e..9a5d65e3c 100644
+index 1626daa88..1239870b7 100644
 --- a/lib/python/Screens/About.py
 +++ b/lib/python/Screens/About.py
-@@ -44,7 +44,6 @@ class About(Screen):
+@@ -45,7 +45,6 @@ class About(Screen):
  		AboutText += _("CPU architecture: ") + about.getCPUArch() + "\n"
  		if boxbranding.getImageFPU() != "":
  			AboutText += _("FPU: ") + boxbranding.getImageFPU() + "\n"
@@ -17,7 +27,7 @@ index f4e24db0e..9a5d65e3c 100644
  
  		if boxbranding.getImageArch() == "aarch64":
  			if boxbranding.getHaveMultiLib() == "True":
-@@ -50,17 +49,11 @@ class About(Screen):
+@@ -53,17 +52,11 @@ class About(Screen):
  			else:
  				AboutText += _("MultiLib: ") + _("No") + "\n"
  
@@ -30,7 +40,7 @@ index f4e24db0e..9a5d65e3c 100644
 -		AboutText += _("Open Vision revision: ") + about.getVisionRevision() + "\n"
 -		AboutText += _("Open Vision module: ") + about.getVisionModule() + "\n"
 -
-+		AboutText += _("Image: ") + "Open Vision\n"
++		AboutText += _("Image: ") + "Open Vision " + about.getImageTypeString() + "\n"
  		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 -		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 +		ImageVersion = _("Last update: ") + about.getImageVersionString()
@@ -39,4 +49,3 @@ index f4e24db0e..9a5d65e3c 100644
  
  		# [WanWizard] Removed until we find a reliable way to determine the installation date
  		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
-
