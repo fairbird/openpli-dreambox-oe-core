@@ -1,11 +1,12 @@
-MODULE = "OpenWebif"
 DESCRIPTION = "Control your receiver with a browser"
+MAINTAINER = "Open Vision Developers"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README;firstline=10;lastline=12;md5=9c14f792d0aeb54e15490a28c89087f7"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "python-cheetah-native"
+
 RDEPENDS_${PN} = "\
 	aio-grab \
 	python-cheetah \
@@ -19,12 +20,27 @@ RDEPENDS_${PN} = "\
 	python-unixadmin \
 	"
 
-inherit gitpkgv
+inherit gitpkgv distutils-openplugins gettext
 
-require openplugins-distutils.inc
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
 
-PV = "1+git${SRCPV}"
-PKGV = "1+git${GITPKGV}"
+SRC_URI = "git://github.com/OpenVisionE2/OpenWebif.git;protocol=git"
+
+S="${WORKDIR}/git"
+
+do_compile() {
+	cheetah-compile -R --nobackup ${S}/plugin
+}
+
+PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/OpenWebif"
+do_install_append() {
+	install -d ${D}${PLUGINPATH}
+	cp -r ${S}/plugin/* ${D}${PLUGINPATH}
+	chmod a+rX ${D}${PLUGINPATH}
+}
+
+FILES_${PN} = "${PLUGINPATH}"
 
 python do_cleanup () {
 
@@ -36,7 +52,7 @@ python do_cleanup () {
 
     target_box = 'dm920.png'
     target_remote = 'dmm2.png'
-    target_keymap = 'dmm2.html'
+    target_keymap = 'dmm2.png'
     exception = ''
 
     for root, dirs, files in os.walk(images + 'boxes', topdown=False):
@@ -57,23 +73,9 @@ python do_cleanup () {
 
 addtask do_cleanup after do_populate_sysroot before do_package
 
-# Just a quick hack to "compile" it
-do_compile() {
-	cheetah-compile -R --nobackup ${S}/plugin
-	python2 -O -m compileall -d ${PLUGINPATH} ${S}/plugin
-}
-
-PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/${MODULE}"
-do_install_append() {
-	install -d ${D}${PLUGINPATH}
-	cp -r ${S}/plugin/* ${D}${PLUGINPATH}
-	chmod a+rX ${D}${PLUGINPATH}
-}
-
-FILES_${PN}-src += "${PLUGINPATH}/controllers/views/*.tmpl ${PLUGINPATH}/controllers/views/*/*.tmpl ${PLUGINPATH}/controllers/views/*/*/*.tmpl"
-FILES_${PN} = "${PLUGINPATH}"
-
-PACKAGES =+ "${PN}-vxg"
-DESCRIPTION_${PN}-vxg = "Adds Google Chrome support to OpenWebif's WebTV"
-FILES_${PN}-vxg = "${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/vxg"
-RDEPENDS_${PN}-vxg =+ "${PN}"
+RPROVIDES_${PN} =+ "${PN}-terminal"
+DESCRIPTION_${PN}-terminal = "CLI for OpenWebif"
+RDEPENDS_${PN}-terminal = "${PN} shellinabox"
+RREPLACES_${PN}-terminal = "enigma2-plugin-extensions-openwebif-terminal"
+RCONFLICTS_${PN}-terminal = "enigma2-plugin-extensions-openwebif-terminal"
+RPROVIDES_${PN}-terminal =+ "enigma2-plugin-extensions-openwebif-terminal"

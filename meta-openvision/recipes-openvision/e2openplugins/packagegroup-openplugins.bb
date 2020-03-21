@@ -26,7 +26,6 @@ DEPENDS = " \
 	enigma2-plugin-extensions-newsreader \
 	enigma2-plugin-extensions-nfsserver \
 	enigma2-plugin-extensions-oggisport \
-	enigma2-plugin-extensions-openwebif \
 	enigma2-plugin-extensions-oroscopoitalia \
 	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-permanentvfdclock \
