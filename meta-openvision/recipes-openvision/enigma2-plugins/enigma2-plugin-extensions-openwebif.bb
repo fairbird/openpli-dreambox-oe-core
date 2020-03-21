@@ -52,7 +52,7 @@ python do_cleanup () {
 
     target_box = 'dm920.png'
     target_remote = 'dmm2.png'
-    target_keymap = 'dmm2.png'
+    target_keymap = 'dmm2.html'
     exception = ''
 
     for root, dirs, files in os.walk(images + 'boxes', topdown=False):
