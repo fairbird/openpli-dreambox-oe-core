@@ -1,0 +1,19 @@
+diff -Naur serviceapp-develop/src/serviceapp/serviceapp.cpp serviceapp-develop-PersianPrince/src/serviceapp/serviceapp.cpp
+--- serviceapp-develop/src/serviceapp/serviceapp.cpp	2019-08-06 21:25:21.000000000 +0430
++++ serviceapp-develop-PersianPrince/src/serviceapp/serviceapp.cpp	2020-04-01 08:16:59.067568178 +0430
+@@ -1350,15 +1350,6 @@
+ 			}
+ 		}
+ 		break;
+-	case iServiceInformation::sFileSize:
+-		{
+-			struct stat s;
+-			if (stat(ref.path.c_str(), &s) == 0)
+-			{
+-				return s.st_size;
+-			}
+-		}
+-		break;
+ 	}
+ 	return iServiceInformation::resNA;
+ }
