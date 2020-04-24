@@ -1,0 +1,55 @@
+From 6465e96a344720ccc8b95b28497f2bf2019f430c Mon Sep 17 00:00:00 2001
+From: fairbird <rrrr53@hotmail.com>
+Date: Fri, 24 Apr 2020 15:19:10 +0300
+Subject: [PATCH] Add_option_to_choose_style_of_VirtualKeyBoard
+
+---
+
+diff --git a/src/YouTubeSearch.py b/src/YouTubeSearch.py
+index 81e97ff..0d37513 100644
+--- a/src/YouTubeSearch.py
++++ b/src/YouTubeSearch.py
+@@ -258,8 +258,16 @@ class YouTubeSearch(Screen, ConfigListScreen):
+ 
+ 	def openKeyboard(self):
+ 		self['config'].getCurrent()[1].help_window.instance.hide()
+-		self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
+-			text = self.searchValue.value)
++		self.VirtualKeyBoard = config.plugins.YouTube.VirtualKeyBoard
++		if self.VirtualKeyBoard == "YouTube":
++			self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
++				text = self.searchValue.value)
++		elif self.VirtualKeyBoard == "Image":
++			from Screens.VirtualKeyBoard import VirtualKeyBoard
++			self.session.openWithCallback(self.keyBoardCallback, VirtualKeyBoard, '')
++		else:
++			self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
++				text = self.searchValue.value)
+ 
+ 	def keyBoardCallback(self, name):
+ 		config = self['config'].getCurrent()[1]
+diff --git a/src/YouTubeUi.py b/src/YouTubeUi.py
+index aa78217..deeae6e 100644
+--- a/src/YouTubeUi.py
++++ b/src/YouTubeUi.py
+@@ -113,6 +113,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='quit', choices=[
+ 	('playprev', _('Play previous'))])
+ config.plugins.YouTube.onMovieStop = ConfigSelection(default='ask', choices=[
+ 	('ask', _('Ask user')), ('quit', _('Return to list'))])
++config.plugins.YouTube.VirtualKeyBoard = ConfigSelection(default='YouTube', choices=[
++	('YouTube', _('YouTube VirtualKeyBoard')), ('Image', _('Image VirtualKeyBoard'))])
+ config.plugins.YouTube.login = ConfigYesNo(default=False)
+ config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
+ config.plugins.YouTube.mergeFiles = ConfigYesNo(default=False)
+@@ -1530,6 +1532,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
+ 		configlist.append(getConfigListEntry(_('Merge downloaded files:'),
+ 			config.plugins.YouTube.mergeFiles,
+ 			_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
++		configlist.append(getConfigListEntry(_('Choose VirtualKeyBoard Style:'),
++			config.plugins.YouTube.VirtualKeyBoard,
++			_('You can choose what style of VirtualKeyBoard to use it.\nYouTube OR Image (VirtualKeyBoard).')))
+ 
+ 		self['config'].list = configlist
+ 		self['config'].l.setList(configlist)
+-- 
+2.20.1
