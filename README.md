@@ -8,7 +8,7 @@ https://github.com/OpenVisionE2/openvision-oe
 -Glibc 2.31<br>
 -GStreamer 1.17.0.1<br>
 -Python 2.7.18<br>
--OpenSSL 1.1.1d<br>
+-OpenSSL 1.1.1f<br>
 -Busybox 1.31.1<br>
 and more.<br>
 <br>
