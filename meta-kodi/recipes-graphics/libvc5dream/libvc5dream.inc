@@ -36,4 +36,6 @@ do_license() {
 	mv ${WORKDIR}/LICENSE-CLOSE ${B}/LICENSE-CLOSE
 }
 
+INSANE_SKIP_${PN} += "installed-vs-shipped"
+
 addtask do_license before do_populate_lic after do_unpack
