@@ -53,7 +53,7 @@ BBLAYERS ?= \
 	$(CURDIR)/openembedded-core/meta \
 	$(CURDIR)/meta-python2 \
 	$(CURDIR)/meta-openvision \
-	$(CURDIR)/meta-dream \
+	$(CURDIR)/meta-dreambox \
 	$(CURDIR)/meta-kodi
 
 CONFFILES = \
