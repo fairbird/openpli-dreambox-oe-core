@@ -1,9 +1,9 @@
 diff --git a/mytest.py b/mytest.py
-index 836ddabcf..47c862bc9 100644
+index f2c29c634..c250b4819 100644
 --- a/mytest.py
 +++ b/mytest.py
-@@ -23,12 +23,6 @@ enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
- enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
+@@ -30,12 +30,6 @@ if getVisionVersion().startswith("10"):
+ 	print("[mytest] All network interfaces loaded.")
  
  from Components.SystemInfo import SystemInfo
 -if not SystemInfo["OpenVisionModule"]:
