@@ -78,6 +78,7 @@ DEPENDS += " \
 IMAGE_INSTALL += " \
 	aio-grab \
 	cdtextinfo \
+	dhrystone \
 	enigma2 \
 	libavahi-client \
 	settings-autorestore \
