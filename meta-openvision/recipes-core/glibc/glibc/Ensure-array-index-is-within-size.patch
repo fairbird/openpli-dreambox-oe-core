@@ -1,0 +1,35 @@
+diff --git a/iconv/loop.c b/iconv/loop.c
+index 9f7570d591..8a1db97783 100644
+--- a/iconv/loop.c
++++ b/iconv/loop.c
+@@ -420,7 +420,7 @@ SINGLE(LOOPFCT) (struct __gconv_step *step,
+ #  else
+       /* We don't have enough input for another complete input
+ 	 character.  */
+-      while (inptr < inend)
++      while (inptr < inend && inlen < 4)
+ 	state->__value.__wchb[inlen++] = *inptr++;
+ #  endif
+ 
+@@ -486,7 +486,7 @@ SINGLE(LOOPFCT) (struct __gconv_step *step,
+       assert (inend - inptr <= sizeof (state->__value));
+       state->__count = (state->__count & ~7) | (inend - inptr);
+       inlen = 0;
+-      while (inptr < inend)
++      while (inptr < inend && inlen < 4)
+ 	state->__value.__wchb[inlen++] = *inptr++;
+ #  endif
+     }
+diff --git a/iconv/skeleton.c b/iconv/skeleton.c
+index 1dc642e2fc..bc226af8cb 100644
+--- a/iconv/skeleton.c
++++ b/iconv/skeleton.c
+@@ -798,7 +798,7 @@ FUNCTION_NAME (struct __gconv_step *step, struct __gconv_step_data *data,
+ 	  assert (inend - *inptrp < 4);
+ 
+ 	  size_t cnt;
+-	  for (cnt = 0; *inptrp < inend; ++cnt)
++	  for (cnt = 0; *inptrp < inend && cnt < 4; ++cnt)
+ 	    data->__statep->__value.__wchb[cnt] = *(*inptrp)++;
+ 	  data->__statep->__count &= ~7;
+ 	  data->__statep->__count |= cnt;
