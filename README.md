@@ -6,7 +6,7 @@ https://github.com/OpenVisionE2/openvision-oe
 &nbsp;with git snapshot of June 1st, 2020.<br>
 -GCC 10.1.0<br>
 -Glibc 2.31<br>
--GStreamer 1.17.0.1<br>
+-GStreamer 1.17.1.1<br>
 -Python 2.7.18<br>
 -OpenSSL 1.1.1g<br>
 -Busybox 1.31.1<br>
