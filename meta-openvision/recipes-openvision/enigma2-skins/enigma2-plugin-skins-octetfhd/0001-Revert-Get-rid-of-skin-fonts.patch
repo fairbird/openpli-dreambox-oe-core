@@ -1,21 +1,21 @@
 diff --git a/usr/share/enigma2/OctEtFHD/skin.xml b/usr/share/enigma2/OctEtFHD/skin.xml
-index 5c4fe4f..a5fb639 100644
+index 20789fd..02f3c82 100644
 --- a/usr/share/enigma2/OctEtFHD/skin.xml
 +++ b/usr/share/enigma2/OctEtFHD/skin.xml
 @@ -94,11 +94,11 @@
- 	<font filename="tuxtxt.ttf" name="Console" scale="100" />
+ 	<font filename="tuxtxt.ttf" name="Console" scale="100"/>
  	<font filename="andale.ttf" name="Fixed" scale="100"/>
- 	<font filename="nmsbd.ttf" name="Arial" scale="100" />
--	<font filename="OpenSans-Regular.ttf" name="Regular" scale="95" />
--	<font filename="OpenSans-Regular.ttf" name="RegularLight" scale="95" />
--	<font filename="OpenSans-Regular.ttf" name="EL_Standard" scale="100" />
--	<font filename="segoe-ui-bold.ttf" name="FHD" scale="100" />
--	<font filename="OpenSans-Bold.ttf" name="RegularBold" scale="100" />
-+	<font filename="/usr/share/enigma2/OctEtFHD/fonts/OpenSans-Regular.ttf" name="Regular" scale="95" />
-+	<font filename="/usr/share/enigma2/OctEtFHD/fonts/OpenSans-Regular.ttf" name="RegularLight" scale="95" />
-+	<font filename="/usr/share/enigma2/OctEtFHD/fonts/OpenSans-Regular.ttf" name="EL_Standard" scale="100" />
-+	<font filename="/usr/share/enigma2/OctEtFHD/fonts/XHD.ttf" name="FHD" scale="100" />
-+	<font filename="/usr/share/enigma2/OctEtFHD/fonts/FHDBold.ttf" name="RegularBold" scale="100" />
- 	<alias name="ChoiceList" font="FHD" size="30" height="50" />
- 	<alias name="Body" font="FHD" size="30" height="50" />
- 	<alias name="TextNormal" font="FHD" size="30" height="50" />
+ 	<font filename="nmsbd.ttf" name="Arial" scale="100"/>
+-	<font filename="OpenSans-Regular.ttf" name="Regular" scale="95"/>
+-	<font filename="OpenSans-Regular.ttf" name="RegularLight" scale="95"/>
+-	<font filename="OpenSans-Regular.ttf" name="EL_Standard" scale="100"/>
+-	<font filename="segoe-ui-bold.ttf" name="FHD" scale="100"/>
+-	<font filename="OpenSans-Bold.ttf" name="RegularBold" scale="100"/>
++	<font filename="/usr/share/enigma2/OctEtFHD/fonts/OpenSans-Regular.ttf" name="Regular" scale="95"/>
++	<font filename="/usr/share/enigma2/OctEtFHD/fonts/OpenSans-Regular.ttf" name="RegularLight" scale="95"/>
++	<font filename="/usr/share/enigma2/OctEtFHD/fonts/OpenSans-Regular.ttf" name="EL_Standard" scale="100"/>
++	<font filename="/usr/share/enigma2/OctEtFHD/fonts/segoe-ui-bold.ttf" name="FHD" scale="100"/>
++	<font filename="/usr/share/enigma2/OctEtFHD/fonts/OpenSans-Bold.ttf" name="RegularBold" scale="100"/>
+ 	<alias name="ChoiceList" font="FHD" size="25" height="45"/>
+ 	<alias name="Body" font="FHD" size="30" height="50"/>
+ 	<alias name="TextNormal" font="FHD" size="30" height="50"/>
