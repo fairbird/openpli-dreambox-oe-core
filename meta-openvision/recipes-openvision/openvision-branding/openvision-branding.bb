@@ -1,11 +1,11 @@
 DESCRIPTION = "Open Vision branding lib"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-DEPENDS = "python3"
+DEPENDS = "python"
 
 require conf/license/openvision-gplv2.inc
 
-inherit autotools-brokensep gitpkgv python3native
+inherit autotools-brokensep gitpkgv pythonnative
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
