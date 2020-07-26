@@ -10,10 +10,6 @@ inherit autotools-brokensep gitpkgv pythonnative
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-PR[vardepsexclude] += "DATE"
-
-do_configure[nostamp] = "1"
-
 SRC_URI="git://github.com/OpenVisionE2/branding-module.git;protocol=git"
 
 S = "${WORKDIR}/git"
