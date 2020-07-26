@@ -1,0 +1,15 @@
+diff --git a/lib/python/Screens/About.py b/lib/python/Screens/About.py
+index 4ca9cf0d3..9b176652d 100644
+--- a/lib/python/Screens/About.py
++++ b/lib/python/Screens/About.py
+@@ -80,7 +80,9 @@ class About(Screen):
+ 		EnigmaVersion = _("Enigma2 version: ") + EnigmaVersion
+ 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
+ 		AboutText += "\n" + EnigmaVersion + "\n"
+-		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
++		ImageVersion = _("Last update: ") + about.getImageVersionString()
++		self["ImageVersion"] = StaticText(ImageVersion)
++		AboutText += ImageVersion + "\n"
+ 		AboutText += _("Enigma2 (re)starts: %d\n") % config.misc.startCounter.value
+ 		AboutText += _("Enigma2 debug level: %d\n") % eGetEnigmaDebugLvl()
+ 
