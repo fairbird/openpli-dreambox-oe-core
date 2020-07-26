@@ -97,3 +97,6 @@ IMAGE_CMD_tar_append = ";\
     rm -f *.rootfs.manifest; \
     rm -f .manifest; \
     "
+
+STB_PLATFORM = "dm4kgen"
+BOX_BRAND = "dreambox"
