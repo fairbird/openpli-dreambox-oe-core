@@ -7,5 +7,4 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
 
 SRC_URI = " git://anongit.freedesktop.org/gstreamer/gst-plugins-good;branch=master \
 			file://001-gstrtpmp4gpay-set-dafault-value-for-MPEG4-without-co.patch \
-			file://002-Remove-orc-directive.patch \
 "
