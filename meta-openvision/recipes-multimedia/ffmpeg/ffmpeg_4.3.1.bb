@@ -28,7 +28,6 @@ SRC_URI = "git://github.com/FFmpeg/FFmpeg.git \
 "
 
 SRC_URI_append = "\
-		file://01-mips64_cpu_detection.patch \
 		file://02-fix-hls.patch \
 		file://03-buffer-size.patch \
 		file://04-aac.patch \
@@ -42,8 +41,8 @@ S = "${WORKDIR}/git"
 
 inherit gitpkgv autotools pkgconfig
 
-PV = "4.2.3+git${SRCPV}"
-PKGV = "4.2.3+git${GITPKGV}"
+PV = "4.3.1+git${SRCPV}"
+PKGV = "4.3.1+git${GITPKGV}"
 
 # Build fails when thumb is enabled: https://bugzilla.yoctoproject.org/show_bug.cgi?id=7717
 ARM_INSTRUCTION_SET = "arm"
