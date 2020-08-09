@@ -100,3 +100,4 @@ IMAGE_CMD_tar_append = ";\
 
 STB_PLATFORM = "dm4kgen"
 BOX_BRAND = "dreambox"
+KERNELVERSION = "3.14"
