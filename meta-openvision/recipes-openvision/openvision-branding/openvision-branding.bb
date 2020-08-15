@@ -68,6 +68,8 @@ EXTRA_OECONF = " \
     --with-socfamily="${SOC_FAMILY}" \
     --with-vfd-symbol="${HAVE_VFDSYMBOL}" \
     --with-kernelversion="${KERNELVERSION}" \
+    --with-rctype="${RCTYPE}" \
+    --with-rcname="${RCNAME}" \
     "
 
 FILES_${PN} = "${libdir}/enigma2/python/*.so"
