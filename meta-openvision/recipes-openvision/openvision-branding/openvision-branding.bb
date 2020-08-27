@@ -70,6 +70,7 @@ EXTRA_OECONF = " \
     --with-kernelversion="${KERNELVERSION}" \
     --with-rctype="${RCTYPE}" \
     --with-rcname="${RCNAME}" \
+    --with-rcidnum="${RCIDNUM}" \
     "
 
 FILES_${PN} = "${libdir}/enigma2/python/*.so"
