@@ -12,12 +12,12 @@ PKGV = "1.20+git${GITPKGV}"
 SRC_URI = "git://github.com/OpenVisionE2/oscam.git;protocol=https"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/enigma2-plugin-softcams-oscam:"
-PATCHREV = "f56e693c449222be715f30f7d154dffdcf108c99"
+PATCHREV = "5a2b9ca596d25197db5cc12da2723a3749827b43"
 PR = "r798"
 SRC_URI += "https://raw.githubusercontent.com/oscam-emu/oscam-emu/${PATCHREV}/oscam-emu.patch?${PATCHREV};downloadfilename=oscam-emu.${PATCHREV}.patch;name=emu;striplevel=0"
 
-SRC_URI[emu.md5sum] = "557659e64a0e3dfd6e2aee01bde7bd7d"
-SRC_URI[emu.sha256sum] = "2df2505a5b56dd3b73d9be15577ea65cd524cc81598f966b8efc1b3ac1919489"
+SRC_URI[emu.md5sum] = "ab7431f34d1b151f1e6f67771fda88d0"
+SRC_URI[emu.sha256sum] = "3f0db45a52d3226fe26c914d298a67b359935a9d918775c5b15a1c765f9775bf"
 
 DEPENDS = "libusb openssl"
 
