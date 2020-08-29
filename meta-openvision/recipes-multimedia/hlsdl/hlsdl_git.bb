@@ -11,7 +11,9 @@ PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/e2iplayer/hlsdl.git;protocol=git"
+SRC_URI = " git://github.com/e2iplayer/hlsdl.git;protocol=git \
+			file://make-hls-args-extern.patch \
+"
 
 S = "${WORKDIR}/git/"
 
