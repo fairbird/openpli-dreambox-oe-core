@@ -1,0 +1,25 @@
+diff --git a/src/http.c b/src/http.c
+index 815ac1b..07abc08 100644
+--- a/src/http.c
++++ b/src/http.c
+@@ -46,6 +46,8 @@
+ #define PROTOCOL_TYPE_PRE_SZ  11   /* for the str length of "http-get:*:" */
+ #define PROTOCOL_TYPE_SUFF_SZ 2    /* for the str length of ":*" */
+ 
++struct UpnpVirtualDirCallbacks virtual_dir_callbacks;
++
+ struct web_file_t {
+   char *fullpath;
+   off_t pos;
+diff --git a/src/http.h b/src/http.h
+index 0e329a4..3f5cb6f 100644
+--- a/src/http.h
++++ b/src/http.h
+@@ -25,6 +25,6 @@
+ #include <upnp/upnp.h>
+ #include <upnp/upnptools.h>
+ 
+-struct UpnpVirtualDirCallbacks virtual_dir_callbacks;
++extern struct UpnpVirtualDirCallbacks virtual_dir_callbacks;
+ 
+ #endif /* _HTTP_H_ */
