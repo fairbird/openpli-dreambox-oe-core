@@ -1,0 +1,36 @@
+diff --git a/scan.c b/scan.c
+index 2246f49..eba776f 100644
+--- a/scan.c
++++ b/scan.c
+@@ -89,6 +89,9 @@
+ 
+ static char demux_devname[80];
+ 
++struct transponder __attribute__((packed))  transponder_t, * p_transponder_t;
++struct service service_t, * p_service_t; 
++
+ struct w_scan_flags flags = {
+   0,                // readback value w_scan version {YYYYMMDD}
+   SCAN_TERRESTRIAL, // scan type
+diff --git a/si_types.h b/si_types.h
+index e20b9bd..1b67409 100644
+--- a/si_types.h
++++ b/si_types.h
+@@ -114,7 +114,7 @@ struct service {
+   uint32_t logical_channel_number;
+   uint8_t  running;
+   void   * priv;
+-} service_t, * p_service_t;
++} extern service_t, * p_service_t;
+ 
+ /*******************************************************************************
+ /* transponder type.
+@@ -201,7 +201,7 @@ struct transponder {
+   /*----------------------------*/
+   char * network_name;
+   network_change_t network_change;
+-} __attribute__((packed))  transponder_t, * p_transponder_t;
++} extern __attribute__((packed))  transponder_t, * p_transponder_t;
+ 
+ /*******************************************************************************
+ /* satellite channel routing type.
