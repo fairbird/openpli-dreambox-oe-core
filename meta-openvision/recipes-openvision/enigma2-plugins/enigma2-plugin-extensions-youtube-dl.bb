@@ -6,10 +6,12 @@ HOMEPAGE = "http://rg3.github.io/youtube-dl/"
 SECTION = "devel/python"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7246f848faa4e9c9fc0ea91122d6e680"
+
 DEPENDS = "libxml2 bash-completion"
 
-PV = "2020.07.28+git${SRCPV}"
-PKGV = "2020.07.28+git${GITPKGV}"
+PE = "1"
+PV = "git${SRCPV}"
+PKGV = "${GITPKGVTAG}"
 PR = "r1"
 
 SRC_URI = "git://github.com/ytdl-org/youtube-dl.git;protocol=https;branch=master"
