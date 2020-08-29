@@ -16,6 +16,7 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/davfs2/${P}.tar.gz \
            file://neon-config \
            file://volatiles \
            file://davfs2.cfg \
+           file://make-integer-extern.patch \
 "
 
 inherit autotools pkgconfig useradd gettext
