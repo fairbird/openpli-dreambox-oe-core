@@ -6,7 +6,9 @@ DEPENDS = "libgcrypt"
 PV = "0.9.0+git${SRCPV}"
 PR = "r1"
 
-SRC_URI = "git://github.com/OpenVisionE2/libaacs.git"
+SRC_URI = " git://code.videolan.org/videolan/${BPN}.git;protocol=https \
+			file://libgcrypt-gpg-error-use-pkgconfig.patch \
+			"
 
 S = "${WORKDIR}/git"
 
