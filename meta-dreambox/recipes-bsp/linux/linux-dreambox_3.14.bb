@@ -30,6 +30,7 @@ SRC_URI = " \
 	file://0015-log2-give-up-on-gcc-constant-optimizations.patch \
 	file://0016-uaccess-dont-mark-register-as-const.patch \
 	file://0017-makefile-silence-packed-not-aligned-warn.patch \
+	file://0018-make-yyloc-global-declaration-extern.patch \
 	file://defconfig \
 "
 
