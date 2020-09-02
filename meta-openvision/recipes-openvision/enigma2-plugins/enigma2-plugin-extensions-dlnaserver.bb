@@ -13,7 +13,6 @@ inherit gitpkgv
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-RDEPENDS_${PN} = "readymedia"
 FILES_${PN} = "${libdir}/enigma2/python/Plugins/Extensions/DLNAServer/*"
 PACKAGES = "${PN}"
 
