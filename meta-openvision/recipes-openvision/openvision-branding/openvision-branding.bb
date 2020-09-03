@@ -10,7 +10,7 @@ inherit autotools-brokensep gitpkgv pythonnative
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI="git://github.com/OpenVisionE2/branding-module.git;protocol=git"
+SRC_URI = "git://github.com/OpenVisionE2/branding-module.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
@@ -26,11 +26,8 @@ EXTRA_OECONF = " \
     --with-oever="${VISIONVERSION}" \
     --with-distro="${DISTRO_NAME}" \
     --with-boxtype="${MACHINE}" \
-    --with-brandoem="${BOX_BRAND}" \
-    --with-machinebrand="${BOX_BRAND}" \
     --with-machinename="${MACHINE}" \
     --with-machinebuild="${STB_PLATFORM}" \
-    --with-machinemake="${MACHINE}" \
     --with-imageversion="${DISTRO_VERSION}" \
     --with-imagebuild="${BUILD_VERSION}" \
     --with-imagedevbuild="${DEVELOPER_BUILD_VERSION}" \
