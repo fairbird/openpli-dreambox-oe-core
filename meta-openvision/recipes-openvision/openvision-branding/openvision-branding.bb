@@ -26,7 +26,6 @@ EXTRA_OECONF = " \
     --with-oever="${VISIONVERSION}" \
     --with-distro="${DISTRO_NAME}" \
     --with-boxtype="${MACHINE}" \
-    --with-machinename="${MACHINE}" \
     --with-machinebuild="${STB_PLATFORM}" \
     --with-imageversion="${DISTRO_VERSION}" \
     --with-imagebuild="${BUILD_VERSION}" \
