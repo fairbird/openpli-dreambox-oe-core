@@ -101,3 +101,7 @@ IMAGE_CMD_tar_append = ";\
 STB_PLATFORM = "dm4kgen"
 BOX_BRAND = "dreambox"
 KERNELVERSION = "3.14"
+
+HAVE_HDMI = "True"
+HAVE_HDMI_IN = "True"
+HAVE_HDMI_FHD = "True"
