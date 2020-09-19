@@ -188,6 +188,7 @@ FILES_${PN}-src += "\
 
 do_install_append() {
 	install -d ${D}${datadir}/keymaps
+	find ${D}${libdir}/enigma2/python/ -name '*.pyc' -exec rm {} \;
 	install -m 0644 ${S}/data/rc_models/${RCNAME}.png ${D}${datadir}/enigma2/rc_models/
 	install -m 0644 ${S}/data/rc_models/${RCNAME}.xml ${D}${datadir}/enigma2/rc_models/
 }
