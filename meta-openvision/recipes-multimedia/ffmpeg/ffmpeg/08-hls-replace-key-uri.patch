@@ -17,7 +17,7 @@ index cae60d21db..85b4957bff 100644
          if (strcmp(seg->key, pls->key_url)) {
 +            char *key_url = NULL;
              AVIOContext *pb = NULL;
--            if (open_url(pls->parent, &pb, seg->key, c->avio_opts, opts, NULL) == 0) {
+-            if (open_url(pls->parent, &pb, seg->key, &c->avio_opts, opts, NULL) == 0) {
 +            
 +            if (NULL != c->key_uri_replace_old && \
 +                NULL != c-> key_uri_replace_new && \
@@ -26,7 +26,7 @@ index cae60d21db..85b4957bff 100644
 +            } else {
 +                key_url = seg->key;
 +            }
-+            if (open_url(pls->parent, &pb, key_url, c->avio_opts, opts, NULL) == 0) {
++            if (open_url(pls->parent, &pb, key_url, &c->avio_opts, opts, NULL) == 0) {
                  ret = avio_read(pb, pls->key, sizeof(pls->key));
                  if (ret != sizeof(pls->key)) {
                      av_log(pls->parent, AV_LOG_ERROR, "Unable to read key file %s\n",
