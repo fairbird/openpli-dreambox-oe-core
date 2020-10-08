@@ -139,6 +139,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-tmbd \
 	enigma2-plugin-extensions-vcs \
 	enigma2-plugin-extensions-xmodem \
+	enigma2-plugin-extensions-xstreamity \
 	enigma2-plugin-extensions-xtraevent \
 	enigma2-plugin-extensions-youtube \
 	enigma2-plugin-extensions-youtube-dl \
