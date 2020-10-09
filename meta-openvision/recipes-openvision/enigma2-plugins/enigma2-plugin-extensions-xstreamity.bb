@@ -9,7 +9,7 @@ RDEPENDS_${PN} = "python-argparse python-image python-imaging python-lzma python
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-inherit gitpkgv rm_python_pyc compile_python_pyo no_python_src rm_language_po
+inherit gitpkgv
 
 SRC_URI = "git://github.com/kiddac/XStreamity.git"
 
@@ -18,6 +18,10 @@ S = "${WORKDIR}/git"
 FILES_${PN} = " ${libdir}/enigma2/python/Components/Converter/* \
                 ${libdir}/enigma2/python/Components/Renderer/* \
                 ${libdir}/enigma2/python/Plugins/Extensions/XStreamity/*"
+
+do_compile_append() {
+    python2 -O -m compileall ${S}
+}
 
 do_install() {
     install -d ${D}${libdir}/enigma2/python/Components/Converter
@@ -45,4 +49,12 @@ if [ -f "${sysconfdir}/enigma2/xstreamity/x-playlists.json" ]
 	then
 	rm -f ${sysconfdir}/enigma2/xstreamity/x-playlists.json > /dev/null 2>&1
 fi
+}
+
+do_install_append() {
+    find ${D}/ -name '*.pyc' -exec rm {} \;
+    find ${D}/ -name '*.po' -exec rm {} \;
+    find ${D}/ -name '*.egg-info' -exec rm {} \;
+    # make scripts executable
+    find "${D}" -name '*.sh' -exec chmod a+x '{}' ';'
 }
