@@ -10,7 +10,7 @@ PKGV = "2.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/OpenVisionE2/cmdwrapper.git;protocol=git"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 SOURCE_FILES = "src/main.c src/cmdwrapper.h src/cmdwrapper.c"
 

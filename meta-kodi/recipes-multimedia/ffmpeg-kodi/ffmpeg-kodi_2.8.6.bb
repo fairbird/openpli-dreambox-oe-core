@@ -15,7 +15,7 @@ SRC_URI = "https://github.com/xbmc/FFmpeg/archive/2.8.6-Jarvis-16.0.tar.gz"
 SRC_URI[md5sum] = "91292b7dc99b9d055e4ad7b9644c9738"
 SRC_URI[sha256sum] = "b08d8dc171f19627025136b498dfcad4f1b84923de7a62696d8a9a7f1d979b01"
 
-S = "${WORKDIR}/FFmpeg-2.8.6-Jarvis-16.0/"
+S = "${WORKDIR}/FFmpeg-2.8.6-Jarvis-16.0"
 
 EXTRA_OECONF = " \
         --extra-cflags='-fdata-sections -ffunction-sections' \

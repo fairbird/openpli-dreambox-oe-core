@@ -15,7 +15,7 @@ SRC_URI = " git://gitlab.com/f4mdump/f4mdump.git;protocol=http \
 			file://fix-build-openssl110.patch \
 "
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 SRCRTMP = "ext/librtmp/amf.c"
 SRCRTMP =+ "ext/librtmp/hashswf.c"

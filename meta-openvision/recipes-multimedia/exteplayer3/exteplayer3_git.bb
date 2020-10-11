@@ -14,7 +14,7 @@ PKGV = "68+gitr${GITPKGV}"
 
 SRC_URI = "git://github.com/OpenVisionE2/exteplayer3.git"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 SOURCE_FILES =  "main/exteplayer.c"
 SOURCE_FILES =+ "container/container.c"
