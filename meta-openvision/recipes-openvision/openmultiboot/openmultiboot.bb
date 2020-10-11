@@ -1,41 +1,55 @@
 SUMMARY = "Multi boot loader for enigma2"
-MAINTAINER = "oe-alliance"
-
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-inherit gitpkgv
+inherit gitpkgv autotools-brokensep pkgconfig
 
-PV = "1.0+git${SRCPV}"
-PKGV = "1.0+git${GITPKGV}"
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "freetype"
 
-SRC_URI = "git://github.com/oe-alliance/openmultiboot.git;protocol=git"
-
-inherit autotools-brokensep pkgconfig
+SRC_URI = "git://github.com/OpenVisionE2/openmultiboot.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = " \
+EXTRA_OEMAKE = "\
     'CFLAGS=${CFLAGS} \
     -I=${includedir}/freetype2 \
-    -DOMB_DREAMBOX \
+    -DOMB_DEFAULT_TIMER=10 \
+    ${@bb.utils.contains("MACHINE_FEATURES", "textlcd", "-DOMB_HAVE_TEXTLCD" , "", d)} \
+    ${@bb.utils.contains("IMAGE_FSTYPES", "ubi", "-DOMB_FLASH_UBI" , "", d)} \
+    ${@bb.utils.contains("IMAGE_FSTYPES", "jffs2", "-DOMB_FLASH_JFFS2" , "", d)} \
+    ${@bb.utils.contains("MACHINE_FEATURES", "dreambox", "-DOMB_DREAMBOX", "", d)} \
+    ${@bb.utils.contains("MACHINE_FEATURES", "mmc", "-DOMB_MMCBLK", "", d)} \
     -DOMB_KERNEL_MTD=\"/dev/${MTD_KERNEL}\"' \
     'LDFLAGS= -lfreetype ${LDFLAGS}' \
     "
 
+do_compile_append() {
+    python2 -O -m compileall ${S}
+}
+
+
 do_install() {
     install -d ${D}${base_sbindir}
     install -m 755 ${S}/src/open_multiboot ${D}${base_sbindir}
+    install -m 644 ${S}/contrib/open-multiboot-branding-helper.pyo ${D}${base_sbindir}
+}
+
+do_install_append() {
+    find ${D}/ -name '*.pyc' -exec rm {} \;
+    find ${D}/ -name '*.egg-info' -exec rm {} \;
+    # make scripts executable
+    find "${D}" -name '*.sh' -exec chmod a+x '{}' ';'
 }
 
 pkg_preinst_${PN}() {
 #!/bin/sh
 if mountpoint -q ${libdir}/enigma2/python/Plugins/Extensions/OpenMultiboot; then
-    echo "openMultiBoot will only install on main image."
+    echo "OpenMultiboot will only install on main image."
     echo "Child image is running - canceling installation!"
     sleep 3
     exit 1
@@ -46,9 +60,6 @@ fi
 }
 
 pkg_postrm_${PN}() {
-#!/bin/sh
-rm -rf /sbin/init
-ln -s /sbin/init.sysvinit /sbin/init
-rm -rf /sbin/open-multiboot-branding-helper.py
-exit 0
+rm ${base_sbindir}/init
+ln -s ${base_sbindir}/init.sysvinit ${base_sbindir}/init
 }
