@@ -13,7 +13,7 @@ SRC_URI="http://mediaarea.net/download/binary/mediainfo/${PV}/MediaInfo_CLI_${PV
 SRC_URI[md5sum] = "6b699ee634d77f40cbc905c667be9d7b"
 SRC_URI[sha256sum] = "aaa70120ce7100f37c41c545d1a26d946e614dc858e6bd5ea91fa2e10b00f696"
 
-S = "${WORKDIR}/MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI/"
+S = "${WORKDIR}/MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI"
 
 do_configure () {
     #build zenlib
