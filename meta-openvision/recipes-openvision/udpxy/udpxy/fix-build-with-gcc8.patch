@@ -26,3 +26,16 @@ index c58ceb5..eb186f3 100644
                                          Zasctime(localtime( &g_recopt.end_time )),
                                          sizeof(sel_buf) );
  
+diff --git a/rparse.c b/rparse.c
+index 8cbdda5..a25832d 100644
+--- a/rparse.c
++++ b/rparse.c
+@@ -175,7 +175,7 @@ parse_udprelay( const char*  opt, size_t optlen,
+ 
+     assert( opt && s_addr && s_addrlen && addr && addrlen && port );
+ 
+-    (void) strncpy( s, opt, MAX_OPTLEN );
++    (void) memcpy( s, opt, MAX_OPTLEN );
+     s[ MAX_OPTLEN - 1 ] = '\0';
+ 
+     do {
