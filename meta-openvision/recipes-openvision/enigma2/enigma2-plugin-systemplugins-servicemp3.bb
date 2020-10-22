@@ -87,7 +87,7 @@ RDEPENDS_${PN} = "\
 	${GST_UGLY_RDEPS} \
 	"
 
-SRC_URI = "git://github.com/Hains/servicemp3.git;branch=master"
+SRC_URI = "git://github.com/OpenVisionE2/servicemp3.git"
 
 S = "${WORKDIR}/git"
 
