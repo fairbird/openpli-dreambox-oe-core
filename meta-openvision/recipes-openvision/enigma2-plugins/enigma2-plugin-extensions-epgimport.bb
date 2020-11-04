@@ -9,7 +9,9 @@ inherit gitpkgv pythonnative gettext
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
-SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=git"
+SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=git \
+	file://Remove-unused-codes.patch \
+"
 
 S = "${WORKDIR}/git/src"
 
