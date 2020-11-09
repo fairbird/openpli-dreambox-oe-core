@@ -5,20 +5,18 @@ from YouTube.com and a few more sites. It requires the Python interpreter \
 HOMEPAGE = "https://youtube-dl.org"
 SECTION = "devel/python"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7246f848faa4e9c9fc0ea91122d6e680"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9936da26f04f6454c738c5f4fda24799"
 
 DEPENDS = "libxml2 bash-completion"
 
-PE = "1"
-PV = "2020.09.20"
-PR = "r1"
+PV = "2020.11.01"
 
-SRC_URI = "https://distfiles.macports.org/youtube-dl/youtube-dl-${PV}.tar.gz"
+SRC_URI = "https://source.netsyms.com/Mirrors/l1ving_youtube-dl/archive/${PV}.tar.gz"
 
-SRC_URI[md5sum] = "ce6abd9cc401d2c7d2bb855088d7447b"
-SRC_URI[sha256sum] = "ac1a799cf968345bf29089ed2e5c5d4f4a32031625d808369e61b6362d1c7cde"
+SRC_URI[md5sum] = "22020bb675e4c84e35149ad7abad09b1"
+SRC_URI[sha256sum] = "8aa3a6fd729749b931be0549bc384e4332e1f97581fec932eaf8d55fef5b221e"
 
-S = "${WORKDIR}/youtube-dl"
+S = "${WORKDIR}/l1ving_youtube-dl"
 
 inherit gitpkgv setuptools
 
