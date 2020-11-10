@@ -15,7 +15,7 @@ index 81e97ff..0d37513 100644
  		self['config'].getCurrent()[1].help_window.instance.hide()
 -		self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
 -			text = self.searchValue.value)
-+		self.VirtualKeyBoard = config.plugins.YouTube.VirtualKeyBoard
++		self.VirtualKeyBoard = config.plugins.YouTube.VirtualKeyBoard.value
 +		if self.VirtualKeyBoard == "YouTube":
 +			self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
 +				text = self.searchValue.value)
