@@ -1,0 +1,133 @@
+diff --git a/configure.ac b/configure.ac
+index e201a66..fd606f1 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -41,8 +41,8 @@ AC_LINK_IFELSE(
+     void AddRef(){}
+     void Release(){}
+ 
+-#if SIGCXX_MAJOR_VERSION == 2
+-    RESULT connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection){return -1;}
++#if SIGCXX_MAJOR_VERSION == 3
++    RESULT connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection){return -1;}
+ #else
+     RESULT connectEvent(const Slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection){return -1;}
+ #endif
+diff --git a/src/serviceapp/extplayer.h b/src/serviceapp/extplayer.h
+index f55d040..40ed208 100644
+--- a/src/serviceapp/extplayer.h
++++ b/src/serviceapp/extplayer.h
+@@ -21,7 +21,7 @@ enum
+ 	STD_ERROR,
+ };
+ 
+-#if SIGCXX_MAJOR_VERSION == 2
++#if SIGCXX_MAJOR_VERSION == 3
+ class PlayerApp: public sigc::trackable
+ #else
+ class PlayerApp: public Object
+@@ -180,7 +180,7 @@ public:
+ };
+ 
+ 
+-#if SIGCXX_MAJOR_VERSION == 2
++#if SIGCXX_MAJOR_VERSION == 3
+ class PlayerBackend: public sigc::trackable, public eThread, public eMainloop, public iPlayerCallback
+ #else
+ class PlayerBackend: public Object, public eThread, public eMainloop, public iPlayerCallback
+diff --git a/src/serviceapp/myconsole.h b/src/serviceapp/myconsole.h
+index b2a8146..f85a55c 100644
+--- a/src/serviceapp/myconsole.h
++++ b/src/serviceapp/myconsole.h
+@@ -18,7 +18,7 @@ struct queue_data
+     int dataSent;
+ };
+ 
+-#if SIGCXX_MAJOR_VERSION == 2
++#if SIGCXX_MAJOR_VERSION == 3
+ class eConsoleContainer: public sigc::trackable, public iObject
+ #else
+ class eConsoleContainer: public Object, public iObject
+diff --git a/src/serviceapp/scriptrun.h b/src/serviceapp/scriptrun.h
+index d18eaec..aceda15 100644
+--- a/src/serviceapp/scriptrun.h
++++ b/src/serviceapp/scriptrun.h
+@@ -9,7 +9,7 @@
+ #include "extplayer.h"
+ #include "myconsole.h"
+ 
+-#if SIGCXX_MAJOR_VERSION == 2
++#if SIGCXX_MAJOR_VERSION == 3
+ class scriptrun: public sigc::trackable
+ #else
+ class scriptrun: public Object
+@@ -38,7 +38,7 @@ public:
+ };
+ 
+ 
+-#if SIGCXX_MAJOR_VERSION == 2
++#if SIGCXX_MAJOR_VERSION == 3
+ class ResolveUrl: public sigc::trackable, public eThread, public eMainloop
+ #else
+ class ResolveUrl: public Object, public eThread, public eMainloop
+@@ -84,8 +84,8 @@ public:
+     std::string getUrl();
+ 
+     void scriptEnded(int retval);
+-#if SIGCXX_MAJOR_VERSION == 2
+-    sigc::signal1<void,int> urlResolved;
++#if SIGCXX_MAJOR_VERSION == 3
++    sigc::signal<void(int)> urlResolved;
+ #else
+     Signal1<void, int> urlResolved;
+ #endif
+diff --git a/src/serviceapp/serviceapp.cpp b/src/serviceapp/serviceapp.cpp
+index 95f9002..52c3a44 100644
+--- a/src/serviceapp/serviceapp.cpp
++++ b/src/serviceapp/serviceapp.cpp
+@@ -672,8 +672,8 @@ void eServiceApp::gotExtPlayerMessage(int message)
+ 
+ 
+ // __iPlayableService
+-#if SIGCXX_MAJOR_VERSION == 2
+-RESULT eServiceApp::connectEvent(const sigc::slot2< void, iPlayableService*, int >& event, ePtr< eConnection >& connection)
++#if SIGCXX_MAJOR_VERSION == 3
++RESULT eServiceApp::connectEvent(const sigc::slot< void(iPlayableService*, int)>& event, ePtr< eConnection >& connection)
+ #else
+ RESULT eServiceApp::connectEvent(const Slot2< void, iPlayableService*, int >& event, ePtr< eConnection >& connection)
+ #endif
+diff --git a/src/serviceapp/serviceapp.h b/src/serviceapp/serviceapp.h
+index 50328b7..6fe1981 100644
+--- a/src/serviceapp/serviceapp.h
++++ b/src/serviceapp/serviceapp.h
+@@ -29,7 +29,7 @@ struct eServiceAppOptions
+ 	{};
+ };
+ 
+-#if SIGCXX_MAJOR_VERSION == 2
++#if SIGCXX_MAJOR_VERSION == 3
+ class eServiceApp: public sigc::trackable,
+ #else
+ class eServiceApp: public Object,
+@@ -46,8 +46,8 @@ class eServiceApp: public Object,
+ 	bool m_subservices_checked;
+ 	void fillSubservices();
+ 
+-#if SIGCXX_MAJOR_VERSION == 2
+-	sigc::signal2<void,iPlayableService*,int> m_event;
++#if SIGCXX_MAJOR_VERSION == 3
++	sigc::signal<void(iPlayableService*,int)> m_event;
+ #else
+ 	Signal2<void,iPlayableService*,int> m_event;
+ #endif
+@@ -104,8 +104,8 @@ public:
+ 	~eServiceApp();
+ 
+ 	// iPlayableService
+-#if SIGCXX_MAJOR_VERSION == 2
+-	RESULT connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection);
++#if SIGCXX_MAJOR_VERSION == 3
++	RESULT connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection);
+ #else
+ 	RESULT connectEvent(const Slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection);
+ #endif
