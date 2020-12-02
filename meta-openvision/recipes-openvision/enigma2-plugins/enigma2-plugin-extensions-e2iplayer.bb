@@ -5,9 +5,7 @@ SECTION = "multimedia"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
 
-SRC_URI = " git://github.com/persianpros/e2iplayer.git;protocol=http \
-			file://001-Remove-ov-lock.patch \
-"
+SRC_URI = "git://github.com/persianpros/e2iplayer.git;protocol=http"
 
 S = "${WORKDIR}/git"
 
