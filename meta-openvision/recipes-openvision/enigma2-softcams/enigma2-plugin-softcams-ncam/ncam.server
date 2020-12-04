@@ -1,4 +1,26 @@
 [reader]
+label                         = constant.cw
+protocol                      = constcw
+device                        = /etc/tuxbox/config/constant.cw
+caid                          = 2600,0B00,0B02,0500,0963,06AD,0940
+group                         = 1
+
+[reader]
+label                         = emulator
+protocol                      = emu
+device                        = emulator
+#device                        = https://xxxxxx/SoftCam.Key (Change this line to yout url address)
+#device                        = /etc/tuxbox/config/SoftCam.key  (if you want to set your personal path)
+#/storage/.kodi/userdata/addon_data/service.softcam.ncam/config/SoftCam.Key (change with your system location)
+disablecrccws_only_for        = 0E00:000000
+caid                          = 0500,0604,0E00,1010,1801,2600,2602,2610
+detect                        = cd
+ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;2602:000000;2610:000000
+group                         = 1
+emmcache                      = 2,1,2,1
+emu_auproviders               = 0604:010200;0E00:000000;1010:000000;2610:000000
+
+[reader]
 label                         = lower_card
 enable                        = 1
 protocol                      = internal
@@ -37,26 +59,69 @@ ecmunique                     = 1
 srvidholdtime                 = 2000
 cooldown                      = 30,600
 
-
 [reader]
 label                         = Mainreceiver
-enable			      = 0
+enable			                  = 0
 protocol                      = cs378x
 device                        = ip_adress_mainreceiver,12005
 user                          = 2nd_box
 password                      = 2nd_box
 group                         = 1
 
+####################### CCcam ############################
 
 [reader]
-label                         = CCcam-server
-enable                        = 0
+label                         = cccam_server
 protocol                      = cccam
-device                        = ip_adress_server,12001
+device                        = host,port
 user                          = user
-password                      = password
-group                         = 1
-cccversion                    = 2.3.0
-cccmaxhops                    = 2
+password                      = pass
+group                         = 1,2,3,4,5,6,7,8,9,10,64
+emmcache                      = 2,1,2,1
+cccversion                    = 2.0.11
 ccckeepalive                  = 1
+cccmaxhops                    = 2 # dont use higher than 3 !!!
+disablecrccws                 = 1
+cccwantemu                    = 1
+blockemm-unknown              = 1
+blockemm-u                    = 1
+blockemm-s                    = 1
+blockemm-g                    = 1
 audisabled                    = 1
+services                      = !powervu_fake,!tandberg_fake,!biss_fake,!afn_fake,1708:000000
+disablecrccws_only_for        = 1709:000000;1708:000000;1811:003311,003315;09C4:000000;0500:030B00,042820;0604:000000;1819:00006D;0100:00006D;1810:000000;1884:000000;0E00:000000
+
+####################### MgCamd ############################
+
+[reader]
+label                         = mgcamd_server
+enable                        = 1
+protocol                      = mgcamd
+device                        = host,port
+key                           = 0102030405060708091011121314
+user                          = user
+password                      = pass
+services                      = !powervu_fake,!tandberg_fake,!biss_fake,!afn_fake,1708:000000
+inactivitytimeout             = -1
+group                         = 1,2,3,4,5,6,7,8,9,10,64
+fallback                      = 1
+disablecrccws                 = 1
+audisabled                    = 1
+disablecrccws_only_for        = 1709:000000;1708:000000;1811:003311,003315;09C4:000000;0500:030B00,042820;0604:000000;1819:00006D;0100:00006D;1810:000000;1884:000000;0E00:000000
+
+####################### Newcamd ############################
+
+[reader]
+label                         = newcamd_server
+enable                        = 1
+protocol                      = newcamd
+device                        = host,port
+key                           = 0102030405060708091011121314
+user                          = user
+password                      = pass
+services                      = !powervu_fake,!tandberg_fake,!biss_fake,!afn_fake,1708:000000
+fallback                      = 1
+group                         = 1,2,3,4,5,6,7,8,9,10,64
+disablecrccws                 = 1
+audisabled                    = 1
+disablecrccws_only_for        = 1709:000000;1708:000000;1811:003311,003315;09C4:000000;0500:030B00,042820;0604:000000;1819:00006D;0100:00006D;1810:000000;1884:000000;0E00:000000

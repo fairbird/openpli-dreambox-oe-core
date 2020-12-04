@@ -19,13 +19,14 @@ CAMNAME = "ncam"
 CAMSTART = "/usr/bin/ncam --wait 0 --config-dir /etc/tuxbox/config/ncam --daemon --pidfile /tmp/ncam.pid --restart 2 --utf8"
 CAMSTOP = "kill \`cat /tmp/ncam.pid\` 2> /dev/null"
 
-SRC_URI += " \
+SRC_URI += "\
 	file://ncam.conf \
 	file://ncam.server \
 	file://ncam.srvid \
 	file://ncam.user \
 	file://ncam.provid \
-	file://CCcam.cfg"
+	file://CCcam.cfg \
+	file://ncam.fs"
 
 CONFFILES = "/etc/tuxbox/config/ncam/ncam.conf /etc/tuxbox/config/ncam/ncam.server /etc/tuxbox/config/ncam/ncam.srvid /etc/tuxbox/config/ncam/ncam.user /etc/tuxbox/config/ncam/ncam.provid ${sysconfdir}/tuxbox/config/ncam/CCcam.cfg"
 
