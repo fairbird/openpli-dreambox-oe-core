@@ -8,7 +8,10 @@ group                         = 1
 [reader]
 label                         = emulator
 protocol                      = emu
-device                        = https://raw.githubusercontent.com/fairbird/test/main/SoftCam.Key
+device                        = emulator
+#device                        = https://xxxxxx/SoftCam.Key (Change this line to yout url address)
+#device                        = /etc/tuxbox/config/SoftCam.key  (if you want to set your personal path)
+#/storage/.kodi/userdata/addon_data/service.softcam.ncam/config/SoftCam.Key (change with your system location)
 disablecrccws_only_for        = 0E00:000000
 caid                          = 0500,0604,0E00,1010,1801,2600,2602,2610
 detect                        = cd
