@@ -2,23 +2,25 @@ SUMMARY = "Download videos from YouTube (and more sites)"
 DESCRIPTION = "youtube-dl is a small command-line program to download videos \
 from YouTube.com and a few more sites. It requires the Python interpreter \
 (2.6, 2.7, or 3.2+), and it is not platform specific"
-HOMEPAGE = "https://youtube-dl.org"
+HOMEPAGE = "http://rg3.github.io/youtube-dl/"
 SECTION = "devel/python"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=9936da26f04f6454c738c5f4fda24799"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7246f848faa4e9c9fc0ea91122d6e680"
+PACKAGE_ARCH = "all"
 
 DEPENDS = "libxml2 bash-completion"
 
-PV = "2020.11.01"
+inherit gitpkgv
 
-SRC_URI = "https://source.netsyms.com/Mirrors/l1ving_youtube-dl/archive/${PV}.tar.gz"
+PE = "1"
+PV = "git${SRCPV}"
+PKGV = "${GITPKGVTAG}"
 
-SRC_URI[md5sum] = "22020bb675e4c84e35149ad7abad09b1"
-SRC_URI[sha256sum] = "8aa3a6fd729749b931be0549bc384e4332e1f97581fec932eaf8d55fef5b221e"
+SRC_URI = "git://github.com/ytdl-org/youtube-dl.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/l1ving_youtube-dl"
+S = "${WORKDIR}/git"
 
-inherit gitpkgv setuptools
+inherit setuptools
 
 EXTRA_OEMAKE = "PYTHON=${PYTHON}"
 
