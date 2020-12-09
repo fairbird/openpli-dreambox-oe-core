@@ -15,11 +15,11 @@ index 81e97ff..0d37513 100644
  		self['config'].getCurrent()[1].help_window.instance.hide()
 -		self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
 -			text = self.searchValue.value)
-+		self.VirtualKeyBoard = config.plugins.YouTube.VirtualKeyBoard
-+		if self.VirtualKeyBoard == "YouTube":
++		self.KeyBoard = config.plugins.YouTube.KeyBoard.value
++		if self.KeyBoard == "YouTube":
 +			self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
 +				text = self.searchValue.value)
-+		elif self.VirtualKeyBoard == "Image":
++		elif self.KeyBoard == "Image":
 +			from Screens.VirtualKeyBoard import VirtualKeyBoard
 +			self.session.openWithCallback(self.keyBoardCallback, VirtualKeyBoard, '')
 +		else:
@@ -36,21 +36,17 @@ index aa78217..deeae6e 100644
  	('playprev', _('Play previous'))])
  config.plugins.YouTube.onMovieStop = ConfigSelection(default='ask', choices=[
  	('ask', _('Ask user')), ('quit', _('Return to list'))])
-+config.plugins.YouTube.VirtualKeyBoard = ConfigSelection(default='YouTube', choices=[
++config.plugins.YouTube.KeyBoard = ConfigSelection(default='YouTube', choices=[
 +	('YouTube', _('YouTube VirtualKeyBoard')), ('Image', _('Image VirtualKeyBoard'))])
  config.plugins.YouTube.login = ConfigYesNo(default=False)
  config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
  config.plugins.YouTube.mergeFiles = ConfigYesNo(default=False)
-diff --git a/src/YouTubeUi.py b/src/YouTubeUi.py
-index f7d21d0..79c320e 100644
---- a/src/YouTubeUi.py
-+++ b/src/YouTubeUi.py
 @@ -1476,6 +1476,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
  		configlist.append(getConfigListEntry(_('Merge downloaded files:'),
  			config.plugins.YouTube.mergeFiles,
  			_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
 +		configlist.append(getConfigListEntry(_('Choose VirtualKeyBoard Style:'),
-+			config.plugins.YouTube.VirtualKeyBoard,
++			config.plugins.YouTube.KeyBoard,
 +			_('You can choose what style of VirtualKeyBoard to use it.\nYouTube OR Image (VirtualKeyBoard).')))
  		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
  			# TRANSLATORS: Don't translate this! It is used as a variable, so it must be equal to the translation in the plugin!
