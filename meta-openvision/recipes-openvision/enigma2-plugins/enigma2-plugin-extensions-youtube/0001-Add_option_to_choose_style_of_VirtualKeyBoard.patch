@@ -9,17 +9,29 @@ diff --git a/src/YouTubeSearch.py b/src/YouTubeSearch.py
 index 81e97ff..0d37513 100644
 --- a/src/YouTubeSearch.py
 +++ b/src/YouTubeSearch.py
-@@ -258,8 +258,16 @@ class YouTubeSearch(Screen, ConfigListScreen):
+@@ -15,6 +15,7 @@ from Components.Pixmap import Pixmap
+ from Components.Sources.Boolean import Boolean
+ from Components.Sources.List import List
+ from Components.Sources.StaticText import StaticText
++from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+ 
+ from . import _
+ from .compat import compat_quote
+@@ -314,8 +315,20 @@ class YouTubeSearch(Screen, ConfigListScreen):
  
  	def openKeyboard(self):
  		self['config'].getCurrent()[1].help_window.instance.hide()
 -		self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
 -			text = self.searchValue.value)
-+		self.KeyBoard = config.plugins.YouTube.KeyBoard.value
-+		if self.KeyBoard == "YouTube":
-+			self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
-+				text = self.searchValue.value)
-+		elif self.KeyBoard == "Image":
++		self.VirtualKeyBoard = config.plugins.YouTube.VirtualKeyBoard.value
++		if self.VirtualKeyBoard == "YouTube":
++			if os.path.islink("/usr/lib/enigma2/python/Screens/VirtualKeyBoard.py") and os.path.exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NewVirtualKeyBoard")):
++				from Screens.VirtualKeyBoard import VirtualKeyBoard
++				self.session.openWithCallback(self.keyBoardCallback, VirtualKeyBoard, '')
++			else:
++				self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
++					text = self.searchValue.value)
++		elif self.VirtualKeyBoard == "Image":
 +			from Screens.VirtualKeyBoard import VirtualKeyBoard
 +			self.session.openWithCallback(self.keyBoardCallback, VirtualKeyBoard, '')
 +		else:
@@ -28,15 +40,13 @@ index 81e97ff..0d37513 100644
  
  	def keyBoardCallback(self, name):
  		config = self['config'].getCurrent()[1]
-diff --git a/src/YouTubeUi.py b/src/YouTubeUi.py
-index aa78217..deeae6e 100644
 --- a/src/YouTubeUi.py
 +++ b/src/YouTubeUi.py
 @@ -113,6 +113,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='quit', choices=[
  	('playprev', _('Play previous'))])
  config.plugins.YouTube.onMovieStop = ConfigSelection(default='ask', choices=[
  	('ask', _('Ask user')), ('quit', _('Return to list'))])
-+config.plugins.YouTube.KeyBoard = ConfigSelection(default='YouTube', choices=[
++config.plugins.YouTube.VirtualKeyBoard = ConfigSelection(default='YouTube', choices=[
 +	('YouTube', _('YouTube VirtualKeyBoard')), ('Image', _('Image VirtualKeyBoard'))])
  config.plugins.YouTube.login = ConfigYesNo(default=False)
  config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
@@ -46,7 +56,7 @@ index aa78217..deeae6e 100644
  			config.plugins.YouTube.mergeFiles,
  			_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
 +		configlist.append(getConfigListEntry(_('Choose VirtualKeyBoard Style:'),
-+			config.plugins.YouTube.KeyBoard,
++			config.plugins.YouTube.VirtualKeyBoard,
 +			_('You can choose what style of VirtualKeyBoard to use it.\nYouTube OR Image (VirtualKeyBoard).')))
  		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
  			# TRANSLATORS: Don't translate this! It is used as a variable, so it must be equal to the translation in the plugin!
