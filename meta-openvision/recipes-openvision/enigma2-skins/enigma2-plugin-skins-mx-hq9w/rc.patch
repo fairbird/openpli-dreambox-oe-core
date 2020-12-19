@@ -1,0 +1,90 @@
+--- MX_HQ9W/usr/share/enigma2/MX_HQ9W/skin.xml.orig	2016-07-20 13:11:42.448868278 +0200
++++ MX_HQ9W/usr/share/enigma2/MX_HQ9W/skin.xml	2016-07-20 13:14:10.152165707 +0200
+@@ -1434,7 +1434,7 @@
+ }
+ </convert>
+ </widget>
+-<widget name="rc" position="993,70" size="154,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="154,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -1456,7 +1456,7 @@
+ }
+ </convert>
+ </widget>
+-<widget name="rc" position="993,70" size="154,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="154,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -1478,7 +1478,7 @@
+ }
+ </convert>
+ </widget>
+-<widget name="rc" position="993,70" size="154,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="154,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -1500,7 +1500,7 @@
+ }
+ </convert>
+ </widget>
+-<widget name="rc" position="993,70" size="154,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="154,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -1523,7 +1523,7 @@
+ }
+ </convert>
+ </widget>
+-<widget name="rc" position="993,70" size="154,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="154,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -1545,7 +1545,7 @@
+ }
+ </convert>
+ </widget>
+-<widget name="rc" position="993,70" size="154,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="154,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -1563,7 +1563,7 @@
+ }
+ </convert>
+ </widget>
+-<widget name="rc" position="993,70" size="154,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="154,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -1582,7 +1582,7 @@
+ }
+ </convert>
+ </widget>
+-<widget name="rc" position="993,70" size="154,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="154,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -1811,7 +1811,7 @@
+ <screen name="HelpMenu" position="center,200" size="1300,720" title="help...">
+ <widget name="list" position="20,10" size="820,700" zPosition="2" font="Regular;28" itemHeight="32" enableWrapAround="1" scrollbarMode="showOnDemand" foregroundColor="button" backgroundColor="bgbutton" backgroundColorSelected="selbutton" backgroundPixmap="MX_HQ9W/menu/bg820x32.png" selectionPixmap="MX_HQ9W/menu/button820x32.png" transparent="1"/>
+ <widget name="long_key" position="993,585" size="142,35" font="Regular;30" halign="center" foregroundColor="info" backgroundColor="bgmain" transparent="1"/>
+-<widget name="rc" position="993,70" size="142,500" pixmap="MX_HQ9W/rc.png" zPosition="10" alphatest="on"/>
++<widget name="rc" position="993,70" size="142,500" pixmap="skin_default/rc.png" zPosition="10" alphatest="on"/>
+ <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowdown2" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowdown.png" zPosition="11" alphatest="blend"/>
+ <widget name="arrowup" position="-100,-100" size="37,70" pixmap="MX_HQ9W/arrowup.png" zPosition="11" alphatest="blend"/>
+@@ -6658,4 +6658,4 @@
+ <widget source="key_green" render="Label" position="220,780" size="330,50" zPosition="1" font="Regular;32" halign="left" valign="center" foregroundColor="button" backgroundColor="bgkey" transparent="1"/>
+ <widget source="key_red" render="Label" position="550,780" size="330,50" zPosition="1" font="Regular;32" halign="left" valign="center" foregroundColor="button" backgroundColor="bgkey" transparent="1"/>
+ </screen>
+-</skin>
+\ Geen regeleindeteken (LF) aan einde van bestand
++</skin>
