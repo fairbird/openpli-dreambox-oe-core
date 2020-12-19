@@ -1,3 +1,3 @@
 do_compile_append() {
-    ${PYTHONEXACTVERSION} -O -m compileall ${S}
+    python2 -O -m compileall ${S}
 }
