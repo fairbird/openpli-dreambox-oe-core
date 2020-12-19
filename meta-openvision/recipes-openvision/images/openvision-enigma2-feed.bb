@@ -134,6 +134,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-modifyplifullhd \
 	enigma2-plugin-extensions-moviemanager \
 	enigma2-plugin-extensions-openmultiboot \
+	enigma2-plugin-extensions-openvisionskintools \
 	enigma2-plugin-extensions-refreshbouquet \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-tmbd \
@@ -144,10 +145,35 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-youtube \
 	enigma2-plugin-extensions-youtube-dl \
 	enigma2-plugin-security-firewall \
-	enigma2-plugin-skins-pd1loi-hd-night \
-	enigma2-plugin-skins-pli-hd \
+	enigma2-plugin-skins-arctic-raed \
+	enigma2-plugin-skins-atilehd-raed \
+	enigma2-plugin-skins-blacktransfhd-raed \
+	enigma2-plugin-skins-bundesligafhd-raed \
+	enigma2-plugin-skins-cinogripli \
+	enigma2-plugin-skins-dreamplexskins \
+	enigma2-plugin-skins-glamouraurafhd \
+	enigma2-plugin-skins-hdlinesuper-raed \
+	enigma2-plugin-skins-iflatfhd \
+	enigma2-plugin-skins-kravenfhd \
+	enigma2-plugin-skins-kravenhd \
+	enigma2-plugin-skins-kravenvb \
+	enigma2-plugin-skins-maxfhdxta-raed \
+	enigma2-plugin-skins-multibox-raed \
+	enigma2-plugin-skins-mxblack-raed \
+	enigma2-plugin-skins-mxhq9b-raed \
+	enigma2-plugin-skins-mx-hq7 \
+	enigma2-plugin-skins-mx-hq9w \
+	enigma2-plugin-skins-mxsline-raed \
+	enigma2-plugin-skins-octetfhd \
 	enigma2-plugin-skins-pli-hd-fullnight \
+	enigma2-plugin-skins-sevenhd \
 	enigma2-plugin-skins-simple-gray-hd \
+	enigma2-plugin-skins-slyk-1080-raed \
+	enigma2-plugin-skins-turbo-raed \
+	enigma2-plugin-skins-turquoisehd \
+	enigma2-plugin-skins-xionhdf \
+	enigma2-plugin-skins-whitetransfhd-raed \
+	enigma2-plugin-skins-wowcataclysmfhd-raed \
 	enigma2-plugin-systemplugins-crossepg \
 	enigma2-plugin-systemplugins-extnumberzap \
 	enigma2-plugin-systemplugins-extrafancontrol \

@@ -1,0 +1,1 @@
+inherit rm_python_pyc compile_python_pyo no_python_src
