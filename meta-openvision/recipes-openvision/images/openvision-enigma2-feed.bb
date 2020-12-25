@@ -137,6 +137,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-openvisionskintools \
 	enigma2-plugin-extensions-refreshbouquet \
 	enigma2-plugin-extensions-subssupport \
+	enigma2-plugin-extensions-weathermsn \
 	enigma2-plugin-extensions-tmbd \
 	enigma2-plugin-extensions-vcs \
 	enigma2-plugin-extensions-xmodem \
