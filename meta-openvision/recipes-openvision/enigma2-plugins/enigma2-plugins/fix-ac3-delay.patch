@@ -1,0 +1,16 @@
+diff --git a/audiosync/src/AC3delay.py b/audiosync/src/AC3delay.py
+index c47b3043..d080b41e 100644
+--- a/audiosync/src/AC3delay.py
++++ b/audiosync/src/AC3delay.py
+@@ -156,7 +156,10 @@ class AC3delay:
+ 
+ 		# check if downmix is enabled
+ 		try:
+-			bDownmixEnabled = config.av.downmix_ac3.value
++			if config.av.downmix_ac3.value == "downmix":
++				bDownmixEnabled = True
++			else:
++				bDownmixEnabled = False
+ 		except:
+ 			bDownmixEnabled = False
+ 
