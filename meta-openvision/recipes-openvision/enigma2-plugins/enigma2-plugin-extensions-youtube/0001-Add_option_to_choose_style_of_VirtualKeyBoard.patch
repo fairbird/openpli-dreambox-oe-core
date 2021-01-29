@@ -9,6 +9,15 @@ diff --git a/src/YouTubeSearch.py b/src/YouTubeSearch.py
 index 81e97ff..0d37513 100644
 --- a/src/YouTubeSearch.py
 +++ b/src/YouTubeSearch.py
+@@ -2,7 +2,7 @@
+ 
+ from threading import Thread
+ from json import loads
+-
++import os
+ from enigma import ePoint, getDesktop
+ from Screens.ChoiceBox import ChoiceBox
+ from Screens.Screen import Screen
 @@ -15,6 +15,7 @@ from Components.Pixmap import Pixmap
  from Components.Sources.Boolean import Boolean
  from Components.Sources.List import List
@@ -22,7 +31,7 @@ index 81e97ff..0d37513 100644
  	def openKeyboard(self):
  		self['config'].getCurrent()[1].help_window.instance.hide()
 -		self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
--			text = self.searchValue.value)
+-			text=self.searchValue.value)
 +		self.VirtualKeyBoard = config.plugins.YouTube.VirtualKeyBoard.value
 +		if self.VirtualKeyBoard == "YouTube":
 +			if os.path.islink("/usr/lib/enigma2/python/Screens/VirtualKeyBoard.py") and os.path.exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NewVirtualKeyBoard")):
@@ -61,5 +70,3 @@ index 81e97ff..0d37513 100644
  		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
  			# TRANSLATORS: Don't translate this! It is used as a variable, so it must be equal to the translation in the plugin!
  			if p.name == _("ServiceApp"):
--- 
-2.20.1
