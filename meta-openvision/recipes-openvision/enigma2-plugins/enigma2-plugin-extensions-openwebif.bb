@@ -25,7 +25,7 @@ inherit gitpkgv distutils-openplugins gettext
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://github.com/OpenVisionE2/OpenWebif.git;protocol=git"
+SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git"
 
 S="${WORKDIR}/git"
 
