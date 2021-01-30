@@ -8,7 +8,7 @@ inherit gitpkgv
 PV = "2.1+git${SRCPV}"
 PKGV = "2.1+git${GITPKGV}"
 
-SRC_URI = "git://github.com/OpenVisionE2/cmdwrapper.git;protocol=git"
+SRC_URI = "git://github.com/Hains/cmdwrapper.git;branch=main;protocol=git"
 
 S = "${WORKDIR}/git"
 
