@@ -19,7 +19,7 @@ RDEPENDS_${PN} += "\
 	enigma2-plugin-systemplugins-weathercomponenthandler \
 	"
 
-SRC_URI = "git://github.com/OpenVisionE2/OctEtFHD-skin.git;protocol=git"
+SRC_URI = "git://github.com/Hains/OctEtFHD-skin.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
