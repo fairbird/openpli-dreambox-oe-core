@@ -108,7 +108,7 @@ PKGV = "2.7+git${GITPKGV}"
 ENIGMA2_BRANCH ?= "develop"
 GITHUB_URI ?= "git://github.com"
 
-SRC_URI = " ${GITHUB_URI}/OpenVisionE2/enigma2-openvision.git;branch=${ENIGMA2_BRANCH} \
+SRC_URI = " ${GITHUB_URI}/Hains/enigma2-openvision.git;branch=${ENIGMA2_BRANCH} \
 			file://003-restore-last-update-date-time.patch \
 			file://006-make-PLi-FullNightHD-skin-default.patch \
 			file://012-set-default-hide-channel-list-radio.patch \
@@ -143,7 +143,6 @@ EXTRA_OECONF = "\
 	--with-${DISPLAY_TYPE} \
 	--with-boxbrand=${BOX_BRAND} \
 	--with-stbplatform=${STB_PLATFORM} \
-	--with-oever=${VISIONVERSION} \
 	ac_cv_prog_c_openmp=-fopenmp \
 	${@get_crashaddr(d)} \
 	BUILD_SYS=${BUILD_SYS} \
