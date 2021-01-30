@@ -9,7 +9,7 @@ DEPENDS = " \
 	freetype \
 	gettext-native \
 	jpeg \
-	libdreamdvd libdvbsi++ fribidi libmad libpng libsigc++-2.0 giflib libxml2 \
+	libdreamdvd libdvbsi++ fribidi libmad libpng libsigc++-3 giflib libxml2 \
 	openssl libudfread \
 	python-imaging python-twisted python-wifi \
 	swig-native \
@@ -117,6 +117,8 @@ SRC_URI = " ${GITHUB_URI}/OpenVisionE2/enigma2-openvision.git;branch=${ENIGMA2_B
 LDFLAGS_prepend = " -lxml2 "
 
 S = "${WORKDIR}/git"
+
+CXXFLAGS = " -std=c++17"
 
 FILES_${PN} += "${datadir}/keymaps"
 FILES_${PN}-meta = "${datadir}/meta"

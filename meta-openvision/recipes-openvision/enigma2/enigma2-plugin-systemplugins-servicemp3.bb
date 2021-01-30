@@ -87,7 +87,7 @@ RDEPENDS_${PN} = "\
 	${GST_UGLY_RDEPS} \
 	"
 
-SRC_URI = "git://github.com/OpenVisionE2/servicemp3.git"
+SRC_URI = "git://github.com/OpenVisionE2/servicemp3.git file://sigc3.patch"
 
 S = "${WORKDIR}/git"
 
@@ -95,6 +95,8 @@ inherit autotools gitpkgv pythonnative pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
+
+CXXFLAGS = " -std=c++17"
 
 EXTRA_OECONF = "\
 	--with-gstversion=${GST_VERSION} \

@@ -1,0 +1,70 @@
+diff --git a/servicemp3/servicemp3.cpp b/servicemp3/servicemp3.cpp
+index 4786fb7..0bb33c1 100644
+--- a/servicemp3/servicemp3.cpp
++++ b/servicemp3/servicemp3.cpp
+@@ -817,7 +817,7 @@ DEFINE_REF(eServiceMP3);
+ 
+ DEFINE_REF(GstMessageContainer);
+ 
+-RESULT eServiceMP3::connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection)
++RESULT eServiceMP3::connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection)
+ {
+ 	connection = new eConnection((iPlayableService*)this, m_event.connect(event));
+ 	return 0;
+diff --git a/servicemp3/servicemp3.h b/servicemp3/servicemp3.h
+index 760e259..f3f4f4f 100644
+--- a/servicemp3/servicemp3.h
++++ b/servicemp3/servicemp3.h
+@@ -129,7 +129,7 @@ public:
+ 	virtual ~eServiceMP3();
+ 
+ 		// iPlayableService
+-	RESULT connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection);
++	RESULT connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection);
+ 	RESULT start();
+ 	RESULT stop();
+ 
+@@ -319,7 +319,7 @@ private:
+ 	errorInfo m_errorInfo;
+ 	std::string m_download_buffer_path;
+ 	eServiceMP3(eServiceReference ref);
+-	sigc::signal2<void,iPlayableService*,int> m_event;
++	sigc::signal<void(iPlayableService*,int)> m_event;
+ 	enum
+ 	{
+ 		stIdle, stRunning, stStopped,
+diff --git a/servicemp3/servicemp3record.cpp b/servicemp3/servicemp3record.cpp
+index 50968b9..dddc17b 100644
+--- a/servicemp3/servicemp3record.cpp
++++ b/servicemp3/servicemp3record.cpp
+@@ -491,7 +491,7 @@ RESULT eServiceMP3Record::frontendInfo(ePtr<iFrontendInformation> &ptr)
+ 	return -1;
+ }
+ 
+-RESULT eServiceMP3Record::connectEvent(const sigc::slot2<void,iRecordableService*,int> &event, ePtr<eConnection> &connection)
++RESULT eServiceMP3Record::connectEvent(const sigc::slot<void(iRecordableService*,int)> &event, ePtr<eConnection> &connection)
+ {
+ 	connection = new eConnection((iRecordableService*)this, m_event.connect(event));
+ 	return 0;
+diff --git a/servicemp3/servicemp3record.h b/servicemp3/servicemp3record.h
+index 87bea53..1263cd6 100644
+--- a/servicemp3/servicemp3record.h
++++ b/servicemp3/servicemp3record.h
+@@ -12,7 +12,7 @@ class eServiceMP3Record:
+ {
+ 	DECLARE_REF(eServiceMP3Record);
+ public:
+-	RESULT connectEvent(const sigc::slot2<void,iRecordableService*,int> &event, ePtr<eConnection> &connection);
++	RESULT connectEvent(const sigc::slot<void(iRecordableService*,int)> &event, ePtr<eConnection> &connection);
+ 	RESULT prepare(const char *filename, time_t begTime, time_t endTime, int eit_event_id, const char *name, const char *descr, const char *tags, bool descramble, bool recordecm, int packetsize);
+ 	RESULT prepareStreaming(bool descramble, bool includeecm);
+ 	RESULT start(bool simulate=false);
+@@ -54,7 +54,7 @@ private:
+ 	static gboolean handleAutoPlugCont(GstElement *bin, GstPad *pad, GstCaps *caps, gpointer user_data);
+ 
+ 			/* events */
+-	sigc::signal2<void,iRecordableService*,int> m_event;
++	sigc::signal<void(iRecordableService*,int)> m_event;
+ };
+ 
+ #endif
