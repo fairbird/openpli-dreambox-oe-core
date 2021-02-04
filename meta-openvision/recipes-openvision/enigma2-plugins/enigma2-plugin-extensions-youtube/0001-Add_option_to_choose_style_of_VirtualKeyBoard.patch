@@ -61,10 +61,10 @@ index 81e97ff..0d37513 100644
  config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
  config.plugins.YouTube.mergeFiles = ConfigYesNo(default=False)
 @@ -1476,6 +1476,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
- 		configlist.append(getConfigListEntry(_('Merge downloaded files:'),
+ 		self.list.append(getConfigListEntry(_('Merge downloaded files:'),
  			config.plugins.YouTube.mergeFiles,
  			_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
-+		configlist.append(getConfigListEntry(_('Choose VirtualKeyBoard Style:'),
++		self.list.append(getConfigListEntry(_('Choose VirtualKeyBoard Style:'),
 +			config.plugins.YouTube.VirtualKeyBoard,
 +			_('You can choose what style of VirtualKeyBoard to use it.\nYouTube OR Image (VirtualKeyBoard).')))
  		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
