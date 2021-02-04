@@ -28,14 +28,5 @@ RDEPENDS_${PN} = " \
 	python-twisted-web \
 	"
 
-CONFFILES = "${sysconfdir}/enigma2/YouTube.key"
-
-do_install_append() {
-	install -d ${D}${sysconfdir}/enigma2
-	install -m 0644 ${WORKDIR}/YouTube.key ${D}${sysconfdir}/enigma2/YouTube.key
-}
-
-FILES_${PN} = "${sysconfdir} ${libdir}"
-
 RDEPENDS_{PN}-src = "${PN}"
 FILES_${PN}-src = "${libdir}/enigma2/python/Plugins/Extensions/YouTube/*.py"
