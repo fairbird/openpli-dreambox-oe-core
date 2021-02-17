@@ -6,10 +6,10 @@ Subject: [PATCH] Add_option_to_choose_style_of_VirtualKeyBoard
 ---
 
 diff --git a/src/YouTubeSearch.py b/src/YouTubeSearch.py
-index 81e97ff..0d37513 100644
+index 359da1a..043954f 100644
 --- a/src/YouTubeSearch.py
 +++ b/src/YouTubeSearch.py
-@@ -2,7 +2,7 @@
+@@ -2,7 +2,7 @@ from __future__ import print_function
  
  from threading import Thread
  from json import loads
@@ -26,12 +26,12 @@ index 81e97ff..0d37513 100644
  
  from . import _
  from .compat import compat_quote
-@@ -314,8 +315,20 @@ class YouTubeSearch(Screen, ConfigListScreen):
+@@ -311,8 +312,20 @@ class YouTubeSearch(Screen, ConfigListScreen):
  
  	def openKeyboard(self):
  		self['config'].getCurrent()[1].help_window.instance.hide()
 -		self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
--			text=self.searchValue.value)
+-				text=self.searchValue.value)
 +		self.VirtualKeyBoard = config.plugins.YouTube.VirtualKeyBoard.value
 +		if self.VirtualKeyBoard == "YouTube":
 +			if os.path.islink("/usr/lib/enigma2/python/Screens/VirtualKeyBoard.py") and os.path.exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NewVirtualKeyBoard")):
@@ -49,9 +49,11 @@ index 81e97ff..0d37513 100644
  
  	def keyBoardCallback(self, name):
  		config = self['config'].getCurrent()[1]
+diff --git a/src/YouTubeUi.py b/src/YouTubeUi.py
+index 2d0bb60..1eb3817 100644
 --- a/src/YouTubeUi.py
 +++ b/src/YouTubeUi.py
-@@ -113,6 +113,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='quit', choices=[
+@@ -74,6 +74,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='quit', choices=[
  	('playprev', _('Play previous'))])
  config.plugins.YouTube.onMovieStop = ConfigSelection(default='ask', choices=[
  	('ask', _('Ask user')), ('quit', _('Return to list'))])
@@ -60,7 +62,7 @@ index 81e97ff..0d37513 100644
  config.plugins.YouTube.login = ConfigYesNo(default=False)
  config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
  config.plugins.YouTube.mergeFiles = ConfigYesNo(default=False)
-@@ -1476,6 +1476,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
+@@ -1434,6 +1436,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
  		self.list.append(getConfigListEntry(_('Merge downloaded files:'),
  			config.plugins.YouTube.mergeFiles,
  			_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
