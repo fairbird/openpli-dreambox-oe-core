@@ -6,7 +6,7 @@ Subject: [PATCH] Add_option_to_choose_style_of_VirtualKeyBoard
 ---
 
 diff --git a/src/YouTubeSearch.py b/src/YouTubeSearch.py
-index 359da1a..043954f 100644
+index 9426891..125f933 100644
 --- a/src/YouTubeSearch.py
 +++ b/src/YouTubeSearch.py
 @@ -2,7 +2,7 @@ from __future__ import print_function
@@ -50,7 +50,7 @@ index 359da1a..043954f 100644
  	def keyBoardCallback(self, name):
  		config = self['config'].getCurrent()[1]
 diff --git a/src/YouTubeUi.py b/src/YouTubeUi.py
-index 2d0bb60..1eb3817 100644
+index 027ed69..577674b 100644
 --- a/src/YouTubeUi.py
 +++ b/src/YouTubeUi.py
 @@ -74,6 +74,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='quit', choices=[
@@ -61,11 +61,11 @@ index 2d0bb60..1eb3817 100644
 +	('YouTube', _('YouTube VirtualKeyBoard')), ('Image', _('Image VirtualKeyBoard'))])
  config.plugins.YouTube.login = ConfigYesNo(default=False)
  config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
- config.plugins.YouTube.mergeFiles = ConfigYesNo(default=False)
-@@ -1434,6 +1436,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
- 		self.list.append(getConfigListEntry(_('Merge downloaded files:'),
- 			config.plugins.YouTube.mergeFiles,
- 			_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
+ config.plugins.YouTube.useDashMP4 = ConfigYesNo(default=True)
+@@ -1443,6 +1445,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
+ 			self.list.append(getConfigListEntry(_('Merge downloaded files:'),
+ 				config.plugins.YouTube.mergeFiles,
+ 				_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
 +		self.list.append(getConfigListEntry(_('Choose VirtualKeyBoard Style:'),
 +			config.plugins.YouTube.VirtualKeyBoard,
 +			_('You can choose what style of VirtualKeyBoard to use it.\nYouTube OR Image (VirtualKeyBoard).')))
