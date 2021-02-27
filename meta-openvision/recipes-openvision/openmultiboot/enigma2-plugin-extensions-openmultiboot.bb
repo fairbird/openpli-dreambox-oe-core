@@ -9,7 +9,7 @@ PKGV = "git${GITPKGV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "git://github.com/OpenVisionE2/openmultibootmanager.git;protocol=git"
+SRC_URI = "git://github.com/oe-alliance/openmultibootmanager.git"
 
 S = "${WORKDIR}/git"
 
