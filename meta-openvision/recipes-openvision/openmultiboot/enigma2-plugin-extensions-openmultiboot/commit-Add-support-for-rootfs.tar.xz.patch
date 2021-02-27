@@ -1,0 +1,54 @@
+From 47cf6743d30ed114b4e1e77a7216f8cd77afa11c Mon Sep 17 00:00:00 2001
+From: fairbird <rrrr53@hotmail.com>
+Date: Sat, 27 Feb 2021 15:24:51 +0300
+Subject: [PATCH] commit Add support for rootfs.tar.xz
+(Add support to extract image rootfs.tar.xz for Devises such as (DM520, DM820)
+P.s: Need to set name of image as (name-of-image.rootfs.tar.xz) then compress it with zip extension then upload to directory of OMB_upload)
+
+---
+ src/OMBManagerInstall.py | 22 +++++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
+
+diff --git a/src/OMBManagerInstall.py b/src/OMBManagerInstall.py
+index ce2c080..06366fd 100644
+--- a/src/OMBManagerInstall.py
++++ b/src/OMBManagerInstall.py
+@@ -243,6 +243,7 @@ class OMBManagerInstall(Screen):
+ 			return
+ 
+ 		nfifile = glob.glob('%s/*.nfi' % tmp_folder)
++		tarxzfile = glob.glob('%s/*.rootfs.tar.xz' % tmp_folder)
+ 		if nfifile:
+ 			if not self.extractImageNFI(nfifile[0], tmp_folder):
+ 				self.showError(_("Cannot extract nfi image"))
+@@ -252,12 +253,27 @@ class OMBManagerInstall(Screen):
+ 				self.afterInstallImage(target_folder)
+ 				self.messagebox.close()
+ 				self.close()
++		elif tarxzfile:
++			if os.system(OMB_TAR_BIN + ' xpJf %s -C %s' % (tarxzfile[0], target_folder)) != 0:
++				if not os.path.exists(target_folder + "/usr/bin/enigma2"):
++					self.showError(_("Error unpacking rootfs"))
++					os.system(OMB_RM_BIN + ' -rf ' + tmp_folder)
++				else:
++					self.afterInstallImage(target_folder)
++					os.system(OMB_RM_BIN + ' -f ' + source_file)
++					os.system(OMB_RM_BIN + ' -rf ' + tmp_folder)
++					self.messagebox.close()
++					self.close(target_folder)
++			else:
++				self.showError(_("Error unpacking rootfs"))
++				os.system(OMB_RM_BIN + ' -rf ' + tmp_folder)
+ 		elif self.installImage(tmp_folder, target_folder, kernel_target_file, tmp_folder):
+ 			os.system(OMB_RM_BIN + ' -f ' + source_file)
++			os.system(OMB_RM_BIN + ' -rf ' + tmp_folder)
+ 			self.messagebox.close()
+-			self.close()
+-
+-		os.system(OMB_RM_BIN + ' -rf ' + tmp_folder)
++			self.close(target_folder)
++		else:
++			os.system(OMB_RM_BIN + ' -rf ' + tmp_folder)
+ 
+ 	def installImage(self, src_path, dst_path, kernel_dst_path, tmp_folder):
+ 		if "ubi" in OMB_GETIMAGEFILESYSTEM:
