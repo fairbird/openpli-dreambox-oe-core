@@ -10,7 +10,7 @@ P.s: Need to set name of image as (name-of-image.rootfs.tar.xz) then compress it
  1 file changed, 19 insertions(+), 3 deletions(-)
 
 diff --git a/src/OMBManagerInstall.py b/src/OMBManagerInstall.py
-index ce2c080..06366fd 100644
+index ce2c080..5904026 100644
 --- a/src/OMBManagerInstall.py
 +++ b/src/OMBManagerInstall.py
 @@ -243,6 +243,7 @@ class OMBManagerInstall(Screen):
