@@ -120,7 +120,6 @@ ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
 	dvb-usb-drivers-meta \
 	enigma2-plugin-drivers-usbserial \
-	enigma2-plugin-extensions-backupsuite \
 	enigma2-plugin-extensions-blurayplayer \
 	enigma2-plugin-extensions-dlnabrowser \
 	enigma2-plugin-extensions-dlnaserver \
