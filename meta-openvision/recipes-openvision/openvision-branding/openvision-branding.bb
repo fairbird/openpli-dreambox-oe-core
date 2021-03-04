@@ -67,6 +67,8 @@ EXTRA_OECONF = " \
     --with-rctype="${RCTYPE}" \
     --with-rcname="${RCNAME}" \
     --with-rcidnum="${RCIDNUM}" \
+    --with-fhdskin="${HAVE_FHDSKIN}" \
+    --with-e2service="${PREFERRED_PROVIDER_virtual/enigma2-mediaservice}" \
     "
 
 FILES_${PN} = "${libdir}/enigma2/python/*.so"
