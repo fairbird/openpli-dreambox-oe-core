@@ -110,6 +110,7 @@ ENIGMA2_BRANCH ?= "develop"
 GITHUB_URI ?= "git://github.com"
 
 SRC_URI = " ${GITHUB_URI}/OpenVisionE2/enigma2-openvision.git;branch=${ENIGMA2_BRANCH} \
+			file://001-Fix-PLAYPAUSE-Key.patch \
 			file://003-restore-last-update-date-time.patch;apply=no \
 			file://006-make-PLi-FullNightHD-skin-default.patch \
 			file://012-set-default-hide-channel-list-radio.patch;apply=no \
