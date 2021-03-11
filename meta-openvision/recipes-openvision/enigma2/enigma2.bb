@@ -110,7 +110,6 @@ ENIGMA2_BRANCH ?= "develop"
 GITHUB_URI ?= "git://github.com"
 
 SRC_URI = " ${GITHUB_URI}/OpenVisionE2/enigma2-openvision.git;branch=${ENIGMA2_BRANCH} \
-			file://001-Fix-PLAYPAUSE-Key.patch \
 			file://002-Add-HardwareInfo-file-again.patch \
 			file://003-restore-last-update-date-time.patch;apply=no \
 			file://004-Add-Option-Zap-Mode.patch \
