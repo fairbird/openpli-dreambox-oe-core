@@ -115,6 +115,7 @@ SRC_URI = " ${GITHUB_URI}/OpenVisionE2/enigma2-openvision.git;branch=${ENIGMA2_B
 			file://004-Add-Option-Zap-Mode.patch \
 			file://005-Add-patch-for-Organize-menus.patch \
 			file://006-make-PLi-FullNightHD-skin-default.patch \
+			file://007-delete-duplicate-ColorActions.patch \
 			file://012-set-default-hide-channel-list-radio.patch;apply=no \
 			"
 

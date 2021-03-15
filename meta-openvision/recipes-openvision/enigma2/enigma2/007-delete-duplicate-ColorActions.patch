@@ -1,0 +1,23 @@
+From: fairbird, RAED <rrrr53@hotmail.com>
+Date: Thu, 16 Mar 2021 02:55:52 +0300
+Subject: Delete duplicate ColorActions
+
+---
+
+diff -Naur a/data/keymap.xml  b/data/keymap.xml 
+--- a/data/keymap.xml 	2021-03-16 02:55:52.426216568 +0100
++++ b/data/keymap.xml 	2021-03-16 02:55:30.325492539 +0100
+@@ -4,13 +4,6 @@ <map context="AudioSelectionActions">
+ 		<key id="KEY_PREVIOUS" mapto="moveUp" flags="m" />
+ 		<key id="KEY_MUTE" mapto="volumeMute" flags="m" />
+ 	</map>
+-
+-	<map context="ColorActions">
+-		<key id="KEY_RED" mapto="red" flags="m" />
+-		<key id="KEY_GREEN" mapto="green" flags="m" />
+-		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
+-		<key id="KEY_BLUE" mapto="blue" flags="m" />
+-	</map>
+ 
+ 	<map context="FunctionKeyActions">
+ 		<key id="KEY_F1" mapto="f1" flags="m" />
