@@ -11,7 +11,7 @@ diff --git a/data/menu.xml b/data/menu.xml
 index 578d25f..d6f5a5f 100644
 --- a/data/menu.xml
 +++ b/data/menu.xml
-@@ -14,38 +14,94 @@
+@@ -14,38 +14,95 @@
  -->
  
  <!-- Main Menu -->
@@ -37,16 +37,17 @@ index 578d25f..d6f5a5f 100644
 +	<!-- Menu / Information -->
 +	<menu entryID="info_screen" level="0" text="Information" weight="20">
 +		<id val="information" />
-+		<item entryID="about_screen" level="0" text="About" weight="5"><screen module="About" /></item>
-+		<item entryID="openvision_screen" level="0" text="Open Vision" weight="10"><screen module="About" screen="OpenVisionInformation" /></item>
-+		<item entryID="device_screen" level="0" text="Devices" weight="15"><screen module="About" screen="Devices" /></item>
-+		<item entryID="memory_screen" level="0" text="Memory" weight="20"><screen module="About" screen="SystemMemoryInfo" /></item>
-+		<item entryID="network_screen" level="0" text="Network" weight="25"><screen module="About" screen="SystemNetworkInfo" /></item>
-+		<item entryID="service_info_screen" level="1" text="Service" weight="30"><screen module="ServiceInfo" screen="ServiceInfo" /></item>
-+		<item entryID="dvb_screen" level="0" text="DVB" weight="35"><screen module="About" screen="DVBInformation" /></item>
-+		<item entryID="geolocation_screen" level="0" text="Geolocation" weight="40"><screen module="About" screen="Geolocation" /></item>
-+		<item entryID="benchmark_screen" level="0" text="Benchmark" weight="45"><screen module="About" screen="BenchmarkInformation" /></item>
-+		<item entryID="streaming_clients_info_screen" level="2" text="Streaming Clients" weight="50"><screen module="StreamingClientsInfo" /></item>
++		<item entryID="receiver_info_screen" level="0" text="Receiver" weight="5"><screen module="Information" screen="ReceiverInformation" /></item>
++		<item entryID="openvision_info_screen" level="0" text="OpenVision" weight="10"><screen module="Information" screen="ImageInformation" /></item>
++		<item entryID="tuner_info_screen" level="0" text="Tuners" weight="15"><screen module="Information" screen="TunerInformation" /></item>
++		<item entryID="device_info_screen" level="0" text="Storage" weight="20"><screen module="Information" screen="StorageInformation" /></item>
++		<item entryID="memory_info_screen" level="0" text="Memory" weight="25"><screen module="Information" screen="MemoryInformation" /></item>
++		<item entryID="network_info_screen" level="0" text="Network" weight="30"><screen module="Information" screen="NetworkInformation" /></item>
++		<item entryID="multiboot_info_screen" level="0" text="MultiBoot" weight="35"><screen module="Information" screen="MultiBootInformation" /></item>
++		<item entryID="geolocation_info_screen" level="0" text="Geolocation" weight="40"><screen module="Information" screen="GeolocationInformation" /></item>
++		<item entryID="boxbranding_info_screen" level="2" text="BoxBranding" weight="45"><screen module="Information" screen="BoxBrandingInformation" /></item>
++		<item entryID="service_info_screen" level="1" text="Service" weight="50"><screen module="ServiceInfo" screen="ServiceInfo" /></item>
++		<item entryID="streaming_clients_info_screen" level="2" text="Streaming Clients" weight="55"><screen module="StreamingClientsInfo" /></item>
 +	</menu>
 +
 +	<!-- Menu / Plugins -->
@@ -159,7 +160,7 @@ index 578d25f..d6f5a5f 100644
  from Components.EpgLoadSave import EpgDeleteMsg
  def msgClosed(ret):
  	if ret:
-@@ -79,138 +135,80 @@ def msgClosed(ret):
+@@ -79,139 +135,80 @@ def msgClosed(ret):
  		epgcache = eEPGCache.getInstance()
  		epgcache.flushEPG()
  self.session.openWithCallback(msgClosed, EpgDeleteMsg)
@@ -333,16 +334,17 @@ index 578d25f..d6f5a5f 100644
 -	<!-- Menu / Information -->
 -	<menu entryID="info_screen" level="0" text="Information" weight="20">
 -		<id val="information" />
--		<item entryID="about_screen" level="0" text="About" weight="5"><screen module="About" /></item>
--		<item entryID="openvision_screen" level="0" text="Open Vision" weight="10"><screen module="About" screen="OpenVisionInformation" /></item>
--		<item entryID="device_screen" level="0" text="Devices" weight="15"><screen module="About" screen="Devices" /></item>
--		<item entryID="memory_screen" level="0" text="Memory" weight="20"><screen module="About" screen="SystemMemoryInfo" /></item>
--		<item entryID="network_screen" level="0" text="Network" weight="25"><screen module="About" screen="SystemNetworkInfo" /></item>
--		<item entryID="service_info_screen" level="1" text="Service" weight="30"><screen module="ServiceInfo" screen="ServiceInfo" /></item>
--		<item entryID="dvb_screen" level="0" text="DVB" weight="35"><screen module="About" screen="DVBInformation" /></item>
--		<item entryID="geolocation_screen" level="0" text="Geolocation" weight="40"><screen module="About" screen="Geolocation" /></item>
--		<item entryID="benchmark_screen" level="0" text="Benchmark" weight="45"><screen module="About" screen="BenchmarkInformation" /></item>
--		<item entryID="streaming_clients_info_screen" level="2" text="Streaming Clients" weight="50"><screen module="StreamingClientsInfo" /></item>
+-		<item entryID="receiver_info_screen" level="0" text="Receiver" weight="5"><screen module="Information" screen="ReceiverInformation" /></item>
+-		<item entryID="openvision_info_screen" level="0" text="OpenVision" weight="10"><screen module="Information" screen="ImageInformation" /></item>
+-		<item entryID="tuner_info_screen" level="0" text="Tuners" weight="15"><screen module="Information" screen="TunerInformation" /></item>
+-		<item entryID="device_info_screen" level="0" text="Storage" weight="20"><screen module="Information" screen="StorageInformation" /></item>
+-		<item entryID="memory_info_screen" level="0" text="Memory" weight="25"><screen module="Information" screen="MemoryInformation" /></item>
+-		<item entryID="network_info_screen" level="0" text="Network" weight="30"><screen module="Information" screen="NetworkInformation" /></item>
+-		<item entryID="multiboot_info_screen" level="0" text="MultiBoot" weight="35"><screen module="Information" screen="MultiBootInformation" /></item>
+-		<item entryID="geolocation_info_screen" level="0" text="Geolocation" weight="40"><screen module="Information" screen="GeolocationInformation" /></item>
+-		<item entryID="boxbranding_info_screen" level="2" text="BoxBranding" weight="45"><screen module="Information" screen="BoxBrandingInformation" /></item>
+-		<item entryID="service_info_screen" level="1" text="Service" weight="50"><screen module="ServiceInfo" screen="ServiceInfo" /></item>
+-		<item entryID="streaming_clients_info_screen" level="2" text="Streaming Clients" weight="55"><screen module="StreamingClientsInfo" /></item>
 +		<!-- Menu / Setup / Software Update -->
 +		<item weight="15" level="0" text="Software update" entryID="software_update"><screen module="SoftwareUpdate" screen="UpdatePlugin" /></item>
  	</menu>
@@ -357,14 +359,3 @@ index 578d25f..d6f5a5f 100644
  	<!-- Menu / Standby and Restart -->
  	<menu entryID="standby_restart_list" level="0" text="Standby &amp; Restart" weight="99">
  		<id val="shutdown" />
-@@ -219,9 +217,9 @@ self.session.scart.VCRSbChanged(3)
- 		<item entryID="restart_enigma" level="0" text="Restart GUI" weight="15" requires="!InDebugMode"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
- 		<item entryID="restart_enigma" level="0" text="Restart GUI in standard mode" weight="20" requires="InDebugMode"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
- 		<item entryID="restart_enigma_debug" level="0" text="Restart GUI in debug mode" weight="25" requires="!InDebugMode"><screen module="Standby" screen="TryQuitMainloop">6</screen></item>
--		<item entryID="multiboot" level="0" text="Multiboot Image Selector" weight="40" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
- 		<item entryID="sleep" level="0" text="Sleep Timer" weight="30"><screen module="SleepTimerEdit" screen="SleepTimerEdit" /></item>
- 		<item entryID="restart" level="0" text="Restart" weight="35"><screen module="Standby" screen="TryQuitMainloop">2</screen></item>
-+		<item entryID="multiboot" level="0" text="Multiboot Image Selector" weight="40" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
- 		<item entryID="deep_standby" level="0" text="Deep Standby" weight="45" requires="DeepstandbySupport"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
- 		<item entryID="deep_standby" level="0" text="Shutdown" weight="50" requires="!DeepstandbySupport"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
- 		<item entryID="maintenance_mode" level="0" text="Recovery Mode" weight="55" requires="RecoveryMode"><screen module="Standby" screen="TryQuitMainloop">16</screen></item>
