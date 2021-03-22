@@ -1,4 +1,4 @@
-MAINTAINER = "Open Vision Developers"
+MAINTAINER = "RAED Developer"
 require conf/license/openpli-gplv2.inc
 require softcam.inc
 inherit cmake gitpkgv
