@@ -145,7 +145,6 @@ EXTRA_OECONF = "\
 	--with-${DISPLAY_TYPE} \
 	--with-boxbrand=${BOX_BRAND} \
 	--with-stbplatform=${STB_PLATFORM} \
-	--with-oever=${VISIONVERSION} \
 	ac_cv_prog_c_openmp=-fopenmp \
 	${@get_crashaddr(d)} \
 	BUILD_SYS=${BUILD_SYS} \
