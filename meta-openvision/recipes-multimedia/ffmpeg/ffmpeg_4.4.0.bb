@@ -27,7 +27,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 MIPSFPU = "${@bb.utils.contains("TARGET_FPU", "soft", "--disable-mipsfpu", "--enable-mipsfpu", d)}"
 
 SRC_URI = "\
-	git://github.com/FFmpeg/FFmpeg.git;branch=release/4.3 \
+	git://github.com/FFmpeg/FFmpeg.git;branch=release/4.4 \
 	file://01-mips64_cpu_detection.patch \
 	file://02-fix-hls.patch \
 	file://03-buffer-size.patch \
@@ -45,8 +45,8 @@ S = "${WORKDIR}/git"
 
 inherit gitpkgv autotools pkgconfig
 
-PV = "4.3.2+git${SRCPV}"
-PKGV = "4.3.2+git${GITPKGV}"
+PV = "4.4.0+git${SRCPV}"
+PKGV = "4.4.0+git${GITPKGV}"
 
 # Build fails when thumb is enabled: https://bugzilla.yoctoproject.org/show_bug.cgi?id=7717
 ARM_INSTRUCTION_SET = "arm"

@@ -1,8 +1,8 @@
 diff --git a/configure b/configure
-index 0d6ee0abfc..c69b318c04 100755
+index 7638d62d05..c71302d584 100755
 --- a/configure
 +++ b/configure
-@@ -3273,10 +3273,8 @@ xv_outdev_deps="xlib"
+@@ -3446,10 +3446,8 @@ xv_outdev_deps="xlib"
  # protocols
  async_protocol_deps="threads"
  bluray_protocol_deps="libbluray"
@@ -12,8 +12,8 @@ index 0d6ee0abfc..c69b318c04 100755
 -ffrtmphttp_protocol_conflict="librtmp_protocol"
  ffrtmphttp_protocol_select="http_protocol"
  ftp_protocol_select="tcp_protocol"
- gopher_protocol_select="network"
-@@ -3289,20 +3287,20 @@ https_protocol_suggest="zlib"
+ gopher_protocol_select="tcp_protocol"
+@@ -3463,20 +3461,20 @@ https_protocol_suggest="zlib"
  icecast_protocol_select="http_protocol"
  mmsh_protocol_select="http_protocol"
  mmst_protocol_select="network"
@@ -49,10 +49,10 @@ index 0d6ee0abfc..c69b318c04 100755
  schannel_conflict="openssl gnutls libtls mbedtls"
  sctp_protocol_deps="struct_sctp_event_subscribe struct_msghdr_msg_flags"
 diff --git a/libavformat/Makefile b/libavformat/Makefile
-index 608f7f1f85..8001e7237b 100644
+index 0f340f74a0..597938e009 100644
 --- a/libavformat/Makefile
 +++ b/libavformat/Makefile
-@@ -588,12 +588,12 @@ OBJS-$(CONFIG_MMSH_PROTOCOL)             += mmsh.o mms.o asf.o
+@@ -632,12 +632,12 @@ OBJS-$(CONFIG_MMSH_PROTOCOL)             += mmsh.o mms.o asf.o
  OBJS-$(CONFIG_MMST_PROTOCOL)             += mmst.o mms.o asf.o
  OBJS-$(CONFIG_PIPE_PROTOCOL)             += file.o
  OBJS-$(CONFIG_PROMPEG_PROTOCOL)          += prompeg.o
@@ -72,10 +72,10 @@ index 608f7f1f85..8001e7237b 100644
  OBJS-$(CONFIG_SCTP_PROTOCOL)             += sctp.o
  OBJS-$(CONFIG_SRTP_PROTOCOL)             += srtpproto.o srtp.o
 diff --git a/libavformat/protocols.c b/libavformat/protocols.c
-index ad95659795..617c7dbace 100644
+index fb6fabdce5..9891674eb4 100644
 --- a/libavformat/protocols.c
 +++ b/libavformat/protocols.c
-@@ -44,12 +44,12 @@ extern const URLProtocol ff_mmst_protocol;
+@@ -45,12 +45,12 @@ extern const URLProtocol ff_mmst_protocol;
  extern const URLProtocol ff_md5_protocol;
  extern const URLProtocol ff_pipe_protocol;
  extern const URLProtocol ff_prompeg_protocol;
@@ -95,10 +95,10 @@ index ad95659795..617c7dbace 100644
  extern const URLProtocol ff_sctp_protocol;
  extern const URLProtocol ff_srtp_protocol;
 diff --git a/libavformat/rtmpproto.c b/libavformat/rtmpproto.c
-index b741e421af..3542b71f13 100644
+index 5a540e3240..e3738c23ac 100644
 --- a/libavformat/rtmpproto.c
 +++ b/libavformat/rtmpproto.c
-@@ -2592,7 +2592,7 @@ static int inject_fake_duration_metadata(RTMPContext *rt)
+@@ -2591,7 +2591,7 @@ static int inject_fake_duration_metadata(RTMPContext *rt)
  static int rtmp_open(URLContext *s, const char *uri, int flags, AVDictionary **opts)
  {
      RTMPContext *rt = s->priv_data;
@@ -107,7 +107,7 @@ index b741e421af..3542b71f13 100644
      char *old_app, *qmark, *n, fname_buffer[1024];
      uint8_t buf[2048];
      int port;
-@@ -2603,7 +2603,7 @@ static int rtmp_open(URLContext *s, const char *uri, int flags, AVDictionary **o
+@@ -2602,7 +2602,7 @@ static int rtmp_open(URLContext *s, const char *uri, int flags, AVDictionary **o
  
      rt->is_input = !(flags & AVIO_FLAG_WRITE);
  
@@ -116,19 +116,19 @@ index b741e421af..3542b71f13 100644
                   hostname, sizeof(hostname), &port,
                   path, sizeof(path), s->filename);
  
-@@ -3137,9 +3137,9 @@ const URLProtocol ff_##flavor##_protocol = {     \
- };
+@@ -3147,9 +3147,9 @@ const URLProtocol ff_##flavor##_protocol = {     \
+ #define RTMP_PROTOCOL(flavor, uppercase)         \
+     RTMP_PROTOCOL_3(flavor, CONFIG_ ## uppercase ## _PROTOCOL)
  
- 
--RTMP_PROTOCOL(rtmp)
--RTMP_PROTOCOL(rtmpe)
--RTMP_PROTOCOL(rtmps)
--RTMP_PROTOCOL(rtmpt)
--RTMP_PROTOCOL(rtmpte)
--RTMP_PROTOCOL(rtmpts)
-+RTMP_PROTOCOL(ffrtmp)
-+RTMP_PROTOCOL(ffrtmpe)
-+RTMP_PROTOCOL(ffrtmps)
-+RTMP_PROTOCOL(ffrtmpt)
-+RTMP_PROTOCOL(ffrtmpte)
-+RTMP_PROTOCOL(ffrtmpts)
+-RTMP_PROTOCOL(rtmp,   RTMP)
+-RTMP_PROTOCOL(rtmpe,  RTMPE)
+-RTMP_PROTOCOL(rtmps,  RTMPS)
+-RTMP_PROTOCOL(rtmpt,  RTMPT)
+-RTMP_PROTOCOL(rtmpte, RTMPTE)
+-RTMP_PROTOCOL(rtmpts, RTMPTS)
++RTMP_PROTOCOL(ffrtmp,   FFRTMP)
++RTMP_PROTOCOL(ffrtmpe,  FFRTMPE)
++RTMP_PROTOCOL(ffrtmps,  FFRTMPS)
++RTMP_PROTOCOL(ffrtmpt,  FFRTMPT)
++RTMP_PROTOCOL(ffrtmpte, FFRTMPTE)
++RTMP_PROTOCOL(ffrtmpts, FFRTMPTS)
