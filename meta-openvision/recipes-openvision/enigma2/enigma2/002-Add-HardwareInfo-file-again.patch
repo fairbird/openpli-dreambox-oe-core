@@ -21,7 +21,7 @@ new file mode 100644
 index 0000000..b07fe77
 --- /dev/null
 +++ b/lib/python/Tools/HardwareInfo.py
-@@ -0,0 +1,94 @@
+@@ -0,0 +1,66 @@
 +#!/usr/bin/python
 +# -*- coding: utf-8 -*-
 +from __future__ import print_function
@@ -51,34 +51,6 @@ index 0000000..b07fe77
 +			self.device_version = open("/proc/stb/info/version").read().strip()
 +		except:
 +			print("[HardwareInfo] Read /proc/stb/info/version failed.")
-+
-+		# Revision
-+		try:
-+			print("[HardwareInfo] Read /proc/stb/info/board_revision")
-+			self.device_revision = open("/proc/stb/info/board_revision").read().strip()
-+		except:
-+			print("[HardwareInfo] Read /proc/stb/info/board_revision failed.")
-+
-+		# Name ... bit odd, but history prevails
-+		try:
-+			print("[HardwareInfo] Read /etc/openvision/model")
-+			self.device_name = open("/etc/openvision/model").read().strip()
-+		except:
-+			print("[HardwareInfo] Read /etc/openvision/model failed.")
-+
-+		# Brandname ... bit odd, but history prevails
-+		try:
-+			print("[HardwareInfo] Read /etc/openvision/brand")
-+			self.device_brandname = open("/etc/openvision/brand").read().strip()
-+		except:
-+			print("[HardwareInfo] Read /etc/openvision/brand failed.")
-+
-+		# Model
-+		try:
-+			print("[HardwareInfo] Read /etc/openvision/model")
-+			self.device_model = open("/etc/openvision/model").read().strip()
-+		except:
-+			print("[HardwareInfo] Read /etc/openvision/model failed.")
 +
 +		self.device_model = self.device_model or self.device_name
 +		self.device_hw = self.device_model
