@@ -125,6 +125,14 @@ automount() {
 		exit 0
 	fi
 
+	# Activate swap space
+	if [ "$ID_FS_TYPE" == "swap" ] ; then
+		if ! grep -q "^/dev/${NAME} " /proc/swaps ; then
+			swapon /dev/${NAME}
+		fi
+		exit 0
+	fi
+
 	# Get the device model
 	if [ -f /sys/block/$DEVBASE/device/model ]; then
 		MODEL=`cat /sys/block/$DEVBASE/device/model`
@@ -196,8 +204,8 @@ automount() {
 
 	# Deal with specific file system exceptions
 	case $ID_FS_TYPE in
-	ext3)
-		# ext3 devices need to be mounted with the ext4 driver
+	ext2|ext3)
+		# ext2 and ext3 devices need to be mounted with the ext4 driver
 		MOUNT="$MOUNT -t ext4"
 		;;
 	vfat|fat)
