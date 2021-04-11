@@ -26,9 +26,10 @@ SRC_URI += "\
 	file://ncam.user \
 	file://ncam.provid \
 	file://CCcam.cfg \
-	file://ncam.fs"
+	file://ncam.fs \
+	file://ncam.services"
 
-CONFFILES = "/etc/tuxbox/config/ncam/ncam.conf /etc/tuxbox/config/ncam/ncam.server /etc/tuxbox/config/ncam/ncam.srvid /etc/tuxbox/config/ncam/ncam.user /etc/tuxbox/config/ncam/ncam.provid ${sysconfdir}/tuxbox/config/ncam/CCcam.cfg"
+CONFFILES = "/etc/tuxbox/config/ncam/ncam.conf /etc/tuxbox/config/ncam/ncam.server /etc/tuxbox/config/ncam/ncam.srvid /etc/tuxbox/config/ncam/ncam.user /etc/tuxbox/config/ncam/ncam.provid /etc/tuxbox/config/ncam/CCcam.cfg /etc/tuxbox/config/ncam/ncam.services"
 
 FILES_${PN} = "/usr/bin/ncam /etc/tuxbox/config/ncam/* /etc/init.d/softcam.ncam"
 
