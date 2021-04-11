@@ -11,7 +11,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "freetype"
 
-SRC_URI = "git://github.com/oe-alliance/openmultiboot.git"
+SRC_URI = "git://github.com/OpenVisionE2/openmultiboot.git"
 
 S = "${WORKDIR}/git"
 

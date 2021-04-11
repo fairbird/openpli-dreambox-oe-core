@@ -9,9 +9,7 @@ PKGV = "git${GITPKGV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "git://github.com/oe-alliance/openmultibootmanager.git \
-    file://commit-Add-support-for-rootfs.tar.xz.patch \
-"
+SRC_URI = "git://github.com/OpenVisionE2/openmultibootmanager.git"
 
 S = "${WORKDIR}/git"
 
