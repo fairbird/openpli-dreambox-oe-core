@@ -7,12 +7,28 @@ BACKUPDIR=/media/hdd
 MACADDR=`cat /sys/class/net/eth0/address | cut -b 1,2,4,5,7,8,10,11,13,14,16,17`
 
 # check if we have samba installed
-( test -f /etc/samba/smb.conf ) && HAS_SAMBA=yes
+( test -f /etc/init.d/samba.sh ) && HAS_SAMBA=yes
+
+# check if we have nfs installed
+( test -f /etc/init.d/nfsserver ) && HAS_NFS=yes
+
+# check if we have dropbear installed
+( test -f /etc/init.d/dropbear ) && HAS_DROPBEAR=yes
 
 # Make a safety backup of the smb.conf, we may need that later
 if [ -n ${HAS_SAMBA} ]; then
 	SAMBACONF=/etc/samba/smb.conf
-	cp ${SAMBACONF} ${SAMBACONF}.tmp
+	if [ -f ${SAMBACONF} ]; then
+		cp ${SAMBACONF} ${SAMBACONF}.tmp
+	fi
+fi
+
+# Make a safety backup of the host key file, we may need that later
+if [ -n ${HAS_DROPBEAR} ]; then
+	HOSTKEY=/etc/dropbear/dropbear_rsa_host_key
+	if [ -f ${HOSTKEY} ]; then
+		cp ${HOSTKEY} ${HOSTKEY}.tmp
+	fi
 fi
 
 if [ "$1x" == "startx" ] || [ -z "$1" ]; then
@@ -111,13 +127,88 @@ if [ -f /tmp/passwd ] && [ -f /tmp/shadow ]; then
 	fi
 fi
 
-# restore the original smb.conf
+# if we have samba installed, deal with the original smb.conf
 if [ -n ${HAS_SAMBA} ]; then
-	mv ${SAMBACONF} ${SAMBACONF}.old
-	mv ${SAMBACONF}.tmp ${SAMBACONF}
+	if [ -f ${SAMBACONF} ]; then
+		# swap old and new config files
+		mv ${SAMBACONF} ${SAMBACONF}.old
+		mv ${SAMBACONF}.tmp ${SAMBACONF}
 
-	# process the smb configuration from the backup
-	python /bin/convert-smbconf.py ${SAMBACONF}.old
+		# process the smb configuration from the backup
+		python /bin/convert-smbconf.py ${SAMBACONF}.old
+
+		# check if samba is running
+		SAMBA_ON=$(pidof -s smbd)
+
+		# stop samba
+		if [ -n ${SAMBA_ON} ]; then
+			/etc/init.d/samba.sh stop
+		fi
+
+		# use udev mount to remove and recreate the share
+		DEVNAME=dummy ACTION=dummy source /etc/udev/scripts/mount.sh > /dev/null
+
+		# regenerate the shares
+		ACTION=add
+		for FILE in /etc/samba/shares/*.conf; do
+			# fetch the mount path from the share definition
+			path=`grep "path\s*=\s*" $FILE | tr -d "\040\011\012\015" | cut -d'=' -f 2`
+			comment=`grep "comment\s*=\s*" $FILE | tr -d "\040\011\012\015" | cut -d'=' -f 2`
+			# remove the old config
+			rm $FILE
+			# and recreate it
+			samba_share $path $comment
+        done
+
+		# start samba again
+		if [ -n ${SAMBA_ON} ]; then
+			/etc/init.d/samba.sh start
+		fi
+	fi
+fi
+
+# fix possible resolv.conf symlink recursion
+find -L /etc/resolv.conf
+if [ $? -eq 1 ]; then
+	rm -f /etc/resolv.conf
+	touch /etc/resolv.conf
+fi
+
+# if we have NFS, check for exports and restart it
+if [ -n ${HAS_NFS} ]; then
+	if [ -f /etc/exports -a -s /etc/exports ]; then
+		/etc/init.d/nfsserver restart
+	fi
+fi
+
+# if we have dropbear installed, check for  an outdated hostkey
+if [ -n ${HAS_DROPBEAR} ]; then
+	# get the encoding type of the current key
+	TYPE=$(strings $HOSTKEY | head -n 1)
+	# if an old one was restored
+	if [ "${TYPE}" == "ssh-rsa" ]; then
+		# restore the original
+		mv ${HOSTKEY} ${HOSTKEY}.old
+		mv ${HOSTKEY}.tmp ${HOSTKEY}
+		# and restart dropbear
+		/etc/init.d/dropbear restart
+	else
+		# no need to for the original
+		rm -f ${HOSTKEY}.tmp
+	fi
+fi
+
+# custom cron jobs in /etc?
+if [[ -d /etc/cron/crontabs && ! -L /etc/cron ]]; then
+	# move them to /var/spool/cron
+	cd /etc/cron/crontabs
+	for file in *; do
+		cat $file >> /var/spool/cron/$file
+	done
+	cd /
+	rm -rf /etc/cron
+	ln -s /var/spool/cron /etc/cron
+	/etc/init.d/busybox-cron restart
 fi
 
 # remove any temp files used
