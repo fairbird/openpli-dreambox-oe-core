@@ -15,7 +15,7 @@ index 9426891..125f933 100644
  from json import loads
 -
 +import os
- from enigma import ePoint, getDesktop
+ from enigma import ePoint
  from Screens.ChoiceBox import ChoiceBox
  from Screens.Screen import Screen
 @@ -15,6 +15,7 @@ from Components.Pixmap import Pixmap
