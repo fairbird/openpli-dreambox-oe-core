@@ -6,27 +6,26 @@ Subject: [PATCH] Add_option_to_choose_style_of_VirtualKeyBoard
 ---
 
 diff --git a/src/YouTubeSearch.py b/src/YouTubeSearch.py
-index 9426891..125f933 100644
+index fb4b651..d756b70 100644
 --- a/src/YouTubeSearch.py
 +++ b/src/YouTubeSearch.py
-@@ -2,7 +2,7 @@ from __future__ import print_function
- 
+@@ -3,6 +3,7 @@ from __future__ import print_function
  from threading import Thread
  from json import loads
--
+ 
 +import os
  from enigma import ePoint
  from Screens.ChoiceBox import ChoiceBox
  from Screens.Screen import Screen
-@@ -15,6 +15,7 @@ from Components.Pixmap import Pixmap
+@@ -15,6 +16,7 @@ from Components.Pixmap import Pixmap
  from Components.Sources.Boolean import Boolean
  from Components.Sources.List import List
  from Components.Sources.StaticText import StaticText
 +from Tools.Directories import resolveFilename, SCOPE_PLUGINS
  
- from . import _
+ from . import _, screenwidth
  from .compat import compat_quote
-@@ -311,8 +312,20 @@ class YouTubeSearch(Screen, ConfigListScreen):
+@@ -344,8 +346,20 @@ class YouTubeSearch(Screen, ConfigListScreen):
  
  	def openKeyboard(self):
  		self['config'].getCurrent()[1].help_window.instance.hide()
@@ -50,7 +49,7 @@ index 9426891..125f933 100644
  	def keyBoardCallback(self, name):
  		config = self['config'].getCurrent()[1]
 diff --git a/src/YouTubeUi.py b/src/YouTubeUi.py
-index 027ed69..577674b 100644
+index cb4898e..da00cf4 100644
 --- a/src/YouTubeUi.py
 +++ b/src/YouTubeUi.py
 @@ -74,6 +74,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='quit', choices=[
@@ -62,7 +61,7 @@ index 027ed69..577674b 100644
  config.plugins.YouTube.login = ConfigYesNo(default=False)
  config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
  config.plugins.YouTube.useDashMP4 = ConfigYesNo(default=True)
-@@ -1443,6 +1445,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
+@@ -1515,6 +1517,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
  			self.list.append(getConfigListEntry(_('Merge downloaded files:'),
  				config.plugins.YouTube.mergeFiles,
  				_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
