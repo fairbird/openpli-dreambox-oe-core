@@ -7,6 +7,7 @@ SRC_URI += " \
             file://no-ldconfig.patch \
             file://setuptweaks-2.patch \
             file://pgettext.patch \
+            file://get-rid-of-register-keyword.patch \
 "
 
 EXTRA_OECONF += " \

@@ -123,6 +123,7 @@ SRC_URI = " ${GITHUB_URI}/OpenPLi/enigma2.git;branch=${ENIGMA2_BRANCH} \
 			file://008-dual-tuner-letter-detection.patch \
 			file://009-fix-fp-version.patch \
 			file://010-fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch \
+			file://011-get-rid-of-register-keyword.patch \
 			file://012-make-front-led-configurable.patch \
 			file://013-move-lcd-text-a-bit-to-the-right.patch \
 			file://014-use-ioctl-22-for-h265.patch \
