@@ -88,7 +88,7 @@ all: init
 	@echo
 	@echo " cd $(BUILD_DIR)"
 	@echo " source env.source"
-	@echo " bitbake openpli-enigma2-image"
+	@echo " bitbake openvision-enigma2-image"
 	@echo
 	@echo "	or, if you want to build not just the image, but the optional packages in the feed as well:"
 	@echo
