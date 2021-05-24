@@ -166,6 +166,7 @@ FILES_libswscale = "${libdir}/libswscale${SOLIBS}"
 # ffmpeg disables PIC on some platforms (e.g. x86-32)
 
 EXTRA_FFCONF = " \
+	--prefix=${prefix} \
 	--disable-static \
 	--enable-small \
 	--disable-runtime-cpudetect \
@@ -186,35 +187,59 @@ EXTRA_FFCONF = " \
 	--disable-fma3 \
 	--disable-fma4 \
 	--disable-avx2 \
-	--enable-inline-asm \
+	--disable-inline-asm \
 	--enable-asm \
+	--disable-yasm \
 	--disable-x86asm \
 	--disable-fast-unaligned \
-	--enable-muxers \
-	--enable-encoders \
+	--enable-protocol=http \
+	\
+	--disable-muxers \
+	--enable-muxer=mpeg1video \
+	--enable-muxer=h264 \
+	--enable-muxer=mp4 \
+	--enable-muxer=image2 \
+	--enable-muxer=mjpeg \
+	--enable-muxer=rawvideo \
+	--enable-muxer=mpeg2video \
+	--enable-muxer=matroska \
+	--enable-muxer=m4v \
+	--enable-muxer=image2pipe \
+	--enable-muxer=apng \
+	--enable-muxer=mpegts \
+	--disable-encoders \
 	--enable-decoders \
 	--enable-demuxers \
+	--enable-encoder=mpeg1video \
+	--enable-encoder=png \
+	--enable-encoder=libx264 \
+	--enable-encoder=ljpeg \
+	--enable-encoder=mpeg4 \
+	--enable-encoder=jpeg2000 \
+	--enable-encoder=jpegls \
+	--enable-encoder=rawvideo \
+	--disable-decoder=truehd \
+	--disable-decoder=mlp \
+	\
+	--disable-debug \
+	--disable-doc \
 	--enable-parsers \
 	--enable-bsfs \
 	--enable-protocols \
 	--enable-indevs \
 	--enable-outdevs \
 	--enable-filters \
-	--disable-doc \
 	--enable-libfdk-aac \
 	--enable-encoder=libfdk_aac \
 	--disable-htmlpages \
 	--disable-manpages \
 	--disable-podpages \
 	--disable-txtpages \
-	${@bb.utils.contains("TARGET_ARCH", "mipsel", "${MIPSFPU} --disable-vfp --disable-neon --disable-mipsdsp --disable-mipsdspr2", "", d)} \
-	${@bb.utils.contains("TARGET_ARCH", "arm", "--enable-armv6 --enable-armv6t2 --enable-vfp --enable-neon", "", d)} \
-	${@bb.utils.contains("TUNE_FEATURES", "aarch64", "--enable-armv8 --enable-vfp --enable-neon", "", d)} \
-	${@bb.utils.contains("TARGET_ARCH", "sh4", "--disable-vfp --disable-neon", "", d)} \
-	--disable-debug \
 	--pkg-config="pkg-config" \
 	--enable-zlib \
+	${@bb.utils.contains("TARGET_ARCH", "mipsel", "${MIPSFPU} --disable-mmi --disable-vfp --disable-neon --disable-mipsdsp --disable-mipsdspr2", "", d)} \
+	${@bb.utils.contains("TARGET_ARCH", "arm", "--enable-armv6 --enable-armv6t2 --enable-vfp --enable-neon", "", d)} \
+	${@bb.utils.contains("TUNE_FEATURES", "aarch64", "--enable-armv8 --enable-vfp --enable-neon", "", d)} \
 	--extra-cflags="${TARGET_CFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} -ffunction-sections -fdata-sections -fno-aggressive-loop-optimizations" \
 	--extra-ldflags="${TARGET_LDFLAGS},--gc-sections -Wl,--print-gc-sections,-lrt" \
-	--prefix=${prefix} \
-	"
+"
