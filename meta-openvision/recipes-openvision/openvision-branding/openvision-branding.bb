@@ -7,10 +7,14 @@ require conf/license/openvision-gplv2.inc
 
 inherit autotools-brokensep gitpkgv pythonnative
 
-PV = "git${SRCPV}"
-PKGV = "git${GITPKGV}"
+PV = "${VISIONVERSION}"
+PR = "${VISIONREVISION}"
 
-SRC_URI = "git://github.com/Hains/branding-module.git;protocol=git"
+PR[vardepsexclude] += "DATE"
+
+do_configure[nostamp] = "1"
+
+SRC_URI = "git://git@github.com/OpenVisionE2/branding-module.git;protocol=ssh"
 
 S = "${WORKDIR}/git"
 
@@ -19,13 +23,16 @@ EXTRA_OECONF = " \
     HOST_SYS=${HOST_SYS} \
     STAGING_INCDIR=${STAGING_INCDIR} \
     STAGING_LIBDIR=${STAGING_LIBDIR} \
-    --with-visionversion="${VISIONVERSION}" \
-    --with-visionrevision="${VISIONREVISION}" \
+    --with-imgversion="${VISIONVERSION}" \
+    --with-imgrevision="${VISIONREVISION}" \
+    --with-imglanguage="${VISIONLANGUAGE}" \
     --with-developername="${DEVELOPER_NAME}" \
     --with-boxbrand="${BOX_BRAND}" \
+    --with-displaybrand="${DISPLAY_BRAND}" \
     --with-oever="${VISIONVERSION}" \
     --with-distro="${DISTRO_NAME}" \
     --with-boxtype="${MACHINE}" \
+    --with-displaymodel="${DISPLAY_MODEL}" \
     --with-machinebuild="${STB_PLATFORM}" \
     --with-imageversion="${DISTRO_VERSION}" \
     --with-imagebuild="${BUILD_VERSION}" \
@@ -41,6 +48,7 @@ EXTRA_OECONF = " \
     --with-kernelfile="${KERNEL_FILE}" \
     --with-mkubifs="${MKUBIFS_ARGS}" \
     --with-ubinize="${UBINIZE_ARGS}" \
+    --with-forcemode="${FORCE}" \
     --with-arch="${DEFAULTTUNE}" \
     --with-tfpu="${TARGET_FPU}" \
     --with-display-type="${DISPLAY_TYPE}" \
@@ -69,6 +77,7 @@ EXTRA_OECONF = " \
     --with-rcidnum="${RCIDNUM}" \
     --with-fhdskin="${HAVE_FHDSKIN}" \
     --with-e2service="${PREFERRED_PROVIDER_virtual/enigma2-mediaservice}" \
+    --with-dboxlcd="${SUPPORT_DBOXLCD}" \
     "
 
 FILES_${PN} = "${libdir}/enigma2/python/*.so"
