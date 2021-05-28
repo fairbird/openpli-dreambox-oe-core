@@ -54,3 +54,5 @@ FILES_${PN}-src = " \
 	"
 
 FILES_${PN} += "${sysconfdir}"
+
+deltask do_populate_sysroot
