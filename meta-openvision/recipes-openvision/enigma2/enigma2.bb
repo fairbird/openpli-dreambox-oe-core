@@ -26,6 +26,7 @@ RDEPENDS_${PN} = " \
 	enigma2-fonts \
 	ethtool \
 	glibc-gconv-iso8859-15 \
+	ntpdate \
 	openvision-branding \
 	enigma-module \
 	${PYTHON_RDEPS} \
