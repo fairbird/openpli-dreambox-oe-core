@@ -142,15 +142,19 @@ def get_crashaddr(d):
 EXTRA_OECONF = "\
 	--with-libsdl=no --with-boxtype=${MACHINE} \
 	--enable-dependency-tracking \
-	--with-${DISPLAY_TYPE} \
-	--with-boxbrand=${BOX_BRAND} \
-	--with-stbplatform=${STB_PLATFORM} \
 	ac_cv_prog_c_openmp=-fopenmp \
 	${@get_crashaddr(d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "textlcd", "--with-textlcd" , "", d)} \
 	BUILD_SYS=${BUILD_SYS} \
 	HOST_SYS=${HOST_SYS} \
 	STAGING_INCDIR=${STAGING_INCDIR} \
 	STAGING_LIBDIR=${STAGING_LIBDIR} \
+	--with-boxbrand=${BOX_BRAND} \
+	--with-stbplatform=${STB_PLATFORM} \
+	--with-e2rev=${GITPKGV} \
+	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd220", "--with-colorlcd220" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd390", "--with-colorlcd390" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd400", "--with-colorlcd400" , "", d)} \
 	"
 
 # pass the enigma branch to automake

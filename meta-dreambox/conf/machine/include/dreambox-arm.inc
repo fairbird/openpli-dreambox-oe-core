@@ -4,6 +4,7 @@ MTD_ROOTFS = "mmcblk0p2"
 MTD_KERNEL = "mmcblk0p1"
 KERNEL_FILE = "kernel.bin"
 ROOTFS_FILE = "rootfs.tar.bz2"
+MTD_BLACK  = "mmcblk0"
 
 DISTRO_FEATURES_GFX_mipsel ?= " opengl"
 
@@ -28,6 +29,7 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     gstreamer1.0-libav \
     kernel-module-cifs \
     kernel-module-autofs4 \
+    kernel-module-bluetooth \
     kernel-module-hmac \
     kernel-module-md4 \
     kernel-module-ecb \
@@ -49,22 +51,26 @@ KERNEL_MODULE_AUTOLOAD += "xfs"
 
 DISTRO_FEATURES_remove = "directfb gtk-directfb"
     
-MACHINE_FEATURES += "dreambox alsa usbhost 3dtv switchoff blindscan-dvbs"
+MACHINE_FEATURES += "alsa usbhost switchoff blindscan-dvbs modem dvb-c blindscan-dvbc hdmicec recovery ci usbconsole blindscan-tbs emmc mmc HDMI HDMI-IN-FHD"
 # Add "dreambox" override for recipes
 MACHINEOVERRIDES .= ":dreambox"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"
 PREFERRED_PROVIDER_virtual/blindscan-dvbs = "dreambox-blindscan-utils"
 PREFERRED_PROVIDER_virtual/blindscan-dvbc = "dreambox-blindscan-utils"
-PREFERRED_VERSION_linux-dreambox ?= "3.14"
+PREFERRED_VERSION_linux-dreambox = "${KERNELVERSION}"
+PREFERRED_PROVIDER_virtual/egl ?= "libvc5dream"
+PREFERRED_PROVIDER_virtual/libgles1 ?= "libvc5dream"
+PREFERRED_PROVIDER_virtual/libgles2 ?= "libvc5dream"
 PREFERRED_PROVIDER_virtual/libgl ?= "mesa-gl"
 PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
+PREFERRED_PROVIDER_jpeg ?= "libjpeg-turbo"
+PREFERRED_PROVIDER_jpeg-native ?= "libjpeg-turbo-native"
 PREFERRED_PROVIDER_virtual/kodi = "stb-kodi-${MACHINE}"
-PREFERRED_VERSION_linux-dreambox = "3.14"
 
 TARGET_ARCH = "arm"
 DEFAULTTUNE = "cortexa15hf-neon-vfpv4"
-OLDEST_KERNEL = "3.14"
+OLDEST_KERNEL = "${KERNELVERSION}"
 
 MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc gobject-introspection-data"
 
@@ -101,7 +107,6 @@ IMAGE_CMD_tar_append = ";\
 STB_PLATFORM = "dm4kgen"
 BOX_BRAND = "dreambox"
 KERNELVERSION = "3.14"
-
-HAVE_HDMI = "True"
-HAVE_HDMI_IN = "True"
-HAVE_HDMI_FHD = "True"
+SOC_FAMILY = "bcm7252s"
+RCNAME = "dmm2"
+KERNEL_MODULE_AUTOLOAD += "bluetooth"
