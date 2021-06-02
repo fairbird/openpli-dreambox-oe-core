@@ -14,7 +14,7 @@ PR[vardepsexclude] += "DATE"
 
 do_configure[nostamp] = "1"
 
-SRC_URI = "git://git@github.com/OpenVisionE2/branding-module.git;protocol=ssh"
+SRC_URI = "git://github.com/OpenVisionE2/branding-module.git"
 
 S = "${WORKDIR}/git"
 

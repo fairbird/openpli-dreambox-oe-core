@@ -10,7 +10,7 @@ PR = "${VISIONREVISION}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "git://git@github.com/OpenVisionE2/openvision-module.git;protocol=ssh"
+SRC_URI = "git://github.com/OpenVisionE2/openvision-module.git"
 
 S = "${WORKDIR}/git/source/enigma"
 
