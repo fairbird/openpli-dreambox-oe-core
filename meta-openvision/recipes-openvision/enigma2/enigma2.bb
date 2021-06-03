@@ -25,6 +25,7 @@ RDEPENDS_${PN} = " \
 	enigma2-data-iso-639-3 \
 	enigma2-fonts \
 	ethtool \
+	enigma2-timezones \
 	glibc-gconv-iso8859-15 \
 	ntpdate \
 	openvision-branding \
