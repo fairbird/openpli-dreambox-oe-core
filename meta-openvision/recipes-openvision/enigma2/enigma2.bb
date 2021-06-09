@@ -24,12 +24,13 @@ RDEPENDS_${PN} = " \
 	alsa-conf \
 	enigma2-data-iso-639-3 \
 	enigma2-fonts \
-	ethtool \
+	enigma-module \
+	enigma2-remotes \
 	enigma2-timezones \
+	ethtool \
 	glibc-gconv-iso8859-15 \
 	ntpdate \
 	openvision-branding \
-	enigma-module \
 	${PYTHON_RDEPS} \
 	"
 
