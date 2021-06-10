@@ -4,7 +4,6 @@ require conf/license/openvision-gplv2.inc
 
 inherit gitpkgv allarch
 
-SRCREV = "${AUTOREV}"
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
