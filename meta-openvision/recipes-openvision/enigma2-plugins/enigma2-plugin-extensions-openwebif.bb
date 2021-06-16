@@ -17,6 +17,7 @@ RDEPENDS_${PN} = "\
 	python-numbers \
 	python-pyopenssl \
 	python-shell \
+	python-six \
 	python-unixadmin \
 	"
 
@@ -25,7 +26,7 @@ inherit gitpkgv distutils-openplugins gettext
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git"
+SRC_URI = "git://github.com/OpenVisionE2/OpenWebif.git;protocol=git"
 
 S="${WORKDIR}/git"
 
