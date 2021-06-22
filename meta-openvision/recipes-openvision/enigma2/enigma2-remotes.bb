@@ -15,10 +15,10 @@ S = "${WORKDIR}/git"
 
 do_install() {
     install -d ${D}${datadir}/enigma2/
-    install -d ${D}${datadir}/enigma2/rc_models
+    install -d ${D}${datadir}/enigma2/rc
     
-    install -m 0644 ${S}/png/${RCNAME}.png ${D}${datadir}/enigma2/rc_models/
-    install -m 0644 ${S}/xml/${RCNAME}.xml ${D}${datadir}/enigma2/rc_models/
+    install -m 0644 ${S}/png/${RCNAME}.png ${D}${datadir}/enigma2/rc/
+    install -m 0644 ${S}/xml/${RCNAME}.xml ${D}${datadir}/enigma2/rc/
     
     install -m 0644 ${S}/remotes.xml ${D}${datadir}/enigma2/remotes.xml
 }
