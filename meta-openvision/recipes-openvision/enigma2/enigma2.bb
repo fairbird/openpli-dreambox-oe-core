@@ -30,7 +30,6 @@ RDEPENDS_${PN} = " \
 	ethtool \
 	glibc-gconv-iso8859-15 \
 	ntpdate \
-	openvision-branding \
 	${PYTHON_RDEPS} \
 	"
 
