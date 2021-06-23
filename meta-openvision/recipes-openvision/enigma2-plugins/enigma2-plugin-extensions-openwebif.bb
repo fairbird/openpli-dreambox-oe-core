@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://README;firstline=10;lastline=12;md5=9c14f792d0aeb54e1
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-DEPENDS = "python-cheetah-native"
+DEPENDS = "python-cheetah-native enigma2-remotes"
 
 RDEPENDS_${PN} = "\
 	aio-grab \
