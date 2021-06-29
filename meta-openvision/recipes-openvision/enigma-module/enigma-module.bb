@@ -1,16 +1,17 @@
-SUMMARY = "Open Vision information module for ${MACHINE}"
+SUMMARY = "Enigma kernel module for ${MACHINE}"
+MAINTAINER = "Open Vision developers"
+HOMEPAGE = "https://github.com/OpenVisionE2/enigma-module"
 SECTION = "base"
 PRIORITY = "required"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-SRCREV = "${AUTOREV}"
 PV = "${VISIONVERSION}"
 PR = "${VISIONREVISION}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "git://github.com/OpenVisionE2/openvision-module.git"
+SRC_URI = "git://github.com/OpenVisionE2/enigma-module.git;protocol=git"
 
 S = "${WORKDIR}/git/source/enigma"
 
@@ -88,9 +89,9 @@ do_install[vardepsexclude] += "DATE"
 
 do_install() {
 	install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/enigma
-	modinfo -d ${S}/enigma.ko > ${S}/openvision.txt
-	sed -i '1d' ${S}/openvision.txt
-	sort  ${S}/openvision.txt > openvision-${MACHINE}.txt
+	modinfo -d ${S}/enigma.ko > ${S}/enigma.txt
+	sed -i '1d' ${S}/enigma.txt
+	sort  ${S}/enigma.txt > enigma-${MACHINE}-${VISIONREVISION}.txt
 	install -m 0644 ${S}/enigma.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/enigma/
 	install -d ${D}${sysconfdir}/modules-load.d
 	echo "enigma" > ${D}${sysconfdir}/modules-load.d/zzzzenigma.conf
@@ -102,7 +103,7 @@ export KCFLAGS = "-Wno-error"
 
 do_deploy() {
 	install -d ${DEPLOY_DIR_IMAGE}
-	install -m 0644 ${S}/openvision-${MACHINE}.txt ${DEPLOY_DIR_IMAGE}/
+	install -m 0644 ${S}/enigma-${MACHINE}-${VISIONREVISION}.txt ${DEPLOY_DIR_IMAGE}/
 }
 
 addtask deploy before do_build after do_install
