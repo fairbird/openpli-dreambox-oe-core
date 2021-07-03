@@ -163,6 +163,12 @@ EXTRA_OEMAKE = "\
 	ENIGMA2_BRANCH=${ENIGMA2_BRANCH} \
 	"
 
+FILES_enigma2-fonts = "${datadir}/fonts"
+
+FILES_${PN} += "${datadir}/keymaps"
+
+FILES_${PN}-meta = "${datadir}/meta"
+
 # some plugins contain so's, their stripped symbols should not end up in the enigma2 package
 FILES_${PN}-dbg += "\
 	${libdir}/enigma2/python/Plugins/*/*/.debug \
