@@ -119,7 +119,7 @@ SRC_URI = " ${GITHUB_URI}/OpenPLi/enigma2.git;branch=${ENIGMA2_BRANCH} \
 			file://004-Add-Option-Zap-Mode.patch \
 			file://005-Restore-AlphaTest-and-craze-changes.patch;apply=no \
 			file://006-add-support-2160p.patch \
-			file://007-dm9x0-recoverymode.patch \
+			file://007-dm9x0-recoverymode.patch;apply=no \
 			file://008-dual-tuner-letter-detection.patch \
 			file://009-fix-fp-version.patch \
 			file://010-fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch \
