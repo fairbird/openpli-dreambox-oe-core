@@ -128,6 +128,7 @@ SRC_URI = " ${GITHUB_URI}/OpenPLi/enigma2.git;branch=${ENIGMA2_BRANCH} \
 			file://013-move-lcd-text-a-bit-to-the-right.patch \
 			file://014-use-ioctl-22-for-h265.patch \
 			file://015-fix-build-gcc11.patch \
+			file://016-use-mallinfo2.patch \
 			"
 
 LDFLAGS_prepend = " -lxml2 "
