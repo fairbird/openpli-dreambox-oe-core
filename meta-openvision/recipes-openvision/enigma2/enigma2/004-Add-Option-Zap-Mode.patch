@@ -6,35 +6,19 @@ Subject: Add Option Zap channels Mode (Black/Hold) Screen for dreambox
 ---
 
 diff --git a/data/setup.xml b/data/setup.xml
-index 638ca67..de0f72c 100644
+index dcf979d00..5edd3f16b 100644
 --- a/data/setup.xml
 +++ b/data/setup.xml
-@@ -249,6 +249,7 @@
- 		<item level="1" text="Zap key delay for channel number input" description="In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. ">config.misc.zapkey_delay</item>
- 		<item level="2" text="Show picons during channel number input" description="Configure whether service picons will be shown in number zap.">config.misc.numzap_picon</item>
- 		<item level="1" text="Zap mode" requires="ZapMode" description="Configure the way in which your %s %s changes channels.">config.misc.zapmode</item>
+@@ -13,6 +13,7 @@
+ 		<item level="0" text="Show menu or plugin numbers" description="This option allows you to show menu and/or plugin number quick links.">config.usage.menu_show_numbers</item>
+ 		<item level="2" text="Show softcam setup in extensions menu" description="This option allows you to add the softcam setup in the extensions menu." requires="HasSoftcamInstalled">config.misc.softcam_setup.extension_menu</item>
+ 		<item level="1" text="Zap mode" requires="ZapMode" description="Configure the way in which the receiver changes channels.">config.misc.zapmode</item>
 +		<item level="1" text="Zap mode" description="Configure the way in which your %s %s changes channels.">config.misc.zapmodeDM</item>
- 		<item level="2" text="Number of digits in channel number" description="This allows you to set the number of digits you can input when selecting channels using number input.">config.usage.maxchannelnumlen</item>
  		<item level="2" text="Enable teletext caching" description="When enabled, teletext pages will be cached, allowing faster access.">config.usage.enable_tt_caching</item>
- 		<item level="1" text="Teletext font and resolution" description="Configure the display resolution and the font used for teletext.">config.usage.tuxtxt_font_and_res</item>
-diff --git a/lib/python/Components/UsageConfig.py b/lib/python/Components/UsageConfig.py
-index 0dff999..973c5f3 100644
---- a/lib/python/Components/UsageConfig.py
-+++ b/lib/python/Components/UsageConfig.py
-@@ -1329,6 +1329,12 @@ def InitUsageConfig():
- 		])
- 		config.misc.zapmode.addNotifier(setZapmode, immediate_feedback=False)
- 
-+	if not BoxInfo.getItem("ZapMode") and exists("/proc/stb/info/model"):
-+		def setZapmodeDM(el):
-+			print('[UsageConfig] >>> zapmodeDM')
-+		config.misc.zapmodeDM = ConfigSelection(default="black", choices=[("black", _("Black screen")), ("hold", _("Hold screen"))])
-+		config.misc.zapmodeDM.addNotifier(setZapmodeDM, immediate_feedback = False)
-+
- 	if BoxInfo.getItem("HasBypassEdidChecking"):
- 		def setHasBypassEdidChecking(configElement):
- 			open(SystemInfo["HasBypassEdidChecking"], "w").write("00000001" if configElement.value else "00000000")
+ 		<item level="1" text="12V output" description="12V output" requires="12V_Output.">config.usage.output_12V</item>
+ 		<item level="1" text="Alternative services tuner priority" description="Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type.">config.usage.alternatives_priority</item>
 diff --git a/lib/dvb/decoder.cpp b/lib/dvb/decoder.cpp
+index 70e8dd9a9..9ff057c89 100644
 --- a/lib/dvb/decoder.cpp
 +++ b/lib/dvb/decoder.cpp
 @@ -1,6 +1,7 @@
@@ -45,7 +29,7 @@ diff --git a/lib/dvb/decoder.cpp b/lib/dvb/decoder.cpp
  #include <lib/base/wrappers.h>
  #include <lib/dvb/decoder.h>
  #include <lib/components/tuxtxtapp.h>
-@@ -329,12 +330,14 @@ eDVBVideo::eDVBVideo(eDVBDemux *demux, int dev)
+@@ -282,12 +283,14 @@ eDVBVideo::eDVBVideo(eDVBDemux *demux, int dev)
  		m_fd_demux = -1;
  	}
  
@@ -62,3 +46,20 @@ diff --git a/lib/dvb/decoder.cpp b/lib/dvb/decoder.cpp
  	if (m_close_invalidates_attributes < 0)
  	{
  		/*
+diff --git a/lib/python/Components/UsageConfig.py b/lib/python/Components/UsageConfig.py
+index d6b796537..26855c92c 100644
+--- a/lib/python/Components/UsageConfig.py
++++ b/lib/python/Components/UsageConfig.py
+@@ -535,6 +535,12 @@ def InitUsageConfig():
+ 			("mute", _("Black screen")), ("hold", _("Hold screen")), ("mutetilllock", _("Black screen till locked")), ("holdtilllock", _("Hold till locked"))])
+ 		config.misc.zapmode.addNotifier(setZapmode, immediate_feedback=False)
+ 
++	if not SystemInfo["ZapMode"] and exists("/proc/stb/info/model"):
++		def setZapmodeDM(el):
++			print('[UsageConfig] >>> zapmodeDM')
++		config.misc.zapmodeDM = ConfigSelection(default="black", choices=[("black", _("Black screen")), ("hold", _("Hold screen"))])
++		config.misc.zapmodeDM.addNotifier(setZapmodeDM, immediate_feedback = False)
++
+ 	if SystemInfo["VFD_scroll_repeats"]:
+ 		def scroll_repeats(el):
+ 			open(SystemInfo["VFD_scroll_repeats"], "w").write(el.value)
