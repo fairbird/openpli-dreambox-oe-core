@@ -1,9 +1,9 @@
-Experimental build environment for dreambox 920 based on Open Vision (unofficial).
+Experimental build environment for dreambox 920 based on OpenPLi, also derived from openvision (closed source).
 
-https://github.com/OpenVisionE2/openvision-oe
+https://github.com/OpenPLi/openpli-oe-core
 
 -Submodules bitbake, openembedded-core and meta-openembedded from master branch,<br>
-&nbsp;with git snapshot of June 19, 2021.<br>
+&nbsp;with git snapshot of July 3, 2021.<br>
 -GCC 11.1.1 (11.1.0 patched upstream) <br>
 -Glibc 2.33<br>
 -GStreamer 1.19.1.1<br>
@@ -24,13 +24,13 @@ sudo apt install autoconf automake bison bzip2 cvs default-jre diffstat flex g++
 ```
 To build image:
 ```
-git clone https://github.com/Hains/openvision-dm920-oe-core.git
+git clone https://github.com/Hains/openpli-dm920-oe-core.git
 
-cd openvision-dm920-oe-core
+cd openpli-dm920-oe-core
 
 make image
 ```
-When the build is finished, the image openvision-enigma2-11.1-dm920.rootfs.tar.bz2 is in the:
+When the build is finished, the image openpli-enigma2-11.1-dm920.rootfs.tar.bz2 is in the:
 ```
 build/tmp/deploy/images/dm920/
 ```
@@ -51,13 +51,13 @@ Create symlinks to your build-environment:
 ```
 cd /var/www/html
 
-sudo mkdir feeds;cd feeds;sudo mkdir openvision-11.1;cd openvision-11.1;
+sudo mkdir feeds;cd feeds;sudo mkdir openpli-11.1;cd openpli-11.1;
 
-sudo ln -s /home/<your username>/openvision-dm920-oe-core/build/tmp/deploy/ipk/dm920 dm920 
+sudo ln -s /home/<your username>/openpli-dm920-oe-core/build/tmp/deploy/ipk/dm920 dm920 
 
-sudo ln -s /home/<your username>/openvision-dm920-oe-core/build/tmp/deploy/ipk/all all
+sudo ln -s /home/<your username>/openpli-dm920-oe-core/build/tmp/deploy/ipk/all all
 
-sudo ln -s /home/<your username>/openvision-dm920-oe-core/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
+sudo ln -s /home/<your username>/openpli-dm920-oe-core/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
 ```
 Add hostname or ip address to the site.conf file (exist after make command), e.g. at the end of the file.
 ```
