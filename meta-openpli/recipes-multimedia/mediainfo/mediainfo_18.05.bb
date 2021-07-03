@@ -2,7 +2,7 @@ HOMEPAGE="mediainfo.sourceforge.net"
 SUMMARY = "Mediainfo is a tool to analyze multimedia files"
 
 LICENSE = "MEDIAINFO"
-LIC_FILES_CHKSUM = "file://${OPENVISION_BASE}/meta-openvision/licenses/MEDIAINFO;md5=3b19611f7ea2253f534b20692b22ce50"
+LIC_FILES_CHKSUM = "file://${OPENPLI_BASE}/meta-openpli/licenses/MEDIAINFO;md5=3b19611f7ea2253f534b20692b22ce50"
 
 inherit autotools
 

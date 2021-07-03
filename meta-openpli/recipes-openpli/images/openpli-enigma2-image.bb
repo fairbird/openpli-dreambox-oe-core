@@ -1,4 +1,4 @@
-require openvision-image.bb
+require openpli-image.bb
 require ../../recipes-core/package-index/package-index.bb
 
 KERNEL_WIFI_DRIVERS = " \
@@ -86,4 +86,4 @@ IMAGE_INSTALL += " \
 	${EXTERNAL_WIFI_DRIVERS} \
 	"
 
-export IMAGE_BASENAME = "openvision-enigma2"
+export IMAGE_BASENAME = "openpli-enigma2"

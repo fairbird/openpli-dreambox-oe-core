@@ -15,7 +15,7 @@ deltask do_install
 deltask do_populate_sysroot
 
 do_package_index[nostamp] = "1"
-do_package_index[depends] += "${PACKAGEINDEXDEPS} openvision-enigma2-image:do_image_complete"
+do_package_index[depends] += "${PACKAGEINDEXDEPS} openpli-enigma2-image:do_image_complete"
 
 python do_package_index() {
     from oe.rootfs import generate_index_files
