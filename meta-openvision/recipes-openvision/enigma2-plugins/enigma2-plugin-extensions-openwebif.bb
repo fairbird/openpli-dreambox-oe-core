@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://README;firstline=10;lastline=12;md5=9c14f792d0aeb54e1
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-DEPENDS = "python-cheetah-native enigma2-remotes"
+DEPENDS = "python-cheetah-native"
 
 RDEPENDS_${PN} = "\
 	aio-grab \
@@ -26,7 +26,7 @@ inherit gitpkgv distutils-openplugins gettext
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://github.com/OpenVisionE2/OpenWebif.git;protocol=git"
+RC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git"
 
 S="${WORKDIR}/git"
 
@@ -39,6 +39,8 @@ do_install_append() {
 	install -d ${D}${PLUGINPATH}
 	cp -r ${S}/plugin/* ${D}${PLUGINPATH}
 	chmod a+rX ${D}${PLUGINPATH}
+	rm -rf ${D}${libdir}/enigma2/python/Plugins/*.egg-info
+	rmdir -p --ignore-fail-on-non-empty ${D}${datadir} ${D}/${PYTHON_SITEPACKAGES_DIR} || true
 }
 
 FILES_${PN} = "${PLUGINPATH}"
