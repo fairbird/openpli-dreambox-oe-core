@@ -1,0 +1,49 @@
+diff --git a/data/setup.xml b/data/setup.xml
+index 9fc780d9c..e011f901c 100644
+--- a/data/setup.xml
++++ b/data/setup.xml
+@@ -212,6 +212,7 @@
+ 		<item level="0" text="Brightness" description="Configure the brightness level of the front panel display.">config.lcd.bright</item>
+ 		<item level="0" text="Contrast" description="Configure the contrast level of the front panel display.">config.lcd.contrast</item>
+ 		<item level="0" text="Standby" description="Configure the brightness level of the front panel display during standby.">config.lcd.standby</item>
++		<item level="0" text="Front LED on" description="Turn on front LED (this needs a restart of enigma2).">config.usage.frontled_on</item>
+ 		<item level="0" text="Standby LED" description="Turn on the power LED during standby." requires="StandbyLED">config.usage.standbyLED</item>
+ 		<item level="0" text="Deep Standby LED" description="Turn on the power LED during deep standby." requires="StandbyLED">config.usage.suspendLED</item>
+ 		<item level="0" text="Scroll repeats" description="Number of repeating text on display." requires="VFD_scroll_repeats">config.usage.vfd_scroll_repeats</item>
+diff --git a/lib/python/Components/UsageConfig.py b/lib/python/Components/UsageConfig.py
+index 741e7c5d6..72dd6d9b6 100644
+--- a/lib/python/Components/UsageConfig.py
++++ b/lib/python/Components/UsageConfig.py
+@@ -306,6 +306,8 @@ def InitUsageConfig():
+ 
+ 	config.usage.swap_snr_on_osd = ConfigYesNo(default = False)
+ 
++	config.usage.frontled_on = ConfigYesNo(default = False)
++
+ 	def SpinnerOnOffChanged(configElement):
+ 		setSpinnerOnOff(int(configElement.value))
+ 	config.usage.show_spinner.addNotifier(SpinnerOnOffChanged)
+diff --git a/lib/python/Screens/SessionGlobals.py b/lib/python/Screens/SessionGlobals.py
+index b532e211a..593327574 100644
+--- a/lib/python/Screens/SessionGlobals.py
++++ b/lib/python/Screens/SessionGlobals.py
+@@ -10,6 +10,7 @@ from Components.Sources.RecordState import RecordState
+ from Components.Sources.HddState import HddState
+ from Components.Converter.Combine import Combine
+ from Components.Renderer.FrontpanelLed import FrontpanelLed
++from Components.config import config
+ 
+ class SessionGlobals(Screen):
+ 	def __init__(self, session):
+@@ -48,5 +49,9 @@ class SessionGlobals(Screen):
+ 		if nr_leds == 1:
+ 			FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
+ 		elif nr_leds == 2:
+-			FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_ON, PATTERN_BLINK]).connect(combine)
+-			FrontpanelLed(which = 1, boolean = False, patterns = [PATTERN_ON, PATTERN_ON, PATTERN_OFF, PATTERN_OFF]).connect(combine)
++			if not config.usage.frontled_on.value:
++				FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
++			else:
++				FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_ON, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
++			FrontpanelLed(which = 1, boolean = False, patterns = [PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]).connect(combine)
++

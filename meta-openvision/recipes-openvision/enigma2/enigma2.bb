@@ -112,29 +112,32 @@ PKGV = "2.7+git${GITPKGV}"
 ENIGMA2_BRANCH ?= "develop"
 GITHUB_URI ?= "git://github.com"
 
-SRC_URI = " ${GITHUB_URI}/OpenVisionE2/enigma2-openvision.git;branch=${ENIGMA2_BRANCH} \
-			file://001-get-rid-of-donations.patch \
+SRC_URI = " ${GITHUB_URI}/OpenPLi/enigma2.git;branch=${ENIGMA2_BRANCH} \
+			file://001-adapt-res-to-dm9x0-display.patch \
+			file://002-add-skin_display-dm9x0
 			file://003-restore-last-update-date-time.patch;apply=no \
 			file://004-Add-Option-Zap-Mode.patch \
-			file://005-Restore-AlphaTest-and-craze-changes.patch \
-			file://006-make-PLi-FullNightHD-skin-default.patch;apply=no \
-			file://012-set-default-hide-channel-list-radio.patch;apply=no \
+			file://005-Restore-AlphaTest-and-craze-changes.patch;apply=no \
+			file://006-add-support-2160p.patch \
+			file://007-dm9x0-recoverymode.patch \
+			file://008-dual-tuner-letter-detection
+			file://009-fix-fp-version.patch \
+			file://010-fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch \
+			file://011-fix-wrong-driver-date.patch \
+			file://012-make-front-led-configurable.patch \
+			file://013-move-lcd-text-a-bit-to-the-right.patch \
+			file://014-use-ioctl-22-for-h265.patch.patch \
 			"
 
 LDFLAGS_prepend = " -lxml2 "
 
 S = "${WORKDIR}/git"
 
-FILES_${PN} += "${datadir}/keymaps"
-FILES_${PN}-meta = "${datadir}/meta"
-PACKAGES += "${PN}-meta ${PN}-build-dependencies"
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PACKAGES += "${PN}-meta ${PN}-build-dependencies enigma2-fonts"
 
 inherit autotools pkgconfig
 
-PACKAGES =+ "enigma2-fonts"
-PKGV_enigma2-fonts = "2018.08.15"
-FILES_enigma2-fonts = "${datadir}/fonts"
+PKGV_enigma2-fonts = "2020.10.17"
 
 def get_crashaddr(d):
     if d.getVar('CRASHADDR', True):
@@ -147,17 +150,10 @@ EXTRA_OECONF = "\
 	--enable-dependency-tracking \
 	ac_cv_prog_c_openmp=-fopenmp \
 	${@get_crashaddr(d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "textlcd", "--with-textlcd" , "", d)} \
 	BUILD_SYS=${BUILD_SYS} \
 	HOST_SYS=${HOST_SYS} \
 	STAGING_INCDIR=${STAGING_INCDIR} \
 	STAGING_LIBDIR=${STAGING_LIBDIR} \
-	--with-boxbrand=${BOX_BRAND} \
-	--with-stbplatform=${STB_PLATFORM} \
-	--with-e2rev=${GITPKGV} \
-	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd220", "--with-colorlcd220" , "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd390", "--with-colorlcd390" , "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd400", "--with-colorlcd400" , "", d)} \
 	"
 
 # pass the enigma branch to automake
@@ -171,27 +167,23 @@ FILES_${PN}-dbg += "\
 	"
 
 # Swig generated 200k enigma.py file has no purpose for end users
-# Save some space by not installing sources (mytest.py must remain)
+# Save some space by not installing sources (Startup.py must remain)
 FILES_${PN}-src += "\
+	${libdir}/enigma2/python/e2reactor.py \
+	${libdir}/enigma2/python/enigma.py \
 	${libdir}/enigma2/python/GlobalActions.py \
+	${libdir}/enigma2/python/keyids.py \
+	${libdir}/enigma2/python/keymapparser.py \
 	${libdir}/enigma2/python/Navigation.py \
 	${libdir}/enigma2/python/NavigationInstance.py \
 	${libdir}/enigma2/python/RecordTimer.py \
 	${libdir}/enigma2/python/ServiceReference.py \
 	${libdir}/enigma2/python/SleepTimer.py \
-	${libdir}/enigma2/python/e2reactor.py \
-	${libdir}/enigma2/python/enigma.py \
-	${libdir}/enigma2/python/keyids.py \
-	${libdir}/enigma2/python/keymapparser.py \
 	${libdir}/enigma2/python/skin.py \
 	${libdir}/enigma2/python/timer.py \
-	${libdir}/enigma2/python/BoxBrandingTest.py \
-	${libdir}/enigma2/python/PowerTimer.py \
 	${libdir}/enigma2/python/*/*.py \
 	${libdir}/enigma2/python/*/*/*.py \
 	${libdir}/enigma2/python/*/*/*/*.py \
-	${libdir}/enigma2/python/*/*/*/*/*.py \
-	${libdir}/enigma2/python/*/*/*/*/*/*.py \
 	"
 
 do_install_append() {
@@ -200,10 +192,10 @@ do_install_append() {
 }
 
 python populate_packages_prepend() {
-    enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', '%s', recursive=True, match_path=True, prepend=True, extra_depends='')
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.py$', 'enigma2-plugin-%s-src', '%s (sources)', recursive=True, match_path=True, prepend=True, extra_depends='')
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True, extra_depends='')
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True, extra_depends='')
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', '%s (debug)', recursive=True, match_path=True, prepend=True, extra_depends='')
+	enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', '%s', recursive=True, match_path=True, prepend=True, extra_depends='')
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.py$', 'enigma2-plugin-%s-src', '%s (sources)', recursive=True, match_path=True, prepend=True, extra_depends='')
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True, extra_depends='')
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True, extra_depends='')
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', '%s (debug)', recursive=True, match_path=True, prepend=True, extra_depends='')
 }

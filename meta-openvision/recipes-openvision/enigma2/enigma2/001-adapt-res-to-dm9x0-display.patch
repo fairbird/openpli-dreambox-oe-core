@@ -1,0 +1,19 @@
+diff --git a/lib/python/Screens/ServiceScan.py b/lib/python/Screens/ServiceScan.py
+index 7c0ccc54c..68c06ca16 100644
+--- a/lib/python/Screens/ServiceScan.py
++++ b/lib/python/Screens/ServiceScan.py
+@@ -11,10 +11,10 @@ from enigma import eServiceReference
+ 
+ class ServiceScanSummary(Screen):
+ 	skin = """
+-	<screen position="0,0" size="132,64">
+-		<widget name="Title" position="6,4" size="120,42" font="Regular;16" transparent="1" />
+-		<widget name="scan_progress" position="6,50" zPosition="1" borderWidth="1" size="56,12" backgroundColor="dark" />
+-		<widget name="Service" position="6,22" size="120,26" font="Regular;12" transparent="1" />
++	<screen position="0,0" size="390,240">
++		<widget name="Title" position="6,20" size="390,45" font="Regular;40" transparent="1" />
++		<widget name="scan_progress" position="6,180" zPosition="1" borderWidth="1" size="390,24" backgroundColor="dark" />
++		<widget name="Service" position="6,90" size="390,40" font="Regular;32" transparent="1" />
+ 	</screen>"""
+ 
+ 	def __init__(self, session, parent, showStepSlider = True):

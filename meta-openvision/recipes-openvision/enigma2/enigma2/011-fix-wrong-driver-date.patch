@@ -1,0 +1,18 @@
+Since dreambox has added an 'a' to the driver date, the driver date is
+shown as '0140-60-4a' instead of '2014-06-04a' in about screen Enigma2.
+Tell About.py to use nine character instead of eight to get rid of that
+bizarre driver date.
+
+diff --git a/lib/python/Components/About.py b/lib/python/Components/About.py
+index a0951c697..dc9e54dbe 100644
+--- a/lib/python/Components/About.py
++++ b/lib/python/Components/About.py
+@@ -127,7 +127,7 @@ def getDriverInstalledDate():
+ 	try:
+ 		from glob import glob
+ 		try:
+-			driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
++			driver = [x.split("-")[-2:-1][0][-9:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
+ 			return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+ 		except:
+ 			try:
