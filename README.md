@@ -1,6 +1,10 @@
-Experimental build environment for dreambox 920 based on OpenPLi, also derived from openvision (closed source).
+Build environment for dreambox dm920 based on OpenPLi, also derived from openvision (closed source).
+Work in progress, not ready yet.
+
+Thanks to OpenPLi and Open-Alliance.
 
 https://github.com/OpenPLi/openpli-oe-core
+https://github.com/oe-alliance/oe-alliance-core/commits/5.0
 
 -Submodules bitbake, openembedded-core and meta-openembedded from master branch,<br>
 &nbsp;with git snapshot of July 3, 2021.<br>
