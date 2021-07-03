@@ -1,5 +1,4 @@
 DESCRIPTION = "Control your receiver with a browser"
-MAINTAINER = "Open Vision Developers"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README;firstline=10;lastline=12;md5=9c14f792d0aeb54e15490a28c89087f7"
 
