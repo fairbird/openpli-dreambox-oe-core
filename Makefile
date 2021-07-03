@@ -52,20 +52,20 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-openembedded/meta-python \
 	$(CURDIR)/openembedded-core/meta \
 	$(CURDIR)/meta-python2 \
-	$(CURDIR)/meta-openvision \
+	$(CURDIR)/meta-openpli \
 	$(CURDIR)/meta-dreambox \
 	$(CURDIR)/meta-kodi
 
 CONFFILES = \
 	$(TOPDIR)/env.source \
-	$(TOPDIR)/conf/openvision.conf \
+	$(TOPDIR)/conf/openpli.conf \
 	$(TOPDIR)/conf/bblayers.conf \
 	$(TOPDIR)/conf/local.conf \
 	$(TOPDIR)/conf/site.conf
 
 CONFDEPS = \
 	$(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH) \
-	$(DEPDIR)/.openvision.conf.$(OPENVISION_CONF_HASH) \
+	$(DEPDIR)/.openpli.conf.$(OPENPLI_CONF_HASH) \
 	$(DEPDIR)/.bblayers.conf.$(BBLAYERS_CONF_HASH) \
 	$(DEPDIR)/.local.conf.$(LOCAL_CONF_HASH)
 
@@ -88,13 +88,13 @@ all: init
 	@echo
 	@echo " cd $(BUILD_DIR)"
 	@echo " source env.source"
-	@echo " bitbake openvision-enigma2-image"
+	@echo " bitbake openpli-enigma2-image"
 	@echo
 	@echo "	or, if you want to build not just the image, but the optional packages in the feed as well:"
 	@echo
 	@echo " make feed"
 	@echo "	or:"
-	@echo " bitbake openvision-enigma2-feed"
+	@echo " bitbake openpli-enigma2-feed"
 	@echo
 
 $(BBLAYERS):
@@ -106,11 +106,11 @@ init: $(BBLAYERS) $(CONFFILES)
 
 image: init
 	@echo 'Building image for $(MACHINE)'
-	@. $(TOPDIR)/env.source && cd $(TOPDIR) && bitbake openvision-enigma2-image
+	@. $(TOPDIR)/env.source && cd $(TOPDIR) && bitbake openpli-enigma2-image
 
 feed: init
 	@echo 'Building feed for $(MACHINE)'
-	@. $(TOPDIR)/env.source && cd $(TOPDIR) && bitbake openvision-enigma2-feed
+	@. $(TOPDIR)/env.source && cd $(TOPDIR) && bitbake openpli-enigma2-feed
 
 update:
 	@echo 'Updating Git repositories...'
@@ -124,7 +124,7 @@ update:
 	else \
 		$(GIT) submodule sync && \
 		$(GIT) submodule update --init && \
-		echo "The openvision OE is now up-to-date."; \
+		echo "The openpli OE is now up-to-date."; \
 	fi
 
 .PHONY: all image init initialize update usage
@@ -140,8 +140,8 @@ $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'export MACHINE' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
 
-OPENVISION_CONF_HASH := $(call hash, \
-	'OPENVISION_CONF_VERSION = "1"' \
+OPENPLI_CONF_HASH := $(call hash, \
+	'OPENPLI_CONF_VERSION = "1"' \
 	'CURDIR = "$(CURDIR)"' \
 	'BB_NUMBER_THREADS = "$(BB_NUMBER_THREADS)"' \
 	'PARALLEL_MAKE = "$(PARALLEL_MAKE)"' \
@@ -150,7 +150,7 @@ OPENVISION_CONF_HASH := $(call hash, \
 	'TMPDIR = "$(TMPDIR)"' \
 	)
 
-$(TOPDIR)/conf/openvision.conf: $(DEPDIR)/.openvision.conf.$(OPENVISION_CONF_HASH)
+$(TOPDIR)/conf/openpli.conf: $(DEPDIR)/.openpli.conf.$(OPENPLI_CONF_HASH)
 	@echo 'Generating $@'
 	@test -d $(@D) || mkdir -p $(@D)
 	@echo 'SSTATE_DIR = "$(SSTATE_DIR)"' >> $@
@@ -158,7 +158,7 @@ $(TOPDIR)/conf/openvision.conf: $(DEPDIR)/.openvision.conf.$(OPENVISION_CONF_HAS
 	@echo 'BB_GENERATE_MIRROR_TARBALLS = "0"' >> $@
 	@echo 'BBINCLUDELOGS = "yes"' >> $@
 	@echo 'CONF_VERSION = "1"' >> $@
-	@echo 'DISTRO = "openvision"' >> $@
+	@echo 'DISTRO = "openpli"' >> $@
 	@echo 'EXTRA_IMAGE_FEATURES = "debug-tweaks"' >> $@
 	@echo 'USER_CLASSES = "buildstats"' >> $@
 
@@ -172,7 +172,7 @@ $(TOPDIR)/conf/local.conf: $(DEPDIR)/.local.conf.$(LOCAL_CONF_HASH)
 	@echo 'Generating $@'
 	@test -d $(@D) || mkdir -p $(@D)
 	@echo 'TOPDIR = "$(TOPDIR)"' > $@
-	@echo 'require $(TOPDIR)/conf/openvision.conf' >> $@
+	@echo 'require $(TOPDIR)/conf/openpli.conf' >> $@
 
 $(TOPDIR)/conf/site.conf: $(CURDIR)/site.conf
 	@ln -s ../../site.conf $@
