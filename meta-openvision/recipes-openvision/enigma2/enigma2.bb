@@ -25,7 +25,6 @@ RDEPENDS_${PN} = " \
 	enigma2-data-iso-639-3 \
 	enigma2-fonts \
 	enigma-module \
-	enigma2-remotes \
 	enigma2-timezones \
 	ethtool \
 	glibc-gconv-iso8859-15 \
