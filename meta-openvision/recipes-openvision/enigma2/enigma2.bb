@@ -114,19 +114,19 @@ GITHUB_URI ?= "git://github.com"
 
 SRC_URI = " ${GITHUB_URI}/OpenPLi/enigma2.git;branch=${ENIGMA2_BRANCH} \
 			file://001-adapt-res-to-dm9x0-display.patch \
-			file://002-add-skin_display-dm9x0
+			file://002-add-skin_display-dm9x0.patch \
 			file://003-restore-last-update-date-time.patch;apply=no \
 			file://004-Add-Option-Zap-Mode.patch \
 			file://005-Restore-AlphaTest-and-craze-changes.patch;apply=no \
 			file://006-add-support-2160p.patch \
 			file://007-dm9x0-recoverymode.patch \
-			file://008-dual-tuner-letter-detection
+			file://008-dual-tuner-letter-detection.patch \
 			file://009-fix-fp-version.patch \
 			file://010-fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch \
 			file://011-fix-wrong-driver-date.patch \
 			file://012-make-front-led-configurable.patch \
 			file://013-move-lcd-text-a-bit-to-the-right.patch \
-			file://014-use-ioctl-22-for-h265.patch.patch \
+			file://014-use-ioctl-22-for-h265.patch \
 			"
 
 LDFLAGS_prepend = " -lxml2 "
@@ -192,10 +192,10 @@ do_install_append() {
 }
 
 python populate_packages_prepend() {
-	enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', '%s', recursive=True, match_path=True, prepend=True, extra_depends='')
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.py$', 'enigma2-plugin-%s-src', '%s (sources)', recursive=True, match_path=True, prepend=True, extra_depends='')
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True, extra_depends='')
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True, extra_depends='')
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', '%s (debug)', recursive=True, match_path=True, prepend=True, extra_depends='')
+    enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', '%s', recursive=True, match_path=True, prepend=True, extra_depends='')
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.py$', 'enigma2-plugin-%s-src', '%s (sources)', recursive=True, match_path=True, prepend=True, extra_depends='')
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True, extra_depends='')
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True, extra_depends='')
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', '%s (debug)', recursive=True, match_path=True, prepend=True, extra_depends='')
 }
