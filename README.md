@@ -32,7 +32,7 @@ git clone https://github.com/Hains/openpli-dm920-oe-core.git
 
 cd openpli-dm920-oe-core
 
-make image
+MACHINE=dm920 make image
 ```
 When the build is finished, the image openpli-enigma2-11.1-dm920.rootfs.tar.bz2 is in the:
 ```
@@ -42,7 +42,7 @@ directory.
 
 To build feed:
 ```
-make feed
+MACHINE=dm920 make feed
 ```
 
 To update your box:
