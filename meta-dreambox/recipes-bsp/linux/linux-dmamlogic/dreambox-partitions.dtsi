@@ -1,0 +1,49 @@
+/*
+ * arch/arm64/boot/dts/amlogic/dreambox-partitions.dtsi
+ *
+ * Copyright (C) 2018 Dream Property GmbH. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ */
+/ {
+	partitions: partitions{
+		parts = <4>;
+		part-0 = <&recovery>;
+		part-1 = <&boot>;
+		part-2 = <&system>;
+		part-3 = <&data>;
+
+		recovery:recovery{
+			pname = "recovery";
+			size = <0x0 0x4000000>;
+			mask = <1>;
+		};
+		boot:boot
+		{
+			pname = "boot";
+			size = <0x0 0x2000000>;
+			mask = <1>;
+		};
+		system:system
+		{
+			pname = "dreambox-rootfs";
+			size = <0x1 0x00000000>;
+			mask = <1>;
+		};
+		data:data
+		{
+			pname = "dreambox-data";
+			size = <0xffffffff 0xffffffff>;
+			mask = <4>;
+		};
+	};
+};/* end of / */
