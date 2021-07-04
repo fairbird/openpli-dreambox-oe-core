@@ -113,7 +113,7 @@ SRC_URI = " ${GITHUB_URI}/Hains/enigma2.git;branch=${ENIGMA2_BRANCH} \
 			file://001-adapt-res-to-dm9x0-display.patch \
 			file://002-add-skin_display-dm9x0.patch \
 			file://003-restore-last-update-date-time.patch;apply=no \
-			file://004-Add-Option-Zap-Mode.patch \
+			file://004-Add-Option-Zap-Mode.patch;apply=no \
 			file://005-Restore-AlphaTest-and-craze-changes.patch;apply=no \
 			file://006-add-support-2160p.patch \
 			file://007-dm9x0-recoverymode.patch;apply=no \
