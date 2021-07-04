@@ -22,7 +22,6 @@ RCONFLICTS_${PN} = "enigma2-plugin-pli-softcamsetup"
 
 RDEPENDS_${PN} = " \
 	alsa-conf \
-	oe-alliance-branding \
 	enigma2-fonts \
 	enigma-module \
 	enigma2-timezones \
