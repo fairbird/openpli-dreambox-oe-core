@@ -109,7 +109,7 @@ PKGV = "2.7+git${GITPKGV}"
 ENIGMA2_BRANCH ?= "develop"
 GITHUB_URI ?= "git://github.com"
 
-SRC_URI = " ${GITHUB_URI}/OpenPLi/enigma2.git;branch=${ENIGMA2_BRANCH} \
+SRC_URI = " ${GITHUB_URI}/Hains/enigma2.git;branch=${ENIGMA2_BRANCH} \
 			file://001-adapt-res-to-dm9x0-display.patch \
 			file://002-add-skin_display-dm9x0.patch \
 			file://003-restore-last-update-date-time.patch;apply=no \
