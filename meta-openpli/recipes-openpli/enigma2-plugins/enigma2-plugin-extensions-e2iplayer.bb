@@ -5,7 +5,9 @@ SECTION = "multimedia"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
 
-SRC_URI = "git://github.com/OpenVisionE2/e2iplayer-ov.git;protocol=http"
+SRC_URI = " git://github.com/OpenVisionE2/e2iplayer-ov.git;protocol=http \
+			file://get-rid-of-boxbranding.patch \
+"
 
 S = "${WORKDIR}/git"
 
