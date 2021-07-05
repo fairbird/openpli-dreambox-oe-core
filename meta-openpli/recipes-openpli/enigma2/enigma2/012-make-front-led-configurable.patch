@@ -124,7 +124,7 @@ index 009ec3440..0550da50a 100644
 +		if config.usage.frontledrecstdby_color.value == "4":
 +			RecstdbyLed1 = PATTERN_BLINK
 +
-+		nr_leds = SystemInfo.getItem("NumFrontpanelLEDs", 0)
++		nr_leds = SystemInfo.get("NumFrontpanelLEDs", 0)
  
  		if nr_leds == 1:
  			FrontpanelLed(which=0, boolean=False, patterns=[PATTERN_OFF, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
