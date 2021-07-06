@@ -118,7 +118,7 @@ SRC_URI = " ${GITHUB_URI}/Hains/enigma2.git;branch=${ENIGMA2_BRANCH} \
 			file://005-Restore-AlphaTest-and-craze-changes.patch;apply=no \
 			file://006-add-support-2160p.patch;apply=no \
 			file://007-dm9x0-recoverymode.patch;apply=no \
-			file://008-dual-tuner-letter-detection.patch \
+			file://008-dual-tuner-letter-detection.patch;apply=no \
 			file://009-fix-fp-version.patch;apply=no \
 			file://010-fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch;apply=no \
 			file://011-get-rid-of-register-keyword.patch;apply=no \
