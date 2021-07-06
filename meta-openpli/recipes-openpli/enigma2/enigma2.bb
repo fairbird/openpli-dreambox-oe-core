@@ -112,7 +112,7 @@ GITHUB_URI ?= "git://github.com"
 
 SRC_URI = " ${GITHUB_URI}/Hains/enigma2.git;branch=${ENIGMA2_BRANCH} \
 			file://001-adapt-res-to-dm9x0-display.patch;apply=no \
-			file://002-add-skin_display-dm9x0.patch \
+			file://002-add-skin_display-dm9x0.patch;apply=no \
 			file://003-restore-last-update-date-time.patch;apply=no \
 			file://004-Add-Option-Zap-Mode.patch;apply=no \
 			file://005-Restore-AlphaTest-and-craze-changes.patch;apply=no \
