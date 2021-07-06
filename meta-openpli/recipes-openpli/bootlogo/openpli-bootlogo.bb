@@ -1,4 +1,4 @@
-DESCRIPTION = "Open Vision bootlogo"
+DESCRIPTION = "OpenPLi bootlogo"
 SECTION = "base"
 PRIORITY = "required"
 MAINTAINER = "PLi team"
@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${OPENPLI_BASE}/meta-openpli/licenses/CC-BY-NC-ND-4.0
 
 RDEPENDS_${PN} += "showiframe"
 
-PV = "4.1"
+PV = "1.0"
 
 S = "${WORKDIR}"
 
