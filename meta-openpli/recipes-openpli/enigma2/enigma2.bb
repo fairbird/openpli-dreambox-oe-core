@@ -107,27 +107,10 @@ inherit gitpkgv pythonnative
 PV = "2.7+git${SRCPV}"
 PKGV = "2.7+git${GITPKGV}"
 
-ENIGMA2_BRANCH ?= "develop"
+ENIGMA2_BRANCH ?= "ion"
 GITHUB_URI ?= "git://github.com"
 
-SRC_URI = " ${GITHUB_URI}/Hains/enigma2.git;branch=${ENIGMA2_BRANCH} \
-			file://001-adapt-res-to-dm9x0-display.patch;apply=no \
-			file://002-add-skin_display-dm9x0.patch;apply=no \
-			file://003-restore-last-update-date-time.patch;apply=no \
-			file://004-Add-Option-Zap-Mode.patch;apply=no \
-			file://005-Restore-AlphaTest-and-craze-changes.patch;apply=no \
-			file://006-add-support-2160p.patch;apply=no \
-			file://007-dm9x0-recoverymode.patch;apply=no \
-			file://008-dual-tuner-letter-detection.patch;apply=no \
-			file://009-fix-fp-version.patch;apply=no \
-			file://010-fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch;apply=no \
-			file://011-get-rid-of-register-keyword.patch;apply=no \
-			file://012-make-front-led-configurable.patch \
-			file://013-move-lcd-text-a-bit-to-the-right.patch;apply=no \
-			file://014-use-ioctl-22-for-h265.patch;apply=no \
-			file://015-fix-build-gcc11.patch \
-			file://016-use-mallinfo2.patch;apply=no \
-			"
+SRC_URI = " ${GITHUB_URI}/Hains/enigma2.git;branch=${ENIGMA2_BRANCH}"
 
 LDFLAGS_prepend = " -lxml2 "
 
