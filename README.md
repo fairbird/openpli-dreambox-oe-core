@@ -29,21 +29,21 @@ sudo apt install autoconf automake bison bzip2 cvs default-jre diffstat flex g++
 ```
 To build image:
 ```
-git clone https://github.com/Hains/openpli-dm920-oe-core.git
+git clone https://github.com/Hains/openpli-dreambox-oe-core.git
 
-cd openpli-dm920-oe-core
+cd openpli-dreambox-oe-core
 
-MACHINE=dm920 make image
+MACHINE=<box name> make image
 ```
-When the build is finished, the image openpli-enigma2-11.1-dm920.rootfs.tar.bz2 is in the:
+When the build is finished, the image openpli-enigma2-11.1-<box name>.rootfs.tar.bz2 is in the:
 ```
-build/tmp/deploy/images/dm920/
+build/tmp/deploy/images/<box name>/
 ```
 directory.
 
 To build feed:
 ```
-MACHINE=dm920 make feed
+MACHINE=<box name> make feed
 ```
 
 To update your box:
@@ -58,11 +58,13 @@ cd /var/www/html
 
 sudo mkdir feeds;cd feeds;sudo mkdir openpli-11.1;cd openpli-11.1;
 
-sudo ln -s /home/<your username>/openpli-dm920-oe-core/build/tmp/deploy/ipk/dm920 dm920 
+sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/<box name> <box name> 
 
-sudo ln -s /home/<your username>/openpli-dm920-oe-core/build/tmp/deploy/ipk/all all
+sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/all all
 
-sudo ln -s /home/<your username>/openpli-dm920-oe-core/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
+sudo ln -s /home/<your username>/openpli-ddreambox-oe-core/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
+  
+sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/mips32el mips32el
 ```
 Add hostname or ip address to the site.conf file (exist after make command), e.g. at the end of the file.
 ```
