@@ -27,7 +27,7 @@ PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git"
 
-SRC_URI_append_dm8000 = "file://get-rid-of-orgdream-check.patch"
+SRC_URI_append_dm8000 = " file://get-rid-of-orgdream-check.patch"
 
 S="${WORKDIR}/git"
 
