@@ -51,7 +51,6 @@ OPTIONAL_PACKAGES += " \
 	mediainfo \
 	minisatip \
 	mt7601u \
-	mt7610u \
 	mtd-utils \
 	mtools \
 	nano \
