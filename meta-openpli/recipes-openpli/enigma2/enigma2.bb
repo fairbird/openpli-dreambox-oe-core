@@ -24,7 +24,6 @@ RDEPENDS_${PN} = " \
 	alsa-conf \
 	oe-alliance-branding \
 	enigma2-fonts \
-	enigma-module \
 	enigma2-timezones \
 	ethtool \
 	glibc-gconv-iso8859-15 \
