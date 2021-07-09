@@ -132,6 +132,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-moviemanager \
 	enigma2-plugin-extensions-openmultiboot \
 	enigma2-plugin-extensions-openvisionskintools \
+	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-refreshbouquet \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-weathermsn \
