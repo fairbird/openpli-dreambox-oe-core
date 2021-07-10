@@ -55,8 +55,8 @@ python do_cleanup () {
         ('dm800se', 'dm800se.png', 'dm_normal.png', 'dmm.html'),
 	('dm820', 'dm820.png', 'dmm2.png', 'dmm2.html'),
 	('dm7080', 'dm7080.png', 'dmm2.png', 'dmm2.html'),
-        ('dm900', 'dm900.png', 'dmm2.png', 'dmm2.html'),
-        ('dm920', 'dm920.png', 'dmm2.png', 'dmm2.html'),
+	('dm900', 'dm900.png', 'dmm2.png', 'dmm2.html'),
+	('dm920', 'dm920.png', 'dmm2.png', 'dmm2.html'),
 	('dreamone', 'dreamone.png', 'dmm2.png', 'dmm2.html'),
 	('dreamtwo', 'dreamtwo.png', 'dmm2.png', 'dmm2.html'),
     ]
