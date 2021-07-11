@@ -44,6 +44,7 @@ ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-openwebif \
 	enigma2-plugin-extensions-pictureplayer \
 	enigma2-plugin-extensions-ppanel \
+	enigma2-plugin-extensions-internetspeedtest \
 	enigma2-plugin-extensions-systemtools \
 	enigma2-plugin-extensions-tmbd \
 	enigma2-plugin-extensions-youtube \
