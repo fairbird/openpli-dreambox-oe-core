@@ -36,6 +36,7 @@ ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-cdinfo \
 	enigma2-plugin-extensions-cutlisteditor \
 	enigma2-plugin-extensions-dvdplayer \
+	enigma2-plugin-extensions-epgimport \
 	enigma2-plugin-extensions-filecommander \
 	enigma2-plugin-extensions-graphmultiepg \
 	enigma2-plugin-extensions-mediaplayer \
