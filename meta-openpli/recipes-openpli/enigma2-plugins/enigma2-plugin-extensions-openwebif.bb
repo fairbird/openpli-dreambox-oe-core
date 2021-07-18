@@ -1,6 +1,6 @@
 DESCRIPTION = "Control your receiver with a browser"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://README;firstline=10;lastline=12;md5=9c14f792d0aeb54e15490a28c89087f7"
+LIC_FILES_CHKSUM = "file://README;firstline=10;lastline=12;md5=26abba37d1c2fcbf96a087ceb8e1db86"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
