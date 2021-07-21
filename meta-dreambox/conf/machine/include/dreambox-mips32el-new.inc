@@ -31,8 +31,6 @@ IMAGE_CMD_tar_prepend = "\
 	rm -f ${DEPLOY_DIR_IMAGE}/*.tar.xz; \
 	"
 
-STB_PLATFORM = "dm3gen"
-
 MACHINE_FEATURES += "modem dvb-c blindscan-dvbc hdmicec recovery ci usbconsole HDMI"
 
 RCNAME = "dmm2"

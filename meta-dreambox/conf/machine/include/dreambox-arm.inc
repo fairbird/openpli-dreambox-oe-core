@@ -104,7 +104,6 @@ IMAGE_CMD_tar_append = ";\
     rm -f .manifest; \
     "
 
-STB_PLATFORM = "dm4kgen"
 BOX_BRAND = "dreambox"
 KERNELVERSION = "3.14"
 SOC_FAMILY = "bcm7252s"

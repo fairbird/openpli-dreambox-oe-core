@@ -1,24 +1,24 @@
 # dreambox.inc
 # We know about rtc
-MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"
+MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc"
 
 OPTIONAL_BSP_PACKAGES += "dreambox-buildimage"
 
 EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "dreambox-dvb-modules-${MACHINE}"
+#KERNEL_MODULE_AUTOLOAD += "xfs"
 
-KERNEL_MODULE_AUTOLOAD += "xfs"
-
-MACHINE_EXTRA_RRECOMMENDS = " \
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS = " \
 	gstreamer1.0-plugin-multibox-dvbmediasink \	
 	ntfs-3g \
 	kernel-module-cifs \
 	kernel-module-hmac \
 	kernel-module-md4 \
-	kernel-module-ecb \
+	dreambox-dvb-modules-${MACHINE} \
+	${@bb.utils.contains_any("MACHINE", "dm8000 dm7020hd dm800sev2 dm500hdv2", "kernel-module-ecb", "", d)} \
 	dreambox-boot-progress \
 	"
+
 GST_VERSION = "1.0"
 	
 MACHINE_FEATURES += "alsa usbhost dreambox"

@@ -1,11 +1,15 @@
 # dreambox-mips32el.inc
 
-STB_PLATFORM = "dm1gen"
 BOX_BRAND = "dreambox"
 KERNELVERSION = "3.2"
 
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
+
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+	libpagecache \
+	libpassthrough \
+	"
 
 MTD_KERNEL = "mtd2"
 
