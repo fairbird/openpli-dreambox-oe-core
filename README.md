@@ -29,7 +29,7 @@ sudo apt install autoconf automake bison bzip2 cvs default-jre diffstat flex g++
 ```
 To build image:
 ```
-git clone https://github.com/Hains/openpli-dreambox-oe-core.git
+git clone https://github.com/fairbird/openpli-dreambox-oe-core.git
 
 cd openpli-dreambox-oe-core
 
