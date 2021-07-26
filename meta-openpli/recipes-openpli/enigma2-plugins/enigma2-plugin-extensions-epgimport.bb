@@ -10,7 +10,7 @@ PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=git \
-	file://Remove-unused-codes.patch;apply=no \
+	file://Remove-unused-codes.patch;apply=yes \
 "
 
 S = "${WORKDIR}/git/src"
