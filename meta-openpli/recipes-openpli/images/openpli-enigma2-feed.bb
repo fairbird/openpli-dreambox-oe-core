@@ -77,6 +77,7 @@ OPTIONAL_PACKAGES += " \
 	python-ntplib \
 	python-pyexecjs \
 	python-requests \
+	python-youtube-dl \
 	rsync \
 	rt3573 \
 	rt5572 \
@@ -147,7 +148,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-xstreamity \
 	enigma2-plugin-extensions-xtraevent \
 	enigma2-plugin-extensions-youtube \
-	enigma2-plugin-extensions-youtube-dl \
 	enigma2-plugin-security-firewall \
 	enigma2-plugin-skins-arctic-raed \
 	enigma2-plugin-skins-atilehd-raed \
