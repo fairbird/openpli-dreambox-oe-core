@@ -50,7 +50,7 @@ ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-tmbd \
 	enigma2-plugin-extensions-youtube \
 	\
-	enigma2-plugin-softcams-oscam \
+	enigma2-plugin-softcams-ncam \
 	\
 	enigma2-plugin-systemplugins-cablescan \
 	enigma2-plugin-systemplugins-commoninterfaceassignment \
