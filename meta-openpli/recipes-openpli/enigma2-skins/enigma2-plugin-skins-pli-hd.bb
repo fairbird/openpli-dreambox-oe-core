@@ -8,7 +8,9 @@ inherit gitpkgv allarch
 PV = "0.1+git${SRCPV}"
 PKGV = "0.1+git${GITPKGV}"
 
-SRC_URI = "git://github.com/littlesat/skin-PLiHD.git;protocol=git"
+SRC_URI = "git://github.com/littlesat/skin-PLiHD.git;protocol=git \
+	file://01-add-support-to-new-date-time-feature.patch;apply=yes \
+"
 
 FILES_${PN} = "${datadir}/enigma2/"
 
