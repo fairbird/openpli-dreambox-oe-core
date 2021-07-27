@@ -27,6 +27,6 @@ do_compile_append() {
 pkg_postinst_${PN} () {
 	if [ ! -e "$D${sysconfdir}/init.d/softcam" ]
 	then
-		ln -s softcam.oscam $D${sysconfdir}/init.d/softcam
+		ln -s softcam.ncam $D${sysconfdir}/init.d/softcam
 	fi
 }

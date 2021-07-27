@@ -1,24 +1,47 @@
+#### "*******************************************"
+#### "*          << RAED - fairbird >>          *"
+#### "* Read more: https://www.tunisia-sat.com  *"
+#### "*******************************************"
+#### "****************************************************************"             
+#### "*Read more: https://www.tunisia-sat.com/forums/threads/3539021/*"
+#### "****************************************************************"
+
+####################### SoftCams ########################
+
 [reader]
 label                         = constant.cw
+enable                        = 1
 protocol                      = constcw
 device                        = /etc/tuxbox/config/constant.cw
 caid                          = 2600,0B00,0B02,0500,0963,06AD,0940
 group                         = 1
 
 [reader]
-label                         = emulator
+label                         = Device_SoftCam
 protocol                      = emu
 device                        = emulator
-#device                        = https://xxxxxx/SoftCam.Key (Change this line to yout url address)
 #device                        = /etc/tuxbox/config/SoftCam.key  (if you want to set your personal path)
-#/storage/.kodi/userdata/addon_data/service.softcam.ncam/config/SoftCam.Key (change with your system location)
 disablecrccws_only_for        = 0E00:000000
-caid                          = 0500,0604,0E00,1010,1801,2600,2602,2610
+caid                          = 0E00,0500,0604,090F,1010,1801,2600,4AE1
 detect                        = cd
-ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;2602:000000;2610:000000
+ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;090F:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;4AE1:000011,000014,0000FE
 group                         = 1
 emmcache                      = 2,1,2,1
-emu_auproviders               = 0604:010200;0E00:000000;1010:000000;2610:000000
+emu_auproviders               = 0604:010200;0E00:000000;1010:000000;4AE1:000011,000014,0000FE
+
+[reader]
+label                         = Internet_SoftCam
+protocol                      = emu
+device                        = https://raw.githubusercontent.com/MOHAMED19OS/SoftCam_Emu/main/Enigma2/SoftCam.Key
+disablecrccws_only_for        = 0E00:000000
+caid                          = 0E00,0500,0604,090F,1010,1801,2600,4AE1
+detect                        = cd
+ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;090F:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;4AE1:000011,000014,0000FE
+group                         = 1
+emmcache                      = 2,1,2,1
+emu_auproviders               = 0604:010200;0E00:000000;1010:000000;4AE1:000011,000014,0000FE
+
+####################### Card ############################
 
 [reader]
 label                         = lower_card
