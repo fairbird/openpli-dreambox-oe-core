@@ -1,6 +1,6 @@
-From 2773eb42c17269db732e2b7aa457acb7811f5644 Mon Sep 17 00:00:00 2001
+From e6a9e3df1d9fd735768fe004c1ade76f2d3c0321 Mon Sep 17 00:00:00 2001
 From: fairbird <rrrr53@hotmail.com>
-Date: Tue, 27 Jul 2021 16:45:48 +0300
+Date: Thu, 29 Jul 2021 22:15:09 +0300
 Subject: add support to new date/time feature
 
 
@@ -13,12 +13,10 @@ diff --git a/usr/share/enigma2/PLi-FullNightHD/skin.xml b/usr/share/enigma2/PLi-
 index eb36a55..4aef922 100644
 --- a/usr/share/enigma2/PLi-FullNightHD/skin.xml
 +++ b/usr/share/enigma2/PLi-FullNightHD/skin.xml
-@@ -95,6 +95,12 @@
+@@ -95,6 +95,10 @@
  	</colors>
  
  	<parameters>
-+		<!-- Allow OnlyIcon -->
-+    		<parameter name="AllowUseOnlyIcon" value="1,1"/>
 +    		<!-- Allow User Dates And Times -->
 +    		<parameter name="AllowUserDatesAndTimes" value="1,1"/>
 +    		<!-- Allow User Dates And Times Display -->
@@ -30,7 +28,7 @@ diff --git a/usr/share/enigma2/PLi-FullNightHD/skin_templates.xml b/usr/share/en
 index 350a798..d60298c 100644
 --- a/usr/share/enigma2/PLi-FullNightHD/skin_templates.xml
 +++ b/usr/share/enigma2/PLi-FullNightHD/skin_templates.xml
-@@ -33,10 +33,11 @@
+@@ -33,10 +33,12 @@
  		<widget source="ScreenPath" render="Label" position="30,5" size="1860,20" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;19" valign="center" halign="left"/>	
  		<widget source="Title" render="Label" position="30,7" size="1860,75" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
  		<widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right">
@@ -41,8 +39,143 @@ index 350a798..d60298c 100644
  		<widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right">
 -			<convert type="ClockToText">Date</convert>
 +			<convert type="ClockToText">FullDate</convert>
++			<!--convert type="ClockToText">Date</convert-->
  		</widget>
  	</screen>
  
--- 
-2.25.1
+diff --git a/usr/share/enigma2/PLi-FullHD/skin.xml b/usr/share/enigma2/PLi-FullHD/skin.xml
+index 1cafc4f..982d29e 100644
+--- a/usr/share/enigma2/PLi-FullHD/skin.xml
++++ b/usr/share/enigma2/PLi-FullHD/skin.xml
+@@ -96,6 +96,10 @@
+ 	</colors>
+ 
+ 	<parameters>
++    		<!-- Allow User Dates And Times -->
++    		<parameter name="AllowUserDatesAndTimes" value="1,1"/>
++    		<!-- Allow User Dates And Times Display -->
++    		<parameter name="AllowUserDatesAndTimesDisplay" value="1,1"/>
+ 		<parameter name="ConfigListSlider" value="22,0"/>
+ 		<parameter name="ChoicelistName" value="68,3,1000,31"/>
+ 		<parameter name="ExpandableListIcon" value="0,0,55,38"/>
+diff --git a/usr/share/enigma2/PLi-FullHD/skin_templates.xml b/usr/share/enigma2/PLi-FullHD/skin_templates.xml
+index 0b86965..2825a19 100644
+--- a/usr/share/enigma2/PLi-FullHD/skin_templates.xml
++++ b/usr/share/enigma2/PLi-FullHD/skin_templates.xml
+@@ -39,10 +39,12 @@
+ 		<widget source="ScreenPath" render="Label" position="30,5" size="1860,20" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;19" valign="center" halign="left"/>
+ 		<widget source="Title" render="Label" position="30,7" size="1860,75" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
+ 		<widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right">
+-			<convert type="ClockToText">Format:%-H:%M</convert>
++			<convert type="ClockToText"/>
++			<!--convert type="ClockToText">Format:%-H:%M</convert-->
+ 		</widget>
+ 		<widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right">
+-			<convert type="ClockToText">Date</convert>
++			<convert type="ClockToText">FullDate</convert>
++			<!--convert type="ClockToText">Date</convert-->
+ 		</widget>
+ 	</screen>
+ 
+diff --git a/usr/share/enigma2/PLi-HD/skin.xml b/usr/share/enigma2/PLi-HD/skin.xml
+index 86f5ca9..c070511 100644
+--- a/usr/share/enigma2/PLi-HD/skin.xml
++++ b/usr/share/enigma2/PLi-HD/skin.xml
+@@ -26,6 +26,10 @@
+   <!-- Parameters -->
+ 
+   <parameters>
++    <!-- Allow User Dates And Times -->
++    <parameter name="AllowUserDatesAndTimes" value="1,1"/>
++    <!-- Allow User Dates And Times Display -->
++    <parameter name="AllowUserDatesAndTimesDisplay" value="1,1"/>
+     <parameter name="AboutHddSplit" value="0"/>
+     <parameter name="VirtualKeyBoard" value="45,45" />
+     <parameter name="VirtualKeyBoardShiftColors" value="0x00ffffff,0x00ffffff,0x0000ffff,0x00ff00ff" />
+diff --git a/usr/share/enigma2/PLi-HD/skin_templates.xml b/usr/share/enigma2/PLi-HD/skin_templates.xml
+index a93b4a5..9ac7e4d 100644
+--- a/usr/share/enigma2/PLi-HD/skin_templates.xml
++++ b/usr/share/enigma2/PLi-HD/skin_templates.xml
+@@ -36,10 +36,12 @@
+     <widget source="ScreenPath" render="Label" position="85,30" size="1085,14" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;12" valign="center" halign="left"/>
+     <widget source="Title" render="Label" position="85,30" size="1085,55" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left" />
+     <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right">
+-      <convert type="ClockToText">Format:%-H:%M</convert>
++      <convert type="ClockToText"/>
++      <!--convert type="ClockToText">Format:%-H:%M</convert-->
+     </widget>
+     <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right">
+-      <convert type="ClockToText">Date</convert>
++      <convert type="ClockToText">FullDate</convert>
++      <!--convert type="ClockToText">Date</convert-->
+     </widget>
+   </screen>
+ 
+diff --git a/usr/share/enigma2/PLi-HD1/skin.xml b/usr/share/enigma2/PLi-HD1/skin.xml
+index d055387..80b1807 100644
+--- a/usr/share/enigma2/PLi-HD1/skin.xml
++++ b/usr/share/enigma2/PLi-HD1/skin.xml
+@@ -71,6 +71,10 @@
+   </colors>
+ 
+   <parameters>
++    <!-- Allow User Dates And Times -->
++    <parameter name="AllowUserDatesAndTimes" value="1,1"/>
++    <!-- Allow User Dates And Times Display -->
++    <parameter name="AllowUserDatesAndTimesDisplay" value="1,1"/>
+     <parameter name="AboutHddSplit" value="1"/>
+     <parameter name="SelectionListDescr" value="34,2,700,30"/>
+     <parameter name="SelectionListLock" value="4,1,25,24"/>
+diff --git a/usr/share/enigma2/PLi-HD1/skin_templates.xml b/usr/share/enigma2/PLi-HD1/skin_templates.xml
+index 77fb289..7985879 100644
+--- a/usr/share/enigma2/PLi-HD1/skin_templates.xml
++++ b/usr/share/enigma2/PLi-HD1/skin_templates.xml
+@@ -36,10 +36,12 @@
+     <widget source="ScreenPath" render="Label" position="20,3" size="1240,14" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;13" valign="center" halign="left"/>
+     <widget source="Title" render="Label" position="20,5" size="1240,50" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left"/>
+     <widget source="global.CurrentTime" render="Label" position="1110,15" size="150,25" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right">
+-      <convert type="ClockToText">Format:%-H:%M</convert>
++      <convert type="ClockToText"/>
++      <!--convert type="ClockToText">Format:%-H:%M</convert-->
+     </widget>
+     <widget source="global.CurrentTime" render="Label" position="960,35" size="300,25" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right">
+-      <convert type="ClockToText">Date</convert>
++      <convert type="ClockToText">FullDate</convert>
++      <!--convert type="ClockToText">Date</convert-->
+     </widget>
+   </screen>
+ 
+diff --git a/usr/share/enigma2/PLi-HD2/skin.xml b/usr/share/enigma2/PLi-HD2/skin.xml
+index 1a8e6ec..c018641 100644
+--- a/usr/share/enigma2/PLi-HD2/skin.xml
++++ b/usr/share/enigma2/PLi-HD2/skin.xml
+@@ -26,6 +26,10 @@
+   <!-- Parameters -->
+ 
+   <parameters>
++    <!-- Allow User Dates And Times -->
++    <parameter name="AllowUserDatesAndTimes" value="1,1"/>
++    <!-- Allow User Dates And Times Display -->
++    <parameter name="AllowUserDatesAndTimesDisplay" value="1,1"/>
+     <parameter name="AboutHddSplit" value="0"/>
+     <parameter name="VirtualKeyBoard" value="45,45" />
+     <parameter name="VirtualKeyBoardShiftColors" value="0x00ffffff,0x00ffffff,0x0000ffff,0x00ff00ff" />
+diff --git a/usr/share/enigma2/PLi-HD2/skin_templates.xml b/usr/share/enigma2/PLi-HD2/skin_templates.xml
+index 84c0c56..1b0e18a 100644
+--- a/usr/share/enigma2/PLi-HD2/skin_templates.xml
++++ b/usr/share/enigma2/PLi-HD2/skin_templates.xml
+@@ -36,10 +36,12 @@
+     <widget source="ScreenPath" render="Label" position="40,3" size="1200,14" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;13" valign="center" halign="left"/>
+     <widget source="Title" render="Label" position="40,5" size="1200,50" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left" />
+     <widget source="global.CurrentTime" render="Label" position="1090,15" size="150,25" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right">
+-      <convert type="ClockToText">Format:%-H:%M</convert>
++      <convert type="ClockToText"/>
++      <!--convert type="ClockToText">Format:%-H:%M</convert-->
+     </widget>
+     <widget source="global.CurrentTime" render="Label" position="940,35" size="300,25" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right">
+-      <convert type="ClockToText">Date</convert>
++      <convert type="ClockToText">FullDate</convert>
++      <!--convert type="ClockToText">Date</convert-->
+     </widget>
+   </screen>
+ 
