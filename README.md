@@ -1,4 +1,4 @@
-Build environment for dreambox DM920 and DM8000 based on OpenPLi, also derived from openvision (closed source).<br>
+Build environment for (DM520/525, DM820, DM7080 and DM900/920 ... DreamOne/Two not ready yet (Audio issue)) based on OpenPLi, also derived from openvision (closed source).<br>
 Work in progress, not ready yet!<br>
 More boxes will follow.
 
