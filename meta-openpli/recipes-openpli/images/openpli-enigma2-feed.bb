@@ -17,7 +17,6 @@ OPTIONAL_PACKAGES += " \
 	autossh \
 	ccid \
 	cloudflare-dns \
-	cronie \
 	ctorrent \
 	cups \
 	davfs2 \
