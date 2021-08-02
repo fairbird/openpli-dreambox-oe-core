@@ -28,7 +28,6 @@ RDEPENDS_${PN} = " \
 	ethtool \
 	glibc-gconv-iso8859-15 \
 	ntpdate \
-	cronie \
 	${PYTHON_RDEPS} \
 	"
 

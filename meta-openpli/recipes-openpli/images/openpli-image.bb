@@ -8,6 +8,7 @@ IMAGE_INSTALL = "\
 	avahi-daemon \
 	ca-certificates \
 	cifs-utils \
+	cronie \
 	distro-feed-configs \
 	dropbear \
 	e2fsprogs-e2fsck \
