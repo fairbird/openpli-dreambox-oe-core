@@ -205,7 +205,7 @@ fi
 	# move them to /var/spool/cron
 # 	cd /etc/cron/crontabs
 # 	for file in *; do
-		cat $file >> /var/spool/cron/$file
+#		cat $file >> /var/spool/cron/$file
 # 	done
 # 	cd /
 # 	rm -rf /etc/cron
