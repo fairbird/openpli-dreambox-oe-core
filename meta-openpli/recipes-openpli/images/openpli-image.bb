@@ -14,6 +14,7 @@ IMAGE_INSTALL = "\
 	e2fsprogs-e2fsck \
 	e2fsprogs-mke2fs \
 	e2fsprogs-tune2fs \
+	fake-hwclock \
 	fakelocale \
 	fuse-exfat \
 	glibc-binary-localedata-en-gb \
@@ -22,6 +23,7 @@ IMAGE_INSTALL = "\
 	modutils-loadscript \
 	nfs-utils \
 	nfs-utils-client \
+	ntp \
 	openpli-bootlogo \
 	openssh-sftp-server \
 	opkg \
@@ -33,6 +35,7 @@ IMAGE_INSTALL = "\
 	python-netifaces \
 	python-pysmb \
 	sdparm \
+	stb-hwclock \
 	tuxbox-common \
 	util-linux-ionice \
 	tzdata \
