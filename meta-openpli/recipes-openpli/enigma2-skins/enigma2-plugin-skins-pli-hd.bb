@@ -10,6 +10,7 @@ PKGV = "0.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/littlesat/skin-PLiHD.git;protocol=git \
 	file://01-add-support-to-new-date-time-feature.patch;apply=yes \
+	file://02-add-crontimers-screen.patch;apply=yes \
 "
 
 FILES_${PN} = "${datadir}/enigma2/"
