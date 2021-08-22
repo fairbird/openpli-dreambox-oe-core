@@ -27,7 +27,7 @@ do_install() {
 
 	install -m 0644 "${S}"/*.xml "${D}${sysconfdir}/tuxbox"
 	
-	ln -sf "/usr/share"			"${D}/share"
+	ln -s "${sysconfdir}/tuxbox"		"${D}${localstatedir}/"
 	ln -s "${sysconfdir}/tuxbox/scce"	"${D}${localstatedir}/"
 	ln -s "${prefix}/keys"			"${D}${localstatedir}/"
 	ln -s "${bindir}"			"${D}${localstatedir}/"
