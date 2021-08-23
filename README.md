@@ -23,7 +23,7 @@ Tested with Ubuntu 21.04.
 <br>
 Dependencies:
 ```
-sudo apt install autoconf automake bison bzip2 cvs default-jre diffstat flex g++ gawk gcc gettext git git-lfs gzip help2man ncurses-bin lib32ncurses5-dev libc6-dev libtool make texinfo patch perl pkg-config subversion tar texi2html zlib1g-dev chrpath libxml2-utils xsltproc libglib2.0-dev python-setuptools libc6-i386 genromfs guile-2.0-libs quilt
+sudo apt install autoconf automake bison bzip2 cvs default-jre diffstat flex g++ gawk gcc gettext git git-lfs gzip help2man ncurses-bin lib32ncurses5-dev libc6-dev libtool make texinfo patch perl pkg-config subversion tar texi2html zlib1g-dev chrpath libxml2-utils xsltproc libglib2.0-dev python-setuptools libc6-i386 genromfs guile-2.0-libs quilt dialog
 ```
 To build image:
 ```
@@ -31,20 +31,19 @@ git clone https://github.com/fairbird/openpli-dreambox-oe-core.git
 
 cd openpli-dreambox-oe-core
 
-MACHINE=<box name> make image
+./build_image.sh
+
+![Selection_001](https://user-images.githubusercontent.com/1761779/130413731-c24a2ddd-ca71-437e-8734-bdfc2f8729ff.png)
+
+![Selection_002](https://user-images.githubusercontent.com/1761779/130413735-8f2a0caf-e3f7-4264-b33e-b474ac13d245.png)
 ```
-When the build is finished, the image openpli-enigma2-11.1-<box name>.rootfs.tar.bz2 is in the:
+When the build is finished, the image openpli-enigma2-GCC-11.1-<box name>.rootfs.tar.bz2 is in the:
 ```
 build/tmp/deploy/images/<box name>/
 ```
 directory.
 
-To build feed:
-```
-MACHINE=<box name> make feed
-```
-
-To update your box:
+To upload feed:
 
 Install apache2:
 ```
@@ -68,18 +67,9 @@ Add hostname or ip address to the site.conf file (exist after make command), e.g
 ```
 DISTRO_HOST = " <your ip address or hostname> "
 ```
-To update the image, run:
+To update the image or feed, run:
 ```
-make image                         // update image only.
-```
-or  
-```
-make feed                          // update image and feed.
-```
-
-To update build-environment including all submodules, run:
-```
-make update
+./build_image.sh
 ```
 
 Notice: 
