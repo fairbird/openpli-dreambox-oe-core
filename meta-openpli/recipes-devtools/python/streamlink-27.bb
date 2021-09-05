@@ -25,7 +25,6 @@ RDEPENDS_${PN} = "python-core \
     python-subprocess \
     python-typing \
     python-websocket-client \
-    python-youtube-dl \
     "
 
 inherit gittag setuptools python-dir
