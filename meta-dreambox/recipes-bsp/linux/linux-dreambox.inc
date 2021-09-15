@@ -81,7 +81,7 @@ pkg_postrm_kernel () {
 
 CMDLINE_JFFS2 = "root=/dev/mtdblock3 rootfstype=jffs2 rw ${CMDLINE_CONSOLE}"
 CMDLINE_UBI = "ubi.mtd=root root=ubi0:rootfs rootfstype=ubifs rw ${CMDLINE_CONSOLE}"
-CMDLINE = "${CMDLINE_UBI}"
+CMDLINE = "${@bb.utils.contains('IMAGE_FSTYPES', 'ubifs', '${CMDLINE_UBI}', '${CMDLINE_JFFS2}', d)}"
 USB_CMDLINE = "root=${USB_ROOT} rootdelay=10 rw ${CMDLINE_CONSOLE}"
 
 LOCALVERSION = "-${MACHINE}"

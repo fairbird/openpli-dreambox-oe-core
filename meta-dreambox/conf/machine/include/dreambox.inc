@@ -14,8 +14,9 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS = " \
 	kernel-module-cifs \
 	kernel-module-hmac \
 	kernel-module-md4 \
+	kernel-module-stv0299 \
 	dreambox-dvb-modules-${MACHINE} \
-	${@bb.utils.contains_any("MACHINE", "dm8000 dm7020hd dm800sev2 dm500hdv2", "kernel-module-ecb", "", d)} \
+	${@bb.utils.contains_any("MACHINE", "dm800se dm500hhd dm8000 dm7020hd dm800sev2 dm500hdv2", "kernel-module-ecb", "", d)} \
 	dreambox-boot-progress \
 	"
 
