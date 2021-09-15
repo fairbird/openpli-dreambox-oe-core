@@ -14,17 +14,18 @@ rm -f build/bitbake.lock
 clear
 ## Menu Select Boxes ##
 BOX_1="dm500hdv2"
-BOX_2="dm520"
-BOX_3="dm820"
-BOX_4="dm7020hd"
-BOX_5="dm7080"
-BOX_6="dm8000"
-BOX_7="dm900"
-BOX_8="dm920"
-BOX_9="dreamone"
-BOX_10="dreamtwo"
+BOX_2="dm800sev2"
+BOX_3="dm520"
+BOX_4="dm820"
+BOX_5="dm7020hd"
+BOX_6="dm7080"
+BOX_7="dm8000"
+BOX_8="dm900"
+BOX_9="dm920"
+BOX_10="dreamone"
+BOX_11="dreamtwo"
 list=
-for i in $(seq 1 10); do
+for i in $(seq 1 11); do
     p="BOX_$i"
     list="$list $i ${!p} "
 done
@@ -35,30 +36,33 @@ box=$(dialog --stdout --clear --colors --backtitle "Build Image" --menu "Select 
     echo "($box) Select DM500hdv2"
     ;;
     2)
-    echo "($box) Select DM520"
+    echo "($box) Select DM800sev2"
     ;;
     3)
-    echo "($box) Select DM820"
+    echo "($box) Select DM520"
     ;;
     4)
-    echo "($box) Select DM7020HD"
+    echo "($box) Select DM820"
     ;;
     5)
-    echo "($box) Select DM7080"
+    echo "($box) Select DM7020HD"
     ;;
     6)
-    echo "($box) Select DM8000"
+    echo "($box) Select DM7080"
     ;;
     7)
-    echo "($box) Select DM900"
+    echo "($box) Select DM8000"
     ;;
     8)
-    echo "($box) Select DM920"
+    echo "($box) Select DM900"
     ;;
     9)
-    echo "($box) Select DreamOne"
+    echo "($box) Select DM920"
     ;;
     10)
+    echo "($box) Select DreamOne"
+    ;;
+    11)
     echo "($box) Select DreamTwo"
     ;;
     *) clear && exit ;;
