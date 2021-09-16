@@ -1,4 +1,6 @@
-Build environment for (DM800se, DM500HD, DM800seV2, DM500HDV2, DM520/525, DM820, DM7080 and DM900/920 ... DreamOne/Two not ready yet (Audio issue)) based on OpenPLi, also derived from openvision (closed source).<br>
+Build environment for (DM800se, DM500HD, DM800seV2, DM500HDV2, DM520/525, DM820, DM7080 and DM900/920 ... DreamOne/Two not ready yet (Audio issue))
+
+Based on OpenPLi, also derived from openvision (closed source).<br>
 
 ********************************************************************************************
 WARRNING : The compile images for DM800se and DM500HD to External flash only For [Multiboot]. Because it is more than 64MB
