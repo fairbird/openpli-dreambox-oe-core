@@ -123,7 +123,7 @@ OPTIONAL_BSP_ENIGMA2_PACKAGES ?= ""
 ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
 	dvb-usb-drivers-meta \
-	enigma2-display-skins \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "bwlcd96 bwlcd128 bwlcd140 bwlcd255 colorlcd220 colorlcd390 colorlcd400", "enigma2-display-skins", "", d)} \
 	enigma2-plugin-drivers-usbserial \
 	enigma2-plugin-extensions-blurayplayer \
 	enigma2-plugin-extensions-dlnabrowser \
