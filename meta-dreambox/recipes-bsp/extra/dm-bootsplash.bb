@@ -13,6 +13,10 @@ S = "${WORKDIR}"
 
 SRC_URI = "http://dreamboxupdate.com/download/opendreambox/2.0.0/dreambox-bootlogo/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}.tar.bz2;name=${MACHINE}"
 
+SRC_URI[dm500hd.md5sum] = "b9ada70304ca1f9a8e36a55bd38834c6"
+SRC_URI[dm500hd.sha256sum] = "d4b0f650711d5d6fdecb42efe9e13987ef803cba829d0950e899608a784ae3b2"
+SRC_URI[dm800se.md5sum] = "3413a894a3d77e02cae34b96d302817d"
+SRC_URI[dm800se.sha256sum] = "8a283442c231e82ee1a2093e53dc5bf52c478e12d22c79af7e7026b52711fc9c"
 SRC_URI[dm8000.md5sum] = "1b63ac7e2bd5c0db0748606acc310d47"
 SRC_URI[dm8000.sha256sum] = "91e4402190fe88cf394ae780141d968a1ebecd8db7b23c1f0ca3f4bfa9c9512a"
 SRC_URI[dm7020hd.md5sum] = "f8e423dbf7661367659fa86a68b74bc4"
