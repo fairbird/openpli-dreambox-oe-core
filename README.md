@@ -79,6 +79,6 @@ To update the image or feed, run:
 ```
 
 # Notice: 
-* Run 'make feed' twice before you update the box!
+* Build the feed twice before you update the box!
 
 ==========================================================
