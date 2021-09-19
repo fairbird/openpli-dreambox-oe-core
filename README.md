@@ -1,10 +1,10 @@
-Build environment for (DM800se, DM500HD, DM800seV2, DM500HDV2, DM520/525, DM820, DM7080 and DM900/920 ... DreamOne/Two not ready yet (Audio issue))
+# Build environment for (DM800se, DM500HD, DM800seV2, DM500HDV2, DM520/525, DM820, DM7080 and DM900/920 ... DreamOne/Two not ready yet (Audio issue))
 
 Based on OpenPLi, also derived from openvision (closed source).<br>
 
-********************************************************************************************
-WARRNING : The compile images for DM800se and DM500HD to External flash only For [Multiboot]. Because it is more than 64MB
-********************************************************************************************
+ **************************************************************************************************************************
+# WARRNING : The compile images for DM800se and DM500HD to External flash only For [Multiboot]. Because it is more than 64MB
+ **************************************************************************************************************************
 
 Thanks to OpenPLi and Open-Alliance.
 
@@ -27,11 +27,11 @@ Feel free to send pull-request.
 Tested with Ubuntu 21.04.
 <br>
 <br>
-Dependencies:
+# Dependencies:
 ```
 sudo apt install autoconf automake bison bzip2 cvs default-jre diffstat flex g++ gawk gcc gettext git git-lfs gzip help2man ncurses-bin lib32ncurses5-dev libc6-dev libtool make texinfo patch perl pkg-config subversion tar texi2html zlib1g-dev chrpath libxml2-utils xsltproc libglib2.0-dev python-setuptools libc6-i386 genromfs guile-2.0-libs quilt dialog
 ```
-To build image:
+# To build image:
 ```
 git clone https://github.com/fairbird/openpli-dreambox-oe-core.git
 
@@ -49,7 +49,7 @@ build/tmp/deploy/images/<box name>/
 ```
 directory.
 
-To upload feed:
+# To upload feed:
 
 Install apache2:
 ```
@@ -78,7 +78,7 @@ To update the image or feed, run:
 ./build_image.sh
 ```
 
-Notice: 
+# Notice: 
 * Run 'make feed' twice before you update the box!
 
 ==========================================================
