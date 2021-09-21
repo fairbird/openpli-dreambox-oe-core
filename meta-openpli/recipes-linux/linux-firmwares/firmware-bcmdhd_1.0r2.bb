@@ -22,3 +22,6 @@ do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/brcm
     install -m 0644 ${S}${nonarch_base_libdir}/firmware/brcm/*.bin ${D}${nonarch_base_libdir}/firmware/brcm/
 }
+
+
+INSANE_SKIP_${PN} += " installed-vs-shipped"
