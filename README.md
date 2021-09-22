@@ -29,7 +29,7 @@ Tested with Ubuntu 21.04.
 <br>
 # Dependencies:
 ```
-sudo apt install autoconf automake bison bzip2 cvs default-jre diffstat flex g++ gawk gcc gettext git git-lfs gzip help2man ncurses-bin lib32ncurses5-dev libc6-dev libtool make texinfo patch perl pkg-config subversion tar texi2html zlib1g-dev chrpath libxml2-utils xsltproc libglib2.0-dev python-setuptools libc6-i386 genromfs guile-2.0-libs quilt dialog
+sudo apt install sudo apt install -y autoconf automake bison bzip2 cvs diffstat flex g++ g++-multilib gawk gcc gettext git git-lfs gzip help2man ncurses-bin libncurses5-dev libc6-dev libtool make texinfo patch perl pkg-config subversion tar texi2html wget chrpath libxml2-utils xsltproc python-setuptools libc6 genromfs mtd-utils dpkg-dev sshpass poedit translate-toolkit xclip linux-firmware linux-headers-`uname -r` linux-headers-`uname -r` linux-image-`uname -r` linux-tools-`uname -r` linux-libc-dev linux-source u-boot-tools upx-ucl doxygen optipng python-dev-is-python2 libglib2.0-dev pngquant default-jdk fastboot adb libssl-dev libc6-dev-i386 lib32z1 m4 intltool ccache zlib1g zlib1g-dev liblzo2-dev tcl dpkg asciidoc texlive-latex-base dblatex xutils-dev gparted openssh-server nfs-common nfs-kernel-server lintian git-doc git-gui gitk indent tofrodos fakeroot meld atftpd sharutils manpages-dev manpages-posix manpages-posix-dev libgdk-pixbuf2.0-dev linux-doc build-essential socat libsdl1.2-dev xterm gcc-multilib libopenmpi-dev parted mercurial binutils imagemagick librsvg2-bin jq linux-libc-dev:i386 linux-headers-generic python3-pip python3-autopep8 python3-six python-six libnl-3-dev libimage-exiftool-perl dos2unix ffmpeg dialog default-jre libc6-i386 guile-2.0-libs quilt dialog
 ```
 # To build image:
 ```
