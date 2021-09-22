@@ -22,3 +22,13 @@ do_install() {
 	install -d ${D}${libdir}/gstreamer-1.0
 	install -m 0755 ${S}${libdir}/gstreamer-1.0/libgstdreamsinks.so ${D}${libdir}/gstreamer-1.0/
 }
+
+INSANE_SKIP_${PN} += " installed-vs-shipped"
+
+SRC_URI += "file://LICENSE-CLOSE"
+
+do_license() {
+	mv ${WORKDIR}/LICENSE-CLOSE ${B}/LICENSE-CLOSE
+}
+
+addtask do_license before do_populate_lic after do_unpack

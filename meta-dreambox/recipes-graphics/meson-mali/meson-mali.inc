@@ -1,4 +1,4 @@
-SUMMARY = "Amlogic mali opengl provider"
+SUMMARY = "amlogic mali opengl provider"
 LICENSE = "CLOSED"
 PROVIDES = "virtual/egl virtual/libgles2"
 
