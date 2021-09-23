@@ -1,5 +1,6 @@
 SUMMARY = "Broadcom DHD firmware"
 LICENSE = "CLOSED"
+require conf/license/license-close.inc
 
 inherit allarch
 INSANE_SKIP_${PN} = "arch"
@@ -21,14 +22,3 @@ do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/brcm
     install -m 0644 ${S}${nonarch_base_libdir}/firmware/brcm/*.bin ${D}${nonarch_base_libdir}/firmware/brcm/
 }
-
-
-INSANE_SKIP_${PN} += " installed-vs-shipped"
-
-SRC_URI += "file://LICENSE-CLOSE"
-
-do_license() {
-	mv ${WORKDIR}/LICENSE-CLOSE ${B}/LICENSE-CLOSE
-}
-
-addtask do_license before do_populate_lic after do_unpack

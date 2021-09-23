@@ -9,13 +9,3 @@ SRC_URI[cortexa15hf-neon-vfpv4.sha256sum] = "e9f119af9bcadf4a74d91ed8ebccbf86bc4
 COMPATIBLE_MACHINE = "^(dm900|dm920)$"
 
 inherit opendreambox-precompiled-binary-new
-
-INSANE_SKIP_${PN} += " installed-vs-shipped"
-
-SRC_URI += "file://LICENSE-CLOSE"
-
-do_license() {
-	mv ${WORKDIR}/LICENSE-CLOSE ${B}/LICENSE-CLOSE
-}
-
-addtask do_license before do_populate_lic after do_unpack
