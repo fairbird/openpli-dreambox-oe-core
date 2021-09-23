@@ -1,6 +1,6 @@
 SUMMARY = "timezone.xml for enigma2"
 
-require conf/license/openvision-gplv2.inc
+require conf/license/openpli-gplv2.inc
 
 inherit gitpkgv allarch
 

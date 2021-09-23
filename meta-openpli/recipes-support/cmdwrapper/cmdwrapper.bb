@@ -1,7 +1,7 @@
 DESCRIPTION = "cmd wrapper"
 MAINTAINER = "Open Vision Developers"
 
-require conf/license/openvision-gplv2.inc
+require conf/license/openpli-gplv2.inc
 
 inherit gitpkgv
 
