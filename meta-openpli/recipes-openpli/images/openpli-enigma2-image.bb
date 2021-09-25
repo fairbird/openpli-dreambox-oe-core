@@ -84,7 +84,7 @@ IMAGE_INSTALL += " \
 	wget \
 	${ENIGMA2_PLUGINS} \
 	${KERNEL_WIFI_DRIVERS} \
-	${EXTERNAL_WIFI_DRIVERS} \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "dm500hd dm500hdv2 dm800se dm800sev2 dm520 dm820 dm7020hd dm7080 dm8000 dm900 dm920", "${EXTERNAL_WIFI_DRIVERS}" , "", d)} \
 	"
 
 export IMAGE_BASENAME = "openpli-enigma2"
