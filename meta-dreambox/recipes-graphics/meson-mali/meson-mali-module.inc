@@ -9,6 +9,10 @@ SRC_URI_append = " file://0001-${GPU_MODEL}-${GPU_VERSION}-compile-fix-for-dream
 GPU_MODEL = "${@d.getVar('BPN').split('-')[-2]}"
 GPU_VERSION = "${@d.getVar('BPN').split('-')[-1]}"
 
+export KCFLAGS = "-Wno-error=maybe-uninitialized \
+                  -Wno-error=array-bounds \
+"
+
 EXTRA_OEMAKE += " \
     ARCH=${ARCH} \
     CONFIG_MALI_MIDGARD=m \
