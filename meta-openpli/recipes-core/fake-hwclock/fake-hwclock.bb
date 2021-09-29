@@ -9,13 +9,11 @@ SRC_URI = "file://fake-hwclock \
            file://fake-hwclock.init \
            file://fake-hwclock.default \
 "
+
 inherit update-rc.d
 
 INITSCRIPT_NAME = "fake-hwclock"
 INITSCRIPT_PARAMS = "start 01 S . stop 25 0 6 ."
-
-#SYSTEMD_PACKAGES = "${PN}"
-#SYSTEMD_SERVICE_${PN} = "fake-hwclock.service"
 
 do_configure() {
 }
@@ -30,19 +28,13 @@ do_install() {
     install -d ${D}${sysconfdir}/default
     install -m 644 ${WORKDIR}/fake-hwclock.default ${D}${sysconfdir}/default/fake-hwclock
 
-
-#    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-#        install -d ${D}${systemd_system_unitdir}
-#        install -m 0644 ${WORKDIR}/fake-hwclock.service ${D}${systemd_system_unitdir}
-#    else
-        install -d ${D}${sysconfdir}/init.d
-        install -m 755 ${WORKDIR}/fake-hwclock.init ${D}${sysconfdir}/init.d/fake-hwclock
-#    fi
+    install -d ${D}${INIT_D_DIR}
+    install -m 755 ${WORKDIR}/fake-hwclock.init ${D}${INIT_D_DIR}/fake-hwclock
 }
 
 pkg_postinst_${PN}_prepend () {
 #!/bin/sh
 if [ -n "$D" ]; then
-        [[ -f $D/etc/fake-hwclock.data ]] || date -u '+%Y-%m-%d %H:%M:%S' > $D/etc/fake-hwclock.data
+        [[ -f $D${sysconfdir}/fake-hwclock.data ]] || date -u '+%Y-%m-%d %H:%M:%S' > $D${sysconfdir}/fake-hwclock.data
 fi
 }
