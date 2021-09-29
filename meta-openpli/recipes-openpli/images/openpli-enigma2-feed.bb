@@ -117,6 +117,31 @@ OPTIONAL_PACKAGES += " \
 	zip \
 	zsh \
 	${OPTIONAL_BSP_PACKAGES} \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "dreamone dreamtwo", "${KERNEL_WIFI_DRIVERS}" , "", d)} \
+	"
+
+KERNEL_WIFI_DRIVERS = " \
+	firmware-carl9170 \
+	firmware-htc7010 \
+	firmware-htc9271 \
+	firmware-rt2870 \
+	firmware-rt73 \
+	firmware-rtl8712u \
+	firmware-zd1211 \
+	firmware-rtl8192eu \
+	firmware-rtl8188eu \
+	\
+	rtl8188eu \
+	rtl8192eu \
+	\
+	kernel-module-ath9k-htc \
+	kernel-module-carl9170 \
+	kernel-module-r8712u \
+	kernel-module-rt2500usb \
+	kernel-module-rt2800usb \
+	kernel-module-rt73usb \
+	kernel-module-rtl8187 \
+	kernel-module-zd1211rw \
 	"
 
 OPTIONAL_BSP_ENIGMA2_PACKAGES ?= ""
