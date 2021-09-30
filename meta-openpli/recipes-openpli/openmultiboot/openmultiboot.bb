@@ -9,7 +9,7 @@ PKGV = "git${GITPKGV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-DEPENDS = "freetype"
+DEPENDS = "freetype json-c"
 
 SRC_URI = "git://github.com/OpenVisionE2/openmultiboot.git"
 
