@@ -26,6 +26,15 @@ EXTERNAL_WIFI_DRIVERS = " \
 	\
 	rtl8188eu \
 	rtl8192eu \
+	rt3573 \
+	rt5572 \
+	rtl8723a \
+	rtl8723bs \
+	rtl8814au \
+	rtl8822bu \
+	rt8812au \
+	mt7610u \
+	mt7601u \
 	"
 
 ENIGMA2_PLUGINS = " \

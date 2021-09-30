@@ -50,8 +50,6 @@ OPTIONAL_PACKAGES += " \
 	mc \
 	mediainfo \
 	minisatip \
-	mt7601u \
-	mt7610u \
 	mtd-utils \
 	mtools \
 	nano \
@@ -79,13 +77,6 @@ OPTIONAL_PACKAGES += " \
 	python-requests \
 	python-youtube-dl \
 	rsync \
-	rt3573 \
-	rt5572 \
-	rtl8723a \
-	rtl8723bs \
-	rtl8814au \
-	rtl8822bu \
-	rt8812au \
 	rtl-sdr \
 	rtorrent \
 	sabnzbd \
