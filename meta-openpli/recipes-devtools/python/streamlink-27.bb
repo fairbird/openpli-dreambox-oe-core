@@ -15,6 +15,7 @@ RDEPENDS_${PN} = "python-core \
     python-isodate \
     python-iso3166 \
     python-iso639 \
+    python-lxml \
     python-misc \
     python-pkgutil \
     python-pycryptodome \
@@ -25,21 +26,17 @@ RDEPENDS_${PN} = "python-core \
     python-subprocess \
     python-typing \
     python-websocket-client \
+    python-youtube-dl \
     "
 
-inherit gittag setuptools python-dir
+inherit gittag setuptools
 
 SRCREV = "${AUTOREV}"
 PV = "git${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
-SRC_URI = "git://github.com/Billy2011/streamlink-27;protocol=https"
+SRC_URI = "git://github.com/oe-mirrors/streamlink-27;protocol=https"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/streamlink-27:"
-
-SRC_URI += " \
-    file://0001-added-files.patch \
-    "
 S = "${WORKDIR}/git"
 
 do_install_append() {
@@ -55,7 +52,7 @@ FILES_${PN} = " \
     ${libdir}/${PYTHON_DIR}/site-packages/streamlink/*/*/*.pyo \
     "
 
-FILES_${PN}-src += " \
+FILES_${PN}-src = " \
     ${libdir}/${PYTHON_DIR}/site-packages/streamlink-*.egg-info/* \
     ${libdir}/${PYTHON_DIR}/site-packages/streamlink/plugins/.removed \
     ${libdir}/${PYTHON_DIR}/site-packages/streamlink/*.py \
