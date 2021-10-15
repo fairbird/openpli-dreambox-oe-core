@@ -10,7 +10,7 @@ PACKAGE_ARCH = "all"
 
 DEPENDS = "libxml2 bash-completion"
 
-inherit setuptools gittag
+inherit setuptools gitpkgv
 
 PE = "2"
 PV = "git${SRCPV}"
@@ -23,27 +23,35 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "PYTHON=${PYTHON}"
 
 do_compile_prepend() {
-    cd ${S}
-    oe_runmake lazy-extractors youtube-dl.bash-completion
+	cd ${S}
+	oe_runmake lazy-extractors youtube-dl.bash-completion
 }
 
 do_install_append() {
-    mv ${D}${datadir}/etc ${D}${sysconfdir}
-    install -m 0755 -d ${D}${sysconfdir}/bash_completion.d
-    install -m 0644 youtube-dl.bash-completion ${D}${sysconfdir}/bash_completion.d
+	mv ${D}${datadir}/etc ${D}${sysconfdir}
+	install -m 0755 -d ${D}${sysconfdir}/bash_completion.d
+	install -m 0644 youtube-dl.bash-completion ${D}${sysconfdir}/bash_completion.d
 }
 
 RDEPENDS_${PN} = " \
-    python-email \
-    python-gdata \
-    python-unixadmin \
-    python-ctypes \
-    python-html \
-    "
+	python-email \
+	python-gdata \
+	python-subprocess \
+	python-unixadmin \
+	python-ctypes \
+	python-argparse \
+	python-html \
+	"
 
 RDEPENDS_{PN}-src = "${PN}"
 FILES_${PN}-src = " \
-    ${datadir}/etc/* \
-    "
+	${libdir}/${PYTHON_DIR}/site-packages/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
+	${datadir}/etc/* \
+	"
 
 FILES_${PN} += "${sysconfdir}"
+
+deltask do_populate_sysroot
