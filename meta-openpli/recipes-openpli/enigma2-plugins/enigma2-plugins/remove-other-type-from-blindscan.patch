@@ -1,0 +1,21 @@
+diff --git a/blindscan/src/plugin.py b/blindscan/src/plugin.py
+--- a/blindscan/src/plugin.py
++++ b/blindscan/src/plugin.py
+@@ -1796,15 +1796,8 @@ class AC3delay:
+ 		import dmmBlindScan
+ 		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
+ 	elif BOX_MODEL == "dreambox":
+-		menu = [(_("Another type"), "all"), (_("Dreambox type"), "dmm")]
+-		def scanType(choice):
+-			if choice:
+-				if choice[1] == "all":
+-					session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
+-				elif choice[1] == "dmm":
+-					import dmmBlindScan
+-					session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
+-		session.openWithCallback(scanType, ChoiceBox, title=_("Select type for scan:"), list=menu)
++		import dmmBlindScan
++		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
+ 	else:
+ 		session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
+ 

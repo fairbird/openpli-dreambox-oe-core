@@ -31,7 +31,8 @@ PKGV = "y-git${GITPKGV}"
 
 GITHUB_URI ?= "git://github.com"
 SRC_URI = "${GITHUB_URI}/OpenPLi/${BPN}.git \
-			file://fix-ac3-delay.patch \
+		file://fix-ac3-delay.patch \
+		file://remove-other-type-from-blindscan.patch \
 "
 
 EXTRA_OECONF = " \
