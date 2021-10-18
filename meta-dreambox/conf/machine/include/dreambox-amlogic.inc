@@ -78,8 +78,6 @@ KERNEL_MODULE_AUTOLOAD += "\
 
 STB_PLATFORM = "dmamlogic"
 
-RCNAME = "dmm2"
-
 EXTRA_ALSA = "${STB_PLATFORM}"
 
 MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc gobject-introspection-data"
