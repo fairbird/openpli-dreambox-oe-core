@@ -1,40 +1,39 @@
-SUMMARY = "Enigma kernel module for ${MACHINE}"
-MAINTAINER = "Open Vision developers"
-HOMEPAGE = "https://github.com/OpenVisionE2/enigma-module"
+SUMMARY = "Enigma kernel information module for ${MACHINE}"
 SECTION = "base"
 PRIORITY = "required"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-PV = "${VISIONVERSION}"
-PR = "${VISIONREVISION}"
+SRCREV = "${AUTOREV}"
 
+PV = "${DATE}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+SSTATE_SKIP_CREATION = "1"
 
-SRC_URI = "git://github.com/OpenVisionE2/enigma-module.git;protocol=git"
+SRC_URI = "git://github.com/oe-alliance/enigma2-kernel-module.git;protocol=git"
 
 S = "${WORKDIR}/git/source/enigma"
 
-inherit module gitpkgv deploy
+inherit python-dir module gitpkgv deploy
 
 EXTRA_OEMAKE = "KSRC=${STAGING_KERNEL_BUILDDIR}"
 
 do_configure_prepend(){
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@MACHINE@|${MACHINE}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISPLAY_MODEL@|${DISPLAY_MODEL}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@BOX_BRAND@|${BOX_BRAND}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISPLAY_BRAND@|${DISPLAY_BRAND}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISPLAY_MODEL@|${MACHINE_NAME}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@BOX_BRAND@|${BRAND_OEM}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISPLAY_BRAND@|${MACHINE_BRAND}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@STB_PLATFORM@|${STB_PLATFORM}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@VISIONVERSION@|${VISIONVERSION}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@VISIONREVISION@|${VISIONREVISION}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@VISIONLANGUAGE@|${VISIONLANGUAGE}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@IMAGE_VERSION@|${IMAGE_VERSION}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@BUILD_VERSION@|${BUILD_VERSION}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@LANGUAGE@|${LANGUAGE}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DEVELOPER_NAME@|${DEVELOPER_NAME}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISTRO_FEED_URI@|${DISTRO_FEED_URI}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISTRO_NAME@|${DISTRO_NAME}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@BUILD_VERSION@|${BUILD_VERSION}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@KERNELVERSION@|${KERNELVERSION}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@PREFERRED_VERSION_python@|${PREFERRED_VERSION_python}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@PREFERRED_PROVIDER_virtual/enigma2-mediaservice@|${PREFERRED_PROVIDER_virtual/enigma2-mediaservice}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@OE_VERSION@|${OE_VER}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@KERNELVERSION@|${KERNEL_VERSION}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@PREFERRED_VERSION_python@|${PYTHON_BASEVERSION}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@PREFERRED_PROVIDER_virtual/enigma2-mediaservice@|${MEDIASERVICE}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_MULTILIB@|${HAVE_MULTILIB}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DEFAULTTUNE@|${DEFAULTTUNE}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@SOC_FAMILY@|${SOC_FAMILY}|g"
@@ -69,6 +68,7 @@ do_configure_prepend(){
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_HDMI_IN_HD@|${HAVE_HDMI_IN_HD}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_HDMI_IN_FHD@|${HAVE_HDMI_IN_FHD}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_WOL@|${HAVE_WOL}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_WWOL@|${HAVE_WWOL}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_CI@|${HAVE_CI}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_VFDSYMBOL@|${HAVE_VFDSYMBOL}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_FHDSKIN@|${HAVE_FHDSKIN}|g"
@@ -78,6 +78,7 @@ do_configure_prepend(){
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DEVELOPER_BUILD_VERSION@|${DEVELOPER_BUILD_VERSION}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISTRO_TYPE@|${DISTRO_TYPE}|g"
 }
+
 
 do_compile() {
 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
@@ -91,19 +92,21 @@ do_install() {
 	install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/enigma
 	modinfo -d ${S}/enigma.ko > ${S}/enigma.txt
 	sed -i '1d' ${S}/enigma.txt
-	sort  ${S}/enigma.txt > enigma-${MACHINE}-${VISIONREVISION}.txt
+	sort  ${S}/enigma.txt > enigma-${MACHINE}.txt
+	install -d ${D}${libdir}
+	install -m 0644 ${S}/enigma-${MACHINE}.txt ${D}${libdir}/enigma.info
 	install -m 0644 ${S}/enigma.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/enigma/
 	install -d ${D}${sysconfdir}/modules-load.d
 	echo "enigma" > ${D}${sysconfdir}/modules-load.d/zzzzenigma.conf
 }
 
-FILES_${PN} += "${sysconfdir}"
+FILES_${PN} += "${sysconfdir} ${libdir}"
 
 export KCFLAGS = "-Wno-error"
 
 do_deploy() {
 	install -d ${DEPLOY_DIR_IMAGE}
-	install -m 0644 ${S}/enigma-${MACHINE}-${VISIONREVISION}.txt ${DEPLOY_DIR_IMAGE}/
+	install -m 0644 ${S}/enigma-${MACHINE}.txt ${DEPLOY_DIR_IMAGE}/
 }
 
 addtask deploy before do_build after do_install
