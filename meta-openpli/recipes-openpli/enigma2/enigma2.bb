@@ -25,6 +25,8 @@ RDEPENDS_${PN} = " \
 	oe-alliance-branding \
 	enigma2-fonts \
 	enigma2-timezones \
+	enigma2-remotes \
+	enigma-module \
 	ethtool \
 	glibc-gconv-iso8859-15 \
 	ntpdate \
