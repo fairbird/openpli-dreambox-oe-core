@@ -18,7 +18,6 @@ RDEPENDS_${PN} = "\
 	python-shell \
 	python-six \
 	python-unixadmin \
-	oe-alliance-branding \
 	"
 
 inherit gitpkgv distutils-openplugins gettext
