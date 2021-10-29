@@ -32,6 +32,8 @@ SRC_URI_append_dm8000 = " file://get-rid-of-orgdream-check.patch"
 S="${WORKDIR}/git"
 
 do_compile() {
+	rm -rf ${S}/plugin/public/static/remotes >/dev/null 2>&1 || true
+    	ln -sf /usr/share/enigma2/rc_models ${S}/plugin/public/static/remotes
 	cheetah-compile -R --nobackup ${S}/plugin
 }
 
