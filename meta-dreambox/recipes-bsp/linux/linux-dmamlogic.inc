@@ -63,6 +63,38 @@ do_configure_prepend() {
         kernel_conf_variable RESOURCE_COUNTERS y
     fi
 
+    kernel_conf_variable ZSMALLOC n
+    kernel_conf_variable BT m
+    kernel_conf_variable BT_RFCOMM m
+    kernel_conf_variable BT_BNEP m
+    kernel_conf_variable BT_HIDP m
+    kernel_conf_variable ZRAM m
+    kernel_conf_variable TUN m
+    kernel_conf_variable PPP m
+    kernel_conf_variable PPP_BSDCOMP m
+    kernel_conf_variable PPP_DEFLATE m
+    kernel_conf_variable PPP_MPPE m
+    kernel_conf_variable PPPOE m
+    kernel_conf_variable PPP_ASYNC m
+    kernel_conf_variable USB_SERIAL m
+    kernel_conf_variable EXT3_FS m
+    kernel_conf_variable AUTOFS4_FS m
+    kernel_conf_variable FUSE_FS m
+    kernel_conf_variable ISO9660_FS m
+    kernel_conf_variable UDF_FS m
+    kernel_conf_variable MSDOS_FS m
+    kernel_conf_variable NTFS_FS m
+    kernel_conf_variable JFFS2_FS m
+    kernel_conf_variable CRAMFS m
+    kernel_conf_variable SQUASHFS m
+    kernel_conf_variable NLS_CODEPAGE_437 m
+    kernel_conf_variable NLS_CODEPAGE_850 m
+    kernel_conf_variable NFSD m
+    kernel_conf_variable EXPORTFS m
+    kernel_conf_variable CIFS m
+    kernel_conf_variable OVERLAY_FS n
+    kernel_conf_variable CIFS_SMB311 n
+
     kernel_conf_variable CDROM_PKTCDVD m
     kernel_conf_variable CDROM_PKTCDVD_BUFFERS=8
     kernel_conf_variable CDROM_PKTCDVD_WCACHE n
