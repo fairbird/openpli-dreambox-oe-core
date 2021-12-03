@@ -11,7 +11,7 @@ PKGV = "${VERSION}+git${GITPKGV}"
 
 SRCREV = "95d4dd192e659f297e782fd71edbee038f9dc443"
 
-SRC_URI = "git://git.opendreambox.org/git/buildimage.git;protocol=git"
+SRC_URI = "git://git.opendreambox.org/git/buildimage.git;protocol=git;branch=master"
 
 S = "${WORKDIR}/git"
 
