@@ -23,8 +23,6 @@ RDEPENDS_${PN} = " \
 	python-codecs \
 	python-json \
 	python-netclient \
-	python-pyopenssl \
-	python-zlib \
 	python-twisted-web \
 	"
 
