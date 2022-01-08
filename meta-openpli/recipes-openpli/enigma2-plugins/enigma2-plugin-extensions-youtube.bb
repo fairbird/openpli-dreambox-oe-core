@@ -27,4 +27,4 @@ RDEPENDS_${PN} = " \
 	"
 
 RDEPENDS_{PN}-src = "${PN}"
-FILES_${PN}-src = "${libdir}/enigma2/python/Plugins/Extensions/YouTube/*.py"
+FILES_${PN}-src = "${libdir}/enigma2/python/Plugins/Extensions/YouTube/*.pyo"
