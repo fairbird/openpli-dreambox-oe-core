@@ -9,7 +9,7 @@ inherit gitpkgv pythonnative gettext
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
-SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git${@ ';protocol=https' if d.getVar('GITHUB_URI', '').startswith('git://github.com') else '' } \
+SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git \
 	file://Remove-unused-codes.patch;apply=yes \
 "
 
