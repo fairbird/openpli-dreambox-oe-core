@@ -1,10 +1,12 @@
 diff --git a/blindscan/src/plugin.py b/blindscan/src/plugin.py
 --- a/blindscan/src/plugin.py
 +++ b/blindscan/src/plugin.py
-@@ -1799,17 +1799,8 @@ class AC3delay:
+@@ -1798,16 +1798,9 @@
+ 				have_Support_Blindscan = True
  		except:
  			pass
- 	if have_Support_Blindscan or BOX_MODEL == "dreambox":
+-	if have_Support_Blindscan or BOX_MODEL == "dreambox":
++	if BOX_MODEL == "dreambox":
 -		menu = [(_("Utility from the manufacturer"), "manufacturer"), (_("Hardware type"), "hardware")]
 -		def scanType(choice):
 -			if choice:
