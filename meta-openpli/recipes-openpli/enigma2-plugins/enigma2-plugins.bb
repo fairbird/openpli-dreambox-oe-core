@@ -30,7 +30,7 @@ PV = "y-git${SRCPV}"
 PKGV = "y-git${GITPKGV}"
 
 GITHUB_URI ?= "git://github.com"
-SRC_URI = "${GITHUB_URI}/OpenPLi/${BPN}.git \
+SRC_URI = "${GITHUB_URI}/OpenPLi/${BPN}.git${@ ';protocol=https' if d.getVar('GITHUB_URI', '').startswith('git://github.com') else '' } \
 		file://fix-ac3-delay.patch \
 		file://remove-other-type-from-blindscan.patch \
 "
