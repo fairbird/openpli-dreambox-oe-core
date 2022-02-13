@@ -36,3 +36,5 @@ MACHINE_FEATURES += "modem dvb-c blindscan-dvbc hdmicec recovery ci usbconsole H
 IMAGE_CLASSES += "tarxz-dreambox"
 
 KODIEXTSETTINGS = ""
+
+KERNEL_FILE = "kernel.bin"
