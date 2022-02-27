@@ -198,17 +198,20 @@ if [ -n ${HAS_DROPBEAR} ]; then
 	fi
 fi
 
+[ -s /tmp/crontab ] && crontab /tmp/crontab
+
 # custom cron jobs in /etc?
-if [[ -d /etc/cron/crontabs && ! -L /etc/cron ]]; then
-	# move them to /var/spool/cron/crobtabs
-	cd /etc/cron/crontabs
-	for file in *; do
-		mv $file /var/spool/cron/crobtabs/$file
-	done
-	cd /
-	rm -rf /etc/cron
-	/etc/init.d/busybox-cron restart
-fi
+# if [[ -d /etc/cron/crontabs && ! -L /etc/cron ]]; then
+	# move them to /var/spool/cron
+# 	cd /etc/cron/crontabs
+# 	for file in *; do
+#		cat $file >> /var/spool/cron/$file
+# 	done
+# 	cd /
+# 	rm -rf /etc/cron
+# 	ln -s /var/spool/cron /etc/cron
+# 	/etc/init.d/busybox-cron restart
+# fi
 
 # remove any temp files used
 rm -f /tmp/crontab /tmp/fstab
