@@ -1,0 +1,23 @@
+diff --git a/blindscan/src/plugin.py b/blindscan/src/plugin.py
+--- a/blindscan/src/plugin.py
++++ b/blindscan/src/plugin.py
+@@ -1798,16 +1798,9 @@
+ 				have_Support_Blindscan = True
+ 		except:
+ 			pass
+-	if have_Support_Blindscan or BOX_MODEL == "dreambox":
++	if BOX_MODEL == "dreambox":
+-		menu = [(_("Utility from the manufacturer"), "manufacturer"), (_("Hardware type"), "hardware")]
+-		def scanType(choice):
+-			if choice:
+-				if choice[1] == "manufacturer":
+-					session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
+-				elif choice[1] == "hardware":
+-					from . import dmmBlindScan
+-					session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
+-		session.openWithCallback(scanType, ChoiceBox, title=_("Select type for scan:"), list=menu)
++		import dmmBlindScan
++		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
+ 	else:
+ 		session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
+ 
