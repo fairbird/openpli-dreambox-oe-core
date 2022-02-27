@@ -123,6 +123,7 @@ ENIGMA2_OPTIONAL = " \
 	dvb-usb-drivers-meta \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "bwlcd96 bwlcd128 bwlcd140 bwlcd255 colorlcd220 colorlcd390 colorlcd400", "enigma2-display-skins", "", d)} \
 	enigma2-plugin-drivers-usbserial \
+	enigma2-plugin-extensions-backupsuite \
 	enigma2-plugin-extensions-autobouquets \
 	enigma2-plugin-extensions-e2iplayer \
 	enigma2-plugin-extensions-hetweer \
