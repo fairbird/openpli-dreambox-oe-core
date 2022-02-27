@@ -65,7 +65,7 @@ sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/<
 
 sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/all all
 
-sudo ln -s /home/<your username>/openpli-ddreambox-oe-core/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
+sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
   
 sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/mips32el mips32el
 ```
