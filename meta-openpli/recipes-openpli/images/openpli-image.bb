@@ -27,6 +27,7 @@ IMAGE_INSTALL = "\
 	packagegroup-base \
 	packagegroup-core-boot \
 	parted \
+	pigz \
 	python3-ipaddress  \
 	python3-netifaces \
 	python3-pysmb \
@@ -37,6 +38,7 @@ IMAGE_INSTALL = "\
 	tzdata \
 	volatile-media \
 	vsftpd \
+	xz \
 "
 
 export IMAGE_BASENAME = "openpli"
