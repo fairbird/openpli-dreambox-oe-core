@@ -8,14 +8,17 @@ inherit gitpkgv allarch
 PV = "0.1+git${SRCPV}"
 PKGV = "0.1+git${GITPKGV}"
 
-SRC_URI = "git://github.com/Hains/skin-PLiHD.git;branch=python3;protocol=https"
+SRC_URI = "git://github.com/littlesat/skin-PLiHD.git;protocol=https \
+	file://01-add-support-to-new-date-time-feature.patch;apply=yes \
+	file://02-add-crontimers-screen.patch;apply=yes \
+	file://03-add-NewHelp-screen.patch;apply=yes \
+"
 
-FILES:${PN} = "${datadir}/enigma2/"
+FILES_${PN} = "${datadir}/enigma2/"
 
 S = "${WORKDIR}/git"
 
-do_compile() {
-}
+do_compile[noexec] = "1"
 
 do_install() {
 	install -d ${D}${datadir}
