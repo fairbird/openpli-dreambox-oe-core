@@ -7,6 +7,7 @@ IMAGE_INSTALL = "\
 	avahi-daemon \
 	ca-certificates \
 	cifs-utils \
+	cronie \
 	dhrystone \
 	distro-feed-configs \
 	dropbear \

@@ -26,7 +26,6 @@ RDEPENDS:${PN} = " \
 	enigma2-fonts \
 	ethtool \
 	ntpdate \
-	cronie \
 	glibc-gconv-iso8859-15 \
 	${PYTHON_RDEPS} \
 	"
