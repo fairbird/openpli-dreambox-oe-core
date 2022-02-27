@@ -42,7 +42,6 @@ ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-moviecut \
 	enigma2-plugin-extensions-netcaster \
 	enigma2-plugin-extensions-openwebif \
-	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-pictureplayer \
 	enigma2-plugin-extensions-systemtools \
 	enigma2-plugin-extensions-tmbd \
