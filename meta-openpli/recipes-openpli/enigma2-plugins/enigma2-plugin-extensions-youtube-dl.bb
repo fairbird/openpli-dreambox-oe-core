@@ -1,44 +1,58 @@
+
+  
 SUMMARY = "Download videos from YouTube (and more sites)"
 DESCRIPTION = "youtube-dl is a small command-line program to download videos \
-from YouTube.com and a few more sites. It requires the Python interpreter \
+from YouTube.com and a few more sites. It requires the python interpreter \
 (2.6, 2.7, or 3.2+), and it is not platform specific"
-HOMEPAGE = "https://youtube-dl.org"
+HOMEPAGE = "http://rg3.github.io/youtube-dl/"
 SECTION = "devel/python"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7246f848faa4e9c9fc0ea91122d6e680"
 
 DEPENDS = "libxml2 bash-completion"
 
-PE = "1"
-PV = "2020.09.20"
-PR = "r1"
+inherit python3-dir setuptools3 gittag
 
-SRC_URI = "https://distfiles.macports.org/youtube-dl/youtube-dl-${PV}.tar.gz"
+SRCREV = "${AUTOREV}"
+PV = "git${SRCPV}"
+PKGV = "${GITPKGVTAG}"
 
-SRC_URI[md5sum] = "ce6abd9cc401d2c7d2bb855088d7447b"
-SRC_URI[sha256sum] = "ac1a799cf968345bf29089ed2e5c5d4f4a32031625d808369e61b6362d1c7cde"
+SRC_URI = "git://github.com/ytdl-org/youtube-dl.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/youtube-dl"
-
-inherit gitpkgv setuptools3
+S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "PYTHON=${PYTHON}"
 
 do_compile:prepend() {
-	oe_runmake lazy-extractors youtube-dl.bash-completion
+    cd ${S}
+    oe_runmake lazy-extractors youtube-dl.bash-completion
 }
 
 do_install:append() {
-	mv ${D}${datadir}/etc ${D}${sysconfdir}
-	install -m 0755 -d ${D}${sysconfdir}/bash_completion.d
-	install -m 0644 youtube-dl.bash-completion ${D}${sysconfdir}/bash_completion.d
+    mv ${D}${datadir}/etc ${D}${sysconfdir}
+    install -m 0755 -d ${D}${sysconfdir}/bash_completion.d
+    install -m 0644 youtube-dl.bash-completion ${D}${sysconfdir}/bash_completion.d
+    rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/PKG-INFO
+    rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/SOURCES.txt
+    rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/dependency_links.txt
+    rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/top_level.txt
 }
 
 RDEPENDS:${PN} = " \
-	python3-email \
-	python3-unixadmin \
-	python3-ctypes \
-	python3-html \
-	"
+    ${PYTHON_PN}-email \
+    ${PYTHON_PN}-gdata-python3 \
+    ${PYTHON_PN}-unixadmin \
+    ${PYTHON_PN}-ctypes \
+    ${PYTHON_PN}-html \
+    "
+
+RDEPENDS:{PN}-src = "${PN}"
+FILES:${PN}-src = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/*/*.py \
+    ${libdir}/${PYTHON_DIR}/site-packages/*/*/*.py \
+    ${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*.py \
+    ${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
+    ${datadir}/etc/* \
+    "
 
 FILES:${PN} += "${sysconfdir}"

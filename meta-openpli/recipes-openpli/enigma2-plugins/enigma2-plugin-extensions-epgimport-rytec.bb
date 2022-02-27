@@ -2,6 +2,7 @@ DESCRIPTION = "Rytec's XMLTV sources and channels for the EPGImporter"
 MAINTAINER = "Rytec forum @ forums.openpli.org"
 
 require conf/license/openpli-gplv2.inc
+require classes/python3-compileall.inc
 
 inherit allarch
 

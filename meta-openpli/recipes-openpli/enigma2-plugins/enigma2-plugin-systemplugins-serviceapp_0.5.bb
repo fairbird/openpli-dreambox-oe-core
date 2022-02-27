@@ -2,6 +2,7 @@ DESCRIPTION = "serviceapp service for enigma2"
 AUTHOR = "Maroš Ondrášek <mx3ldev@gmail.com>"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+require classes/python3-compileall.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -28,8 +29,17 @@ EXTRA_OECONF = "\
 	"
 
 FILES:${PN} = "\
-	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/"
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/ \
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/*.pyc \
+    	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/serviceapp.so \
+    	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/locale/*/*/*.mo \
+    	"
 
 FILES:${PN}-dev = "\
 	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/serviceapp.la"
 
+FILES:${PN}-src = "\
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/*.py \
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/locale/*/LC_MESSAGES/*.mo \
+	/usr/src/debug/* \
+	"

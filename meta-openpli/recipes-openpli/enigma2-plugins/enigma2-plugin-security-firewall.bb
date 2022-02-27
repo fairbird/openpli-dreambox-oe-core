@@ -1,6 +1,7 @@
 DESCRIPTION = "Firewall"
 
 require conf/license/openpli-gplv2.inc
+require classes/python3-compileall.inc
 
 RDEPENDS:${PN} = "iptables kernel-module-ip-tables kernel-module-nf-conntrack kernel-module-ipt-reject kernel-module-xt-state kernel-module-iptable-filter"
 

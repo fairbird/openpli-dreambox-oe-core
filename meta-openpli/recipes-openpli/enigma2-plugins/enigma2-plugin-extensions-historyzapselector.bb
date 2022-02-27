@@ -2,6 +2,7 @@ DESCRIPTION = "Advanced history zap selector"
 HOMEPAGE = "https://github.com/Dima73/enigma2-plugin-extensions-historyzapselector"
 LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://README;md5=b5f3c7ed409cbcc6d849e694f25729ba"
+require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/Dima73/enigma2-plugin-extensions-historyzapselector.git;protocol=https;branch=master"
 

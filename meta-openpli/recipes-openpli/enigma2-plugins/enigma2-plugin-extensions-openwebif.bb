@@ -1,6 +1,7 @@
 DESCRIPTION = "Control your receiver with a browser"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README;md5=26abba37d1c2fcbf96a087ceb8e1db86"
+require classes/python3-compileall.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -27,13 +28,9 @@ PKGV = "${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git;protocol=https;branch=master"
 
-SRC_URI_append_dm8000 = " file://get-rid-of-orgdream-check.patch"
-
 S="${WORKDIR}/git"
 
 do_compile() {
-	rm -rf ${S}/plugin/public/static/remotes >/dev/null 2>&1 || true
-    	ln -sf /usr/share/enigma2/rc_models ${S}/plugin/public/static/remotes
 	cheetah-compile -R --nobackup ${S}/plugin
 }
 
@@ -49,19 +46,6 @@ do_install:append() {
 FILES:${PN} = "${PLUGINPATH}"
 
 python do_cleanup () {
-    # contains: MACHINE, box image, remote image, remote map
-    boxtypes = [
-        ('dm500hd', 'dm500hd.png', 'dm_normal.png', 'dmm.html'),
-        ('dm7020hd', 'dm7020hd.png', 'dmm2.png', 'dmm2.html'),
-        ('dm8000', 'dm8000.png', 'dmm1.png', 'dmm1.html'),
-        ('dm800se', 'dm800se.png', 'dm_normal.png', 'dmm.html'),
-        ('dm820', 'dm820.png', 'dmm2.png', 'dmm2.html'),
-        ('dm7080', 'dm7080.png', 'dmm2.png', 'dmm2.html'),
-        ('dm900', 'dm900.png', 'dmm2.png', 'dmm2.html'),
-        ('dm920', 'dm920.png', 'dmm2.png', 'dmm2.html'),
-        ('dreamone', 'dreamone.png', 'dmm2.png', 'dmm2.html'),
-        ('dreamtwo', 'dreamtwo.png', 'dmm2.png', 'dmm2.html'),
-    ]
 
     import os
 
@@ -69,16 +53,10 @@ python do_cleanup () {
     images = "%s/public/images/" % pluginpath
     keymaps = "%s/public/static/" % pluginpath
 
-    target_box = 'unknown.png'
-    target_remote = 'ow_remote.png'
-    target_keymap = ''
-    exception = []
-
-    for x in boxtypes:
-        if x[0] == d.getVar('MACHINE', True):
-            target_box = x[1]
-            target_remote = x[2]
-            target_keymap = x[3]
+    target_box = 'dm920.png'
+    target_remote = 'dmm2.png'
+    target_keymap = 'dmm2.html'
+    exception = ''
 
     for root, dirs, files in os.walk(images + 'boxes', topdown=False):
         for name in files:

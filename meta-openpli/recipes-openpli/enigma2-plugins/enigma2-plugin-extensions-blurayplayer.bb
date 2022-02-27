@@ -4,6 +4,7 @@ HOMEPAGE = "https://github.com/Taapat/enigma2-plugin-blurayplayer"
 SECTION = "multimedia"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+require classes/python3-compileall.inc
 
 DEPENDS = "libbluray libudfread"
 

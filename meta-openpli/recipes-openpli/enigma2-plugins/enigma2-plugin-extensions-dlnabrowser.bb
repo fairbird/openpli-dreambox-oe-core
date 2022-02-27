@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c9e255efa454e0155c1fd758df7dcaf3"
 BRANCH = "vuplus_experimental"
 S = "${WORKDIR}/git"
 SRC_URI = " git://code.vuplus.com/git/dvbapp.git;protocol=http;branch=${BRANCH} \
-			file://enigma2-plugin-systemplugins-dlnabrowser_20130723.patch \
+	file://enigma2-plugin-systemplugins-dlnabrowser_20130723.patch;striplevel=1;apply=yes \
+	file://fix_compile_error_py3.patch;striplevel=1;apply=yes \
 "
 
 inherit gitpkgv
@@ -24,3 +25,5 @@ do_install() {
 	install -m 0644 ${S}/lib/python/Plugins/Extensions/DLNABrowser/*.py ${D}${libdir}/enigma2/python/Plugins/Extensions/DLNABrowser
 	python3 -O -m compileall ${D}${libdir}/enigma2/python/Plugins/
 }
+
+INSANE_SKIP_${PN} += "already-stripped"
