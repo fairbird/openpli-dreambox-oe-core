@@ -17,4 +17,4 @@ do_install() {
 	cp -r ${S}${prefix}/* ${D}${prefix}/
 }
 
-FILES_${PN} = "${prefix}/"
+FILES:${PN} = "${prefix}/"
