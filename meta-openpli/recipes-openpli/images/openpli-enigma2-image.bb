@@ -25,6 +25,15 @@ EXTERNAL_WIFI_DRIVERS = " \
 	\
 	rtl8188eu \
 	rtl8192eu \
+	rt3573 \
+	rt5572 \
+	rtl8723a \
+	rtl8723bs \
+	rtl8814au \
+	rtl8822bu \
+	rt8812au \
+	mt7610u \
+	mt7601u \
 	"
 
 ENIGMA2_PLUGINS = " \
@@ -78,13 +87,12 @@ IMAGE_INSTALL += " \
 	cdtextinfo \
 	enigma2 \
 	libavahi-client \
-	ntpdate \
 	settings-autorestore \
 	tuxbox-common \
 	wget \
 	${ENIGMA2_PLUGINS} \
-	${KERNEL_WIFI_DRIVERS} \
-	${EXTERNAL_WIFI_DRIVERS} \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "dm500hd dm500hdv2 dm800se dm800sev2 dm520 dm820 dm7020hd dm7080 dm8000 dm900 dm920", "${KERNEL_WIFI_DRIVERS}" , "", d)} \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "dm500hd dm500hdv2 dm800se dm800sev2 dm520 dm820 dm7020hd dm7080 dm8000 dm900 dm920", "${EXTERNAL_WIFI_DRIVERS}" , "", d)} \
 	"
 
 export IMAGE_BASENAME = "openpli-enigma2"
