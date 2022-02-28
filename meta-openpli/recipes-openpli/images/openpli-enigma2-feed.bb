@@ -131,6 +131,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-ppanel \
 	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-subssupport \
+	enigma2-plugin-extensions-xtraevent \
 	enigma2-plugin-extensions-youtube \
 	enigma2-plugin-extensions-kodi \
 	enigma2-plugin-security-firewall \
