@@ -78,6 +78,7 @@ OPTIONAL_PACKAGES += " \
 	python3-ntplib \
 	python3-pysnmp \
 	python3-requests \
+	python3-youtube-dl \
 	qtwidevine \
 	rsync \
 	rt3573 \
