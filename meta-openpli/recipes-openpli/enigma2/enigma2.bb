@@ -24,6 +24,9 @@ RDEPENDS:${PN} = " \
 	alsa-conf \
 	oe-alliance-branding \
 	enigma2-fonts \
+	enigma2-timezones \
+	enigma2-remotes \
+	enigma2-module \
 	ethtool \
 	ntpdate \
 	glibc-gconv-iso8859-15 \
