@@ -6,12 +6,12 @@ HOMEPAGE = "http://rg3.github.io/youtube-dl/"
 SECTION = "devel/python"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7246f848faa4e9c9fc0ea91122d6e680"
+PACKAGE_ARCH = "all"
 
 DEPENDS = "libxml2 bash-completion"
 
 inherit python3-dir setuptools3 gittag
 
-SRCREV = "${AUTOREV}"
 PV = "git${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
@@ -22,35 +22,35 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "PYTHON=${PYTHON}"
 
 do_compile:prepend() {
-    cd ${S}
-    oe_runmake lazy-extractors youtube-dl.bash-completion
+	cd ${S}
+	oe_runmake lazy-extractors youtube-dl.bash-completion
 }
 
 do_install:append() {
-    mv ${D}${datadir}/etc ${D}${sysconfdir}
-    install -m 0755 -d ${D}${sysconfdir}/bash_completion.d
-    install -m 0644 youtube-dl.bash-completion ${D}${sysconfdir}/bash_completion.d
-    rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/PKG-INFO
-    rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/SOURCES.txt
-    rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/dependency_links.txt
-    rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/top_level.txt
+	mv ${D}${datadir}/etc ${D}${sysconfdir}
+	install -m 0755 -d ${D}${sysconfdir}/bash_completion.d
+	install -m 0644 youtube-dl.bash-completion ${D}${sysconfdir}/bash_completion.d
+	rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/PKG-INFO
+	rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/SOURCES.txt
+	rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/dependency_links.txt
+	rm -f ${D}${libdir}/${PYTHON_DIR}/site-packages/youtube_dl*egg-info/top_level.txt
 }
 
 RDEPENDS:${PN} = " \
-    python3-email \
-    python3-gdata-python3 \
-    python3-unixadmin \
-    python3-ctypes \
-    python3-html \
-    "
+	python3-email \
+	python3-gdata-python3 \
+	python3-unixadmin \
+	python3-ctypes \
+	python3-html \
+	"
 
 RDEPENDS:{PN}-src = "${PN}"
 FILES:${PN}-src = " \
-    ${libdir}/${PYTHON_DIR}/site-packages/*/*.py \
-    ${libdir}/${PYTHON_DIR}/site-packages/*/*/*.py \
-    ${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*.py \
-    ${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
-    ${datadir}/etc/* \
-    "
+	${libdir}/${PYTHON_DIR}/site-packages/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
+	${datadir}/etc/* \
+	"
 
 FILES:${PN} += "${sysconfdir}"
