@@ -1,13 +1,26 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+PR .= ".2"
 
 SRC_URI += " \
-			file://mount_single_uuid.patch \
-			file://busybox-cron \
-"
+            file://mount_single_uuid.patch \
+            file://use_ipv6_when_ipv4_unroutable.patch \
+            file://telnetd \
+            file://inetd \
+            file://inetd.conf \
+            file://vi.sh \
+            file://ntp.script \
+            file://0001-Prevent-telnet-connections-from-the-internet-to-the-.patch \
+            file://0002-Extended-network-interfaces-support.patch \
+            file://0003-Revert-ip-fix-ip-oneline-a.patch \
+            file://0004-libbb-make-unicode-printable.patch \
+            "
 
 # we do not really depend on mtd-utils, but as mtd-utils replaces 
 # include/mtd/* we cannot build in parallel with mtd-utils
 DEPENDS += "mtd-utils"
+
+RDEPENDS:${PN} += "odhcp6c"
 
 PACKAGES =+ "${PN}-inetd"
 INITSCRIPT_PACKAGES += "${PN}-inetd"
@@ -15,14 +28,16 @@ INITSCRIPT_NAME:${PN}-inetd = "inetd.${BPN}"
 CONFFILES:${PN}-inetd = "${sysconfdir}/inetd.conf"
 FILES:${PN}-inetd = "${sysconfdir}/init.d/inetd.${BPN} ${sysconfdir}/inetd.conf"
 RDEPENDS:${PN}-inetd += "${PN}"
-
+PROVIDES += "virtual/inetd"
+RPROVIDES:${PN}-inetd += "virtual/inetd"
+RCONFLICTS:${PN}-inetd += "xinetd"
 RRECOMMENDS:${PN} += "${PN}-inetd"
 
-PACKAGES =+ "${PN}-cron"
-INITSCRIPT_PACKAGES += "${PN}-cron"
-INITSCRIPT_NAME:${PN}-cron = "${BPN}-cron" 
-FILES:${PN}-cron = "${sysconfdir}/cron ${sysconfdir}/init.d/${BPN}-cron"
-RDEPENDS:${PN}-cron += "${PN}"
+do_install:append() {
+	sed -i "/[/][s][h]*$/d" ${D}${sysconfdir}/busybox.links.nosuid
+	install -d ${D}${sysconfdir}/udhcpc.d
+	install -m 0755 ${WORKDIR}/ntp.script ${D}${sysconfdir}/udhcpc.d/55ntp
+}
 
 pkg_postinst:${PN}:append () {
 	update-alternatives --install /bin/sh sh /bin/busybox.nosuid 50
@@ -30,11 +45,4 @@ pkg_postinst:${PN}:append () {
 
 pkg_prerm:${PN}:append () {
 	ln -s ${base_bindir}/busybox $tmpdir/wget
-}
-
-do_install:append() {
-	if grep -q "CONFIG_CRONTAB=y" ${WORKDIR}/defconfig; then
-		install -d ${D}${localstatedir}/spool/cron/crontabs
-	fi
-	sed -i "/[/][s][h]*$/d" ${D}${sysconfdir}/busybox.links.nosuid
 }
