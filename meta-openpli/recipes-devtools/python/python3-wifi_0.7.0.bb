@@ -17,9 +17,6 @@ SRC_URI = "git://github.com/athoik/pythonwifi.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 
-SRC_URI[md5sum] = "2d7f2bab7345a2034c976096e31cc2ff"
-SRC_URI[sha256sum] = "a18699739f07444b1781d4731286ac85c8c35f98ca1166cde2d9f91366bbdc76"
-
 do_install:append() {
 		install -d ${D}${docdir}/${PN}
 		mv ${D}${datadir}/README ${D}${docdir}/${PN}
