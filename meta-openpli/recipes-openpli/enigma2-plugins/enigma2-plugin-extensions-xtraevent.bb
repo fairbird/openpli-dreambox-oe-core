@@ -14,8 +14,8 @@ RDEPENDS_${PN} += "\
 
 S = "${WORKDIR}/git"
 
-PV = "4.9+git${SRCPV}"
-PKGV = "4.9+git${GITPKGV}"
+PV = "5.2+git${SRCPV}"
+PKGV = "5.2+git${GITPKGV}"
 
 FILES_${PN} = "${prefix}/"
 

@@ -12,7 +12,7 @@ DEPENDS = "libxml2 bash-completion"
 
 inherit setuptools gitpkgv
 
-PE = "2"
+PE = "1"
 PV = "git${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
