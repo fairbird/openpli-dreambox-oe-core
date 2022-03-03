@@ -22,7 +22,7 @@ GLIBC_EXTRA_OECONF = "--with-tls --with-__thread"
 DVBMEDIASINK_CONFIG = "--with-machine=${MACHINE} --with-pcm --with-wma --with-wmv --with-dts=no --with-dtsdownmix --with-eac3 --with-vb6 --with-vb8 --with-vb9 --with-spark --with-h265"
 
 require conf/machine/include/soc-family.inc
-require conf/machine/include/tune-cortexa15.inc
+require conf/machine/include/arm/armv7a/tune-cortexa15.inc
 
 MACHINE_EXTRA_RRECOMMENDS += "\
     gstreamer1.0-plugin-multibox-dvbmediasink \

@@ -15,7 +15,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 MTD_KERNEL = "mtd2"
 
 require conf/machine/include/dreambox.inc
-require conf/machine/include/tune-mips32.inc
+require conf/machine/include/mips/tune-mips32.inc
 
 DVBMEDIASINK_CONFIG = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts"
 DVBMEDIASINK_CONFIG_dm8000 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts --with-limited-mpeg4v2"
