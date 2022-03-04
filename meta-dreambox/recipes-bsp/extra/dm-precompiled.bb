@@ -27,4 +27,4 @@ do_package_qa() {
 do_populate_sysroot() {
 }
 
-FILES_${PN} += "/"
+FILES:${PN} += "/"

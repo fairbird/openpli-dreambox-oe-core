@@ -1,4 +1,4 @@
-RDEPENDS_${PN} += "flash-nrf52"
+RDEPENDS:${PN} += "flash-nrf52"
 
 CURRENT_FW = "central-two-noreset-200814-1.13.hex"
 

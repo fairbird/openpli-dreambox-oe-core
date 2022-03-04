@@ -7,6 +7,8 @@ PR = "r1"
 
 inherit pkgconfig update-rc.d
 
+SRC_URI:append = ";branch=${BRANCH}"
+
 do_install() {
     oe_runmake install DESTDIR=${D}
 }
@@ -19,15 +21,12 @@ EMMCRDEPENDS_recovery = " \
     e2fsprogs-mke2fs \
     gptfdisk \
 "
-
 EMMCRDEPENDS_flash-scripts = " \
     util-linux-sfdisk \
 "
-
 NANDRDEPENDS_recovery = " \
     mtd-utils-ubifs \
 "
-
 NANDRDEPENDS_flash-scripts = " \
     mtd-utils \
 "
@@ -37,7 +36,7 @@ FASTBOOTRDEPENDS_flash-scripts = " \
     mkbootblob \
 "
 
-RDEPENDS:${PN} = "\
+RDEPENDS:${PN} = " \
     ${PN}-autoflashd \
     flash-scripts \
     gpgv \
@@ -46,75 +45,77 @@ RDEPENDS:${PN} = "\
     util-linux-mount \
 "
 
-RDEPENDS:${PN}:append_dm820 = "\
+RDEPENDS:${PN}:append:dm820 = "\
     ${EMMCRDEPENDS_recovery} \
 "
 
-RDEPENDS:${PN}:append_dm7080 = "\
+RDEPENDS:${PN}:append:dm7080 = "\
     ${EMMCRDEPENDS_recovery} \
 "
 
-RDEPENDS:${PN}:append_dm900 = "\
+RDEPENDS:${PN}:append:dm900 = "\
     ${EMMCRDEPENDS_recovery} \
 "
 
-RDEPENDS:${PN}:append_dm920 = "\
+RDEPENDS:${PN}:append:dm920 = "\
     ${EMMCRDEPENDS_recovery} \
 "
 
-RDEPENDS:${PN}:append_dm520 = "\
+RDEPENDS:${PN}:append:dm520 = "\
     ${NANDRDEPENDS_recovery} \
 "
 
-RDEPENDS:${PN}:append_dreamone = "\
+RDEPENDS:${PN}:append:dreamone = "\
     ${EMMCRDEPENDS_recovery} \
     ${PN}-fbscaled \
 "
 
-RDEPENDS:${PN}:append_dreamtwo = "\
+RDEPENDS:${PN}:append:dreamtwo = "\
     ${EMMCRDEPENDS_recovery} \
     ${PN}-fbscaled \
 "
 
-RDEPENDS_flash-scripts = "\
+RDEPENDS:flash-scripts = " \
     coreutils-realpath \
 "
 
-RDEPENDS_flash-scripts:append_dm820 = "\
+RDEPENDS:flash-scripts:append:dm820 = "\
     ${EMMCRDEPENDS_flash-scripts} \
     ${FASTBOOTRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts:append_dm7080 = "\
+RDEPENDS:flash-scripts:append:dm7080 = "\
     ${EMMCRDEPENDS_flash-scripts} \
     ${FASTBOOTRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts:append_dm900 = "\
+RDEPENDS:flash-scripts:append:dm900 = "\
     ${EMMCRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts:append_dm920 = "\
+RDEPENDS:flash-scripts:append:dm920 = "\
     ${EMMCRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts:append_dm520 = "\
+RDEPENDS:flash-scripts:append:dm520 = "\
     ${NANDRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts:append_dreamone = "\
+RDEPENDS:flash-scripts:append:dreamone = "\
     ${EMMCRDEPENDS_flash-scripts} \
     android-tools \
     u-boot-mkimage \
 "
 
-RDEPENDS_flash-scripts:append_dreamtwo = "\
+RDEPENDS:flash-scripts:append:dreamtwo = "\
     ${EMMCRDEPENDS_flash-scripts} \
     android-tools \
     u-boot-mkimage \
 "
 
-#RRECOMMENDS_flash-scripts = "dreambox-dvb-modules-stb-core"
+#RRECOMMENDS_flash-scripts = " \
+#    dreambox-dvb-modules-stb-core \
+#"
 
 FILES:${PN}-autoflashd = "\
     ${INIT_D_DIR}/autoflashd \
@@ -126,7 +127,7 @@ FILES:${PN}-fbscaled = "\
     ${sbindir}/fbscaled \
 "
 
-FILES_flash-scripts = "\
+FILES:flash-scripts = " \
     ${sbindir}/flash-fsbl \
     ${sbindir}/flash-rescue \
     ${sbindir}/flash-kernel \
