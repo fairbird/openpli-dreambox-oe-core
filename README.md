@@ -26,7 +26,7 @@ and more.<br>
 <br>
 Feel free to send pull-request.
 
-Tested wit Ubuntu 21.10.
+Tested with Ubuntu 21.10.
 <br>
 <br>
 # Dependencies:
