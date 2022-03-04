@@ -6,7 +6,7 @@ DEPENDS = "python"
 
 require conf/license/license-gplv2.inc
 
-inherit autotools-brokensep gitpkgv ${PYTHON_PN}native
+inherit autotools-brokensep gitpkgv python3native
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
