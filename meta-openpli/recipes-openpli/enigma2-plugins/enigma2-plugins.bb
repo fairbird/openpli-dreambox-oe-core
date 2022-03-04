@@ -30,7 +30,7 @@ PV = "y-git${SRCPV}"
 PKGV = "y-git${GITPKGV}"
 
 GITHUB_URI ?= "git://github.com"
-SRC_URI = "${GITHUB_URI}/OpenPLi/${BPN}.git${@ ';protocol=https' if d.getVar('GITHUB_URI', '').startswith('git://github.com') else '' } \
+SRC_URI = "git://github.com/OpenPLi/${BPN}.git;protocol=https;branch=python3" \
 		file://remove-other-type-from-blindscan.patch \
 "
 
