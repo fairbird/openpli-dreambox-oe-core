@@ -175,7 +175,6 @@ FILES:${PN}-src = "\
     	"
 
 do_install:append() {
-	cp ${WORKDIR}/dmm2.png ${B}/data/rc_models/dmm2.png
 	install -d ${D}${datadir}/keymaps
 	if [ "${base_libdir}" = "/lib64" ] ; then
         	install -d ${D}/usr/lib
