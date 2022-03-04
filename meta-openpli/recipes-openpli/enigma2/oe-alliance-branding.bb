@@ -6,7 +6,7 @@ DEPENDS = "python"
 
 require conf/license/license-gplv2.inc
 
-inherit autotools-brokensep gitpkgv pythonnative
+inherit autotools-brokensep gitpkgv ${PYTHON_PN}native
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
@@ -66,7 +66,7 @@ EXTRA_OECONF = " \
     --with-transcoding="${TRANSCODING}" \
     "
 
-FILES_${PN} = "${libdir}/enigma2/python/*.so"
-FILES_${PN}-dev += "${libdir}/enigma2/python/*.la"
-FILES_${PN}-staticdev += "${libdir}/enigma2/python/*.a"
-FILES_${PN}-dbg += "${libdir}/enigma2/python/.debug"
+FILES:${PN} = "${libdir}/enigma2/python/*.so"
+FILES:${PN}-dev += "${libdir}/enigma2/python/*.la"
+FILES:${PN}-staticdev += "${libdir}/enigma2/python/*.a"
+FILES:${PN}-dbg += "${libdir}/enigma2/python/.debug"
