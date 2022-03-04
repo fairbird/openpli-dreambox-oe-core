@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/cronie:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/cronie:"
 
 CONFFILES:${PN} += "/etc/cron.deny /etc/crontab /etc/default/crond"
 
