@@ -30,7 +30,7 @@ PV = "y-git${SRCPV}"
 PKGV = "y-git${GITPKGV}"
 
 GITHUB_URI ?= "git://github.com"
-SRC_URI = "git://github.com/OpenPLi/${BPN}.git;protocol=https;branch=python3" \
+SRC_URI = "git://github.com/OpenPLi/${BPN}.git;protocol=https;branch=python3 \
 		file://remove-other-type-from-blindscan.patch \
 "
 
