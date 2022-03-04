@@ -7,7 +7,7 @@ inherit gitpkgv allarch
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://github.com/OpenVisionE2/openvision-xml.git;protocol=git"
+SRC_URI = "git://github.com/OpenVisionE2/openvision-xml.git;protocol=https;branch=master"
 
 FILES:${PN} = "/"
 

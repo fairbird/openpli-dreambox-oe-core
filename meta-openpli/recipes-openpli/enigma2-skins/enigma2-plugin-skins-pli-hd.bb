@@ -8,7 +8,7 @@ inherit gitpkgv allarch
 PV = "0.1+git${SRCPV}"
 PKGV = "0.1+git${GITPKGV}"
 
-SRC_URI = "git://github.com/littlesat/skin-PLiHD.git;protocol=https \
+SRC_URI = "git://github.com/littlesat/skin-PLiHD.git;protocol=https;branch=master \
 	file://01-add-support-to-new-date-time-feature.patch;apply=yes \
 	file://02-add-crontimers-screen.patch;apply=yes \
 	file://03-add-NewHelp-screen.patch;apply=yes \
