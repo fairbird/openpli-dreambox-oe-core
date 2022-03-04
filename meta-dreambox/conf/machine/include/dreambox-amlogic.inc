@@ -87,7 +87,7 @@ DVBMEDIASINK_CONFIG = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with
 
 IMAGE_FSTYPES =+ "tar.xz"
 
-IMAGE_CMD_tar_prepend = "\
+IMAGE_CMD_tar:prepend = "\
 	mkdir -p ${IMAGE_ROOTFS}/tmp; \
 	rm -Rf ${IMAGE_ROOTFS}/tmp/*; \
 	rm -f ${DEPLOY_DIR_IMAGE}/*.tar.xz; \

@@ -49,7 +49,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 
 KERNEL_MODULE_AUTOLOAD += "xfs"
 
-DISTRO_FEATURES_remove = "directfb gtk-directfb"
+DISTRO_FEATURES:remove = "directfb gtk-directfb"
     
 MACHINE_FEATURES += "alsa usbhost switchoff blindscan-dvbs modem dvb-c blindscan-dvbc hdmicec recovery ci usbconsole blindscan-tbs emmc mmc HDMI HDMI-IN-FHD"
 # Add "dreambox" override for recipes

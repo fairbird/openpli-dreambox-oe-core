@@ -14,17 +14,17 @@ DREAMBOXURL = "http://dreamboxupdate.com/download/opendreambox"
 
 SRC_URI = "${DREAMBOXURL}/2.2.0/blindscan-utils/${PV}/${DEFAULTTUNE}/2acb58192434f308bfed6879c51d5d6e/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-dora"
 
-SRC_URI_dm900 = "${DREAMBOXURL}/2.5.0/blindscan-utils/${PV}/${DEFAULTTUNE}/9e93783a6ac4611bb683d0b36fc44a87/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-krogoth"
+SRC_URI:dm900 = "${DREAMBOXURL}/2.5.0/blindscan-utils/${PV}/${DEFAULTTUNE}/9e93783a6ac4611bb683d0b36fc44a87/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-krogoth"
 
-SRC_URI_dm920 = "${SRC_URI_dm900}"
+SRC_URI:dm920 = "${SRC_URI:dm900}"
 
-SRC_URI_dm520 = "${DREAMBOXURL}/2.5.0/blindscan-utils/${PV}/${DEFAULTTUNE}/185cd9490723728f39953348e322f5c7/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-krogoth"
+SRC_URI:dm520 = "${DREAMBOXURL}/2.5.0/blindscan-utils/${PV}/${DEFAULTTUNE}/185cd9490723728f39953348e322f5c7/blindscan-utils_${PV}_${DEFAULTTUNE}.tar.xz;name=${DEFAULTTUNE}-krogoth"
 
-SRC_URI_dm820 = "${SRC_URI_dm520}"
+SRC_URI:dm820 = "${SRC_URI:dm520}"
 
-SRC_URI_dm7080 = "${SRC_URI_dm520}"
+SRC_URI:dm7080 = "${SRC_URI:dm520}"
 
-SRC_URI_dreamone = "${DREAMBOXURL}/2.6.0/blindscan-utils/${PV}/aarch64/aa6dad1ece041c236338d3a41fd5da1e/blindscan-utils_${PV}_aarch64.tar.xz;name=aarch64-pyro"
+SRC_URI:dreamone = "${DREAMBOXURL}/2.6.0/blindscan-utils/${PV}/aarch64/aa6dad1ece041c236338d3a41fd5da1e/blindscan-utils_${PV}_aarch64.tar.xz;name=aarch64-pyro"
 
 SRC_URI_dreamtwo = "${SRC_URI_dreamone}"
 

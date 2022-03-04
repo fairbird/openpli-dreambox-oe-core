@@ -80,35 +80,35 @@ RDEPENDS_flash-scripts = "\
     coreutils-realpath \
 "
 
-RDEPENDS_flash-scripts_append_dm820 = "\
+RDEPENDS_flash-scripts:append_dm820 = "\
     ${EMMCRDEPENDS_flash-scripts} \
     ${FASTBOOTRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts_append_dm7080 = "\
+RDEPENDS_flash-scripts:append_dm7080 = "\
     ${EMMCRDEPENDS_flash-scripts} \
     ${FASTBOOTRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts_append_dm900 = "\
+RDEPENDS_flash-scripts:append_dm900 = "\
     ${EMMCRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts_append_dm920 = "\
+RDEPENDS_flash-scripts:append_dm920 = "\
     ${EMMCRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts_append_dm520 = "\
+RDEPENDS_flash-scripts:append_dm520 = "\
     ${NANDRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS_flash-scripts_append_dreamone = "\
+RDEPENDS_flash-scripts:append_dreamone = "\
     ${EMMCRDEPENDS_flash-scripts} \
     android-tools \
     u-boot-mkimage \
 "
 
-RDEPENDS_flash-scripts_append_dreamtwo = "\
+RDEPENDS_flash-scripts:append_dreamtwo = "\
     ${EMMCRDEPENDS_flash-scripts} \
     android-tools \
     u-boot-mkimage \

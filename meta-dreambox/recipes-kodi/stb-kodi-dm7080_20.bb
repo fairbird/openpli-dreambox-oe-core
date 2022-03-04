@@ -1,4 +1,4 @@
-require recipes-mediacenter/kodi/stb-kodi_${PV}.bb
+require recipes-multimedia/kodi/stb-kodi_${PV}.bb
 
 PROVIDES += "virtual/kodi"
 RPROVIDES:${PN} += "virtual/kodi"
