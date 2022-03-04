@@ -8,11 +8,11 @@ PV = "${DATE}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 SSTATE_SKIP_CREATION = "1"
 
-SRC_URI = "git://github.com/oe-alliance/enigma2-kernel-module.git;protocol=git"
+SRC_URI = "git://github.com/oe-alliance/enigma2-kernel-module.git;protocol=https"
 
 S = "${WORKDIR}/git/source/enigma"
 
-inherit python-dir module gitpkgv deploy
+inherit python3-dir module gitpkgv deploy
 
 EXTRA_OEMAKE = "KSRC=${STAGING_KERNEL_BUILDDIR}"
 
@@ -86,11 +86,16 @@ do_compile() {
 do_configure[nostamp] = "1"
 do_install[vardepsexclude] += "DATE"
 
+print_md5hash() {
+	printf "checksum=%s\n" $(md5sum "$1" | awk '{print $1}')
+}
+
 do_install() {
 	install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/enigma
 	modinfo -d ${S}/enigma.ko > ${S}/enigma.txt
 	sed -i '1d' ${S}/enigma.txt
 	sort  ${S}/enigma.txt > enigma-${MACHINE}.txt
+	print_md5hash ${S}/enigma-${MACHINE}.txt >> ${S}/enigma-${MACHINE}.txt
 	install -d ${D}${libdir}
 	install -m 0644 ${S}/enigma-${MACHINE}.txt ${D}${libdir}/enigma.info
 	install -m 0644 ${S}/enigma.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/enigma/
