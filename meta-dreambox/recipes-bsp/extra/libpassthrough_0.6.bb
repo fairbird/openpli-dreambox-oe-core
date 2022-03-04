@@ -6,9 +6,11 @@ SRC_URI[cortexa15hf-neon-vfpv4.sha256sum] = "498c3412025350da77f67bd56bcc32a60c5
 SRC_URI[mips32el.md5sum] = "c0cb3a7d196acdeeb9717ee837268c84"
 SRC_URI[mips32el.sha256sum] = "2a13e4eb92d6b8ad28d4cb8af5e39c1507280dcb9631d1ae3ec0494c7d05c021"
 
-inherit opendreambox-precompiled-binary-new
+inherit opendreambox-precompiled-binary
 
 FILES:${PN} = "${libdir}/lib*${SOLIBSDEV}"
-FILES:SOLIBSDEV = ""
+FILES_SOLIBSDEV = ""
 
 DEBIAN_NOAUTONAME:${PN} = "1"
+
+INSANE_SKIP:${PN} += "file-rdeps"
