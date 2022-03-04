@@ -8,7 +8,7 @@ SRCREV = "6e7b3136e17c28697b3dcea597a334022a931b27"
 inherit autotools opendreambox-git pkgconfig
 
 FILES:${PN} = "${libdir}/lib*${SOLIBSDEV}"
-FILES:SOLIBSDEV = ""
+FILES_SOLIBSDEV = ""
 
 RREPLACES:${PN} += "libpagecache0"
 RCONFLICTS:${PN} += "libpagecache0"
