@@ -3,7 +3,7 @@ HOMEPAGE = "http://bitbucket.org/blueluna/transmissionrpc/wiki/Home"
 SECTION = "devel/python"
 PRIORITY = "optional"
 LICENSE = "MIT"
-RDEPENDS:${PN} = "python-simplejson"
+RDEPENDS:${PN} = "python3-simplejson"
 PV = "0.7+hg${SRCREV}"
 
 SRC_URI = "hg://bitbucket.org/blueluna;protocol=http;module=transmissionrpc;rev=${SRCREV}"

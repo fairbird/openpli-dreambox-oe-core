@@ -4,15 +4,15 @@ SECTION = "devel/python"
 PRIORITY = "optional"
 LICENSE = "PSF"
 PR = "r1"
-# NOTE: requires python-misc for webbrowser and subprocess as missing dependency of the webbrowser
+# NOTE: requires python3-misc for webbrowser and subprocess as missing dependency of the webbrowser
 RDEPENDS:${PN} = "\
-  python-core \
-  python-logging \
-  python-misc \
-  python-netclient \
-  python-subprocess \
-  python-threading \
-  python-xml \
+  python3-core \
+  python3-logging \
+  python3-misc \
+  python3-netclient \
+  python3-subprocess \
+  python3-threading \
+  python3-xml \
 "
 
 SRC_URI = "http://pypi.python.org/packages/source/f/flickrapi/flickrapi-${PV}.zip"

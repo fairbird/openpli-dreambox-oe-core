@@ -37,7 +37,7 @@ RRECOMMENDS:${PN} = " \
 	enigma2-plugin-skins-pli-hd \
 	hotplug-e2-helper \
 	glibc-gconv-utf-16 \
-	python-sendfile \
+	python3-sendfile \
 	virtual/enigma2-mediaservice \
 	"
 

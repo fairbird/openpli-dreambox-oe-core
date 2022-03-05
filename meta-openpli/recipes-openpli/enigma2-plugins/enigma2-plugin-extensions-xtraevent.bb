@@ -7,9 +7,9 @@ SRC_URI = "git://github.com/fairbird/xtraEvent;protocol=https;branch=main"
 inherit gitpkgv distutils-openplugins
 
 RDEPENDS:${PN} += "\
-	python-image \
-	python-imaging \
-	python-requests \
+	python3-image \
+	python3-imaging \
+	python3-requests \
 	"
 
 S = "${WORKDIR}/git"

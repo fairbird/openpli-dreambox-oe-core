@@ -1,8 +1,8 @@
 MODULE = "OpenAirPlay"
 DESCRIPTION = "AirPlay and AirTunes server for enigma2"
-RDEPENDS:${PN} = "python-twisted-core python-twisted-web python-m2crypto \
-                  python-biplist python-netclient python-avahi python-dbus \
-                  python-core python-subprocess python-io python-xmlrpc \
+RDEPENDS:${PN} = "python3-twisted-core python3-twisted-web python3-m2crypto \
+                  python3-biplist python3-netclient python3-avahi python3-dbus \
+                  python3-core python3-subprocess python3-io python3-xmlrpc \
                   hairtunes"
 
 inherit gitpkgv
@@ -13,7 +13,7 @@ PR = "r0.2"
 require conf/license/license-gplv2.inc
 require openplugins.inc
 
-PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/${MODULE}"
+PLUGINPATH = "${libdir}/enigma2/python3.10/Plugins/Extensions/${MODULE}"
 do_install() {
 	install -d ${D}${PLUGINPATH}
 	cp -r --preserve=mode,links ${S}/plugin/* ${D}${PLUGINPATH}
