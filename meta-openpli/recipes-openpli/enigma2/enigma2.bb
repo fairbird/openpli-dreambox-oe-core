@@ -25,7 +25,7 @@ RDEPENDS:${PN} = " \
 	oe-alliance-branding \
 	enigma2-fonts \
 	enigma2-timezones \
-	enigma2-remotes \
+	enigma2-remote \
 	enigma2-module \
 	ethtool \
 	ntpdate \
