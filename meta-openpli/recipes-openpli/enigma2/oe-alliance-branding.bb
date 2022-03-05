@@ -2,7 +2,7 @@ DESCRIPTION = "OE-A Branding Lib for OE-A 2.0"
 MAINTAINER = "oe-alliance team"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-DEPENDS = "python"
+DEPENDS = "python3 python3-six-native"
 
 require conf/license/license-gplv2.inc
 
@@ -15,6 +15,8 @@ PR = "r0"
 MACHINEBUILD = "${MACHINE}"
 
 do_configure[nostamp] = "1"
+
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 BRANCH="master"
 SRC_URI="git://github.com/oe-alliance/branding-module.git;protocol=https;branch=${BRANCH}"
