@@ -5,8 +5,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS = "python3 python3-six-native"
 
 require conf/license/license-gplv2.inc
+require classes/python3-compileall.inc
 
-inherit autotools-brokensep gitpkgv python3native
+inherit autotools-brokensep gitpkgv python3targetconfig python3native
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
@@ -19,7 +20,10 @@ do_configure[nostamp] = "1"
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 BRANCH="master"
-SRC_URI="git://github.com/oe-alliance/branding-module.git;protocol=https;branch=${BRANCH}"
+
+SRC_URI="git://github.com/oe-mirrors/branding-module.git;protocol=https;branch=${BRANCH} \
+        file://ax-python-devel-dont-check-for-distutils.patch \
+"
 
 S = "${WORKDIR}/git"
 
@@ -50,7 +54,7 @@ EXTRA_OECONF = " \
     --with-mkubifs="${MKUBIFS_ARGS}" \
     --with-ubinize="${UBINIZE_ARGS}" \
     --with-driverdate="${DRIVERSDATE}" \
-    --with-arch="${DEFAULTTUNE}" \
+    --with-arch="${TUNE_PKGARCH}" \
     --with-display-type="${DISPLAY_TYPE}" \
     --with-hdmi="${HAVE_HDMI}" \
     --with-yuv="${HAVE_YUV}" \
@@ -68,7 +72,8 @@ EXTRA_OECONF = " \
     --with-transcoding="${TRANSCODING}" \
     "
 
-FILES:${PN} = "${libdir}/enigma2/python/*.so"
+FILES:${PN}-src = "${libdir}/enigma2/python/Components/*.py"
+FILES:${PN} = "${libdir}/enigma2/python/*.so /usr/share ${libdir}/enigma2/python/Components/*.pyc ${libdir}/enigma2/python/Plugins"
 FILES:${PN}-dev += "${libdir}/enigma2/python/*.la"
 FILES:${PN}-staticdev += "${libdir}/enigma2/python/*.a"
 FILES:${PN}-dbg += "${libdir}/enigma2/python/.debug"
