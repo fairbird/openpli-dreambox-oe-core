@@ -27,3 +27,5 @@ do_install() {
 	install -m 0644 ${S}/xml/dmm1.xml ${D}${datadir}/enigma2/rc_models/
 	install -m 0644 ${S}/html/dmm1.html ${D}${datadir}/enigma2/rc_models/
 }
+
+INSANE_SKIP:${PN} += "already-stripped"
