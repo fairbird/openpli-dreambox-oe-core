@@ -121,20 +121,20 @@ index 00d7f63..94171f5 100644
 -				autotimer.readXml()
 -				checkDeepstandby(_session, parse=True)
 -				autotimer.parseEPGAsync(simulateOnly=False)
--				print>>log, "[XMLTVImport] Run start parse autotimers"
+-				print("[XMLTVImport] Run start parse autotimers", file=log)
 +				if not parse_autotimer:
 +					autotimer.readXml()
 +					checkDeepstandby(_session, parse=True)
 +					autotimer.parseEPGAsync(simulateOnly=False)
-+					print>>log, "[XMLTVImport] Run start parse autotimers"
++					print("[XMLTVImport] Run start parse autotimers", file=log)
 +					parse_autotimer = True
  			except:
- 				print>>log, "[XMLTVImport] Could not start autotimers"
+ 				print("[XMLTVImport] Could not start autotimers", file=log)
  				checkDeepstandby(_session, parse=False)
 @@ -825,6 +812,8 @@ class checkDeepstandby:
  
  	def runCheckDeepstandby(self):
- 		print>>log, "[XMLTVImport] Run check deep standby after import"
+ 		print("[XMLTVImport] Run check deep standby after import", file=log)
 +		global parse_autotimer
 +		parse_autotimer = False
  		if config.plugins.epgimport.shutdown.value and config.plugins.epgimport.deepstandby.value == 'wakeup':
