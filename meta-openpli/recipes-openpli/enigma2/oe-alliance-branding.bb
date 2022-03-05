@@ -5,7 +5,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS = "python3 python3-six-native"
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 inherit autotools-brokensep gitpkgv python3targetconfig python3native
 
@@ -72,8 +71,10 @@ EXTRA_OECONF = " \
     --with-transcoding="${TRANSCODING}" \
     "
 
+require classes/python3-compileall.inc
+
 FILES:${PN}-src = "${libdir}/enigma2/python/Components/*.py"
-FILES:${PN} = "${libdir}/enigma2/python/*.so /usr/share ${libdir}/enigma2/python/Components/*.pyc ${libdir}/enigma2/python/Plugins"
+FILES:${PN} = "${libdir}/enigma2/python/*.so /usr/share ${libdir}/enigma2/python/Plugins"
 FILES:${PN}-dev += "${libdir}/enigma2/python/*.la"
 FILES:${PN}-staticdev += "${libdir}/enigma2/python/*.a"
 FILES:${PN}-dbg += "${libdir}/enigma2/python/.debug"
