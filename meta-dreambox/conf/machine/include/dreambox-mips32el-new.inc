@@ -21,7 +21,7 @@ DREAMBOX_IMAGE_SIZE ??= "1024"
 
 IMAGE_FSTYPES =+ "tar.xz"
 
-IMAGE_CMD_tar:prepend = "\
+IMAGE_CMD:tar:prepend = "\
 	mkdir -p ${IMAGE_ROOTFS}/tmp; \
 	rm -Rf ${IMAGE_ROOTFS}/tmp/*; \
 	mkdir -p ${IMAGE_ROOTFS}${localstatedir}/lib/opkg/info; \
