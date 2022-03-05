@@ -10,7 +10,7 @@ require classes/python3-compileall.inc
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
-SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=master \
+SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=python3 \
 	file://Remove-unused-codes.patch;apply=yes \
 "
 
@@ -21,16 +21,13 @@ inherit distutils-openplugins
 DEPENDS = "python3"
 RDEPENDS:${PN} = "python3-compression python3-shell python3-backports-lzma python3-pkgutil"
 RRECOMMENDS:${PN} = "${PN}-rytec"
-PACKAGES = "${PN}-dbg ${PN}"
 
-RREPLACES:${PN} = "enigma2-plugin-extensions-xmltvimport"
-RCONFLICTS:${PN} = "enigma2-plugin-extensions-xmltvimport"
+PACKAGES = "${PN}-src ${PN}-dbg ${PN}"
 
 PLUGIN = "EPGImport"
 
 FILES:${PN} = "${libdir}/enigma2/python/Plugins/Extensions/${PLUGIN}/ /etc"
 FILES:${PN}-dbg = "${libdir}/enigma2/python/Plugins/Extensions/${PLUGIN}/.debug /usr/src/debug"
-FILES:${PN}-src = "${libdir}/enigma2/python/Plugins/Extensions/${PLUGIN}/*.py"
 
 # skip this!
 install_egg_info() {
