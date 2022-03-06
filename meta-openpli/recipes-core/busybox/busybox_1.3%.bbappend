@@ -5,10 +5,8 @@ PR .= ".2"
 SRC_URI += " \
             file://mount_single_uuid.patch \
             file://use_ipv6_when_ipv4_unroutable.patch \
-            file://telnetd \
             file://inetd \
             file://inetd.conf \
-            file://vi.sh \
             file://ntp.script \
             file://0001-Prevent-telnet-connections-from-the-internet-to-the-.patch \
             file://0002-Extended-network-interfaces-support.patch \
