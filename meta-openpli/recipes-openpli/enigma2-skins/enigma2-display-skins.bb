@@ -16,10 +16,10 @@ PR = "r0"
 SRC_URI = "git://github.com/oe-alliance/enigma2-display-skins.git;protocol=https;branch=master"
 
 # note that enigma2-skins is just an empty package to satisfy silly dependencies.
-ALLOW_EMPTY_${PN} = "1"
-FILES_${PN} = "/usr/share/enigma2/display"
-FILES_${PN}-meta = "${datadir}/meta"
-RDEPENDS_${PN}-meta = ""
+ALLOW:EMPTY:${PN} = "1"
+FILES:${PN} = "/usr/share/enigma2/display"
+FILES:${PN}-meta = "${datadir}/meta"
+RDEPENDS:${PN}-meta = ""
 
 inherit autotools-brokensep
 
