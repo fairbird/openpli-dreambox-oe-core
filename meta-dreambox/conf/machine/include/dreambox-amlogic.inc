@@ -5,8 +5,9 @@ KERNEL_DEVICETREE = "${MACHINE}.dtb"
 SOC_FAMILY = "meson64"
 TARGET_ARCH = "aarch64"
 DEFAULTTUNE = "aarch64"
-require conf/machine/include/arm/arch-armv8a.inc
+
 require conf/machine/include/soc-family.inc
+require conf/machine/include/arm/arch-armv8a.inc
 
 SERIAL_CONSOLES = "1000000;ttyS0"
 

@@ -23,8 +23,8 @@ INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 
 do_install() {
-	find . -depth -not -path "./patches*" -not -path "./.pc*" -print0 | cpio --null -pdlu ${D}
-	chown -hR root:root ${D}
+    find . -depth -not -path "./patches*" -not -path "./.pc*" -print0 | cpio --null -pdlu ${D}
+    chown -hR root:root ${D}
 }
 
 do_install_append() {
