@@ -52,6 +52,7 @@ PYTHON_RDEPS = " \
 	python3-netserver \
 	python3-numbers \
 	python3-pickle \
+	python3-process \
 	python3-pyusb \
 	python3-service-identity \
 	python3-shell \
