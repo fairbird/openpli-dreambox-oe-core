@@ -1,18 +1,18 @@
-From ac924738693877f6d20242365cbc1997bf90153d Mon Sep 17 00:00:00 2001
+From 20dfc9e902eec9ae260caaef0733158d9d0951ca Mon Sep 17 00:00:00 2001
 From: fairbird <rrrr53@hotmail.com>
-Date: Wed, 27 Oct 2021 22:16:34 +0300
+Date: Mon, 7 Mar 2022 14:27:13 +0300
 Subject: add NewHelp Screen
 
 ---
- skin.xml           | 64 +++++++++++++++++++++++++++++++++++++++++++++-
- skin_templates.xml | 48 +++++++++++++++++++++++++++++++++-
- 2 files changed, 110 insertions(+), 2 deletions(-)
+ usr/share/enigma2/PLi-FullNightHD/skin.xml    | 66 ++++++++++++++++++-
+ .../PLi-FullNightHD/skin_templates.xml        | 47 ++++++++++++-
+ 2 files changed, 110 insertions(+), 3 deletions(-)
 
 diff --git a/usr/share/enigma2/PLi-FullNightHD/skin.xml b/usr/share/enigma2/PLi-FullNightHD/skin.xml
-index c7cf04a..9766c1b 100644
+index 8eaacaa..883c2e0 100644
 --- a/usr/share/enigma2/PLi-FullNightHD/skin.xml
 +++ b/usr/share/enigma2/PLi-FullNightHD/skin.xml
-@@ -1381,6 +1381,7 @@
+@@ -1385,6 +1385,7 @@
  		<panel name="WizardMarginsTemplate"/>
  		<panel name="WizardPictureLangTemplate"/>
  		<panel name="RemoteControlTemplate"/>
@@ -20,7 +20,7 @@ index c7cf04a..9766c1b 100644
  		<panel position="left" size="10,*"/>
  		<panel position="right" size="10,*"/>
  		<panel position="fill">
-@@ -1403,6 +1403,7 @@
+@@ -1407,6 +1408,7 @@
  		<panel name="WizardMarginsTemplate"/>
  		<panel name="WizardPictureLangTemplate"/>
  		<panel name="RemoteControlTemplate"/>
@@ -28,7 +28,7 @@ index c7cf04a..9766c1b 100644
  		<panel position="left" size="10,*"/>
  		<panel position="right" size="10,*"/>
  		<panel position="fill">
-@@ -1427,6 +1427,7 @@
+@@ -1431,6 +1433,7 @@
  	<screen name="LanguageWizard" position="fill" flags="wfNoBorder">
  		<panel name="WizardMarginsTemplate"/>
  		<panel name="RemoteControlTemplate"/>
@@ -36,7 +36,7 @@ index c7cf04a..9766c1b 100644
  		<panel position="left" size="10,*"/>
  		<panel position="right" size="10,*"/>
  		<panel position="fill">
-@@ -1449,6 +1449,7 @@
+@@ -1453,6 +1456,7 @@
  		<panel name="WizardMarginsTemplate"/>
  		<panel position="top" size="*,100"/>
  		<panel name="RemoteControlTemplate"/>
@@ -44,7 +44,7 @@ index c7cf04a..9766c1b 100644
  		<panel position="left" size="10,*"/>
  		<panel position="right" size="10,*"/>
  		<widget source="statusbar" render="Label" position="fill" zPosition="10" halign="center" valign="center" font="Regular;34" transparent="1"/>
-@@ -1765,7 +1765,7 @@
+@@ -1766,7 +1770,7 @@
  
  	<!-- Help -->
  
@@ -53,10 +53,11 @@ index c7cf04a..9766c1b 100644
  		<panel name="PigTemplate"/>
  		<widget name="list" position="780,100" size="855,912" itemHeight="38" font="Regular;28" scrollbarMode="showOnDemand"/>
  		<widget name="rc" position="1659,105" size="231,750" zPosition="10" pixmaps="rc.png,rcold.png" alphatest="on"/>
-@@ -1771,6 +1771,64 @@
+@@ -1775,7 +1779,65 @@
  		<widget name="arrowup" pixmap="arrowup.png" position="-150,-150" size="55,105" zPosition="11" alphatest="on"/>
  		<widget name="arrowup2" pixmap="arrowup.png" position="-150,-150" size="55,105" zPosition="11" alphatest="on"/>
  		<widget name="long_key" position="1590,922" size="375,30" foregroundColor="yellow" font="Regular;24" halign="center"/>
+-	</screen>
 +	</screen-->
 +
 +	<screen name="HelpMenu" position="fill" title="Menu" flags="wfNoBorder" backgroundColor="background">
@@ -115,19 +116,20 @@ index c7cf04a..9766c1b 100644
 +		</widget>
 +		<widget name="buttonlist" position="105,945" size="1050,51" font="Regular;38" halign="center" zPosition="2" foregroundColor="white" backgroundColor="darkgrey" transparent="0"/>
 +		<panel name="wizard_rc_templateNew" />
- 	</screen>
++ 	</screen>
  
  	<!-- PPanel -->
+ 
 diff --git a/usr/share/enigma2/PLi-FullNightHD/skin_templates.xml b/usr/share/enigma2/PLi-FullNightHD/skin_templates.xml
-index 350a798..8c77409 100644
+index 9895742..7dec5bc 100644
 --- a/usr/share/enigma2/PLi-FullNightHD/skin_templates.xml
 +++ b/usr/share/enigma2/PLi-FullNightHD/skin_templates.xml
-@@ -400,5 +400,51 @@
+@@ -402,5 +402,50 @@
  		</widget>
  		<!--<ePixmap pixmap="icons/icon_update_off.png" position="90,52" size="30,30" zPosition="0" alphatest="blend"/>-->
  	</screen>
 -`</skin>
-+
+ 
 +	<!-- cf#_#rename -->
 +
 +	<screen name="wizard_rc_templateNew">
@@ -174,3 +176,6 @@ index 350a798..8c77409 100644
 +	</screen>
 +
 +</skin>
+-- 
+2.32.0
+
