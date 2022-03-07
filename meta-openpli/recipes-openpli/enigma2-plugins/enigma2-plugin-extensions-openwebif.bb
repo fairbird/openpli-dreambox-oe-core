@@ -8,21 +8,22 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-DEPENDS = "python3-cheetah-native"
+DEPENDS = "${PYTHON_PN}-cheetah-native"
 
 RDEPENDS:${PN} = "\
 	aio-grab \
-	python3-cheetah \
-	python3-compression \
-	python3-ipaddress \
-	python3-json \
-	python3-misc \
-	python3-numbers \
-	python3-pyopenssl \
-	python3-pprint \
-	python3-shell \
-	python3-twisted-web \
-	python3-unixadmin \
+	${PYTHON_PN}-cheetah \
+	${PYTHON_PN}-compression \
+	${PYTHON_PN}-ipaddress \
+	${PYTHON_PN}-json \
+	${PYTHON_PN}-misc \
+	${PYTHON_PN}-numbers \
+	${PYTHON_PN}-pprint \
+	${PYTHON_PN}-pyopenssl \
+	${PYTHON_PN}-shell \
+	${PYTHON_PN}-six \
+	${PYTHON_PN}-twisted-web \
+	${PYTHON_PN}-unixadmin \
 	oe-alliance-branding \
 	"
 
@@ -33,9 +34,11 @@ PKGV = "${GITPKGVTAG}"
 
 BRANCH="master"
 
-SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH}"
+SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH} \
+	file://0001-revert-workaround-for-non-pli-streamproxy.patch
+"
 
-SRC_URI:append_dm8000 = " file://get-rid-of-orgdream-check.patch"
+SRC_URI:append_dm8000 = " file://0001-revert-workaround-for-non-pli-streamproxy.patch"
 
 S="${WORKDIR}/git"
 
@@ -45,7 +48,7 @@ do_compile() {
 	cheetah-compile -R --nobackup ${S}/plugin
 }
 
-PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/OpenWebif"
+PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/${MODULE}"
 do_install:append() {
 	install -d ${D}${PLUGINPATH}
 	cp -r ${S}/plugin/* ${D}${PLUGINPATH}
