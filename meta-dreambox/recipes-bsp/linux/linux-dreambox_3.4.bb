@@ -1,5 +1,7 @@
 inherit kernel machine_kernel_pr
 
+INSANE_SKIP:${PN} += "already-stripped"
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "^(dm520|dm820|dm7080)$"
@@ -45,16 +47,16 @@ CMDLINE_dm7080 = "bmem=512M@512M memc1=768M console=ttyS0,1000000 root=/dev/mmcb
 BRCM_PATCHLEVEL = "4.0"
 
 LINUX_VERSION = "${PV}-${BRCM_PATCHLEVEL}-${MACHINE}"
-KERNEL:IMAGETYPE_dm520 = "vmlinux.gz"
-KERNEL:IMAGETYPE_dm820 = "vmlinux.bin"
-KERNEL:IMAGETYPE_dm7080 = "vmlinux.bin"
-KERNEL:IMAGETYPES_dm520 = ""
-KERNEL:IMAGETYPES_dm820 = "vmlinux.gz"
-KERNEL:IMAGETYPES_dm7080 = "vmlinux.gz"
-KERNEL:ALT_IMAGETYPE_dm820 = "vmlinux.bin"
-KERNEL:ALT_IMAGETYPE_dm7080 = "vmlinux.bin"
+KERNEL_IMAGETYPE_dm520 = "vmlinux.gz"
+KERNEL_IMAGETYPE_dm820 = "vmlinux.bin"
+KERNEL_IMAGETYPE_dm7080 = "vmlinux.bin"
+KERNEL_IMAGETYPES_dm520 = ""
+KERNEL_IMAGETYPES_dm820 = "vmlinux.gz"
+KERNEL_IMAGETYPES_dm7080 = "vmlinux.gz"
+KERNEL_ALT_IMAGETYPE_dm820 = "vmlinux.bin"
+KERNEL_ALT_IMAGETYPE_dm7080 = "vmlinux.bin"
 
-KERNEL:ENABLE_CGROUPS = "1"
+KERNEL_ENABLE_CGROUPS = "1"
 
 RDEPENDS:${KERNEL_PACKAGE_NAME}-image = "flash-scripts"
 
