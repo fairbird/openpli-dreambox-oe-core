@@ -9,7 +9,7 @@ diff --git a/usr/share/enigma2/PLi-FullNightHD/skin.xml b/usr/share/enigma2/PLi-
 index eb36a55..4aef922 100644
 --- a/usr/share/enigma2/PLi-FullNightHD/skin.xml
 +++ b/usr/share/enigma2/PLi-FullNightHD/skin.xml
-@@ -2422,4 +2422,30 @@
+@@ -2416,4 +2416,30 @@
  			<convert type="ClientsStreaming">INFO_RESOLVE_SHORT</convert>
  		</widget>
  	</screen>
@@ -44,7 +44,7 @@ diff --git a/usr/share/enigma2/PLi-FullHD/skin.xml b/usr/share/enigma2/PLi-FullH
 index 1cafc4f..982d29e 100644
 --- a/usr/share/enigma2/PLi-FullHD/skin.xml
 +++ b/usr/share/enigma2/PLi-FullHD/skin.xml
-@@ -2422,4 +2422,30 @@
+@@ -2418,4 +2418,30 @@
  			<convert type="ClientsStreaming">INFO_RESOLVE_SHORT</convert>
  		</widget>
  	</screen>

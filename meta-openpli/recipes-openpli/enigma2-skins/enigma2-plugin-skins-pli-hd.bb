@@ -25,5 +25,3 @@ do_install() {
 	cp -r ${S}${datadir}/* ${D}${datadir}/
 	chmod -R a+rX ${D}${datadir}/enigma2/
 }
-
-INSANE_SKIP:${PN} += "already-stripped"

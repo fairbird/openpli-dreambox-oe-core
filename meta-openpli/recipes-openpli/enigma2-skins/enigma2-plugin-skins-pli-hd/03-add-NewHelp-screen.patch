@@ -12,7 +12,7 @@ diff --git a/usr/share/enigma2/PLi-FullNightHD/skin.xml b/usr/share/enigma2/PLi-
 index c7cf04a..9766c1b 100644
 --- a/usr/share/enigma2/PLi-FullNightHD/skin.xml
 +++ b/usr/share/enigma2/PLi-FullNightHD/skin.xml
-@@ -1380,6 +1380,7 @@
+@@ -1381,6 +1381,7 @@
  		<panel name="WizardMarginsTemplate"/>
  		<panel name="WizardPictureLangTemplate"/>
  		<panel name="RemoteControlTemplate"/>
@@ -20,7 +20,7 @@ index c7cf04a..9766c1b 100644
  		<panel position="left" size="10,*"/>
  		<panel position="right" size="10,*"/>
  		<panel position="fill">
-@@ -1402,6 +1403,7 @@
+@@ -1403,6 +1403,7 @@
  		<panel name="WizardMarginsTemplate"/>
  		<panel name="WizardPictureLangTemplate"/>
  		<panel name="RemoteControlTemplate"/>
@@ -28,7 +28,7 @@ index c7cf04a..9766c1b 100644
  		<panel position="left" size="10,*"/>
  		<panel position="right" size="10,*"/>
  		<panel position="fill">
-@@ -1426,6 +1428,7 @@
+@@ -1427,6 +1427,7 @@
  	<screen name="LanguageWizard" position="fill" flags="wfNoBorder">
  		<panel name="WizardMarginsTemplate"/>
  		<panel name="RemoteControlTemplate"/>
@@ -36,7 +36,7 @@ index c7cf04a..9766c1b 100644
  		<panel position="left" size="10,*"/>
  		<panel position="right" size="10,*"/>
  		<panel position="fill">
-@@ -1448,6 +1451,7 @@
+@@ -1449,6 +1449,7 @@
  		<panel name="WizardMarginsTemplate"/>
  		<panel position="top" size="*,100"/>
  		<panel name="RemoteControlTemplate"/>
@@ -44,7 +44,7 @@ index c7cf04a..9766c1b 100644
  		<panel position="left" size="10,*"/>
  		<panel position="right" size="10,*"/>
  		<widget source="statusbar" render="Label" position="fill" zPosition="10" halign="center" valign="center" font="Regular;34" transparent="1"/>
-@@ -1761,7 +1765,7 @@
+@@ -1765,7 +1765,7 @@
  
  	<!-- Help -->
  
@@ -53,7 +53,7 @@ index c7cf04a..9766c1b 100644
  		<panel name="PigTemplate"/>
  		<widget name="list" position="780,100" size="855,912" itemHeight="38" font="Regular;28" scrollbarMode="showOnDemand"/>
  		<widget name="rc" position="1659,105" size="231,750" zPosition="10" pixmaps="rc.png,rcold.png" alphatest="on"/>
-@@ -1770,6 +1774,64 @@
+@@ -1771,6 +1771,64 @@
  		<widget name="arrowup" pixmap="arrowup.png" position="-150,-150" size="55,105" zPosition="11" alphatest="on"/>
  		<widget name="arrowup2" pixmap="arrowup.png" position="-150,-150" size="55,105" zPosition="11" alphatest="on"/>
  		<widget name="long_key" position="1590,922" size="375,30" foregroundColor="yellow" font="Regular;24" halign="center"/>
