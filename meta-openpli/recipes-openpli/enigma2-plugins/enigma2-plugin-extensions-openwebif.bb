@@ -1,7 +1,10 @@
+MODULE = "OpenWebif"
 DESCRIPTION = "Control your receiver with a browser"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README;md5=26abba37d1c2fcbf96a087ceb8e1db86"
 require classes/python3-compileall.inc
+
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -10,15 +13,17 @@ DEPENDS = "python3-cheetah-native"
 RDEPENDS:${PN} = "\
 	aio-grab \
 	python3-cheetah \
-	python3-compression\
-	python3-ipaddress\
+	python3-compression \
+	python3-ipaddress \
 	python3-json \
 	python3-misc \
 	python3-numbers \
 	python3-pyopenssl \
+	python3-pprint \
 	python3-shell \
-	python3-six \
+	python3-twisted-web \
 	python3-unixadmin \
+	oe-alliance-branding \
 	"
 
 inherit gittag distutils-openplugins gettext
@@ -26,7 +31,9 @@ inherit gittag distutils-openplugins gettext
 PV = "git${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
-SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git;protocol=https;branch=master"
+BRANCH="master"
+
+SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH}"
 
 SRC_URI:append_dm8000 = " file://get-rid-of-orgdream-check.patch"
 
