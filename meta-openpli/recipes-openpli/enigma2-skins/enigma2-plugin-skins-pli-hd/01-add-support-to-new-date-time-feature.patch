@@ -84,7 +84,7 @@ index 350a798..9895742 100644
  		</widget>
  		<widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right">
 -			<convert type="ClockToText">Date</convert>
-+			convert type="ClockToText">FullDate</convert>
++			<convert type="ClockToText">FullDate</convert>
 +			<!--convert type="ClockToText">Date</convert-->
  		</widget>
  	</screen>
