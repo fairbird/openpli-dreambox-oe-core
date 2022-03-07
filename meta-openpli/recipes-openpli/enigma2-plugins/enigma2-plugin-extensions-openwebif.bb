@@ -34,11 +34,9 @@ PKGV = "${GITPKGVTAG}"
 
 BRANCH="master"
 
-SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH} \
-	file://0001-revert-workaround-for-non-pli-streamproxy.patch
-"
+SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH}"
 
-SRC_URI:append_dm8000 = " file://0001-revert-workaround-for-non-pli-streamproxy.patch"
+SRC_URI:append_dm8000 = " file://get-rid-of-orgdream-check.patch"
 
 S="${WORKDIR}/git"
 
