@@ -1,3 +1,5 @@
+PRECOMPILED_ARCH = "dm7020hd"
+
 require dreambox-secondstage.inc
 
 PR = "${INC_PR}.0"

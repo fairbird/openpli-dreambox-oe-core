@@ -1,3 +1,5 @@
+PRECOMPILED_ARCH = "dm7020hd"
+
 require dreambox-dvb-modules.inc
 
 PR = "${INC_PR}.3"
