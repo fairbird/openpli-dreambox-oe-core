@@ -34,7 +34,7 @@ SRC_URI += "\
 
 CONFFILES = "/etc/tuxbox/config/ncam.conf /etc/tuxbox/config/ncam.server /etc/tuxbox/config/ncam.srvid /etc/tuxbox/config/ncam.user /etc/tuxbox/config/ncam.provid /etc/tuxbox/config/CCcam.cfg /etc/tuxbox/config/ncam.services"
 
-FILES_${PN} = "/usr/bin/ncam /etc/tuxbox/config/* /etc/init.d/softcam.ncam"
+FILES:${PN} = "/usr/bin/ncam /etc/tuxbox/config/* /etc/init.d/softcam.ncam"
 
 EXTRA_OECMAKE += "\
 	-DOSCAM_SYSTEM_NAME=Tuxbox \

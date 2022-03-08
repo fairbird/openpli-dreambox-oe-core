@@ -14,7 +14,7 @@ inherit gitpkgv
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-FILES_${PN} = "${libdir}/enigma2/python/Plugins/Extensions/DLNAServer/*"
+FILES:${PN} = "${libdir}/enigma2/python/Plugins/Extensions/DLNAServer/*"
 PACKAGES = "${PN}"
 
 do_install() {
@@ -23,4 +23,4 @@ do_install() {
 	python3 -O -m compileall ${D}${libdir}/enigma2/python/Plugins/
 }
 
-INSANE_SKIP_${PN} += "already-stripped"
+INSANE_SKIP:${PN} += "already-stripped"

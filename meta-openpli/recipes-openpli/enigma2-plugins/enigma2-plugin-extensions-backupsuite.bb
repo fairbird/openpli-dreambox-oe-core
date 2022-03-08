@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/persianpros/BackupSuite-PLi.git;protocol=https;branc
 # don't inherit allarch, it can't work with arch-dependent RDEPENDS
 inherit gitpkgv distutils-openplugins gettext
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	mtd-utils \
 	mtd-utils-ubifs \
 	ofgwrite \

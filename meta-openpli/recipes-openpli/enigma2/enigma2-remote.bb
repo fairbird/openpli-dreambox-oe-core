@@ -9,7 +9,7 @@ PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-alliance/remotes;protocol=https;branch=master"
 
-FILES_${PN} = "/"
+FILES:${PN} = "/"
 
 S = "${WORKDIR}/git"
 

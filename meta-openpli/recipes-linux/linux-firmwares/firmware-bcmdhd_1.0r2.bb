@@ -3,7 +3,7 @@ LICENSE = "CLOSED"
 require conf/license/license-close.inc
 
 inherit allarch
-INSANE_SKIP_${PN} = "arch"
+INSANE_SKIP:${PN} = "arch"
 
 SRC_URI = "http://dreamboxupdate.com/download/opendreambox/2.6.0/bcmdhd-firmware/${PV}/all/3815bf87c0c39c63de32db99f02827ba/bcmdhd-firmware_${PV}_all.tar.xz"
 

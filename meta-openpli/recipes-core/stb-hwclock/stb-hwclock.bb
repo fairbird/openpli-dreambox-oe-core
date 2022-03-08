@@ -14,7 +14,7 @@ INITSCRIPT_NAME = "stb-hwclock"
 INITSCRIPT_PARAMS = "start 67 S ."
 
 #SYSTEMD_PACKAGES = "${PN}"
-#SYSTEMD_SERVICE_${PN} = "stb-hwclock.service"
+#SYSTEMD_SERVICE:${PN} = "stb-hwclock.service"
 
 do_configure() {
 }
