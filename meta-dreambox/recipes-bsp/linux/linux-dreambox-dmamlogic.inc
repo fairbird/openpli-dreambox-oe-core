@@ -2,24 +2,24 @@ require linux-dmamlogic.inc
 
 DEPENDS += "linux-firmware"
 
-RDEPENDS_kernel-module-carl9170 ?= "linux-firmware-carl9170"
-RDEPENDS_kernel-module-r8712u ?= "linux-firmware-rtl8192su"
-RDEPENDS_kernel-module-rt2800usb ?= "linux-firmware-rt2800usb"
-RDEPENDS_kernel-module-rt73usb ?= "linux-firmware-rt73usb"
-RDEPENDS_kernel-module-zd1211rw ?= "zd1211-firmware"
-RRECOMMENDS_kernel-module-cifs ?= "kernel-module-arc4 kernel-module-ecb kernel-module-hmac kernel-module-md4"
-RRECOMMENDS_kernel-module-mac80211 ?= "kernel-module-aes-generic kernel-module-arc4"
+RDEPENDS:kernel-module-carl9170 ?= "linux-firmware-carl9170"
+RDEPENDS:kernel-module-r8712u ?= "linux-firmware-rtl8192su"
+RDEPENDS:kernel-module-rt2800usb ?= "linux-firmware-rt2800usb"
+RDEPENDS:kernel-module-rt73usb ?= "linux-firmware-rt73usb"
+RDEPENDS:kernel-module-zd1211rw ?= "zd1211-firmware"
+RRECOMMENDS:kernel-module-cifs ?= "kernel-module-arc4 kernel-module-ecb kernel-module-hmac kernel-module-md4"
+RRECOMMENDS:kernel-module-mac80211 ?= "kernel-module-aes-generic kernel-module-arc4"
 
 KERNEL_ENABLE_CGROUPS = "1"
 
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
 # package names instead, to allow only one kernel to be installed.
-PKG_kernel = "kernel"
-RPROVIDES_${KERNEL_PACKAGE_NAME} = "${KERNEL_PACKAGE_NAME}-${KERNEL_VERSION}"
-PKG_${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-base"
-RPROVIDES_${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-base-${KERNEL_VERSION}"
-RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+PKG:kernel = "kernel"
+RPROVIDES:${KERNEL_PACKAGE_NAME} = "${KERNEL_PACKAGE_NAME}-${KERNEL_VERSION}"
+PKG:${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-base"
+RPROVIDES:${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-base-${KERNEL_VERSION}"
+RDEPENDS:${KERNEL_PACKAGE_NAME}-base = ""
 PACKAGES:remove = "${KERNEL_PACKAGE_NAME}-image"
 
 KERNEL_FLASH_ARGS ?= ""
