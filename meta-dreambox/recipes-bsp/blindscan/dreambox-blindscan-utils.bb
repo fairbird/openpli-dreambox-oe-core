@@ -1,6 +1,8 @@
 SUMMARY = "Utilities needed to do transponder blindscan with dreambox dvb receivers"
 LICENSE = "CLOSED"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 COMPATIBLE_MACHINE = "^(dm500hd|dm800se|dm500hdv2|dm520|dm800sev2|dm820|dm900|dm920|dm7020hd|dm7080|dm8000|dreamone|dreamtwo)$"
 
 PROVIDES += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
@@ -26,11 +28,11 @@ SRC_URI:dm7080 = "${SRC_URI:dm520}"
 
 SRC_URI:dreamone = "${DREAMBOXURL}/2.6.0/blindscan-utils/${PV}/aarch64/aa6dad1ece041c236338d3a41fd5da1e/blindscan-utils_${PV}_aarch64.tar.xz;name=aarch64-pyro"
 
-SRC_URI_dreamtwo = "${SRC_URI_dreamone}"
+SRC_URI:dreamtwo = "${SRC_URI:dreamone}"
 
 S = "${WORKDIR}/blindscan-utils_${PV}_${DEFAULTTUNE}"
-S_dreamone = "${WORKDIR}/blindscan-utils_${PV}_aarch64"
-S_dreamtwo = "${S_dreamone}"
+S:dreamone = "${WORKDIR}/blindscan-utils_${PV}_aarch64"
+S:dreamtwo = "${S:dreamone}"
 
 PACKAGES = "${PN}"
 
@@ -46,7 +48,5 @@ SRC_URI[aarch64-pyro.md5sum] = "aa6dad1ece041c236338d3a41fd5da1e"
 SRC_URI[aarch64-pyro.sha256sum] = "aeaf9088b3cb2bf91dcab7e7ae8d417ab7eaca304f2f9dc35e5e14838ce5f0cc"
 
 do_install() {
-    cp -fr * ${D}
+	cp -fr * ${D}
 }
-
-INHIBIT_PACKAGE_STRIP = "1"
