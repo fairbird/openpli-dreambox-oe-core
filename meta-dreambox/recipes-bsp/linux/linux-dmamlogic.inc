@@ -150,3 +150,7 @@ do_install:append() {
 
 PACKAGES =+ "${KERNEL_PACKAGE_NAME}-headers"
 FILES:${KERNEL_PACKAGE_NAME}-headers = "${exec_prefix}/src/linux*"
+
+FILES:${PN} += "/usr/src/debug/linux-dmamlogic/*"
+
+INSANE_SKIP:${PN} += "installed-vs-shipped"
