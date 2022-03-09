@@ -65,3 +65,5 @@ do_install:append() {
 
 PACKAGES =+ "${KERNEL_PACKAGE_NAME}-headers"
 FILES:${KERNEL_PACKAGE_NAME}-headers = "${exec_prefix}/src/linux*"
+
+INSANE_SKIP:${PN} += "installed-vs-shipped"

@@ -1,0 +1,12 @@
+diff -Naur linux-3.14/scripts/dtc/dtc-lexer.l linux-3.14-PersianPrince/scripts/dtc/dtc-lexer.l
+--- linux-3.14/scripts/dtc/dtc-lexer.l	2014-03-31 08:10:15.000000000 +0430
++++ linux-3.14-PersianPrince/scripts/dtc/dtc-lexer.l	2020-08-08 14:57:20.710494018 +0430
+@@ -39,7 +39,7 @@
+ #include "srcpos.h"
+ #include "dtc-parser.tab.h"
+ 
+-YYLTYPE yylloc;
++//YYLTYPE yylloc;
+ 
+ /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
+ #define	YY_USER_ACTION \

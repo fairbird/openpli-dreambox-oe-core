@@ -42,5 +42,8 @@ python populate_packages:prepend() {
 # Do not use update-alternatives!
 pkg_postinst:kernel-image () {
 }
+
 pkg_postrm:kernel-image () {
 }
+
+INSANE_SKIP:${PN} += "installed-vs-shipped"
