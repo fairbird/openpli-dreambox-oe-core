@@ -3,6 +3,8 @@ SECTION = "kernel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/linux-${PV}/COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
+COMPATIBLE_MACHINE = "^(dm500hd|dm500hdv2|dm800se|dm800sev2|dm7020hd|dm7020hdv2|dm8000)$"
+
 PRECOMPILED_ARCH = "${MACHINE}"
 PRECOMPILED_ARCH:dm7020hdv2 = "dm7020hd"
 
