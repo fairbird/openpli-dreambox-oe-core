@@ -8,3 +8,5 @@ require meson-mali.inc
 COMPATIBLE_MACHINE = "^(dreamone|dreamtwo)$"
 
 PRECOMPILED_ARCH = "aarch64"
+
+INSANE_SKIP:${PN} += "dev-so"
