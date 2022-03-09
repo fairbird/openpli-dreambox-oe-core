@@ -72,7 +72,7 @@ OPTIONAL_PACKAGES += " \
 	pv \
 	pyload \
 	python3-beautifulsoup4 \
-	python-js2py \
+	python3-js2py \
 	python3-lxml \
 	python3-mechanize \
 	python3-ntplib \
