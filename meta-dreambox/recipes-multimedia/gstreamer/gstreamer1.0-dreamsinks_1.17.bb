@@ -22,3 +22,5 @@ do_install() {
 	install -d ${D}${libdir}/gstreamer-1.0
 	install -m 0755 ${S}${libdir}/gstreamer-1.0/libgstdreamsinks.so ${D}${libdir}/gstreamer-1.0/
 }
+
+INSANE_SKIP:${PN} += "file-rdeps"
