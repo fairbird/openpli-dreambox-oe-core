@@ -11,6 +11,7 @@ CHECK=`which dialog`
 [ ! $CHECK = /usr/bin/dialog ] && sudo apt install -y dialog
 echo -e "" 
 rm -f build/bitbake.lock
+rm -f build/bitbake.sock
 clear
 ## Menu Select Boxes ##
 BOX_1="dm500hd"
