@@ -32,3 +32,5 @@ FILES:${PN}-src = " \
         ${libdir}/enigma2/python/Plugins/Extensions/*/*.py \
         ${libdir}/enigma2/python/Components/*/*.py \
         "
+
+INSANE_SKIP:${PN} += "file-rdeps"
