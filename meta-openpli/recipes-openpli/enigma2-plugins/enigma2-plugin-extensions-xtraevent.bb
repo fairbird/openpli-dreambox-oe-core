@@ -6,6 +6,8 @@ SRC_URI = "git://github.com/fairbird/xtraEvent;protocol=https;branch=main"
 
 inherit gitpkgv distutils-openplugins
 
+include python3-package-split.inc
+
 RDEPENDS:${PN} += "\
 	python3-image \
 	python3-imaging \
@@ -22,4 +24,11 @@ FILES:${PN} = "${prefix}/"
 do_install() {
 	install -d ${D}${prefix}
 	cp -r ${S}${prefix}/* ${D}${prefix}/
+	python3 -m compileall -o2 -b ${D}${prefix}
 }
+
+RDEPENDS:{PN}-src = "${PN}"
+FILES:${PN}-src = " \
+        ${libdir}/enigma2/python/Plugins/Extensions/*/*.py \
+        ${libdir}/enigma2/python/Components/*/*.py \
+        "
