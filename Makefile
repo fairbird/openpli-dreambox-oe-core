@@ -34,6 +34,8 @@ BB_NUMBER_THREADS ?= $(NR_CPU)
 PARALLEL_MAKE ?= -j $(NR_CPU)
 
 XSUM ?= md5sum
+ONLINECHECK_URL ?= "http://google.com"
+ONLINECHECK_TIMEOUT ?= 2
 
 BUILD_DIR = $(CURDIR)/build
 TOPDIR = $(BUILD_DIR)
@@ -134,8 +136,22 @@ BITBAKE_ENV_HASH := $(call hash, \
 $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'Generating $@'
 	@echo 'export BB_ENV_EXTRAWHITE="MACHINE"' > $@
+	@echo 'export BB_ENV_EXTRAWHITE="MACHINE BB_SRCREV_POLICY BB_NO_NETWORK"' > $@
 	@echo 'export MACHINE' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
+	@echo 'if [[ $$BB_NO_NETWORK -eq 1 ]]; then' >> $@
+	@echo ' export BB_SRCREV_POLICY="cache"' >> $@
+	@echo ' echo -e "\e[95mforced offline mode\e[0m"' >> $@
+	@echo 'else' >> $@
+	@echo ' echo -n -e "check internet connection: \e[93mWaiting ...\e[0m"' >> $@
+	@echo ' wget -q --tries=10 --timeout=$(ONLINECHECK_TIMEOUT) --spider $(ONLINECHECK_URL)' >> $@
+	@echo ' if [[ $$? -eq 0 ]]; then' >> $@
+	@echo '  echo -e "\b\b\b\b\b\b\b\b\b\b\b\e[32mOnline      \e[0m"' >> $@
+	@echo ' else' >> $@
+	@echo '  echo -e "\b\b\b\b\b\b\b\b\b\b\b\e[31mOffline     \e[0m"' >> $@
+	@echo '  export BB_SRCREV_POLICY="cache"' >> $@
+	@echo ' fi' >> $@
+	@echo 'fi' >> $@
 
 OPENPLI_CONF_HASH := $(call hash, \
 	'OPENPLI_CONF_VERSION = "2"' \
