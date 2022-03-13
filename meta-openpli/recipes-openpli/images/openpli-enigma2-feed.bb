@@ -44,7 +44,6 @@ OPTIONAL_PACKAGES += " \
 	iproute2 \
 	iputils \
 	joe \
-	kodi \
 	less \
 	libbluray \
 	libudfread \
@@ -116,6 +115,7 @@ OPTIONAL_PACKAGES += " \
 	zip \
 	zsh \
 	${OPTIONAL_BSP_PACKAGES} \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "dm900 dm920", "kodi" , "", d)} \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "dm900 dm920", "qtwidevine" , "", d)} \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "dreamone dreamtwo", "${KERNEL_WIFI_DRIVERS}" , "", d)} \
 	"
@@ -159,7 +159,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-xtraevent \
 	enigma2-plugin-extensions-youtube \
-	enigma2-plugin-extensions-kodi \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "dm900 dm920", "enigma2-plugin-extensions-kodi" , "", d)} \
 	enigma2-plugin-security-firewall \
 	enigma2-plugin-skins-octetfhd \
 	enigma2-plugin-skins-pd1loi-hd-night \
