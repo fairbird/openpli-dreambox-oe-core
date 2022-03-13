@@ -79,7 +79,6 @@ OPTIONAL_PACKAGES += " \
 	python3-pysnmp \
 	python3-requests \
 	python3-youtube-dl \
-	qtwidevine \
 	rsync \
 	rt3573 \
 	rt5572 \
@@ -117,6 +116,7 @@ OPTIONAL_PACKAGES += " \
 	zip \
 	zsh \
 	${OPTIONAL_BSP_PACKAGES} \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "dm900 dm920", "qtwidevine" , "", d)} \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "dreamone dreamtwo", "${KERNEL_WIFI_DRIVERS}" , "", d)} \
 	"
 
