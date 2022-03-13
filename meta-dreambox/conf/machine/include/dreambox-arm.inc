@@ -6,14 +6,14 @@ KERNEL_FILE = "kernel.bin"
 ROOTFS_FILE = "rootfs.tar.bz2"
 MTD_BLACK  = "mmcblk0"
 
-DISTRO_FEATURES_GFX_mipsel ?= " opengl"
+DISTRO_FEATURES_GFX:mipsel ?= " opengl"
 
-PACKAGECONFIG_pn-glmark2 = "gles2"
+PACKAGECONFIG:pn-glmark2 = "gles2"
 
-PACKAGECONFIG_pn-cogl-1.0 = "egl-kms egl-null \
+PACKAGECONFIG:pn-cogl-1.0 = "egl-kms egl-null \
         ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 
-PACKAGECONFIG_pn-weston = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles', '', d)}"
+PACKAGECONFIG:pn-weston = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles', '', d)}"
 
 DVBSKYPROVIDER = "kernel"
 
