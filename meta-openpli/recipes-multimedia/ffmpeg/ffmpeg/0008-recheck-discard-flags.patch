@@ -1,8 +1,6 @@
-diff --git a/libavformat/hls.c b/libavformat/hls.c
-index 61b6759ef5..cae60d21db 100644
 --- a/libavformat/hls.c
 +++ b/libavformat/hls.c
-@@ -2067,8 +2067,10 @@ static int hls_read_packet(AVFormatContext *s, AVPacket *pkt)
+@@ -2080,8 +2080,10 @@ static int hls_read_packet(AVFormatContext *s, AVPacket *pkt)
      HLSContext *c = s->priv_data;
      int ret, i, minplaylist = -1;
  
