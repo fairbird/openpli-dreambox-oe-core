@@ -21,7 +21,6 @@ OPTIONAL_PACKAGES += " \
 	cups \
 	davfs2 \
 	diffutils \
-	djmount \
 	dosfstools \
 	dvb-apps \
 	dvblast \
