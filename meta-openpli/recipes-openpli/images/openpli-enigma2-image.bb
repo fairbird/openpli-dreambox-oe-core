@@ -45,7 +45,6 @@ ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-dvdplayer \
 	enigma2-plugin-extensions-epgimport \
 	enigma2-plugin-extensions-filecommander \
-	enigma2-plugin-extensions-foreca \
 	enigma2-plugin-extensions-graphmultiepg \
 	enigma2-plugin-extensions-mediaplayer \
 	enigma2-plugin-extensions-mediascanner \
@@ -85,6 +84,7 @@ DEPENDS += " \
 IMAGE_INSTALL += " \
 	aio-grab \
 	cdtextinfo \
+	dhrystone \
 	enigma2 \
 	libavahi-client \
 	settings-autorestore \

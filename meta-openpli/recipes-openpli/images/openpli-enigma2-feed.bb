@@ -151,12 +151,12 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-backupsuite \
 	enigma2-plugin-extensions-autobouquets \
 	enigma2-plugin-extensions-e2iplayer \
+	enigma2-plugin-extensions-foreca \
 	enigma2-plugin-extensions-hetweer \
 	enigma2-plugin-extensions-ppanel \
 	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-xtraevent \
-	enigma2-plugin-extensions-youtube \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "dm900 dm920", "enigma2-plugin-extensions-kodi" , "", d)} \
 	enigma2-plugin-security-firewall \
 	enigma2-plugin-skins-octetfhd \
@@ -168,6 +168,22 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-hrtunerproxy \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-serviceapp \
+	enigma2-plugin-extensions-fontinfo \
+	enigma2-plugin-extensions-historyzapselector \
+	enigma2-plugin-extensions-managerautofs \
+	enigma2-plugin-extensions-modifyplifullhd \
+	enigma2-plugin-extensions-moviemanager \
+	enigma2-plugin-extensions-openmultiboot \
+	enigma2-plugin-extensions-refreshbouquet \
+	enigma2-plugin-extensions-weathermsn \
+	enigma2-plugin-extensions-vcs \
+	enigma2-plugin-extensions-xmodem \
+	enigma2-plugin-extensions-xstreamity \
+	enigma2-plugin-systemplugins-extnumberzap \
+	enigma2-plugin-systemplugins-extrafancontrol \
+	enigma2-plugin-systemplugins-mountmanager \
+	enigma2-plugin-systemplugins-netspeedtest \
+	enigma2-plugin-systemplugins-signalfinder \
 	enigma2-plugins \
 	meta-enigma2-dvdburn \
 	picons-enigma2-meta \
