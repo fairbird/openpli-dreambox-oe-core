@@ -53,6 +53,7 @@ do_install:append() {
 	chmod a+rX ${D}${PLUGINPATH}
 	rm -rf ${D}${libdir}/enigma2/python/Plugins/*.egg-info
 	rmdir -p --ignore-fail-on-non-empty ${D}${datadir} ${D}/${PYTHON_SITEPACKAGES_DIR} || true
+	python3 -m compileall -o2 -b ${D}${PLUGINPATH}
 }
 
 FILES:${PN} = "${PLUGINPATH}"
