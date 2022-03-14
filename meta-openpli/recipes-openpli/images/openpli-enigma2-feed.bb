@@ -60,7 +60,6 @@ OPTIONAL_PACKAGES += " \
 	ntfs-3g \
 	ntp \
 	ofgwrite \
-	${@bb.utils.contains('TARGET_FPU', 'soft', '', 'nodejs', d)} \
 	openresolv \
 	openssh \
 	openvpn \
