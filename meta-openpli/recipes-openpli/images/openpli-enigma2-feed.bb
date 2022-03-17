@@ -153,6 +153,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-e2iplayer \
 	enigma2-plugin-extensions-foreca \
 	enigma2-plugin-extensions-hetweer \
+	enigma2-plugin-extensions-jedimakerxtream \
 	enigma2-plugin-extensions-ppanel \
 	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-subssupport \
