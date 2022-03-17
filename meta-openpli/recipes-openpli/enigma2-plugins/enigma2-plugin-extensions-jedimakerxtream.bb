@@ -46,3 +46,5 @@ rm -rf /etc/epgimport/*jmx*.* > /dev/null 2>&1
 sed -i '/jmx/d' /etc/enigma2/bouquets.tv
 echo "Restart GUI to finish uninstall!"
 }
+
+INSANE_SKIP:${PN} += "installed-vs-shipped"
