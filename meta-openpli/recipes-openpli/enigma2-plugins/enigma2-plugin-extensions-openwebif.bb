@@ -24,7 +24,6 @@ RDEPENDS:${PN} = "\
 	${PYTHON_PN}-six \
 	${PYTHON_PN}-twisted-web \
 	${PYTHON_PN}-unixadmin \
-	oe-alliance-branding \
 	"
 
 inherit gittag distutils-openplugins gettext
