@@ -9,7 +9,9 @@ inherit allarch distutils-openplugins gitpkgv setuptools
 
 DEPENDS = "python-future-native"
 
-SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=master;protocol=https \
+	file://no-need-to-check-depends.patch \
+"
 
 S = "${WORKDIR}/git"
 
