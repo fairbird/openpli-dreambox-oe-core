@@ -7,9 +7,9 @@ require conf/license/license-gplv2.inc
 
 inherit allarch distutils-openplugins gitpkgv setuptools
 
-DEPENDS = "${PYTHON_PN}-future-native"
+DEPENDS = "python-future-native"
 
-SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=python3;protocol=https"
+SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 
@@ -27,9 +27,9 @@ RDEPENDS_${PN} = " \
 	hlsdl \
 	iptvsubparser \
 	lsdir \
-	python3-core \
-	python3-e2icjson \
-	python3-pycurl \
+	python-core \
+	python-e2icjson \
+	python-pycurl \
 	rtmpdump \
 	uchardet \
 	wget \
