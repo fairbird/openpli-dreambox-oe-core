@@ -12,7 +12,7 @@ SRCREV = "${AUTOREV}"
 PV = "1.2+git${SRCPV}"
 PKGV = "1.2+git${GITPKGV}"
 
-SRC_URI = "git://github.com/satdreamgr/dab-cmdline.git;branch=sdgradio"
+SRC_URI = "git://github.com/satdreamgr/dab-cmdline.git;protocol=https;branch=sdgradio"
 
 EXTRA_OECMAKE = "-DAAC_OUT=ON -DRAWFILES=ON -DCMAKE_INSTALL_PREFIX=/usr/bin"
 
