@@ -87,7 +87,7 @@ RDEPENDS_${PN} = "\
 	${GST_UGLY_RDEPS} \
 	"
 
-SRC_URI = "git://github.com/OpenPLi/servicemp3.git"
+SRC_URI = "git://github.com/OpenPLi/servicemp3.git;protocol=https"
 
 S = "${WORKDIR}/git"
 

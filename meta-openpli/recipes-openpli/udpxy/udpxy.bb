@@ -12,7 +12,7 @@ PKGV = "1+git${GITPKGV}"
 
 inherit autotools-brokensep pkgconfig
 
-SRC_URI = " git://github.com/pcherenkov/udpxy.git \
+SRC_URI = " git://github.com/pcherenkov/udpxy.git;protocol=https \
 			file://fix-build-with-gcc8.patch \
 			file://udpxy.sh \
 			"
