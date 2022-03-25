@@ -16,7 +16,7 @@ RRECOMMENDS_${PN} += "\
 	enigma2-plugin-skincomponents-weathercomponent \
 	"
 
-SRC_URI = "git://github.com/audi06/CinoGriPLi.git;protocol=git"
+SRC_URI = "git://github.com/audi06/CinoGriPLi.git;protocol=https"
 
 FILES_${PN} = "${prefix}"
 

@@ -20,7 +20,7 @@ RDEPENDS_${PN} += "\
 	enigma2-plugin-skincomponents-weathercomponent \
 	"
 
-SRC_URI = "git://github.com/OpenVisionE2/RAED-Mod-Skins.git;protocol=git"
+SRC_URI = "git://github.com/OpenVisionE2/RAED-Mod-Skins.git;protocol=https"
 
 S = "${WORKDIR}/git/${SKINNAME}"
 

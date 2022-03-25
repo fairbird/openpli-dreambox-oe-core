@@ -11,7 +11,7 @@ inherit gitpkgv autotools-brokensep rm_python_pyc compile_python_pyo no_python_s
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://github.com/OpenViX/skins.git;protocol=git"
+SRC_URI = "git://github.com/OpenViX/skins.git;protocol=https"
 
 DEPENDS += "enigma2 enigma2-plugin-fonts-roboto enigma2-plugin-fonts-valis-hd enigma2-plugin-extensions-yahooweather"
 

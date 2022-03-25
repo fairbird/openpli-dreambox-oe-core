@@ -8,7 +8,7 @@ inherit gitpkgv allarch
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
-SRC_URI = "git://github.com/Taapat/skin-SimpleGrayHD.git;protocol=git"
+SRC_URI = "git://github.com/Taapat/skin-SimpleGrayHD.git;protocol=https"
 
 FILES_${PN} = "${prefix}/"
 

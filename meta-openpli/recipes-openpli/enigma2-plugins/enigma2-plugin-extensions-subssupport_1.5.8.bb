@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
 
 RDEPENDS_${PN} = "python-requests python-xmlrpc python-compression python-codecs python-zlib python-difflib unrar"
 
-SRC_URI = "git://github.com/mx3L/subssupport;protocol=git;branch=master"
+SRC_URI = "git://github.com/mx3L/subssupport;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 

@@ -12,7 +12,7 @@ PKGV = "git${GITPKGV}"
 
 RDEPENDS_${PN} = "enigma2-plugin-extensions-weatherplugin enigma2-plugin-extensions-openvisionskintools"
 
-SRC_URI = "git://github.com/OpenVisionE2/iFlatFHD-skin.git;protocol=git"
+SRC_URI = "git://github.com/OpenVisionE2/iFlatFHD-skin.git;protocol=https"
 
 S = "${WORKDIR}/git"
 

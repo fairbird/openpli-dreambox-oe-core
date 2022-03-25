@@ -12,7 +12,7 @@ PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI=" \
-	git://github.com/OBH-Skins/MX-HQ7-Pli.git;protocol=git \
+	git://github.com/OBH-Skins/MX-HQ7-Pli.git;protocol=https \
 	file://rc.patch;patch=1 \
 	"
 
