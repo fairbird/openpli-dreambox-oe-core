@@ -193,7 +193,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-skins-simple-gray-hd \
 	enigma2-plugin-skins-slyk-1080-raed \
 	enigma2-plugin-skins-turbo-raed \
-	enigma2-plugin-skins-turquoisehd \
 	enigma2-plugin-skins-xionhdf \
 	enigma2-plugin-skins-whitetransfhd-raed \
 	enigma2-plugin-skins-wowcataclysmfhd-raed \
