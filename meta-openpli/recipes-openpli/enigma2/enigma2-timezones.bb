@@ -9,7 +9,7 @@ PKGV = "git${GITPKGV}"
 
 SRC_URI="git://github.com/oe-alliance/oe-alliance-tuxbox-common.git;protocol=https;branch=master"
 
-FILES:${PN} = "/"
+FILES_${PN} = "/"
 
 S = "${WORKDIR}/git"
 
