@@ -7,4 +7,4 @@ require enigma2-plugin-picons-ziggo.inc
 
 SRCREV = "${AUTOREV}"
 
-SRC_URI = "git://github.com/Stevie-v/srp.220x132.metal-ziggo"
+SRC_URI = "git://github.com/Stevie-v/srp.220x132.metal-ziggo.git;protocol=https"
