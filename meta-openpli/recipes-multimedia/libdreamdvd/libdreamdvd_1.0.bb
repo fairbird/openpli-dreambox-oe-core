@@ -6,6 +6,6 @@ PR = "r3"
 
 inherit autotools pkgconfig git-project
 
-SRC_URI = " git://github.com/mirakels/libdreamdvd.git \
+SRC_URI = " git://github.com/mirakels/libdreamdvd.git;protocol=https \
 			file://move-function-pointer-away-from-header.patch \
 			"

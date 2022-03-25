@@ -11,7 +11,7 @@ PKGV = "git${GITPKGV}"
 
 inherit gitpkgv
 
-SRC_URI = "git://github.com/kiddac/XStreamity.git"
+SRC_URI = "git://github.com/kiddac/XStreamity.git;protocol=https"
 
 S = "${WORKDIR}/git"
 
