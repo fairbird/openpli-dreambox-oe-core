@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/mx3L/subssupport;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 
-FILES_${PN} = "${libdir}/enigma2/python/Plugins/Extensions/SubsSupport \
+FILES_${PN} = "${libdir}/enigma2/python/Plugins/Extensions/SubsSupport.git;protocol=https \
 ${localstatedir}/lib/subssupport"
 
 do_install_append() {

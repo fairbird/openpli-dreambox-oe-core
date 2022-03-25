@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://github.com/fairbird/NCam.git"
+SRC_URI = "git://github.com/fairbird/NCam.git;protocol=https"
 
 DEPENDS = "libusb openssl"
 

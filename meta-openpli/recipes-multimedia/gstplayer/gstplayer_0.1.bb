@@ -7,7 +7,7 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base"
 
 inherit pkgconfig
 
-SRC_URI = "	git://gitlab.com/e2i/gstplayer.git;protocol=http \
+SRC_URI = "	git://gitlab.com/e2i/gstplayer.git;protocol=https \
 			file://0001-set-iptv-download-timeout-0-to-disable-ifdsrc.patch \
 			file://0002-rename-stored-sink-to-dvbSink-for-clarity.patch \
 			file://0003-try-to-get-PTS-from-video-sink-first.patch \
