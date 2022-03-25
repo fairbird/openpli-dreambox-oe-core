@@ -8,7 +8,7 @@ DEPENDS += "gstreamer1.0-plugins-base json-glib"
 
 inherit gettext
 
-SRC_URI = " git://github.com/GStreamer/gst-plugins-bad.git \
+SRC_URI = " git://github.com/GStreamer/gst-plugins-bad.git;protocol=https \
 			file://001-rtmp-hls-tsdemux-fix.patch \
 			file://002-fix-maybe-uninitialized-warnings-when-compiling-with-Os.patch \
 			file://003-rtmp-fix-seeking-and-potential-segfault.patch \

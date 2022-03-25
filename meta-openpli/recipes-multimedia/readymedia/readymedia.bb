@@ -13,7 +13,7 @@ PKGV = "1.1.0+git${GITPKGV}"
 PR = "r0"
 DEPENDS = "libexif libav libjpeg-turbo libid3tag libvorbis sqlite3 flac"
 
-SRC_URI = "git://github.com/OpenVisionE2/minidlna.git \
+SRC_URI = "git://github.com/OpenVisionE2/minidlna.git;protocol=https \
 			file://readymedia.sh \
 			file://minidlna.conf \
 "

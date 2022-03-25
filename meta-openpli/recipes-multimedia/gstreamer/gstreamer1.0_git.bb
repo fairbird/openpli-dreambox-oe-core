@@ -13,7 +13,7 @@ DEPENDS = "glib-2.0 glib-2.0-native libcap libxml2 bison-native flex-native"
 
 inherit meson pkgconfig gettext upstream-version-is-even
 
-SRC_URI = " git://github.com/GStreamer/gstreamer.git \
+SRC_URI = " git://github.com/GStreamer/gstreamer.git;protocol=https \
 		file://001-revert-use-new-gst-adapter-get-buffer.patch \
 "
 

@@ -6,7 +6,7 @@ require gstreamer1.0-common.inc
 
 DEPENDS += "util-linux iso-codes zlib"
 
-SRC_URI = " git://github.com/GStreamer/gst-plugins-base.git \
+SRC_URI = " git://github.com/GStreamer/gst-plugins-base.git;protocol=https \
 			file://001-riff-media-added-fourcc-to-all-ffmpeg-mpeg4-video-caps.patch \
 			file://002-subparse-avoid-false-negatives-dealing-with-UTF-8.patch \
 "

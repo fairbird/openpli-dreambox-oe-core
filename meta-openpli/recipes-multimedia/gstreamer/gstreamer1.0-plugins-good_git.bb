@@ -11,7 +11,7 @@ DEPENDS += "gstreamer1.0-plugins-base libcap orc zlib bzip2"
 
 inherit gettext
 
-SRC_URI = " git://github.com/GStreamer/gst-plugins-good.git \
+SRC_URI = " git://github.com/GStreamer/gst-plugins-good.git;protocol=https \
 		file://001-gstrtpmp4gpay-set-dafault-value-for-MPEG4-without-co.patch \
 "
 
