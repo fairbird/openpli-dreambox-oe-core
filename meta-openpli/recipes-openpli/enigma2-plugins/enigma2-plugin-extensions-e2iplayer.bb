@@ -4,15 +4,12 @@ HOMEPAGE = "http://www.iptvplayer.gitlab.io/"
 SECTION = "multimedia"
 LICENSE = "GPLv2"
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 inherit allarch distutils-openplugins gitpkgv setuptools3
 
 DEPENDS = "${PYTHON_PN}-future-native"
 
-SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=python3;protocol=https \
-           file://use-setuptools-instead-of-distutils.patch \
-"
+SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=python3;protocol=https"
 
 S = "${WORKDIR}/git"
 
@@ -42,12 +39,6 @@ RDEPENDS:{PN}-src = "${PN}"
 
 FILES:${PN}-src = " \
 	${libdir}/enigma2/python/Plugins/*-py3.10.egg-info/* \
-	${libdir}/enigma2/python/Plugins/*/locale/*/LC_MESSAGES/*.po \
-        ${libdir}/enigma2/python/Plugins/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*/*/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*/*/*/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*/*/*/*/*/*.py \
         ${libdir}/enigma2/python/Plugins/*-py2.7.egg-info/* \
         ${libdir}/enigma2/python/Plugins/*/locale/*/LC_MESSAGES/*.po \
         "
