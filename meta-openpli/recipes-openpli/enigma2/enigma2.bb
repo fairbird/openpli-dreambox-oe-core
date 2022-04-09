@@ -28,7 +28,7 @@ RDEPENDS:${PN} = " \
 	enigma2-remote \
 	enigma2-module \
 	ethtool \
-	ntpdate \
+	ntp \
 	glibc-gconv-iso8859-15 \
 	${PYTHON_RDEPS} \
 	"

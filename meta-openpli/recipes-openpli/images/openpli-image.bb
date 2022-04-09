@@ -21,7 +21,6 @@ IMAGE_INSTALL = "\
 	modutils-loadscript \
 	nfs-utils \
 	nfs-utils-client \
-	ntp \
 	openpli-bootlogo \
 	openssh-sftp-server \
 	opkg \
