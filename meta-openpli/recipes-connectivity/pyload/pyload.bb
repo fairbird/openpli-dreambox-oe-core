@@ -1,5 +1,5 @@
 DESCRIPTION = "pyLoad is a fast, lightweight and full featured download manager for many One-Click-Hoster"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2d20d11c1dccf4454ce811d6bfb05a2b"
 HOMEPAGE = "http://pyload.org/"
 

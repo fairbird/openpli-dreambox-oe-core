@@ -1,7 +1,7 @@
 SUMMARY = "Ralink 88x2BU v1.0.0.9"
 HOMEPAGE = "http://www.realtek.com.tw"
 SECTION = "kernel/modules"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ffa10f40b98be2c2bc9608f56827ed23"
 
 inherit module

@@ -2,7 +2,7 @@ SUMMARY = "E2i Player for E2"
 DESCRIPTION = "E2i Player for E2"
 HOMEPAGE = "http://www.iptvplayer.gitlab.io/"
 SECTION = "multimedia"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
 
 inherit allarch distutils-openplugins gitpkgv setuptools3

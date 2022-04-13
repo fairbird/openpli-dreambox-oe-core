@@ -3,7 +3,7 @@ SUMMARY = "lightweight DLNA/UPnP-AV server targeted at embedded systems"
 HOMEPAGE = "http://sourceforge.net/projects/minidlna"
 SECTION = "multimedia"
 MAINTAINER = "OpenPLi"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2b"
 
 inherit gitpkgv

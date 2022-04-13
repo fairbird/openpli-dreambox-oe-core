@@ -2,7 +2,7 @@ SUMMARY = "Kodi Media Center"
 
 do_compile[network] = "1"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7b423f1c9388eae123332e372451a4f7"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-20:"

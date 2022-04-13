@@ -1,7 +1,7 @@
 DESCRIPTION = "Imports XMLTV and epg.dat files into the EPG cache of enigma2"
 MAINTAINER = "OpenPLi team"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://../etc/epgimport/readme.txt;startline=1;endline=4;md5=c162054328d930d453543efef81be1d8"
 
 inherit gitpkgv python3native gettext

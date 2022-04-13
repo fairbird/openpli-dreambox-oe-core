@@ -1,7 +1,7 @@
 SUMMARY  = "UDF reader"
 SECTION = "misc"
 HOMEPAGE = "http://videolan.org"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM="file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://code.videolan.org/videolan/libudfread.git;branch=master;protocol=http"

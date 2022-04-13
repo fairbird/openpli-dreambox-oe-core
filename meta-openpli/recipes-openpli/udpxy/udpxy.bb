@@ -2,7 +2,7 @@ SUMMARY = "udpxy"
 MAINTAINER = "Pavel V. Cherenkov"
 SECTION = "multimedia"
 PRIORITY = "optional"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://README;md5=f210c6f38d8c7db12fdfd009dcd9438c"
 
 inherit gitpkgv
