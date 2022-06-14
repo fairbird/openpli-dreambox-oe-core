@@ -5,7 +5,6 @@ HOMEPAGE = "https://github.com/mx3L/subssupport"
 AUTHOR = "Maroš Ondrášek <mx3ldev@gmail.com>"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
-require classes/python3-compileall.inc
 
 RDEPENDS:${PN} = "python3-xmlrpc python3-compression python3-codecs python3-difflib unrar"
 
