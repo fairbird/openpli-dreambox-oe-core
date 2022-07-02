@@ -142,6 +142,8 @@ ENIGMA2_OPTIONAL = " \
 	dvb-usb-drivers-meta \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "bwlcd96 bwlcd128 bwlcd140 bwlcd255 colorlcd220 colorlcd390 colorlcd400", "enigma2-display-skins", "", d)} \
 	enigma2-plugin-drivers-usbserial \
+	enigma2-plugin-extensions-arabicsavior \
+	enigma2-plugin-extensions-backupflash \
 	enigma2-plugin-extensions-backupsuite \
 	enigma2-plugin-extensions-blurayplayer \
 	enigma2-plugin-extensions-dlnabrowser \
@@ -151,6 +153,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-filecommander \
 	enigma2-plugin-extensions-fontinfo \
 	enigma2-plugin-extensions-historyzapselector \
+	enigma2-plugin-extensions-keyadder \
 	enigma2-plugin-extensions-lcd4linux \
 	enigma2-plugin-extensions-managerautofs \
 	enigma2-plugin-extensions-modifyplifullhd \
@@ -158,6 +161,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-openmultiboot \
 	enigma2-plugin-extensions-openvisionskintools \
 	enigma2-plugin-extensions-oscamstatus \
+	enigma2-plugin-extensions-raedquicksignal \
 	enigma2-plugin-extensions-refreshbouquet \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-weathermsn \
