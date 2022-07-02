@@ -1,45 +1,26 @@
-DESCRIPTION = "NewVirtualKeyBoard plugin by mfaraj57"
-MAINTAINER = "TunisiaSat Developers"
-LICENSE = "GPL-3.0-only"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
+DESCRIPTION = "NewVirtualKeyBoard plugin by mfaraj57 & RAED"
+MAINTAINER = "RAED - fairbird"
+
+require conf/license/license-gplv2.inc
 require classes/python3-compileall.inc
 
-SRC_URI = "git://github.com/OpenVisionE2/NewVirtualKeyBoard.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/fairbird/NewVirtualKeyBoard;protocol=https;branch=main"
 
-# don't inherit allarch, it can't work with arch-dependent RDEPENDS
 inherit gitpkgv distutils-openplugins gettext
 
 S = "${WORKDIR}/git"
 
-PV = "1.0+git${SRCPV}"
-PKGV = "1.0+git${GITPKGV}"
+SRCREV = "${AUTOREV}"
 
-FILES:${PN} = "/usr/"
+PV = "1.1+git${SRCPV}"
+PKGV = "1.1+git${GITPKGV}"
 
-do_compile() {
-	python3 -O -m compileall ${S}${libdir}/enigma2/python/
-}
+FILES_${PN} = "${prefix}/"
 
 do_install() {
-	install -d ${D}/usr
-	cp -r ${S}/usr/* ${D}/usr/
+	install -d ${D}${prefix}
+	cp -r ${S}${prefix}/* ${D}${prefix}/
+	python3 -m compileall -o2 -b ${D}${prefix}
 }
 
-FILES:${PN}-src = "\
-    ${libdir}/enigma2/python/*/*.py \
-    ${libdir}/enigma2/python/*/*/*.py \
-    ${libdir}/enigma2/python/*/*/*/*.py \
-    ${libdir}/enigma2/python/*/*/*/*/*.py \
-    ${libdir}/enigma2/python/*/*/*/*/*/*.py \
-    ${libdir}/enigma2/python/*/*/*/*/*/*/*.py \
-    ${libdir}/enigma2/python/*/*/*/*/*/*/*/*.py \
-    ${libdir}/enigma2/python/*/*/*/*/*/*/*/*/*.py \
-    ${libdir}/enigma2/python/*/*/*/*/*/*/*/*/*/*.py \
-    ${libdir}/enigma2/python/*/*/*/*/*/*/*/*/*/*/*.py \
-    "
-
-python populate_packages:prepend() {
-    enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', 'Enigma2 Plugin: %s', recursive=True, match_path=True, prepend=True)
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.py$', 'enigma2-plugin-%s-src', 'Enigma2 Plugin: %s', recursive=True, match_path=True, prepend=True)
-}
+INSANE_SKIP_${PN} += "already-stripped"
