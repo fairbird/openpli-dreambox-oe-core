@@ -1,24 +1,34 @@
-SUMMARY = "E2i Player for E2"
-DESCRIPTION = "E2i Player for E2"
-HOMEPAGE = "http://www.iptvplayer.gitlab.io/"
+SUMMARY = "E2iPlayer"
+DESCRIPTION = "Watch Videos Online"
+HOMEPAGE = "https://gitlab.com/iptvplayer-for-e2/"
 SECTION = "multimedia"
 LICENSE = "GPLv2"
 require conf/license/license-gplv2.inc
 
-inherit allarch distutils-openplugins gitpkgv setuptools
-
-DEPENDS = "python-future-native"
-
-SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;protocol=http;branch=master \
 	file://no-need-to-check-depends.patch \
 "
 
 S = "${WORKDIR}/git"
 
-PV = "1+git${SRCPV}"
-PKGV = "1+git${GITPKGV}"
+inherit gitpkgv
+SRCREV = "${AUTOREV}"
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
+PR = "r0"
+
+inherit ${@bb.utils.contains("python", "python", "distutils-openplugins", "distutils-openplugins", d)} gettext
+
+DEPENDS = "gettext-native python-future-native python"
 
 RDEPENDS_${PN} = " \
+	python-core \
+	python-e2icjson \
+	python-json \
+	python-pycurl \
+	python-html \
+	python-shell \
+	python-compression \
 	cmdwrapper \
 	duktape \
 	exteplayer3 \
@@ -29,19 +39,15 @@ RDEPENDS_${PN} = " \
 	hlsdl \
 	iptvsubparser \
 	lsdir \
-	python-core \
-	python-e2icjson \
-	python-pycurl \
 	rtmpdump \
 	uchardet \
 	wget \
+	${@bb.utils.contains("python", "python", "python-subprocess", "", d)} \
+        ${@bb.utils.contains("python", "python", "python-textutils", "", d)} \
 	"
 
 RDEPENDS_{PN}-src = "${PN}"
-
 FILES_${PN}-src = " \
-	${libdir}/enigma2/python/Plugins/*-py3.10.egg-info/* \
-	${libdir}/enigma2/python/Plugins/*/locale/*/LC_MESSAGES/*.po \
         ${libdir}/enigma2/python/Plugins/*/*.py \
         ${libdir}/enigma2/python/Plugins/*/*/*.py \
         ${libdir}/enigma2/python/Plugins/*/*/*/*.py \
@@ -50,7 +56,6 @@ FILES_${PN}-src = " \
         ${libdir}/enigma2/python/Plugins/*-py2.7.egg-info/* \
         ${libdir}/enigma2/python/Plugins/*/locale/*/LC_MESSAGES/*.po \
         "
-
 deltask package_qa
 
 FILES_${PN} += "${sysconfdir}"
