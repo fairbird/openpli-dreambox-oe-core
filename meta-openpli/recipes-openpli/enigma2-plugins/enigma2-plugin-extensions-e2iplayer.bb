@@ -5,9 +5,9 @@ SECTION = "multimedia"
 LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
 
-inherit allarch distutils-openplugins gitpkgv setuptools3
+inherit ${@bb.utils.contains("python3", "python3", "distutils-openplugins", "distutils-openplugins", d)} gettext
 
-DEPENDS = "${PYTHON_PN}-future-native"
+DEPENDS = "gettext-native python3-future-native python3"
 
 SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=python3;protocol=https \
 	file://no-need-to-check-depends.patch \
@@ -18,7 +18,14 @@ S = "${WORKDIR}/git"
 PV = "1+git${SRCPV}"
 PKGV = "1+git${GITPKGV}"
 
-RDEPENDS:${PN} = " \
+RDEPENDS_${PN} = " \
+	python3-core \
+	python3-e2icjson \
+	python3-json \
+	python3-pycurl \
+	python3-html \
+	python3-shell \
+	python3-compression \
 	cmdwrapper \
 	duktape \
 	exteplayer3 \
@@ -29,12 +36,11 @@ RDEPENDS:${PN} = " \
 	hlsdl \
 	iptvsubparser \
 	lsdir \
-	python3-core \
-	python3-e2icjson \
-	python3-pycurl \
 	rtmpdump \
 	uchardet \
 	wget \
+	${@bb.utils.contains("python3", "python3", "python3-subprocess", "", d)} \
+        ${@bb.utils.contains("python3", "python3", "python3-textutils", "", d)} \
 	"
 
 RDEPENDS:{PN}-src = "${PN}"
