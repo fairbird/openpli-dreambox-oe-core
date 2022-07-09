@@ -1,6 +1,6 @@
-SUMMARY = "E2i Player for E2"
-DESCRIPTION = "E2i Player for E2"
-HOMEPAGE = "http://www.iptvplayer.gitlab.io/"
+SUMMARY = "E2iPlayer"
+DESCRIPTION = "Watch Videos Online"
+HOMEPAGE = "https://gitlab.com/iptvplayer-for-e2/"
 SECTION = "multimedia"
 LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
@@ -18,7 +18,7 @@ S = "${WORKDIR}/git"
 PV = "1+git${SRCPV}"
 PKGV = "1+git${GITPKGV}"
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	python3-core \
 	python3-e2icjson \
 	python3-json \
