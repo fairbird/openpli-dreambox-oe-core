@@ -18,6 +18,7 @@ group                         = 1
 
 [reader]
 label                         = Device_SoftCam
+enable                        = 1
 protocol                      = emu
 device                        = emulator
 #device                        = /etc/tuxbox/config/SoftCam.key  (if you want to set your personal path)
@@ -31,15 +32,62 @@ emu_auproviders               = 0604:010200;0E00:000000;1010:000000;4AE1:000011,
 
 [reader]
 label                         = Internet_SoftCam
+enable                        = 1
 protocol                      = emu
-device                        = https://raw.githubusercontent.com/MOHAMED19OS/SoftCam_Emu/main/Enigma2/SoftCam.Key
+device                        = https://raw.githubusercontent.com/smcam/s/main/SoftCam.Key
 disablecrccws_only_for        = 0E00:000000
-caid                          = 0E00,0500,0604,090F,1010,1801,2600,4AE1
+caid                          = 0500,0604,090F,0E00,1010,1801,2600,2602,2610,4AE1
 detect                        = cd
-ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;090F:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;4AE1:000011,000014,0000FE
+ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;090F:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;2602:000000;2610:000000;4AE1:000011,000014,0000FE
 group                         = 1
 emmcache                      = 2,1,2,1
-emu_auproviders               = 0604:010200;0E00:000000;1010:000000;4AE1:000011,000014,0000FE
+emu_auproviders               = 0604:010200;0E00:000000;1010:000000;2610:000000;4AE1:000011,000014,0000FE
+
+[reader]
+### This reader automatically downloads afn keys into memory if label = github:"and path" and if the keys are invalid or missing from the SoftCam.Key file. If you want to find the keys, use debug 2 or 4.
+### If the downloaded keys are invalid or expired, the reader will automatically download them again after 5 minutes, no need to restart ncam or use external scripts.
+
+#label                         = github:"and path"
+label                         = github:JetCamFastCam/JetFastCamRza/main/SoftCam.Key
+enable                        = 1
+protocol                      = emu
+#device                        = emulator
+device                        = https://raw.githubusercontent.com/JetCamFastCam/JetFastCamRza/main/SoftCam.Key
+disablecrccws_only_for        = 0E00:000000
+caid                          = 0500,0604,090F,0E00,1010,1801,2600,2602,2610,4AE1
+detect                        = cd
+ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;090F:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;2602:000000;2610:000000;4AE1:000011,000014,0000FE
+group                         = 1
+emmcache                      = 2,1,2,1
+emu_auproviders               = 0604:010200;0E00:000000;1010:000000;2610:000000;4AE1:000011,000014,0000FE
+
+[reader]
+label                         = github:smcam/s/main/SoftCam.Key
+enable                        = 1
+protocol                      = emu
+device                        = emulator
+disablecrccws_only_for        = 0E00:000000
+caid                          = 0500,0604,090F,0E00,1010,1801,2600,2602,2610,4AE1
+detect                        = cd
+ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;090F:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;2602:000000;2610:000000;4AE1:000011,000014,0000FE
+group                         = 1
+emmcache                      = 2,1,2,1
+emu_auproviders               = 0604:010200;0E00:000000;1010:000000;2610:000000;4AE1:000011,000014,0000FE
+
+############ This is prive reader don't change it or remove it ############
+[reader]
+label                         = linuxsat-support.com
+enable                        = 1
+protocol                      = emu
+device                        = emulator
+#device                        = http...
+disablecrccws_only_for        = 0E00:000000
+caid                          = 0500,0604,090F,0E00,1010,1801,2600,2602,2610,4AE1
+detect                        = cd
+ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;090F:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;2602:000000;2610:000000;4AE1:000011,000014,0000FE
+group                         = 1
+emmcache                      = 2,1,2,1
+emu_auproviders               = 0604:010200;0E00:000000;1010:000000;2610:000000;4AE1:000011,000014,0000FE
 
 ####################### Card ############################
 
