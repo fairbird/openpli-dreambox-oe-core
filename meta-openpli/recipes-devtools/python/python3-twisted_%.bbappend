@@ -1,4 +1,4 @@
-RDEPENDS:${PN}:append = " python3-typing-extensions"
+RDEPENDS:${PN}:append = " python3-typing-extensions python3-asyncio"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
