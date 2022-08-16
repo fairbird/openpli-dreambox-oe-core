@@ -1,7 +1,7 @@
 SECTION = "base"
 DESCRIPTION = "Load hotplug modules at boot"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://modload.sh;beginline=2;endline=2;md5=3b6e5b2caf81c241a5956ed7691327ab"
+LIC_FILES_CHKSUM = "file://modload.sh;beginline=2;endline=2;md5=3582b3015888936cabf777918af3d3e2"
 SRC_URI = "file://modload.sh"
 PV = "3"
 PR = "r0"
