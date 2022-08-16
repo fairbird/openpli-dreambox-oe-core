@@ -2,7 +2,7 @@
 # but that should be built for the feed so that other
 # components may use them and install on demand.
 
-# We have a GPLv2 license for this recipe...
+# We have a GPL-2.0-only license for this recipe...
 require conf/license/openpli-gplv2.inc
 
 # Depend on the image, so that it gets build

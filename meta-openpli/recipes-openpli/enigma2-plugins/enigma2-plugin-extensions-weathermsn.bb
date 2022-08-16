@@ -1,7 +1,7 @@
 DESCRIPTION = "Weather forecast for 5 days"
 SUMMARY = "Weather MSN"
 MAINTAINER = "Sirius"
-LICENSE = "GPLv3+"
+LICENSE = "GPL-3.0-only+"
 HOMEPAGE = "www.gisclub.tv"
 LIC_FILES_CHKSUM = "file://python/Plugins/Extensions/WeatherMSN/plugin.py;beginline=3;endline=19;md5=ffc4a5bf0cc661f90242506d3c0fed50"
 

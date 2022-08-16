@@ -3,7 +3,7 @@
 # Trivial script to load/save current contents of the kernel clock
 # from/to the pseudo RTC in STB front panel.
 #
-# License: GPLv2, see COPYING
+# License: GPL-2.0-only, see COPYING
 
 COMMAND=$1
 if [ "$COMMAND"x = ""x ] ; then

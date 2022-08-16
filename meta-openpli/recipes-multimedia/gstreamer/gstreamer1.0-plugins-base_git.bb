@@ -1,4 +1,4 @@
-LICENSE = "GPLv2+ & LGPLv2+"
+LICENSE = "GPL-2.0-only & LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=69333daa044cb77e486cc36129f7a770"
 
 require gstreamer1.0-plugins.inc

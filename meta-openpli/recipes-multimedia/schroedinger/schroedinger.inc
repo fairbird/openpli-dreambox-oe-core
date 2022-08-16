@@ -1,5 +1,5 @@
 HOMEPAGE = "http://schrodinger.sourceforge.net/"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-only"
 DEPENDS = "liboil orc-native orc alsa-lib"
 
 INC_PR = "r1"

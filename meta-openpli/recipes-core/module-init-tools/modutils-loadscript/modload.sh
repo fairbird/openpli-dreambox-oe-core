@@ -1,5 +1,5 @@
 #!/bin/sh
-# Licensed under GPLv2
+# Licensed under GPL-2.0-only
 # Load kernel modules for hotpluggable devices
 
 if [ "$1x" == "stopx" ]

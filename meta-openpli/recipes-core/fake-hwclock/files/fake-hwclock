@@ -8,7 +8,7 @@
 #
 # Copyright 2012 Steve McIntyre <93sam@debian.org>
 #
-# License: GPLv2, see COPYING
+# License: GPL-2.0-only, see COPYING
 
 if [ "$FILE"x = ""x ] ; then
     FILE=/etc/fake-hwclock.data

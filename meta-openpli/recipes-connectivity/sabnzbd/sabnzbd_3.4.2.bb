@@ -1,5 +1,5 @@
 MAINTAINER = "team@sabnzbd.org"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYRIGHT.txt;md5=d4bfc20f13bd0e7363c57525136734ee"
 
 PR = "r1"

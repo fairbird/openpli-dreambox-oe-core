@@ -1,6 +1,6 @@
 SUMMARY = "A very fast JSON encoder/decoder for Python modified for e2iplayer"
 HOMEPAGE = "https://github.com/e2iplayer/python-cjson"
-LICENSE = "LGPLv2+"
+LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0816bf71e8b244e6de5618a54522e845"
 
 SRC_URI = "git://github.com/Hains/python3-cjson.git;protocol=https;branch=master"
