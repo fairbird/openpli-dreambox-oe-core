@@ -12,13 +12,13 @@ PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=python3 \
 	file://Remove-unused-codes.patch;apply=yes \
+	file://use-setuptools-instead-of-distutils.patch \
 "
 
 S = "${WORKDIR}/git/src"
 
 inherit distutils-openplugins
 
-DEPENDS = "python3"
 RDEPENDS:${PN} = "python3-compression python3-shell python3-backports-lzma python3-pkgutil"
 RRECOMMENDS:${PN} = "${PN}-rytec"
 
