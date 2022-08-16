@@ -22,7 +22,7 @@ RRECOMMENDS:${PN} = "unrar"
 
 PV = "0.5.0"
 
-inherit update-rc.d setuptools3
+inherit update-rc.d setuptools3_legacy
 
 SRC_URI = "git://github.com/pyload/pyload.git;branch=main;protocol=https \
 	file://pyload.init \
