@@ -14,12 +14,12 @@ https://github.com/oe-alliance/oe-alliance-core
 
 
 -Submodules bitbake, openembedded-core and meta-openembedded from master branch,<br>
-&nbsp;with git snapshot of February 17, 2022.<br>
--GCC 11.2.0 <br>
--Glibc 2.35<br>
+&nbsp;with git snapshot of August 16, 2022.<br>
+-GCC 12.1.0 <br>
+-Glibc 2.36<br>
 -GStreamer 1.19.2<br>
--Python 3.10.2<br>
--OpenSSL 3.0.1<br>
+-Python 3.10.6<br>
+-OpenSSL 3.0.5<br>
 -Busybox 1.35.0<br>
 and more.<br>
 <br>
