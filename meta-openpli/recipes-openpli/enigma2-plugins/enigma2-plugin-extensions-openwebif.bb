@@ -26,14 +26,16 @@ RDEPENDS:${PN} = "\
 	${PYTHON_PN}-unixadmin \
 	"
 
-inherit gittag distutils-openplugins gettext
+inherit gittag setuptools3_legacy gettext
 
 PV = "git${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
 BRANCH="master"
 
-SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH}"
+SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH} \
+	file://set-packages-explicit.patch \
+"
 
 SRC_URI:append_dm8000 = " file://get-rid-of-orgdream-check.patch"
 
@@ -81,7 +83,7 @@ python do_cleanup () {
     target_box = 'unknown.png'
     target_remote = 'ow_remote.png'
     target_keymap = ''
-    exception = []
+    exception = ''
 
     for x in boxtypes:
         if x[0] == d.getVar('MACHINE', True):
