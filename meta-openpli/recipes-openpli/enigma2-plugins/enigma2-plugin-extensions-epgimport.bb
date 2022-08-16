@@ -37,3 +37,5 @@ do_install:prepend (){
 	install -d ${D}/${sysconfdir}/epgimport
 	install -m 755 ${S}/../etc/epgimport/readme.txt ${D}${sysconfdir}/epgimport/readme.txt
 }
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"

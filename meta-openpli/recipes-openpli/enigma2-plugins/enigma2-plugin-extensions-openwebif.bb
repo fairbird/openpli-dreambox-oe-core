@@ -115,3 +115,5 @@ RDEPENDS:${PN}-terminal = "${PN} shellinabox"
 RREPLACES:${PN}-terminal = "enigma2-plugin-extensions-openwebif-terminal"
 RCONFLICTS:${PN}-terminal = "enigma2-plugin-extensions-openwebif-terminal"
 RPROVIDES:${PN}-terminal =+ "enigma2-plugin-extensions-openwebif-terminal"
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
