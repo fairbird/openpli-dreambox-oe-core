@@ -135,8 +135,8 @@ BITBAKE_ENV_HASH := $(call hash, \
 
 $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'Generating $@'
-	@echo 'export BB_ENV_EXTRAWHITE="MACHINE"' > $@
-	@echo 'export BB_ENV_EXTRAWHITE="MACHINE BB_SRCREV_POLICY BB_NO_NETWORK"' > $@
+	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE"' > $@
+	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE BB_SRCREV_POLICY BB_NO_NETWORK"' > $@
 	@echo 'export MACHINE' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
 	@echo 'if [[ $$BB_NO_NETWORK -eq 1 ]]; then' >> $@
