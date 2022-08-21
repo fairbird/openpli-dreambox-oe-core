@@ -175,6 +175,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-serviceapp \
 	enigma2-plugin-extensions-fontinfo \
 	enigma2-plugin-extensions-historyzapselector \
+	enigma2-plugin-extensions-infobarweather \
 	enigma2-plugin-extensions-managerautofs \
 	enigma2-plugin-extensions-modifyplifullhd \
 	enigma2-plugin-extensions-moviemanager \
