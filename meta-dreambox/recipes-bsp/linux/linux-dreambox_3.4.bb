@@ -17,6 +17,7 @@ SRC_URI = " \
 	file://genksyms_fix_typeof_handling.patch \
 	file://defconfig \
 	file://kernel-add-support-for-gcc11.patch \
+	file://kernel-add-support-for-gcc12.patch \
 	file://0001-log2-give-up-on-gcc-constant-optimizations.patch \
 	file://0002-cp1emu-do-not-use-bools-for-arithmetic.patch \
 	file://0003-makefile-silence-packed-not-aligned-warn.patch \

@@ -13,6 +13,7 @@ require linux-dreambox-dmamlogic.inc
 
 SRC_URI = "https://dreamboxupdate.com/download/opendreambox/linux-meson64/linux-meson64-v${PV}-${DMPV}.tar.xz \
 	file://kernel-add-support-for-gcc11.patch \
+	file://kernel-add-support-for-gcc12.patch \
 	file://defconfig \
 	"
 
