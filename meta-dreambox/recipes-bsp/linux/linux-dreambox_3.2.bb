@@ -60,6 +60,7 @@ SRC_URI = " \
     file://0015-fcrypt-fix-bitoperation-for-gcc.patch \
     file://suppress-array-bounds-error.patch \
     file://devinitdata-gcc11.patch \
+    file://fix-never-be-null_outside-array-bounds-gcc-12.patch \
 "
 
 PACKAGES_DYNAMIC = "kernel-*"

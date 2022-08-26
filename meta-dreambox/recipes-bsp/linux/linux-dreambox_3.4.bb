@@ -18,6 +18,7 @@ SRC_URI = " \
 	file://defconfig \
 	file://kernel-add-support-for-gcc11.patch \
 	file://kernel-add-support-for-gcc12.patch \
+	file://fix-never-be-null_outside-array-bounds-gcc-12.patch \
 	file://0001-log2-give-up-on-gcc-constant-optimizations.patch \
 	file://0002-cp1emu-do-not-use-bools-for-arithmetic.patch \
 	file://0003-makefile-silence-packed-not-aligned-warn.patch \
