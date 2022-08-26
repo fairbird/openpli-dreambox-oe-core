@@ -1,4 +1,6 @@
-SRC_URI ?= "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=master"
+BRANCH ?= "python3"
+
+SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH}"
 
 S="${WORKDIR}/git"
 
