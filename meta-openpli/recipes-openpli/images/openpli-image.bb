@@ -47,7 +47,7 @@ export IMAGE_BASENAME = "openpli"
 IMAGE_LINGUAS = ""
 IMAGE_FEATURES += "package-management"
 
-rootfs:Addntpdate_cron() {
+Addntpdatecron() {
 	echo "30 * * * *    /usr/bin/ntpdate-sync silent" >> ${IMAGE_ROOTFS}/etc/cron/crontabs/root
 }
 
@@ -72,4 +72,4 @@ ssh_allow_empty_password () {
 license_create_manifest() {
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "rootfs_Addntpdate_cron; removeopkgleftovers; "
+ROOTFS_POSTPROCESS_COMMAND += "Addntpdatecron; removeopkgleftovers; "
