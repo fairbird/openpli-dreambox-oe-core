@@ -99,6 +99,16 @@ python populate_packages:prepend () {
             full_package = "enigma2-plugin-extensions-" + package
             if line.startswith('Package: '):
                 full_package = line[9:]
+            elif line.startswith('Depends: '):
+                rdepends = []
+                for depend in line[9:].split(','):
+                    depend = depend.strip()
+                    if depend.startswith('enigma2') and not depend.startswith('enigma2-'):
+                        pass # Ignore silly depends on enigma2 with all kinds of misspellings
+                    else:
+                        rdepends.append(depend)
+                rdepends = ' '.join(rdepends)
+                d.setVar('RDEPENDS:' + full_package, rdepends)
             elif line.startswith('Recommends: '):
                 d.setVar('RRECOMMENDS_' + full_package, line[12:])
             elif line.startswith('Description: '):
