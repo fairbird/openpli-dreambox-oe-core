@@ -11,7 +11,7 @@ require openplugins-distutils.inc
 # and decided that this would be good enough until someone explains how to do this properly
 # with distutils.
 do_install:append() {
-	chmod a+x ${D}${libdir}/enigma2/python/Plugins/*/*/*.sh
+	chmod a+x ${D}${libdir}/*
 }
 
 DEPENDS = "python3-future-native"
