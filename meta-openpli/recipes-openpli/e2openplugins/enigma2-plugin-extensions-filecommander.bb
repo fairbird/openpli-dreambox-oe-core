@@ -7,4 +7,4 @@ require openplugins-replace-pli.inc
 
 require openplugins-distutils.inc
 
-SRC_URI = "git://github.com/Hains/e2openplugin-FileCommander.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/Hains/e2openplugin-FileCommander.git;protocol=https;branch=master file://use-setuptools-instead-of-distutils.patch"

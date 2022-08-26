@@ -12,11 +12,6 @@ do_install() {
         chmod a+rX ${D}${PLUGINPATH}
 }
 
-
-pkg_postrm:${PN}() {
-    rm -rf ${libdir}/enigma2/python/Plugins/Extensions/HetWeer
-}
-
 FILES:${PN} = "${PLUGINPATH}"
 
-SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-HetWeer.git;branch=python3;protocol=https"
+SRC_URI:append = " file://replace-distutils-with-setuptools.patch"
