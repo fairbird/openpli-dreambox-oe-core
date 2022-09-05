@@ -35,9 +35,9 @@ sudo apt install sudo apt install -y autoconf automake bison bzip2 cvs diffstat 
 ```
 # To build image:
 ```
-git clone https://github.com/fairbird/openpli-dreambox-oe-core-python3.git
+git clone https://github.com/fairbird/openpli-dreambox-oe-core.git
 
-cd openpli-dreambox-oe-core-python3
+cd openpli-dreambox-oe-core
 
 ./build_image.sh
 ```
@@ -63,13 +63,13 @@ cd /var/www/html
 
 sudo mkdir feeds;cd feeds;sudo mkdir openpli-11.2;cd openpli-11.2;
 
-sudo ln -s /home/<your username>/openpli-dreambox-oe-core-python3/build/tmp/deploy/ipk/<box name> <box name> 
+sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/<box name> <box name> 
 
-sudo ln -s /home/<your username>/openpli-dreambox-oe-core-python3/build/tmp/deploy/ipk/all all
+sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/all all
 
-sudo ln -s /home/<your username>/openpli-dreambox-oe-core-python3/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
+sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
   
-sudo ln -s /home/<your username>/openpli-dreambox-oe-core-python3/build/tmp/deploy/ipk/mips32el mips32el
+sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/mips32el mips32el
 ```
 Add hostname or ip address to the site.conf file (exist after make command), e.g. at the end of the file.
 ```
