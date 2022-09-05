@@ -47,7 +47,7 @@ cd openpli-dreambox-oe-core
 
 ![Selection_002](https://user-images.githubusercontent.com/1761779/130413735-8f2a0caf-e3f7-4264-b33e-b474ac13d245.png)
 
-When the build is finished, the image openpli-enigma2-GCC-11.2-<box name>.rootfs.tar.bz2 is in the:
+When the build is finished, the image openpli-enigma2-GCC-12.1-<box name>.rootfs.tar.bz2 is in the:
 ```
 build/tmp/deploy/images/<box name>/
 ```
@@ -63,7 +63,7 @@ Create symlinks to your build-environment:
 ```
 cd /var/www/html
 
-sudo mkdir feeds;cd feeds;sudo mkdir openpli-11.2;cd openpli-11.2;
+sudo mkdir feeds;cd feeds;sudo mkdir openpli-Dreambox;cd openpli-Dreambox;
 
 sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/<box name> <box name> 
 
