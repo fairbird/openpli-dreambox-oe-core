@@ -3,24 +3,20 @@ SUMMARY = "Weather MSN"
 MAINTAINER = "Sirius"
 LICENSE = "GPL-3.0-only+"
 HOMEPAGE = "www.gisclub.tv"
-LIC_FILES_CHKSUM = "file://python/Plugins/Extensions/WeatherMSN/plugin.py;beginline=3;endline=19;md5=ffc4a5bf0cc661f90242506d3c0fed50"
-
-inherit gitpkgv allarch
+require conf/license/license-gplv2.inc
 require classes/python3-compileall.inc
 
-SRCREV = "${AUTOREV}"
-PV = "0.7+git${SRCPV}"
-PKGV = "0.7+git${GITPKGV}"
+inherit gitpkgv ${PYTHON_PN}native
 
-SRC_URI = "git://github.com/Sirius0103/enigma2-plugins.git;protocol=https;branch=master"
+SRCREV = "${AUTOREV}"
+PV = "1.3.+git${SRCPV}"
+PKGV = "1.3.+git${GITPKGV}"
+
+SRC_URI = "git://github.com/oe-mirrors/enigma2-plugins.git;protocol=https"
 
 FILES:${PN} = "${libdir}/enigma2/"
 
 S = "${WORKDIR}/git"
-
-do_compile:append() {
-    python3 -O -m compileall ${S}
-}
 
 do_install() {
 	install -d ${D}${libdir}/enigma2/python/Plugins/Extensions
