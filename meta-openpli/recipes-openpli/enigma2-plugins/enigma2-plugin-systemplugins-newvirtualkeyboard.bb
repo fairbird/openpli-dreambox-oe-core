@@ -15,7 +15,7 @@ SRCREV = "${AUTOREV}"
 PV = "1.1+git${SRCPV}"
 PKGV = "1.1+git${GITPKGV}"
 
-FILES_${PN} = "${prefix}/"
+FILES:${PN} = "${prefix}/"
 
 do_install() {
 	install -d ${D}${prefix}
@@ -23,4 +23,4 @@ do_install() {
 	python3 -m compileall -o2 -b ${D}${prefix}
 }
 
-INSANE_SKIP_${PN} += "already-stripped"
+INSANE_SKIP:${PN} += "already-stripped"

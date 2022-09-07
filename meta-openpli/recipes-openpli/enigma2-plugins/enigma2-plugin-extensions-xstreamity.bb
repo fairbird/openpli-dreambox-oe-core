@@ -5,13 +5,14 @@ PRIORITY = "optional"
 require conf/license/license-gplv2.inc
 require classes/python3-compileall.inc
 
-RDEPENDS_${PN} = "${PYTHON_PN} ${PYTHON_PN}-multiprocessing ${PYTHON_PN}-requests \
+RDEPENDS:${PN} = "${PYTHON_PN} ${PYTHON_PN}-multiprocessing ${PYTHON_PN}-requests \
                   ${PYTHON_PN}-imaging ${PYTHON_PN}-pillow \
 "
 
 SRCREV = "${AUTOREV}"
-PV = "git${SRCPV}"
-PKGV = "git${GITPKGV}"
+PV = "3.71+git${SRCPV}"
+PKGV = "3.71+git${GITPKGV}"
+PR = "r0"
 
 inherit gitpkgv
 
