@@ -9,14 +9,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
 
 PR = "r0"
 
-SRC_URI[md5sum] = "c9f0b557275b7ec88fec751bf22f30cf"
-SRC_URI[sha256sum] = "c9c4e0f0912a782386216b2147eb9c36c47f193b8fcf3d637719e0b9fe7c96e0"
+SRC_URI[md5sum] = "04c82c25663f7dae5931002aa8ffea06"
+SRC_URI[sha256sum] = "ce3eb948ece582a51c934ccb0cc70e659839172717caff173f69a5e2af90c5c0"
 
 SRC_URI = "http://download.savannah.nongnu.org/releases/davfs2/${P}.tar.gz \
            file://neon-config \
            file://volatiles \
            file://davfs2.cfg \
-           file://make-integer-extern.patch \
 "
 
 inherit autotools pkgconfig useradd gettext
