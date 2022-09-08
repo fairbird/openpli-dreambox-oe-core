@@ -5,29 +5,30 @@ SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=381ff91bf309000e0ec58dafe27a97b0"
 
+DEPENDS += "${PYTHON_PN}-versioningit-native"
+
 inherit python3-dir setuptools3 gittag
 
-RDEPENDS:${PN} = "python3-core \
-    python3-ctypes \
-    python3-futures3 \
-    python3-isodate \
-    python3-pycountry \
-    python3-lxml \
-    python3-misc \
-    python3-pkgutil \
-    python3-pycryptodome \
-    python3-pysocks \
-    python3-requests \
-    python3-shell \
-    python3-singledispatch \
-    python3-websocket-client \
+RDEPENDS:${PN} = "${PYTHON_PN}-core \
+    ${PYTHON_PN}-ctypes \
+    ${PYTHON_PN}-futures3 \
+    ${PYTHON_PN}-isodate \
+    ${PYTHON_PN}-pycountry \
+    ${PYTHON_PN}-lxml \
+    ${PYTHON_PN}-misc \
+    ${PYTHON_PN}-pkgutil \
+    ${PYTHON_PN}-pycryptodome \
+    ${PYTHON_PN}-pysocks \
+    ${PYTHON_PN}-requests \
+    ${PYTHON_PN}-shell \
+    ${PYTHON_PN}-singledispatch \
+    ${PYTHON_PN}-websocket-client \
     "
 
-SRCREV = "${AUTOREV}"
 PV = "git${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
-SRCREV_streamlink = "89ab021c07cd2100b93023f6222fac28365c4d7c"
+SRCREV_streamlink = "${AUTOREV}"
 SRCREV_plugins = "${AUTOREV}"
 
 SRCREV_FORMAT = "streamlink_plugins"
@@ -53,7 +54,7 @@ do_install:append() {
     rm -rf ${D}${datadir}
 }
 
-include python3-package-split.inc
+include ${PYTHON_PN}-package-split.inc
 
 PACKAGES = "${PN}"
 
