@@ -64,7 +64,10 @@ inherit autotools-brokensep
 S = "${WORKDIR}/git"
 
 DEPENDS = " \
+	python3-pillow \
 	python3-pyopenssl \
+	python3-pyusb \
+	python3-simplejson \
 	streamripper \
 	python3-mutagen \
 	python3-twisted \
