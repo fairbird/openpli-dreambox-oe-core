@@ -1,3 +1,6 @@
+diff --git a/include/linux/compiler-gcc11.h b/include/linux/compiler-gcc11.h
+new file mode 100644
+index 0000000..ba064fa
 --- /dev/null
 +++ b/include/linux/compiler-gcc11.h
 @@ -0,0 +1,59 @@
@@ -59,4 +62,6 @@
 +#define __HAVE_BUILTIN_BSWAP16__
 +#endif /* CONFIG_ARCH_USE_BUILTIN_BSWAP */
 +
-+#define KASAN_ABI_VERSION 5
++#define KASAN_ABI_VERSION 6
+-- 
+2.1.0
