@@ -3,8 +3,6 @@ HOMEPAGE = "http://dreamboxupdate.com/"
 LICENSE = "CLOSED"
 DEPENDS = "coreutils-native udev"
 
-PR = "r1"
-
 inherit pkgconfig update-rc.d
 
 SRC_URI:append = ";branch=${BRANCH}"
@@ -13,7 +11,7 @@ do_install() {
     oe_runmake install DESTDIR=${D}
 }
 
-PACKAGES =+ "flash-scripts ${PN}-autoflashd ${PN}-fbscaled"
+PACKAGES =+ "flash-scripts"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -37,94 +35,33 @@ FASTBOOTRDEPENDS_flash-scripts = " \
 "
 
 RDEPENDS:${PN} = " \
-    ${PN}-autoflashd \
     flash-scripts \
     gpgv \
     pigz \
-    util-linux-blkid \
     util-linux-mount \
 "
-
-RDEPENDS:${PN}:append:dm820 = "\
+RDEPENDS:${PN}:append:bcm7435 = " \
     ${EMMCRDEPENDS_recovery} \
 "
-
-RDEPENDS:${PN}:append:dm7080 = "\
+RDEPENDS:${PN}:append:bcm7252s = " \
     ${EMMCRDEPENDS_recovery} \
 "
-
-RDEPENDS:${PN}:append:dm900 = "\
-    ${EMMCRDEPENDS_recovery} \
-"
-
-RDEPENDS:${PN}:append:dm920 = "\
-    ${EMMCRDEPENDS_recovery} \
-"
-
-RDEPENDS:${PN}:append:dm520 = "\
+RDEPENDS:${PN}:append:bcm73625 = " \
     ${NANDRDEPENDS_recovery} \
-"
-
-RDEPENDS:${PN}:append:dreamone = "\
-    ${EMMCRDEPENDS_recovery} \
-    ${PN}-fbscaled \
-"
-
-RDEPENDS:${PN}:append:dreamtwo = "\
-    ${EMMCRDEPENDS_recovery} \
-    ${PN}-fbscaled \
 "
 
 RDEPENDS:flash-scripts = " \
     coreutils-realpath \
 "
-
-RDEPENDS:flash-scripts:append:dm820 = "\
+RDEPENDS:flash-scripts:append:bcm7435 = " \
     ${EMMCRDEPENDS_flash-scripts} \
     ${FASTBOOTRDEPENDS_flash-scripts} \
 "
-
-RDEPENDS:flash-scripts:append:dm7080 = "\
-    ${EMMCRDEPENDS_flash-scripts} \
-    ${FASTBOOTRDEPENDS_flash-scripts} \
-"
-
-RDEPENDS:flash-scripts:append:dm900 = "\
+RDEPENDS:flash-scripts:append:bcm7252s = " \
     ${EMMCRDEPENDS_flash-scripts} \
 "
-
-RDEPENDS:flash-scripts:append:dm920 = "\
-    ${EMMCRDEPENDS_flash-scripts} \
-"
-
-RDEPENDS:flash-scripts:append:dm520 = "\
+RDEPENDS:flash-scripts:append:bcm73625 = " \
     ${NANDRDEPENDS_flash-scripts} \
-"
-
-RDEPENDS:flash-scripts:append:dreamone = "\
-    ${EMMCRDEPENDS_flash-scripts} \
-    android-tools \
-    u-boot-mkimage \
-"
-
-RDEPENDS:flash-scripts:append:dreamtwo = "\
-    ${EMMCRDEPENDS_flash-scripts} \
-    android-tools \
-    u-boot-mkimage \
-"
-
-#RRECOMMENDS_flash-scripts = " \
-#    dreambox-dvb-modules-stb-core \
-#"
-
-FILES:${PN}-autoflashd = "\
-    ${INIT_D_DIR}/autoflashd \
-    ${sbindir}/autoflashd \
-"
-
-FILES:${PN}-fbscaled = "\
-    ${INIT_D_DIR}/fbscaled \
-    ${sbindir}/fbscaled \
 "
 
 FILES:flash-scripts = " \
@@ -136,12 +73,8 @@ FILES:flash-scripts = " \
     ${sbindir}/readspi \
     ${sbindir}/select-boot-source \
     ${sbindir}/to-the-rescue \
-    ${sbindir}/update-autoexec \
     ${sbindir}/update-rescue \
     ${sbindir}/writespi \
 "
 
-INITSCRIPT_PACKAGES = "${PN}-autoflashd ${PN}-fbscaled"
-INITSCRIPT_NAME = ""
-INITSCRIPT_NAME:${PN}-autoflashd = "autoflashd"
-INITSCRIPT_NAME:${PN}-fbscaled = "fbscaled"
+INITSCRIPT_NAME = "autoflashd"

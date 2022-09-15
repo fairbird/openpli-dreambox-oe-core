@@ -7,9 +7,9 @@ PRIORITY = "required"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 BCMNUMBER = "bcm7435"
-BCMNUMBER_dm520 = "bcm73625"
-BCMNUMBER_dm900 = "bcm7439"
-BCMNUMBER_dm920 = "bcm7439"
+BCMNUMBER:dm520 = "bcm73625"
+BCMNUMBER:dm900 = "bcm7439"
+BCMNUMBER:dm920 = "bcm7439"
 
 DREAMBOX_DVB_MODULES_MIRROR ?= "http://dreamboxupdate.com/download/opendreambox/2.5.0/dreambox-dvb-modules/${KV}-${MACHINE}-${DRIVERDATE}/${MACHINE}/${MD5SUM}"
 
@@ -49,8 +49,8 @@ PACKAGES =+ "${PN}-lcd ${PN}-stb-core"
 
 RDEPENDS:${PN}-lcd = "${PN}-stb-core"
 RRECOMMENDS:${PN} = "${PN}-lcd"
-RDEPENDS:${PN}_dm900 = "kernel-${KV}-${MACHINE} ${PN}-stb-core"
-RDEPENDS:${PN}_dm920 = "kernel-${KV}-${MACHINE} ${PN}-stb-core"
+RDEPENDS:${PN}:dm900 = "kernel-${KV}-${MACHINE} ${PN}-stb-core"
+RDEPENDS:${PN}:dm920 = "kernel-${KV}-${MACHINE} ${PN}-stb-core"
 
 FILES:${PN} = "${sysconfdir}/modules-load.d/10-${BPN}.conf \
                /lib/modules/${DM_LOCALVERSION}/extra/"

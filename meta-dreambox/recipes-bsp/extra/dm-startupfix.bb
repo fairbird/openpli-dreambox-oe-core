@@ -31,4 +31,3 @@ pkg_postinst:${PN}() {
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-
