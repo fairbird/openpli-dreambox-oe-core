@@ -140,3 +140,5 @@ do_install:append() {
 sysroot_stage_all() {
     :
 }
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
