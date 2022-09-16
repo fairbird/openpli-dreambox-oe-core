@@ -32,6 +32,7 @@ FASTBOOTRDEPENDS_flash-scripts = " \
 "
 
 RDEPENDS:${PN} = "\
+	${PN}-autoflashd \
 	flash-scripts \
 	gpgv \
 	pigz \
@@ -97,6 +98,11 @@ RDEPENDS:flash-scripts:append:dreamtwo = "\
 	${EMMCRDEPENDS_flash-scripts} \
 	android-tools \
 	u-boot-mkimage \
+	"
+
+FILES:${PN}-autoflashd = "\
+	${INIT_D_DIR}/autoflashd \
+	${sbindir}/autoflashd \
 	"
 
 FILES:${PN}-fbscaled = "\
