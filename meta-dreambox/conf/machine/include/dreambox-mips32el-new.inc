@@ -43,8 +43,6 @@ IMAGE_CMD:tar:prepend = "\
 
 MACHINE_FEATURES += "modem dvb-c blindscan-dvbc hdmicec recovery ci usbconsole HDMI"
 
-RCNAME = "dmm2"
-
 IMAGE_CLASSES += "tarxz-dreambox"
 
 KODIEXTSETTINGS = ""
