@@ -9,8 +9,6 @@ SRCREV:dm7080 = "ed7dd69f2d24c040b2a4ebfbeeb63135132abde7"
 SRCREV:dreamone = "${SRCREV:dm7080}"
 SRCREV:dreamtwo = "${SRCREV:dm7080}"
 
-SRC_URI:append = ";branch=${BRANCH}"
-
 inherit opendreambox-git pkgconfig update-rc.d
 
 do_install() {
@@ -19,9 +17,8 @@ do_install() {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-#RRECOMMENDS:${PN} = "dreambox-dvb-modules-${MACHINE}-lcd"
+RRECOMMENDS_${PN} = "dreambox-dvb-modules-${MACHINE}-lcd"
 
-BRANCH = "master"
 DMBRANCH:dm7080 = "dm7080"
 DMBRANCH:dm820 = "dm7080"
 DMBRANCH:dreamone = "dm7080"
