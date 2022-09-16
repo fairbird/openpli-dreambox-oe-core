@@ -11,5 +11,3 @@ def kernel_console(d):
     return 'console=%s' % console
 
 CMDLINE = "${@kernel_console(d)} root=/dev/mmcblk0p7 rootwait rootfstype=ext4 no_console_suspend"
-
-COMPATIBLE_MACHINE = "^(dreamone)$"
