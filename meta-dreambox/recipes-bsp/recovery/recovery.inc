@@ -3,6 +3,8 @@ HOMEPAGE = "http://dreamboxupdate.com/"
 LICENSE = "CLOSED"
 DEPENDS = "coreutils-native udev"
 
+PR = "r1"
+
 inherit pkgconfig update-rc.d opendreambox-git
 
 do_install() {
@@ -14,21 +16,21 @@ PACKAGES =+ "flash-scripts ${PN}-autoflashd ${PN}-fbscaled"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 EMMCRDEPENDS_recovery = " \
-    e2fsprogs-mke2fs \
-    gptfdisk \
+	e2fsprogs-mke2fs \
+	gptfdisk \
 "
 EMMCRDEPENDS_flash-scripts = " \
-    util-linux-sfdisk \
+	util-linux-sfdisk \
 "
 NANDRDEPENDS_recovery = " \
-    mtd-utils-ubifs \
+	mtd-utils-ubifs \
 "
 NANDRDEPENDS_flash-scripts = " \
-    mtd-utils \
+	mtd-utils \
 "
 FASTBOOTRDEPENDS_flash-scripts = " \
-    fastboot \
-    mkbootblob \
+	fastboot \
+	mkbootblob \
 "
 
 RDEPENDS:${PN} = "\
@@ -45,6 +47,10 @@ RDEPENDS:${PN}:append:dm520 = " \
 "
 
 RDEPENDS:${PN}:append:dm820 = " \
+	${EMMCRDEPENDS_recovery} \
+"
+
+RDEPENDS:${PN}:append:dm7080 = " \
 	${EMMCRDEPENDS_recovery} \
 "
 
@@ -67,25 +73,20 @@ RDEPENDS:${PN}:append:dreamtwo = "\
 	"
 
 RDEPENDS:flash-scripts = " \
-    coreutils-realpath \
-    tpm-ca \
+	coreutils-realpath \
+	tpm-ca \
 "
 
 RDEPENDS:flash-scripts:append:dm520 = " \
 	${NANDRDEPENDS_flash-scripts} \
 "
 
-RDEPENDS:flash-scripts:append:dm820 = "\
-	${EMMCRDEPENDS_flash-scripts} \
-	${FASTBOOTRDEPENDS_flash-scripts} \
-	"
-
 RDEPENDS:flash-scripts:append:dm900 = " \
-    ${EMMCRDEPENDS_flash-scripts} \
+	${EMMCRDEPENDS_flash-scripts} \
 "
 
 RDEPENDS:flash-scripts:append:dm920 = " \
-    ${EMMCRDEPENDS_flash-scripts} \
+	${EMMCRDEPENDS_flash-scripts} \
 "
 
 RDEPENDS:flash-scripts:append:dreamone = "\
