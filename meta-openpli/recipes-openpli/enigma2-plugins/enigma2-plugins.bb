@@ -77,6 +77,7 @@ DEPENDS = " \
 	libcddb \
 	dvdbackup \
 	libtirpc \
+	enigma2-plugin-extensions-lcd4linuxplugin \
 	"
 
 do_compile() {
