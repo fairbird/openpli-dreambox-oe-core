@@ -3,7 +3,7 @@ HOMEPAGE = "http://dreamboxupdate.com/"
 LICENSE = "CLOSED"
 DEPENDS = "coreutils-native udev"
 
-inherit pkgconfig update-rc.d
+inherit pkgconfig update-rc.d opendreambox-git
 
 do_install() {
 	oe_runmake install DESTDIR=${D}
@@ -13,24 +13,25 @@ PACKAGES =+ "flash-scripts ${PN}-autoflashd ${PN}-fbscaled"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-EMMCRDEPENDS:recovery = "\
-	e2fsprogs-mke2fs \
-	gptfdisk \
-	"
-
-EMMCRDEPENDS:flash-scripts += "util-linux-sfdisk"
-
-NANDRDEPENDS:recovery += "mtd-utils-ubifs"
-
-NANDRDEPENDS:flash-scripts += "mtd-utils"
-
-FASTBOOTRDEPENDS:flash-scripts = "\
-	fastboot \
-	mkbootblob \
-	"
+EMMCRDEPENDS_recovery = " \
+    e2fsprogs-mke2fs \
+    gptfdisk \
+"
+EMMCRDEPENDS_flash-scripts = " \
+    util-linux-sfdisk \
+"
+NANDRDEPENDS_recovery = " \
+    mtd-utils-ubifs \
+"
+NANDRDEPENDS_flash-scripts = " \
+    mtd-utils \
+"
+FASTBOOTRDEPENDS_flash-scripts = " \
+    fastboot \
+    mkbootblob \
+"
 
 RDEPENDS:${PN} = "\
-	${PN}-autoflashd \
 	flash-scripts \
 	gpgv \
 	pigz \
@@ -38,55 +39,64 @@ RDEPENDS:${PN} = "\
 	util-linux-mount \
 	"
 
-RDEPENDS:${PN}:append:dm820 = " ${EMMCRDEPENDS:recovery}"
-RDEPENDS:${PN}:append:dm7080 = " ${EMMCRDEPENDS:recovery}"
-RDEPENDS:${PN}:append:dm900 = " ${EMMCRDEPENDS:recovery}"
-RDEPENDS:${PN}:append:dm920 = " ${EMMCRDEPENDS:recovery}"
-RDEPENDS:${PN}:append:dm520 = " ${NANDRDEPENDS:recovery}"
+RDEPENDS:${PN}:append:dm520 = " \
+	${NANDRDEPENDS_recovery} \
+"
+
+RDEPENDS:${PN}:append:dm820 = " \
+	${EMMCRDEPENDS_recovery} \
+"
+
+RDEPENDS:${PN}:append:dm900 = " \
+	${EMMCRDEPENDS_recovery} \
+"
+
+RDEPENDS:${PN}:append:dm920 = " \
+	${EMMCRDEPENDS_recovery} \
+"
 
 RDEPENDS:${PN}:append:dreamone = "\
-	${EMMCRDEPENDS:recovery} \
+	$EMMCRDEPENDS_recovery} \
 	${PN}-fbscaled \
 	"
 
 RDEPENDS:${PN}:append:dreamtwo = "\
-	${EMMCRDEPENDS:recovery} \
+	${EMMCRDEPENDS_recovery} \
 	${PN}-fbscaled \
 	"
 
-RDEPENDS:flash-scripts += "coreutils-realpath"
+RDEPENDS:flash-scripts = " \
+    coreutils-realpath \
+    tpm-ca \
+"
+
+RDEPENDS:flash-scripts:append:dm520 = " \
+	${NANDRDEPENDS_flash-scripts} \
+"
 
 RDEPENDS:flash-scripts:append:dm820 = "\
-	${EMMCRDEPENDS:flash-scripts} \
-	${FASTBOOTRDEPENDS:flash-scripts} \
+	${EMMCRDEPENDS_flash-scripts} \
+	${FASTBOOTRDEPENDS_flash-scripts} \
 	"
 
-RDEPENDS:flash-scripts:append:dm7080 = "\
-	${EMMCRDEPENDS:flash-scripts} \
-	${FASTBOOTRDEPENDS:flash-scripts} \
-	"
+RDEPENDS:flash-scripts:append:dm900 = " \
+    ${EMMCRDEPENDS_flash-scripts} \
+"
 
-RDEPENDS:flash-scripts:append:dm900 = " ${EMMCRDEPENDS:flash-scripts}"
-RDEPENDS:flash-scripts:append:dm920 = " ${EMMCRDEPENDS:flash-scripts}"
-RDEPENDS:flash-scripts:append:dm520 = " ${NANDRDEPENDS:flash-scripts}"
+RDEPENDS:flash-scripts:append:dm920 = " \
+    ${EMMCRDEPENDS_flash-scripts} \
+"
 
 RDEPENDS:flash-scripts:append:dreamone = "\
-	${EMMCRDEPENDS:flash-scripts} \
+	${EMMCRDEPENDS_flash-scripts} \
 	android-tools \
 	u-boot-mkimage \
 	"
 
 RDEPENDS:flash-scripts:append:dreamtwo = "\
-	${EMMCRDEPENDS:flash-scripts} \
+	${EMMCRDEPENDS_flash-scripts} \
 	android-tools \
 	u-boot-mkimage \
-	"
-
-#RRECOMMENDS:flash-scripts = "dreambox-dvb-modules-stb-core"
-
-FILES:${PN}-autoflashd = "\
-	${INIT_D_DIR}/autoflashd \
-	${sbindir}/autoflashd \
 	"
 
 FILES:${PN}-fbscaled = "\

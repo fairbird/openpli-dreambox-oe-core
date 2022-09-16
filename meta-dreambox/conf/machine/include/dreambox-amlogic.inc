@@ -45,6 +45,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	meson-mali-module-bifrost-r12p0 \
 	nrf52-firmware-${MACHINE} \
 	u-boot-bin \
+	tpmd \
 	"
 
 KERNEL_MODULE_AUTOLOAD += "\

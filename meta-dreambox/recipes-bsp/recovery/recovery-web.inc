@@ -1,7 +1,6 @@
 SUMMARY = "Provides web pages for the rescue partition"
 HOMEPAGE = "http://dreamboxupdate.com/"
 LICENSE = "CLOSED"
-
 DEPENDS = "fcgi"
 
 do_install() {
@@ -17,8 +16,7 @@ RDEPENDS:${PN} = "\
 	lighttpd-module-cgi \
 	lighttpd-module-fastcgi \
 	recovery \
+	tpm-ca \
 	"
-
-#RRECOMMENDS:${PN} = "dreambox-dvb-modules-stb-core"
 
 inherit opendreambox-git
