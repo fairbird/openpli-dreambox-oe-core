@@ -65,6 +65,8 @@ inherit autotools-brokensep
 
 S = "${WORKDIR}/git"
 
+WARN_QA:remove = "build-deps"
+
 DEPENDS = " \
 	python3-pillow \
 	python3-pyopenssl \
