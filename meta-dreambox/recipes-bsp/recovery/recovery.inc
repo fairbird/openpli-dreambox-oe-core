@@ -81,6 +81,11 @@ RDEPENDS:flash-scripts:append:dm520 = " \
 	${NANDRDEPENDS_flash-scripts} \
 "
 
+RDEPENDS:flash-scripts:append:dm820 = "\
+	${EMMCRDEPENDS_flash-scripts} \
+	${FASTBOOTRDEPENDS_flash-scripts} \
+"
+
 RDEPENDS:flash-scripts:append:dm900 = " \
 	${EMMCRDEPENDS_flash-scripts} \
 "
