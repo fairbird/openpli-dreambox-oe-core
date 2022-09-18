@@ -30,7 +30,6 @@ NANDRDEPENDS_flash-scripts = " \
 "
 FASTBOOTRDEPENDS_flash-scripts = " \
 	fastboot \
-	mkbootblob \
 "
 
 RDEPENDS:${PN} = "\
