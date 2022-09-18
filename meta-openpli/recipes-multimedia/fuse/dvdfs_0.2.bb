@@ -8,7 +8,7 @@ PR = "r1"
 
 inherit pkgconfig
 
-SRC_URI = "http://www.jspenguin.org/software/${BPN}/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://ktpanda.org/software/${BPN}/${BPN}-${PV}.tar.gz \
 	file://crosscompile.patch \
 	file://defaultdevicesr0.patch \
 	"
