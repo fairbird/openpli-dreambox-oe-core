@@ -8,7 +8,7 @@ EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
 #KERNEL_MODULE_AUTOLOAD += "xfs"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS = " \
+MACHINE_EXTRA_RDEPENDS = " \
 	gstreamer1.0-plugin-multibox-dvbmediasink \	
 	ntfs-3g \
 	kernel-module-cifs \

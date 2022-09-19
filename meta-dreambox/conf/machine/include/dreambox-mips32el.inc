@@ -6,7 +6,7 @@ KERNELVERSION = "3.2"
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+MACHINE_EXTRA_RDEPENDS += "\
 	${@bb.utils.contains_any("MACHINE", "dm800se dm500hd", "dm-bootsplash", "", d)} \
 	libpagecache \
 	libpassthrough \

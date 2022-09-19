@@ -40,11 +40,13 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-module-snd-pcm-oss \
     "
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    dreambox-dvb-modules-${MACHINE} \
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "dreambox-dvb-modules-${MACHINE}"
+
+MACHINE_EXTRA_RDEPENDS += "\
     libpagecache \
     libpassthrough \
     flash-nrf52 \
+    libvc5dream \
     "
 
 KERNEL_MODULE_AUTOLOAD += "xfs"

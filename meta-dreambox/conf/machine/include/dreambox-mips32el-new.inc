@@ -22,7 +22,7 @@ PACKAGECONFIG:pn-cogl-1.0 = "egl-kms egl-null \
 
 PACKAGECONFIG:pn-weston = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles', '', d)}"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+MACHINE_EXTRA_RDEPENDS += "\
 	libvc5dream \
 	tpmd \
 	"

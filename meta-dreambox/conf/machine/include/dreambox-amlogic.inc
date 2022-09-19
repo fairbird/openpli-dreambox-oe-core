@@ -31,12 +31,11 @@ MACHINE_FEATURES = "dreambox hdmicec serial usbconsole usbgadget usbhost vfat ex
 
 BOX_BRAND = "dreambox"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+MACHINE_EXTRA_RDEPENDS += "\
 	alsa-plugins \
 	alsa-plugins-pulseaudio-conf \
 	bcmdhd \
 	dm-precompiled \
-	dreambox-dvb-modules-${MACHINE} \
 	firmware-bcmdhd \
 	flash-scripts \
 	gstreamer1.0-dreamsinks \
