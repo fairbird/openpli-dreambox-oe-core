@@ -1,0 +1,87 @@
+From c9ef072dc2cb8e3392e48bb7d588f70c3c6a1e8d Mon Sep 17 00:00:00 2001
+From: fairbird <rrrr53@hotmail.com>
+Date: Fri, 23 Sep 2022 13:46:11 +0300
+Subject: remove-unused-plugins
+
+---
+ Makefile.am  |  2 +-
+ configure.ac | 37 -------------------------------------
+ 2 files changed, 1 insertion(+), 38 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index a3906b0..658d3e4 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,6 @@
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-SUBDIRS = ABMCustomMixImporter AboutBoxBranding Blindscan BTDevicesManager ChannelsImporter DLNABrowser DLNAServer EPGTranslator Fempa LCD4linux OnDemand RemoteChannelStreamConverter SatipClient StreamTV tmdb TunerServer xmlUpdate 3GModemManager Chefkoch PiconsUpdater TVSpielfilm
++SUBDIRS = ABMCustomMixImporter AboutBoxBranding BTDevicesManager ChannelsImporter DLNABrowser DLNAServer EPGTranslator Fempa OnDemand RemoteChannelStreamConverter StreamTV tmdb TunerServer xmlUpdate 3GModemManager Chefkoch PiconsUpdater TVSpielfilm
+ 
+ if MIPSEL
+ SUBDIRS += WirelessAccessPoint
+diff --git a/configure.ac b/configure.ac
+index 880d12b..5c0b73e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -290,11 +290,6 @@ AnimationSetup/src/Makefile
+ AnimationSetup/po/Makefile
+ AnimationSetup/meta/Makefile
+ 
+-Blindscan/Makefile
+-Blindscan/src/Makefile
+-Blindscan/meta/Makefile
+-Blindscan/po/Makefile
+-
+ BTDevicesManager/Makefile
+ BTDevicesManager/src/Makefile
+ BTDevicesManager/meta/Makefile
+@@ -389,33 +384,6 @@ VPLEDControl/src/Makefile
+ VPLEDControl/meta/Makefile
+ VPLEDControl/po/Makefile
+ 
+-LCD4linux/Makefile
+-LCD4linux/src/Makefile
+-LCD4linux/src/data/Makefile
+-LCD4linux/src/data/audio/Makefile
+-LCD4linux/src/data/Clock1/Makefile
+-LCD4linux/src/data/Clock2/Makefile
+-LCD4linux/src/data/Clock3/Makefile
+-LCD4linux/src/data/Clock4/Makefile
+-LCD4linux/src/data/Clock5/Makefile
+-LCD4linux/src/data/Clock6/Makefile
+-LCD4linux/src/data/Clock7/Makefile
+-LCD4linux/src/data/Clock8/Makefile
+-LCD4linux/src/data/Clock9/Makefile
+-LCD4linux/src/data/Clock10/Makefile
+-LCD4linux/src/meteo/Makefile
+-LCD4linux/src/renderer/Makefile
+-LCD4linux/src/wetter/Makefile
+-LCD4linux/src/dinobot/Makefile
+-LCD4linux/src/aarch64/Makefile
+-LCD4linux/src/armv7a/Makefile
+-LCD4linux/src/armv7ahf/Makefile
+-LCD4linux/src/cortexa9hf/Makefile
+-LCD4linux/src/mips/Makefile
+-LCD4linux/src/sh4/Makefile
+-LCD4linux/meta/Makefile
+-LCD4linux/po/Makefile
+-
+ OdinM7VFDControl/Makefile
+ OdinM7VFDControl/src/Makefile
+ OdinM7VFDControl/meta/Makefile
+@@ -483,11 +451,6 @@ RCUSelect/conf/Makefile
+ RCUSelect/po/Makefile
+ RCUSelect/meta/Makefile
+ 
+-SatipClient/Makefile
+-SatipClient/src/Makefile
+-SatipClient/po/Makefile
+-SatipClient/meta/Makefile
+-
+ SimpleFancontrol/Makefile
+ SimpleFancontrol/src/Makefile
+ SimpleFancontrol/meta/Makefile
+-- 
+2.34.1
+
