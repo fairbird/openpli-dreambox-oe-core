@@ -37,11 +37,19 @@ IMAGE_INSTALL = "\
 	stb-hwclock \
 	tuxbox-common \
 	util-linux-ionice \
+	util-linux-mount \
 	tzdata \
 	volatile-media \
 	vsftpd \
 	xz \
+	mtd-utils \
+	mtd-utils-ubifs \
+	${@bb.utils.contains('MACHINE_FEATURES', 'emmc', 'bzip2 rsync', '', d)} \
+	${@bb.utils.contains("TARGET_ARCH", "arm", "${GETEXTRA}", "", d)} \
+	${@bb.utils.contains("TARGET_ARCH", "aarch64", "${GETEXTRA}", "", d)} \
 "
+
+GETEXTRA = "${@bb.utils.contains('MACHINE', 'cube', '', 'edid-decode', d)}"
 
 export IMAGE_BASENAME = "openpli"
 IMAGE_LINGUAS = ""
