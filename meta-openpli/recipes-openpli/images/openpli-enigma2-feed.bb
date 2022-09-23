@@ -100,8 +100,6 @@ OPTIONAL_PACKAGES += " \
 	tmux \
 	transmission \
 	udpxy \
-	usb-modeswitch \
-	usb-modeswitch-data \
 	v4l-utils \
 	vim \
 	wget \
@@ -191,6 +189,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-systemplugins-signalfinder \
 	enigma2-plugins \
+	enigma2-alliance-plugins \
 	meta-enigma2-dvdburn \
 	picons-enigma2-meta \
 	softcams-enigma2-meta \
