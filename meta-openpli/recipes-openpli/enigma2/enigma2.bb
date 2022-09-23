@@ -29,7 +29,6 @@ RDEPENDS:${PN} = " \
 	enigma2-module \
 	ethtool \
 	ntpdate \
-	mtd-utils-ubifs \
 	glibc-gconv-iso8859-15 \
 	${PYTHON_RDEPS} \
 	"
