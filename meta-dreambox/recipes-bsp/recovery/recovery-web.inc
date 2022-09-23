@@ -16,7 +16,6 @@ RDEPENDS:${PN} = "\
 	lighttpd-module-cgi \
 	lighttpd-module-fastcgi \
 	recovery \
-	tpm-ca \
 	"
 
 inherit opendreambox-git

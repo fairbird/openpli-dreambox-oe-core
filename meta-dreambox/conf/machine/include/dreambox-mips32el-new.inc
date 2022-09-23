@@ -24,7 +24,6 @@ PACKAGECONFIG:pn-weston = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gl
 
 MACHINE_EXTRA_RDEPENDS += "\
 	libvc5dream \
-	tpmd \
 	"
 
 DREAMBOX_IMAGE_SIZE ??= "1024"

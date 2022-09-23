@@ -73,7 +73,6 @@ RDEPENDS:${PN}:append:dreamtwo = "\
 
 RDEPENDS:flash-scripts = " \
 	coreutils-realpath \
-	tpm-ca \
 "
 
 RDEPENDS:flash-scripts:append:dm520 = " \

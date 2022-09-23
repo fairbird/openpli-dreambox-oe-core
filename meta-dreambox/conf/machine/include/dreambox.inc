@@ -17,7 +17,6 @@ MACHINE_EXTRA_RDEPENDS = " \
 	dreambox-dvb-modules-${MACHINE} \
 	${@bb.utils.contains_any("MACHINE", "dm800se dm500hhd dm8000 dm7020hd dm800sev2 dm500hdv2", "kernel-module-ecb", "", d)} \
 	dreambox-boot-progress \
-	tpmd \
 	"
 
 GST_VERSION = "1.0"
