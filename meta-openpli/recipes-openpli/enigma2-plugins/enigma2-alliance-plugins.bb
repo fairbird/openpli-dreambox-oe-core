@@ -60,7 +60,7 @@ DEPENDS = "\
     minidlna \
     hddtemp \
     ppp \
-    usbmodeswitch \
+    usb-modeswitch \
     usbmodeswitch-data \
     usbutils \
     bluez-conf \
