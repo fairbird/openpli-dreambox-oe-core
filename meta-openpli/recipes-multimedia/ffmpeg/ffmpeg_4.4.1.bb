@@ -91,7 +91,7 @@ PACKAGECONFIG[shared] = "--enable-shared"
 PACKAGECONFIG[strip] = ",--disable-stripping"
 
 # Check codecs that require --enable-nonfree
-USE_NONFREE = "${@bb.utils.contains_any('PACKAGECONFIG', [ 'openssl' ], 'yes', '', d)}"
+USE_NONFREE = "${@bb.utils.contains('PACKAGECONFIG', [ 'openssl' ], 'yes', '', d)}"
 
 def cpu(d):
     for arg in (d.getVar('TUNE_CCARGS') or '').split():
