@@ -29,7 +29,7 @@ BOX_12="dm920"
 BOX_13="dreamone"
 BOX_14="dreamtwo"
 list=
-for i in $(seq 1 13); do
+for i in $(seq 1 14); do
     p="BOX_$i"
     list="$list $i ${!p} "
 done
