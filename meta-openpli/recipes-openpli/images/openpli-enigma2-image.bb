@@ -1,41 +1,5 @@
 require openpli-image.bb
 
-KERNEL_WIFI_DRIVERS = " \
-	firmware-carl9170 \
-	firmware-htc7010 \
-	firmware-htc9271 \
-	firmware-rt2870 \
-	firmware-rt73 \
-	firmware-rtl8712u \
-	firmware-zd1211 \
-	\
-	kernel-module-ath9k-htc \
-	kernel-module-carl9170 \
-	kernel-module-r8712u \
-	kernel-module-rt2500usb \
-	kernel-module-rt2800usb \
-	kernel-module-rt73usb \
-	kernel-module-rtl8187 \
-	kernel-module-zd1211rw \
-	"
-
-EXTERNAL_WIFI_DRIVERS = " \
-	firmware-rtl8192eu \
-	firmware-rtl8188eu \
-	\
-	rtl8188eu \
-	rtl8192eu \
-	rt3573 \
-	rt5572 \
-	rtl8723a \
-	rtl8723bs \
-	rtl8814au \
-	rtl8822bu \
-	rt8812au \
-	mt7610u \
-	mt7601u \
-	"
-
 ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-audiosync \
 	enigma2-plugin-extensions-autobackup \
@@ -91,7 +55,7 @@ IMAGE_INSTALL += " \
 	tuxbox-common \
 	wget \
 	${ENIGMA2_PLUGINS} \
-	${@bb.utils.contains_any("MACHINE", "dm500hd dm500hdv2 dm800se dm800sev2 dm520 dm820 dm7020hd dm7080 dm8000 dm900 dm920", "${KERNEL_WIFI_DRIVERS}" , "${EXTERNAL_WIFI_DRIVERS}", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "nowifi", "", "network-usb-drivers-meta", d)} \
 	"
 
 export IMAGE_BASENAME = "openpli-enigma2"

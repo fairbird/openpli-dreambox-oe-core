@@ -50,8 +50,6 @@ OPTIONAL_PACKAGES += " \
 	mediainfo \
 	minisatip \
 	mpd \
-	mt7601u \
-	mt7610u \
 	mtd-utils \
 	mtools \
 	nano \
@@ -77,13 +75,6 @@ OPTIONAL_PACKAGES += " \
 	python3-requests \
 	python3-youtube-dl \
 	rsync \
-	rt3573 \
-	rt5572 \
-	rtl8723a \
-	rtl8723bs \
-	rtl8814au \
-	rtl8822bu \
-	rt8812au \
 	rtl-sdr \
 	rtorrent \
 	sabnzbd \
@@ -110,41 +101,17 @@ OPTIONAL_PACKAGES += " \
 	zeroconf \
 	zip \
 	zsh \
+	network-usb-drivers-meta \
 	${OPTIONAL_BSP_PACKAGES} \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "dm900 dm920", "kodi" , "", d)} \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "dm900 dm920", "qtwidevine" , "", d)} \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "dreamone dreamtwo", "${KERNEL_WIFI_DRIVERS}" , "", d)} \
-	"
-
-KERNEL_WIFI_DRIVERS = " \
-	firmware-carl9170 \
-	firmware-htc7010 \
-	firmware-htc9271 \
-	firmware-rt2870 \
-	firmware-rt73 \
-	firmware-rtl8712u \
-	firmware-zd1211 \
-	firmware-rtl8192eu \
-	firmware-rtl8188eu \
-	\
-	rtl8188eu \
-	rtl8192eu \
-	\
-	kernel-module-ath9k-htc \
-	kernel-module-carl9170 \
-	kernel-module-r8712u \
-	kernel-module-rt2500usb \
-	kernel-module-rt2800usb \
-	kernel-module-rt73usb \
-	kernel-module-rtl8187 \
-	kernel-module-zd1211rw \
+	${@bb.utils.contains("MACHINE_FEATURES", "dm900 dm920", "kodi" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "dm900 dm920", "qtwidevine" , "", d)} \
 	"
 
 OPTIONAL_BSP_ENIGMA2_PACKAGES ?= ""
 ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
 	dvb-usb-drivers-meta \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "bwlcd96 bwlcd128 bwlcd140 bwlcd255 colorlcd220 colorlcd390 colorlcd400", "enigma2-display-skins", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "bwlcd96 bwlcd128 bwlcd140 bwlcd255 colorlcd220 colorlcd390 colorlcd400", "enigma2-display-skins", "", d)} \
 	enigma2-plugin-extensions-arabicsavior \
 	enigma2-plugin-extensions-backupflash \
 	enigma2-plugin-extensions-keyadder \
@@ -160,7 +127,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-xtraevent \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "dm900 dm920", "enigma2-plugin-extensions-kodi" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "dm900 dm920", "enigma2-plugin-extensions-kodi" , "", d)} \
 	enigma2-plugin-security-firewall \
 	enigma2-plugin-skins-octetfhd \
 	enigma2-plugin-skins-pd1loi-hd-night \
