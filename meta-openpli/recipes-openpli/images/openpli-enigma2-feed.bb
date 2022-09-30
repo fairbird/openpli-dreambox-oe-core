@@ -103,7 +103,6 @@ OPTIONAL_PACKAGES += " \
 	zsh \
 	network-usb-drivers-meta \
 	${OPTIONAL_BSP_PACKAGES} \
-	${@bb.utils.contains("MACHINE_FEATURES", "dm900 dm920", "kodi" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "dm900 dm920", "qtwidevine" , "", d)} \
 	"
 
@@ -127,7 +126,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-xtraevent \
-	${@bb.utils.contains("MACHINE_FEATURES", "dm900 dm920", "enigma2-plugin-extensions-kodi" , "", d)} \
 	enigma2-plugin-security-firewall \
 	enigma2-plugin-skins-octetfhd \
 	enigma2-plugin-skins-pd1loi-hd-night \
