@@ -101,16 +101,16 @@ OPTIONAL_PACKAGES += " \
 	zeroconf \
 	zip \
 	zsh \
-	enigma2-plugin-drivers-network-usb-mt7610u
-	enigma2-plugin-drivers-network-usb-r8712u
-	enigma2-plugin-drivers-network-usb-rt5572
-	enigma2-plugin-drivers-network-usb-rt73
-	enigma2-plugin-drivers-network-usb-rtl8188fu
-	enigma2-plugin-drivers-network-usb-rtl8192eu
-	enigma2-plugin-drivers-network-usb-rtl8192fu
-	enigma2-plugin-drivers-network-usb-rtl8814au
-	enigma2-plugin-drivers-network-usb-rtl8821cu
-	enigma2-plugin-drivers-network-usb-rtl8822bu
+	enigma2-plugin-drivers-network-usb-mt7610u \
+	enigma2-plugin-drivers-network-usb-r8712u \
+	enigma2-plugin-drivers-network-usb-rt5572 \
+	enigma2-plugin-drivers-network-usb-rt73 \
+	enigma2-plugin-drivers-network-usb-rtl8188fu \
+	enigma2-plugin-drivers-network-usb-rtl8192eu \
+	enigma2-plugin-drivers-network-usb-rtl8192fu \
+	enigma2-plugin-drivers-network-usb-rtl8814au \
+	enigma2-plugin-drivers-network-usb-rtl8821cu \
+	enigma2-plugin-drivers-network-usb-rtl8822bu \
 	${OPTIONAL_BSP_PACKAGES} \
 	${@bb.utils.contains("MACHINE_FEATURES", "dm900 dm920", "qtwidevine" , "", d)} \
 	"
