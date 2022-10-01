@@ -1,7 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-DEPENDS += "libsoup-2.4"
-RDEPENDS:${PN} += "libsoup-2.4"
+DEPENDS:append = " libsoup-2.4"
+RDEPENDS:${PN}-soup += "libsoup-2.4"
 
 SRC_URI:append = " file://001-gstrtpmp4gpay-set-dafault-value-for-MPEG4-without-co.patch"
 
