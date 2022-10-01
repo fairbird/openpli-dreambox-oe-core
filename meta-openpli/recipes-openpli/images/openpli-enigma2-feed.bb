@@ -101,6 +101,7 @@ OPTIONAL_PACKAGES += " \
 	zeroconf \
 	zip \
 	zsh \
+	network-usb-drivers-meta \
 	enigma2-plugin-drivers-network-usb-mt7610u \
 	enigma2-plugin-drivers-network-usb-r8712u \
 	enigma2-plugin-drivers-network-usb-rt5572 \
