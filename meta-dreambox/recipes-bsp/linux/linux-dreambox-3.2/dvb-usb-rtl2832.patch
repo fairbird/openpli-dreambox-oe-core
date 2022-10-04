@@ -202,9 +202,9 @@ diff --git a/drivers/media/dvb/dvb-usb/Kconfig b/drivers/media/dvb/dvb-usb/Kconf
 index 787ffab..cbb591f 100644
 --- a/drivers/media/dvb/dvb-usb/Kconfig
 +++ b/drivers/media/dvb/dvb-usb/Kconfig
-@@ -351,6 +351,13 @@ config DVB_USB_AF9035
+@@ -338,6 +338,13 @@ config DVB_USB_AF9035
  	help
- 	  Say Y here to support the Afatech AF9035 based DVB-T USB2.0 receiver
+ 	  Say Y here to support the Afatech AF9015 based DVB-T USB2.0 receiver
  
 +config DVB_USB_RTL2832
 +	tristate "Realtek RTL2832 DVB-T USB2.0 support"
@@ -14451,7 +14451,7 @@ diff --git a/drivers/media/dvb/dvb-usb/dvb-usb-ids.h b/drivers/media/dvb/dvb-usb
 index 9df8f28..442f15c 100644
 --- a/drivers/media/dvb/dvb-usb/dvb-usb-ids.h
 +++ b/drivers/media/dvb/dvb-usb/dvb-usb-ids.h
-@@ -305,6 +305,7 @@
+@@ -282,6 +282,7 @@
  #define USB_PID_WINFAST_DTV_DONGLE_H			0x60f6
  #define USB_PID_WINFAST_DTV_DONGLE_STK7700P_2		0x6f01
  #define USB_PID_WINFAST_DTV_DONGLE_GOLD			0x6029
