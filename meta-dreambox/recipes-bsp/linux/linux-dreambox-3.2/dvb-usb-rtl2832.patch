@@ -202,7 +202,7 @@ diff --git a/drivers/media/dvb/dvb-usb/Kconfig b/drivers/media/dvb/dvb-usb/Kconf
 index 787ffab..cbb591f 100644
 --- a/drivers/media/dvb/dvb-usb/Kconfig
 +++ b/drivers/media/dvb/dvb-usb/Kconfig
-@@ -338,6 +338,13 @@ config DVB_USB_AF9035
+@@ -338,6 +338,13 @@ config DVB_USB_AF9015
  	help
  	  Say Y here to support the Afatech AF9015 based DVB-T USB2.0 receiver
  
@@ -215,7 +215,7 @@ index 787ffab..cbb591f 100644
 +
  config DVB_USB_CE6230
  	tristate "Intel CE6230 DVB-T USB2.0 support"
- 	depends on DVB_USB
+ 	depends on DVB_USB && EXPERIMENTAL
 diff --git a/drivers/media/dvb/dvb-usb/Makefile b/drivers/media/dvb/dvb-usb/Makefile
 index 4745905..834c2b2 100644
 --- a/drivers/media/dvb/dvb-usb/Makefile

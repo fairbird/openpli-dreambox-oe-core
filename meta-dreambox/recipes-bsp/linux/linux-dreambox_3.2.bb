@@ -20,8 +20,7 @@ SRC_URI = " \
     ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.${PATCHLEVEL}.xz;apply=yes;name=stable-patch \
     http://dreamboxupdate.com/download/kernel-patches/linux-dreambox-${PV}-${PATCHREV}.patch.bz2;apply=yes;name=dream-patch \ 
     http://download.filesystems.org/unionfs/unionfs-2.x/unionfs-2.5.11_for_3.2.2.diff.gz;name=unionfs \
-    file://0001-correctly-initiate-nand-flash-ecc-config-when-old-2n.patch \ 
-    file://0001-Revert-MIPS-Fix-potencial-corruption.patch \
+    file://0001-correctly-initiate-nand-flash-ecc-config-when-old-2n.patch \
     file://fadvise_dontneed_change.patch \
     file://fix-proc-cputype.patch \
     file://rtl8712-backport-b.patch \
