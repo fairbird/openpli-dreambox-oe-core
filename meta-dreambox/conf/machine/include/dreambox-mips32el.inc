@@ -7,7 +7,7 @@ TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
 
 MACHINE_EXTRA_RDEPENDS += "\
-	${@bb.utils.contains("MACHINE", "dm800se dm500hd", "dm-bootsplash", "", d)} \
+	${@bb.utils.contains("MACHINE", "dm800se dm500hd", "dm-bootsplash kernel-module-stv0299", "", d)} \
 	libpagecache \
 	libpassthrough \
 	"
