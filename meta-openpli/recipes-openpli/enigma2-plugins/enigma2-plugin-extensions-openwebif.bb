@@ -62,10 +62,10 @@ FILES:${PN} = "${PLUGINPATH}"
 python do_cleanup () {
     # contains: MACHINE, box image, remote image, remote map
     boxtypes = [
-        ('dm500hd', 'dm500hd.png', 'dm_normal.png', 'dmm.html'),
+        ('dm500hd', 'dm500hd.png', 'dmm1.png', 'dmm.html'),
         ('dm7020hd', 'dm7020hd.png', 'dmm2.png', 'dmm2.html'),
         ('dm8000', 'dm8000.png', 'dmm1.png', 'dmm1.html'),
-        ('dm800se', 'dm800se.png', 'dm_normal.png', 'dmm.html'),
+        ('dm800se', 'dm800se.png', 'dmm1.png', 'dmm.html'),
         ('dm820', 'dm820.png', 'dmm2.png', 'dmm2.html'),
         ('dm7080', 'dm7080.png', 'dmm2.png', 'dmm2.html'),
         ('dm900', 'dm900.png', 'dmm2.png', 'dmm2.html'),
