@@ -147,7 +147,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-serviceapp \
 	enigma2-plugin-extensions-fontinfo \
-	enigma2-plugin-extensions-historyzapselector \
 	enigma2-plugin-extensions-infobarweather \
 	enigma2-plugin-extensions-managerautofs \
 	enigma2-plugin-extensions-modifyplifullhd \
@@ -155,13 +154,18 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-openmultiboot \
 	enigma2-plugin-extensions-refreshbouquet \
 	enigma2-plugin-extensions-weathermsn \
-	enigma2-plugin-extensions-vcs \
+	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-extensions-xmodem \
 	enigma2-plugin-extensions-xstreamity \
+	enigma2-plugin-extensions-automatic-fullbackup \
+	enigma2-plugin-extensions-customsubservices \
+	enigma2-plugin-extensions-historyzapselector \
+	enigma2-plugin-extensions-sundtekcontrolcenter \
+	enigma2-plugin-extensions-ts-sateditor \
+	enigma2-plugin-extensions-vcs \
 	enigma2-plugin-systemplugins-extnumberzap \
 	enigma2-plugin-systemplugins-extrafancontrol \
 	enigma2-plugin-systemplugins-mountmanager \
-	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-systemplugins-signalfinder \
 	enigma2-plugins \
 	enigma2-alliance-plugins \
