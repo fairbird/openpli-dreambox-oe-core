@@ -4,7 +4,7 @@ inherit allarch
 require conf/license/license-gplv2.inc
 
 RRECOMMENDS:${PN} = " \
-    kernel-module-mt7601u \
+    ${@bb.utils.contains("LINUX_WIFI_mt7106u", "kernel-module-mt7601u", "kernel-module-mt7601u", "mt7601u", d)} \
     firmware-mt7601u \
     "
 

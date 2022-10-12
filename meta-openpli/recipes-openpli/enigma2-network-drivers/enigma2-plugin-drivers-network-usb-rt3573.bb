@@ -4,8 +4,7 @@ inherit allarch
 require conf/license/license-gplv2.inc
 
 RRECOMMENDS:${PN} = " \
-    kernel-module-rt2800usb \
-    rt3573 \
+    ${@bb.utils.contains("MACHINE_FEATURES", "linuxwifi", "kernel-module-rt2800usb", "rt3573", d)} \
     "
 
 PV = "1.0"

@@ -4,7 +4,8 @@ inherit allarch
 require conf/license/license-gplv2.inc
 
 RRECOMMENDS:${PN} = " \
-    firmware-rt3070"
+     ${@bb.utils.contains("MACHINE_FEATURES", "linuxwifi", "kernel-module-rt2800usb", "rt3070", d)} \
+     firmware-rt3070"
 
 PV = "1.0"
 PR = "r0"
