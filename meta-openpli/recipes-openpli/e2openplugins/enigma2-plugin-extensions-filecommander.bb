@@ -7,4 +7,6 @@ require openplugins-replace-pli.inc
 
 require openplugins-distutils.inc
 
-SRC_URI:append = " file://use-setuptools-instead-of-distutils.patch"
+SRC_URI:append = " file://use-setuptools-instead-of-distutils.patch \
+                   file://convert-key-actions-hashes-to-list.patch \
+"
