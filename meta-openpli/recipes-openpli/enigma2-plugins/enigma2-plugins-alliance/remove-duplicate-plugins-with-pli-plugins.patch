@@ -1,0 +1,675 @@
+diff --git a/Makefile.am b/Makefile.am
+index 90eef37..1a295f7 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -2,127 +2,43 @@ ACLOCAL_AMFLAGS = -I m4
+ 
+ SUBDIRS = \
+ 	advhdmi \
+-	aihdcontroler \
+-	antiscrollbar \
+-	aspectratioswitch \
+ 	audiorestart \
+-	audiosync \
+-	automaticcleanup \
+-	automaticvolumeadjustment \
+-	autoresolution \
+-	autotimer \
+-	babelzapper \
+ 	birthdayreminder \
+-	bonjour \
+-	cdinfo \
+ 	channelselectionshorttitle \
+-	curlytx \
+-	dreamexplorer \
+-	dreamirc \
+-	dreammediathek \
+-	dvdbackup \
+-	easymedia \
+ 	ecasa \
+-	eibox \
+-	emailclient \
+ 	emission \
+ 	eparted \
+-	epgrefresh \
+ 	eurotictv \
+ 	eventlist \
+ 	eventposition \
+-	filebrowser \
+ 	flashexpander \
+-	fritzcall \
+-	fstabeditor \
+-	ftpbrowser \
+ 	googlemaps \
+-	growlee \
+-	imdb \
+ 	infobartunerstate \
+-	kiddytimer \
+-	letterbox \
+-	mediadownloader \
+-	merlinepg \
+-	merlinepgcenter \
+-	merlinmusicplayer \
+-	mosaic \
+-	moviecut \
+-	movieretitle \
+ 	moviesearch \
+-	movietagger \
+-	mphelp \
+-	multirc \
+-	ncidclient \
+-	netcaster \
+-	ofdb \
+-	orfat \
+-	orfteletext \
+-	partnerbox \
+-	permanentclock \
+ 	pipservicerelation \
+ 	podcast \
+-	porncenter \
+ 	pushservice \
+ 	quickbutton \
+-	reconstructapsc \
+ 	reftopiconname \
+ 	remotetimer \
+ 	rsdownloader \
+ 	seriesplugin \
+-	setpasswd \
+-	shoutcast \
+-	showclock \
+-	simplerss \
+ 	startuptostandby \
+ 	subsdownloader2 \
+-	svdrp \
+-	tageditor \
+ 	teletext \
+ 	toolkit \
+-	tvcharts \
+-	unwetterinfo \
+-	valixdcontrol \
+ 	videocolorspace \
+-	vlcplayer \
+-	weatherplugin \
+ 	weathercomponent \
+ 	weathercomponenthandler \
+ 	webadmin \
+ 	webbouqueteditor \
+-	webcamviewer \
+-	werbezapper \
+ 	zaphistorybrowser \
+-	zapstatistic \
+-	zdfmediathek \
+-	esame \
+ 	schiffe \
+ 	sudoku \
+ 	vierg \
+ 	bmediacenter \
+ 	advancedmovieselection
+ 
+-if DREAMBOX
+-SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
+-endif
+-
+-if VUSOLO2
+-SUBDIRS +=  fancontrol2
+-endif
+-if VUDUO2
+-SUBDIRS +=  fancontrol2
+-endif
+-if VUUNO
+-SUBDIRS +=  fancontrol2
+-endif
+-if VUULTIMO
+-SUBDIRS +=  fancontrol2
+-endif
+-
+-if XC7346
+-SUBDIRS +=  fancontrol2
+-endif
+-
+ if TPM
+ SUBDIRS += \
+ 	mytube \
+@@ -135,12 +52,6 @@ SUBDIRS += \
+ 	pluginsort 
+ endif
+ 
+-if PLI
+-SUBDIRS += networkbrowserpli epgsearchpli
+-else
+-SUBDIRS += networkbrowser epgsearch
+-endif
+-
+ SUBDIRS += tetris ardmediathek netzkino Series2Folder
+ 
+ metadir = $(datadir)/meta
+diff --git a/configure.ac b/configure.ac
+index ad0c08e..01fb877 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -158,65 +158,12 @@ advhdmi/meta/Makefile
+ advhdmi/po/Makefile
+ advhdmi/src/Makefile
+ 
+-aihdcontroler/Makefile
+-aihdcontroler/meta/Makefile
+-aihdcontroler/src/Makefile
+-aihdcontroler/src/comp/Makefile
+-aihdcontroler/src/data/Makefile
+-
+-antiscrollbar/Makefile
+-antiscrollbar/meta/Makefile
+-antiscrollbar/src/Makefile
+-
+-aspectratioswitch/Makefile
+-aspectratioswitch/meta/Makefile
+-aspectratioswitch/po/Makefile
+-aspectratioswitch/src/Makefile
+-
+ audiorestart/Makefile
+ audiorestart/img/Makefile
+ audiorestart/meta/Makefile
+ audiorestart/po/Makefile
+ audiorestart/src/Makefile
+
+-audiosync/Makefile
+-audiosync/img/Makefile
+-audiosync/meta/Makefile
+-audiosync/po/Makefile
+-audiosync/src/Makefile
+-
+-automaticcleanup/Makefile
+-automaticcleanup/meta/Makefile
+-automaticcleanup/po/Makefile
+-automaticcleanup/src/Makefile
+-
+-automaticvolumeadjustment/Makefile
+-automaticvolumeadjustment/meta/Makefile
+-automaticvolumeadjustment/po/Makefile
+-automaticvolumeadjustment/src/Makefile
+-
+-autoresolution/Makefile
+-autoresolution/meta/Makefile
+-autoresolution/po/Makefile
+-autoresolution/src/Makefile
+-
+-autotimer/etc/Makefile
+-autotimer/Makefile
+-autotimer/meta/Makefile
+-autotimer/po/Makefile
+-autotimer/src/Makefile
+-autotimer/src/WebChilds/Makefile
+-autotimer/src/WebComponents/Makefile
+-autotimer/src/WebComponents/Sources/Makefile
+-autotimer/src/WebScreens/Makefile
+-autotimer/src/web/Makefile
+-autotimer/src/web-data/Makefile
+-
+-babelzapper/etc/Makefile
+-babelzapper/Makefile
+-babelzapper/meta/Makefile
+-babelzapper/src/Makefile
+-
+ birthdayreminder/Makefile
+ birthdayreminder/meta/Makefile
+ birthdayreminder/po/Makefile
+@@ -241,14 +188,6 @@ bmediacenter/skins/Makefile
+ bmediacenter/src/skins/defaultHD/Makefile
+ bmediacenter/src/skins/defaultHD/images/Makefile
+ 
+-bonjour/Makefile
+-bonjour/meta/Makefile
+-bonjour/src/Makefile
+-
+-cdinfo/Makefile
+-cdinfo/meta/Makefile
+-cdinfo/src/Makefile
+-
+ channelselectionshorttitle/Makefile
+ channelselectionshorttitle/src/Makefile
+ 
+@@ -257,54 +196,10 @@ curlytx/meta/Makefile
+ curlytx/po/Makefile
+ curlytx/src/Makefile
+ 
+-dreamexplorer/Makefile
+-dreamexplorer/meta/Makefile
+-dreamexplorer/src/Makefile
+-dreamexplorer/src/res/Makefile
+-
+-dreamirc/Makefile
+-dreamirc/meta/Makefile
+-dreamirc/src/Makefile
+-dreamirc/src/protocols/Makefile
+-
+-dreammediathek/Makefile
+-dreammediathek/src/Makefile
+-
+-dvdbackup/Makefile
+-dvdbackup/meta/Makefile
+-dvdbackup/po/Makefile
+-dvdbackup/src/Makefile
+-
+-easyinfo/Makefile
+-easyinfo/meta/Makefile
+-easyinfo/src/Makefile
+-
+-easymedia/Makefile
+-easymedia/meta/Makefile
+-easymedia/po/Makefile
+-easymedia/src/Makefile
+-easymedia/src/icons/Makefile
+-
+ ecasa/Makefile
+ ecasa/meta/Makefile
+ ecasa/src/Makefile
+ 
+-eibox/Makefile
+-eibox/meta/Makefile
+-eibox/po/Makefile
+-eibox/src/Makefile
+-eibox/src/images/Makefile
+-
+-elektro/Makefile
+-elektro/meta/Makefile
+-elektro/po/Makefile
+-elektro/src/Makefile
+-
+-emailclient/Makefile
+-emailclient/meta/Makefile
+-emailclient/po/Makefile
+-emailclient/src/Makefile
+-
+ emission/Makefile
+ emission/meta/Makefile
+ emission/src/Makefile
+@@ -320,20 +215,6 @@ epgbackup/po/Makefile
+ epgbackup/src/Makefile
+ epgbackup/src/localehelp/Makefile
+ 
+-epgrefresh/Makefile
+-epgrefresh/meta/Makefile
+-epgrefresh/po/Makefile
+-epgrefresh/src/Makefile
+-epgrefresh/src/localehelp/Makefile
+-epgrefresh/src/localehelp/de/Makefile
+-epgrefresh/src/localehelp/it/Makefile
+-epgrefresh/src/localehelp/pt/Makefile
+-
+-esame/Makefile
+-esame/meta/Makefile
+-esame/src/Makefile
+-esame/src/data/Makefile
+-
+ epgsearch/Makefile
+ epgsearch/meta/Makefile
+ epgsearch/po/Makefile
+@@ -356,39 +237,11 @@ eventlist/Makefile
+ eventposition/Makefile
+ eventposition/src/Makefile
+ 
+-fancontrol2/Makefile
+-fancontrol2/meta/Makefile
+-fancontrol2/po/Makefile
+-fancontrol2/src/Makefile
+-fancontrol2/src/data/Makefile
+-
+-filebrowser/Makefile
+-filebrowser/meta/Makefile
+-filebrowser/src/Makefile
+-filebrowser/po/Makefile
+-
+ flashexpander/Makefile
+ flashexpander/meta/Makefile
+ flashexpander/po/Makefile
+ flashexpander/src/Makefile
+ 
+-fritzcall/Makefile
+-fritzcall/meta/Makefile
+-fritzcall/po/Makefile
+-fritzcall/src/Makefile
+-fritzcall/src/images/Makefile
+-fritzcall/src/images/MODERN/Makefile
+-
+-fstabeditor/Makefile
+-fstabeditor/meta/Makefile
+-fstabeditor/src/Makefile
+-
+-ftpbrowser/Makefile
+-ftpbrowser/meta/Makefile
+-ftpbrowser/po/Makefile
+-ftpbrowser/src/Makefile
+-ftpbrowser/src/images/Makefile
+-
+ genuinedreambox/Makefile
+ genuinedreambox/meta/Makefile
+ genuinedreambox/src/Makefile
+@@ -397,98 +250,21 @@ googlemaps/Makefile
+ googlemaps/meta/Makefile
+ googlemaps/src/Makefile
+ 
+-growlee/Makefile
+-growlee/meta/Makefile
+-growlee/src/Makefile
+-
+-httpproxy/Makefile
+-httpproxy/meta/Makefile
+-httpproxy/src/Makefile
+-
+-imdb/Makefile
+-imdb/meta/Makefile
+-imdb/po/Makefile
+-imdb/src/Makefile
+-
+ infobartunerstate/Makefile
+ infobartunerstate/meta/Makefile
+ infobartunerstate/po/Makefile
+ infobartunerstate/src/Makefile
+ 
+-kiddytimer/Makefile
+-kiddytimer/img/Makefile
+-kiddytimer/meta/Makefile
+-kiddytimer/po/Makefile
+-kiddytimer/src/Makefile
+-
+-lastfm/Makefile
+-lastfm/meta/Makefile
+-lastfm/po/Makefile
+-lastfm/src/Makefile
+-
+-letterbox/Makefile
+-letterbox/src/Makefile
+-letterbox/meta/Makefile
+-
+-logomanager/Makefile
+-logomanager/logodir_hdd/Makefile
+-logomanager/meta/Makefile
+-logomanager/src/Makefile
+-
+-mediadownloader/Makefile
+-mediadownloader/meta/Makefile
+-mediadownloader/po/Makefile
+-mediadownloader/src/Makefile
+-
+ menusort/Makefile
+ menusort/meta/Makefile
+ menusort/src/Makefile
+ 
+-merlinepg/Makefile
+-merlinepg/meta/Makefile
+-merlinepg/src/Makefile
+-
+-merlinepgcenter/Makefile
+-merlinepgcenter/meta/Makefile
+-merlinepgcenter/src/Makefile
+-merlinepgcenter/po/Makefile
+-merlinepgcenter/skins/Makefile
+-merlinepgcenter/images/Makefile
+-merlinepgcenter/images/HD/Makefile
+-merlinepgcenter/images/HD_BORDER/Makefile
+-merlinepgcenter/images/SD/Makefile
+-merlinepgcenter/images/XD/Makefile
+-merlinepgcenter/images/XD_BORDER/Makefile
+-merlinepgcenter/images/HD_Elgato/Makefile
+-
+-merlinmusicplayer/Makefile
+-merlinmusicplayer/meta/Makefile
+-merlinmusicplayer/po/Makefile
+-merlinmusicplayer/src/Makefile
+-merlinmusicplayer/src/images/Makefile
+-
+-mosaic/Makefile
+-mosaic/meta/Makefile
+-mosaic/po/Makefile
+-mosaic/src/Makefile
+-
+-moviecut/Makefile
+-moviecut/meta/Makefile
+-moviecut/po/Makefile
+-moviecut/src_cc/Makefile
+-moviecut/src_py/Makefile
+-
+ movielistpreview/Makefile
+ movielistpreview/meta/Makefile
+ movielistpreview/po/Makefile
+ movielistpreview/src/Makefile
+
+-movieretitle/Makefile
+-movieretitle/meta/Makefile
+-movieretitle/po/Makefile
+-movieretitle/src/Makefile
+-
+ moviesearch/Makefile
+ moviesearch/meta/Makefile
+ moviesearch/src/Makefile
+
+@@ -497,78 +277,11 @@ movieselectionquickbutton/meta/Makefile
+ movieselectionquickbutton/po/Makefile
+ movieselectionquickbutton/src/Makefile
+ 
+-movietagger/Makefile
+-movietagger/etc/Makefile
+-movietagger/meta/Makefile
+-movietagger/po/Makefile
+-movietagger/src/Makefile
+-
+-mphelp/Makefile
+-mphelp/meta/Makefile
+-mphelp/po/Makefile
+-mphelp/src/Makefile
+-
+-multirc/Makefile
+-multirc/src/Makefile
+-multirc/meta/Makefile
+-
+ mytube/Makefile
+ mytube/meta/Makefile
+ mytube/po/Makefile
+ mytube/src/Makefile
+ 
+-ncidclient/Makefile
+-ncidclient/meta/Makefile
+-ncidclient/po/Makefile
+-ncidclient/src/Makefile
+-
+-netcaster/Makefile
+-netcaster/meta/Makefile
+-netcaster/src/Makefile
+-netcaster/src/bin/Makefile
+-netcaster/src/bin/interface/Makefile
+-netcaster/src/etc/Makefile
+-
+-networkbrowser/Makefile
+-networkbrowser/meta/Makefile
+-networkbrowser/src/Makefile
+-networkbrowser/src/icons/Makefile
+-networkbrowser/src/lib/Makefile
+-networkbrowser/po/Makefile
+-
+-networkbrowserpli/Makefile
+-networkbrowserpli/meta/Makefile
+-networkbrowserpli/src/Makefile
+-networkbrowserpli/src/icons/Makefile
+-networkbrowserpli/src/lib/Makefile
+-networkbrowserpli/po/Makefile
+-
+-ofdb/Makefile
+-ofdb/meta/Makefile
+-ofdb/po/Makefile
+-ofdb/src/Makefile
+-
+-orfat/Makefile
+-orfat/meta/Makefile
+-orfat/src/Makefile
+-
+-orfteletext/Makefile
+-orfteletext/meta/Makefile
+-orfteletext/src/Makefile
+-
+-partnerbox/Makefile
+-partnerbox/meta/Makefile
+-partnerbox/po/Makefile
+-partnerbox/src/Makefile
+-partnerbox/src/icons/Makefile
+-partnerbox/src/buttons/Makefile
+-
+-permanentclock/Makefile
+-permanentclock/meta/Makefile
+-permanentclock/po/Makefile
+-permanentclock/src/Makefile
+-permanentclock/src/trad/Makefile
+-
+ pipservicerelation/Makefile
+ pipservicerelation/src/Makefile
+ pipservicerelation/meta/Makefile
+@@ -589,12 +302,6 @@ podcast/meta/Makefile
+ podcast/po/Makefile
+ podcast/src/Makefile
+ 
+-porncenter/Makefile
+-porncenter/meta/Makefile
+-porncenter/po/Makefile
+-porncenter/src/Makefile
+-porncenter/src/Additions/Makefile
+-
+ pushservice/Makefile
+ pushservice/meta/Makefile
+ pushservice/po/Makefile
+@@ -609,10 +316,6 @@ quickbutton/meta/Makefile
+ quickbutton/po/Makefile
+ quickbutton/src/Makefile
+ 
+-reconstructapsc/Makefile
+-reconstructapsc/meta/Makefile
+-reconstructapsc/src_py/Makefile
+-
+ reftopiconname/Makefile
+ reftopiconname/src/Makefile
+ 
+@@ -646,26 +349,10 @@ seriesplugin/Logos/Makefile
+ seriesplugin/src/Skins/Makefile
+ seriesplugin/src/Identifiers/Makefile
+ 
+-setpasswd/Makefile
+-setpasswd/meta/Makefile
+-setpasswd/po/Makefile
+-setpasswd/src/Makefile
+-
+ shoutcast/Makefile
+ shoutcast/meta/Makefile
+ shoutcast/po/Makefile
+ shoutcast/src/Makefile
+-
+-showclock/Makefile
+-showclock/meta/Makefile
+-showclock/po/Makefile
+-showclock/src/Makefile
+-
+-simplerss/Makefile
+-simplerss/meta/Makefile
+-simplerss/po/Makefile
+-simplerss/src/Makefile
+-
+ startuptostandby/Makefile
+ startuptostandby/meta/Makefile
+ startuptostandby/src/Makefile
+@@ -692,16 +375,6 @@ sudoku/meta/Makefile
+ sudoku/src/Makefile
+ sudoku/src/pic/Makefile
+ 
+-svdrp/Makefile
+-svdrp/meta/Makefile
+-svdrp/src/Makefile
+-
+-
+-tageditor/Makefile
+-tageditor/meta/Makefile
+-tageditor/po/Makefile
+-tageditor/src/Makefile
+-
+ teletext/Makefile
+ teletext/meta/Makefile
+ teletext/po/Makefile
+@@ -715,20 +388,6 @@ tetris/pic/Makefile
+ toolkit/Makefile
+ toolkit/src/Makefile
+ 
+-tvcharts/Makefile
+-tvcharts/meta/Makefile
+-tvcharts/src/Makefile
+-
+-unwetterinfo/Makefile
+-unwetterinfo/meta/Makefile
+-unwetterinfo/src/Makefile
+-
+-valixdcontrol/Makefile
+-valixdcontrol/meta/Makefile
+-valixdcontrol/src/Makefile
+-valixdcontrol/src/comp/Makefile
+-valixdcontrol/src/data/Makefile
+-
+ videocolorspace/Makefile
+ videocolorspace/meta/Makefile
+ videocolorspace/po/Makefile
+@@ -738,21 +397,6 @@ vierg/Makefile
+ vierg/meta/Makefile
+ vierg/src/Makefile
+ 
+-vlcplayer/Makefile
+-vlcplayer/meta/Makefile
+-vlcplayer/po/Makefile
+-vlcplayer/src/Makefile
+-
+-vps/Makefile
+-vps/meta/Makefile
+-vps/po/Makefile
+-vps/src_cc/Makefile
+-vps/src_py/Makefile
+-vps/src_py/web/Makefile
+-vps/src_py/web-data/Makefile
+-vps/src_py/WebComponents/Makefile
+-vps/src_py/WebComponents/Sources/Makefile
+-
+ weatherplugin/Makefile
+ weatherplugin/meta/Makefile
+ weatherplugin/po/Makefile
+@@ -789,10 +433,6 @@ webbouqueteditor/WebComponents/Makefile
+ webbouqueteditor/src/WebComponents/Sources/Makefile
+ webbouqueteditor/src/WebScreens/Makefile
+ 
+-webcamviewer/Makefile
+-webcamviewer/meta/Makefile
+-webcamviewer/src/Makefile
+-
+ webinterface/Makefile
+ webinterface/meta/Makefile
+ webinterface/po/Makefile
+@@ -823,11 +463,6 @@ webinterface/WebComponents/Makefile
+ webinterface/src/WebComponents/Converter/Makefile
+ webinterface/src/WebComponents/Sources/Makefile
+ 
+-werbezapper/Makefile
+-werbezapper/meta/Makefile
+-werbezapper/po/Makefile
+-werbezapper/src/Makefile
+-
+ youtubeplayer/Makefile
+ youtubeplayer/meta/Makefile
+ youtubeplayer/src/Makefile
+@@ -843,16 +478,6 @@ zaphistorybrowser/meta/Makefile
+ zaphistorybrowser/po/Makefile
+ zaphistorybrowser/src/Makefile
+ 
+-zapstatistic/Makefile
+-zapstatistic/meta/Makefile
+-zapstatistic/po/Makefile
+-zapstatistic/src/Makefile
+-
+-zdfmediathek/Makefile
+-zdfmediathek/meta/Makefile
+-zdfmediathek/src/Makefile
+-zdfmediathek/src/img/Makefile
+-
+ ardmediathek/Makefile
+ ardmediathek/meta/Makefile
+ ardmediathek/src/Makefile
