@@ -102,6 +102,20 @@ OPTIONAL_PACKAGES += " \
 	zip \
 	zsh \
 	network-usb-drivers-meta \
+	rt7777 \
+	rtl8189es \
+	kernel-module-rt2x00lib \
+        kernel-module-rt2x00usb \
+        kernel-module-rt2500usb \
+        kernel-module-rt2800lib \
+        kernel-module-rt2800usb \
+        kernel-module-belkin-sa \
+        firmware-dvb-demod-si2168-d60 \
+        firmware-dvb-fe-cx24117 \
+        firmware-dvb-tuner-si2141-a10 \
+        firmware-dvb-usb-tbs5520 \
+        firmware-mn8847x \
+        firmware-mt7650 \
 	enigma2-plugin-drivers-network-usb-asix \
 	enigma2-plugin-drivers-network-usb-rt2800 \
 	enigma2-plugin-drivers-network-usb-mt7610u \
