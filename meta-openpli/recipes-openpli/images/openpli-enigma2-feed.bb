@@ -116,6 +116,13 @@ OPTIONAL_PACKAGES += " \
         firmware-dvb-usb-tbs5520 \
         firmware-mn8847x \
         firmware-mt7650 \
+	enigma2-plugin-drivers-network-usb-ath9k-htc \
+	enigma2-plugin-drivers-network-usb-r8723a \
+	enigma2-plugin-drivers-network-usb-rt8723bs \
+	enigma2-plugin-drivers-network-usb-ax88179-178a \
+	enigma2-plugin-drivers-network-usb-rtl8192ce \
+	enigma2-plugin-drivers-network-usb-rt3070 \
+	enigma2-plugin-drivers-network-usb-rt3573 \
 	enigma2-plugin-drivers-network-usb-asix \
 	enigma2-plugin-drivers-network-usb-rt2800 \
 	enigma2-plugin-drivers-network-usb-mt7610u \
@@ -129,7 +136,6 @@ OPTIONAL_PACKAGES += " \
 	enigma2-plugin-drivers-network-usb-rtl8822bu \
 	enigma2-plugin-drivers-network-usb-smsc75xx \
 	${OPTIONAL_BSP_PACKAGES} \
-	${@bb.utils.contains("MACHINE_FEATURES", "dm900 dm920", "qtwidevine" , "", d)} \
 	"
 
 OPTIONAL_BSP_ENIGMA2_PACKAGES ?= ""
