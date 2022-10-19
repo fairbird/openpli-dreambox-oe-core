@@ -102,7 +102,6 @@ OPTIONAL_PACKAGES += " \
 	zip \
 	zsh \
 	network-usb-drivers-meta \
-	rtl8189es \
         firmware-dvb-demod-si2168-d60 \
         firmware-dvb-fe-cx24117 \
         firmware-dvb-tuner-si2141-a10 \
