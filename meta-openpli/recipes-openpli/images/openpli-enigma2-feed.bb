@@ -104,12 +104,6 @@ OPTIONAL_PACKAGES += " \
 	network-usb-drivers-meta \
 	rt7777 \
 	rtl8189es \
-	kernel-module-rt2x00lib \
-        kernel-module-rt2x00usb \
-        kernel-module-rt2500usb \
-        kernel-module-rt2800lib \
-        kernel-module-rt2800usb \
-        kernel-module-belkin-sa \
         firmware-dvb-demod-si2168-d60 \
         firmware-dvb-fe-cx24117 \
         firmware-dvb-tuner-si2141-a10 \
