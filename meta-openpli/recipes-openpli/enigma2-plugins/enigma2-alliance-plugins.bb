@@ -61,7 +61,7 @@ DEPENDS = "\
     hddtemp \
     ppp \
     usb-modeswitch \
-    usbmodeswitch-data \
+    usb-modeswitch-data \
     usbutils \
     bluez-conf \
     bluez-hidd \
