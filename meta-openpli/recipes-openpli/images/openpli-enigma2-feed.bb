@@ -102,12 +102,6 @@ OPTIONAL_PACKAGES += " \
 	zip \
 	zsh \
 	network-usb-drivers-meta \
-        firmware-dvb-demod-si2168-d60 \
-        firmware-dvb-fe-cx24117 \
-        firmware-dvb-tuner-si2141-a10 \
-        firmware-dvb-usb-tbs5520 \
-        firmware-mn8847x \
-        firmware-mt7650 \
 	enigma2-plugin-drivers-network-usb-ath9k-htc \
 	enigma2-plugin-drivers-network-usb-r8723a \
 	enigma2-plugin-drivers-network-usb-rt8723bs \
