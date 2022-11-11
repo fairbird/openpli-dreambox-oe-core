@@ -1,7 +1,6 @@
 # dreambox-mips32el.inc
 
 BOX_BRAND = "dreambox"
-KERNELVERSION = "3.2"
 
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
