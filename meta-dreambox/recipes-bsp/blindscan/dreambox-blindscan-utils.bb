@@ -8,8 +8,6 @@ COMPATIBLE_MACHINE = "^(dm500hd|dm800se|dm500hdv2|dm520|dm800sev2|dm820|dm900|dm
 PROVIDES += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
 RPROVIDES:${PN} += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
 
-DEPENDS = "ncurses"
-
 PV = "1.12"
 
 DREAMBOXURL = "http://dreamboxupdate.com/download/opendreambox"
@@ -50,3 +48,5 @@ SRC_URI[aarch64-pyro.sha256sum] = "aeaf9088b3cb2bf91dcab7e7ae8d417ab7eaca304f2f9
 do_install() {
 	cp -fr * ${D}
 }
+
+do_compile[noexec] = "1"
