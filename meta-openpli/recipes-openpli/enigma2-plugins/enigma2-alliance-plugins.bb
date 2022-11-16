@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 include python3-package-split.inc
 
-inherit python3-dir autotools-brokensep gitpkgv ${PYTHON_PN}native gettext
+inherit python3-dir autotools-brokensep gitpkgv ${PYTHON_PN}native gettext python3targetconfig
 
 SRCREV = "${AUTOREV}"
 PV = "git${SRCPV}"
