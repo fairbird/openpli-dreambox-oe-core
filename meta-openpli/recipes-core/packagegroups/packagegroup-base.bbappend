@@ -1,12 +1,41 @@
-# Patches on packagegroups to remove unwanted items
+RDEPENDS:packagegroup-base := "${@oe.utils.str_filter_out('packagegroup-base-nfs', '${RDEPENDS:packagegroup-base}', d)}"
+RDEPENDS:packagegroup-base := "${@oe.utils.str_filter_out('packagegroup-base-smbfs', '${RDEPENDS:packagegroup-base}', d)}"
 
-# Remove alsa-utils-alsamixer
-#RDEPENDS_packagegroup-base-alsa = "\
-#	alsa-utils-alsactl \
-#	${VIRTUAL-RUNTIME_alsa-state} \
-#"
+RDEPENDS:packagegroup-base-smbfs += "\
+    cifs-utils \
+    "
 
-RDEPENDS_packagegroup-base += "\
-	stb-hwclock \
-	fake-hwclock \
-"
+RDEPENDS:packagegroup-base-smbfs-client = "\
+    packagegroup-base-smbfs \
+    smbclient \
+    "
+
+RDEPENDS:packagegroup-base-smbfs-server = "\
+    samba \
+    "
+
+RDEPENDS:packagegroup-base-smbfs-utils = "\
+    samba-admin \
+    samba-utils \
+    "
+
+RRECOMMENDS:packagegroup-base-samba = "\
+    packagegroup-base-smbfs-client \
+    packagegroup-base-smbfs-server \
+    packagegroup-base-smbfs-utils \
+    "
+
+RDEPENDS:packagegroup-base-nfs += "\
+    nfs-utils \
+    nfs-utils-client \
+    "
+
+RDEPENDS:packagegroup-base-zeroconf += "\
+    libnss-llmnr \
+    "
+
+RDEPENDS:packagegroup-base += "\
+    coreutils-truefalse \
+    stb-hwclock \
+    fake-hwclock \
+    "
