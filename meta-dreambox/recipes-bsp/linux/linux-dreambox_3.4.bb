@@ -11,12 +11,17 @@ SRC_URI = " \
 	${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.xz;name=kernel \
 	${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.${PATCHLEVEL}.xz;apply=yes;name=stable-patch \
 	http://dreamboxupdate.com/download/kernel-patches/linux-dreambox-${PV}-${PATCHREV}.patch.xz;apply=yes;name=dream-patch \
-	file://dvb_frontend-Multistream-support-${PV}.patch \
-	file://genksyms_fix_typeof_handling.patch \
-	file://defconfig \
+	file://dvb_frontend-Multistream-support-3.4.patch \
+	file://kernel-add-support-for-gcc6.patch \
+	file://kernel-add-support-for-gcc7.patch \
+	file://kernel-add-support-for-gcc8.patch \
+	file://kernel-add-support-for-gcc9.patch \
+	file://kernel-add-support-for-gcc10.patch \
 	file://kernel-add-support-for-gcc11.patch \
 	file://kernel-add-support-for-gcc12.patch \
-	file://fix-never-be-null_outside-array-bounds-gcc-12.patch \
+	file://build-with-gcc12-fixes.patch \
+	file://genksyms_fix_typeof_handling.patch \
+	file://defconfig \
 	file://0001-log2-give-up-on-gcc-constant-optimizations.patch \
 	file://0002-cp1emu-do-not-use-bools-for-arithmetic.patch \
 	file://0003-makefile-silence-packed-not-aligned-warn.patch \
@@ -34,7 +39,7 @@ S = "${WORKDIR}/linux-${PV}"
 B = "${WORKDIR}/build"
 
 do_configure:prepend() {
-        sed -e "/^SUBLEVEL = /d" -i ${S}/Makefile
+	sed -e "/^SUBLEVEL = /d" -i ${S}/Makefile
 }
 
 require linux-dreambox_3.4.inc
@@ -63,7 +68,7 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-image = "flash-scripts"
 pkg_postinst:kernel-image () {
 #!/bin/sh
 if [ -z "$D" ]; then
-    flash-kernel /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${LINUX_VERSION}
+	flash-kernel /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${LINUX_VERSION}
 fi
 }
 

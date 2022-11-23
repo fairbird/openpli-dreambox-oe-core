@@ -16,50 +16,50 @@ PATCHREV = "3c7230bc0819495db75407c365f4d1db70008044"
 PATCHLEVEL = "68"
 
 SRC_URI = " \
-    ${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.xz;name=kernel \
-    ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.${PATCHLEVEL}.xz;apply=yes;name=stable-patch \
-    http://dreamboxupdate.com/download/kernel-patches/linux-dreambox-${PV}-${PATCHREV}.patch.bz2;apply=yes;name=dream-patch \ 
-    http://download.filesystems.org/unionfs/unionfs-2.x/unionfs-2.5.11_for_3.2.2.diff.gz;name=unionfs \
-    file://0001-correctly-initiate-nand-flash-ecc-config-when-old-2n.patch \
-    file://fadvise_dontneed_change.patch \
-    file://fix-proc-cputype.patch \
-    file://rtl8712-backport-b.patch \
-    file://rtl8712-backport-c.patch \
-    file://rtl8712-backport-d.patch \
-    file://0007-CHROMIUM-make-3.82-hack-to-fix-differing-behaviour-b.patch \
-    file://0008-MIPS-Fix-build-with-binutils-2.24.51.patch \
-    file://0009-MIPS-Refactor-clear_page-and-copy_page-functions.patch \
-    file://0010-BRCMSTB-Fix-build-with-binutils-2.24.51.patch \
-    file://0011-staging-rtl8712-rtl8712-avoid-lots-of-build-warnings.patch \
-    file://0001-brmcnand_base-disable-flash-BBT-on-64MB-nand.patch \
-    file://0002-ubifs-add-config-option-to-use-zlib-as-default-compr.patch \
-    file://em28xx_fix_terratec_entries.patch \
-    file://em28xx_add_terratec_h5_rev3.patch \
-    file://dvb-usb-siano-always-load-smsdvb.patch \
-    file://dvb-usb-af9035.patch \
-    file://dvb-usb-a867.patch \
-    file://dvb-usb-rtl2832.patch \
-    file://dvb_usb_disable_rc_polling.patch \
-    file://dvb-usb-smsdvb_fix_frontend.patch \
-    file://0001-it913x-backport-changes-to-3.2-kernel.patch \
-    file://defconfig \
-    file://kernel-add-support-for-gcc6.patch \
-    file://kernel-add-support-for-gcc7.patch \
-    file://kernel-add-support-for-gcc8.patch \
-    file://kernel-add-support-for-gcc9.patch \
-    file://kernel-add-support-for-gcc10.patch \
-    file://kernel-add-support-for-gcc11.patch \
-    file://kernel-add-support-for-gcc12.patch \
-    file://misc_latin1_to_utf8_conversions.patch \
-    file://0001-dvb_frontend-backport-multistream-support.patch \
-    file://genksyms_fix_typeof_handling.patch \
-    file://0012-log2-give-up-on-gcc-constant-optimizations.patch \
-    file://0013-cp1emu-do-not-use-bools-for-arithmetic.patch \
-    file://0014-makefile-silence-packed-not-aligned-warn.patch \
-    file://0015-fcrypt-fix-bitoperation-for-gcc.patch \
-    file://suppress-array-bounds-error.patch \
-    file://devinitdata-gcc11.patch \
-    file://fix-never-be-null_outside-array-bounds-gcc-12.patch \
+        ${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.xz;name=kernel \
+        ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.${PATCHLEVEL}.xz;apply=yes;name=stable-patch \
+        http://dreamboxupdate.com/download/kernel-patches/linux-dreambox-${PV}-${PATCHREV}.patch.bz2;apply=yes;name=dream-patch \ 
+        http://download.filesystems.org/unionfs/unionfs-2.x/unionfs-2.5.11_for_3.2.2.diff.gz;name=unionfs \
+        file://0001-correctly-initiate-nand-flash-ecc-config-when-old-2n.patch \ 
+        file://0001-Revert-MIPS-Fix-potencial-corruption.patch \
+        file://fadvise_dontneed_change.patch \
+        file://fix-proc-cputype.patch \
+        file://rtl8712-backport-b.patch \
+        file://rtl8712-backport-c.patch \
+        file://rtl8712-backport-d.patch \
+        file://0007-CHROMIUM-make-3.82-hack-to-fix-differing-behaviour-b.patch \
+        file://0008-MIPS-Fix-build-with-binutils-2.24.51.patch \
+        file://0009-MIPS-Refactor-clear_page-and-copy_page-functions.patch \
+        file://0010-BRCMSTB-Fix-build-with-binutils-2.24.51.patch \
+        file://0011-staging-rtl8712-rtl8712-avoid-lots-of-build-warnings.patch \
+        file://0001-brmcnand_base-disable-flash-BBT-on-64MB-nand.patch \
+        file://0002-ubifs-add-config-option-to-use-zlib-as-default-compr.patch \
+        file://em28xx_fix_terratec_entries.patch \
+        file://em28xx_add_terratec_h5_rev3.patch \
+        file://dvb-usb-siano-always-load-smsdvb.patch \
+        file://dvb-usb-af9035.patch \
+        file://dvb-usb-a867.patch \
+        file://dvb-usb-rtl2832.patch \
+        file://dvb_usb_disable_rc_polling.patch \
+        file://dvb-usb-smsdvb_fix_frontend.patch \
+        file://0001-it913x-backport-changes-to-3.2-kernel.patch \
+        file://defconfig \
+        file://kernel-add-support-for-gcc6.patch \
+        file://kernel-add-support-for-gcc7.patch \
+        file://kernel-add-support-for-gcc8.patch \
+        file://kernel-add-support-for-gcc9.patch \
+        file://kernel-add-support-for-gcc10.patch \
+        file://kernel-add-support-for-gcc11.patch \
+        file://kernel-add-support-for-gcc12.patch \
+        file://build-with-gcc12-fixes.patch \
+        file://misc_latin1_to_utf8_conversions.patch \
+        file://0001-dvb_frontend-backport-multistream-support.patch \
+        file://genksyms_fix_typeof_handling.patch \
+        file://0012-log2-give-up-on-gcc-constant-optimizations.patch \
+        file://0013-cp1emu-do-not-use-bools-for-arithmetic.patch \
+        file://0014-makefile-silence-packed-not-aligned-warn.patch \
+        file://0015-fcrypt-fix-bitoperation-for-gcc.patch \
+        file://devinitdata-gcc11.patch \
 "
 
 PACKAGES_DYNAMIC = "kernel-*"
@@ -69,16 +69,16 @@ PACKAGES_DYNAMIC = "kernel-*"
 KERNEL_BUILTIN_MODULES = ""
 
 KERNEL_BUILTIN_MODULES:dm8000 = "\
-    kernel-module-aes-generic \
-    kernel-module-crc32c \
-    kernel-module-mac80211 \
-    kernel-module-cfg80211 \
-    kernel-module-ath \
-    kernel-module-ath5k \
-    kernel-module-sr-mod \
-    kernel-module-isofs \
-    kernel-module-udf \
-    "
+        kernel-module-aes-generic \
+        kernel-module-crc32c \
+        kernel-module-mac80211 \
+        kernel-module-cfg80211 \
+        kernel-module-ath \
+        kernel-module-ath5k \
+        kernel-module-sr-mod \
+        kernel-module-isofs \
+        kernel-module-udf \
+        "
 
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned

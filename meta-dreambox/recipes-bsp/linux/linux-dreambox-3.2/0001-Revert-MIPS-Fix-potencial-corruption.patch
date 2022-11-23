@@ -17,7 +17,7 @@ diff --git a/arch/mips/mm/c-r4k.c b/arch/mips/mm/c-r4k.c
 index b69f255..24f2937 100644
 --- a/arch/mips/mm/c-r4k.c
 +++ b/arch/mips/mm/c-r4k.c
-@@ -603,6 +603,9 @@ static void r4k_dma_cache_inv(unsigned long addr, unsigned long size)
+@@ -636,6 +636,9 @@ static void r4k_dma_cache_inv(unsigned long addr, unsigned long size)
  		if (size >= scache_size)
  			r4k_blast_scache();
  		else {
@@ -27,7 +27,7 @@ index b69f255..24f2937 100644
  			/*
  			 * There is no clearly documented alignment requirement
  			 * for the cache instruction on MIPS processors and
-@@ -644,6 +644,9 @@ static void r4k_dma_cache_inv(unsigned long addr, unsigned long size)
+@@ -644,6 +647,9 @@ static void r4k_dma_cache_inv(unsigned long addr, unsigned long size)
  			 * hit ops with insufficient alignment.  Solved by
  			 * aligning the address to cache line size.
  			 */
@@ -37,7 +37,7 @@ index b69f255..24f2937 100644
  			blast_inv_scache_range(addr, addr + size);
  		}
  		__sync();
-@@ -659,7 +659,12 @@ static void r4k_dma_cache_inv(unsigned long addr, unsigned long size)
+@@ -653,7 +659,12 @@ static void r4k_dma_cache_inv(unsigned long addr, unsigned long size)
  	if (cpu_has_safe_index_cacheops && size >= dcache_size) {
  		r4k_blast_dcache();
  	} else {
