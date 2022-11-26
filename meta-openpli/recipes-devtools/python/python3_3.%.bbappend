@@ -1,5 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-SRC_URI += "file://importlib.patch"
+SRC_URI += "file://use-legacy-path-for-pycs.patch"
 
 inherit python3-dir
 
@@ -11,8 +11,6 @@ FILES:${PN}-src += " \
     ${libdir}/${PYTHON_DIR}/*/*/*/*/*.py \
     ${libdir}/${PYTHON_DIR}/*/*/*/*/*/*.py \
     "
-
-CFLAGS:append:sh4 = " -std=gnu11"
 
 # for importlib patch
 # add dummy __pycache__ files to make rm happy later...
