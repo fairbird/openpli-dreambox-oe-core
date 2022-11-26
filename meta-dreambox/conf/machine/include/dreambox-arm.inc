@@ -1,35 +1,29 @@
 # dreambox-arm.inc
+# We know about rtc
+include conf/machine/include/build-extras.inc
 
-MTD_ROOTFS = "mmcblk0p2"
-MTD_KERNEL = "mmcblk0p1"
-KERNEL_FILE = "kernel.bin"
-ROOTFS_FILE = "rootfs.tar.bz2"
-MTD_BLACK  = "mmcblk0"
-
-DISTRO_FEATURES_GFX:mipsel ?= " opengl"
-
-PACKAGECONFIG:pn-glmark2 = "gles2"
-
-PACKAGECONFIG:pn-cogl-1.0 = "egl-kms egl-null \
-        ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
-
-PACKAGECONFIG:pn-weston = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles', '', d)}"
+BRAND_OEM = "dreambox"
+MACHINE_BRAND = "Dreambox"
 
 DVBSKYPROVIDER = "kernel"
 
 GLIBC_EXTRA_OECONF = "--with-tls --with-__thread"
 
-DVBMEDIASINK_CONFIG = "--with-machine=${MACHINE} --with-pcm --with-wma --with-wmv --with-dts=no --with-dtsdownmix --with-eac3 --with-vb6 --with-vb8 --with-vb9 --with-spark --with-h265"
+DVBMEDIASINK_CONFIG = "--with-dreambox --with-pcm --with-wma --with-wmv --with-dts=no --with-dtsdownmix --with-eac3 --with-vb6 --with-vb8 --with-vb9 --with-spark --with-h265"
 
+include conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/soc-family.inc
+require box-hardware.inc
 require conf/machine/include/arm/armv7a/tune-cortexa15.inc
 
-MACHINE_EXTRA_RRECOMMENDS += "\
-    gstreamer1.0-plugin-multibox-dvbmediasink \
+MACHINE_EXTRA_RRECOMMENDS += " \
+    gstreamer1.0-plugin-subsink \
     gstreamer1.0-libav \
+    libpagecache \
+    libpassthrough \
+    flash-nrf52 \
     kernel-module-cifs \
     kernel-module-autofs4 \
-    kernel-module-bluetooth \
     kernel-module-hmac \
     kernel-module-md4 \
     kernel-module-ecb \
@@ -38,76 +32,25 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-module-exportfs \
     kernel-module-snd-oss \
     kernel-module-snd-pcm-oss \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'v3d', 'libvc5dream', '',d)} \
     "
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "dreambox-dvb-modules-${MACHINE}"
-
-MACHINE_EXTRA_RDEPENDS += "\
-    libpagecache \
-    libpassthrough \
-    flash-nrf52 \
-    libvc5dream \
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+    dreambox-dvb-modules-${MACHINE} \
     "
 
-KERNEL_MODULE_AUTOLOAD += "xfs"
-
-DISTRO_FEATURES:remove = "directfb gtk-directfb"
-    
-MACHINE_FEATURES += "alsa usbhost switchoff blindscan-dvbs modem dvb-c blindscan-dvbc hdmicec recovery ci usbconsole blindscan-tbs emmc mmc HDMI HDMI-IN-FHD"
-# Add "dreambox" override for recipes
-MACHINEOVERRIDES .= ":dreambox"
+MACHINE_FEATURES += "dreambox alsa usbhost 3dtv switchoff blindscan-dvbs boxmodel"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"
+PREFERRED_PROVIDER_virtual/kodi = "stb-kodi-${MACHINE}"
+
 PREFERRED_PROVIDER_virtual/blindscan-dvbs = "dreambox-blindscan-utils"
 PREFERRED_PROVIDER_virtual/blindscan-dvbc = "dreambox-blindscan-utils"
-PREFERRED_VERSION_linux-dreambox = "${KERNELVERSION}"
-PREFERRED_PROVIDER_virtual/egl ?= "libvc5dream"
-PREFERRED_PROVIDER_virtual/libgles1 ?= "libvc5dream"
-PREFERRED_PROVIDER_virtual/libgles2 ?= "libvc5dream"
-PREFERRED_PROVIDER_virtual/libgl ?= "mesa-gl"
-PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
-PREFERRED_PROVIDER_jpeg ?= "libjpeg-turbo"
-PREFERRED_PROVIDER_jpeg-native ?= "libjpeg-turbo-native"
-PREFERRED_PROVIDER_virtual/kodi = "stb-kodi-${MACHINE}"
+
+PREFERRED_VERSION_linux-dreambox ?= "3.14"
 
 TARGET_ARCH = "arm"
 DEFAULTTUNE = "cortexa15hf-neon-vfpv4"
-OLDEST_KERNEL = "${KERNELVERSION}"
+OLDEST_KERNEL = "3.14"
 
 MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc gobject-introspection-data"
-
-DREAMBOX_IMAGE_SIZE ??= "1024"
-
-IMAGE_FSTYPES =+ "tar.bz2"
-IMAGEDIR = "${MACHINE}"
-
-IMAGE_CMD:tar:prepend = " \
-    mkdir -p ${IMAGE_ROOTFS}/tmp; \
-    mkdir -p ${IMAGE_ROOTFS}/var/lib/opkg/info; \
-    mkdir -p ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}; \
-    cp ${DEPLOY_DIR_IMAGE}/zImage ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${KERNEL_FILE}; \
-    echo ${DISTRO_NAME}-${DISTRO_VERSION}.${BUILD_VERSION} > ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/imageversion; \
-    cd ${IMAGE_ROOTFS}; \
-    tar -cvf ${DEPLOY_DIR_IMAGE}/rootfs.tar -C ${IMAGE_ROOTFS} .; \
-    mv ${DEPLOY_DIR_IMAGE}/rootfs.tar ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/rootfs.tar; \
-    bzip2 ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/rootfs.tar; \
-    cd ${DEPLOY_DIR_IMAGE}; \
-    zip ${IMAGE_NAME}_mmc.zip ${IMAGEDIR}/*; \
-    rm -f ${DEPLOY_DIR_IMAGE}/*.rootfs.tar.bz2; \
-    rm -f ${DEPLOY_DIR_IMAGE}/.tar.bz2; \
-    rm -f ${DEPLOY_DIR_IMAGE}/*.manifest; \
-    rm -f ${DEPLOY_DIR_IMAGE}/.manifest; \
-    rm -Rf ${IMAGEDIR}; \
-    "
-
-IMAGE_CMD:tar:append = " ; \
-    cd ${DEPLOY_DIR_IMAGE}; \
-    rm -f *.rootfs.manifest; \
-    rm -f .manifest; \
-    "
-
-BOX_BRAND = "dreambox"
-KERNELVERSION = "3.14"
-SOC_FAMILY = "bcm7252s"
-RCNAME = "dmm2"
-KERNEL_MODULE_AUTOLOAD += "bluetooth"

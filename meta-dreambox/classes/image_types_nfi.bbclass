@@ -1,38 +1,37 @@
-IMAGE_CMD:jffs2:prepend = " \
-	rm -rf ${IMAGE_ROOTFS}/tmp/*; \
+IMAGE_CMD:jffs2nfi = " \
 	mkfs.jffs2 \
 		--root=${IMAGE_ROOTFS}/boot \
-		--compression-mode=none \
+		--disable-compressor=lzo \
+		--compression-mode=size \
 		--output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
 		${EXTRA_IMAGECMD}; \
 	rm -rf ${IMAGE_ROOTFS}/boot/*; \
+	printf '/dev/mtdblock2\t/boot\t\tjffs2\tro\t\t\t\t0 0\n' >> ${IMAGE_ROOTFS}/etc/fstab; \
 	mkfs.jffs2 \
 		--root=${IMAGE_ROOTFS} \
 		--disable-compressor=lzo \
 		--compression-mode=size \
-		--output=${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.jffs2 \
+		--output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 \
 		${EXTRA_IMAGECMD}; \
 	${DREAMBOX_BUILDIMAGE} \
 		--boot-partition ${DREAMBOX_PART0_SIZE}:${DEPLOY_DIR_IMAGE}/secondstage-${MACHINE}.bin \
 		--data-partition ${DREAMBOX_PART1_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
-		--data-partition ${DREAMBOX_PART2_SIZE}:${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.jffs2 \
-		> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}.nfi; \
-	rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
-	zip -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}_nfi.zip ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}.nfi ${DEPLOY_DIR_IMAGE}/imageversion ${DEPLOY_DIR_IMAGE}/donate.txt; \
-	rm -f ${DEPLOY_DIR_IMAGE}/*.nfi; \
+		--data-partition ${DREAMBOX_PART2_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 \
+		> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.nfi; \
 "
 
-IMAGE_CMD:ubifs:prepend = " \
-	rm -Rf ${IMAGE_ROOTFS}/tmp/*; \
+IMAGE_CMD:ubinfi = " \
 	mkfs.jffs2 \
 		--root=${IMAGE_ROOTFS}/boot \
-		--compression-mode=none \
+		--disable-compressor=lzo \
+		--compression-mode=size \
 		--output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
 		${EXTRA_IMAGECMD}; \
 	rm -rf ${IMAGE_ROOTFS}/boot/*; \
+	printf '/dev/mtdblock2\t/boot\t\tjffs2\tro\t\t\t\t0 0\n' >> ${IMAGE_ROOTFS}/etc/fstab; \
 	echo \[root\] > ubinize.cfg; \
 	echo mode=ubi >> ubinize.cfg; \
-	echo image=${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubifs >> ubinize.cfg; \
+	echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs >> ubinize.cfg; \
 	echo vol_id=0 >> ubinize.cfg; \
 	echo vol_name=${UBI_VOLNAME} >> ubinize.cfg; \
 	echo vol_type=dynamic >> ubinize.cfg; \
@@ -48,29 +47,41 @@ IMAGE_CMD:ubifs:prepend = " \
 			echo vol_name=data >> ubinize.cfg; \
 			echo vol_size=${UBINIZE_DATAVOLSIZE} >> ubinize.cfg; \
 			echo vol_flags=autoresize >> ubinize.cfg; \
-			printf '/dev/ubi0_1\t/data\t\tubifs\trw\t\t\t\t0 0\n' >> ${IMAGE_ROOTFS}/etc/fstab; \
+			printf '/dev/ubi0_1\t/data\t\tubifs\trw,nofail\t\t\t\t0 0\n' >> ${IMAGE_ROOTFS}/etc/fstab; \
 			install -d ${IMAGE_ROOTFS}/data; \
 		fi; \
 	fi; \
 	mkfs.ubifs \
 		-r ${IMAGE_ROOTFS} \
-		-o ${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubifs \
+		-o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs \
 		${MKUBIFS_ARGS}; \
-	ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubi ${UBINIZE_ARGS} ubinize.cfg; \
+	ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg; \
 	${DREAMBOX_BUILDIMAGE} \
 		--boot-partition ${DREAMBOX_PART0_SIZE}:${DEPLOY_DIR_IMAGE}/secondstage-${MACHINE}.bin \
 		--data-partition ${DREAMBOX_PART1_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
-		--data-partition ${DREAMBOX_PART2_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubi \
-		> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}.nfi; \
-	rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
-	zip -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}_nfi.zip ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}.nfi ${DEPLOY_DIR_IMAGE}/imageversion ${DEPLOY_DIR_IMAGE}/donate.txt; \
-	rm -f ${DEPLOY_DIR_IMAGE}/*.nfi; \
+		--data-partition ${DREAMBOX_PART2_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi \
+		> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.nfi; \
+	cd ${DEPLOY_DIR_IMAGE}; \
+	echo ${DISTRO_NAME}-${DISTRO_VERSION}.${BUILD_VERSION} > ${DEPLOY_DIR_IMAGE}/imageversion; \
+	echo "Image for WebBrower Update" >> ${DEPLOY_DIR_IMAGE}/imageversion; \
+	zip ${IMAGE_NAME}_web.zip ${IMAGE_NAME}.nfi imageversion; \
+	mkdir -p ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}; \
+	cp ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${ROOTFS_FILE}; \
+	echo ${DISTRO_NAME}-${DISTRO_VERSION}.${BUILD_VERSION} > ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/imageversion; \
+	echo "Flash Online Image" >> ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/imageversion; \
+	echo "dummy file dont delete" > ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/kernel.bin; \
+	zip ${IMAGE_NAME}_flash.zip ${IMAGEDIR}/*; \
+	rm -Rf ${IMAGEDIR}; \
+	rm -Rf ${IMAGE_NAME}.nfi; \
+	rm -Rf ${IMAGE_NAME}.boot.jffs2; \
+	rm -Rf ${IMAGE_NAME}.rootfs.ubi; \
+	rm -Rf ${IMAGE_NAME}.rootfs.ubifs; \
 "
 
-EXTRA_IMAGECMD:jffs2 ?= "-e ${DREAMBOX_ERASE_BLOCK_SIZE} -n -l"
-EXTRA_IMAGECMD:ubifs ?= "-e ${DREAMBOX_ERASE_BLOCK_SIZE} -n -l"
+EXTRA_IMAGECMD:jffs2nfi ?= "-e ${DREAMBOX_ERASE_BLOCK_SIZE} -n -l"
+EXTRA_IMAGECMD:ubinfi ?= "-e ${DREAMBOX_ERASE_BLOCK_SIZE} -n -l"
 
-do_image_jffs2[depends] += "dreambox-buildimage-native:do_populate_sysroot"
-do_image_ubifs[depends] += "dreambox-buildimage-native:do_populate_sysroot"
+do_image_jffs2nfi[depends] += "mtd-utils-native:do_populate_sysroot dreambox-buildimage-native:do_populate_sysroot"
+do_image_ubinfi[depends] += "mtd-utils-native:do_populate_sysroot dreambox-buildimage-native:do_populate_sysroot"
 
-IMAGE_TYPES += "jffs2 ubifs"
+IMAGE_TYPES += "jffs2nfi ubinfi"

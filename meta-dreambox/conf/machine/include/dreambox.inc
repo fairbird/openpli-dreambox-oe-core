@@ -1,24 +1,42 @@
 # dreambox.inc
 # We know about rtc
-MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc"
+include conf/machine/include/build-extras.inc
 
-OPTIONAL_BSP_PACKAGES += "dreambox-buildimage"
+BRAND_OEM = "dreambox"
+MACHINE_BRAND = "Dreambox"
 
 EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "dreambox-dvb-modules-${MACHINE}"
+GLIBC_EXTRA_OECONF = "--with-tls --with-__thread"
 
-MACHINE_EXTRA_RDEPENDS += "\
-	gstreamer1.0-plugin-multibox-dvbmediasink \	
-	ntfs-3g \
-	kernel-module-cifs \
-	kernel-module-hmac \
-	kernel-module-md4 \
-	${@bb.utils.contains("MACHINE", "dm800se dm500hhd dm8000 dm7020hd dm800sev2 dm500hdv2", "kernel-module-ecb", "", d)} \
-	dreambox-boot-progress \
-	"
-	
-MACHINE_FEATURES += "alsa usbhost dreambox"
+DVBMEDIASINK_CONFIG = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts"
+DVBMEDIASINK_CONFIG:dm7080 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts --with-vb6 --with-vb8 --with-spark"
+DVBMEDIASINK_CONFIG:dm820 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts --with-vb6 --with-vb8 --with-spark"
+DVBMEDIASINK_CONFIG:dm520 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts --with-vb6 --with-vb8 --with-spark --with-h265"
+
+include conf/machine/include/autoload-filesystems.inc
+require conf/machine/include/soc-family.inc
+require box-hardware.inc
+
+MACHINE_EXTRA_RRECOMMENDS += " \
+    gstreamer1.0-plugin-subsink \
+    gstreamer1.0-libav \
+    kernel-module-cifs \
+    kernel-module-autofs4 \
+    kernel-module-hmac \
+    kernel-module-md4 \
+    kernel-module-ecb \
+    kernel-module-fuse \
+    kernel-module-nfsd \
+    kernel-module-exportfs \
+    kernel-module-snd-oss \
+    kernel-module-snd-pcm-oss \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'v3d', 'libvc5dream', '',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'oem-info', 'oem-info', '',d)} \
+    dreambox-boot-progress \
+    "
+    
+MACHINE_FEATURES += "dreambox alsa usbhost 3dtv switchoff tpm blindscan-dvbs boxmodel feature1 feature2"
 
 PREFERRED_PROVIDER_virtual/bootloader = "dreambox-secondstage-${MACHINE}"
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"
@@ -27,11 +45,10 @@ PREFERRED_PROVIDER_virtual/kodi = "stb-kodi-${MACHINE}"
 PREFERRED_PROVIDER_virtual/blindscan-dvbs = "dreambox-blindscan-utils"
 PREFERRED_PROVIDER_virtual/blindscan-dvbc = "dreambox-blindscan-utils"
 
-KERNEL_IMAGETYPE = "vmlinux"
-KERNEL_OUTPUT = "${KERNEL_IMAGETYPE}"
-KERNEL_CONSOLE = "${@bb.utils.contains('OPENPLI_FEATURES', 'usbconsole', 'ttyS0,115200', 'null', d)}"
+PREFERRED_VERSION_linux-dreambox ?= "3.2"
+
+PREFERRED_VERSION_rt8812au = "4.3.14"
 
 DREAMBOX_BUILDIMAGE = "buildimage --arch ${MACHINE} ${EXTRA_BUILDCMD} \
-	--erase-block-size ${DREAMBOX_ERASE_BLOCK_SIZE} \
-	--flash-size ${DREAMBOX_FLASH_SIZE} \
-	--sector-size ${DREAMBOX_SECTOR_SIZE}"
+    --erase-block-size ${DREAMBOX_ERASE_BLOCK_SIZE} \
+    --sector-size ${DREAMBOX_SECTOR_SIZE}"

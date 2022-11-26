@@ -1,27 +1,17 @@
 # dreambox-mips32el.inc
 
-BOX_BRAND = "dreambox"
-
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
 
-MACHINE_EXTRA_RDEPENDS += "\
-	${@bb.utils.contains("MACHINE", "dm800se dm500hd", "dm-bootsplash kernel-module-stv0299", "", d)} \
-	libpagecache \
-	libpassthrough \
-	"
-
-MTD_KERNEL = "mtd2"
+IMAGEDIR ?= "${MACHINE}"
 
 require conf/machine/include/dreambox.inc
 require conf/machine/include/mips/tune-mips32.inc
 
-DVBMEDIASINK_CONFIG = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts"
-DVBMEDIASINK_CONFIG:dm8000 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts --with-limited-mpeg4v2"
-DVBMEDIASINK_CONFIG:dm7080 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts --with-vb6 --with-vb8 --with-spark"
-DVBMEDIASINK_CONFIG:dm820 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts --with-vb6 --with-vb8 --with-spark"
-DVBMEDIASINK_CONFIG:dm520 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix --with-eac3 --with-dts --with-vb6 --with-vb8 --with-spark --with-h265"
-
-CFLAGS:append:pn-titan = " -DDREAMBOX "
-
-MACHINE_KERNEL_PR = "r14"
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+    dreambox-dvb-modules-${MACHINE} \
+    kernel-module-stv0299 \
+    ${@bb.utils.contains("MACHINE", "dm800se dm500hd", "dm-bootsplash", "", d)} \
+    libpagecache \
+    libpassthrough \
+    "
