@@ -14,7 +14,7 @@ PYPI_PACKAGE = "versioningit"
 
 inherit pypi python_setuptools_build_meta
 
-require python3-package-split.inc
+require ${PYTHON_PN}-package-split.inc
 
 FILES:${PN}-src += "${bindir}/versioningit"
 

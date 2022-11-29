@@ -14,4 +14,4 @@ S = "${WORKDIR}/requests-cache-0.8.1"
 
 RDEPENDS:${PN} = "python3-requests python3-urllib3 python3-appdirs python3-attrs python3-cattrs python3-url-normalize"
 
-include python3-package-split.inc
+include ${PYTHON_PN}-package-split.inc

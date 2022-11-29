@@ -13,4 +13,4 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3 gitpkgv
 
-include python-package-split.inc
+include ${PYTHON_PN}-package-split.inc

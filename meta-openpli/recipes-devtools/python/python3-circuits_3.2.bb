@@ -15,4 +15,4 @@ S = "${WORKDIR}/circuits-${PV}"
 
 inherit setuptools3
 
-include python3-package-split.inc
+include ${PYTHON_PN}-package-split.inc

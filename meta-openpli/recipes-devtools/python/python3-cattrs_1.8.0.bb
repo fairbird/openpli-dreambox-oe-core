@@ -14,4 +14,4 @@ S = "${WORKDIR}/cattrs-1.8.0"
 
 RDEPENDS:${PN} = "python3-attrs"
 
-include python3-package-split.inc
+include ${PYTHON_PN}-package-split.inc

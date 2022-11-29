@@ -19,4 +19,4 @@ FILES:${PN}-src:append = " \
     ${libdir}/${PYTHON_DIR}/site-packages/mechanize-0.4.5-py2.7.egg-info/* \
 "
 
-include python-package-split.inc
+include ${PYTHON_PN}-package-split.inc

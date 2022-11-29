@@ -32,4 +32,4 @@ S = "${WORKDIR}/${PN}-${PV}"
 
 inherit pypi setuptools3
 
-include python-package-split.inc
+include ${PYTHON_PN}-package-split.inc

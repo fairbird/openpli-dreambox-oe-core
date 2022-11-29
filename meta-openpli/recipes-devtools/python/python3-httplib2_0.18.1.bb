@@ -26,4 +26,4 @@ do_install:append() {
     ln -s /etc/ssl/certs/ca-certificates.crt ${D}${PYTHON_SITEPACKAGES_DIR}/httplib2/cacerts.txt
 }
 
-include python3-package-split.inc
+include ${PYTHON_PN}-package-split.inc

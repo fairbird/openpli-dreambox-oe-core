@@ -14,7 +14,7 @@ S = "${WORKDIR}/soco-${PV}"
 
 inherit setuptools3
 
-include python3-package-split.inc
+include ${PYTHON_PN}-package-split.inc
 
 # Make clean requires sphinx which we don't have
 CLEANBROKEN = "1"

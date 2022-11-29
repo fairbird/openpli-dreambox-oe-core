@@ -16,4 +16,4 @@ inherit setuptools3
 
 SRC_URI[md5sum] = "49b626f282be13acfc0fe2bc24732b3d"
 
-include python-package-split.inc
+include ${PYTHON_PN}-package-split.inc

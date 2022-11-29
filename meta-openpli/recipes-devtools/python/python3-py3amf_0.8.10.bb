@@ -16,4 +16,4 @@ S = "${WORKDIR}/Py3AMF-0.8.10"
 
 inherit setuptools3
 
-include python3-package-split.inc
+include ${PYTHON_PN}-package-split.inc
