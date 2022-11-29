@@ -1,1 +1,1 @@
-include python3-package-split.inc
+include ${PYTHON_PN}-package-split.inc

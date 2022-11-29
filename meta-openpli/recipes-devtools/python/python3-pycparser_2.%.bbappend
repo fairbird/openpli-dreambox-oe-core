@@ -3,4 +3,4 @@ RDEPENDS:${PN}:class-target:remove = "\
 	cpp-symlinks \
 "
 
-include python-package-split.inc
+include ${PYTHON_PN}-package-split.inc
