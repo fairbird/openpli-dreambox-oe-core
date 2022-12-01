@@ -56,6 +56,7 @@ OPTIONAL_PACKAGES += " \
 	net-tools \
 	ntfs-3g \
 	ntp \
+	openmultiboot \
 	ofgwrite \
 	openresolv \
 	openssh \
