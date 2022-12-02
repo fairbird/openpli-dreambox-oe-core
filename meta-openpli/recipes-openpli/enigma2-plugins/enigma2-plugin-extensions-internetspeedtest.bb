@@ -3,8 +3,6 @@ MAINTAINER = "madhouse"
 
 require conf/license/license-gplv2.inc
 
-include python3-package-split.inc
-
 inherit gitpkgv distutils-openplugins gettext
 
 PV = "git${SRCPV}"
@@ -21,9 +19,3 @@ do_install() {
 }
 
 FILES:${PN} = "${prefix}/"
-
-RDEPENDS:{PN}-src = "${PN}"
-FILES:${PN}-src = " \
-        ${libdir}/enigma2/python/Plugins/Extensions/InternetSpeedTest/*.py \
-        ${libdir}/enigma2/python/Components/Converter/*.py \
-        "
