@@ -344,7 +344,7 @@ index ad0c08e..01fb877 100644
  genuinedreambox/Makefile
  genuinedreambox/meta/Makefile
  genuinedreambox/src/Makefile
-@@ -397,98 +250,21 @@ googlemaps/Makefile
+@@ -401,98 +250,21 @@ googlemaps/Makefile
  googlemaps/meta/Makefile
  googlemaps/src/Makefile
  
@@ -417,6 +417,10 @@ index ad0c08e..01fb877 100644
 -merlinmusicplayer/po/Makefile
 -merlinmusicplayer/src/Makefile
 -merlinmusicplayer/src/images/Makefile
+-merlinmusicplayer/src/skin/Makefile
+-merlinmusicplayer/src/skin/fhd/Makefile
+-merlinmusicplayer/src/skin/hd/Makefile
+-merlinmusicplayer/src/skin/sd/Makefile
 -
 -mosaic/Makefile
 -mosaic/meta/Makefile
