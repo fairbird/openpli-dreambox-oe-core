@@ -344,7 +344,7 @@ index ad0c08e..01fb877 100644
  genuinedreambox/Makefile
  genuinedreambox/meta/Makefile
  genuinedreambox/src/Makefile
-@@ -401,98 +250,21 @@ googlemaps/Makefile
+@@ -250,102 +250,21 @@ googlemaps/Makefile
  googlemaps/meta/Makefile
  googlemaps/src/Makefile
  
