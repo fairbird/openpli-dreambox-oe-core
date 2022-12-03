@@ -1,4 +1,5 @@
 #!/usr/bin/make -f
+SHELL := /bin/bash # Use bash syntax to fix error ([[: not found) on ubuntu 22.10
 #
 # Copyright (c) 2010-2012 Dream Multimedia GmbH, Germany
 #                         http://www.dream-multimedia-tv.de/
