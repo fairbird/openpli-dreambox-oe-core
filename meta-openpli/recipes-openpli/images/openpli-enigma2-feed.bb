@@ -177,6 +177,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-extrafancontrol \
 	enigma2-plugin-systemplugins-mountmanager \
 	enigma2-plugin-systemplugins-signalfinder \
+	enigma2-plugin-extensions-yahooweather \
 	enigma2-plugins \
 	enigma2-plugins-alliance \
 	enigma2-alliance-plugins \
