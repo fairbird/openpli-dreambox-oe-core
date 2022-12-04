@@ -130,7 +130,7 @@ index 90eef37..1a295f7 100644
  if TPM
  SUBDIRS += \
  	mytube \
-@@ -135,14 +52,7 @@ SUBDIRS += \
+@@ -135,13 +135,7 @@ SUBDIRS += \
  	pluginsort 
  endif
  
