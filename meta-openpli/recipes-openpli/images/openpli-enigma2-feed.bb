@@ -155,6 +155,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-hrtunerproxy \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-serviceapp \
+	enigma2-plugin-extensions-enigmalight \
 	enigma2-plugin-extensions-fontinfo \
 	enigma2-plugin-extensions-infobarweather \
 	enigma2-plugin-extensions-managerautofs \
