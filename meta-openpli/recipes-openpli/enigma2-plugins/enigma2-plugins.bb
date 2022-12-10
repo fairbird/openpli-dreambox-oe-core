@@ -72,6 +72,7 @@ DEPENDS = " \
 	python3-pyopenssl \
 	python3-pyusb \
 	python3-simplejson \
+	python3-treq \
 	streamripper \
 	python3-mutagen \
 	python3-twisted \
