@@ -7,7 +7,7 @@ PLUGINNAME = "enigma2-plugin-extensions-tmbd"
 require dima-plugins.inc
 
 RDEPENDS:${PN} = " \
-	${PYTHON_PN}-twisted-web \
+	${PYTHON_PN}-treq \
 	${PYTHON_PN}-xml \
 	${PYTHON_PN}-shell \
 	${PYTHON_PN}-misc \
@@ -16,4 +16,7 @@ RDEPENDS:${PN} = " \
 	${PYTHON_PN}-lxml \
 	"
 
-SRC_URI = "git://github.com/Dima73/enigma2-plugin-extensions-tmbd.git;protocol=https;branch=python3 file://use-setuptools-instead-of-distutils.patch"
+SRC_URI = "git://github.com/Dima73/enigma2-plugin-extensions-tmbd.git;protocol=https;branch=python3 \
+           file://use-setuptools-instead-of-distutils.patch \
+           file://port-to-treq.patch \
+"
