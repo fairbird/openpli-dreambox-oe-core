@@ -7,7 +7,7 @@ index a5f76db..0ae0c32 100644
  from urllib.parse import quote
  from urllib.request import urlopen
 -from twisted.web.client import downloadPage
-+from treq import get
++from treq import get, collect
  
  from enigma import ePicLoad, eTimer, eServiceReference
  from Components.ActionMap import ActionMap, HelpableActionMap
