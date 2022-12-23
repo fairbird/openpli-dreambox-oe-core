@@ -2,6 +2,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += " \
 	file://mpd.init \
+	file://boost-1.81.patch \
 "
 
 do_install:append() {
