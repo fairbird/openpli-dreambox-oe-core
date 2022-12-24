@@ -160,5 +160,3 @@ rm -rf /home/elight-addons 2>/dev/null
 
 echo ""
 }
-
-do_populate_sysroot[noexec] = "1"
