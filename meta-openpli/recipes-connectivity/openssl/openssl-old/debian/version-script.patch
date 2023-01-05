@@ -1,0 +1,50 @@
+From 807712e045250c5fce2c7c876ea3ce9980338668 Mon Sep 17 00:00:00 2001
+From: atvcaptain <captain@web.de>
+Date: Sun, 10 Nov 2013 11:57:29 +0100
+Subject: [PATCH] * Create openssl-old that provides obsolete 0.9.8 versions
+
+Upstream-Status: Backport [debian]
+
+---
+ Configure          | 2 ++
+ engines/openssl.ld | 5 +++++
+ openssl.ld         | 5 +++++
+ 3 files changed, 12 insertions(+)
+ create mode 100644 engines/openssl.ld
+ create mode 100644 openssl.ld
+
+diff --git a/Configure b/Configure
+index 31a9f6f..9dc82ef 100755
+--- a/Configure
++++ b/Configure
+@@ -1516,6 +1516,8 @@ if ($strict_warnings)
+ 		}
+ 	}
+ 
++$shared_ldflag .= " -Wl,--version-script=openssl.ld";
++
+ open(IN,'<Makefile.org') || die "unable to read Makefile.org:$!\n";
+ unlink("$Makefile.new") || die "unable to remove old $Makefile.new:$!\n" if -e "$Makefile.new";
+ open(OUT,">$Makefile.new") || die "unable to create $Makefile.new:$!\n";
+diff --git a/engines/openssl.ld b/engines/openssl.ld
+new file mode 100644
+index 0000000..7dd9663
+--- /dev/null
++++ b/engines/openssl.ld
+@@ -0,0 +1,5 @@
++OPENSSL_0.9.8 {
++	 global:
++		 *;
++};
++
+diff --git a/openssl.ld b/openssl.ld
+new file mode 100644
+index 0000000..7dd9663
+--- /dev/null
++++ b/openssl.ld
+@@ -0,0 +1,5 @@
++OPENSSL_0.9.8 {
++	 global:
++		 *;
++};
++

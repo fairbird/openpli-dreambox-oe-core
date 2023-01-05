@@ -1,0 +1,44 @@
+From 88f8cf74fe6535c064f6dd3d8f76003a963350fc Mon Sep 17 00:00:00 2001
+From: atvcaptain <captain@web.de>
+Date: Sun, 10 Nov 2013 11:57:29 +0100
+Subject: [PATCH] * Create openssl-old that provides obsolete 0.9.8 versions
+
+Upstream-Status: Backport [debian]
+
+---
+ tools/c_rehash.in | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/tools/c_rehash.in b/tools/c_rehash.in
+index 8b6d3f5..79df17c 100644
+--- a/tools/c_rehash.in
++++ b/tools/c_rehash.in
+@@ -60,12 +60,15 @@ sub hash_dir {
+ 		}
+ 	}
+ 	closedir DIR;
+-	FILE: foreach $fname (grep {/\.pem$/} @flist) {
++	FILE: foreach $fname (grep {/\.pem$|\.crt$/} @flist) {
+ 		# Check to see if certificates and/or CRLs present.
+ 		my ($cert, $crl) = check_file($fname);
+ 		if(!$cert && !$crl) {
+-			print STDERR "WARNING: $fname does not contain a certificate or CRL: skipping\n";
+-			next;
++			($cert, $crl) = check_file("$openssl x509 -in \"$fname\" -inform der  -outform pem | ");
++			if(!$cert && !$crl) {
++				print STDERR "WARNING: $fname does not contain a certificate or CRL: skipping\n";
++				next;
++			}
+ 		}
+ 		link_hash_cert($fname) if($cert);
+ 		link_hash_crl($fname) if($crl);
+@@ -103,6 +106,9 @@ sub link_hash_cert {
+ 		my $fname = $_[0];
+ 		$fname =~ s/'/'\\''/g;
+ 		my ($hash, $fprint) = `"$openssl" x509 -hash -fingerprint -noout -in '$fname'`;
++		if(!$hash || !fprint) {
++			($hash, $fprint) = `"$openssl" x509 -hash -fingerprint -noout -in '$fname' -inform der`;
++		}
+ 		chomp $hash;
+ 		chomp $fprint;
+ 		$fprint =~ s/^.*=//;

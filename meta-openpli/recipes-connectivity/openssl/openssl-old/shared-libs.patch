@@ -1,0 +1,61 @@
+From ee5698e169c180013a65e1370ccc4f62a596f991 Mon Sep 17 00:00:00 2001
+From: atvcaptain <captain@web.de>
+Date: Sun, 10 Nov 2013 11:57:29 +0100
+Subject: [PATCH] * Create openssl-old that provides obsolete 0.9.8 versions
+
+Upstream-Status: Inappropriate [configuration]
+
+---
+ Makefile.org    | 4 ++--
+ crypto/Makefile | 2 +-
+ ssl/Makefile    | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile.org b/Makefile.org
+index f94a850..3fb6eda 100644
+--- a/Makefile.org
++++ b/Makefile.org
+@@ -356,7 +356,7 @@ libcrypto$(SHLIB_EXT): libcrypto.a $(SHARED_FIPS)
+ 	@if [ "$(SHLIB_TARGET)" != "" ]; then \
+ 		if [ "$(FIPSCANLIB)" = "libfips" ]; then \
+ 			$(ARD) libcrypto.a fipscanister.o ; \
+-			$(MAKE) SHLIBDIRS='crypto' SHLIBDEPS='-lfips' build-shared; \
++			$(MAKE) -e SHLIBDIRS='crypto' SHLIBDEPS='-lfips' build-shared; \
+ 			$(AR) libcrypto.a fips/fipscanister.o ; \
+ 		else \
+ 			if [ "$(FIPSCANLIB)" = "libcrypto" ]; then \
+@@ -374,7 +374,7 @@ libssl$(SHLIB_EXT): libcrypto$(SHLIB_EXT) libssl.a
+ 	@if [ "$(SHLIB_TARGET)" != "" ]; then \
+ 		shlibdeps=-lcrypto; \
+ 		[ "$(FIPSCANLIB)" = "libfips" ] && shlibdeps="$$shlibdeps -lfips"; \
+-		$(MAKE) SHLIBDIRS=ssl SHLIBDEPS="$$shlibdeps" build-shared; \
++		$(MAKE) -e SHLIBDIRS=ssl SHLIBDEPS="$$shlibdeps" build-shared; \
+ 	else \
+ 		echo "There's no support for shared libraries on this platform" >&2 ; \
+ 		exit 1; \
+diff --git a/crypto/Makefile b/crypto/Makefile
+index 71ac792..0990a35 100644
+--- a/crypto/Makefile
++++ b/crypto/Makefile
+@@ -103,7 +103,7 @@ $(LIB):	$(LIBOBJ)
+ 
+ shared: buildinf.h lib subdirs
+ 	if [ -n "$(SHARED_LIBS)" ]; then \
+-		(cd ..; $(MAKE) $(SHARED_LIB)); \
++		(cd ..; $(MAKE) -e $(SHARED_LIB)); \
+ 	fi
+ 
+ libs:
+diff --git a/ssl/Makefile b/ssl/Makefile
+index 5ac3507..77ea2bd 100644
+--- a/ssl/Makefile
++++ b/ssl/Makefile
+@@ -62,7 +62,7 @@ lib:	$(LIBOBJ)
+ 
+ shared: lib
+ 	if [ -n "$(SHARED_LIBS)" ]; then \
+-		(cd ..; $(MAKE) $(SHARED_LIB)); \
++		(cd ..; $(MAKE) -e $(SHARED_LIB)); \
+ 	fi
+ 
+ files:
