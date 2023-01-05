@@ -16,7 +16,7 @@ DVBMEDIASINK_CONFIG:dm520 = "--with-pcm --with-wma --with-wmv --with-dtsdownmix 
 
 include conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/soc-family.inc
-require box-hardware.inc
+require conf/machine/box-hardware.inc
 
 MACHINE_EXTRA_RRECOMMENDS += " \
     gstreamer1.0-plugin-subsink \

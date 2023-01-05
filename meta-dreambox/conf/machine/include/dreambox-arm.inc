@@ -13,7 +13,7 @@ DVBMEDIASINK_CONFIG = "--with-pcm --with-wma --with-wmv --with-dts=no --with-dts
 
 include conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/soc-family.inc
-require box-hardware.inc
+require conf/machine/box-hardware.inc
 require conf/machine/include/arm/armv7a/tune-cortexa15.inc
 
 MACHINE_EXTRA_RRECOMMENDS += " \
