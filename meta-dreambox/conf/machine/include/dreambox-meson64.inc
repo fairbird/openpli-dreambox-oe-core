@@ -44,8 +44,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS = "\
     flash-nrf52 \
     nrf52-firmware-${MACHINE} \
     nrf52-firmware-rcu \
-    tpmd \
-    tpm-ca \
     dreambox-bootlogo \
     fbset \
     fbset-modes \
