@@ -6,7 +6,7 @@
 require conf/license/openpli-gplv2.inc
 
 # Depend on the image, so that it gets build
-DEPENDS = "openpli-enigma2-image package-index"
+DEPENDS = "openpli-enigma2-image package-index-feed"
 
 OPTIONAL_PACKAGES_BROKEN = ""
 OPTIONAL_PACKAGES ?= ""
