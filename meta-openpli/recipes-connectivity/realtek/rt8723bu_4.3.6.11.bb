@@ -16,6 +16,21 @@ SRC_URI = "https://source.mynonpublic.com/rtl8723bu_v4.3.6.11_12942.20141204_BTC
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 S = "${WORKDIR}"
 
+# need only for dreambox linux-meson64 4.9
+export KCFLAGS += " -Wno-error=misleading-indentation \
+                    -Wno-error=aggressive-loop-optimizations \
+                    -Wno-error=int-to-pointer-cast \
+                    -Wno-error=restrict \
+                    -Wno-error=int-conversion \
+                    -Wno-error=maybe-uninitialized \
+                    -Wno-error=discarded-qualifiers \
+                    -Wno-error=switch-unreachable \
+                    -Wno-error=bool-operation \
+                    -Wno-error=declaration-after-statement \
+                    -Wno-error=incompatible-pointer-types \
+                    -Wno-error \
+"
+
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP
     oe_runmake 'M={D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless' \

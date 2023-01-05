@@ -11,7 +11,7 @@ do_install() {
     oe_runmake install DESTDIR=${D}
 }
 
-PACKAGES =+ "flash-scripts"
+PACKAGES =+ "flash-scripts ${PN}-autoflashd ${PN}-fbscaled"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -34,9 +34,11 @@ FASTBOOTRDEPENDS_flash-scripts = " \
 "
 
 RDEPENDS:${PN} = " \
+    ${PN}-autoflashd \
     flash-scripts \
     gpgv \
     pigz \
+    util-linux-blkid \
     util-linux-mount \
 "
 RDEPENDS:${PN}:append:bcm7435 = " \
@@ -49,8 +51,17 @@ RDEPENDS:${PN}:append:bcm73625 = " \
     ${NANDRDEPENDS_recovery} \
 "
 
+RDEPENDS:${PN}:append:meson64 = " \
+    ${EMMCRDEPENDS_recovery} \
+    ${PN}-fbscaled \
+"
+#RRECOMMENDS:${PN} = " \
+#    recovery-ui \
+#"
+
 RDEPENDS:flash-scripts = " \
     coreutils-realpath \
+    curl \
 "
 RDEPENDS:flash-scripts:append:bcm7435 = " \
     ${EMMCRDEPENDS_flash-scripts} \
@@ -63,6 +74,27 @@ RDEPENDS:flash-scripts:append:bcm73625 = " \
     ${NANDRDEPENDS_flash-scripts} \
 "
 
+RDEPENDS:flash-scripts:append:meson64 = " \
+    ${EMMCRDEPENDS_flash-scripts} \
+    mkbootimg \
+    u-boot-mkimage \
+"
+RRECOMMENDS:flash-scripts:meson64 = " \
+    dreambox-dvb-modules-meson64-stb-core \
+"
+RRECOMMENDS:flash-scripts = " \
+    dreambox-dvb-modules-${MACHINE}-stb-core \
+"
+
+FILES:${PN}-autoflashd = " \
+    ${sysconfdir}/init.d/autoflashd \
+    ${sbindir}/autoflashd \
+"
+FILES:${PN}-fbscaled = " \
+    ${sysconfdir}/init.d/fbscaled \
+    ${sbindir}/fbscaled \
+"
+
 FILES:flash-scripts = " \
     ${sbindir}/flash-fsbl \
     ${sbindir}/flash-rescue \
@@ -72,8 +104,12 @@ FILES:flash-scripts = " \
     ${sbindir}/readspi \
     ${sbindir}/select-boot-source \
     ${sbindir}/to-the-rescue \
+    ${sbindir}/update-autoexec \
     ${sbindir}/update-rescue \
     ${sbindir}/writespi \
 "
 
-INITSCRIPT_NAME = "autoflashd"
+INITSCRIPT_PACKAGES = "${PN}-autoflashd ${PN}-fbscaled"
+INITSCRIPT_NAME = ""
+INITSCRIPT_NAME:${PN}-autoflashd = "autoflashd"
+INITSCRIPT_NAME:${PN}-fbscaled = "fbscaled"
