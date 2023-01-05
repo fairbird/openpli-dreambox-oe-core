@@ -15,3 +15,6 @@ RREPLACES:${PN}-dev = "libegl-dev libgles2-dev"
 
 FILES:${PN} += "${libdir}/lib*${SOLIBSDEV}"
 FILES_SOLIBSDEV = ""
+INSANE_SKIP:${PN} = "dev-so"
+
+COMPATIBLE_MACHINE = "^(meson64)$"

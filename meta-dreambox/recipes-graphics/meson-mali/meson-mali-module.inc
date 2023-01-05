@@ -1,5 +1,5 @@
 SUMMARY = "Mali kernel module"
-LICENSE = "GPL-2.0-only"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://${GPU_MODEL}/${GPU_VERSION}/kernel/license.txt;md5=13e14ae1bd7ad5bff731bba4a31bb510"
 
 inherit module-base
@@ -8,10 +8,6 @@ SRC_URI:append = " file://0001-${GPU_MODEL}-${GPU_VERSION}-compile-fix-for-dream
 
 GPU_MODEL = "${@d.getVar('BPN').split('-')[-2]}"
 GPU_VERSION = "${@d.getVar('BPN').split('-')[-1]}"
-
-export KCFLAGS = "-Wno-error=maybe-uninitialized \
-                  -Wno-error=array-bounds \
-"
 
 EXTRA_OEMAKE += " \
     ARCH=${ARCH} \
@@ -49,12 +45,8 @@ if [ -z "$D" ]; then
 fi
 }
 
-COMPATIBLE_MACHINE = "^(dreamone|dreamtwo)$"
+COMPATIBLE_MACHINE = "^(meson64)$"
 
 addtask make_scripts after do_prepare_recipe_sysroot before do_compile
 do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
 do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
-
-do_make_scripts() {
-	:
-}

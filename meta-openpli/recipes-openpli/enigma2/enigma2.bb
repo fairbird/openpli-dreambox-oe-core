@@ -14,6 +14,7 @@ DEPENDS = " \
 	python3-twisted python3-wifi \
 	swig-native \
 	tuxtxt-enigma2 \
+	${@bb.utils.contains("MACHINE_FEATURES", "alsamixer", "ffmpeg" , "", d)} \
 	"
 
 # SoftcamSetup is integrated now
