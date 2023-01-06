@@ -72,8 +72,8 @@ python do_cleanup () {
         ('dm7080', 'dm7080.png', 'dmm2.png', 'dmm2.html'),
         ('dm900', 'dm900.png', 'dmm2.png', 'dmm2.html'),
         ('dm920', 'dm920.png', 'dmm2.png', 'dmm2.html'),
-        ('dreamone', 'dreamone.png', 'dmm2.png', 'dmm2.html'),
-        ('dreamtwo', 'dreamtwo.png', 'dmm2.png', 'dmm2.html'),
+        ('dreamone', 'dreamone.png', 'dmm3.png', 'dmm3.html'),
+        ('dreamtwo', 'dreamtwo.png', 'dmm3.png', 'dmm3.html'),
     ]
 
     import os
