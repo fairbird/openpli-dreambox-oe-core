@@ -21,7 +21,9 @@ export KCFLAGS += " -Wno-error=misleading-indentation \
                     -Wno-error=switch-unreachable \
                     -Wno-error=bool-operation \
                     -Wno-error=declaration-after-statement \
+                    -Wno-error=implicit-function-declaration \
                     -Wno-error=incompatible-pointer-types \
+                    -Wno-error=ignored-qualifiers \
                     -Wno-error \
 "
 
