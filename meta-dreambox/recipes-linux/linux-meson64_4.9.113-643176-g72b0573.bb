@@ -51,6 +51,7 @@ export KCFLAGS = "-Wno-error=misleading-indentation \
                   -Wno-error=builtin-declaration-mismatch \
                   -Wno-error=address \
                   -Wno-error=unused-const-variable \
+                  -Wno-error \
 "
 
 KERNEL_FLASH_ARGS = "-c '${CMDLINE}'"
