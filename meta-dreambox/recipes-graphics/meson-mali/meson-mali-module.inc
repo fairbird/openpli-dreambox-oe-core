@@ -9,6 +9,10 @@ SRC_URI:append = " file://0001-${GPU_MODEL}-${GPU_VERSION}-compile-fix-for-dream
 GPU_MODEL = "${@d.getVar('BPN').split('-')[-2]}"
 GPU_VERSION = "${@d.getVar('BPN').split('-')[-1]}"
 
+export KCFLAGS = "-Wno-error=maybe-uninitialized \
+                  -Wno-error=array-bounds \
+"
+
 EXTRA_OEMAKE += " \
     ARCH=${ARCH} \
     CONFIG_MALI_MIDGARD=m \
@@ -50,3 +54,7 @@ COMPATIBLE_MACHINE = "^(meson64)$"
 addtask make_scripts after do_prepare_recipe_sysroot before do_compile
 do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
 do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
+
+do_make_scripts() {
+	:
+}
