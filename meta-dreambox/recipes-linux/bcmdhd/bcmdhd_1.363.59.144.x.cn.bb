@@ -1,12 +1,24 @@
 SUMMARY = "Broadcom DHD driver"
-LICENSE = "GPL-2.0-or-later"
-DEPENDS = "virtual/kernel"
+LICENSE = "GPL-2.0-only"
+require conf/license/license-gplv2.inc
 
-inherit module-base
+DEPENDS = "virtual/kernel"
+RDEPENDS:${PN} = "firmware-bcmdhd"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit module-base machine_kernel_pr
+
+SRC_URI = "https://dreamboxupdate.com/download/opendreambox/${BPN}/${BPN}.${PV}-38a2e98.tar.xz \
+           file://0001-Makefile-set-default-firmware-path.patch"
+SRC_URI[md5sum] = "6c4425868dd86785f1986ce7642685f1"
+SRC_URI[sha256sum] = "177af925bc2e7130e59dc56b0e6f13b992fee8ab57e7b221671e5cb2ec37e008"
+
+S = "${WORKDIR}/${BPN}.${PV}"
 
 M ?= "${S}"
 
-EXTRA_OEMAKE += " \
+EXTRA_OEMAKE += "\
     ARCH=${ARCH} \
     CONFIG_BCMDHD_SDIO=y \
     CROSS_COMPILE=${TARGET_PREFIX} \
@@ -20,6 +32,7 @@ do_compile() {
     unset CC CFLAGS CPP CPPFLAGS CXX CXXFLAGS CCLD LDFLAGS
     oe_runmake -C ${STAGING_KERNEL_DIR} modules
 }
+
 do_install() {
     unset CC CFLAGS CPP CPPFLAGS CXX CXXFLAGS CCLD LDFLAGS
     oe_runmake -C ${STAGING_KERNEL_DIR} modules_install
@@ -30,7 +43,7 @@ do_install() {
 }
 
 FILES:${PN} = "${sysconfdir}/modules-load.d \
-               /lib/modules/${KERNEL_VERSION}/extra"
+               ${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra"
 
 pkg_postinst:${PN} () {
 if [ -z "$D" ]; then
@@ -38,7 +51,10 @@ if [ -z "$D" ]; then
 fi
 }
 
-RDEPENDS:${PN} = "bcmdhd-firmware"
+export KCFLAGS = "-Wno-error=stringop-overflow \
+                  -Wno-error=address-of-packed-member \
+                  -Wno-error=missing-attributes \
+                  "
 
 addtask make_scripts after do_prepare_recipe_sysroot before do_compile
 do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
