@@ -51,11 +51,11 @@ if [ -z "$D" ]; then
 fi
 }
 
-export KCFLAGS = "-Wno-error=stringop-overflow \
-                  -Wno-error=address-of-packed-member \
-                  -Wno-error=missing-attributes \
-                  "
+export KCFLAGS = " \
+	-Wno-error=stringop-overflow \
+	-Wno-error=address \
+	-Wno-error=address-of-packed-member \
+	-Wno-error=missing-attributes \
+	"
 
 addtask make_scripts after do_prepare_recipe_sysroot before do_compile
-do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
-do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
