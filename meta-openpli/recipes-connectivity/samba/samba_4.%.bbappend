@@ -10,7 +10,6 @@ EXTRA_OECONF += " \
 			--with-ads \
 			--with-sockets-dir=${localstatedir}/run \
 			--with-logfilebase=${localstatedir}/log/samba \
-			--without-dnsupdate \
 			--without-profiling-data \
 			--without-quotas \
 			--without-syslog \
