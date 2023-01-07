@@ -3,7 +3,17 @@ DESCRIPTION = "Firewall"
 require conf/license/openpli-gplv2.inc
 require classes/python3-compileall.inc
 
-RDEPENDS:${PN} = "iptables kernel-module-ip-tables kernel-module-nf-conntrack kernel-module-ipt-reject kernel-module-xt-state kernel-module-iptable-filter"
+RDEPENDS:${PN} = " \	
+	${@bb.utils.contains("MACHINE", "dreamone dreamtwo", "", \
+	" \
+	iptables \
+	kernel-module-ip-tables \
+	kernel-module-xt-state \
+	kernel-module-nf-conntrack \
+	kernel-module-ipt-reject \
+	kernel-module-iptable-filter \
+	", d)} \
+	"
 
 SRC_URI = "file://firewall.sh file://firewall.users"
 
