@@ -3,7 +3,7 @@ DESCRIPTION = "USB serial drivers"
 require conf/license/openpli-gplv2.inc
 
 RDEPENDS:${PN} = " \	
-	${@bb.utils.contains("MACHINE", "dreamone dreamtwo", "", "kernel-module-belkin-sa", d)} \
+	${@bb.utils.contains_any("MACHINE", "dreamone dreamtwo", "", "kernel-module-belkin-sa", d)} \
 	kernel-module-usbserial \
 	kernel-module-ftdi-sio \
 	kernel-module-pl2303 \

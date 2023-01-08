@@ -4,7 +4,7 @@ require conf/license/openpli-gplv2.inc
 require classes/python3-compileall.inc
 
 RDEPENDS:${PN} = " \	
-	${@bb.utils.contains("MACHINE", "dreamone dreamtwo", "", \
+	${@bb.utils.contains_any("MACHINE", "dreamone dreamtwo", "", \
 	" \
 	iptables \
 	kernel-module-ip-tables \
