@@ -11,12 +11,16 @@ diff --git a/EPGImport/plugin.py b/EPGImport/plugin.py
 index 00d7f63..94171f5 100644
 --- a/EPGImport/plugin.py
 +++ b/EPGImport/plugin.py
-@@ -46,11 +46,9 @@ def calcDefaultStarttime():
- 		offset = 7680
- 	return (5 * 60 * 60) + offset
+@@ -12,7 +12,6 @@
+ import time
  
--
+ import enigma
 -from boxbranding import getImageDistro
+ # Config
+ from Components.ActionMap import ActionMap
+ from Components.Button import Button
+@@ -55,7 +55,7 @@ def calcDefaultStarttime():
+ 
  #Set default configuration
  config.plugins.epgimport = ConfigSubsection()
 -config.plugins.epgimport.enabled = ConfigEnableDisable(default=False)
