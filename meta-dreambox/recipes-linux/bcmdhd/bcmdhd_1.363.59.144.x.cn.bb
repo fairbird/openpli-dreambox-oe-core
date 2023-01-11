@@ -58,4 +58,4 @@ export KCFLAGS = " \
 	-Wno-error=missing-attributes \
 	"
 
-addtask make_scripts after do_prepare_recipe_sysroot before do_compile
+addtask do_prepare_recipe_sysroot before do_compile
