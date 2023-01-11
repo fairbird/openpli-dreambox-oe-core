@@ -8,6 +8,6 @@ S = "${WORKDIR}"
 inherit allarch
 
 do_install() {
-    install -d ${D}${base_libdir}/udev/rules.d
-    install -m 0644 ${WORKDIR}/${BPN}.rules ${D}${base_libdir}/udev/rules.d/10-${BPN}.rules
+    install -d ${D}/lib/udev/rules.d
+    install -m 0644 ${WORKDIR}/${BPN}.rules ${D}/lib/udev/rules.d/10-${BPN}.rules
 }
