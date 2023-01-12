@@ -72,6 +72,36 @@ EXTRA_OECONF = " \
     --with-transcoding="${HAVE_VFDSYMBOL}" \
     "
 
+do_configure:prepend() {
+        if [ "${MACHINE}" = "dm7080" ]; then
+            DRIVERSDATE="20190502"
+        elif [ "${MACHINE}" = "dm820" ]; then
+            DRIVERSDATE="20181018"
+        elif [ "${MACHINE}" = "dm520" ]; then
+            DRIVERSDATE="20180222"
+        elif [ "${MACHINE}" = "dm800" ]; then
+            DRIVERSDATE="20131228"
+        elif [ "${MACHINE}" = "dm8000" ]; then
+            DRIVERSDATE="20140604"
+        elif [ "${MACHINE}" = "dm7020hd" ] || [ "${MACHINE}" = "dm7020hdv2" ]; then
+            DRIVERSDATE="20161019"
+        elif [ "${MACHINE}" = "dm800se" ]; then
+            DRIVERSDATE="20151201"
+        elif [ "${MACHINE}" = "dm800sev2" ]; then
+            DRIVERSDATE="20151201"
+        elif [ "${MACHINE}" = "dm900" ]; then
+            DRIVERSDATE="20200226"
+        elif [ "${MACHINE}" = "dm920" ]; then
+            DRIVERSDATE="20190830"
+        elif [ "${MACHINE}" = "dreamone" ]; then
+            DRIVERSDATE="20210518"
+        elif [ "${MACHINE}" = "dreamtwo" ]; then
+            DRIVERSDATE="20210518"
+        else
+            DRIVERSDATE='N/A'
+        fi
+}
+
 require classes/python3-compileall.inc
 
 FILES:${PN}-src = "${libdir}/enigma2/python/Components/*.py ${libdir}/enigma2/python/Components/*.pyc"
