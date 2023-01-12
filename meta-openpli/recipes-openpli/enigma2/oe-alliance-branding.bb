@@ -16,12 +16,11 @@ MACHINEBUILD = "${MACHINE}"
 
 do_configure[nostamp] = "1"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
-
 BRANCH="master"
 
 SRC_URI="git://github.com/oe-mirrors/branding-module.git;protocol=https;branch=${BRANCH} \
         file://ax-python-devel-dont-check-for-distutils.patch \
+        file://Add_VFDSymbol_SoCFamily.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -69,6 +68,8 @@ EXTRA_OECONF = " \
     --with-wwol="${HAVE_WWOL}" \
     --with-ci="${HAVE_CI}" \
     --with-transcoding="${TRANSCODING}" \
+    --with-transcoding="${SOCFAMILY}" \
+    --with-transcoding="${HAVE_VFDSYMBOL}" \
     "
 
 require classes/python3-compileall.inc

@@ -1,0 +1,89 @@
+Subject: Add getHaveVFDSymbol
+
+---
+
+diff --git a/BoxBranding/lib/_boxbranding.c b/BoxBranding/lib/_boxbranding.c
+--- a/BoxBranding/lib/_boxbranding.c
++++ b/BoxBranding/lib/_boxbranding.c
+@@ -56,6 +56,8 @@ MAKE_STRING_FUNCTION(getHaveWOL)
+ MAKE_STRING_FUNCTION(getHaveTranscoding1)
+ MAKE_STRING_FUNCTION(getHaveTranscoding2)
+ MAKE_STRING_FUNCTION(getHaveCI)
++MAKE_STRING_FUNCTION(getSoCFamily)
++MAKE_STRING_FUNCTION(getHaveVFDSymbol)
+ 
+ /* Module specification */
+ static PyMethodDef boxbrandingMethods[] = {
+@@ -99,6 +99,8 @@ static PyMethodDef boxbrandingMethods[] = {
+ 	{ "getHaveTranscoding1", getHaveTranscoding1, METH_NOARGS, NULL },
+ 	{ "getHaveTranscoding2", getHaveTranscoding2, METH_NOARGS, NULL },
+ 	{ "getHaveCI", getHaveCI, METH_NOARGS, NULL },
++	{ "getSoCFamily", getSoCFamily, METH_NOARGS, NULL },
++	{ "getHaveVFDSymbol", getHaveVFDSymbol, METH_NOARGS, NULL },
+ 	{ NULL, NULL, 0, NULL }
+ };
+ 
+diff --git a/BoxBranding/lib/boxbranding.c b/BoxBranding/lib/boxbranding.c
+--- a/BoxBranding/lib/boxbranding.c
++++ b/BoxBranding/lib/boxbranding.c
+@@ -752,6 +752,18 @@ char *_getSoCFamily()
+ {
+ 	return strdup(UBINIZE_ARGS);
+ }
++
++char *_getSoCFamily()
++{
++	return strdup(SOCFAMILY);
++}
++
++char *_getHaveVFDSymbol()
++{
++	if(strcmp(HAVE_VFDSYMBOL, "False") == 0)
++		return strdup("");
++	return strdup(HAVE_VFDSYMBOL);
++}
+ 
+ char *_getMachineProcModel() // return just value from proc entry
+ {
+diff --git a/BoxBranding/lib/boxbranding.h b/BoxBranding/lib/boxbranding.h
+--- a/BoxBranding/lib/boxbranding.h
++++ b/BoxBranding/lib/boxbranding.h
+@@ -50,5 +50,7 @@ char *_getHaveWOL();
+ char *_getHaveTranscoding1();
+ char *_getHaveTranscoding2();
+ char *_getHaveCI();
++char *_getSoCFamily();
++char *_getHaveVFDSymbol();
+ 
+ #endif
+diff --git a/BoxBranding/lib/test.py b/BoxBranding/lib/test.py
+--- a/BoxBranding/lib/test.py
++++ b/BoxBranding/lib/test.py
+@@ -40,3 +40,4 @@
+ print("getHaveTranscoding1%s<" %boxbranding.getHaveTranscoding1())
+ print("getHaveTranscoding2%s<" %boxbranding.getHaveTranscoding2())
+ print("getHaveCI%s<" %boxbranding.getHaveCI())
++print("getSoCFamily=%s<" %boxbranding.getSoCFamily())
++print("getHaveVFDSymbol=%s<" %boxbranding.getHaveVFDSymbol())
+diff --git a/configure.ac b/configure.ac
+--- a/configure.ac
++++ b/configure.ac
+@@ -256,6 +256,18 @@ AC_ARG_WITH(socfamily,
+ AC_SUBST(DRIVERDATE)
+ AC_DEFINE_UNQUOTED(DRIVERDATE,"$DRIVERDATE",[driver date])
+ 
++AC_ARG_WITH(socfamily,
++	[  --with-socfamily=NAME SoC family [[SoC,...]]],
++	[SOCFAMILY="$withval"],[SOCFAMILY=""])
++AC_SUBST(SOCFAMILY)
++AC_DEFINE_UNQUOTED(SOCFAMILY,"$SOCFAMILY",[SoC family])
++
++AC_ARG_WITH(vfd-symbol,
++	[  --with-vfd-symbol=NAME vfd symbol [[vfdsymbol,...]]],
++	[HAVE_VFDSYMBOL="$withval"],[HAVE_VFDSYMBOL="True"])
++AC_SUBST(HAVE_VFDSYMBOL)
++AC_DEFINE_UNQUOTED(HAVE_VFDSYMBOL,"$HAVE_VFDSYMBOL",[vfdsymbol])
++
+ 
+ AC_ARG_WITH(debug,
+ 	AS_HELP_STRING([--without-debug],[disable debugging code]),
