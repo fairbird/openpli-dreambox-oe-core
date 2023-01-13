@@ -27,7 +27,7 @@ KERNEL_LD += "${TOOLCHAIN_OPTIONS}"
 S = "${WORKDIR}/${BPN}-v${PV}"
 B = "${WORKDIR}/build"
 
-CMDLINE = "${@kernel_console(d)} root=/dev/mmcblk0p7 rootwait rootfstype=ext4 no_console_suspend"
+CMDLINE = "logo=osd0,loaded,0x7f800000 vout=1080p50hz,enable hdmimode=1080p50hz fb_width=1280 fb_height=720 ${@kernel_console(d)} root=/dev/mmcblk0p7 rootwait rootfstype=ext4 no_console_suspend"
 
 COMPATIBLE_MACHINE = "^(dreamone|dreamtwo)$"
 
