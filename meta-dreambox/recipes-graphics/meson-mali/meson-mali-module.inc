@@ -40,6 +40,10 @@ do_install() {
     chmod 0644 ${D}${sysconfdir}/modules-load.d/00-${BPN}.conf
 }
 
+do_make_scripts() {
+	:
+}
+
 FILES:${PN} = "${sysconfdir}/modules-load.d \
                /lib/modules/${KERNEL_VERSION}/extra"
 
