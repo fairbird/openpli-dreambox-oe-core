@@ -9,11 +9,11 @@ MACHINE_KERNEL_PR:append = ".1"
 require linux-dreambox-4.9.inc
 
 SRC_URI = "https://dreamboxupdate.com/download/opendreambox/${BPN}/${BPN}-v${PV}.tar.xz \
+           file://support-for-gcc12.patch \
            file://defonfig \
            file://fix-multiple-defs-yyloc_v1.patch \
            file://0003-cp1emu-do-not-use-bools-for-arithmetic.patch \
            file://move-default-dialect-to-SMB3.patch \
-           file://fsnotify_avoid_gcc-10_zero-length-bounds_warning.patch \
            file://hide_sdcardfs_info.patch \
            file://use_address-of_operator_on_section_symbols.patch \
 "
@@ -27,7 +27,7 @@ KERNEL_LD += "${TOOLCHAIN_OPTIONS}"
 S = "${WORKDIR}/${BPN}-v${PV}"
 B = "${WORKDIR}/build"
 
-CMDLINE = "logo=osd0,loaded,0x7f800000 vout=1080p50hz,enable hdmimode=1080p50hz fb_width=1280 fb_height=720 ${@kernel_console(d)} root=/dev/mmcblk0p7 rootwait rootfstype=ext4 no_console_suspend"
+CMDLINE = "${@kernel_console(d)} root=/dev/mmcblk0p7 rootwait rootfstype=ext4 no_console_suspend"
 
 COMPATIBLE_MACHINE = "^(dreamone|dreamtwo)$"
 
@@ -43,15 +43,17 @@ export KCFLAGS = "-Wno-error=misleading-indentation \
                   -Wno-error=parentheses \
                   -Wno-error=shift-overflow \
                   -Wno-error=array-bounds \
+                  -Wno-error=array-compare \
+                  -Wno-error=sizeof-array-div \
                   -Wno-error=bool-compare \
                   -Wno-error=maybe-uninitialized \
                   -Wno-error=unused-variable \
                   -Wno-error=stringop-overflow \
+                  -Wno-error=stringop-overread \
                   -Wno-error=zero-length-bounds \
                   -Wno-error=builtin-declaration-mismatch \
                   -Wno-error=address \
                   -Wno-error=unused-const-variable \
-                  -Wno-error \
 "
 
 KERNEL_FLASH_ARGS = "-c '${CMDLINE}'"
