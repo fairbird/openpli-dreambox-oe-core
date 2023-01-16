@@ -10,7 +10,7 @@ require linux-dreambox-4.9.inc
 
 SRC_URI = "https://dreamboxupdate.com/download/opendreambox/${BPN}/${BPN}-v${PV}.tar.xz \
            file://support-for-gcc12.patch \
-           file://defonfig \
+           file://defconfig \
            file://fix-multiple-defs-yyloc_v1.patch \
            file://0003-cp1emu-do-not-use-bools-for-arithmetic.patch \
            file://move-default-dialect-to-SMB3.patch \
