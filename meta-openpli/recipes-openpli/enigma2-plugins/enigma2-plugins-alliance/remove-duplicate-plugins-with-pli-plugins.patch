@@ -306,7 +306,7 @@ index ad0c08e..01fb877 100644
  epgsearch/Makefile
  epgsearch/meta/Makefile
  epgsearch/po/Makefile
-@@ -356,39 +356,11 @@
+@@ -356,38 +356,11 @@
  eventposition/Makefile
  eventposition/src/Makefile
  
@@ -327,7 +327,6 @@ index ad0c08e..01fb877 100644
  flashexpander/src/Makefile
  
 -fritzcall/Makefile
--fritzcall/meta/Makefile
 -fritzcall/po/Makefile
 -fritzcall/src/Makefile
 -fritzcall/src/images/Makefile
