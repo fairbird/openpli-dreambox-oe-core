@@ -1,28 +1,31 @@
-From 7068d44f69927b9a5ae1dd7e6dbc9b98e78bd281 Mon Sep 17 00:00:00 2001
+From 6465e96a344720ccc8b95b28497f2bf2019f430c Mon Sep 17 00:00:00 2001
 From: fairbird <rrrr53@hotmail.com>
-Date: Mon, 21 Mar 2022 11:29:37 +0300
+Date: Fri, 24 Apr 2020 15:19:10 +0300
 Subject: [PATCH] Add_option_to_choose_style_of_VirtualKeyBoard
 
 ---
- YouTubeSearch.py | 18 ++++++++++++++++--
- YouTubeUi.py     |  5 +++++
- 2 files changed, 21 insertions(+), 2 deletions(-)
 
 diff --git a/src/YouTubeSearch.py b/src/YouTubeSearch.py
-index 471813f..45dbfa2 100644
+index e406b7a..dea50ea 100644
 --- a/src/YouTubeSearch.py
 +++ b/src/YouTubeSearch.py
-@@ -17,7 +17,9 @@ from Components.Pixmap import Pixmap
+@@ -5,6 +5,7 @@ from os import path as os_path
+ from threading import Thread
+ from json import loads
+ 
++import os
+ from enigma import ePoint
+ from Screens.ChoiceBox import ChoiceBox
+ from Screens.Screen import Screen
+@@ -17,6 +18,7 @@ from Components.Pixmap import Pixmap
  from Components.Sources.Boolean import Boolean
  from Components.Sources.List import List
  from Components.Sources.StaticText import StaticText
 +from Tools.Directories import resolveFilename, SCOPE_PLUGINS
  
-+import os
  from . import _, screenwidth
  from .compat import compat_quote
- from .compat import compat_urlopen
-@@ -355,8 +357,20 @@ class YouTubeSearch(Screen, ConfigListScreen):
+@@ -354,8 +356,20 @@ class YouTubeSearch(Screen, ConfigListScreen):
  
  	def openKeyboard(self):
  		self['config'].getCurrent()[1].help_window.instance.hide()
@@ -46,10 +49,10 @@ index 471813f..45dbfa2 100644
  	def keyBoardCallback(self, name):
  		config = self['config'].getCurrent()[1]
 diff --git a/src/YouTubeUi.py b/src/YouTubeUi.py
-index 8dbc624..c6b6637 100644
+index e9beedb..f619dc5 100644
 --- a/src/YouTubeUi.py
 +++ b/src/YouTubeUi.py
-@@ -78,6 +78,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='related', choices=[
+@@ -77,6 +77,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='related', choices=[
  config.plugins.YouTube.onMovieStop = ConfigSelection(default='related', choices=[
  	('related', _('Show related videos')),
  	('ask', _('Ask user')), ('quit', _('Return to list'))])
@@ -58,13 +61,13 @@ index 8dbc624..c6b6637 100644
  config.plugins.YouTube.login = ConfigYesNo(default=False)
  config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
  config.plugins.YouTube.useDashMP4 = ConfigYesNo(default=True)
-@@ -1497,6 +1499,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
- 			self.list.append(getConfigListEntry(_('Merge downloaded files:'),
+@@ -1483,6 +1485,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
+ 			self.list.append((_('Merge downloaded files:'),
  				config.plugins.YouTube.mergeFiles,
  				_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
-+		self.list.append(getConfigListEntry(_('Choose VirtualKeyBoard Style:'),
++		self.list.append((_('Choose VirtualKeyBoard Style:'),
 +			config.plugins.YouTube.VirtualKeyBoard,
 +			_('You can choose what style of VirtualKeyBoard to use it.\nYouTube OR Image (VirtualKeyBoard).')))
  		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
  			if 'ServiceApp' in p.path:  # pragma: no cover
- 				self.list.append(getConfigListEntry(_('Media player:'),
+ 				self.list.append((_('Media player:'),
