@@ -18,5 +18,4 @@ RDEPENDS:${PN} = " \
 
 SRC_URI = "git://github.com/Dima73/enigma2-plugin-extensions-tmbd.git;protocol=https;branch=python3 \
            file://use-setuptools-instead-of-distutils.patch \
-           file://port-to-treq.patch \
 "
