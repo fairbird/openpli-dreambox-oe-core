@@ -8,7 +8,7 @@ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 
 RDEPENDS:${PN} += "${PYTHON_PN}-packaging ${PYTHON_PN}-tomli"
 
-SRC_URI[sha256sum] = "3b7565a2db92f1206b5b833a72cc6936c8a74d65e94224f0a9eb54799d1561d9"
+SRC_URI[sha256sum] = "73f2965e30d2ebfd7ffab6bf26368f2237570622dd2a49c7fbc1995de9c676d6"
 
 PYPI_PACKAGE = "versioningit"
 
