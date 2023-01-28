@@ -31,15 +31,16 @@ index f438eff..44af0bb 100644
  obj-$(CONFIG_USB_GSPCA)         += gspca/
 --- a/drivers/media/usb/dvb-usb-v2/rtl28xxu.c
 +++ b/drivers/media/usb/dvb-usb-v2/rtl28xxu.c
-@@ -1430,6 +1430,8 @@ static const struct usb_device_id rtl28xxu_id_table[] = {
- 	{ DVB_USB_DEVICE(USB_VID_GTEK, USB_PID_CPYTO_REDI_PC50A,
- 		&rtl2832u_props, "Crypto ReDi PC 50 A", NULL) },
- 
+index fda5c64ba..208711b21 100644
+@@ -1421,6 +1421,8 @@ static const struct usb_device_id rtl28xxu_id_table[] = {
+ 		&rtl2832u_props, "GIGABYTE U7300", NULL) },
+ 	{ DVB_USB_DEVICE(USB_VID_DEXATEK, 0x1104,
+ 		&rtl2832u_props, "MSI DIGIVOX Micro HD", NULL) },
 +	{ DVB_USB_DEVICE(USB_PID_GOTVIEW_CA42, 0x5654,
 +		&rtl2832u_props, "GoTview MasterHD 3", NULL) },
- 	{ DVB_USB_DEVICE(USB_VID_HANFTEK, 0x0131,
- 		&rtl2832u_props, "Astrometa DVB-T2", NULL) },
- 	{ }
+ 	{ DVB_USB_DEVICE(USB_VID_COMPRO, 0x0620,
+ 		&rtl2832u_props, "Compro VideoMate U620F", NULL) },
+ 	{ DVB_USB_DEVICE(USB_VID_KWORLD_2, 0xd394,
 diff --git a/drivers/media/usb/rtl2832u/Kconfig b/drivers/media/usb/rtl2832u/Kconfig
 new file mode 100644
 index 0000000..b86cf01
