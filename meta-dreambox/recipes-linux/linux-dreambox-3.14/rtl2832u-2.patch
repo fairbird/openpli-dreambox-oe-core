@@ -8,7 +8,7 @@ diff --git a/drivers/media/usb/Kconfig b/drivers/media/usb/Kconfig
 index 94d51e0..57ee616 100644
 --- a/drivers/media/usb/Kconfig
 +++ b/drivers/media/usb/Kconfig
-@@ -46,6 +46,7 @@ source "drivers/media/usb/ttusb-budget/Kconfig"
+@@ -45,6 +45,7 @@ source "drivers/media/usb/ttusb-budget/Kconfig"
  source "drivers/media/usb/ttusb-dec/Kconfig"
  source "drivers/media/usb/siano/Kconfig"
  source "drivers/media/usb/b2c2/Kconfig"
@@ -31,15 +31,15 @@ index f438eff..44af0bb 100644
  obj-$(CONFIG_USB_GSPCA)         += gspca/
 --- a/drivers/media/usb/dvb-usb-v2/rtl28xxu.c
 +++ b/drivers/media/usb/dvb-usb-v2/rtl28xxu.c
-@@ -1430,6 +1430,8 @@
+@@ -1430,6 +1430,8 @@ static const struct usb_device_id rtl28xxu_id_table[] = {
+ 	{ DVB_USB_DEVICE(USB_VID_GTEK, USB_PID_CPYTO_REDI_PC50A,
+ 		&rtl2832u_props, "Crypto ReDi PC 50 A", NULL) },
  
- 	{ DVB_USB_DEVICE(USB_VID_HANFTEK, 0x0131,
- 		&rtl2832u_props, "Astrometa DVB-T2", NULL) },
 +	{ DVB_USB_DEVICE(USB_PID_GOTVIEW_CA42, 0x5654,
 +		&rtl2832u_props, "GoTview MasterHD 3", NULL) },
+ 	{ DVB_USB_DEVICE(USB_VID_HANFTEK, 0x0131,
+ 		&rtl2832u_props, "Astrometa DVB-T2", NULL) },
  	{ }
- };
- MODULE_DEVICE_TABLE(usb, rtl28xxu_id_table);
 diff --git a/drivers/media/usb/rtl2832u/Kconfig b/drivers/media/usb/rtl2832u/Kconfig
 new file mode 100644
 index 0000000..b86cf01
@@ -89003,7 +89003,7 @@ index 0000000..76e5e32
 +tmbslTDA182I2GetPowerLevel
 +(
 +    tmUnitSelect_t  tUnit,      /* I: Unit number */
-+    UInt32*         pPowerLevel /* O: Power Level in dBµV */
++    UInt32*         pPowerLevel /* O: Power Level in dB\B5V */
 +)
 +{
 +    ptmTDA182I2Object_t pObj = Null;
@@ -112141,7 +112141,7 @@ index 0000000..2f00d86
 +    tmErrorCode_t
 +        tmbslTDA182I2GetPowerLevel(
 +        tmUnitSelect_t  tUnit,      /* I: Unit number */
-+        UInt32*         pPowerLevel /* O: Power Level in dBµV */
++        UInt32*         pPowerLevel /* O: Power Level in dB\B5V */
 +        );
 +    tmErrorCode_t
 +        tmbslTDA182I2SetIRQWait(
