@@ -36,7 +36,7 @@ index 90eef3742f..068d1199fe 100644
  	eurotictv \
  	eventlist \
  	eventposition \
-@@ -12,58 +12,22 @@ SUBDIRS = \
+@@ -12,61 +12,23 @@ SUBDIRS = \
  	eurotictv \
  	eventlist \
  	eventposition \
@@ -93,8 +93,11 @@ index 90eef3742f..068d1199fe 100644
 -	unwetterinfo \
 -	valixdcontrol \
  	videocolorspace \
- 	vlcplayer \
- 	vps \
+-	vlcplayer \
+-	vps \
+ 	weatherplugin \
+ 	weathercomponent \
+ 	weathercomponenthandler \
 @@ -72,39 +36,13 @@ SUBDIRS = \
  	weathercomponenthandler \
  	webadmin \
