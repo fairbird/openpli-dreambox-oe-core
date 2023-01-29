@@ -1,7 +1,5 @@
-diff --git a/src/astra/core/child.c b/src/astra/core/child.c
-index a04d87b..19d3341 100644
---- a/src/astra/core/child.c
-+++ b/src/astra/core/child.c
+--- a/src/core/child.c
++++ b/src/core/child.c
 @@ -468,7 +468,7 @@ void asc_child_close(asc_child_t *child)
              {
                  const int signum = WTERMSIG(status);
@@ -11,11 +9,9 @@ index a04d87b..19d3341 100644
  
                  status = 128 + signum;
              }
-diff --git a/src/astra/core/spawn.c b/src/astra/core/spawn.c
-index b7ff9ba..85a421e 100644
---- a/src/astra/core/spawn.c
-+++ b/src/astra/core/spawn.c
-@@ -149,8 +149,8 @@ static
+--- a/src/core/spawn.c
++++ b/src/core/spawn.c
+@@ -150,8 +150,8 @@ static
  void perror_s(const char *s)
  {
      const char *msg = "Unknown error";
@@ -25,4 +21,4 @@ index b7ff9ba..85a421e 100644
 +        msg = strerror(errno);
  
      size_t slen;
-     ssize_t ret;
+     if (s != NULL && (slen = strlen_s(s)))
