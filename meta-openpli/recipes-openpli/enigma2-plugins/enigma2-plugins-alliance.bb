@@ -96,7 +96,14 @@ python populate_packages:prepend() {
     def getControlLines(mydir, d, package):
         packagename = package[-1]
         import os
-        src = open(mydir + packagename + "/CONTROL/control").read()
+        try:
+            #ac3lipsync is renamed since 20091121 to audiosync.. but rename in cvs is not possible without lost of revision history..
+            #so the foldername is still ac3lipsync
+            if packagename == 'audiosync':
+                packagename = 'ac3lipsync'
+            src = open(mydir + packagename + "/CONTROL/control").read()
+        except IOError:
+            return
         for line in src.split("\n"):
             full_package = package[0] + '-' + package[1] + '-' + package[2] + '-' + package[3]
             if line.startswith('Depends: '):
