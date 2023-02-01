@@ -18,6 +18,7 @@ PR = "r0"
 
 SRC_URI = "git://github.com/oe-alliance/e2openplugin-CrossEPG.git;protocol=https;branch=dev \
            file://fix-build-with-fno-common.patch \
+           file://fix-warning-message-installed-vs-shipped.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -53,7 +54,5 @@ FILES:${PN}:append = " /usr/crossepg ${libdir}/libcrossepg.so ${libdir}/${PYTHON
 FILES:${PN}-src:append = " ${libdir}/${PYTHON_DIR}/crossepg.py"
 FILES:${PN}-dbg:append = " /usr/crossepg/scripts/mhw2epgdownloader/.debug /usr/crossepg/scripts/mhw2epgdownloader/.debug"
 FILES_SOLIBSDEV = ""
-
-INSANE_SKIP:${PN} += "already-stripped ldflags installed-vs-shipped"
 
 do_package_qa[noexec] = "1"

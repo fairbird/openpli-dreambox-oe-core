@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index 456e5b8..1b4a285 100644
+--- a/Makefile
++++ b/Makefile
+@@ -58,7 +58,7 @@ FTP_USER = root
+ FTP_PASSWORD = sifteam
+ 
+ TARGET_ARCH ?= mips
+-PYTHON_BASEVERSION ?= 3.8
++PYTHON_BASEVERSION ?= 3.11
+ 
+ all:
+ 	$(MAKE) clean
