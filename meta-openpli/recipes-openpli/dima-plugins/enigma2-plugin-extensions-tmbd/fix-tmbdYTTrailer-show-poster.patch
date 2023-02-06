@@ -1,0 +1,27 @@
+diff --git a/src/tmbdYTTrailer.py b/src/tmbdYTTrailer.py
+index a5f76db..a9d3a59 100644
+--- a/src/tmbdYTTrailer.py
++++ b/src/tmbdYTTrailer.py
+@@ -271,11 +217,17 @@ def createThumbnails(self):
+ 			if not entry[2]:
+ 				self.decodeThumbnail(entry[0])
+ 			else:
++				try:
++					from twisted.web.client import downloadPage
++					downloadPage(entry[2].encode(), os.path.join('/tmp/', str(entry[0]) + '.jpg'))\
++						.addCallback(boundFunction(self.downloadFinished, entry[0]))\
++						.addErrback(boundFunction(self.downloadFailed, entry[0]))
++				except:
+-				f = open(os.path.join('/tmp/', str(entry[0]) + '.jpg'), "wb")
+-				get(entry[2]).addCallback(collect, f.write)\
+-					.addCallback(boundFunction(self.downloadFinished, entry[0]))\
+-					.addErrback(boundFunction(self.downloadFailed, entry[0]))\
+-					.addBoth(lambda _: f.close())
++					f = open(os.path.join('/tmp/', str(entry[0]) + '.jpg'), "wb")
++					get(entry[2]).addCallback(collect, f.write)\
++						.addCallback(boundFunction(self.downloadFinished, entry[0]))\
++						.addErrback(boundFunction(self.downloadFailed, entry[0]))\
++						.addBoth(lambda _: f.close())
+ 
+ 	def downloadFinished(self, entryId, result):
+ 		image = os.path.join('/tmp/', str(entryId) + '.jpg')
