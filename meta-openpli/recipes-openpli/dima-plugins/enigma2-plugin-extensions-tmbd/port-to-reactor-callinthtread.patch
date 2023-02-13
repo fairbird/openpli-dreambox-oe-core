@@ -1,0 +1,38 @@
+diff --git a/src/tmbdYTTrailer.py b/src/tmbdYTTrailer.py
+index 2d6ea5f..2f32acf 100644
+--- a/src/tmbdYTTrailer.py
++++ b/src/tmbdYTTrailer.py
+@@ -4,7 +4,8 @@ import os
+ from json import load
+ from urllib.parse import quote
+ from urllib.request import urlopen
+-from twisted.web.client import downloadPage
++from twisted.internet.reactor import callInThread
++from requests import get, exceptions
+ 
+ from enigma import ePicLoad, eTimer, eServiceReference
+ from Components.ActionMap import ActionMap, HelpableActionMap
+@@ -217,9 +218,20 @@ class TmbdYTTrailerList(Screen, tmbdYTTrailer):
+ 			if not entry[2]:
+ 				self.decodeThumbnail(entry[0])
+ 			else:
+-				downloadPage(entry[2].encode(), os.path.join('/tmp/', str(entry[0]) + '.jpg'))\
+-					.addCallback(boundFunction(self.downloadFinished, entry[0]))\
+-					.addErrback(boundFunction(self.downloadFailed, entry[0]))
++				callInThread(self.threadDownloadPage, entry[2].encode(), os.path.join('/tmp/', str(entry[0]) + '.jpg'),\
++					boundFunction(self.downloadFinished, entry[0]),\
++					boundFunction(self.downloadFailed, entry[0]))
++
++	def threadDownloadPage(self, link, file, success, fail=None):
++		try:
++			response = get(link)
++			response.raise_for_status()
++			with open(file, "wb") as f:
++				f.write(response.content)
++			success(file)
++		except exceptions.RequestException as error:
++			if fail is not None:
++				fail(error)
+ 
+ 	def downloadFinished(self, entryId, result):
+ 		image = os.path.join('/tmp/', str(entryId) + '.jpg')
