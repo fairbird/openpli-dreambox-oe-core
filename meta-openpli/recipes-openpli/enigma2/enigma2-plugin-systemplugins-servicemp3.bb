@@ -21,7 +21,7 @@ GST_BASE_RDEPS = "\
 	gstreamer${GST_VERSION}-plugins-base-rawparse \
 	gstreamer${GST_VERSION}-plugins-base-subparse \
 	gstreamer${GST_VERSION}-plugins-base-typefindfunctions \
-	gstreamer${GST_VERSION}-plugins-base-videoconvert \
+	gstreamer${GST_VERSION}-plugins-base-videoconvertscale \
 	gstreamer${GST_VERSION}-plugins-base-vorbis \
 	"
 
