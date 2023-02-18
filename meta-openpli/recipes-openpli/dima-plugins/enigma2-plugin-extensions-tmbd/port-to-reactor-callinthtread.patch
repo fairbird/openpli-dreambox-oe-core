@@ -25,7 +25,7 @@ index 2d6ea5f..2f32acf 100644
 +
 +	def threadDownloadPage(self, link, file, success, fail=None):
 +		try:
-+			response = get(link)
++			response = get(link, timeout=(3.1, 6))
 +			response.raise_for_status()
 +			with open(file, "wb") as f:
 +				f.write(response.content)
