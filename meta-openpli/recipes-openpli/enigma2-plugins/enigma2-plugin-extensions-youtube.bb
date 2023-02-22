@@ -7,10 +7,7 @@ LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 require classes/python3-compileall.inc
 
-SRC_URI = " git://github.com/Taapat/enigma2-plugin-youtube.git;protocol=https;branch=master \
-		file://0001-Add_option_to_choose_style_of_VirtualKeyBoard.patch \
-		file://0002-Remove_screenwidth_svg.patch \
-"
+SRC_URI = " git://github.com/fairbird/Youtube-Opensource-DreamOS.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 
