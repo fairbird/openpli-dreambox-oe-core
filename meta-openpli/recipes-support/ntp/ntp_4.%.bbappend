@@ -23,18 +23,3 @@ do_install:append() {
                  ${D}/usr/bin/ntpdate-sync
     sed  's!if /usr/sbin/ntpdate -s $OPTS $NTPSERVERS!if /usr/sbin/ntpdate -s $OPTS $NTPSERVERS \&!' -i ${D}/usr/bin/ntpdate-sync
 }
-
-pkg_postinst:ntpdate() {
-#!/bin/sh
-
-if [ -n "$D" ]; then
-    $INTERCEPT_DIR/postinst_intercept delay_to_first_boot ntpdate mlprefix=
-    exit 0
-fi
-set +e
-if ! grep -q -s ntpdate /var/spool/cron/crontabs/root; then
-    echo "adding crontab"
-    test -d $D/var/spool/cron/crontabs || mkdir -p /var/spool/cron/crontabs
-    echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> /var/spool/cron/crontabs/root
-fi
-}
