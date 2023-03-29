@@ -28,7 +28,7 @@ OPTIONAL_PACKAGES += " \
 	dvdfs \
 	edid-decode \
 	evtest \
-	exfat-utils \
+	exfatprogs \
 	exteplayer3 \
 	gdb \
 	gerbera \
