@@ -1,5 +1,7 @@
 inherit setuptools3
 
+FILES:${PN} += "${libdir}"
+
 # Scripts want to install "/etc", so we need "--root" instead of setting install-data stuff
 # to remain compatible with previous versions.
 
