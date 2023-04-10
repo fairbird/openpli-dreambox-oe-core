@@ -1,0 +1,46 @@
+diff --git a/src/SongPrint.cxx b/src/SongPrint.cxx
+index 98d544cc3..b353f8d33 100644
+--- a/src/SongPrint.cxx
++++ b/src/SongPrint.cxx
+@@ -77,7 +77,7 @@ song_print_info(Response &r, const LightSong &song, bool base) noexcept
+		time_print(r, "Last-Modified", song.mtime);
+
+ 	if (song.audio_format.IsDefined())
+-		r.Fmt(FMT_STRING("Format: {}\n"), ToString(song.audio_format));
++		r.Fmt(FMT_STRING("Format: {}\n"), (ToString(song.audio_format)).data());
+
+ 	tag_print_values(r, song.tag);
+
+@@ -100,7 +100,7 @@ song_print_info(Response &r, const DetachedSong &song, bool base) noexcept
+ 		time_print(r, "Last-Modified", song.GetLastModified());
+ 
+ 	if (const auto &f = song.GetAudioFormat(); f.IsDefined())
+-		r.Fmt(FMT_STRING("Format: {}\n"), ToString(f));
++		r.Fmt(FMT_STRING("Format: {}\n"), (ToString(f)).data());
+ 
+ 	tag_print_values(r, song.GetTag());
+ 
+diff --git a/src/TimePrint.cxx b/src/TimePrint.cxx
+index 5bf05f623..252850c09 100644
+--- a/src/TimePrint.cxx
++++ b/src/TimePrint.cxx
+@@ -20,5 +20,5 @@ time_print(Response &r, const char *name,
+ 		return;
+ 	}
+ 
+-	r.Fmt(FMT_STRING("{}: {}\n"), name, s);
++	r.Fmt(FMT_STRING("{}: {}\n"), name, s.data());
+ }
+diff --git a/src/command/PlayerCommands.cxx b/src/command/PlayerCommands.cxx
+index 5108b9d3c..88436cba2 100644
+--- a/src/command/PlayerCommands.cxx
++++ b/src/command/PlayerCommands.cxx
+@@ -170,7 +170,7 @@ handle_status(Client &client, [[maybe_unused]] Request args, Response &r)
+ 
+ 		if (player_status.audio_format.IsDefined())
+ 			r.Fmt(FMT_STRING(COMMAND_STATUS_AUDIO ": {}\n"),
+-			      ToString(player_status.audio_format));
++			      (ToString(player_status.audio_format)).data());
+ 	}
+ 
+ #ifdef ENABLE_DATABASE

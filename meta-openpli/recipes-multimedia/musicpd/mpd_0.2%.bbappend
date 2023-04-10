@@ -3,6 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI += " \
 	file://mpd.init \
 	file://use-structure-member-data.patch \
+	file://fix-build-fmt-mpd.patch \
 "
 
 do_install:append() {
