@@ -9,9 +9,6 @@ KERNEL_ENABLE_CGROUPS = "1"
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
 # package names instead, to allow only one kernel to be installed.
-PKG:kernel = "kernel"
-PKG:${KERNEL_PACKAGE_NAME}-base = "kernel-base"
-PKG:${KERNEL_PACKAGE_NAME}-image = "kernel-image"
 PKG:${KERNEL_PACKAGE_NAME}-image-zimage = "kernel-image"
 RPROVIDES:${KERNEL_PACKAGE_NAME} = "kernel-${LINUX_VERSION}"
 RPROVIDES:${KERNEL_PACKAGE_NAME}-base = "kernel-${KERNEL_VERSION}"
