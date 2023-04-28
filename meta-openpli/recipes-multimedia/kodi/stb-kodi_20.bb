@@ -1,7 +1,5 @@
 SUMMARY = "Kodi Media Center"
 
-do_compile[network] = "1"
-
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7b423f1c9388eae123332e372451a4f7"
 
@@ -9,19 +7,18 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-20:"
 
 PACKAGE_ARCH = "${MACHINE}"
 
-inherit cmake gettext python3-dir pkgconfig  python3native
+inherit ccache cmake gettext pkgconfig python3targetconfig
 
 DEPENDS += " \
-            autoconf-native \
-            automake-native \
-            ninja-native \
             fmt \
             flatbuffers flatbuffers-native \
             fstrcmp \
             rapidjson \
             crossguid \
             libdvdnav libdvdcss libdvdread \
-            ffmpeg \
+            kodi-ffmpeg \
+            autoconf-native \
+            automake-native \
             git-native \
             curl-native \
             gperf-native \
@@ -33,36 +30,29 @@ DEPENDS += " \
             zip-native \
             \
             avahi \
-            boost \
             bzip2 \
             curl \
             libdcadec \
-            enca \
-            expat \
             faad2 \
             fontconfig \
             fribidi \
-            glib-2.0 \ 
+            glib-2.0 \
             giflib \
             libass \
             libcdio \
             libcec \
             libinput \
             libbluray \
-            libmad \
             libmicrohttpd \
-            libmms \
-            libmodplug \
             libnfs \
             libpcre \
             libplist \
-            libsamplerate0 \
             libsquish \
             libssh \
             spdlog \
             libtinyxml \
-            libusb1 \
             libxkbcommon \
+            libxml2 \
             libxslt \
             lzo \
             mpeg2dec \
@@ -72,42 +62,40 @@ DEPENDS += " \
             taglib \
             virtual/egl \
             wavpack \
-            yajl \
             zlib \
             texturepacker-native \
             \
             gstreamer1.0 \
             gstreamer1.0-plugins-base \
           "
-
-# 20.0 Alpha1
-SRCREV = "9df7fe699148a5990f86129cba760113a4c72fb0"
+inherit gitpkgv
+# 20.0 Nexus
+SRCREV = "${AUTOREV}"
 
 # 'patch' doesn't support binary diffs
 PATCHTOOL = "git"
 
-PR = "r0"
+PR = "r1"
 
-PV = "20.0-gitr${SRCPV}"
+PV = "20.0+gitr${SRCPV}"
 
-SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
+SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Nexus \
            file://0001-flatbuffers-20.patch \
            file://0002-readd-Touchscreen-settings.patch \
-           file://0003-crossguid-0.2.patch \
-           file://0004-shader-nopow-20.patch \
-           file://0006-stb-settings-20.patch \
+           file://0003-shader-nopow-20.patch \
+           file://0004-stb-settings-20.patch \
            file://0005-stb-support-20.patch \
-           file://0007-add-winsystemfactory-windowing-init.patch \
-           file://0008-adapt-window-system-registration.patch \
-           ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0009-e2-player.patch', d)} \
-           ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0010-gst-player.patch', d)} \
+           file://0006-add-winsystemfactory-windowing-init.patch \
+           file://0007-adapt-window-system-registration.patch \
+           file://0008-reinstate-system-h.patch \
+           file://0009-reinstate-platform-defines.patch \
+           file://0010-AEELDParser.cpp-fix-rtrim-function-for-clang.patch \
+           file://0011-FindLibDvd.cmake-build-with-external-source.patch \
+           ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0100-e2-player.patch', d)} \
+           ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0101-gst-player.patch', d)} \
           "
 
 S = "${WORKDIR}/git"
-
-# breaks compilation
-CCACHE_DISABLE = "1"
-ASNEEDED = ""
 
 ACCEL ?= ""
 ACCEL:x86 = "vaapi vdpau"
@@ -120,7 +108,11 @@ WINDOWSYSTEM ?= "stb"
 #https://github.com/xbmc/xbmc/commit/d159837cf736c9ba17772ba52e4ce95aa3625528
 APPRENDERSYSTEM ?= "gles"
 
-PACKAGECONFIG ??= "${ACCEL} ${WINDOWSYSTEM} pulseaudio lcms lto \
+TOOLCHAIN:arm ?= "clang"
+
+PACKAGECONFIG ?= "${ACCEL} ${WINDOWSYSTEM} pulseaudio lcms lto \
+                   ${@bb.utils.contains('TOOLCHAIN', 'clang', 'clang', '', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', 'lld', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)}"
 
@@ -144,20 +136,14 @@ PACKAGECONFIG[lcms] = ",,lcms"
 
 # Compilation tunes
 
+PACKAGECONFIG[lld] = "-DENABLE_LLD=ON,-DENABLE_LLD=OFF"
+PACKAGECONFIG[clang] = "-DENABLE_CLANGFORMAT=ON -DENABLE_CLANGTIDY=ON,-DENABLE_CLANGFORMAT=OFF -DENABLE_CLANGTIDY=OFF"
 PACKAGECONFIG[gold] = "-DENABLE_LDGOLD=ON,-DENABLE_LDGOLD=OFF"
 PACKAGECONFIG[lto] = "-DUSE_LTO=${@oe.utils.cpu_count()},-DUSE_LTO=OFF"
 
 LDFLAGS += "${TOOLCHAIN_OPTIONS}"
-LDFLAGS:append:mips = " -latomic"
-LDFLAGS:append:mipsel = " -latomic"
-LDFLAGS:append:mips64 = " -latomic"
-LDFLAGS:append:mips64el = " -latomic"
-
-KODI_ARCH = ""
-KODI_ARCH:mips = "-DWITH_ARCH=${TARGET_ARCH}"
-KODI_ARCH:mipsel = "-DWITH_ARCH=${TARGET_ARCH}"
-KODI_ARCH:mips64 = "-DWITH_ARCH=${TARGET_ARCH}"
-KODI_ARCH:mips64el = "-DWITH_ARCH=${TARGET_ARCH}"
+LDFLAGS:append:mipsarch = " -latomic"
+EXTRA_OECMAKE:append:mipsarch = " -DWITH_ARCH=${TARGET_ARCH}"
 
 KODI_DISABLE_INTERNAL_LIBRARIES = " \
   -DENABLE_INTERNAL_CROSSGUID=OFF \
@@ -168,6 +154,13 @@ KODI_DISABLE_INTERNAL_LIBRARIES = " \
   -DENABLE_INTERNAL_FFMPEG=OFF \
 "
 
+# Allow downloads during internals build
+do_compile[network] = "1"
+
+RUNTIME:arm ?= "llvm"
+
+RUNTIME_NM = "${@bb.utils.contains('RUNTIME', 'llvm', '${TARGET_PREFIX}llvm-nm', '${TARGET_PREFIX}gcc-nm', d)}"
+
 EXTRA_OECMAKE = " \
     ${KODI_ARCH} \
     ${KODI_DISABLE_INTERNAL_LIBRARIES} \
@@ -175,10 +168,14 @@ EXTRA_OECMAKE = " \
     \
     -DNATIVEPREFIX=${STAGING_DIR_NATIVE}${prefix} \
     -DJava_JAVA_EXECUTABLE=/usr/bin/java \
+    -DCLANG_TIDY_EXECUTABLE=${STAGING_BINDIR_NATIVE}/clang-tidy \
+    -DCLANG_FORMAT_EXECUTABLE=${STAGING_BINDIR_NATIVE}/clang-format \
+    \
     -DWITH_TEXTUREPACKER=${STAGING_BINDIR_NATIVE}/TexturePacker \
     -DWITH_JSONSCHEMABUILDER=${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder \
     \
-    -DCMAKE_NM='${NM}' \
+    -DENABLE_STATIC_LIBS=FALSE \
+    -DCMAKE_NM=${STAGING_BINDIR_NATIVE}/${TARGET_SYS}/${RUNTIME_NM} \
     \
     -DFFMPEG_PATH=${STAGING_DIR_TARGET} \
     -DLIBDVD_INCLUDE_DIRS=${STAGING_INCDIR} \
@@ -195,8 +192,8 @@ EXTRA_OECMAKE = " \
 # OECMAKE_GENERATOR="Unix Makefiles"
 # PARALLEL_MAKE = " "
 
-FULL_OPTIMIZATION:armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
-FULL_OPTIMIZATION:armv7ve = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
+FULL_OPTIMIZATION:armv7a = "-fomit-frame-pointer -O3 -ffast-math"
+FULL_OPTIMIZATION:armv7ve = "-fomit-frame-pointer -O3 -ffast-math"
 BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
 
 # for python modules
@@ -214,15 +211,15 @@ do_configure:prepend() {
     mkdir -p ${STAGING_LIBDIR_NATIVE}/bfd-plugins
     ln -sf $liblto ${STAGING_LIBDIR_NATIVE}/bfd-plugins/liblto_plugin.so
 
-    sed -i -e 's:CMAKE_NM}:}${TARGET_PREFIX}gcc-nm:' ${S}/xbmc/cores/DllLoader/exports/CMakeLists.txt
+#    sed -i -e 's:CMAKE_NM}:}${TARGET_PREFIX}gcc-nm:' ${S}/xbmc/cores/DllLoader/exports/CMakeLists.txt
 }
 
-INSANE_SKIP:${PN} = "rpaths already-stripped"
+INSANE_SKIP:${PN} = "rpaths already-stripped textrel"
 
 FILES:${PN} = "${libdir}/kodi ${libdir}/xbmc"
-FILES:${PN} += "${bindir}/kodi ${bindir}/xbmc"
+FILES:${PN} += "${bindir}/kodi ${bindir}/xbmc ${bindir}/kodi-TexturePacker"
 FILES:${PN} += "${datadir}/icons ${datadir}/kodi ${datadir}/xbmc ${datadir}/applications"
-FILES:${PN} += "${bindir}/kodi-standalone ${bindir}/xbmc-standalone ${datadir}/xsessions"
+FILES:${PN} += "${bindir}/kodi-standalone ${bindir}/xbmc-standalone ${datadir}/xsessions ${datadir}/metainfo"
 FILES:${PN} += "${libdir}/firewalld"
 FILES:${PN}-dev = "${includedir}"
 FILES:${PN}-dbg += "${libdir}/kodi/.debug ${libdir}/kodi/*/.debug ${libdir}/kodi/*/*/.debug ${libdir}/kodi/*/*/*/.debug"
@@ -261,8 +258,8 @@ RRECOMMENDS:${PN}:append = " libcec \
                              tzdata-europe \
                              tzdata-pacific \
                              xkeyboard-config \
-                             kodi-addon-inputstream-adaptive-matrix \
-                             kodi-addon-inputstream-rtmp-matrix \
+                             kodi-addon-inputstream-adaptive-nexus \
+                             kodi-addon-inputstream-rtmp-nexus \
                              alsa-plugins \
                            "
 

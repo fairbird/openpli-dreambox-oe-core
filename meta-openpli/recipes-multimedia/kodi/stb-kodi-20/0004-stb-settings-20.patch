@@ -1,11 +1,11 @@
-From 85b84e34fe8c29cd6bdeae04d84c57364c13e076 Mon Sep 17 00:00:00 2001
+From 81fa8854f8bae20690456f9d0d8f506d0b1f9793 Mon Sep 17 00:00:00 2001
 From: Captain <captain.onboard@web.de>
 Date: Wed, 15 Jul 2020 18:07:08 +0200
-Subject: [PATCH] stb-settings-19
+Subject: [PATCH] stb-settings-20
 
 ---
  addons/skin.estuary/xml/Home.xml           |  2 +-
- cmake/modules/FindFFMPEG.cmake             | 43 +++++++++-----
+ cmake/modules/FindFFMPEG.cmake             | 47 +++++++++------
  cmake/platform/linux/stb.cmake             | 69 ++++++++++++++++++++++
  cmake/scripts/linux/ArchSetup.cmake        |  4 ++
  cmake/treedata/common/stb.txt              |  1 +
@@ -18,15 +18,15 @@ Subject: [PATCH] stb-settings-19
  xbmc/guilib/guiinfo/SystemGUIInfo.cpp      |  5 ++
  xbmc/input/InputManager.cpp                | 12 ++++
  xbmc/view/ViewStateSettings.cpp            |  2 +-
- 14 files changed, 200 insertions(+), 41 deletions(-)
+ 14 files changed, 201 insertions(+), 44 deletions(-)
  create mode 100644 cmake/platform/linux/stb.cmake
  create mode 100644 cmake/treedata/common/stb.txt
 
 diff --git a/addons/skin.estuary/xml/Home.xml b/addons/skin.estuary/xml/Home.xml
-index f90d63470b..82671efbf9 100644
+index 5b9f2fbf57..ee2dc4fd45 100644
 --- a/addons/skin.estuary/xml/Home.xml
 +++ b/addons/skin.estuary/xml/Home.xml
-@@ -1046,7 +1046,7 @@
+@@ -1044,7 +1044,7 @@
  					<align>justify</align>
  					<include content="IconButton">
  						<param name="control_id" value="804" />
@@ -36,43 +36,10 @@ index f90d63470b..82671efbf9 100644
  						<param name="label" value="$LOCALIZE[33060]" />
  					</include>
 diff --git a/cmake/modules/FindFFMPEG.cmake b/cmake/modules/FindFFMPEG.cmake
-index 03626ef005..d9b5ba4b2f 100644
+index fedbf0adde..40485253fa 100644
 --- a/cmake/modules/FindFFMPEG.cmake
 +++ b/cmake/modules/FindFFMPEG.cmake
-@@ -45,16 +45,22 @@ set(_postproc_ver ">=55.9.100")
- # Allows building with external ffmpeg not found in system paths,
- # without library version checks
- if(WITH_FFMPEG)
--  set(FFMPEG_PATH ${WITH_FFMPEG})
--  message(STATUS "Warning: FFmpeg version checking disabled")
--  set(REQUIRED_FFMPEG_VERSION undef)
--  unset(_avcodec_ver)
--  unset(_avfilter_ver)
--  unset(_avformat_ver)
--  unset(_avutil_ver)
--  unset(_swscale_ver)
--  unset(_swresample_ver)
--  unset(_postproc_ver)
-+  if(WITH_FFMPEG STREQUAL stb)
-+    set(FFMPEG_TARGET ${WITH_FFMPEG})
-+    set(ENABLE_INTERNAL_FFMPEG ON)
-+  else()
-+    set(FFMPEG_TARGET "")
-+    set(FFMPEG_PATH ${WITH_FFMPEG})
-+    message(STATUS "Warning: FFmpeg version checking disabled")
-+    set(REQUIRED_FFMPEG_VERSION undef)
-+    unset(_avcodec_ver)
-+    unset(_avfilter_ver)
-+    unset(_avformat_ver)
-+    unset(_avutil_ver)
-+    unset(_swscale_ver)
-+    unset(_swresample_ver)
-+    unset(_postproc_ver)
-+  endif()
- endif()
- 
- # Allows building with external ffmpeg not found in system paths,
-@@ -239,6 +245,12 @@ if(NOT FFMPEG_FOUND)
+@@ -63,6 +63,12 @@ macro(buildFFMPEG)
                       -DENABLE_DAV1D=${DAV1D_FOUND}
                       -DEXTRA_FLAGS=${FFMPEG_EXTRA_FLAGS})
  
@@ -85,7 +52,7 @@ index 03626ef005..d9b5ba4b2f 100644
    if(KODI_DEPENDSBUILD)
      set(CROSS_ARGS -DDEPENDS_PATH=${DEPENDS_PATH}
                     -DPKG_CONFIG_EXECUTABLE=${PKG_CONFIG_EXECUTABLE}
-@@ -282,12 +294,12 @@ if(NOT FFMPEG_FOUND)
+@@ -110,12 +116,12 @@ macro(buildFFMPEG)
      add_dependencies(ffmpeg dav1d)
    endif()
  
@@ -102,8 +69,8 @@ index 03626ef005..d9b5ba4b2f 100644
 +"#!/bin/bash
  if [[ $@ == *${APP_NAME_LC}.bin* || $@ == *${APP_NAME_LC}${APP_BINARY_SUFFIX}* || $@ == *${APP_NAME_LC}.so* || $@ == *${APP_NAME_LC}-test* ]]
  then
-   avformat=`PKG_CONFIG_PATH=${CMAKE_BINARY_DIR}/${CORE_BUILD_DIR}/lib/pkgconfig ${PKG_CONFIG_EXECUTABLE} --libs --static libavcodec`
-@@ -301,6 +313,7 @@ then
+   avcodec=`PKG_CONFIG_PATH=${DEPENDS_PATH}/lib/pkgconfig ${PKG_CONFIG_EXECUTABLE} --libs --static libavcodec`
+@@ -129,6 +135,7 @@ then
  else
    $@
  fi")
@@ -111,6 +78,45 @@ index 03626ef005..d9b5ba4b2f 100644
    file(COPY ${CMAKE_BINARY_DIR}/${CORE_BUILD_DIR}/ffmpeg/ffmpeg-link-wrapper
         DESTINATION ${CMAKE_BINARY_DIR}/${CORE_BUILD_DIR}
         FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+@@ -146,21 +153,25 @@ endmacro()
+ # Allows building with external ffmpeg not found in system paths,
+ # without library version checks
+ if(WITH_FFMPEG)
+-  set(FFMPEG_PATH ${WITH_FFMPEG})
+-  message(STATUS "Warning: FFmpeg version checking disabled")
+-  set(REQUIRED_FFMPEG_VERSION undef)
+-else()
+-  # required ffmpeg library versions
+-  set(REQUIRED_FFMPEG_VERSION 4.4.1)
+-  set(_avcodec_ver ">=58.134.100")
+-  set(_avfilter_ver ">=7.110.100")
+-  set(_avformat_ver ">=58.76.100")
+-  set(_avutil_ver ">=56.70.100")
+-  set(_postproc_ver ">=55.9.100")
+-  set(_swresample_ver ">=3.9.100")
+-  set(_swscale_ver ">=5.9.100")
++  if(WITH_FFMPEG STREQUAL stb)
++    set(FFMPEG_TARGET ${WITH_FFMPEG})
++    set(REQUIRED_FFMPEG_VERSION 4.4.1)
++  else()
++    set(FFMPEG_TARGET "")
++    set(FFMPEG_PATH ${WITH_FFMPEG})
++    message(STATUS "Warning: FFmpeg version checking disabled")
++    set(REQUIRED_FFMPEG_VERSION undef)
++    unset(_avcodec_ver)
++    unset(_avfilter_ver)
++    unset(_avformat_ver)
++    unset(_avutil_ver)
++    unset(_swscale_ver)
++    unset(_swresample_ver)
++    unset(_postproc_ver)
++  endif()
+ endif()
+ 
++
+ # Allows building with external ffmpeg not found in system paths,
+ # with library version checks
+ if(FFMPEG_PATH)
 diff --git a/cmake/platform/linux/stb.cmake b/cmake/platform/linux/stb.cmake
 new file mode 100644
 index 0000000000..e1fe54a13d
@@ -187,13 +193,13 @@ index 0000000000..e1fe54a13d
 +
 +list(APPEND PLATFORM_DEFINES -DMESA_EGL_NO_X11_HEADERS)
 diff --git a/cmake/scripts/linux/ArchSetup.cmake b/cmake/scripts/linux/ArchSetup.cmake
-index b68efe3bd0..6905eb95a4 100644
+index 4083483173..838c82a3f4 100644
 --- a/cmake/scripts/linux/ArchSetup.cmake
 +++ b/cmake/scripts/linux/ArchSetup.cmake
-@@ -32,6 +32,10 @@ else()
-   elseif(CPU MATCHES aarch64 OR CPU MATCHES arm64)
-     set(ARCH aarch64)
-     set(NEON True)
+@@ -46,6 +46,10 @@ else()
+   elseif(CPU MATCHES loongarch64)
+     set(ARCH loongarch64)
+     set(NEON False)
 +  elseif(CPU MATCHES "cortexa15")
 +    set(ARCH arm)
 +    set(NEON True)
@@ -209,28 +215,28 @@ index 0000000000..2606a0f999
 @@ -0,0 +1 @@
 +xbmc/windowing/egl   windowing/egl    # STB
 diff --git a/system/settings/settings.xml b/system/settings/settings.xml
-index 2c81816158..22f5a09b49 100755
+index 1b998bcc66..b04ad16383 100755
 --- a/system/settings/settings.xml
 +++ b/system/settings/settings.xml
-@@ -503,7 +503,7 @@
-           <control type="spinner" format="integer" delayed="true"/>
-         </setting>
-         <setting id="subtitles.font" type="string" label="14089" help="36185">
--          <level>1</level>
-+          <level>3</level>
-           <default>arial.ttf</default>
-           <constraints>
-             <options>fonts</options>
-@@ -511,7 +511,7 @@
+@@ -518,7 +518,7 @@
            <control type="list" format="string" />
          </setting>
-         <setting id="subtitles.charset" type="string" parent="subtitles.font" label="735" help="36189">
+         <setting id="subtitles.fontname" type="string" label="14089" help="36185">
+-          <level>1</level>
++          <level>3</level>
+           <default>DEFAULT</default>
+           <constraints>
+             <options>subtitlesfonts</options>
+@@ -710,7 +710,7 @@
+           <control type="spinner" format="integer" delayed="true"/>
+         </setting>
+         <setting id="subtitles.charset" type="string" label="735" help="36189">
 -          <level>1</level>
 +          <level>3</level>
            <default>DEFAULT</default>
            <constraints>
              <options>charsets</options>
-@@ -2759,7 +2759,7 @@
+@@ -2961,7 +2961,7 @@
          <setting id="audiooutput.processquality" type="integer" label="13505" help="36169">
            <requirement>HAS_AE_QUALITY_LEVELS</requirement>
            <level>2</level>
@@ -239,7 +245,7 @@ index 2c81816158..22f5a09b49 100755
            <constraints>
              <options>aequalitylevels</options>
            </constraints>
-@@ -2777,7 +2777,7 @@
+@@ -2979,7 +2979,7 @@
          </setting>
          <setting id="audiooutput.samplerate" type="integer" label="458" help="36523">
            <level>2</level>
@@ -248,7 +254,7 @@ index 2c81816158..22f5a09b49 100755
            <dependencies>
              <dependency type="visible">
                <and>
-@@ -2789,10 +2789,6 @@
+@@ -2991,10 +2991,6 @@
            <constraints>
              <options>
                <option label="34124">44100</option>
@@ -259,7 +265,7 @@ index 2c81816158..22f5a09b49 100755
                <option label="34129">352800</option>
                <option label="34130">384000</option>
              </options>
-@@ -3603,7 +3599,7 @@
+@@ -3815,7 +3811,7 @@
        <group id="2" label="14270">
          <setting id="locale.country" type="string" label="14271" help="36115">
            <level>0</level>
@@ -322,17 +328,17 @@ index 108c0b007b..e0401b5348 100644
    CHILD=$!
    wait "${CHILD}"
    RET=$?
--  if [ $(( $RET == 65 )) = "1" ]
+-  if [ $RET -eq 65 ]
 -  then # User requested to restart app
 -    LOOP=1
--  elif [ $(( ($RET >= 131 && $RET <= 136) || $RET == 139 )) = "1" ]
+-  elif [ $RET -ge 131 ] && [ $RET -le 136 ] || [ $RET -eq 139 ]
 -  then # Crashed with core dump
 -    print_crash_report
 -  fi
-+#  if [ $(( $RET == 65 )) = "1" ]
++#  if [ $RET -eq 65 ]
 +#  then # User requested to restart app
 +#    LOOP=1
-+#  elif [ $(( ($RET >= 131 && $RET <= 136) || $RET == 139 )) = "1" ]
++#  elif [ $RET -ge 131 ] && [ $RET -le 136 ] || [ $RET -eq 139 ]
 +#  then # Crashed with core dump
 +#    print_crash_report
 +#  fi
@@ -340,11 +346,11 @@ index 108c0b007b..e0401b5348 100644
  
  exit $RET
 diff --git a/tools/depends/target/ffmpeg/CMakeLists.txt b/tools/depends/target/ffmpeg/CMakeLists.txt
-index e358775911..2b73a8751a 100644
+index f09258058b..854e76a2f1 100644
 --- a/tools/depends/target/ffmpeg/CMakeLists.txt
 +++ b/tools/depends/target/ffmpeg/CMakeLists.txt
-@@ -10,6 +10,36 @@ else()
-   set(ffmpeg_conf --cc=${CMAKE_C_COMPILER} --cxx=${CMAKE_CXX_COMPILER})
+@@ -12,6 +12,36 @@ else()
+                 )
  endif()
  
 +if(FFMPEG_TARGET STREQUAL "stb")
@@ -379,13 +385,13 @@ index e358775911..2b73a8751a 100644
 +
  if(CROSSCOMPILING)
    set(pkgconf "PKG_CONFIG_LIBDIR=${DEPENDS_PATH}/lib/pkgconfig")
-   list(APPEND ffmpeg_conf --pkg-config=${PKG_CONFIG_EXECUTABLE} --pkg-config-flags=--static)
+   list(APPEND ffmpeg_conf --pkg-config=${PKG_CONFIG_EXECUTABLE}
 diff --git a/tools/depends/target/libdvdcss/Makefile b/tools/depends/target/libdvdcss/Makefile
-index a5026227c2..c7b103117a 100644
+index b157eee34d..789c0940f1 100644
 --- a/tools/depends/target/libdvdcss/Makefile
 +++ b/tools/depends/target/libdvdcss/Makefile
-@@ -3,7 +3,7 @@ include DVDCSS-VERSION
- DEPS= DVDCSS-VERSION Makefile
+@@ -3,7 +3,7 @@ include LIBDVDCSS-VERSION
+ DEPS = LIBDVDCSS-VERSION Makefile ../../download-files.include
  
  ifeq ($(CROSS_COMPILING), yes)
 -  DEPS += ../../Makefile.include
@@ -400,14 +406,14 @@ index a5026227c2..c7b103117a 100644
 -config = --prefix=$(PREFIX) --disable-shared --enable-static --with-pic
 +config = --build=$(BUILD_SYS) --host=$(HOST_SYS) --prefix=$(PREFIX) --disable-shared --enable-static --with-pic
  
- GITREV=$(shell git ls-remote $(BASE_URL) $(VERSION) | awk '{print $$1}')
- ifeq ($(GITREV),)
+ include ../../download-files.include
+ all: .installed-$(PLATFORM)
 diff --git a/tools/depends/target/libdvdnav/Makefile b/tools/depends/target/libdvdnav/Makefile
-index eada58a160..38f9be520d 100644
+index eca4d53f54..77b856714f 100644
 --- a/tools/depends/target/libdvdnav/Makefile
 +++ b/tools/depends/target/libdvdnav/Makefile
-@@ -3,11 +3,11 @@ include DVDNAV-VERSION
- DEPS = DVDNAV-VERSION Makefile
+@@ -3,11 +3,11 @@ include LIBDVDNAV-VERSION
+ DEPS = LIBDVDNAV-VERSION Makefile ../../download-files.include
  
  # configuration settings
 -config = --prefix=$(PREFIX) --disable-shared --enable-static --with-pic
@@ -421,11 +427,11 @@ index eada58a160..38f9be520d 100644
    ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
    PREFIX := $(ROOT_DIR)/dvdnav-install
 diff --git a/tools/depends/target/libdvdread/Makefile b/tools/depends/target/libdvdread/Makefile
-index d240953fe4..2c9100f84e 100644
+index 0be5f2d6f4..8e7e0b0e38 100644
 --- a/tools/depends/target/libdvdread/Makefile
 +++ b/tools/depends/target/libdvdread/Makefile
-@@ -3,11 +3,12 @@ include DVDREAD-VERSION
- DEPS = DVDREAD-VERSION Makefile
+@@ -3,11 +3,12 @@ include LIBDVDREAD-VERSION
+ DEPS = LIBDVDREAD-VERSION Makefile ../../download-files.include
  
  # configuration settings
 -config = --prefix=$(PREFIX) --disable-shared --enable-static --with-pic --with-libdvdcss
@@ -440,10 +446,10 @@ index d240953fe4..2c9100f84e 100644
    ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
    PREFIX := $(ROOT_DIR)/dvdread-install
 diff --git a/xbmc/guilib/guiinfo/SystemGUIInfo.cpp b/xbmc/guilib/guiinfo/SystemGUIInfo.cpp
-index c7c521202a..dba09cd1f0 100644
+index bc01047b3b..72b1daaaf0 100644
 --- a/xbmc/guilib/guiinfo/SystemGUIInfo.cpp
 +++ b/xbmc/guilib/guiinfo/SystemGUIInfo.cpp
-@@ -57,6 +57,11 @@ std::string CSystemGUIInfo::GetSystemHeatInfo(int info) const
+@@ -62,6 +62,11 @@ std::string CSystemGUIInfo::GetSystemHeatInfo(int info) const
  #if defined(TARGET_POSIX)
      CServiceBroker::GetCPUInfo()->GetTemperature(m_cpuTemp);
      m_gpuTemp = GetGPUTemperature();
@@ -456,10 +462,10 @@ index c7c521202a..dba09cd1f0 100644
    }
  
 diff --git a/xbmc/input/InputManager.cpp b/xbmc/input/InputManager.cpp
-index f704de24b5..7240deb698 100644
+index 571b2599ab..938ed628d6 100644
 --- a/xbmc/input/InputManager.cpp
 +++ b/xbmc/input/InputManager.cpp
-@@ -579,6 +579,18 @@ bool CInputManager::HandleKey(const CKey& key)
+@@ -587,6 +587,18 @@ bool CInputManager::HandleKey(const CKey& key)
            useKeyboard = true;
        }
      }
@@ -479,7 +485,7 @@ index f704de24b5..7240deb698 100644
      {
        // use the virtualkeyboard section of the keymap, and send keyboard-specific or navigation
 diff --git a/xbmc/view/ViewStateSettings.cpp b/xbmc/view/ViewStateSettings.cpp
-index a92bd1e834..79faef8162 100644
+index d8833934ae..0c557cece1 100644
 --- a/xbmc/view/ViewStateSettings.cpp
 +++ b/xbmc/view/ViewStateSettings.cpp
 @@ -114,7 +114,7 @@ bool CViewStateSettings::Load(const TiXmlNode *settings)
