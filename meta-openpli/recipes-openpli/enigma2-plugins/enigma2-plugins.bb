@@ -32,7 +32,6 @@ PKGV = "y-git${GITPKGV}"
 GITHUB_URI ?= "git://github.com"
 SRC_URI = "${GITHUB_URI}/OpenPLi/${BPN}.git;branch=python3;protocol=https \
 		file://remove-other-type-from-blindscan.patch \
-		file://remove-lcd4linuxplugin.patch \
 "
 
 EXTRA_OECONF = " \
