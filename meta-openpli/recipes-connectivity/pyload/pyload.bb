@@ -44,4 +44,4 @@ do_install:append() {
 	install -m 0755 ${WORKDIR}/pyload.init ${D}/etc/init.d/pyload
 }
 
-include python-package-split.inc
+include ${PYTHON_PN}-package-split.inc
