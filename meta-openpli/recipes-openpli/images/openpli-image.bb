@@ -55,10 +55,6 @@ export IMAGE_BASENAME = "openpli"
 IMAGE_LINGUAS = ""
 IMAGE_FEATURES += "package-management"
 
-Addntpdatecron() {
-	echo "30 * * * *    /usr/bin/ntpdate-sync silent" >> ${IMAGE_ROOTFS}/etc/cron/crontabs/root
-}
-
 # Remove the mysterious var/lib/opkg/lists that appears to be the result
 # of the installer that populates the rootfs. I wanted to call this
 # rootfs:remove_opkg_leftovers but that fails to parse.
@@ -80,4 +76,4 @@ ssh_allow_empty_password () {
 license_create_manifest() {
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "Addntpdatecron; removeopkgleftovers; "
+ROOTFS_POSTPROCESS_COMMAND += "removeopkgleftovers; "
