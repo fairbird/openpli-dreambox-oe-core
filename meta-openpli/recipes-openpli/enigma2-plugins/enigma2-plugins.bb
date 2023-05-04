@@ -21,7 +21,6 @@ RDEPENDS:enigma2-plugin-extensions-fancontrol2 = "smartmontools hdparm"
 RDEPENDS:enigma2-plugin-extensions-bonjour = "avahi-daemon"
 
 RRECOMMENDS:enigma2-plugin-systemplugins-blindscan = "virtual/blindscan-dvbs"
-RRECOMMENDS:enigma2-plugin-systemplugins-systemtime = "ntpdate"
 RRECOMMENDS:enigma2-plugin-extensions-transmission = "transmission transmission-client"
 
 inherit gitpkgv python3native pkgconfig
