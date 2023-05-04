@@ -1,10 +1,6 @@
 require linux-3.4.inc
 
-# By default, kernel.bbclass modifies package names to allow multiple kernels
-# to be installed in parallel. We revert this change and rprovide the versioned
-# package names instead, to allow only one kernel to be installed.
-RPROVIDES:${KERNEL_PACKAGE_NAME} = "kernel-${LINUX_VERSION}"
-RPROVIDES:${KERNEL_PACKAGE_NAME}-image = "kernel-image-${LINUX_VERSION} kernel-${KERNEL_IMAGETYPE}"
+RPROVIDES:${KERNEL_PACKAGE_NAME}-image = "kernel-${KERNEL_IMAGETYPE}"
 
 do_install:append() {
         if [ "${KERNEL_IMAGETYPE}" = "vmlinux" ]; then

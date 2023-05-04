@@ -6,7 +6,7 @@ do_configure:prepend() {
 
 KERNEL_ENABLE_CGROUPS = "1"
 
-RPROVIDES:${KERNEL_PACKAGE_NAME} = "kernel-${LINUX_VERSION}"
+RPROVIDES:${KERNEL_PACKAGE_NAME}-image = "kernel-${KERNEL_IMAGETYPE}"
 RDEPENDS:${KERNEL_PACKAGE_NAME}-image = "kernel-devicetree flash-scripts"
 
 pkg_postinst_ontarget:kernel-image () {
