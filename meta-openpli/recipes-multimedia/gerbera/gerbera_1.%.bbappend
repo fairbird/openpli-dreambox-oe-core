@@ -1,10 +1,15 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " \
-                file://0001-Fix-build-with-fmt-post-9.1.patch \
-                file://config.xml \
-                file://init \
+SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
+           file://0001-Fix-build-with-fmt-post-9.1.patch \
+           file://config.xml \
+           file://init \
 "
+
+SRCREV = "63ff8e785ad4d631e519874523d5e31afcfa8933"
+
+PV = "1.12.1"
+PKGV = "1.12.1"
 
 inherit update-rc.d
 

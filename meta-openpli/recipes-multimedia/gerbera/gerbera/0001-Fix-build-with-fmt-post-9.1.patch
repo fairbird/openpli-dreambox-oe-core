@@ -25,13 +25,6 @@ index 8f3cf1db..9827bf71 100644
      }
      return result;
  }
-@@ -217,4 +218,4 @@ bool ConfigArraySetup::InitItemsPerPage(const pugi::xml_node& value, std::vector
-         }
-     }
-     return true;
--}
-\ No newline at end of file
-+}
 diff --git a/src/config/setup/config_setup_autoscan.cc b/src/config/setup/config_setup_autoscan.cc
 index e882ca3e..b7bdada1 100644
 --- a/src/config/setup/config_setup_autoscan.cc
