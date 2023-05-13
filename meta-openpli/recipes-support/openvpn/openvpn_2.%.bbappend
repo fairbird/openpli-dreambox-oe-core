@@ -2,6 +2,8 @@
 INITSCRIPT_NAME = "openvpn"
 INITSCRIPT_PARAMS = "defaults"
 
+RDEPENDS:{$PN} = "lzo lz4"
+
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 inherit update-rc.d
