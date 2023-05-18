@@ -20,8 +20,7 @@ SRC_URI = " \
     ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.${PATCHLEVEL}.xz;apply=yes;name=stable-patch \
     http://sources.dreamboxupdate.com/download/kernel-patches/${P}-${PATCHREV}.patch.bz2;name=dream-patch \
     http://download.filesystems.org/unionfs/unionfs-2.x/unionfs-2.5.11_for_3.2.2.diff.gz;name=unionfs \
-    file://0001-correctly-initiate-nand-flash-ecc-config-when-old-2n.patch \ 
-    file://0001-Revert-MIPS-Fix-potencial-corruption.patch \
+    file://0001-correctly-initiate-nand-flash-ecc-config-when-old-2n.patch \
     file://fadvise_dontneed_change.patch \
     file://fix-proc-cputype.patch \
     file://rtl8712-backport-b.patch \
@@ -39,7 +38,6 @@ SRC_URI = " \
     file://dvb-usb-siano-always-load-smsdvb.patch \
     file://dvb-usb-af9035.patch \
     file://dvb-usb-a867.patch \
-    file://dvb-usb-rtl2832.patch \
     file://dvb_usb_disable_rc_polling.patch \
     file://dvb-usb-smsdvb_fix_frontend.patch \
     file://0001-it913x-backport-changes-to-3.2-kernel.patch \
