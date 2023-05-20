@@ -1,0 +1,4 @@
+SRCREV = "7401fe046a24c49d4d369d6f5f88d89066f86c8d"
+
+PV = "10.0.pre1"
+PKGV = "10.0.pre1"
