@@ -1,7 +1,10 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRCREV = "57a9fd0841f00e92b478a07fef62636d7be612a8"
+SRCREV = "dd173bc5442a20b3c8429a6d848e770ef96b952f"
 
 SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x \
            file://fix-build-gerbera.patch \
 "      
+
+PV = "1.11.pre1"
+PKGV = "1.11.pre1"
