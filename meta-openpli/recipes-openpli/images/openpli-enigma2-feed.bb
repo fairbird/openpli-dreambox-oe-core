@@ -171,7 +171,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-xmodem \
 	enigma2-plugin-extensions-xstreamity \
 	enigma2-plugin-extensions-automatic-fullbackup \
-	enigma2-plugin-extensions-customsubservices \
 	enigma2-plugin-extensions-historyzapselector \
 	enigma2-plugin-extensions-sundtekcontrolcenter \
 	enigma2-plugin-extensions-ts-sateditor \
