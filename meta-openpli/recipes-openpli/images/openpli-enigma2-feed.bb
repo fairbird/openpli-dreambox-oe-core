@@ -156,6 +156,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-crossepg \
 	enigma2-plugin-systemplugins-hrtunerproxy \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
+	enigma2-plugin-systemplugins-satipserver \
 	enigma2-plugin-systemplugins-serviceapp \
 	enigma2-plugin-extensions-enigmalight \
 	enigma2-plugin-extensions-fontinfo \
