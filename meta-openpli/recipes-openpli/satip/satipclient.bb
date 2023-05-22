@@ -10,8 +10,8 @@ PR = "r0"
 SRC_URI = " \
     git://github.com/oe-alliance/satip-client.git;protocol=https;branch=mis \
     file://satipclient.sh \
+    file://auto-detect-and-avoid-ioctl-conflicts.patch \
 "
-#SRC_URI += "file://auto-detect-and-avoi-ioct-conflicts.patch"
 
 S = "${WORKDIR}/git"
 

@@ -82,6 +82,7 @@ OPTIONAL_PACKAGES += " \
 	sabnzbd \
 	samba \
 	satipclient \
+	satpi \
 	screen \
 	sed \
 	smartmontools \
