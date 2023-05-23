@@ -7,10 +7,10 @@ SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
 	file://mpd.init \
 "
 
-SRCREV = "c69b9780df4b69fe4f22231916df8083aa92a647"
+SRCREV = "9027e5c5bbfc77e4c2390323325cef6877b2ca45"
 
-PV = "0.23.pre13"
-PKGV = "0.23.pre13"
+PV = "0.23.13"
+PKGV = "0.23.13"
 
 do_install:append() {
 	install -d ${D}${localstatedir}/lib/mpd/playlists
