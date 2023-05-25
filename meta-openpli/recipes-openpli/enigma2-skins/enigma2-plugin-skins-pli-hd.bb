@@ -8,11 +8,7 @@ inherit gitpkgv allarch
 PV = "0.1+git${SRCPV}"
 PKGV = "0.1+git${GITPKGV}"
 
-SRC_URI = "git://github.com/Hains/skin-PLiHD.git;branch=python3;protocol=https \
-	file://01-add-support-to-new-date-time-feature.patch;apply=yes \
-	file://02-add-crontimers-screen.patch;apply=yes \
-	file://03-add-NewHelp-screen.patch;apply=yes \
-"
+SRC_URI = "git://github.com/fairbird/skin-PLiHD.git;branch=python3;protocol=https"
 
 FILES:${PN} = "${datadir}/enigma2/"
 
