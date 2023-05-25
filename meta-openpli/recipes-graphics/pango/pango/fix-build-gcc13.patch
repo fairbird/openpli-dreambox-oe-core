@@ -1,0 +1,13 @@
+diff --git a/pango/pango-language.c b/pango/pango-language.c
+index 410e6f9..0474bf1 100644
+--- a/pango/pango-language.c
++++ b/pango/pango-language.c
+@@ -514,7 +514,7 @@ find_best_lang_match_cached (PangoLanguage *language,
+ 				 num_records,
+ 				 record_size);
+ 
+-  if (cache)
++  if (cache && result)
+     *cache = result;
+ 
+   return result;
