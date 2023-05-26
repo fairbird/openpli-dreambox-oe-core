@@ -20,7 +20,7 @@ https://github.com/oe-alliance/oe-alliance-core
 -GCC 13.1.0 <br>
 -Glibc 2.37<br>
 -GStreamer 1.22.2<br>
--Python 3.11.2<br>
+-Python 3.11.3<br>
 -OpenSSL 3.1.0<br>
 -Busybox 1.36.0<br>
 and more.<br>
