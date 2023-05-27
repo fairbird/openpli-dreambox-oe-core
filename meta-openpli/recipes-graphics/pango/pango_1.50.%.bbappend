@@ -1,4 +1,4 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " file://fix-build-gcc13.patch"
+SRC_URI:append = " file://0001-Drop-Werror-array-bounds.patch"
 
