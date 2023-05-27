@@ -54,6 +54,7 @@ IMAGE_INSTALL += " \
 	settings-autorestore \
 	tuxbox-common \
 	wget \
+	gettext \
 	${ENIGMA2_PLUGINS} \
 	${@bb.utils.contains("MACHINE_FEATURES", "nowifi", "", "network-usb-drivers-meta", d)} \
 	"
