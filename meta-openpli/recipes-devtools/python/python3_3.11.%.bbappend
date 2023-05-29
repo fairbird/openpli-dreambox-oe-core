@@ -1,1 +1,0 @@
-DEPENDS:remove = "libxcrypt-native"
