@@ -7,7 +7,6 @@ RDEPENDS:${PN} = "${PYTHON_PN}-twisted-web ${PYTHON_PN}-html ${PYTHON_PN}-json $
 
 inherit gitpkgv distutils-openplugins gettext
 
-SRCREV = "${AUTOREV}"
 SRC_URI = "\
 	git://github.com/DrMichael/FritzCall.git;protocol=https;branch=master \
 	file://git/setup.py \
