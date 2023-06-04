@@ -16,7 +16,7 @@ PR = "r0"
 SRC_URI = "git://github.com/oe-alliance/enigma2-display-skins.git;protocol=https;branch=master"
 
 # note that enigma2-skins is just an empty package to satisfy silly dependencies.
-ALLOW:EMPTY:${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 FILES:${PN} = "/usr/share/enigma2/display"
 FILES:${PN}-meta = "${datadir}/meta"
 RDEPENDS:${PN}-meta = ""
