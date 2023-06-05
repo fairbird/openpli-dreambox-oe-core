@@ -9,7 +9,7 @@ MACHINE_KERNEL_PR:append = ".1"
 require linux-dreambox-4.9.inc
 
 SRC_URI = "https://dreamboxupdate.com/download/opendreambox/${BPN}/${BPN}-v${PV}.tar.xz \
-           file://support-for-gcc12.patch \
+           file://support-for-gcc13.patch \
            file://defconfig \
            file://fix-multiple-defs-yyloc_v1.patch \
            file://0003-cp1emu-do-not-use-bools-for-arithmetic.patch \
