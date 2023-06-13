@@ -54,6 +54,8 @@ export KCFLAGS = "-Wno-error=misleading-indentation \
                   -Wno-error=builtin-declaration-mismatch \
                   -Wno-error=address \
                   -Wno-error=unused-const-variable \
+                  -Wno-error=enum-int-mismatch \
+                  -Wno-error=dangling-pointer \
 "
 
 KERNEL_FLASH_ARGS = "-c '${CMDLINE}'"
@@ -66,3 +68,5 @@ do_install:prepend() {
 
 do_rm_work() {
 }
+
+OLDEST_KERNEL = "3.2.0"
