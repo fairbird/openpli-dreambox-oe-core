@@ -68,5 +68,3 @@ do_install:prepend() {
 
 do_rm_work() {
 }
-
-OLDEST_KERNEL = "3.2.0"
