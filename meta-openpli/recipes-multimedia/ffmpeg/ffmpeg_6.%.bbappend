@@ -46,6 +46,7 @@ EXTRA_FFCONF = " \
     --disable-x86asm \
     --disable-fast-unaligned \
     --enable-protocol=http \
+    --enable-demuxer=dash \
     \
     --disable-muxers \
     --enable-muxer=adts \
