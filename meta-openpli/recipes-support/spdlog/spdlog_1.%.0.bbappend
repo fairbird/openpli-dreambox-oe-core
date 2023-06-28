@@ -1,4 +1,4 @@
-SRCREV = "c174c151383214769e86780e9fabb36fc8597a13"
+SRCREV = "326f8870c2746aea9b295e9b366174116f266b6e"
 
 SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x"    
 
