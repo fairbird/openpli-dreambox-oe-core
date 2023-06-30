@@ -11,6 +11,10 @@ IMAGE_CMD:tar:prepend = " \
     mkdir -p ${IMAGE_ROOTFS}/tmp; \
     "
 
+IMAGE_CMD:tar:append = " \
+    rm ${IMAGE_NAME}.rootfs.tar; \
+    "
+
 CONVERSION_CMD:bz2 = " \
     rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
     bzip2 -f -k ${IMAGE_NAME}.tar; \
