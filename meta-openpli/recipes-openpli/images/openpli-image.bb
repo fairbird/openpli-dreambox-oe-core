@@ -51,7 +51,6 @@ IMAGE_INSTALL = "\
 
 GETEXTRA = "${@bb.utils.contains('MACHINE', 'cube', '', 'edid-decode', d)}"
 
-export IMAGE_BASENAME = "openpli"
 IMAGE_LINGUAS = ""
 IMAGE_FEATURES += "package-management"
 
