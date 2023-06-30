@@ -1,12 +1,11 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
-           file://0001-Fix-build-with-fmt-post-9.1.patch \
            file://config.xml \
            file://init \
 "
 
-SRCREV = "d1d3deea3125e0960d505e2d55a9b5f9b2f1719a"
+SRCREV = "37957aac0aea776e6f843af2358916f81056a405"
 
 PV = "1.12.pre2"
 PKGV = "1.12.pre2"
