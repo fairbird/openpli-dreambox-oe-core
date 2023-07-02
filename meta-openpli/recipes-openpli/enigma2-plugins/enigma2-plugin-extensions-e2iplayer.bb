@@ -5,43 +5,29 @@ SECTION = "multimedia"
 LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
 
-inherit ${@bb.utils.contains("python3", "python3", "distutils-openplugins", "distutils-openplugins", d)} gettext
-
-DEPENDS = "gettext-native python3-future-native python3"
-
 SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=python3;protocol=https \
 	file://no-need-to-check-depends.patch \
 "
 
 S = "${WORKDIR}/git"
 
-PV = "1+git${SRCPV}"
-PKGV = "1+git${GITPKGV}"
+inherit gitpkgv
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
+PR = "r0"
 
-RDEPENDS:${PN} = " \
-	python3-core \
-	python3-e2icjson \
-	python3-json \
-	python3-pycurl \
-	python3-html \
-	python3-shell \
-	python3-compression \
-	cmdwrapper \
-	duktape \
-	exteplayer3 \
-	f4mdump \
-	ffmpeg \
-	gst-ifdsrc \
-	gstplayer \
-	hlsdl \
-	iptvsubparser \
-	lsdir \
-	rtmpdump \
-	uchardet \
-	wget \
-	${@bb.utils.contains("python3", "python3", "python3-subprocess", "", d)} \
-        ${@bb.utils.contains("python3", "python3", "python3-textutils", "", d)} \
-	"
+inherit setuptools3-openplugins gettext
+
+DEPENDS = "gettext-native ${PYTHON_PN}-future-native ${PYTHON_PN}"
+RRECOMMENDS:${PN} = " \
+        enigma2-plugin-extensions-e2iplayer-deps \
+        ${PYTHON_PN}-compression \
+        ${PYTHON_PN}-core \
+        ${PYTHON_PN}-html \
+        ${PYTHON_PN}-e2icjson \
+        ${PYTHON_PN}-json \
+        ${PYTHON_PN}-shell \
+        "
 
 RDEPENDS:{PN}-src = "${PN}"
 
@@ -52,5 +38,3 @@ FILES:${PN}-src = " \
 	"
 
 deltask package_qa
-
-FILES:${PN} += "${sysconfdir}"
