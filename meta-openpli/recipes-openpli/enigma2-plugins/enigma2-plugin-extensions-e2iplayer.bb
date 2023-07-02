@@ -16,7 +16,7 @@ PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 PR = "r0"
 
-inherit setuptools3-openplugins gettext
+inherit distutils-openplugins gettext
 
 DEPENDS = "gettext-native ${PYTHON_PN}-future-native ${PYTHON_PN}"
 RRECOMMENDS:${PN} = " \
