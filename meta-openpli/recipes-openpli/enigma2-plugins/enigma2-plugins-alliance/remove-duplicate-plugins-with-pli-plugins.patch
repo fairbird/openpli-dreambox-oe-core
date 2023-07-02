@@ -148,8 +148,8 @@ index 90eef3742f..068d1199fe 100644
 -SUBDIRS += networkbrowser epgsearch
 -endif
 -
--SUBDIRS += tetris ardmediathek netzkino Series2Folder
-+SUBDIRS += tetris Series2Folder
+-SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek
++SUBDIRS += tetris Series2Folder srfmediathek
  
  metadir = $(datadir)/meta
  meta_DATA = index-enigma2-plugins.xml
