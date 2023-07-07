@@ -58,6 +58,7 @@ OPTIONAL_PACKAGES += " \
 	ntfs-3g \
 	ntp \
 	openmultiboot \
+	openresolv \
 	ofgwrite \
 	openresolv \
 	openssh \

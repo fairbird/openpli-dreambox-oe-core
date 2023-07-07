@@ -74,7 +74,6 @@ IMAGE_INSTALL = " \
 	nfs-utils-client \
 	ntp \
 	openpli-bootlogo \
-	openresolv \
 	openssh-sftp-server \
 	opkg \
 	packagegroup-base \
