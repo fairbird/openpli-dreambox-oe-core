@@ -1,0 +1,13 @@
+diff --git a/Makefile.pre.in b/Makefile.pre.in
+index 3ea8653..9a4e155 100644
+--- a/Makefile.pre.in
++++ b/Makefile.pre.in
+@@ -2046,7 +2046,7 @@ TESTSUBDIRS=	ctypes/test \
+ 		unittest/test/testmock
+ 
+ TEST_MODULES=@TEST_MODULES@
+-libinstall:	all $(srcdir)/Modules/xxmodule.c
++libinstall:	all $(srcdir)/Modules/xxmodule.c libainstall
+ 	@for i in $(SCRIPTDIR) $(LIBDEST); \
+ 	do \
+ 		if test ! -d $(DESTDIR)$$i; then \
