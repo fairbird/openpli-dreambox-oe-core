@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRCREV = "436c131d4c6534f123772e93c0326ce929f970ab"
+SRCREV = "3dec65b7fd8df55bd5904a1e22dd907038634cf0"
 
 SRC_URI:append = " file://restore-fmt-header-files.patch"
 
