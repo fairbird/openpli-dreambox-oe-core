@@ -15,8 +15,4 @@ S = "${WORKDIR}/mechanize-${PV}"
 
 inherit setuptools3
 
-FILES:${PN}-src:append = " \
-    ${libdir}/${PYTHON_DIR}/site-packages/mechanize-0.4.5-py2.7.egg-info/* \
-"
-
 include ${PYTHON_PN}-package-split.inc
