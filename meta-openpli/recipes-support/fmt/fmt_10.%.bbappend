@@ -1,4 +1,4 @@
-SRCREV = "757564f5cd2fa78b634dd698c63dbf069818e6fd"
+SRCREV = "e57ca2e3685b160617d3d95fcd9e789c4e06ca88"
 
-PV = "10.0.pre1"
-PKGV = "10.0.pre1"
+PV = "10.1.0"
+PKGV = "10.1.0"
