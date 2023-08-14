@@ -63,5 +63,4 @@ MEDIASERVICE ?= "${@bb.utils.contains("MACHINE_FEATURES", "himedia", "servicehis
 BLINDSCAN_BINARY ?= "blindscan"
 FORCE ?= "no"
 SUPPORT_DBOXLCD ?= "${@bb.utils.contains_any("MACHINE_FEATURES", "textlcd", "True", "False", d)}"
-DEVELOPER_NAME ?= "${DISTRO_NAME}"
 FRIENDLY_FAMILY ?= "${MACHINE} ${BUILDMACHINE}"
