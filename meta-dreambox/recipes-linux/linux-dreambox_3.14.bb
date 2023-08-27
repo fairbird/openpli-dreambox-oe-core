@@ -29,6 +29,7 @@ SRC_URI = " \
     file://0005-uaccess-dont-mark-register-as-const.patch \
     file://0006-makefile-silence-packed-not-aligned-warn.patch \
     file://0007-overlayfs.patch \
+    file://0008-fix-build-binutils241.patch \
     file://move-default-dialect-to-SMB3.patch \
     file://fix-multiple-defs-yyloc.patch \
 "

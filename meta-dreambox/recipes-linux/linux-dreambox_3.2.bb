@@ -61,6 +61,7 @@ SRC_URI = " \
     file://0014-makefile-silence-packed-not-aligned-warn.patch \
     file://0015-fcrypt-fix-bitoperation-for-gcc.patch \
     file://devinitdata-gcc11.patch \
+    file://0008-fix-build-binutils241.patch \
 "
 
 PACKAGES_DYNAMIC = "kernel-*"
