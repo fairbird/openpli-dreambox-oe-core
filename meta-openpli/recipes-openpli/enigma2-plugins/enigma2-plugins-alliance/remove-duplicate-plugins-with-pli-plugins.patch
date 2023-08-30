@@ -36,12 +36,12 @@ index 90eef3742f..068d1199fe 100644
  	eurotictv \
  	eventlist \
  	eventposition \
-@@ -12,61 +12,23 @@ SUBDIRS = \
+@@ -12,61 +12,22 @@ SUBDIRS = \
  	eurotictv \
  	eventlist \
  	eventposition \
 -	filebrowser \
- 	flashexpander \
+-	flashexpander \
 -	fritzcall \
 -	fstabeditor \
 -	ftpbrowser \
