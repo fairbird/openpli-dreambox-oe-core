@@ -9,7 +9,7 @@ S = "${WORKDIR}/git"
 
 inherit gitpkgv setuptools3
 
-PV = "1.2.1+git${SRCPV}"
+PV = "1.2.1+git"
 PKGV = "1.2.1+git${GITPKGV}"
 
 DISTUTILS_INSTALL_ARGS = "\

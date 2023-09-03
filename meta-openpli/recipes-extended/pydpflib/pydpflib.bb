@@ -11,7 +11,7 @@ S = "${WORKDIR}/git"
 
 inherit gitpkgv setuptools3
 
-PV = "0.14+git${SRCPV}"
+PV = "0.14+git"
 PKGV = "0.14+git${GITPKGV}"
 PR = "r0"
 

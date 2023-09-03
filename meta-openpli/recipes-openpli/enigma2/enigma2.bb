@@ -174,7 +174,7 @@ RDEPENDS:${PN}-build-dependencies = "\
 
 inherit gitpkgv python3native python3targetconfig
 
-PV = "${PYTHON_BASEVERSION}+git${SRCPV}"
+PV = "${PYTHON_BASEVERSION}+git"
 PKGV = "${PYTHON_BASEVERSION}+git${GITPKGV}"
 
 ENIGMA2_BRANCH ?= "develop"

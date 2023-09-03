@@ -10,7 +10,7 @@ RDEPENDS:${PN} = "${PYTHON_PN} ${PYTHON_PN}-multiprocessing ${PYTHON_PN}-request
 "
 
 SRCREV = "${AUTOREV}"
-PV = "3.71+git${SRCPV}"
+PV = "3.71+git"
 PKGV = "3.71+git${GITPKGV}"
 PR = "r0"
 

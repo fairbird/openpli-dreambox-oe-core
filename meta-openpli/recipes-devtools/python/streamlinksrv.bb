@@ -12,7 +12,7 @@ RDEPENDS:${PN} = "python3-core streamlink"
 inherit python3-dir gitpkgv
 
 SRCREV = "${AUTOREV}"
-PV = "1.8.2+git${SRCPV}"
+PV = "1.8.2+git"
 PKGV = "1.8.2+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-mirrors/livestreamersrv;protocol=https;branch=streamlinksrv"

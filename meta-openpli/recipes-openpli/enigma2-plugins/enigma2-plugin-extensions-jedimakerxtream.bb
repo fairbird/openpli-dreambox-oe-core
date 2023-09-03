@@ -11,7 +11,7 @@ require classes/python3-compileall.inc
 inherit gitpkgv allarch
 
 SRCREV="${AUTOREV}"
-PV = "1.01+git${SRCPV}"
+PV = "1.01+git"
 PKGV = "1.01+git${GITPKGV}"
 PR = "r2"
 

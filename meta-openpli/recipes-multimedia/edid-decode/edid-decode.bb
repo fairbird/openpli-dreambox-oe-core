@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://edid-decode.cpp;beginline=1;endline=8;md5=2193df34747
 
 inherit gitpkgv
 
-PV = "1.0+git${SRCPV}"
+PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://git.linuxtv.org/edid-decode.git;protocol=https;branch=master"

@@ -10,7 +10,7 @@ SRC_URI = " git://code.vuplus.com/git/dvbapp.git;protocol=http;branch=${BRANCH} 
 "
 
 inherit gitpkgv
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 
 DEPENDS = "djmount fuse libupnp"

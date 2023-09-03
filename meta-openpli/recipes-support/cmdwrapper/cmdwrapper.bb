@@ -5,7 +5,7 @@ require conf/license/openpli-gplv2.inc
 
 inherit gitpkgv
 
-PV = "2.1+git${SRCPV}"
+PV = "2.1+git"
 PKGV = "2.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/OpenVisionE2/cmdwrapper.git;protocol=https;branch=master"

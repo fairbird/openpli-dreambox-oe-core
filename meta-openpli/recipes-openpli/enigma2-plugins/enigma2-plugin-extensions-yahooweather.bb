@@ -7,7 +7,7 @@ require classes/python3-compileall.inc
 
 inherit gitpkgv ${PYTHON_PN}native autotools-brokensep gettext
 
-PV = "1.2.+git${SRCPV}"
+PV = "1.2.+git"
 PKGV = "1.2.+git${GITPKGV}"
 PR = "r0"
 

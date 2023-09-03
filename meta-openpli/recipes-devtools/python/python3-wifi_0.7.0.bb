@@ -9,7 +9,7 @@ RDEPENDS:${PN} = "python3-ctypes python3-datetime python3-six"
 
 inherit gitpkgv setuptools3
 
-PV = "0.7.0+git${SRCPV}"
+PV = "0.7.0+git"
 PKGV = "0.7.0+git${GITPKGV}"
 PR = "r2"
 

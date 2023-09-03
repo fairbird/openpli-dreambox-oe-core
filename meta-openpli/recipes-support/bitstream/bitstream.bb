@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7decd8ef15ab16ed5436851272b61cf7"
 
 inherit gitpkgv
 
-PV = "1.0+git${SRCPV}"
+PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://code.videolan.org/videolan/bitstream.git;protocol=https;branch=master"

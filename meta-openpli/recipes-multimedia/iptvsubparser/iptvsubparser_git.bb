@@ -6,7 +6,7 @@ DEPENDS = "python3"
 
 inherit gitpkgv python3-dir
 
-PV = "1.1+git${SRCPV}"
+PV = "1.1+git"
 PKGV = "1.1+git${GITPKGV}"
 PR = "r0"
 

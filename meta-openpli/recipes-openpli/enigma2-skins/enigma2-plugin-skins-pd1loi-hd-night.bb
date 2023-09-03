@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://README.md;md5=4e92522262895e6aa6977828a170c78b"
 
 inherit gitpkgv allarch
 
-PV = "2.6.1+git${SRCPV}"
+PV = "2.6.1+git"
 PKGV = "2.6.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/PD1LOI/Pd1loi-HD-night.git;protocol=https;branch=master"

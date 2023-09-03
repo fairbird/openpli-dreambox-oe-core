@@ -28,7 +28,7 @@ RDEPENDS:${PN} = "\
 
 inherit gittag setuptools3_legacy gettext
 
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "${GITPKGVTAG}"
 
 BRANCH="master"

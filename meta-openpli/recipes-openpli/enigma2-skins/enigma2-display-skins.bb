@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://README.md;startline=1;endline=6;md5=d87dcebda7b395f6f
 inherit gitpkgv
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 PR = "r0"
 

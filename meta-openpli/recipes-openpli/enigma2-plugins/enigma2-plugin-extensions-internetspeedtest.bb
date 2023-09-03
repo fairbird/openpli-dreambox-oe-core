@@ -5,7 +5,7 @@ require conf/license/license-gplv2.inc
 
 inherit gitpkgv distutils-openplugins gettext
 
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 
 SRC_URI="git://github.com/fairbird/Internet-Speedtest.git;protocol=https;branch=master"

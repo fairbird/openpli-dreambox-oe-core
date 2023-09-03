@@ -8,7 +8,7 @@ DEPENDS = "cmake-native"
 inherit gitpkgv pkgconfig
 
 SRCREV = "${AUTOREV}"
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/openwrt/odhcp6c.git;protocol=https;branch=master \

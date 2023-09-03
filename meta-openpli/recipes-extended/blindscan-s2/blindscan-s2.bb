@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://README.md;md5=b69b6d0feee577047e07a832c67d8076"
 SRC_URI = "git://github.com/OpenVisionE2/blindscan-s2.git;protocol=https;branch=master"
 
 inherit gitpkgv
-PV = "1+git${SRCPV}"
+PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 
 S = "${WORKDIR}/git"

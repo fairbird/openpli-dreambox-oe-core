@@ -4,7 +4,7 @@ RDEPENDS:${PN} = "python3-html"
 
 inherit gitpkgv
 
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 PR = "r0"
 

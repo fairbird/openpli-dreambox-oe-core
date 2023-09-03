@@ -9,7 +9,7 @@ require classes/python3-compileall.inc
 DEPENDS = "libbluray libudfread"
 
 inherit gitpkgv
-PV = "1+git${SRCPV}"
+PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 BRANCH = "openpli"
 

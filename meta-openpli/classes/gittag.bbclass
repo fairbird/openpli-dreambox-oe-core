@@ -25,14 +25,14 @@
 #
 # inherit gitpkgv
 #
-# PV = "1.0+gitr${SRCPV}"      # expands to something like 1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
+# PV = "1.0+gitr"              # expands to 1.0+gitr
 # PKGV = "1.0+gitr${GITPKGV}"  # expands also to something like 1.0+gitr31337+4c1c21d7d
 #
 # or
 #
 # inherit gitpkgv
 #
-# PV = "1.0+gitr${SRCPV}" # expands to something like 1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
+# PV = "1.0+gitr"         # expands to 1.0+gitr
 # PKGV = "${GITPKGVTAG}"  # expands to something like 1.0-31337+g4c1c21d
 #                           if there is tag v1.0 before this revision or
 #                           ver1.0-31337+g4c1c21d if there is tag ver1.0

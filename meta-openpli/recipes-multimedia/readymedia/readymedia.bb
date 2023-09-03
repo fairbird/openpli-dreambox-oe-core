@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2
 
 inherit gitpkgv
 
-PV = "1.1.0+git${SRCPV}"
+PV = "1.1.0+git"
 PKGV = "1.1.0+git${GITPKGV}"
 PR = "r0"
 DEPENDS = "libexif libav libjpeg-turbo libid3tag libvorbis sqlite3 flac"

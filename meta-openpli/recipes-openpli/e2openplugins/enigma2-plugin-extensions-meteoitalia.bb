@@ -2,7 +2,7 @@ MODULE = "MeteoItalia"
 DESCRIPTION = "Forecast Italy"
 
 inherit gitpkgv
-PV = "1.0+git${SRCPV}"
+PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 PR = "r1"
 

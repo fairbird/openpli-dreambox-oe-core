@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ed7e492ee44e70125a5d42e118354a13"
 
 inherit gitpkgv
 
-PV = "1.0+git${SRCPV}"
+PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
 DEPENDS = "bitstream libev"

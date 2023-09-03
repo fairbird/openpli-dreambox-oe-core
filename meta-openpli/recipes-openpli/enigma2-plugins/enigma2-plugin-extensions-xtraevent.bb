@@ -16,7 +16,7 @@ RDEPENDS:${PN} += "\
 
 S = "${WORKDIR}/git"
 
-PV = "5.2+git${SRCPV}"
+PV = "5.2+git"
 PKGV = "5.2+git${GITPKGV}"
 
 FILES:${PN} = "${prefix}/"

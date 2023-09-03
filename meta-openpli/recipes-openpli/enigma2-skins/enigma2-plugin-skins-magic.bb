@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
 
 inherit gitpkgv allarch
 
-PV = "1.0+git${SRCPV}"
+PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
 PKGV:font-valis-enigma = "1.0+git${GITPKGV}"

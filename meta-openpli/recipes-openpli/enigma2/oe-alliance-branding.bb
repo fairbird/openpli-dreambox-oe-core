@@ -8,7 +8,7 @@ require conf/license/license-gplv2.inc
 
 inherit autotools-brokensep gitpkgv python3targetconfig python3native
 
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 PR = "r0"
 

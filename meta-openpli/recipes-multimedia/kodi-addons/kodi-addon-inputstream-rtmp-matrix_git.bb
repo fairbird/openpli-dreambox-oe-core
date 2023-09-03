@@ -9,7 +9,7 @@ DEPENDS += "expat"
 
 SRCREV = "d8cac91499710902d429256a04ac01f618d128be"
 
-PV = "3.4.0+gitr${SRCPV}"
+PV = "3.4.0+gitr"
 
 KODIADDONBRANCH = "Matrix"
 

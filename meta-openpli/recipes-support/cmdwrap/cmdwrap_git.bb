@@ -5,7 +5,7 @@ require conf/license/license-gplv2.inc
 
 inherit gitpkgv
 
-PV = "2.0+git${SRCPV}"
+PV = "2.0+git"
 PKGV = "2.0+git${GITPKGV}"
 PR = "r0"
 

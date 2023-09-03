@@ -8,7 +8,7 @@ require conf/license/license-gplv2.inc
 
 inherit gitpkgv allarch
 
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 
 RRECOMMENDS:${PN} = "enigma2-plugin-extensions-weatherplugin2"

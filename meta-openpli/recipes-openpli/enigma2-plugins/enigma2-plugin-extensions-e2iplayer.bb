@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=python3;protocol=htt
 S = "${WORKDIR}/git"
 
 inherit gitpkgv
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 PR = "r0"
 

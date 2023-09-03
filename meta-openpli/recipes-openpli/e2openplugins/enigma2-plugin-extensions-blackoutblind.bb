@@ -2,7 +2,7 @@ MODULE = "Blackoutblind"
 DESCRIPTION = "Hide white dotted lines (VBI) on top of the screen"
 
 inherit gitpkgv
-PV = "1.0+git${SRCPV}"
+PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 PR = "r0"
 

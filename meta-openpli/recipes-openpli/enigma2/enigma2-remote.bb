@@ -4,7 +4,7 @@ require conf/license/license-gplv2.inc
 
 inherit gitpkgv
 
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-alliance/remotes;protocol=https;branch=master"

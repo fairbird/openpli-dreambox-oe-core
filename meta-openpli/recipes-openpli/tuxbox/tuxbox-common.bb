@@ -4,7 +4,7 @@ MAINTAINER = "PLi team"
 require conf/license/openpli-gplv2.inc
 inherit allarch gitpkgv
 
-PV = "2+git${SRCPV}"
+PV = "2+git"
 PKGV = "2+git${GITPKGV}"
 PR = "3"
 

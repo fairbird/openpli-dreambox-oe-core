@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../etc/epgimport/readme.txt;startline=1;endline=4;md5
 inherit gitpkgv python3native gettext
 require classes/python3-compileall.inc
 
-PV = "1.0+git${SRCPV}"
+PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=python3 \

@@ -6,7 +6,7 @@ S = "${WORKDIR}/git"
 
 inherit gitpkgv distutils-openplugins
 
-PV = "1+git${SRCPV}"
+PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 
 include python3-package-split.inc

@@ -6,7 +6,7 @@ DESCRIPTION = "OScam-emu ${PV} Open Source Softcam"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-PV = "1.20+git${SRCPV}"
+PV = "1.20+git"
 PKGV = "1.20+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oscam-emu/oscam-patched.git;protocol=https;branch=master \

@@ -9,7 +9,7 @@ PACKAGES_DYNAMIC = "enigma2-plugin-(?!oea-).*"
 inherit autotools-brokensep gitpkgv ${PYTHON_PN}native pkgconfig gettext ${PYTHON_PN}-dir python3targetconfig
 
 SRCREV = "${AUTOREV}"
-PV = "gitr${SRCPV}"
+PV = "gitr"
 PKGV = "gitr${GITPKGV}"
 PR = "r1"
 

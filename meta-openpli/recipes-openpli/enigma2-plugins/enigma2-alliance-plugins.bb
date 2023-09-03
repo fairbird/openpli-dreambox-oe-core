@@ -10,7 +10,7 @@ include python3-package-split.inc
 inherit python3-dir autotools-brokensep gitpkgv ${PYTHON_PN}native gettext python3targetconfig
 
 SRCREV = "${AUTOREV}"
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-alliance/oe-alliance-plugins.git;protocol=https;branch=master \

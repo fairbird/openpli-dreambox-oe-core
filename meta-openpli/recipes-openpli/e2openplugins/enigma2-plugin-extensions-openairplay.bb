@@ -6,7 +6,7 @@ RDEPENDS:${PN} = "python3-twisted-core python3-twisted-web python3-m2crypto \
                   hairtunes"
 
 inherit gitpkgv
-PV = "0.1+git${SRCPV}"
+PV = "0.1+git"
 PKGV = "0.1+git${GITPKGV}"
 PR = "r0.2"
 

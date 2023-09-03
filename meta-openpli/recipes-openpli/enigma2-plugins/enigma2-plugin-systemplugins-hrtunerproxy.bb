@@ -7,7 +7,7 @@ require classes/python3-compileall.inc
 
 inherit gitpkgv distutils-openplugins
 
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/OpenViX/HRTunerProxy.git;protocol=https;branch=master"
