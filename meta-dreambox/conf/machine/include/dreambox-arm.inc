@@ -21,7 +21,6 @@ MACHINE_EXTRA_RRECOMMENDS += " \
     gstreamer1.0-libav \
     libpagecache \
     libpassthrough \
-    flash-nrf52 \
     kernel-module-cifs \
     kernel-module-autofs4 \
     kernel-module-hmac \
