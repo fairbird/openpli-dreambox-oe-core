@@ -46,14 +46,12 @@ FILES:enigma2-plugin-extensions-bmediacenter += " ${libdir}/enigma2/python/Compo
 FILES:enigma2-plugin-skincomponents-channelselectionshorttitle += " ${libdir}/enigma2/python/Components/Converter/ChannelSelectionShortTitle.pyc"
 FILES:enigma2-plugin-skincomponents-eventlist += " ${libdir}/enigma2/python/Components/Renderer/EventListDisplay.pyc ${libdir}/enigma2/python/Components/Converter/EventList.pyc"
 FILES:enigma2-plugin-skincomponents-eventposition += " ${libdir}/enigma2/python/Components/Converter/EventPosition.pyc"
-FILES:enigma2-plugin-skincomponents-weathercomponent += " ${libdir}/enigma2/python/Components/WeatherMSN.pyc ${libdir}/enigma2/python/Components/Converter/MSNWeather.pyc ${libdir}/enigma2/python/Components/Sources/MSNWeather.pyc ${libdir}/enigma2/python/Components/Renderer/MSNWeatherPixmap.pyc"
 FILES:enigma2-plugin-skincomponents-reftopiconname += " ${libdir}/enigma2/python/Components/Converter/RefToPiconName.pyc"
 
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Renderer/LizWatches.py /usr/lib/enigma2/python/Components/Converter/LizExtraNumText.py"
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Converter/ChannelSelectionShortTitle.py"
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Renderer/EventListDisplay.py /usr/lib/enigma2/python/Components/Converter/EventList.py"
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Converter/EventPosition.py"
-FILES:${PN}-src += " /usr/lib/enigma2/python/Components/WeatherMSN.py /usr/lib/enigma2/python/Components/Converter/MSNWeather.py /usr/lib/enigma2/python/Components/Sources/MSNWeather.py /usr/lib/enigma2/python/Components/Renderer/MSNWeatherPixmap.py"
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Converter/RefToPiconName.py"
 
 
