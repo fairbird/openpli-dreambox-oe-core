@@ -1,8 +1,6 @@
-diff --git a/Makefile b/Makefile
-index 3c9ad72..a8fa3bc 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2,8 +2,7 @@ VERSION = 0.1.6.8
+--- a/Makefile	2016-02-20 21:52:17.708369076 +0100
++++ b/Makefile	2016-02-20 21:51:54.476369474 +0100
+@@ -2,8 +2,7 @@
  DISTNAME = replex-$(VERSION)
  TARNAME = $(DISTNAME).tar.gz	
  INCS   = -I..
