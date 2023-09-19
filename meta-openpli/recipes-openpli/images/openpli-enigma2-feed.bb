@@ -162,6 +162,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-skins-simple-gray \
 	enigma2-plugin-systemplugins-crossepg \
 	enigma2-plugin-systemplugins-hrtunerproxy \
+	enigma2-plugin-systemplugins-misplslcnscan \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-satipserver \
 	enigma2-plugin-systemplugins-serviceapp \
