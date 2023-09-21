@@ -4,7 +4,7 @@ LICENSE = "MIT"
 INHIBIT_DEFAULT_DEPS = "1"
 PACKAGES = ""
 
-PACKAGEINDEXDEPS += "openpli-enigma2-feed:do_rm_work"
+PACKAGEINDEXDEPS += "openpli-enigma2-feed:do_rm_work package-index:do_rm_work"
 
 inherit nopackages
 
