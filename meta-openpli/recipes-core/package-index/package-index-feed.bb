@@ -17,6 +17,7 @@ deltask do_install
 deltask do_populate_lic
 deltask do_populate_sysroot
 
+do_package_index[nostamp] = "1"
 do_package_index[depends] += "${PACKAGEINDEXDEPS}"
 
 python do_package_index() {
