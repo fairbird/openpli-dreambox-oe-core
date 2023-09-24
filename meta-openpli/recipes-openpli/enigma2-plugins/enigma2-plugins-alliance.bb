@@ -14,7 +14,6 @@ PKGV = "gitr${GITPKGV}"
 PR = "r1"
 
 SRC_URI = "git://github.com/oe-alliance/enigma2-plugins.git;protocol=https;branch=master \
-        file://ax-python-devel-dont-check-for-distutils.patch \
         file://EPGSearch.patch \
         file://remove-duplicate-plugins-with-pli-plugins.patch \
 "

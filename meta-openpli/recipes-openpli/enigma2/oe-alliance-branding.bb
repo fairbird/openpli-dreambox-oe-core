@@ -19,7 +19,6 @@ do_configure[nostamp] = "1"
 BRANCH="master"
 
 SRC_URI="git://github.com/oe-mirrors/branding-module.git;protocol=https;branch=${BRANCH} \
-        file://ax-python-devel-dont-check-for-distutils.patch \
         file://Add_VFDSymbol_SoCFamily.patch \
 "
 
