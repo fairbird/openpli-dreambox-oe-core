@@ -3,7 +3,7 @@ MAINTAINER = "madhouse"
 
 require conf/license/license-gplv2.inc
 
-inherit gitpkgv distutils-openplugins gettext
+inherit gitpkgv setuptools-openplugins gettext
 
 PV = "git"
 PKGV = "git${GITPKGV}"

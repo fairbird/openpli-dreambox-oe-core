@@ -6,7 +6,7 @@ require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/fairbird/RaedQuickSignal;protocol=https;branch=main"
 
-inherit gitpkgv distutils-openplugins
+inherit gitpkgv setuptools-openplugins
 
 RDEPENDS:${PN} += "\
 	python3-requests \

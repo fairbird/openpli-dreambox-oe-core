@@ -12,4 +12,4 @@ SRC_URI = "git://github.com/ims21/ModifyPliFullHD.git;protocol=https;branch=mast
 
 S="${WORKDIR}/git"
 
-inherit distutils-openplugins
+inherit setuptools-openplugins

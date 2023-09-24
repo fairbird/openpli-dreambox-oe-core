@@ -4,7 +4,7 @@ SRC_URI = "git://github.com/Dima73/${PLUGINNAME}.git;protocol=https;branch=maste
 
 S = "${WORKDIR}/git"
 
-inherit gitpkgv distutils-openplugins
+inherit gitpkgv setuptools-openplugins
 
 PV = "1+git"
 PKGV = "1+git${GITPKGV}"
