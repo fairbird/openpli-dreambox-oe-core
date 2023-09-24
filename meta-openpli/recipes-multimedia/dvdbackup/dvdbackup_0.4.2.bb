@@ -1,7 +1,7 @@
 DESCRIPTION = "Tool to rip DVDs from the command line"
 SECTION = "console/multimedia"
 PRIORITY = "optional"
-LICENSE = "GPL-3.0-only+"
+LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 inherit gettext

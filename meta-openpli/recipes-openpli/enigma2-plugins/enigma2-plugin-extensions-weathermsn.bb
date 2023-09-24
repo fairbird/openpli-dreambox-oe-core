@@ -1,7 +1,7 @@
 DESCRIPTION = "Weather forecast for 5 days"
 SUMMARY = "Weather MSN"
 MAINTAINER = "Sirius"
-LICENSE = "GPL-3.0-only+"
+LICENSE = "GPL-3.0-or-later"
 HOMEPAGE = "www.gisclub.tv"
 require conf/license/license-gplv2.inc
 require classes/python3-compileall.inc
