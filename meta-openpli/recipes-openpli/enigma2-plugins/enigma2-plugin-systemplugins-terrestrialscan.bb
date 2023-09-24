@@ -4,7 +4,9 @@ MAINTAINER = "Huevos"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
 
-inherit autotools-brokensep python3targetconfig gitpkgv python3-compileall gettext
+require classes/python3-compileall.inc
+
+inherit autotools-brokensep python3targetconfig gitpkgv gettext
 
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
