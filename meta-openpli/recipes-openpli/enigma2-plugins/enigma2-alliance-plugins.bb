@@ -39,7 +39,6 @@ PROVIDES = "\
     enigma2-plugin-systemplugins-gigabluevfdcontrol \
     enigma2-plugin-systemplugins-inivfdcontrol \
     enigma2-plugin-systemplugins-micomupgrade \
-    enigma2-plugin-systemplugins-misplslcnscan \
     enigma2-plugin-systemplugins-multitranscodingsetup \
     enigma2-plugin-systemplugins-odinm7vfdcontrol \
     enigma2-plugin-systemplugins-remotecontrolcode \
