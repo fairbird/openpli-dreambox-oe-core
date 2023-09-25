@@ -38,6 +38,13 @@ if [ -z "$D" ]; then
 fi
 }
 
+export KCFLAGS = " \
+	-Wno-error=stringop-overflow \
+	-Wno-error=address \
+	-Wno-error=address-of-packed-member \
+	-Wno-error=missing-attributes \
+	"
+
 RDEPENDS:${PN} = "bcmdhd-firmware"
 
 addtask make_scripts after do_prepare_recipe_sysroot before do_compile
