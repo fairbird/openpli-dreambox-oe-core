@@ -29,7 +29,7 @@ index 74f6033e..716aa1ca 100644
  	string	cpu_elf_name, "v7"
  	.align
  
--	.section ".proc.info.init", #alloc, #execinstr
+-	.section ".proc.info.init", #alloc
 +	.section ".proc.info.init", "ax"
  
  	/*
