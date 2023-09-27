@@ -48,5 +48,3 @@ export KCFLAGS = " \
 RDEPENDS:${PN} = "bcmdhd-firmware"
 
 addtask make_scripts after do_prepare_recipe_sysroot before do_compile
-do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
-do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
