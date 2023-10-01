@@ -184,6 +184,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-sundtekcontrolcenter \
 	enigma2-plugin-extensions-ts-sateditor \
 	enigma2-plugin-extensions-vcs \
+	enigma2-plugin-extensions-xmodem \
 	enigma2-plugin-systemplugins-extnumberzap \
 	enigma2-plugin-systemplugins-extrafancontrol \
 	enigma2-plugin-systemplugins-mountmanager \
