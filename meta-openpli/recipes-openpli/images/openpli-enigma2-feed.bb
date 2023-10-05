@@ -70,6 +70,7 @@ OPTIONAL_PACKAGES += " \
 	procps \
 	pv \
 	pyload \
+	python3-future \
 	python3-beautifulsoup4 \
 	python3-js2py \
 	python3-lxml \
