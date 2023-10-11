@@ -81,9 +81,7 @@ RDEPENDS:${PN} = "\
 	${GST_UGLY_RDEPS} \
 	"
 
-SRC_URI = "git://github.com/OpenPLi/servicemp3.git;protocol=https;branch=python3  \
-        file://fix-check-for-distutils.patch \
-"
+SRC_URI = "git://github.com/fairbird/servicemp3.git;protocol=https;branch=python3"
 
 S = "${WORKDIR}/git"
 
