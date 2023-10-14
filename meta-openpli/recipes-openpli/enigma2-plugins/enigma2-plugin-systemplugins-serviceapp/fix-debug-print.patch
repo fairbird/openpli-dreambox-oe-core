@@ -1,0 +1,30 @@
+diff --git a/src/serviceapp/extplayer.h b/src/serviceapp/extplayer.h
+index 5a7694b..c64a8f9 100644
+--- a/src/serviceapp/extplayer.h
++++ b/src/serviceapp/extplayer.h
+@@ -296,8 +296,8 @@ public:
+ 		pCurrentVideo(NULL),
+ 		pCurrentSubtitle(NULL),
+ 		pErrorMessage(NULL),
+-		mMessageMain(eApp, 1),
+-		mMessageThread(this, 1),
++		mMessageMain(eApp, 1, "extplayer"),
++		mMessageThread(this, 1, "extplayer"),
+ 		mTimerDelay(100), // updated play position timer
+ 		mWaitForUpdate(false),
+ 		mWaitForStop(false)
+diff --git a/src/serviceapp/scriptrun.cpp b/src/serviceapp/scriptrun.cpp
+index b81f6ed..a4c2a52 100644
+--- a/src/serviceapp/scriptrun.cpp
++++ b/src/serviceapp/scriptrun.cpp
+@@ -75,8 +75,8 @@ ResolveUrl::ResolveUrl(const std::string &url):
+     m_success(0),
+     mStopped(false),
+     mThreadRunning(false),
+-    mMessageMain(eApp, 1),
+-    mMessageThread(this, 1)
++    mMessageMain(eApp, 1, "scriptrun"),
++    mMessageThread(this, 1, "scriptrun")
+ {
+     eDebug("ResolveUrl::ResolveUrl %s", url.c_str());
+     CONNECT(mMessageThread.recv_msg, ResolveUrl::gotMessage);
