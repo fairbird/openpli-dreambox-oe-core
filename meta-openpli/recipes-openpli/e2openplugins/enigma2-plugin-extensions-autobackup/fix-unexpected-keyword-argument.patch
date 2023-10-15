@@ -1,0 +1,13 @@
+diff --git a/plugin/ui.py b/plugin/ui.py
+index 2046632..3dedd42 100644
+--- a/plugin/ui.py
++++ b/plugin/ui.py
+@@ -132,7 +132,7 @@
+ 		self["key_yellow"] = Button(_("Manual"))
+ 		self["key_blue"] = Button(_("Restore"))
+ 		self["statusbar"] = Label()
+-		self["status"] = ScrollLabel('', showscrollbar=False)
++		self["status"] = ScrollLabel('')
+ 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
+ 		{
+ 			"red": self.cancel,
