@@ -15,6 +15,7 @@ OPTIONAL_PACKAGES += " \
 	astra-sm \
 	autofs \
 	autossh \
+	bitratecalc \
 	ccid \
 	cloudflare-dns \
 	ctorrent \
