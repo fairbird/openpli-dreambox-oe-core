@@ -7,21 +7,20 @@ SRC_URI = "git://github.com/Hains/python3-cjson.git;protocol=https;branch=master
 
 S = "${WORKDIR}/git"
 
-inherit gitpkgv setuptools3
+inherit gitpkgv setuptools-openplugins
 
 PV = "1.2.1+git"
 PKGV = "1.2.1+git${GITPKGV}"
 
-DISTUTILS_INSTALL_ARGS = "\
+SETUPTOOLS_INSTALL_ARGS = "\
     --root=${D} \
     --install-data=${datadir} \
     --install-lib=${libdir}/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/e2icjson \
     "
 
-# Remove "egg-info" files. If datadir or site-packages dir is empty, remove it.
-distutils_do_install:append() {
-	rm -f ${D}${libdir}/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/e2icjson/*.egg-info
-	rmdir -p --ignore-fail-on-non-empty ${D}${datadir} ${D}/${PYTHON_SITEPACKAGES_DIR} || true
+# Remove "egg-info" files.
+setuptools3_do_install:append() {
+	rm -r ${D}${libdir}/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/e2icjson/*.egg-info
 }
 
 include ${PYTHON_PN}-package-split.inc
