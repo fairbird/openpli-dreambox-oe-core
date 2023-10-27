@@ -1,0 +1,3 @@
+GLIBC_64BIT_TIME_FLAGS = ""
+
+INSANE_SKIP = "32bit-time"
