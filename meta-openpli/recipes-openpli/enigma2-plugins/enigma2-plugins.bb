@@ -80,6 +80,7 @@ DEPENDS = " \
 	libcddb \
 	dvdbackup \
 	libtirpc \
+	png-util \
 	"
 
 do_compile() {
