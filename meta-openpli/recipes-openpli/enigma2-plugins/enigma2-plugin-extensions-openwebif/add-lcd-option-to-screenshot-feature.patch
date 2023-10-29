@@ -1,0 +1,97 @@
+Add lcd option to screenshot feature
+
+---
+ OpenWebif/controllers/defaults.py    | 5 +++++
+ OpenWebif/controllers/models/grab.py | 7 +++----
+ OpenWebif/controllers/models/info.py | 6 ++++--
+ 3 files changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/plugin/controllers/defaults.py b/plugin/controllers/defaults.py
+index 0e19d26..fb1cc1c 100644
+--- a/plugin/controllers/defaults.py
++++ b/plugin/controllers/defaults.py
+@@ -8,6 +8,7 @@ import re
+ from Components.Language import language
+ from Components.config import config as comp_config
+ from Components.Network import iNetwork
++from Components.SystemInfo import BoxInfo
+ 
+ try:
+ 	from Tools.Directories import isPluginInstalled
+@@ -47,6 +48,8 @@ MOBILEDEVICE = False
+ 
+ DEBUG_ENABLED = False
+ 
++MODEL = BoxInfo.getItem("model")
++
+ #: get transcoding feature
+ 
+ 
+@@ -271,4 +274,6 @@ ATSEARCHTYPES = getATSearchtypes()
+ 
+ TEXTINPUTSUPPORT = getTextInputSupport()
+ 
++LCD = ("lcd" in MODEL) or ("lcd" in BoxInfo.getItem("displaytype"))
++
+ DEFAULT_RCU = getDefaultRcu()
+diff --git a/plugin/controllers/models/grab.py b/plugin/controllers/models/grab.py
+index f3658d6..9331f2a 100644
+--- a/plugin/controllers/models/grab.py
++++ b/plugin/controllers/models/grab.py
+@@ -21,12 +21,11 @@
+ ##########################################################################
+ 
+ from __future__ import print_function
+-from enigma import eConsoleAppContainer
++from enigma import eConsoleAppContainer, eDBoxLCD
+ from ServiceReference import ServiceReference
+ from Components.config import config
+ from Screens.InfoBar import InfoBar
+ from twisted.web import resource, server
+-from enigma import eDBoxLCD
+ import time
+ from Plugins.Extensions.OpenWebif.controllers.utilities import getUrlArg
+ 
+@@ -65,9 +64,9 @@ class GrabRequest(object):
+ 				if InfoBar.instance.session.pipshown:
+ 					graboptions.append("-i 1")
+ 			elif mode == "lcd":
+-				eDBoxLCD.getInstance().dumpLCD()
++				eDBoxLCD.getInstance().setDump(True)
+ 				fileformat = "png"
+-				command = "cat /tmp/lcdshot.%s" % fileformat
++				command = "cat /tmp/lcd.%s" % fileformat
+ 
+ 		self.filepath = "/tmp/screenshot." + fileformat
+ 		self.container = eConsoleAppContainer()
+diff --git a/plugin/controllers/models/info.py b/plugin/controllers/models/info.py
+index 96d7383..2f991e6 100644
+--- a/plugin/controllers/models/info.py
++++ b/plugin/controllers/models/info.py
+@@ -45,11 +45,13 @@ from Plugins.Extensions.OpenWebif.controllers.defaults import OPENWEBIFVER, TRAN
+ from Plugins.Extensions.OpenWebif.controllers.utilities import removeBad, removeBad2
+ from Plugins.Extensions.OpenWebif.controllers.epg import EPG
+ 
++from ..defaults import LCD
++
+ try:
+ 	from boxbranding import getBoxType, getMachineBuild, getMachineBrand, getMachineName, getImageDistro, getImageVersion, getImageBuild, getOEVersion, getDriverDate
+ 	from enigma import getEnigmaVersionString
+ except:  # nosec # noqa: E722
+-	from Plugins.Extensions.OpenWebif.controllers.models.owibranding import getBoxType, getMachineBuild, getMachineBrand, getMachineName, getImageDistro, getImageVersion, getImageBuild, getOEVersion, getDriverDate, getLcd, getGrabPip
++	from Plugins.Extensions.OpenWebif.controllers.models.owibranding import getBoxType, getMachineBuild, getMachineBrand, getMachineName, getImageDistro, getImageVersion, getImageBuild, getOEVersion, getDriverDate, getGrabPip
+ 
+ 	def getEnigmaVersionString():
+ 		return about.getEnigmaVersionString()
+@@ -210,7 +212,7 @@ def getInfo(session=None, need_fullinfo=False):
+ 	info['boxtype'] = getBoxType()
+ 	info['machinebuild'] = getMachineBuild()
+ 	try:  # temporary due OE-A
+-		info['lcd'] = getLcd()
++		info['lcd'] = int(LCD)
+ 	except:  # nosec # noqa: E722
+ 		info['lcd'] = 0
+ 	try:  # temporary due OE-A
+-- 
+2.39.2
+

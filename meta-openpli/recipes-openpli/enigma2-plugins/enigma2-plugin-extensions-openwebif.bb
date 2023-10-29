@@ -35,6 +35,7 @@ BRANCH="master"
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH} \
 	file://set-packages-explicit.patch \
+	file://add-lcd-option-to-screenshot-feature.patch \
 "
 
 SRC_URI:append_dm8000 = " file://get-rid-of-orgdream-check.patch"
