@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "python3"
 RDEPENDS:${PN} = "python3-shell"
 
-SRC_URI = "https://files.pythonhosted.org/packages/b1/54/d1760a363d0fe345528e37782f6c18123b0e99e8ea755022fd51f1ecd0f9/mutagen-${PV}.tar.gz"
+SRC_URI = "https://files.pythonhosted.org/packages/81/e6/64bc71b74eef4b68e61eb921dcf72dabd9e4ec4af1e11891bbd312ccbb77/mutagen-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "648c9f38b8ef46ffb0d5135524650b87"
-SRC_URI[sha256sum] = "6e5f8ba84836b99fe60be5fb27f84be4ad919bbb6b49caa6ae81e70584b55e58"
+SRC_URI[md5sum] = "aa2d0d73e71c5daa1a730f7b94272357"
+SRC_URI[sha256sum] = "719fadef0a978c31b4cf3c956261b3c58b6948b32023078a2117b1de09f0fc99"
 
 S = "${WORKDIR}/mutagen-${PV}"
 
