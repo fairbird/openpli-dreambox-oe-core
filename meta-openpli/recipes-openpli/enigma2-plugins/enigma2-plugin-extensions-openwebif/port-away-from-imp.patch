@@ -24,8 +24,8 @@ index 1e42b87d..0f481eec 100644
 -				template = imp.load_compiled(module, getViewsPath(path + ".pyc"))
 -			else:
 -				template = imp.load_source(module, getViewsPath(path + ".py"))
-+		if fileExists(getViewsPath(path + ".py")):
-+			spec = spec_from_file_location(module, getViewsPath(path + ".py"))
++		if fileExists(getViewsPath(path + ".pyc")):
++			spec = spec_from_file_location(module, getViewsPath(path + ".pyc"))
 +			template = module_from_spec(spec)
 +			spec.loader.exec_module(template)
  			mod = getattr(template, module, None)
