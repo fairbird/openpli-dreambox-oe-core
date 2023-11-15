@@ -170,6 +170,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-serviceapp \
 	enigma2-plugin-extensions-enigmalight \
 	enigma2-plugin-extensions-fontinfo \
+	enigma2-plugin-extensions-freechannels \
 	enigma2-plugin-extensions-fritzcall \
 	enigma2-plugin-extensions-infobarweather \
 	enigma2-plugin-extensions-managerautofs \
