@@ -9,7 +9,8 @@ SRC_URI = "git://github.com/Taapat/enigma2-plugin-freechannels.git;protocol=http
 
 S = "${WORKDIR}/git"
 
-inherit gitpkgv python3-compileall
+inherit gitpkgv
+require classes/python3-compileall.inc
 
 PV = "py3-git${SRCPV}"
 PKGV = "py3-git${GITPKGV}"
