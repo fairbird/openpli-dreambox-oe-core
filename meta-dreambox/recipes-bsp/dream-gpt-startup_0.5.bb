@@ -20,6 +20,7 @@ do_install () {
     install -m 0755 ${WORKDIR}/STARTUP_1 ${D}/usr/share/startup/STARTUP_1
     install -m 0755 ${WORKDIR}/STARTUP_2 ${D}/usr/share/startup/STARTUP_2
     install -m 0755 ${WORKDIR}/STARTUP_3 ${D}/usr/share/startup/STARTUP_3
+    install -m 0755 ${WORKDIR}/STARTUP_4 ${D}/usr/share/startup/STARTUP_4
     install -m 0755 ${WORKDIR}/STARTUP_RECOVERY ${D}/usr/share/startup/STARTUP_RECOVERY
 }
 
