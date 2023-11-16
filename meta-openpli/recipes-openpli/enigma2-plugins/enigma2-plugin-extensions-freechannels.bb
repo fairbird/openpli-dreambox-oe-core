@@ -12,7 +12,7 @@ S = "${WORKDIR}/git"
 inherit gitpkgv
 require classes/python3-compileall.inc
 
-PV = "py3-git${SRCPV}"
+PV = "py3-git"
 PKGV = "py3-git${GITPKGV}"
 
 inherit setuptools-openplugins
