@@ -81,6 +81,7 @@ DEPENDS = " \
 	dvdbackup \
 	libtirpc \
 	png-util \
+	pydpflib \
 	"
 
 do_compile() {

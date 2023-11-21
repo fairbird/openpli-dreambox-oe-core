@@ -1,0 +1,15 @@
+https://docs.python.org/3/whatsnew/3.11.html
+
+diff --git a/py_device.c b/py_device.c
+index ff13241..1e6d0f3 100644
+--- a/py_device.c
++++ b/py_device.c
+@@ -645,7 +645,7 @@ PyInit_dpflib(void)
+ initdpflib(void)
+ #endif
+ {
+-	Py_TYPE(&DeviceType) = &PyType_Type;
++	Py_SET_TYPE(&DeviceType, &PyType_Type);
+ #if PY_MAJOR_VERSION >= 3
+ 	return PyModule_Create(&moduledef);
+ #else
