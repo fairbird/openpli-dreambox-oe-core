@@ -32,3 +32,4 @@ do_install() {
     cp -rf ${S}/BouquetMakerXtream/usr/lib/enigma2/python/Components/Renderer/* ${D}${libdir}/enigma2/python/Components/Renderer
 }
 
+INSANE_SKIP:${PN} = "installed-vs-shipped"
