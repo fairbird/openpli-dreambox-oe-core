@@ -13,6 +13,14 @@ SRC_URI = "git://github.com/DimitarCC/E2-DarkOS-skin.git;protocol=https;branch=m
 
 S = "${WORKDIR}/git"
 
+# files installed by both enigma2 and enigma2-plugin-skins-e2darkos
+do_install:append() {
+        rm -f ${D}/usr/lib/enigma2/python/Components/Converter/CaidInfo2.py
+        rm -f ${D}/usr/lib/enigma2/python/Components/Converter/CaidInfo2.pyc
+        rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/AudioIcon.py
+        rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/AudioIcon.pyc
+}
+
 do_install() {
 	install -d ${D}${prefix}
 	cp -r ${S}${prefix}/* ${D}${prefix}/
