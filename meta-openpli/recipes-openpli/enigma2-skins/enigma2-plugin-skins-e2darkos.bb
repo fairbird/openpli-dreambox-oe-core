@@ -15,7 +15,6 @@ S = "${WORKDIR}/git"
 
 do_install() {
 	install -d ${D}${prefix}
-	rm -f ${D}${prefix}/usr/lib/enigma2/python/Components/Converter/CaidInfo2.pyc
 	cp -r ${S}${prefix}/* ${D}${prefix}/
 }
 
