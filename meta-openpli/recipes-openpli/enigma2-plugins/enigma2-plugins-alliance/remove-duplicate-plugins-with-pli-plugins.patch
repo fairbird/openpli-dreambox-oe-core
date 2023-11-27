@@ -152,6 +152,13 @@ index d4ff451..47df8be 100644
  
  metadir = $(datadir)/meta
  meta_DATA = index-enigma2-plugins.xml
--- 
-2.40.1
-
+diff --git a/advancedmovieselection/src/Source/MovieDB/Makefile.am b/advancedmovieselection/src/Source/MovieDB/Makefile.am
+index d4ff451..47df8be 100644
+--- a/advancedmovieselection/src/Source/MovieDB/Makefile.am
++++ b/advancedmovieselection/src/Source/MovieDB/Makefile.am
+@@ -1,4 +4,4 @@
+ SUBDIRS = tmdb3
+ installdir = $(libdir)/enigma2/python/Plugins/Extensions/AdvancedMovieSelection/Source/MovieDB
+ 
+-install_PYTHON = __init__.py
++install_PYTHON = *.py

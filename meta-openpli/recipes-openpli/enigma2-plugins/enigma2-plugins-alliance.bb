@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8e37f34d0e40d32ea2bc90ee812c9131"
 
 PACKAGES_DYNAMIC = "enigma2-plugin-(?!oea-).*"
 
-inherit autotools-brokensep gitpkgv ${PYTHON_PN}native pkgconfig gettext ${PYTHON_PN}-dir python3targetconfig
+inherit autotools-brokensep gitpkgv pkgconfig gettext ${PYTHON_PN}targetconfig
 
 SRCREV = "${AUTOREV}"
 PV = "gitr"
 PKGV = "gitr${GITPKGV}"
-PR = "r1"
+PR = "r8"
 
 SRC_URI = "git://github.com/oe-alliance/enigma2-plugins.git;protocol=https;branch=master \
         file://EPGSearch.patch \
@@ -34,23 +34,20 @@ EXTRA_OECONF = " \
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 LDFLAGS += "-ltirpc"
 CXXFLAGS = " -std=c++11"
+ALLOW_EMPTY:${PN} = "1"
 
 RREPLACES:enigma2-plugin-skincomponents-eventlist = "enigma2-plugin-components-eventlist"
 RCONFLICTS:enigma2-plugin-skincomponents-eventlist = "enigma2-plugin-components-eventlist"
 
-CONFFILES:${PN} += "${sysconfdir}/enigma2/movietags"
+CONFFILES:enigma2-plugin-extensions-movietagger += "${sysconfdir}/enigma2/movietags"
 FILES:${PN} += " /usr/share/enigma2 /usr/share/fonts "
 FILES:${PN}-meta = "${datadir}/meta"
-FILES:enigma2-plugin-extensions-bmediacenter += " ${libdir}/enigma2/python/Components/Renderer/LizWatches.pyc ${libdir}/enigma2/python/Components/Converter/LizExtraNumText.pyc"
-FILES:enigma2-plugin-skincomponents-channelselectionshorttitle += " ${libdir}/enigma2/python/Components/Converter/ChannelSelectionShortTitle.pyc"
-FILES:enigma2-plugin-skincomponents-eventlist += " ${libdir}/enigma2/python/Components/Renderer/EventListDisplay.pyc ${libdir}/enigma2/python/Components/Converter/EventList.pyc"
 FILES:enigma2-plugin-skincomponents-eventposition += " ${libdir}/enigma2/python/Components/Converter/EventPosition.pyc"
 FILES:enigma2-plugin-skincomponents-reftopiconname += " ${libdir}/enigma2/python/Components/Converter/RefToPiconName.pyc"
-
-FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Renderer/LizWatches.py /usr/lib/enigma2/python/Components/Converter/LizExtraNumText.py"
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Converter/ChannelSelectionShortTitle.py"
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Renderer/EventListDisplay.py /usr/lib/enigma2/python/Components/Converter/EventList.py"
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Converter/EventPosition.py"
+FILES:${PN}-src += " /usr/lib/enigma2/python/Components/WeatherMSN.py /usr/lib/enigma2/python/Components/Converter/MSNWeather.py /usr/lib/enigma2/python/Components/Sources/MSNWeather.py /usr/lib/enigma2/python/Components/Renderer/MSNWeatherPixmap.py"
 FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Converter/RefToPiconName.py"
 
 
@@ -67,11 +64,11 @@ DEPENDS = "enigma2 \
     ${PYTHON_PN}-mutagen \
     ${PYTHON_PN}-twisted \
     ${PYTHON_PN}-daap \
+    ${PYTHON_PN}-google-api-python-client \
     ${PYTHON_PN}-httplib2 \
     ${PYTHON_PN}-youtube-dl \
     ${PYTHON_PN}-yt-dlp \
     ${PYTHON_PN}-six-native \
-    dvdbackup \
     libav \
     libshowiframe \
     libcddb \
@@ -146,3 +143,5 @@ exit 0
 
 do_package_qa() {
 }
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
