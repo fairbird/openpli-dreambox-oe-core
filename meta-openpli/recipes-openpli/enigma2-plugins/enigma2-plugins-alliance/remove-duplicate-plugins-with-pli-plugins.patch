@@ -1,8 +1,8 @@
 diff --git a/Makefile.am b/Makefile.am
-index 90eef3742f..068d1199fe 100644
+index d4ff451..47df8be 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -2,33 +2,13 @@ ACLOCAL_AMFLAGS = -I m4
+@@ -2,128 +2,40 @@ ACLOCAL_AMFLAGS = -I m4
  
  SUBDIRS = \
  	advhdmi \
@@ -33,10 +33,6 @@ index 90eef3742f..068d1199fe 100644
  	emission \
  	eparted \
 -	epgrefresh \
- 	eurotictv \
- 	eventlist \
- 	eventposition \
-@@ -12,63 +12,21 @@ SUBDIRS = \
  	eurotictv \
  	eventlist \
  	eventposition \
@@ -99,11 +95,6 @@ index 90eef3742f..068d1199fe 100644
 -	weathercomponenthandler \
  	webadmin \
  	webbouqueteditor \
- 	webcamviewer \
-@@ -72,39 +36,13 @@ SUBDIRS = \
- 	weathercomponenthandler \
- 	webadmin \
- 	webbouqueteditor \
 -	webcamviewer \
 -	werbezapper \
  	zaphistorybrowser \
@@ -140,7 +131,7 @@ index 90eef3742f..068d1199fe 100644
  if TPM
  SUBDIRS += \
  	mytube \
-@@ -116,13 +53,13 @@ SUBDIRS += \
+@@ -134,19 +46,13 @@ SUBDIRS += \
  	pluginsort 
  endif
  
@@ -161,3 +152,6 @@ index 90eef3742f..068d1199fe 100644
  
  metadir = $(datadir)/meta
  meta_DATA = index-enigma2-plugins.xml
+-- 
+2.40.1
+
