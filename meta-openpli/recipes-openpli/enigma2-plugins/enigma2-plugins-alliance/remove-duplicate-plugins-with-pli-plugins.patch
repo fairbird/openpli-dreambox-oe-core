@@ -36,7 +36,7 @@ index 90eef3742f..068d1199fe 100644
  	eurotictv \
  	eventlist \
  	eventposition \
-@@ -12,64 +12,22 @@ SUBDIRS = \
+@@ -12,63 +12,21 @@ SUBDIRS = \
  	eurotictv \
  	eventlist \
  	eventposition \
@@ -76,7 +76,6 @@ index 90eef3742f..068d1199fe 100644
  	quickbutton \
 -	reconstructapsc \
  	reftopiconname \
- 	remotetimer \
  	rsdownloader \
  	seriesplugin \
 -	setpasswd \
@@ -141,7 +140,7 @@ index 90eef3742f..068d1199fe 100644
  if TPM
  SUBDIRS += \
  	mytube \
-@@ -115,13 +53,7 @@ SUBDIRS += \
+@@ -116,13 +53,13 @@ SUBDIRS += \
  	pluginsort 
  endif
  
@@ -151,6 +150,12 @@ index 90eef3742f..068d1199fe 100644
 -SUBDIRS += networkbrowser epgsearch
 -endif
 -
+ if REMOTETIMER2
+ SUBDIRS += 	remotetimer2
+ else
+ SUBDIRS += 	remotetimer
+ endif
+ 
 -SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport
 +SUBDIRS += tetris Series2Folder epgexport
  
