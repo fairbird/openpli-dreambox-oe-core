@@ -138,7 +138,7 @@ OPTIONAL_BSP_ENIGMA2_PACKAGES ?= ""
 ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
 	dvb-usb-drivers-meta \
-	${@bb.utils.contains("MACHINE_FEATURES", "bwlcd96 bwlcd128 bwlcd140 bwlcd255 colorlcd220 colorlcd390 colorlcd400", "enigma2-display-skins", "", d)} \
+	enigma2-display-skins \
 	enigma2-plugin-extensions-arabicsavior \
 	enigma2-plugin-extensions-backupflash \
 	enigma2-plugin-extensions-keyadder \
