@@ -64,7 +64,6 @@ DEPENDS = "enigma2 \
     ${PYTHON_PN}-mutagen \
     ${PYTHON_PN}-twisted \
     ${PYTHON_PN}-daap \
-    ${PYTHON_PN}-google-api-python-client \
     ${PYTHON_PN}-httplib2 \
     ${PYTHON_PN}-youtube-dl \
     ${PYTHON_PN}-yt-dlp \
