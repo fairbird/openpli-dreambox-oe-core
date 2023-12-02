@@ -4,7 +4,7 @@ inherit cmake
 inherit gitpkgv
 
 DESCRIPTION = "OScam-cak7 ${PV} Open Source Softcam"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/enigma2-plugin-softcams-oscam:"
@@ -12,7 +12,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/enigma2-plugin-softcams-oscam:"
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_ORIGIN ?= "git://repo.or.cz/oscam.git;protocol=git"
+SRC_ORIGIN ?= "git://repo.or.cz/oscam.git;protocol=https;branch=master"
 SRC_URI = "${SRC_ORIGIN} \
         file://cak7.patch \
 	"
