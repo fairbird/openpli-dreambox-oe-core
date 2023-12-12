@@ -12,10 +12,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/enigma2-plugin-softcams-oscam:"
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_ORIGIN ?= "git://repo.or.cz/oscam.git;protocol=https;branch=master"
-SRC_URI = "${SRC_ORIGIN} \
-        file://cak7.patch \
-	"
+SRC_URI = "git://repo.or.cz/oscam.git;protocol=git;branch=master \
+           file://cak7.patch \
+           "
 
 DEPENDS = "libusb openssl"
 RRECOMMENDS:${PN} += "enigma2-plugin-extensions-oscamstatus"
