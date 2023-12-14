@@ -1,7 +1,7 @@
 SUMMARY = "Hardware drivers for Dreambox"
 SECTION = "base"
 LICENSE = "CLOSED"
-DEPENDS += "virtual/kernel dreambox-dvb-modules-systemd"
+DEPENDS += "virtual/kernel"
 PRIORITY = "required"
 
 inherit opendreambox-precompiled-binary4
@@ -21,7 +21,9 @@ RDEPENDS:${PN}-lcd = "${PN}-fp ${PN}-stb-core"
 RREPLACES:${PN}-lcd = "${PN} (< 4.9-20201130r0-r0.0)"
 RBREAKS:${PN}-lcd = "${PN} (< 4.9-20201130r0-r0.0)"
 
-RRECOMMENDS:${PN} = "${PN}-firmware dreambox-dvb-modules-systemd"
+RRECOMMENDS:${PN} = "${PN}-firmware"
+
+FILES:${PN}-src = "${sysconfdir}/modules-load.d/03-${PRECOMPILED_NAME}-lcd.conf"
 
 FILES:${PN} = "${sysconfdir}/modules-load.d/10-${PRECOMPILED_NAME}.conf \
                /lib/modules/${DM_LOCALVERSION}/extra/"
@@ -34,7 +36,7 @@ FILES:${PN}-fp = "${sysconfdir}/modules-load.d/*-${PRECOMPILED_NAME}-fp.conf \
                    /lib/modules/${DM_LOCALVERSION}/extra/fp/fp-dev.ko"
 
 ALLOW_EMPTY:${PN}-lcd = "1"
-FILES:${PN}-lcd = "${sysconfdir}/modules-load.d/*-${PRECOMPILED_NAME}-lcd.conf \
+FILES:${PN}-lcd = " \
                    /lib/modules/${DM_LOCALVERSION}/extra/lcd/lcd.ko \
                    /lib/modules/${DM_LOCALVERSION}/extra/lcd.ko"
 

@@ -50,7 +50,6 @@ RDEPENDS:${PN}:append:bcm7252s = " \
 RDEPENDS:${PN}:append:bcm73625 = " \
     ${NANDRDEPENDS_recovery} \
 "
-
 RDEPENDS:${PN}:append:meson64 = " \
     ${EMMCRDEPENDS_recovery} \
     ${PN}-fbscaled \
@@ -73,7 +72,6 @@ RDEPENDS:flash-scripts:append:bcm7252s = " \
 RDEPENDS:flash-scripts:append:bcm73625 = " \
     ${NANDRDEPENDS_flash-scripts} \
 "
-
 RDEPENDS:flash-scripts:append:meson64 = " \
     ${EMMCRDEPENDS_flash-scripts} \
     mkbootimg \
@@ -94,7 +92,6 @@ FILES:${PN}-fbscaled = " \
     ${sysconfdir}/init.d/fbscaled \
     ${sbindir}/fbscaled \
 "
-
 FILES:flash-scripts = " \
     ${sbindir}/flash-fsbl \
     ${sbindir}/flash-rescue \
