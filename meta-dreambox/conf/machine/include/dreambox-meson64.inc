@@ -10,6 +10,7 @@ DVBSKYPROVIDER = "kernel"
 GLIBC_EXTRA_OECONF = "--with-tls --with-__thread"
 TARGET_ARCH = "aarch64"
 DEFAULTTUNE = "aarch64"
+OLDEST_KERNEL="4.9"
 
 include conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/soc-family.inc
