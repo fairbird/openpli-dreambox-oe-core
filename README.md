@@ -43,9 +43,12 @@ sudo dpkg-reconfigure dash
 ↳ Select "NO" when asked "Install dash as /bin/sh?"
 ```
 # To build image:
+Clone the source (only one time) ...
 ```
 git clone https://github.com/fairbird/openpli-dreambox-oe-core.git
-
+```
+Then every time need to build image ...
+```
 cd openpli-dreambox-oe-core
 
 ./build_image.sh
