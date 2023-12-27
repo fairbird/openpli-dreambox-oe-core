@@ -7,6 +7,3 @@
 [submodule "openembedded-core"]
 	path = openembedded-core
 	url = git://git.openembedded.org/openembedded-core
-[submodule "meta-qt6"]
-	path = meta-qt6
-	url = git://code.qt.io/yocto/meta-qt6.git
