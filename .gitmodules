@@ -7,3 +7,6 @@
 [submodule "openembedded-core"]
 	path = openembedded-core
 	url = git://git.openembedded.org/openembedded-core
+[submodule "meta-qt5.15"]
+	path = meta-qt5.15
+	url = https://github.com/oe-mirrors/meta-qt5.15.git
