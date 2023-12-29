@@ -12,8 +12,6 @@ PV = "git"
 PKGV = "git${GITPKGV}"
 PR = "r0"
 
-MACHINEBUILD = "${MACHINE}"
-
 do_configure[nostamp] = "1"
 
 BRANCH="master"
