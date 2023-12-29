@@ -17,23 +17,53 @@ inherit python3-dir module gitpkgv deploy
 EXTRA_OEMAKE = "KSRC=${STAGING_KERNEL_BUILDDIR}"
 
 do_configure:prepend(){
+    if [ "${MACHINE}" = "dm7080" ]; then
+        DRIVERSDATE="20190502"
+    elif [ "${MACHINE}" = "dm820" ]; then
+        DRIVERSDATE="20181018"
+    elif [ "${MACHINE}" = "dm520" ]; then
+        DRIVERSDATE="20180222"
+    elif [ "${MACHINE}" = "dm800" ]; then
+        DRIVERSDATE="20131228"
+    elif [ "${MACHINE}" = "dm8000" ]; then
+        DRIVERSDATE="20140604"
+    elif [ "${MACHINE}" = "dm7020hd" ] || [ "${MACHINE}" = "dm7020hdv2" ]; then
+        DRIVERSDATE="20161019"
+    elif [ "${MACHINE}" = "dm800se" ]; then
+        DRIVERSDATE="20151201"
+    elif [ "${MACHINE}" = "dm800sev2" ]; then
+        DRIVERSDATE="20151201"
+    elif [ "${MACHINE}" = "dm900" ]; then
+        DRIVERSDATE="20200226"
+    elif [ "${MACHINE}" = "dm920" ]; then
+        DRIVERSDATE="20200321"
+    elif [ "${MACHINE}" = "dreamone" ]; then
+        DRIVERSDATE="20210518"
+    elif [ "${MACHINE}" = "dreamtwo" ]; then
+        DRIVERSDATE="20210518"
+    else
+        DRIVERSDATE='N/A'
+    fi
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@MACHINE@|${MACHINE}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@MACHINEBUILD@|${MACHINEBUILD}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISPLAY_MODEL@|${MACHINE_NAME}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@BOX_BRAND@|${BRAND_OEM}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISPLAY_BRAND@|${MACHINE_BRAND}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@STB_PLATFORM@|${STB_PLATFORM}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@FRIENDLY_FAMILY@|${FRIENDLY_FAMILY}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@IMAGE_VERSION@|${IMAGE_VERSION}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@BUILD_VERSION@|${BUILD_VERSION}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@LANGUAGE@|${LANGUAGE}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DEVELOPER_NAME@|${DEVELOPER_NAME}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISTRO_FEED_URI@|${DISTRO_FEED_URI}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISTRO_NAME@|${DISTRO_NAME}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISPLAY_DISTRO@|${DISPLAY_DISTRO}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@OE_VERSION@|${OE_VER}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@KERNELVERSION@|${KERNEL_VERSION}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@PREFERRED_VERSION_python@|${PYTHON_BASEVERSION}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@PREFERRED_PROVIDER_virtual/enigma2-mediaservice@|${MEDIASERVICE}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_MULTILIB@|${HAVE_MULTILIB}|g"
-	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DEFAULTTUNE@|${DEFAULTTUNE}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DEFAULTTUNE@|${TUNE_PKGARCH}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@SOC_FAMILY@|${SOC_FAMILY}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@BLINDSCAN_BINARY@|${BLINDSCAN_BINARY}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@RCTYPE@|${RCTYPE}|g"
@@ -61,6 +91,7 @@ do_configure:prepend(){
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_RCA@|${HAVE_RCA}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_AV_JACK@|${HAVE_AV_JACK}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_SCART@|${HAVE_SCART}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_SCART_YUV@|${HAVE_SCART_YUV}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_DVI@|${HAVE_DVI}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_SVIDEO@|${HAVE_SVIDEO}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@HAVE_HDMI_IN_HD@|${HAVE_HDMI_IN_HD}|g"
@@ -75,6 +106,7 @@ do_configure:prepend(){
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@BUILD_VERSION@|${BUILD_VERSION}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DEVELOPER_BUILD_VERSION@|${DEVELOPER_BUILD_VERSION}|g"
 	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DISTRO_TYPE@|${DISTRO_TYPE}|g"
+	find ${S}/ -type f -name "*.c" | xargs -r -L1 sed -i "s|@DRIVERSDATE@|${DRIVERSDATE}|g"
 }
 
 
@@ -89,6 +121,8 @@ do_install[vardepsexclude] += "DATE"
 print_md5hash() {
 	printf "checksum=%s\n" $(md5sum "$1" | awk '{print $1}')
 }
+
+do_install[nostamp] = "1"
 
 do_install() {
 	install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/enigma
@@ -112,4 +146,4 @@ do_deploy() {
 	install -m 0644 ${S}/enigma-${MACHINE}.txt ${DEPLOY_DIR_IMAGE}/
 }
 
-addtask deploy before do_build after do_install
+addtask deploy before do_package after do_install
