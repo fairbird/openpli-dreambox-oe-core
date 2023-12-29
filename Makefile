@@ -54,7 +54,8 @@ BBLAYERS ?= \
 	$(CURDIR)/openembedded-core/meta \
 	$(CURDIR)/meta-openpli \
 	$(CURDIR)/meta-dreambox \
-	$(CURDIR)/meta-qt5.15
+	$(CURDIR)/meta-qt5.15 \
+	$(CURDIR)/meta-images
 
 CONFFILES = \
 	$(TOPDIR)/env.source \
