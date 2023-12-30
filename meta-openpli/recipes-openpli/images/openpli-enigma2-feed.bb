@@ -39,6 +39,7 @@ OPTIONAL_PACKAGES += " \
 	hddtemp \
 	hdparm \
 	htop \
+	flip \
 	inadyn-mt \
 	inetutils \
 	iperf3 \
