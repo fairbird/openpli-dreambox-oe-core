@@ -99,10 +99,21 @@ IMAGE_INSTALL = " \
 	mtd-utils-ubifs \
 	${ENIGMA2_PLUGINS} \
 	${ROOTFS_PKGMANAGE} \
+	${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "${NORMAL_IMAGE}", d)} \
 	${@bb.utils.contains('MACHINE_FEATURES', 'emmc', 'bzip2 rsync', '', d)} \
 	${@bb.utils.contains("TARGET_ARCH", "arm", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("TARGET_ARCH", "aarch64", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "nowifi", "", "network-usb-drivers-meta", d)} \	
+	"
+
+NORMAL_IMAGE = "\
+	ntfs-3g \
+	unrar \
+	iproute2 \
+	flip \
+	rtmpdump \
+	zip \
+	ofgwrite \
 	"
 
 GETEXTRA = "${@bb.utils.contains('MACHINE', 'cube', '', 'edid-decode', d)}"
