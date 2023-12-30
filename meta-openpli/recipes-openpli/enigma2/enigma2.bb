@@ -26,9 +26,9 @@ RDEPENDS:${PN} = " \
 	alsa-conf \
 	oe-alliance-branding \
 	enigma2-fonts \
+	enigma-info \
 	enigma2-timezones \
 	enigma2-remote \
-	enigma2-module \
 	ethtool \
 	glibc-gconv-iso8859-15 \
 	${PYTHON_RDEPS} \
