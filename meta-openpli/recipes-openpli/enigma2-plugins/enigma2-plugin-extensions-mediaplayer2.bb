@@ -6,7 +6,7 @@ LICENSE = "Proprietary"
 require conf/license/license-gplv2.inc
 require classes/python3-compileall.inc
 
-inherit gitpkgv setuptools3-openplugins gettext
+inherit gitpkgv setuptools-openplugins gettext
 
 RDEPENDS:${PN} = "${PYTHON_PN}-xmlrpc ${PYTHON_PN}-compression ${PYTHON_PN}-codecs ${PYTHON_PN}-difflib unrar enigma2-plugin-extensions-subssupport"
 
