@@ -178,6 +178,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-fritzcall \
 	enigma2-plugin-extensions-infobarweather \
 	enigma2-plugin-extensions-managerautofs \
+	enigma2-plugin-extensions-mediaplayer2 \
 	enigma2-plugin-extensions-modifyplifullhd \
 	enigma2-plugin-extensions-moviemanager \
 	enigma2-plugin-extensions-openmultiboot \
