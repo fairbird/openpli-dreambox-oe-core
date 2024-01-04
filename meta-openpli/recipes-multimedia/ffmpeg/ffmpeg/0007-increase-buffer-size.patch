@@ -1,5 +1,3 @@
-diff --git a/libavformat/aviobuf.c b/libavformat/aviobuf.c
-index b20b1a6..6110305 100644
 --- a/libavformat/aviobuf.c
 +++ b/libavformat/aviobuf.c
 @@ -34,7 +34,7 @@

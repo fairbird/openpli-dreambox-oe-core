@@ -1,13 +1,17 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " \
-           file://02-fix-hls.patch \
-           file://03-buffer-size.patch \
-           file://04-aac.patch \
-           file://05-fix-mpegts.patch \
-           file://06-allow_to_choose_rtmp_impl_at_runtime.patch \
-           file://07-fix-edit-list-parsing.patch \
-           file://08-hls-replace-key-uri.patch \
+SRC_URI += "file://0002-fix-mpegts.patch \
+            file://0003-allow-to-choose-rtmp-impl-at-runtime.patch \
+            file://0004-hls-replace-key-uri.patch \
+            file://0005-mips64-cpu-detection.patch \
+            file://0006-optimize-aac.patch \
+            file://0007-increase-buffer-size.patch \
+            file://0008-recheck-discard-flags.patch \
+            file://0009-ffmpeg-fix-edit-list-parsing.patch \
+            file://0011-rtsp.patch \
+            file://0012-dxva2.patch \
+            file://0013-add-av_stream_get_first_dts-for-chromium.patch \
+            file://ffmpeg_ac4.patch \
            "
 
 PACKAGECONFIG:append = " gpl libbluray libfreetype librtmp libxml2 openssl x264"
