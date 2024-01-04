@@ -1,7 +1,7 @@
-From e45fe9ca3d7605bc1b18227c246004503d912c29 Mon Sep 17 00:00:00 2001
+From 21c11eb93247b453eedad74fc5a77de7fd268e30 Mon Sep 17 00:00:00 2001
 From: Captain <captain.onboard@web.de>
-Date: Wed, 15 Jul 2020 18:02:31 +0200
-Subject: [PATCH] stb-support-20
+Date: Wed, 3 Jan 2024 21:16:03 +0100
+Subject: [PATCH] stb-support-21
 
 ---
  xbmc/addons/addoninfo/AddonInfoBuilder.cpp    |   12 +
@@ -10,7 +10,7 @@ Subject: [PATCH] stb-support-20
  .../VideoShaders/VideoFilterShaderGLES.cpp    |    5 +
  xbmc/platform/linux/input/CMakeLists.txt      |    8 +-
  xbmc/platform/linux/input/Keymap.h            |   36 +
- .../linux/input/LinuxInputDevices.cpp         | 1584 +++++++++++++++++
+ .../linux/input/LinuxInputDevices.cpp         | 1593 +++++++++++++++++
  xbmc/platform/linux/input/LinuxInputDevices.h |  125 ++
  xbmc/system_gl.h                              |    3 +
  xbmc/utils/CMakeLists.txt                     |    5 +
@@ -21,7 +21,7 @@ Subject: [PATCH] stb-support-20
  xbmc/windowing/egl/CMakeLists.txt             |   62 +
  xbmc/windowing/egl/EGLNativeType.h            |  152 ++
  xbmc/windowing/egl/EGLNativeTypeDags.cpp      |  337 ++++
- xbmc/windowing/egl/EGLNativeTypeDags.h        |  199 +++
+ xbmc/windowing/egl/EGLNativeTypeDags.h        |  199 ++
  xbmc/windowing/egl/EGLNativeTypeDreambox.cpp  |  196 ++
  xbmc/windowing/egl/EGLNativeTypeDreambox.h    |   61 +
  xbmc/windowing/egl/EGLNativeTypeEdision.cpp   |  174 ++
@@ -47,7 +47,7 @@ Subject: [PATCH] stb-support-20
  xbmc/windowing/egl/WinSystemSTBContext.h      |   43 +
  xbmc/windowing/egl/WinSystemstb.cpp           |  547 ++++++
  xbmc/windowing/egl/WinSystemstb.h             |   79 +
- 43 files changed, 6338 insertions(+), 4 deletions(-)
+ 43 files changed, 6347 insertions(+), 4 deletions(-)
  create mode 100644 xbmc/platform/linux/input/Keymap.h
  create mode 100644 xbmc/platform/linux/input/LinuxInputDevices.cpp
  create mode 100644 xbmc/platform/linux/input/LinuxInputDevices.h
@@ -114,28 +114,28 @@ index 6550057795..69a91be280 100644
      "freebsd",
  #elif defined(TARGET_LINUX)
 diff --git a/xbmc/cores/VideoPlayer/VideoRenderers/CMakeLists.txt b/xbmc/cores/VideoPlayer/VideoRenderers/CMakeLists.txt
-index 540b1e56dc..604efb1e67 100644
+index bc367887af..b318914f27 100644
 --- a/xbmc/cores/VideoPlayer/VideoRenderers/CMakeLists.txt
 +++ b/xbmc/cores/VideoPlayer/VideoRenderers/CMakeLists.txt
-@@ -47,6 +47,7 @@ if(OPENGLES_FOUND AND ("android" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "ios" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "tvos" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "gbm" IN_LIST CORE_PLATFORM_NAME_LC OR
-+                       "stb" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "x11" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "wayland" IN_LIST CORE_PLATFORM_NAME_LC))
+@@ -47,6 +47,7 @@ if(TARGET OpenGL::GLES AND ("android" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "ios" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "tvos" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "gbm" IN_LIST CORE_PLATFORM_NAME_LC OR
++                            "stb" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "x11" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "wayland" IN_LIST CORE_PLATFORM_NAME_LC))
    list(APPEND SOURCES LinuxRendererGLES.cpp
 diff --git a/xbmc/cores/VideoPlayer/VideoRenderers/VideoShaders/CMakeLists.txt b/xbmc/cores/VideoPlayer/VideoRenderers/VideoShaders/CMakeLists.txt
-index 6b71389043..ef7a12f114 100644
+index 5bb02199e7..0456ad5e81 100644
 --- a/xbmc/cores/VideoPlayer/VideoRenderers/VideoShaders/CMakeLists.txt
 +++ b/xbmc/cores/VideoPlayer/VideoRenderers/VideoShaders/CMakeLists.txt
-@@ -30,6 +30,7 @@ if(OPENGLES_FOUND AND ("android" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "ios" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "tvos" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "gbm" IN_LIST CORE_PLATFORM_NAME_LC OR
-+                       "stb" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "x11" IN_LIST CORE_PLATFORM_NAME_LC OR
-                        "wayland" IN_LIST CORE_PLATFORM_NAME_LC))
+@@ -34,6 +34,7 @@ if(TARGET OpenGL::GLES AND ("android" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "ios" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "tvos" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "gbm" IN_LIST CORE_PLATFORM_NAME_LC OR
++                            "stb" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "x11" IN_LIST CORE_PLATFORM_NAME_LC OR
+                             "wayland" IN_LIST CORE_PLATFORM_NAME_LC))
    list(APPEND SOURCES VideoFilterShaderGLES.cpp
 diff --git a/xbmc/cores/VideoPlayer/VideoRenderers/VideoShaders/VideoFilterShaderGLES.cpp b/xbmc/cores/VideoPlayer/VideoRenderers/VideoShaders/VideoFilterShaderGLES.cpp
 index 4f6ffc0061..4e2680e4ea 100644
@@ -161,10 +161,10 @@ index 4f6ffc0061..4e2680e4ea 100644
    CLog::Log(LOGDEBUG, "GLES: using scaling method: {}", m_method);
    CLog::Log(LOGDEBUG, "GLES: using shader: {}", shadername);
 diff --git a/xbmc/platform/linux/input/CMakeLists.txt b/xbmc/platform/linux/input/CMakeLists.txt
-index ebb2ccd585..3def6644af 100644
+index 0859158c9c..5d88e2dc4e 100644
 --- a/xbmc/platform/linux/input/CMakeLists.txt
 +++ b/xbmc/platform/linux/input/CMakeLists.txt
-@@ -6,7 +6,7 @@ if(LIRCCLIENT_FOUND)
+@@ -6,7 +6,7 @@ if(TARGET LIRCCLIENT::LIRCCLIENT)
    list(APPEND HEADERS LIRC.h)
  endif()
  
@@ -230,10 +230,10 @@ index 0000000000..dda1758558
 +};
 diff --git a/xbmc/platform/linux/input/LinuxInputDevices.cpp b/xbmc/platform/linux/input/LinuxInputDevices.cpp
 new file mode 100644
-index 0000000000..cc70a8a832
+index 0000000000..3cc2882d60
 --- /dev/null
 +++ b/xbmc/platform/linux/input/LinuxInputDevices.cpp
-@@ -0,0 +1,1584 @@
+@@ -0,0 +1,1593 @@
 +/*
 + *  Portions copied from DirectFB:
 + *      Copyright (C) 2001-2009  The world wide DirectFB Open Source Community (directfb.org)
@@ -279,6 +279,14 @@ index 0000000000..cc70a8a832
 +#endif
 +
 +#include <linux/input.h>
++
++#ifndef input_event_sec
++#define input_event_sec time.tv_sec
++#endif
++
++#ifndef input_event_usec
++#define input_event_usec time.tv_usec
++#endif
 +
 +#if defined(HAVE_LIBUDEV)
 +#include <libudev.h>
@@ -1017,10 +1025,11 @@ index 0000000000..cc70a8a832
 +/*
 + * Process stored multi-touch events
 + */
++
 +bool CLinuxInputDevice::mtSynEvent(const struct input_event& levt)
 +{
 +  float size = 10.0f;
-+  int64_t nanotime = levt.time.tv_sec * 1000000000LL + levt.time.tv_usec * 1000LL;
++  int64_t nanotime = levt.input_event_sec * 1000000000LL + levt.input_event_usec * 1000LL;
 +
 +  for (int ptr=0; ptr < CGenericTouchInputHandler::MAX_POINTERS; ptr++)
 +  {
@@ -1199,13 +1208,14 @@ index 0000000000..cc70a8a832
 +    struct input_event event;
 +    memset(&event, 0, sizeof(event));
 +
-+    gettimeofday(&event.time, NULL);
++    struct timeval tv;
++    gettimeofday(&tv, NULL);
 +    event.type  = EV_REP;
 +    event.code  = REP_DELAY;
 +    event.value = 0;
 +    write(fd, &event, sizeof(event));
 +
-+    gettimeofday(&event.time, NULL);
++    gettimeofday(&tv, NULL);
 +    event.type  = EV_REP;
 +    event.code  = REP_PERIOD;
 +    event.value = 0;
@@ -1817,7 +1827,6 @@ index 0000000000..cc70a8a832
 +
 +}
 +*/
-+//#endif
 diff --git a/xbmc/platform/linux/input/LinuxInputDevices.h b/xbmc/platform/linux/input/LinuxInputDevices.h
 new file mode 100644
 index 0000000000..23794ab925
@@ -1950,13 +1959,13 @@ index 0000000000..23794ab925
 +
 +#endif /* LINUXINPUTDEVICES_H_ */
 diff --git a/xbmc/system_gl.h b/xbmc/system_gl.h
-index 04c4d55c66..5179f8d636 100644
+index ff7ead6b42..18446f79c9 100644
 --- a/xbmc/system_gl.h
 +++ b/xbmc/system_gl.h
-@@ -27,6 +27,9 @@
- #if defined(TARGET_DARWIN)
+@@ -33,6 +33,9 @@
  #include <OpenGLES/ES2/gl.h>
  #include <OpenGLES/ES2/glext.h>
+ #endif
 +#elif defined(TARGET_V3DNXPL)
 +#include <GLES3/gl31.h>
 +#include <GLES2/gl2ext.h>
@@ -1964,10 +1973,10 @@ index 04c4d55c66..5179f8d636 100644
  #include <GLES2/gl2.h>
  #include <GLES2/gl2ext.h>
 diff --git a/xbmc/utils/CMakeLists.txt b/xbmc/utils/CMakeLists.txt
-index 4f6c12dd29..d0d8f652a0 100644
+index 68c5c666af..db4c73d9a8 100644
 --- a/xbmc/utils/CMakeLists.txt
 +++ b/xbmc/utils/CMakeLists.txt
-@@ -181,6 +181,11 @@ set(HEADERS ActorProtocol.h
+@@ -185,6 +185,11 @@ set(HEADERS ActorProtocol.h
              XMLUtils.h
              XTimeUtils.h)
  
@@ -1976,7 +1985,7 @@ index 4f6c12dd29..d0d8f652a0 100644
 +  list(APPEND HEADERS DreamboxUtils.h)
 +endif()
 +
- if(XSLT_FOUND)
+ if(TARGET XSLT::XSLT)
    list(APPEND SOURCES XSLTUtils.cpp)
    list(APPEND HEADERS XSLTUtils.h)
 diff --git a/xbmc/utils/DreamboxUtils.cpp b/xbmc/utils/DreamboxUtils.cpp
@@ -2459,7 +2468,7 @@ index 0000000000..48987ada45
 +};
 diff --git a/xbmc/windowing/egl/EGLNativeTypeDags.cpp b/xbmc/windowing/egl/EGLNativeTypeDags.cpp
 new file mode 100644
-index 0000000000..f6021ef20e
+index 0000000000..fd67de6c1f
 --- /dev/null
 +++ b/xbmc/windowing/egl/EGLNativeTypeDags.cpp
 @@ -0,0 +1,337 @@
@@ -3007,7 +3016,7 @@ index 0000000000..9d2176a942
 +};
 diff --git a/xbmc/windowing/egl/EGLNativeTypeDreambox.cpp b/xbmc/windowing/egl/EGLNativeTypeDreambox.cpp
 new file mode 100644
-index 0000000000..3ae4254c04
+index 0000000000..9873942e94
 --- /dev/null
 +++ b/xbmc/windowing/egl/EGLNativeTypeDreambox.cpp
 @@ -0,0 +1,196 @@
@@ -6812,3 +6821,6 @@ index 0000000000..c2d176c017
 +  std::unique_ptr<OPTIONALS::CLircContainer, OPTIONALS::delete_CLircContainer> m_lirc;
 +  std::unique_ptr<CLibInputHandler> m_libinput;
 +};
+-- 
+2.43.0.windows.1
+
