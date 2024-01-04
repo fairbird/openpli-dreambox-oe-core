@@ -112,13 +112,17 @@ IMAGE_INSTALL = " \
 GETEXTRA = "edid-decode"
 
 NORMAL_IMAGE = "\
-	ntfs-3g \
-	unrar \
-	iproute2 \
 	flip \
-	rtmpdump \
-	zip \
+	iproute2 \
+	ntfs-3g \
 	ofgwrite \
+	p7zip \
+	python3-future \
+	python3-pexpect \
+	python3-pillow \
+	rtmpdump \
+	unrar \
+	zip \
 	"
 
 export IMAGE_BASENAME = "openpli-enigma2"
