@@ -100,11 +100,15 @@ IMAGE_INSTALL = " \
 	${ENIGMA2_PLUGINS} \
 	${ROOTFS_PKGMANAGE} \
 	${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "${NORMAL_IMAGE}", d)} \
-	${@bb.utils.contains('MACHINE_FEATURES', 'emmc', 'bzip2 rsync', '', d)} \
 	${@bb.utils.contains("TARGET_ARCH", "arm", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("TARGET_ARCH", "aarch64", "${GETEXTRA}", "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "nowifi", "", "network-usb-drivers-meta", d)} \	
+	${@bb.utils.contains("MACHINE_FEATURES", "nowifi", "", "network-usb-drivers-meta", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "emmc", "dosfstools mtools e2fsprogs-resize2fs partitions-by-name bzip2 rsync" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "fastboot", "dosfstools mtools android-tools" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "recovery", "recovery" , "", d)} \
 	"
+
+GETEXTRA = "edid-decode"
 
 NORMAL_IMAGE = "\
 	ntfs-3g \
@@ -115,8 +119,6 @@ NORMAL_IMAGE = "\
 	zip \
 	ofgwrite \
 	"
-
-GETEXTRA = "${@bb.utils.contains('MACHINE', 'cube', '', 'edid-decode', d)}"
 
 export IMAGE_BASENAME = "openpli-enigma2"
 
