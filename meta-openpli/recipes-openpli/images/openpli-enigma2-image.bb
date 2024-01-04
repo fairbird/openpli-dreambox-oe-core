@@ -75,6 +75,7 @@ IMAGE_INSTALL = " \
 	openpli-bootlogo \
 	openssh-sftp-server \
 	opkg \
+	p7zip \
 	packagegroup-base \
 	packagegroup-core-boot \
 	parted \
@@ -116,7 +117,6 @@ NORMAL_IMAGE = "\
 	iproute2 \
 	ntfs-3g \
 	ofgwrite \
-	p7zip \
 	python3-future \
 	python3-pexpect \
 	python3-pillow \
