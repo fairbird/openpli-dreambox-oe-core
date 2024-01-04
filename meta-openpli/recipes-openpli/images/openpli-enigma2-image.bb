@@ -87,6 +87,7 @@ IMAGE_INSTALL = " \
 	sdparm \
 	stb-hwclock \
 	settings-autorestore \
+	tar \
 	tuxbox-common \
 	tzdata \
 	util-linux-ionice \
