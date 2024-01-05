@@ -121,6 +121,7 @@ NORMAL_IMAGE = "\
 	python3-pexpect \
 	python3-pillow \
 	rtmpdump \
+	shellinabox \
 	unrar \
 	zip \
 	"
