@@ -20,7 +20,7 @@
 # Short-Description: SABnzbd+ binary newsgrabber
 ### END INIT INFO
 
-DAEMON=/usr/lib/sabnzbd/SABnzbd.py
+DAEMON=/usr/lib/sabnzbd3/SABnzbd.py
 SETTINGS=/etc/enigma2/sabnzbd.conf
 
 ([ -x $DAEMON ] && [ -r $SETTINGS ]) || exit 0
@@ -48,7 +48,7 @@ check_retval() {
 
 is_running() {
 	# returns 0 when running, 1 otherwise
-	PID="$(pgrep -f -n "python $DAEMON $DEFOPTS.*")"
+	PID="$(pgrep -f -n "$PYTHONEXEC $DAEMON $DEFOPTS.*")"
 	RET=$?
 	[ $RET -gt 1 ] && exit 1 || return $RET
 }
@@ -75,10 +75,8 @@ load_settings() {
 start_sab() {
 	load_settings || exit 0
 	if ! is_running; then
-  SABNZBD_START="start-stop-daemon --start --quiet --exec python ${DAEMON} -- ${OPTIONS}"
 		log_daemon_msg "Starting $DESC"
-		#start-stop-daemon --quiet --chuid $USER --start --exec "python $DAEMON" -- $OPTIONS
-  $SABNZBD_START
+		start-stop-daemon --quiet --chuid $USER --start --exec $DAEMON -- $OPTIONS
 		check_retval
 		# create a pidfile; we don't use it but some monitoring app likes to have one
 		[ -w $(dirname $PIDFILE) ] && \
@@ -112,7 +110,6 @@ case "$1" in
 	;;
 	force-reload|restart)
 		stop_sab
-  sleep 1
 		start_sab
 	;;
 	status)
