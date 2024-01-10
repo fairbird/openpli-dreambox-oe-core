@@ -84,6 +84,7 @@ OPTIONAL_PACKAGES += " \
 	python3-tqdm \
 	python3-yenc \
 	python3-youtube-dl \
+	python3-aws-iot-device-sdk-python \
 	rsync \
 	rtl-sdr \
 	rtorrent \
