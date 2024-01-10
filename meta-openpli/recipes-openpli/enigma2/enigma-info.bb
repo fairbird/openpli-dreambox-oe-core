@@ -169,8 +169,11 @@ fi
 # description: Update the enigma.info file with runtime data
 
 INFOFILE=/usr/lib/enigma.info
-PROC_MODEL=/proc/stb/info/hwmodel
+PROC_MODEL=/proc/stb/info/model
+PROC_HWMODEL=/proc/stb/info/hwmodel
+PROC_BOXTYPE=/proc/stb/info/boxtype
 PROC_TYPE=/proc/stb/info/type
+SFX6008WIFI=/sys/devices/platform/soc/f9890000.ehci/usb1/1-1/idProduct
 
 #
 # bail out if the info file does not exist
@@ -182,12 +185,12 @@ fi
 #
 # fetch the boxes' reported hardware model
 #
-hwmodel() { if [ -f $PROC_MODEL ]; then value=$(head -n 1 $PROC_MODEL); fi; echo $value; }
+hwmodel() { value=""; if [ -f $PROC_BOXTYPE ]; then value=$(head -n 1 $PROC_BOXTYPE); elif [ -f $PROC_HWMODEL ]; then value=$(head -n 1 $PROC_HWMODEL); elif [ -f $PROC_MODEL ]; then value=$(head -n 1 $PROC_MODEL); fi; echo $value | tr '[:upper:]' '[:lower:]'; }
 
 #
 # fetch the boxes' reported stb type
 #
-hwtype() { prefix=$1; if [ -f $PROC_TYPE ]; then value=$(head -n 1 $PROC_TYPE); fi; echo $value; }
+hwtype() { prefix=$1; value=""; if [ -f $PROC_TYPE ]; then value=$(head -n 1 $PROC_TYPE); fi; echo $value; }
 
 #
 # check if $1 starts with $2
