@@ -12,7 +12,7 @@ inherit gitpkgv
 PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 
-inherit setuptools-openplugins
+inherit setuptools3-openplugins
 
 RRECOMMENDS:${PN} = "mtd-utils mtd-utils-ubifs kernel-module-nandsim openmultiboot"
 

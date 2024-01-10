@@ -15,4 +15,4 @@ require classes/python3-compileall.inc
 PV = "py3-git"
 PKGV = "py3-git${GITPKGV}"
 
-inherit setuptools-openplugins
+inherit setuptools3-openplugins

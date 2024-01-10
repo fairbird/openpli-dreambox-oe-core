@@ -1,3 +1,3 @@
 require openplugins.inc
 
-inherit setuptools-openplugins
+inherit setuptools3-openplugins

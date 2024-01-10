@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/Hains/python3-cjson.git;protocol=https;branch=master
 
 S = "${WORKDIR}/git"
 
-inherit gitpkgv setuptools-openplugins
+inherit gitpkgv setuptools3-openplugins
 
 PV = "1.2.1+git"
 PKGV = "1.2.1+git${GITPKGV}"

@@ -12,4 +12,4 @@ SRC_URI = "git://github.com/ims21/RefreshBouquet.git;protocol=https;branch=maste
 
 S="${WORKDIR}/git"
 
-inherit setuptools-openplugins
+inherit setuptools3-openplugins

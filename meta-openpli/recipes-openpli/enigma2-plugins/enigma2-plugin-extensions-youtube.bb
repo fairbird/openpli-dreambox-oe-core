@@ -15,7 +15,7 @@ inherit gitpkgv
 PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 
-inherit setuptools-openplugins
+inherit setuptools3-openplugins
 
 RDEPENDS:${PN} = " \
 	python3-core \

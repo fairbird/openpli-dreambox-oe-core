@@ -12,4 +12,4 @@ SRC_URI = "git://github.com/ims21/FontInfo.git;protocol=https;branch=master"
 
 S="${WORKDIR}/git"
 
-inherit setuptools-openplugins
+inherit setuptools3-openplugins

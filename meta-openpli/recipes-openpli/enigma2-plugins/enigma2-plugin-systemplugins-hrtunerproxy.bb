@@ -5,7 +5,7 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a23a74b3f4caf9616230789d94217acb"
 require classes/python3-compileall.inc
 
-inherit gitpkgv setuptools-openplugins
+inherit gitpkgv setuptools3-openplugins
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"

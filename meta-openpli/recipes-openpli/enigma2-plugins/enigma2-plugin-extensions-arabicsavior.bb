@@ -6,7 +6,7 @@ require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/fairbird/ArabicSavior;protocol=https;branch=main"
 
-inherit gitpkgv setuptools-openplugins
+inherit gitpkgv setuptools3-openplugins
 
 S = "${WORKDIR}/git"
 

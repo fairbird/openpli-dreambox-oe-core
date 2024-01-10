@@ -6,7 +6,7 @@ require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/fairbird/NewVirtualKeyBoard;protocol=https;branch=main"
 
-inherit gitpkgv setuptools-openplugins gettext
+inherit gitpkgv setuptools3-openplugins gettext
 
 S = "${WORKDIR}/git"
 
