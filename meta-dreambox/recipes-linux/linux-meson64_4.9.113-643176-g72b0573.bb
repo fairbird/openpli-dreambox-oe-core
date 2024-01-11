@@ -12,6 +12,7 @@ SRC_URI = "https://source.mynonpublic.com/dreambox/${BPN}-v${PV}.tar.xz \
            file://dmmaml_cec2.patch \
            file://ge2d.patch \
            file://hdmi_tx_spdif.patch \	 
+           file://support-for-gcc12.patch \
            file://support-for-gcc13.patch \
            file://defconfig \
            file://fix-multiple-defs-yyloc_v1.patch \
@@ -19,7 +20,7 @@ SRC_URI = "https://source.mynonpublic.com/dreambox/${BPN}-v${PV}.tar.xz \
            file://move-default-dialect-to-SMB3.patch \
            file://hide_sdcardfs_info.patch \
            file://use_address-of_operator_on_section_symbols.patch \
-           file://0008-fix-build-binutils241.patch \
+           file://fix-build-with-binutils-2.41.patch \
 "
 
 SRC_URI[md5sum] = "2b77df9bf64f825925172790c54f8ead"
@@ -59,7 +60,7 @@ export KCFLAGS = "-Wno-error=misleading-indentation \
                   -Wno-error=address \
                   -Wno-error=unused-const-variable \
                   -Wno-error=enum-int-mismatch \
-                  -Wno-error=dangling-pointer \
+                  -Wno-error=dangling-pointer \   
 "
 
 KERNEL_FLASH_ARGS = "-c '${CMDLINE}'"

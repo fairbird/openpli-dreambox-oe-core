@@ -10,7 +10,7 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-image = "kernel-devicetree flash-scripts"
 
 KERNEL_FLASH_ARGS ?= ""
 
-pkg_postinst_ontarget:${KERNEL_PACKAGE_NAME}-image () {
+pkg_postinst:${KERNEL_PACKAGE_NAME}-image () {
 #!/bin/sh
 [ -n "$D" ] || flash-kernel ${KERNEL_FLASH_ARGS} /boot/${KERNEL_IMAGETYPE}-${KERNEL_VERSION}
 }

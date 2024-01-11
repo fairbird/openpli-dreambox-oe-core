@@ -61,6 +61,7 @@ RDEPENDS:${PN}:append:meson64 = " \
 RDEPENDS:flash-scripts = " \
     coreutils-realpath \
     curl \
+    tpm-ca \
 "
 RDEPENDS:flash-scripts:append:bcm7435 = " \
     ${EMMCRDEPENDS_flash-scripts} \

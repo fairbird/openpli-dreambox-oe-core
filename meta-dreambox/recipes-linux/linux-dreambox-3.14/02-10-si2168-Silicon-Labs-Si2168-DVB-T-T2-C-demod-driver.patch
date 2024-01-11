@@ -2,7 +2,7 @@ diff --git a/drivers/media/dvb-frontends/Kconfig b/drivers/media/dvb-frontends/K
 index 025fc54..1469d44 100644
 --- a/drivers/media/dvb-frontends/Kconfig
 +++ b/drivers/media/dvb-frontends/Kconfig
-@@ -446,6 +446,14 @@ config DVB_RTL2832
+@@ -446,5 +446,13 @@ config DVB_RTL2832
  	help
  	  Say Y when you want to support this frontend.
  
@@ -16,7 +16,6 @@ index 025fc54..1469d44 100644
 +
  comment "DVB-C (cable) frontends"
  	depends on DVB_CORE
- 
 diff --git a/drivers/media/dvb-frontends/Makefile b/drivers/media/dvb-frontends/Makefile
 index 282aba2..dda0bee 100644
 --- a/drivers/media/dvb-frontends/Makefile

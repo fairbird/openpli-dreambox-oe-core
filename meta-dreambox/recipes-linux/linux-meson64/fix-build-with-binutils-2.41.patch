@@ -1,26 +1,22 @@
-diff --git a/arch/arm/boot/compressed/head.S b/arch/arm/boot/compressed/head.S
-index 066b0348..5cf964f0 100644
 --- a/arch/arm/boot/compressed/head.S
 +++ b/arch/arm/boot/compressed/head.S
-@@ -114,7 +114,7 @@
+@@ -112,7 +112,7 @@
  #endif
  		.endm
  
 -		.section ".start", #alloc, #execinstr
-+		.section ".start", "ax"
++		.section .start, "ax"
  /*
   * sort out different calling conventions
   */
-diff --git a/arch/arm/mm/proc-v7.S b/arch/arm/mm/proc-v7.S
-index 74f6033e..716aa1ca 100644
 --- a/arch/arm/mm/proc-v7.S
 +++ b/arch/arm/mm/proc-v7.S
-@@ -404,7 +404,7 @@ __v7_setup_stack:
+@@ -504,7 +504,7 @@ __v7_setup_stack:
  	string	cpu_elf_name, "v7"
  	.align
  
 -	.section ".proc.info.init", #alloc
-+	.section ".proc.info.init", "ax"
++	.section .proc.info.init, "a"
  
  	/*
  	 * Standard v7 proc info content

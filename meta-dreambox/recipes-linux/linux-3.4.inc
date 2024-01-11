@@ -8,8 +8,6 @@ inherit kernel siteinfo
 CMDLINE ?= ""
 LOCALVERSION ?= ""
 
-export KCFLAGS += " -O1"
-
 #kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
 kernel_conf_variable() {
     CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_$1[ =]/d;"

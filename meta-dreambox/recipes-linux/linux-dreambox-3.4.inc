@@ -34,7 +34,7 @@ python populate_packages:prepend() {
 }
 
 # Do not use update-alternatives!
-pkg_postinst_ontarget:kernel-image () {
+pkg_postinst:kernel-image () {
 }
 pkg_postrm:kernel-image () {
 }

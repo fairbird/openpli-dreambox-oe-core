@@ -29,9 +29,9 @@ SRC_URI = " \
     file://0005-uaccess-dont-mark-register-as-const.patch \
     file://0006-makefile-silence-packed-not-aligned-warn.patch \
     file://0007-overlayfs.patch \
-    file://0008-fix-build-binutils241.patch \
     file://move-default-dialect-to-SMB3.patch \
     file://fix-multiple-defs-yyloc.patch \
+    file://fix-build-with-binutils-2.41.patch \
 "
 
 SRC_URI[kernel.md5sum] = "b621207b3f6ecbb67db18b13258f8ea8"

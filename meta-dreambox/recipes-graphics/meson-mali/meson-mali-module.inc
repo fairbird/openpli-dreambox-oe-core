@@ -9,10 +9,6 @@ SRC_URI:append = " file://0001-${GPU_MODEL}-${GPU_VERSION}-compile-fix-for-dream
 GPU_MODEL = "${@d.getVar('BPN').split('-')[-2]}"
 GPU_VERSION = "${@d.getVar('BPN').split('-')[-1]}"
 
-export KCFLAGS = "-Wno-error=maybe-uninitialized \
-                  -Wno-error=array-bounds \
-"
-
 EXTRA_OEMAKE += " \
     ARCH=${ARCH} \
     CONFIG_MALI_MIDGARD=m \
@@ -22,6 +18,10 @@ EXTRA_OEMAKE += " \
     DEPMOD=echo \
     INSTALL_MOD_PATH=${D} \
     M=${S}/${GPU_MODEL}/${GPU_VERSION}/kernel/drivers/gpu/arm/midgard \
+"
+
+export KCFLAGS = "-Wno-error=array-bounds \
+                  -Wno-error=maybe-uninitialized \
 "
 
 EXTRA_CFLAGS = "-DCONFIG_MALI_PLATFORM_DEVICETREE -DCONFIG_MALI_MIDGARD_DVFS -DCONFIG_MALI_BACKEND=gpu"
@@ -40,10 +40,6 @@ do_install() {
     chmod 0644 ${D}${sysconfdir}/modules-load.d/00-${BPN}.conf
 }
 
-do_make_scripts() {
-	:
-}
-
 FILES:${PN} = "${sysconfdir}/modules-load.d \
                /lib/modules/${KERNEL_VERSION}/extra"
 
@@ -58,3 +54,7 @@ COMPATIBLE_MACHINE = "^(meson64)$"
 addtask make_scripts after do_prepare_recipe_sysroot before do_compile
 do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
 do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
+
+do_make_scripts() {
+	:
+}

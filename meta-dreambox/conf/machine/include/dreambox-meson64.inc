@@ -73,6 +73,9 @@ PREFERRED_VERSION_linux-${SOC_FAMILY} = "4.9.%"
 
 MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc gobject-introspection-data"
 
+# Add "MACHINEBUILD" override for recipes
+MACHINEOVERRIDES =. "${@['', '${MACHINEBUILD}:']['${MACHINEBUILD}' != '']}"
+
 PACKAGECONFIG:ffmpeg:append = "libv4l2"
 EXTRA_OECONF:append:pn-enigma2 = " --with-alsa  --with-alsacard=hw:0:0  --with-alsamixer=Master --with-fbdev=/dev/fb0 --with-lcddev=/dev/null "
 EXTRA_OECONF:append:pn-tuxtxt-enigma2 = " --with-fbdev=/dev/fb0"
