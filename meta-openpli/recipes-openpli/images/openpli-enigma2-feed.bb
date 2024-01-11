@@ -16,6 +16,7 @@ OPTIONAL_PACKAGES += " \
 	autofs \
 	autossh \
 	bitratecalc \
+	btrfs-tools \
 	ccid \
 	cloudflare-dns \
 	ctorrent \
@@ -31,6 +32,7 @@ OPTIONAL_PACKAGES += " \
 	evtest \
 	exfatprogs \
 	exteplayer3 \
+	f2fs-tools \
 	gdb \
 	gerbera \
 	google-dns \
