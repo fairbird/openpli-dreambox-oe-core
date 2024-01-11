@@ -18,6 +18,9 @@ RREPLACES:${PN} = "enigma-kernel-module"
 
 SSTATE_SKIP_CREATION = "1"
 
+inherit linux-kernel-base
+KERNEL_VERSION = "${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${PKGDATA_DIR}/kernel-depmod/kernel-abiversion')}"
+
 PV = "${DATE}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 PR[vardepsexclude] = "DATE"
