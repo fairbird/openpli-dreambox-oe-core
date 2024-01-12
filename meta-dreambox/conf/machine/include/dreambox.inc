@@ -33,7 +33,6 @@ MACHINE_EXTRA_RRECOMMENDS += " \
     kernel-module-snd-pcm-oss \
     ${@bb.utils.contains('MACHINE_FEATURES', 'v3d', 'libvc5dream', '',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'oem-info', 'oem-info', '',d)} \
-    dreambox-boot-progress \
     "
     
 MACHINE_FEATURES += "dreambox alsa usbhost 3dtv switchoff tpm blindscan-dvbs boxmodel feature1 feature2"
