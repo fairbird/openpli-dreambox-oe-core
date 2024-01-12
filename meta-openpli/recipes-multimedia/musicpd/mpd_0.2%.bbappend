@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
 			file://mpd.init \
 "
 
-SRCREV = "a6024f476a83423a9a30f0a25b57955e204773b3"
+SRCREV = "d3335f9947e21555c5c6b3b25bbea1ae2d1704f9"
 
 PV = "0.23.14+git"
 PKGV = "0.23.14+git${GITPKGV}"
