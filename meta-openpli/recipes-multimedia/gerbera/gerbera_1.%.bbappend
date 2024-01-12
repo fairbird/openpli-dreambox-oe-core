@@ -6,10 +6,10 @@ SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
            file://init \
 "
 
-SRCREV = "a033b74f21db3c547f16440729ce32d862155141"
+SRCREV = "2f26e656b16fb86132f27d1f8d47c6055041430d"
 
-PV = "1.12.pre2+git"
-PKGV = "1.12.pre2+git${GITPKGV}"
+PV = "2.0.0+git"
+PKGV = "2.0.0+git${GITPKGV}"
 
 inherit update-rc.d gitpkgv
 
