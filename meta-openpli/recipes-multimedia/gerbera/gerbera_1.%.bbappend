@@ -1,6 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
+           file://fix-build-against-fmt-10-2-2.patch \
            file://config.xml \
            file://init \
 "

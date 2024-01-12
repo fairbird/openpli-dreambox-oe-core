@@ -1,0 +1,31 @@
+
+home/hains/openpli-dm920-python3/build/tmp/work/cortexa15hf-neon-vfpv4-oe-linux-gnueabi/gerbera/1.12.pre2+git/git/src/config/client_config.cc:234:35:
+ error: 'join' is not a member of 'fmt'
+|   234 |     return fmt::format("{}", fmt::join(myFlags, " | "));
+
+https://github.com/fmtlib/fmt/commit/50565f9853926501bd1c9bda07c6a98f4d940691
+
+diff --git a/src/database/sql_format.h b/src/database/sql_format.h
+index 9fbb5d8e..0cf73054 100644
+--- a/src/database/sql_format.h
++++ b/src/database/sql_format.h
+@@ -26,6 +26,7 @@
+ #define __SQL_FORMAT_H__
+ 
+ #include <fmt/format.h>
++#include <fmt/ranges.h>
+ 
+ struct SQLIdentifier {
+     SQLIdentifier(const std::string& name, char quote_begin, char quote_end)
+diff --git a/src/util/logger.h b/src/util/logger.h
+index 00e01630..1205dce1 100644
+--- a/src/util/logger.h
++++ b/src/util/logger.h
+@@ -36,6 +36,7 @@
+ 
+ #include <array>
+ #include <fmt/format.h>
++#include <fmt/ranges.h>
+ #include <map>
+ #include <spdlog/spdlog.h>
+ #include <type_traits>
