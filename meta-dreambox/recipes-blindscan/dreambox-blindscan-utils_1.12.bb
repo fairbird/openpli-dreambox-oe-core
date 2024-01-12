@@ -4,8 +4,6 @@ require conf/license/license-close.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "^(dm500hd|dm800se|dm500hdv2|dm520|dm800sev2|dm820|dm900|dm920|dm7020hd|dm7080|dm8000|dreamone|dreamtwo)$"
-
 PROVIDES += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
 RPROVIDES:${PN} += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
 
