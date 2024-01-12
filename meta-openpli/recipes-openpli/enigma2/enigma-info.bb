@@ -18,8 +18,8 @@ RREPLACES:${PN} = "enigma-kernel-module"
 
 SSTATE_SKIP_CREATION = "1"
 
-inherit linux-kernel-base
-KERNEL_VERSION = "${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${PKGDATA_DIR}/kernel-depmod/kernel-abiversion')}"
+inherit ${PYTHON_PN}-dir ${PYTHON_PN}native linux-kernel-base
+KERNEL_VERSION = "${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
 
 PV = "${DATE}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -27,11 +27,7 @@ PR[vardepsexclude] = "DATE"
 
 PACKAGES = "${PN}"
 
-inherit ${PYTHON_PN}-dir ${PYTHON_PN}native
-
 INFOFILE = "${libdir}/enigma.info"
-
-export KERNEL_VERSION = "${@oe.utils.read_file('${PKGDATA_DIR}/kernel-depmod/kernel-abiversion')}"
 
 do_install[nostamp] = "1"
 
