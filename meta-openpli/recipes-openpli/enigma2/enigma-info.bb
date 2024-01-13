@@ -216,10 +216,5 @@ MACHINE=`grep "machine=" $TMPFILE | cut -d '=' -f 2`
 type=`hwtype`
 model=`hwmodel`
 
-# re-add the checksum
-MD5SUM=`md5sum $TMPFILE | cut -d ' ' -f 1`
-echo "checksum=$MD5SUM" >> $TMPFILE
-mv $TMPFILE $INFOFILE
-
 exit 0
 }
