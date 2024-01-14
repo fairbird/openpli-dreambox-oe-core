@@ -32,8 +32,8 @@ index 19979cf7..ed27dfe1 100644
 +enable-freetype = 1
 +enable-lcms = 1
 +enable-jpeg2000 = 1
-+disable-webp = 1
-+disable-webpmux = 1
++enable-webp = 1
++enable-webpmux = 1
 +disable-imagequant = 1
 -- 
 2.17.1
