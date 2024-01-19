@@ -7,6 +7,7 @@ require conf/license/license-gplv2.inc
 
 SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=python3;protocol=https \
 	file://no-need-to-check-depends.patch \
+	file://fix-iAVSwitch-import.patch \
 "
 
 S = "${WORKDIR}/git"
