@@ -11,14 +11,19 @@ diff --git a/EPGImport/plugin.py b/EPGImport/plugin.py
 index 00d7f63..94171f5 100644
 --- a/EPGImport/plugin.py
 +++ b/EPGImport/plugin.py
-@@ -12,7 +12,6 @@
- import time
+@@ -12,12 +12,6 @@
  
  import enigma
--from boxbranding import getImageDistro
+ 
+-try:
+-    from Components.SystemInfo import BoxInfo
+-    IMAGEDISTRO = BoxInfo.getItem("distro")
+-except:
+-    from boxbranding import getImageDistro
+-    IMAGEDISTRO = getImageDistro()
+ 
  # Config
  from Components.ActionMap import ActionMap
- from Components.Button import Button
 @@ -55,7 +55,7 @@ def calcDefaultStarttime():
  
  #Set default configuration
@@ -28,17 +33,14 @@ index 00d7f63..94171f5 100644
  config.plugins.epgimport.runboot = ConfigSelection(default="4", choices=[
  		("1", _("always")),
  		("2", _("only manual boot")),
-@@ -59,13 +57,7 @@ config.plugins.epgimport.runboot = ConfigSelection(default="4", choices=[
+@@ -59,10 +57,7 @@ config.plugins.epgimport.runboot = ConfigSelection(default="4", choices=[
  		])
  config.plugins.epgimport.runboot_restart = ConfigYesNo(default=False)
  config.plugins.epgimport.runboot_day = ConfigYesNo(default=False)
 -config.plugins.epgimport.wakeupsleep = ConfigEnableDisable(default=False)
  config.plugins.epgimport.wakeup = ConfigClock(default=calcDefaultStarttime())
 -# Different default in OpenATV:
--if getImageDistro() in ("openatv"):
--	config.plugins.epgimport.showinplugins = ConfigYesNo(default=False)
--else:
--	config.plugins.epgimport.showinplugins = ConfigYesNo(default=True)
+-config.plugins.epgimport.showinplugins = ConfigYesNo(default=IMAGEDISTRO != "openatv")
  config.plugins.epgimport.showinextensions = ConfigYesNo(default=True)
  config.plugins.epgimport.deepstandby = ConfigSelection(default="skip", choices=[
  		("wakeup", _("wake up and import")),
@@ -51,17 +53,6 @@ index 00d7f63..94171f5 100644
  config.plugins.epgimport.deepstandby_afterimport = NoSave(ConfigYesNo(default=False))
  config.plugins.epgimport.parse_autotimer = ConfigYesNo(default=False)
  config.plugins.epgimport.import_onlybouquet = ConfigYesNo(default=False)
-@@ -85,10 +77,6 @@ config.plugins.extra_epgimport = ConfigSubsection()
- config.plugins.extra_epgimport.last_import = ConfigText(default="none")
- config.plugins.extra_epgimport.day_import = ConfigSubDict()
- 
--# Forcibly set these options to false in OpenATV:
--#if getImageDistro() in ("openatv"):
--#	config.plugins.epgimport.showinmainmenu.value=False
--
- for i in range(7):
- 	config.plugins.extra_epgimport.day_import[i] = ConfigEnableDisable(default=True)
- 
 @@ -115,6 +103,7 @@ CONFIG_PATH = '/etc/epgimport'
  # Global variable
  autoStartTimer = None
@@ -80,18 +71,6 @@ index 00d7f63..94171f5 100644
  		self.cfg_longDescDays = getConfigListEntry(_("Load long descriptions up to X days"), self.EPG.longDescDays)
  		self.cfg_parse_autotimer = getConfigListEntry(_("Run AutoTimer after import"), self.EPG.parse_autotimer)
  		self.cfg_clear_oldepg = getConfigListEntry(_("Clearing current EPG before import"), config.plugins.epgimport.clear_oldepg)
-@@ -399,10 +387,7 @@ class EPGImportConfig(ConfigListScreen, Screen):
- 			if self.EPG.runboot.value == "1" or self.EPG.runboot.value == "2":
- 				list.append(self.cfg_runboot_restart)
- 		list.append(self.cfg_showinextensions)
--		list.append(self.cfg_showinplugins)
--		# Only show these settings if not using OpenATV:
--#		if getImageDistro() not in ("openatv"):
--#			list.append(self.cfg_showinmainmenu)
-+		list.append(self.cfg_showinmainmenu)
- 		list.append(self.cfg_import_onlybouquet)
- 		list.append(self.cfg_import_onlyiptv)
- 		if hasattr(enigma.eEPGCache, 'flushEPG'):
 @@ -759,11 +744,11 @@ def start_import(session, **kwargs):
  def main(session, **kwargs):
  	session.openWithCallback(doneConfiguring, EPGImportConfig)
@@ -153,17 +132,17 @@ index 00d7f63..94171f5 100644
 -
 -
 -def epgmenu(menuid, **kwargs):
--	if getImageDistro() in ("openvix", "openbh", "ventonsupport", "egami", "openhdf", "opendroid"):
+-	if IMAGEDISTRO in ("openvix", "openbh", "ventonsupport", "egami", "openhdf", "opendroid"):
 -		if menuid == "epg":
 -			return [(_("EPG-Importer"), main, "epgimporter", 1002)]
 -		else:
 -			return []
--	elif getImageDistro() in ("openatv"):
+-	elif IMAGEDISTRO in ("openatv"):
 -		if menuid == "epg":
 -			return [(_("EPG-Importer"), main, "epgimporter", None)]
 -		else:
 -			return []
--	elif getImageDistro() in ("teamblue"):
+-	elif IMAGEDISTRO in ("teamblue"):
 -		if menuid == "epg_menu":
 -			return [(_("EPG-Importer"), main, "epgimporter", 95)]
 -		else:
