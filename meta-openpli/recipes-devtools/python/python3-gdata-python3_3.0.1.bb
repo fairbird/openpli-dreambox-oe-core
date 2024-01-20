@@ -15,7 +15,6 @@ SRC_URI += "file://0001-fix-compile-warning.patch"
 deltask do_populate_sysroot
 
 RDEPENDS:${PN} = " \
-    python3-distutils \
     python3-json \
     python3-netserver \
     python3-stringold \
