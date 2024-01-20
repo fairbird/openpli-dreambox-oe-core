@@ -12,7 +12,6 @@ PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=python3 \
 	file://Remove-unused-codes.patch;apply=yes \
-	file://use-setuptools-instead-of-distutils.patch \
 "
 
 S = "${WORKDIR}/git/src"
