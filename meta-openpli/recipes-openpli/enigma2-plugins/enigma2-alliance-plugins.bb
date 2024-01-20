@@ -53,7 +53,7 @@ PROVIDES = "\
     "
 
 DEPENDS = "\
-    ${@bb.utils.contains('MACHINE_FEATURES', 'transcoding', 'virtual/transtreamproxy' , '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'transcoding', 'virtual-transtreamproxy' , '', d)} \
     ${PYTHON_PN}-dnspython ${PYTHON_PN}-beautifulsoup4 ${PYTHON_PN}-lxml ${PYTHON_PN}-simplejson ${PYTHON_PN}-pyamf ${PYTHON_PN}-icalendar ${PYTHON_PN}-pyusb ${PYTHON_PN}-six-native \
     rtmpdump \
     minidlna \
