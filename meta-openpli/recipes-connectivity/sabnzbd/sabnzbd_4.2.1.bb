@@ -17,7 +17,7 @@ RDEPENDS:${PN} = "\
     ${PYTHON_PN}-jaraco.functools ${PYTHON_PN}-jaraco.collections ${PYTHON_PN}-jaraco.text ${PYTHON_PN}-jaraco.classes ${PYTHON_PN}-sabctools \
     "
 
-RRECOMMENDS:${PN} = "par2cmdline unrar p7zip-full"
+RRECOMMENDS:${PN} = "par2cmdline unrar"
 
 SRC_URI = "https://github.com/sabnzbd/sabnzbd/releases/download/${PV}/SABnzbd-${PV}-src.tar.gz \
     file://sabnzbd \
