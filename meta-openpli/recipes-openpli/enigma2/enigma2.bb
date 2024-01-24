@@ -159,7 +159,6 @@ RDEPENDS:enigma2-plugin-systemplugins-softwaremanager = "python3-twisted"
 DESCRIPTION:append:enigma2-plugin-systemplugins-wirelesslan = "helps you configuring your wireless lan"
 RDEPENDS:enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-tools python3-wifi"
 DESCRIPTION:append:enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
-RDEPENDS:enigma2-plugin-systemplugins-fsblupdater = "python3-setuptools"
 # Note that these tools lack recipes
 RDEPENDS:enigma2-plugin-extensions-dvdburn = "dvd+rw-tools dvdauthor mjpegtools cdrkit ${DEMUXTOOL}"
 RDEPENDS:enigma2-plugin-systemplugins-hotplug = "hotplug-e2-helper"
