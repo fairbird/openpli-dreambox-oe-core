@@ -2,7 +2,7 @@ SUMMARY = "CherryPy is a pythonic, object-oriented HTTP framework"
 HOMEPAGE = "https://cheroot.cherrypy.org/"
 SECTION = "devel/python"
 LICENSE = "LGPL-3.0-only"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a8cbc5da4e6892b15a972a0b18622b2b"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a5ad8f932e1fd3841133f20d3ffedda1"
 DEPENDS += "python3-setuptools-scm-native"
 RDEPENDS:${PN} = "python3-jaraco.collections python3-jaraco.classes python3-jaraco.text python3-jaraco.functools python3-zc.lockfile python3-tempora"
 
