@@ -2,10 +2,10 @@ SUMMARY = "yEnc Module for Python3 modified for SABnzbd"
 HOMEPAGE = "https://github.com/sabnzbd/sabnzbd-yenc"
 SECTION = "devel/python"
 LICENSE = "LGPL-3.0-only"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=68dcf3baa84062cbac5a5b06aa406816"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=f82454b2c2160caf008468993f9146b8"
 
-SRC_URI[md5sum] = "a741209df7dd80247a40143b6df91149"
-SRC_URI[sha256sum] = "dfaa0bdd01752a9cfde0d349a8f4e178b04b1cf9c1bc018b287961192cd2bb90"
+SRC_URI[md5sum] = "60382280a30724558ef967cb6eaad37f"
+SRC_URI[sha256sum] = "f3d65f2a70bcb13ef1beae0ff6bb3b69adae18497035f8cd4ffe4e5af1aa2f41"
 
 inherit pypi setuptools3
 
