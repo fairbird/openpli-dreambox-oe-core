@@ -33,6 +33,7 @@ OPTIONAL_PACKAGES += " \
 	exfatprogs \
 	exteplayer3 \
 	f2fs-tools \
+	fio \
 	gdb \
 	gerbera \
 	google-dns \
