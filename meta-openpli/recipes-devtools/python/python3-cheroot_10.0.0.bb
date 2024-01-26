@@ -2,7 +2,7 @@ SUMMARY = "Cheroot is the high-performance, pure-Python HTTP server used by Cher
 HOMEPAGE = "https://cheroot.cherrypy.org/"
 SECTION = "devel/python"
 LICENSE = "LGPL-3.0-only"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=53e455722e37d6acfe57bf370663edb5"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=c4e17b64eab9c128f786f44f0dfb570a"
 DEPENDS += "python3-setuptools-scm-native python3-setuptools-scm-git-archive-native"
 
 SRC_URI[md5sum] = "be96fa052c54892240f916fbb06cc571"
