@@ -24,13 +24,14 @@ RCONFLICTS:${PN} = "enigma2-plugin-pli-softcamsetup"
 
 RDEPENDS:${PN} = " \
 	alsa-conf \
-	oe-alliance-branding \
+	enigma2-dhcp-wait \
 	enigma2-fonts \
 	enigma-info \
 	enigma2-timezones \
 	enigma2-remote \
 	ethtool \
 	glibc-gconv-iso8859-15 \
+	oe-alliance-branding \
 	${PYTHON_RDEPS} \
 	"
 
