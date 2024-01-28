@@ -1,3 +1,5 @@
+require conf/license/license-gplv2.inc
+
 BRANCH ?= "python3"
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH}"

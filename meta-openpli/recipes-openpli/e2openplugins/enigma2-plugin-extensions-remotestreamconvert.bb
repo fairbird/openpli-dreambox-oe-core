@@ -3,7 +3,6 @@ DESCRIPTION = "Fetch channels from remote bouquets and make them available local
 
 RDEPENDS:${PN} = "python3-shell"
 
-require conf/license/license-gplv2.inc
 require openplugins.inc
 require openplugins-distutils.inc
 
