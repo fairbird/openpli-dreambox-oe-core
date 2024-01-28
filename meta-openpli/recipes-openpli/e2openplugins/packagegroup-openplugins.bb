@@ -12,6 +12,7 @@ DEPENDS = " \
 	enigma2-plugin-extensions-antilogo \
 	enigma2-plugin-extensions-autobackup \
 	enigma2-plugin-extensions-autobouquets \
+	enigma2-plugin-extensions-bhtunerserver \
 	enigma2-plugin-extensions-bitrate \
 	enigma2-plugin-extensions-blackoutblind \
 	enigma2-plugin-extensions-cacheflush \
@@ -39,6 +40,7 @@ DEPENDS = " \
 	enigma2-plugin-extensions-streaminterface \
 	enigma2-plugin-extensions-systemtools \
 	enigma2-plugin-extensions-telekomsport \
+	enigma2-plugin-extensions-usbformatwizard \
 	enigma2-plugin-extensions-wakeonlan \
 	enigma2-plugin-extensions-xpower \
 	enigma2-plugin-systemplugins-autobouquetsmaker \
