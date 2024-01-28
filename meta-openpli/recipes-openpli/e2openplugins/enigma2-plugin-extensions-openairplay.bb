@@ -5,10 +5,8 @@ RDEPENDS:${PN} = "python3-twisted-core python3-twisted-web python3-m2crypto \
                   python3-core python3-subprocess python3-io python3-xmlrpc \
                   hairtunes"
 
-inherit gitpkgv
-PV = "0.1+git"
-PKGV = "0.1+git${GITPKGV}"
-PR = "r0.2"
+PV_MOD = "0.1+git"
+PKGV_MOD = "0.1+git${GITPKGV}"
 
 require conf/license/license-gplv2.inc
 require openplugins.inc

@@ -2,7 +2,7 @@ MODULE = "HetWeer"
 DESCRIPTION = "HetWeer plugin"
 
 require conf/license/license-gplv2.inc
-require openplugins-replace-pli.inc
+require openplugins.inc
 require openplugins-distutils.inc
 
 PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/${MODULE}"

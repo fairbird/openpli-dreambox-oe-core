@@ -1,10 +1,9 @@
 MODULE = "WakeOnLan"
 DESCRIPTION = "Send a WOL packet to devices"
 
-require conf/license/license-gplv2.inc
-require openplugins-distutils.inc
+PV_MOD = "1.0+git"
+PKGV_MOD = "1.0+git${GITPKGV}"
 
-inherit gitpkgv
-PV = "1.0+git"
-PKGV = "1.0+git${GITPKGV}"
-PR = "r0"
+require conf/license/license-gplv2.inc
+require openplugins.inc
+require openplugins-distutils.inc

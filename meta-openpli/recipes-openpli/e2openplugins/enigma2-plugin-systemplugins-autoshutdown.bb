@@ -2,11 +2,10 @@ MODULE = "AutoShutDown"
 DESCRIPTION = "automated power off for STB"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit autotools gettext gitpkgv
+inherit autotools gettext
 
-PV = "0.6+git"
-PKGV = "0.6+git${GITPKGV}"
-PR = "r0"
+PV_MOD = "0.6+git"
+PKGV_MOD = "0.6+git${GITPKGV}"
 
 require conf/license/license-gplv2.inc
 require openplugins.inc

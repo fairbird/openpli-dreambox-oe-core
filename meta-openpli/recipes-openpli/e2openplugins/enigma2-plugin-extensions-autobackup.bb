@@ -4,7 +4,7 @@ DESCRIPTION = "Can create daily backups. Backups created will be restored automa
 
 require conf/license/license-gplv2.inc
 
-require openplugins-replace-pli.inc
+require openplugins.inc
 require openplugins-distutils.inc
 
 # I spent over 2 hours trying to get the shell file to be executable. Sorry, I just gave up

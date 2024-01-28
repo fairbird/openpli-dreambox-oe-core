@@ -4,11 +4,8 @@ RDEPENDS:${PN} = "python3-html"
 
 inherit gitpkgv
 
-PV = "git"
-PKGV = "git${GITPKGV}"
-PR = "r0"
-
 require conf/license/license-gplv2.inc
+require openplugins.inc
 require openplugins-distutils.inc
 
 SRC_URI:append = " file://use-setuptools-instead-of-distutils.patch"
