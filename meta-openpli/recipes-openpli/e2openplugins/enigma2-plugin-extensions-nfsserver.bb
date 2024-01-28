@@ -4,4 +4,4 @@ DESCRIPTION = "NFS server configuration"
 RDEPENDS:${PN} = "nfs-utils"
 
 require openplugins.inc
-require openplugins-distutils.inc
+inherit setuptools3-openplugins

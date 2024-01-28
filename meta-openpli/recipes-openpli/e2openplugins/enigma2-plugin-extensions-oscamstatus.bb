@@ -5,6 +5,6 @@ PV_MOD = "1.0+git"
 PKGV_MOD = "1.0+git${GITPKGV}"
 
 require openplugins.inc
-require openplugins-distutils.inc
+inherit setuptools3-openplugins
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OscamStatus.git;protocol=https;branch=master file://use-setuptools-instead-of-distutils.patch"

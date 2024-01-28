@@ -4,6 +4,6 @@ DESCRIPTION = "Fetch channels from remote bouquets and make them available local
 RDEPENDS:${PN} = "python3-shell"
 
 require openplugins.inc
-require openplugins-distutils.inc
+inherit setuptools3-openplugins
 
 BRANCH = "master"

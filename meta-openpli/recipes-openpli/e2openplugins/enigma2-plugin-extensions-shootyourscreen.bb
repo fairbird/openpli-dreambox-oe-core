@@ -7,4 +7,4 @@ PV_MOD = "0.2+git"
 PKGV_MOD = "0.2+git${GITPKGV}"
 
 require openplugins.inc
-require openplugins-distutils.inc
+inherit setuptools3-openplugins

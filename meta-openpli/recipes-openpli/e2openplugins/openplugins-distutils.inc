@@ -1,1 +1,0 @@
-inherit setuptools3-openplugins

@@ -3,7 +3,7 @@ DESCRIPTION = "Weather forecast for the upcoming 10 days"
 RDEPENDS:${PN} = "python3-html"
 
 require openplugins.inc
-require openplugins-distutils.inc
+inherit setuptools3-openplugins
 
 SRC_URI:append = " file://use-setuptools-instead-of-distutils.patch"
 

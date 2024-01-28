@@ -2,7 +2,7 @@ MODULE = "HetWeer"
 DESCRIPTION = "HetWeer plugin"
 
 require openplugins.inc
-require openplugins-distutils.inc
+inherit setuptools3-openplugins
 
 PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/${MODULE}"
 do_install() {
