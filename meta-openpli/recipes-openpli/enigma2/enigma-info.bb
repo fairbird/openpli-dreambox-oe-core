@@ -20,7 +20,7 @@ RREPLACES:${PN} = "enigma-kernel-module"
 
 SSTATE_SKIP_CREATION = "1"
 
-inherit python3-dir
+inherit python3-dir python3native linux-kernel-base
 KERNEL_VERSION = "${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
