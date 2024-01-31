@@ -20,14 +20,19 @@ RREPLACES:${PN} = "enigma-kernel-module"
 
 SSTATE_SKIP_CREATION = "1"
 
-inherit ${PYTHON_PN}-dir ${PYTHON_PN}native linux-kernel-base
+inherit python3-dir
 KERNEL_VERSION = "${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
 
-PV = "${DATE}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+PV = "${DATE}"
 PR[vardepsexclude] = "DATE"
 
 PACKAGES = "${PN}"
+
+# if DATE in PR changes (next day), workdir name changes too
+# this makes sstate unhappy and breakes many tasks in many weird ways
+
+WORKDIR = "${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PN}/${EXTENDPE}${PV}"
 
 INFOFILE = "${libdir}/enigma.info"
 
