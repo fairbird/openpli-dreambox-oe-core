@@ -45,6 +45,7 @@ ENIGMA2_PLUGINS = " \
 
 DEPENDS += " \
 	enigma2 \
+	enigma-info \
 	package-index \
 	"
 
