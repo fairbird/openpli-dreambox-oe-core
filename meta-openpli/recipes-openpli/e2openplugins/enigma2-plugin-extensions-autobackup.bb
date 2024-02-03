@@ -14,4 +14,6 @@ do_install:append() {
 
 DEPENDS = "python3-future-native"
 
-SRC_URI:append = " file://use-setuptools-instead-of-distutils.patch"
+SRC_URI:append = " file://use-setuptools-instead-of-distutils.patch \
+		file://fix-unexpected-keyword-argument.patch \
+"
