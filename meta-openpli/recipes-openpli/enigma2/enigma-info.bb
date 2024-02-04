@@ -2,7 +2,7 @@ SUMMARY = "enigma.info used by BoxInfo"
 PRIORITY = "required"
 MAINTAINER = "oe-alliance team"
 
-require conf/license/license-gplv2.inc
+require conf/license/openpli-gplv2.inc
 
 deltask fetch
 deltask unpack
