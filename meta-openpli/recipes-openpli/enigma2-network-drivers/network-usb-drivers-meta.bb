@@ -20,4 +20,6 @@ RDEPENDS:${PN} = "\
 	enigma2-plugin-drivers-network-usb-rt73 \
 	enigma2-plugin-drivers-network-usb-zd1211rw \
 	enigma2-plugin-drivers-network-usb-mt7601u \
+	enigma2-plugin-drivers-network-usb-rtl8152 \
+	enigma2-plugin-drivers-network-usb-lan78xx \
 "
