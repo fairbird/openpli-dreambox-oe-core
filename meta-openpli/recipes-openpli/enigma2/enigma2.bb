@@ -238,21 +238,21 @@ FILES:${PN}-dbg += "\
 FILES:${PN}-src = "\
 	${libdir}/enigma2/python/e2reactor.py \
 	${libdir}/enigma2/python/enigma_py_patcher.py \
-    	${libdir}/enigma2/python/GlobalActions.py \
+	${libdir}/enigma2/python/GlobalActions.py \
 	${libdir}/enigma2/python/keyids.py \
-    	${libdir}/enigma2/python/keymapparser.py \
-    	${libdir}/enigma2/python/Navigation.py \
-    	${libdir}/enigma2/python/NavigationInstance.py \
-    	${libdir}/enigma2/python/PowerTimer.py \
-    	${libdir}/enigma2/python/RecordTimer.py \
-    	${libdir}/enigma2/python/ServiceReference.py \
-    	${libdir}/enigma2/python/skin.py \
-    	${libdir}/enigma2/python/timer.py \
-    	${libdir}/enigma2/python/upgrade.py \
-    	${libdir}/enigma2/python/*/*.py \
-    	${libdir}/enigma2/python/*/*/*.py \
-    	${libdir}/enigma2/python/*/*/*/*.py \
-    	"
+	${libdir}/enigma2/python/keymapparser.py \
+	${libdir}/enigma2/python/Navigation.py \
+	${libdir}/enigma2/python/NavigationInstance.py \
+	${libdir}/enigma2/python/PowerTimer.py \
+	${libdir}/enigma2/python/RecordTimer.py \
+	${libdir}/enigma2/python/ServiceReference.py \
+	${libdir}/enigma2/python/skin.py \
+	${libdir}/enigma2/python/timer.py \
+	${libdir}/enigma2/python/upgrade.py \
+	${libdir}/enigma2/python/*/*.py \
+	${libdir}/enigma2/python/*/*/*.py \
+	${libdir}/enigma2/python/*/*/*/*.py \
+	"
 
 do_install:append() {
 	install -d ${D}${datadir}/keymaps
