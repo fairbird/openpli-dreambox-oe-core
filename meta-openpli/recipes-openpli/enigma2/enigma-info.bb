@@ -2,7 +2,7 @@ SUMMARY = "enigma.info used by BoxInfo"
 PRIORITY = "required"
 MAINTAINER = "oe-alliance team"
 
-require conf/license/openpli-gplv2.inc
+require conf/license/license-gplv2.inc
 
 deltask fetch
 deltask unpack
@@ -17,11 +17,8 @@ RREPLACES:${PN} = "enigma-kernel-module"
 
 SSTATE_SKIP_CREATION = "1"
 
-inherit python3-dir python3native linux-kernel-base
-KERNEL_VERSION = "${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-PV = "${DATE}"
+PACKAGE_ARCH = "${MACHINEBUILD}"
+PV = "${DISTRO_VERSION}"
 PR[vardepsexclude] = "DATE"
 
 PACKAGES = "${PN}"
@@ -31,25 +28,15 @@ PACKAGES = "${PN}"
 
 WORKDIR = "${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PN}/${EXTENDPE}${PV}"
 
+inherit python3-dir 
+
 INFOFILE = "${libdir}/enigma.info"
+
+export KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
 
 do_install[nostamp] = "1"
 
 do_install() {
-# Python version
-
-	PATTERN=`echo ${BBFILE_PATTERN_core} | cut -c 2-`
-	PYTHON_FULLVERSION=`ls ${PATTERN}recipes-devtools/python/python?_*.bb | cut -d '_' -f 2 | xargs basename -s .bb`
-	if [ "${PYTHON_FULLVERSION}" = "" ]; then
-		PYTHON_FULLVERSION=${PYTHON_BASEVERSION}
-	fi
-
-# OE version info
-	OE_NAME=`cd ${OPENPLI_BASE} && git submodule | grep "meta-openembedded" | cut -d '(' -f 2 | cut -d ')' -f 1 | cut -d '/' -f 3`
-	OE_VERSION=`cd ${OPENPLI_BASE} && git submodule | grep "openembedded-core" | cut -d '(' -f 2 | cut -d ')' -f 1 | cut -d '-' -f 2`
-
-#   driver data
-
     DRIVERSDATE='N/A'
     # machine specific
     if [ "${MACHINE}" = "dm7080" ]; then
