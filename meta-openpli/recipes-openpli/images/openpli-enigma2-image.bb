@@ -26,6 +26,7 @@ ENIGMA2_PLUGINS = " \
 	\
 	enigma2-plugin-softcams-ncam \
 	\
+	enigma2-plugin-systemplugins-blindscan \
 	enigma2-plugin-systemplugins-cablescan \
 	enigma2-plugin-systemplugins-commoninterfaceassignment \
 	enigma2-plugin-systemplugins-fastscan \
