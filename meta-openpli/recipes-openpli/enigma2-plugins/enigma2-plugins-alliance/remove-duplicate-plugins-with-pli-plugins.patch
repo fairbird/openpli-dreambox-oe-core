@@ -147,8 +147,8 @@ index d4ff451..47df8be 100644
  SUBDIRS += 	remotetimer
  endif
  
--SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport
-+SUBDIRS += tetris Series2Folder epgexport
+-SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport mediathekviewweb
++SUBDIRS += tetris Series2Folder epgexport mediathekviewweb
  
  metadir = $(datadir)/meta
  meta_DATA = index-enigma2-plugins.xml
