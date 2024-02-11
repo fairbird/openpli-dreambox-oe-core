@@ -148,7 +148,7 @@ index d4ff451..47df8be 100644
  endif
  
 -SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport mediathekviewweb
-+SUBDIRS += tetris Series2Folder epgexport mediathekviewweb
++SUBDIRS += tetris Series2Folder epgexport
  
  metadir = $(datadir)/meta
  meta_DATA = index-enigma2-plugins.xml
