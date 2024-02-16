@@ -107,6 +107,7 @@ OPTIONAL_PACKAGES += " \
 	tmux \
 	transmission \
 	udpxy \
+	ubuntu-font-family \
 	v4l-utils \
 	vim \
 	wget \
