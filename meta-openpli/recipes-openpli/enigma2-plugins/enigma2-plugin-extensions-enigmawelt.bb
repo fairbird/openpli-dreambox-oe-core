@@ -5,11 +5,10 @@ SECTION = "base"
 inherit allarch
 
 require conf/license/license-gplv2.inc
-require conf/python/python3-compileall.inc
+require classes/python3-compileall.inc
 
 inherit gitpkgv
 
-SRCREV = "${AUTOREV}"
 PV = "1.3+git${SRCPV}"
 PKGV = "1.3+git${GITPKGV}"
 VER ="1.3"
