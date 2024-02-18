@@ -83,6 +83,7 @@ OPTIONAL_PACKAGES += " \
 	python3-ntplib \
 	python3-pysnmp \
 	python3-requests \
+	python3-tinytag \
 	python3-transmissionrpc \
 	python3-tqdm \
 	python3-yenc \
