@@ -2,6 +2,7 @@
 # We know about rtc
 include conf/machine/include/build-extras.inc
 
+OPTIONAL_BSP_PACKAGES += "dreambox-buildimage"
 BRAND_OEM = "dreambox"
 MACHINE_BRAND = "Dreambox"
 
