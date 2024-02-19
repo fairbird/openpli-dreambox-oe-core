@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3c34afdc3adf82d2448f12715a255122"
 PV = "v.02.24.44"
 PR = "r3"
 
-SRC_URI = "https://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}.${PV}/${BPN}.${PV}.tar.gz \
+SRC_URI = "https://source.mynonpublic.com/${BPN}.${PV}.tar.gz \
 	file://inadyn-mt.sh \
 	file://inadyn.conf \
 	file://remove_host_include_paths.patch \

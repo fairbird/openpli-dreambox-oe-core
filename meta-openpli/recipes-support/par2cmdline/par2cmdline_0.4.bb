@@ -8,7 +8,7 @@ HOMEPAGE = "http://parchive.sourceforge.net/"
 DEPENDS = "libsigc++-3"
 PR = "r2"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/parchive/${BPN}/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://source.mynonpublic.com/${BPN}-${PV}.tar.gz \
 	file://par2cmdline-0.4-gcc4.patch \
 	file://par2-softlink.patch \
 	"
