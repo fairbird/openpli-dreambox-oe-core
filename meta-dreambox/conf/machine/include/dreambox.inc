@@ -20,6 +20,7 @@ require conf/machine/include/soc-family.inc
 require conf/machine/box-hardware.inc
 
 MACHINE_EXTRA_RRECOMMENDS += " \
+    dreambox-boot-progress \
     gstreamer1.0-plugin-subsink \
     gstreamer1.0-libav \
     kernel-module-cifs \
