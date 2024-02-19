@@ -20,7 +20,6 @@ require conf/machine/include/soc-family.inc
 require conf/machine/box-hardware.inc
 
 MACHINE_EXTRA_RRECOMMENDS += " \
-    dreambox-boot-progress \
     gstreamer1.0-plugin-subsink \
     gstreamer1.0-libav \
     kernel-module-cifs \
@@ -33,6 +32,7 @@ MACHINE_EXTRA_RRECOMMENDS += " \
     kernel-module-exportfs \
     kernel-module-snd-oss \
     kernel-module-snd-pcm-oss \
+    ${@bb.utils.contains('MACHINE', 'dm800se dm800sev2', 'dreambox-boot-progress', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'v3d', 'libvc5dream', '',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'oem-info', 'oem-info', '',d)} \
     "
