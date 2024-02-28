@@ -1,24 +1,25 @@
-DESCRIPTION = "Imports XMLTV and epg.dat files into the EPG cache of enigma2"
-MAINTAINER = "OpenPLi team"
+SUMMARY = "Imports xmltv files into the EPG cache of enigma2"
+MAINTAINER = "oe-alliance"
+require classes/python3-compileall.inc
 
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://../etc/epgimport/readme.txt;startline=1;endline=4;md5=c162054328d930d453543efef81be1d8"
 
-inherit gitpkgv python3native gettext
-require classes/python3-compileall.inc
+inherit gitpkgv gettext ${PYTHON_PN}native
 
 PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
+PR = "r0"
 
 SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=python3 \
-	file://Remove-unused-codes.patch;apply=yes \
+	file://Remove-unused-codes.patch \
 "
 
 S = "${WORKDIR}/git/src"
 
 inherit setuptools3-openplugins
 
-RDEPENDS:${PN} = "python3-compression python3-shell python3-backports-lzma python3-pkgutil"
+RDEPENDS:${PN} = "${PYTHON_PN}-compression ${PYTHON_PN}-shell ${PYTHON_PN}-backports-lzma ${PYTHON_PN}-pkgutil"
 RRECOMMENDS:${PN} = "${PN}-rytec"
 
 PACKAGES = "${PN}-src ${PN}-dbg ${PN}"
