@@ -9,7 +9,7 @@ inherit gitpkgv gettext ${PYTHON_PN}native
 
 PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=python3 \
 	file://Remove-unused-codes.patch \
