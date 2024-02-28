@@ -82,6 +82,7 @@ IMAGE_INSTALL = " \
 	packagegroup-core-boot \
 	parted \
 	pigz \
+	python3-compat2 \
 	python3-ipaddress  \
 	python3-netifaces \
 	python3-pysmb \
