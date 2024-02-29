@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
 
 RDEPENDS:${PN} = "python3-xmlrpc python3-compression python3-codecs python3-difflib python3-rarfile unrar"
 
-SRC_URI = "git://github.com/oe-mirrors/subssupport;protocol=git;branch=master;protocol=https"
+SRC_URI = "git://github.com/fairbird/subssupport;protocol=git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 
