@@ -117,6 +117,7 @@ OPTIONAL_PACKAGES += " \
 	xfsprogs \
 	yafc \
 	zeroconf \
+	zerotier \
 	zip \
 	zsh \
 	network-usb-drivers-meta \
