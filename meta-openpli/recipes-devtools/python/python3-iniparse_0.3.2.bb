@@ -4,7 +4,7 @@ SECTION = "devel/python"
 PRIORITY = "optional"
 
 require conf/license/license-gplv2.inc
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc
 
 
 SRC_URI[md5sum] = "29005e7585a90e6a09c881dc3b30edee"

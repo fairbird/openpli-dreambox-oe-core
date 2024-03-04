@@ -3,4 +3,4 @@ do_install:prepend() {
     touch ${D}${PYTHON_SITEPACKAGES_DIR}/numpy/typing/tests/data/pass/__pycache__/literal.cpython
 }
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

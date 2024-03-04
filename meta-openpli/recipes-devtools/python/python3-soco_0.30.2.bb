@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "328a6fc0653d9f9e4883fd59674fb73feb61dc273f7c1f0a8212e91103
 
 inherit pypi setuptools3
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc
 
 # Make clean requires sphinx which we don't have
 CLEANBROKEN = "1"

@@ -14,4 +14,4 @@ S = "${WORKDIR}/url-normalize-1.4.3"
 
 RDEPENDS:${PN} = "python3-six"
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

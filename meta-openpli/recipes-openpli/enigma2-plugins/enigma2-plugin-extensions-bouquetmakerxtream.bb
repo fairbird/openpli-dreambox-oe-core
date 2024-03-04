@@ -11,7 +11,7 @@ PKGV = "${GITPKGV}"
 
 inherit gittag allarch
 
-RDEPENDS:${PN} = "${PYTHON_PN} ${PYTHON_PN}-requests ${PYTHON_PN}-pillow"
+RDEPENDS:${PN} = "python3 python3-requests python3-pillow"
 
 SRC_URI = "git://github.com/kiddac/Bouquet_Maker_Xtream.git;protocol=https;branch=master"
 

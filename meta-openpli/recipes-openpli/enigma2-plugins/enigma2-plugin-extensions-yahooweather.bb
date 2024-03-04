@@ -5,7 +5,7 @@ PRIORITY = "optional"
 require conf/license/license-gplv2.inc
 require classes/python3-compileall.inc
 
-inherit gitpkgv ${PYTHON_PN}native autotools-brokensep gettext
+inherit gitpkgv python3native autotools-brokensep gettext
 
 PV = "1.2.+git"
 PKGV = "1.2.+git${GITPKGV}"

@@ -13,7 +13,7 @@ S = "${WORKDIR}/setuptools_scm_git_archive-${PV}"
 
 inherit setuptools3
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc
 
 
 BBCLASSEXTEND = "native nativesdk"

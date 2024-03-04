@@ -12,4 +12,4 @@ PKGV = "2.0.1+git${GITPKGV}"
 SRC_URI = "git://github.com/giampaolo/pysendfile.git;protocol=https;branch=master"
 S = "${WORKDIR}/git"
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

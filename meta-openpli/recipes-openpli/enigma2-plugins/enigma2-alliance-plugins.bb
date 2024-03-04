@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 include python3-package-split.inc
 
-inherit python3-dir autotools-brokensep gitpkgv ${PYTHON_PN}native gettext python3targetconfig
+inherit python3-dir autotools-brokensep gitpkgv python3native gettext python3targetconfig
 
 SRCREV = "${AUTOREV}"
 PV = "git"
@@ -54,7 +54,7 @@ PROVIDES = "\
 
 DEPENDS = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'transcoding', 'virtual-transtreamproxy' , '', d)} \
-    ${PYTHON_PN}-dnspython ${PYTHON_PN}-beautifulsoup4 ${PYTHON_PN}-lxml ${PYTHON_PN}-simplejson ${PYTHON_PN}-pyamf ${PYTHON_PN}-icalendar ${PYTHON_PN}-pyusb ${PYTHON_PN}-six-native \
+    python3-dnspython python3-beautifulsoup4 python3-lxml python3-simplejson python3-pyamf python3-icalendar python3-pyusb python3-six-native \
     rtmpdump \
     minidlna \
     hddtemp \
@@ -83,7 +83,7 @@ RDEPENDS_enigma2-plugin-extensions-streamtv = "rtmpdump"
 DESCRIPTION_enigma2-plugin-extensions-tunerserver = "Builds a virtual channels list"
 DESCRIPTION_enigma2-plugin-extensions-webbrowser = "Webbrowser launcher"
 FILES:enigma2-plugin-extensions-webbrowser:append = "${datadir}/keymaps"
-RDEPENDS_enigma2-plugin-extensions-webbrowser = "${PYTHON_PN}-gdata-python3 libqtwebkite4 webbrowser-utils qt4-embedded-fonts qt4-embedded-plugin-imageformat-gif qt4-embedded-plugin-imageformat-ico qt4-embedded-plugin-imageformat-jpeg qt4-embedded-plugin-imageformat-mng qt4-embedded-plugin-imageformat-svg qt4-embedded-plugin-imageformat-tiff qt4-embedded-plugin-iconengine-svgicon"
+RDEPENDS_enigma2-plugin-extensions-webbrowser = "python3-gdata-python3 libqtwebkite4 webbrowser-utils qt4-embedded-fonts qt4-embedded-plugin-imageformat-gif qt4-embedded-plugin-imageformat-ico qt4-embedded-plugin-imageformat-jpeg qt4-embedded-plugin-imageformat-mng qt4-embedded-plugin-imageformat-svg qt4-embedded-plugin-imageformat-tiff qt4-embedded-plugin-iconengine-svgicon"
 DESCRIPTION_enigma2-plugin-systemplugins-abmcustommiximporter = "Imports ABM CustomMix files from Github."
 DESCRIPTION_enigma2-plugin-systemplugins-audioeffect = "Audio Effect setup"
 DESCRIPTION_enigma2-plugin-systemplugins-channelsimporter = "Imports a copy of the channel list from a remote receiver and loads it on the local receiver."

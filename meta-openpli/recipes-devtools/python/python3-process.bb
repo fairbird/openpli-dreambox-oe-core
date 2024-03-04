@@ -3,7 +3,7 @@ SECTION = "devel/python"
 PRIORITY = "optional"
 SRCNAME = "process"
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc
 require classes/python3-compileall.inc
 
 require conf/license/license-gplv2.inc

@@ -12,9 +12,9 @@ SETUPTOOLS_INSTALL_ARGS = " \
 setuptools3_do_install:append() {
 	cd ${SETUPTOOLS_SETUP_PATH}
 	install -d ${D}${PYTHON_SITEPACKAGES_DIR}
-	${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} setup.py \
+	${STAGING_BINDIR_NATIVE}/python3-native/python3 setup.py \
 	build --build-base=${B} install --skip-build ${SETUPTOOLS_INSTALL_ARGS} || \
-	bbfatal_log "'${PYTHON_PN} setup.py install ${SETUPTOOLS_INSTALL_ARGS}' execution failed."
+	bbfatal_log "'python3 setup.py install ${SETUPTOOLS_INSTALL_ARGS}' execution failed."
 	# Remove "egg-info" files and site-packages
 	rm -rf ${D}${libdir}/python${PYTHON_BASEVERSION}
 	rm -rf ${D}${libdir}/enigma2/python/Plugins/*.egg-info

@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8e37f34d0e40d32ea2bc90ee812c9131"
 
 PACKAGES_DYNAMIC = "enigma2-plugin-(?!oea-).*"
 
-inherit autotools-brokensep gitpkgv pkgconfig gettext ${PYTHON_PN}targetconfig
+inherit autotools-brokensep gitpkgv pkgconfig gettext python3targetconfig
 
 SRCREV = "${AUTOREV}"
 PV = "gitr"
@@ -58,16 +58,16 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 S = "${WORKDIR}/git"
 
 DEPENDS = "enigma2 \
-    ${PYTHON_PN}-pyopenssl \
-    ${PYTHON_PN}-gdata-python3 \
+    python3-pyopenssl \
+    python3-gdata-python3 \
     streamripper \
-    ${PYTHON_PN}-mutagen \
-    ${PYTHON_PN}-twisted \
-    ${PYTHON_PN}-daap \
-    ${PYTHON_PN}-httplib2 \
-    ${PYTHON_PN}-youtube-dl \
-    ${PYTHON_PN}-yt-dlp \
-    ${PYTHON_PN}-six-native \
+    python3-mutagen \
+    python3-twisted \
+    python3-daap \
+    python3-httplib2 \
+    python3-youtube-dl \
+    python3-yt-dlp \
+    python3-six-native \
     libav \
     libshowiframe \
     libcddb \
@@ -75,7 +75,7 @@ DEPENDS = "enigma2 \
     nmap \
     "
 
-RDEPENDS:${PN} = "${PYTHON_PN}-ctypes"
+RDEPENDS:${PN} = "python3-ctypes"
 
 python populate_packages:prepend() {
     enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
@@ -100,16 +100,16 @@ python populate_packages:prepend() {
         for line in src.split("\n"):
             full_package = package[0] + '-' + package[1] + '-' + package[2] + '-' + package[3]
             if line.startswith('Depends: '):
-                # some plugins still reference twisted-* dependencies, these packages are now called ${PYTHON_PN}-twisted-*
+                # some plugins still reference twisted-* dependencies, these packages are now called python3-twisted-*
                 rdepends = []
                 for depend in line[9:].split(','):
                     depend = depend.strip()
                     if depend.startswith('twisted-'):
-                        rdepends.append(depend.replace('twisted-', '${PYTHON_PN}-twisted-'))
+                        rdepends.append(depend.replace('twisted-', 'python3-twisted-'))
                     elif depend == 'python-re' or depend == 'python-lang' or depend == 'python-textutils':
                         pass
                     elif depend.startswith('python-'):
-                        rdepends.append(depend.replace('python-', '${PYTHON_PN}-'))
+                        rdepends.append(depend.replace('python-', 'python3-'))
                     elif depend.startswith('gst-plugins-'):
                         rdepends.append(depend.replace('gst-plugins-', 'gstreamer1.0-'))
                     elif depend.startswith('enigma2') and not depend.startswith('enigma2-'):

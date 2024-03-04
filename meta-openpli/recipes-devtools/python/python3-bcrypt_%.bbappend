@@ -1,8 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-DEPENDS:append = " ${PYTHON_PN}-semantic-version-native"
+DEPENDS:append = " python3-semantic-version-native"
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc
 
 SRC_URI:append:mips32el = " \
     crate://crates.io/portable-atomic/1.6.0 \ 

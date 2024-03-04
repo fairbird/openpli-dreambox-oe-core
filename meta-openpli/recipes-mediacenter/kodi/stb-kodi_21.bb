@@ -55,7 +55,7 @@ DEPENDS += " \
             libxslt \
             lzo \
             mpeg2dec \
-            ${PYTHON_PN} \
+            python3 \
             samba \
             sqlite3 \
             taglib \
@@ -244,19 +244,19 @@ RRECOMMENDS:${PN}:append = " libcec \
                              nss \
                              os-release \
                              ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'xrandr xinit mesa-demos', '', d)} \
-                             ${PYTHON_PN} \
-                             ${PYTHON_PN}-ctypes \
-                             ${PYTHON_PN}-netclient \
-                             ${PYTHON_PN}-html \
-                             ${PYTHON_PN}-difflib \
-                             ${PYTHON_PN}-json \
-                             ${PYTHON_PN}-shell \
-                             ${PYTHON_PN}-sqlite3 \
-                             ${PYTHON_PN}-compression \
-                             ${PYTHON_PN}-xmlrpc \
-                             ${PYTHON_PN}-pycryptodomex \
-                             ${PYTHON_PN}-mechanize \
-                             ${PYTHON_PN}-profile \
+                             python3 \
+                             python3-ctypes \
+                             python3-netclient \
+                             python3-html \
+                             python3-difflib \
+                             python3-json \
+                             python3-shell \
+                             python3-sqlite3 \
+                             python3-compression \
+                             python3-xmlrpc \
+                             python3-pycryptodomex \
+                             python3-mechanize \
+                             python3-profile \
                              tzdata-africa \
                              tzdata-americas \
                              tzdata-antarctica \

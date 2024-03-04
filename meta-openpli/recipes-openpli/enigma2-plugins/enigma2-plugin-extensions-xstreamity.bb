@@ -5,8 +5,8 @@ PRIORITY = "optional"
 require conf/license/license-gplv2.inc
 require classes/python3-compileall.inc
 
-RDEPENDS:${PN} = "${PYTHON_PN} ${PYTHON_PN}-multiprocessing ${PYTHON_PN}-requests \
-                  ${PYTHON_PN}-imaging ${PYTHON_PN}-pillow \
+RDEPENDS:${PN} = "python3 python3-multiprocessing python3-requests \
+                  python3-imaging python3-pillow \
 "
 
 SRCREV = "${AUTOREV}"

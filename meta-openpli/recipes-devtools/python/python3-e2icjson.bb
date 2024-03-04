@@ -23,4 +23,4 @@ setuptools3_do_install:append() {
 	rm -r ${D}${libdir}/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/e2icjson/*.egg-info
 }
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jaraco/jaraco.functools"
 SECTION = "devel/python"
 LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=141643e11c48898150daa83802dbc65f"
-DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+DEPENDS += "python3-setuptools-scm-native"
 
 SRC_URI:append = " file://0001-add-setup.py.patch"
 
@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "c279cb24c93d694ef7270f970d499cab4d3813f4e08273f95398651a63
 
 inherit pypi setuptools3
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

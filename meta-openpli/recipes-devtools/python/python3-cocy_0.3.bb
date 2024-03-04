@@ -22,4 +22,4 @@ inherit setuptools3
 # txt file which should go into -doc
 FILES:${PN}-doc += "${datadir}/pypi-overview.rst"
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

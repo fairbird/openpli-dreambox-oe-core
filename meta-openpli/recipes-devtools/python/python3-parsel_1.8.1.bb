@@ -15,4 +15,4 @@ S = "${WORKDIR}/parsel-${PV}"
 
 inherit pypi setuptools3
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

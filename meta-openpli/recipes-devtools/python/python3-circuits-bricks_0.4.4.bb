@@ -18,4 +18,4 @@ S = "${WORKDIR}/circuits-bricks-${PV}"
 
 inherit setuptools3_legacy
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

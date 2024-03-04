@@ -13,4 +13,4 @@ SRC_URI[sha256sum] = "ad613988d54b1317ca0466dc3546f47b2dddea16e645d755d29fb75a86
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

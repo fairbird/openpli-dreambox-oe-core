@@ -9,4 +9,4 @@ SRC_URI[sha256sum] = "db60b3b5bc1c4bdeb941427d50b606d51df67735338525558384763947
 
 inherit pypi setuptools3
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

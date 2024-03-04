@@ -8,22 +8,22 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-DEPENDS = "${PYTHON_PN}-cheetah-native"
+DEPENDS = "python3-cheetah-native"
 
 RDEPENDS:${PN} = "\
 	aio-grab \
-	${PYTHON_PN}-cheetah \
-	${PYTHON_PN}-compression \
-	${PYTHON_PN}-ipaddress \
-	${PYTHON_PN}-json \
-	${PYTHON_PN}-misc \
-	${PYTHON_PN}-numbers \
-	${PYTHON_PN}-pprint \
-	${PYTHON_PN}-pyopenssl \
-	${PYTHON_PN}-shell \
-	${PYTHON_PN}-six \
-	${PYTHON_PN}-twisted-web \
-	${PYTHON_PN}-unixadmin \
+	python3-cheetah \
+	python3-compression \
+	python3-ipaddress \
+	python3-json \
+	python3-misc \
+	python3-numbers \
+	python3-pprint \
+	python3-pyopenssl \
+	python3-shell \
+	python3-six \
+	python3-twisted-web \
+	python3-unixadmin \
 	"
 
 inherit gittag setuptools3_legacy gettext
