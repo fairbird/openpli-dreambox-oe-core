@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=15519b204ac11ccc2e4c72b87d310191"
 
 DEPENDS += "python3-versioningit-native"
 
-inherit python3-dir setuptools3 gittag gitpkgv
+inherit python3-dir setuptools3 gittag
 
 RDEPENDS:${PN} = "python3-core \
     python3-ctypes \
@@ -25,8 +25,8 @@ RDEPENDS:${PN} = "python3-core \
     python3-websocket-client \
     "
 
-PV = "6.6.2+git"
-PKGV = "6.6.2+${GITPKGV}"
+PV = "git"
+PKGV = "${GITPKGVTAG}"
 
 SRCREV_streamlink = "${AUTOREV}"
 SRCREV_plugins = "${AUTOREV}"
