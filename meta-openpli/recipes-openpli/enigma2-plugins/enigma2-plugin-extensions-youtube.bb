@@ -26,7 +26,7 @@ RDEPENDS:${PN} = " \
 	python3-twisted-web \
 	"
 
-pkg_postinst:${PN}() {
+pkg_postinst_ontarget:${PN}() {
 PLUGINPATH="/usr/lib/enigma2/python/Plugins/Extensions/YouTube"
 repo_url="https://api.github.com/repos/fairbird/Youtube-Opensource-DreamOS/git/refs/heads/master"
 hashfile="$PLUGINPATH/.hashfile"
