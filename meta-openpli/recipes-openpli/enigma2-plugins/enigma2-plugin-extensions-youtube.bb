@@ -26,8 +26,9 @@ RDEPENDS:${PN} = " \
 	python3-twisted-web \
 	"
 
-PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/YouTube"
-do_install:append() {
-	install -d ${D}${PLUGINPATH}
-	touch ${D}${PLUGINPATH}/.hashfile
+pkg_postinst:${PN}() {
+PLUGINPATH="/usr/lib/enigma2/python/Plugins/Extensions/YouTube"
+repo_url="https://api.github.com/repos/fairbird/Youtube-Opensource-DreamOS/git/refs/heads/master"
+hashfile="$PLUGINPATH/.hashfile"
+wget -q -O- $repo_url | awk -F "commits/" '{print $2}' | sed '/^\s*$/d' | tr -d '"' > $hashfile
 }
