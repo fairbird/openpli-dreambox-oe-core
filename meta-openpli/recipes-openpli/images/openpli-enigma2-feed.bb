@@ -50,6 +50,7 @@ OPTIONAL_PACKAGES += " \
 	iputils \
 	joe \
 	less \
+	lsdir \
 	libbluray \
 	libudfread \
 	mc \
@@ -76,9 +77,11 @@ OPTIONAL_PACKAGES += " \
 	pv \
 	pyload \
 	python3-future \
+	python3-fuzzywuzzy \
 	python3-beautifulsoup4 \
 	python3-js2py \
 	python3-lxml \
+	python3-levenshtein \
 	python3-mechanize \
 	python3-ntplib \
 	python3-pysnmp \
