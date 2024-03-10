@@ -11,9 +11,10 @@ PKGV = "1.20+git${GITPKGV}"
 
 SRC_URI = "git://repo.or.cz/oscam.git;protocol=https;branch=master"
 
-DEPENDS = "libusb openssl"
+DEPENDS = "libusb openssl libdvbcsa"
 
-LDFLAGS:prepend = "-ludev "
+LDFLAGS:prepend = "-ludev -ldvbcsa "
+EXTRA_OECONF = "LIBDVBCSA=yes "
 
 S = "${WORKDIR}/git"
 B = "${S}"
@@ -48,6 +49,7 @@ EXTRA_OECMAKE += "\
 	-DCW_CYCLE_CHECK=1 \
 	-DCS_CACHEEX=1 \
 	-DMODULE_CONSTCW=1 \
+	-DMODULE_STREAMRELAY=1 \
 	"
 
 do_install() {
