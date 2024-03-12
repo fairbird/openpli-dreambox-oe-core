@@ -11,9 +11,10 @@ PV = "git"
 PKGV = "git${GITPKGV}"
 SRC_URI = "git://github.com/fairbird/NCam.git;protocol=https;branch=master"
 
-DEPENDS = "libusb openssl"
+DEPENDS = "libusb openssl libdvbcsa"
 
-LDFLAGS:prepend = "-ludev "
+LDFLAGS:prepend = "-ludev -ldvbcsa "
+EXTRA_OECONF = "LIBDVBCSA=yes "
 
 S = "${WORKDIR}/git"
 B = "${S}"
@@ -52,6 +53,7 @@ EXTRA_OECMAKE += "\
 	-DCARDREADER_PCSC=1 \
 	-DCW_CYCLE_CHECK=1 \
 	-DCS_CACHEEX=1 \
+	-DMODULE_STREAMRELAY=1 \
 	"
 
 do_install() {
