@@ -72,6 +72,15 @@
 +
 --- a/src/dvbcsa_key.c
 +++ b/src/dvbcsa_key.c
+@@ -26,6 +26,8 @@ /*
+ #include "dvbcsa/dvbcsa.h"
+ #include "dvbcsa_bs.h"
+ 
++#define dvbcsa_u32_aliasing_t unsigned int
++
+ void
+ dvbcsa_bs_key_set (const dvbcsa_cw_t cw, struct dvbcsa_bs_key_s *key)
+ {
 @@ -585,3 +585,18 @@ dvbcsa_key_schedule_block(const dvbcsa_cw_t cw, uint8_t * kk)
        kk[i*8+j] = (k[i]>>(j*8)) ^ i;
  }
