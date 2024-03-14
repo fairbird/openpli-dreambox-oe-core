@@ -15,7 +15,8 @@ S = "${WORKDIR}/git"
 inherit autotools lib_package pkgconfig
 
 EXTRA_OECONF = "\
-	${@bb.utils.contains("TUNE_FEATURES", "neon aarch64", "--enable-neon", "", d)} \
+	${@bb.utils.contains("TUNE_FEATURES", "neon", "--enable-neon", "", d)} \
+	${@bb.utils.contains("TUNE_FEATURES", "aarch64", "--enable-neon", "", d)} \
 "
 
 do_install:append() {
