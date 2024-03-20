@@ -17,7 +17,7 @@ inherit gittag
 
 do_compile[network] = "1"
 
-PV = "git${SRCPV}"
+PV = "git"
 PKGV = "${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/rclone/rclone;protocol=https;branch=master \
