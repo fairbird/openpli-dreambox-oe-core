@@ -26,6 +26,8 @@ SRC_URI = "git://github.com/rclone/rclone;protocol=https;branch=master \
 S = "${WORKDIR}/git"
 
 do_compile() {
+    GOPROXY=https://proxy.golang.org,direct
+    export GOPROXY
     ${TARGET_PREFIX}go build
 }
 
