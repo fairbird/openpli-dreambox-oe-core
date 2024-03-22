@@ -42,6 +42,15 @@ sudo apt-get install -y autoconf automake bison bzip2 chrpath coreutils cpio cur
 sudo dpkg-reconfigure dash
 ↳ Select "NO" when asked "Install dash as /bin/sh?"
 ```
+3. Set python3 as preferred provider for python
+```
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
+
+sudo update-alternatives --config python
+↳ Select python3
+```
 # To build image:
 Clone the source (only one time) ...
 ```
