@@ -15,4 +15,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	libpassthrough \
 	"
 
-OLDEST_KERNEL = "3.2.0"
+OLDEST_KERNEL = "3.2"
