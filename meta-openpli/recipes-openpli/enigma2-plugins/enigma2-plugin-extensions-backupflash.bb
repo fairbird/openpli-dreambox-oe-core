@@ -13,8 +13,8 @@ RDEPENDS:${PN} += "\
 	pigz \
 	xz \
 	pigz \
-	flash-scripts \
 	python3-crypt \
+	${@bb.utils.contains("MACHINE_FEATURES", "dreamboxv2", "flash-scripts", "", d)} \
 	"
 
 S = "${WORKDIR}/git"
