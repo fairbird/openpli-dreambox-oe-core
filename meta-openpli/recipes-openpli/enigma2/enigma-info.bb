@@ -32,7 +32,8 @@ inherit python3-dir
 
 INFOFILE = "${libdir}/enigma.info"
 
-export KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
+inherit linux-kernel-base
+KERNEL_VERSION = "${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${{STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
 
 do_install[nostamp] = "1"
 
