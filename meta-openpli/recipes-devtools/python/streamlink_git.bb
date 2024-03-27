@@ -11,6 +11,7 @@ inherit python3-dir setuptools3 gittag
 
 RDEPENDS:${PN} = "python3-core \
     python3-ctypes \
+    python3-exceptiongroup \
     python3-futures3 \
     python3-isodate \
     python3-pycountry \
