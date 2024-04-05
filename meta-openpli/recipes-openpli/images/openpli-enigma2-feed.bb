@@ -152,11 +152,18 @@ ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
 	dvb-usb-drivers-meta \
 	enigma2-display-skins \
+	enigma2-plugin-skins-e2darkos \
+	enigma2-plugin-skins-octetfhd \
+	enigma2-plugin-skins-pd1loi-hd-night \
+	enigma2-plugin-skins-pli-hd \
+	enigma2-plugin-skins-pli-hd-fullnight \
+	enigma2-plugin-skins-simple-gray \
+	enigma2-plugin-security-firewall \
+	enigma2-plugin-drivers-usbserial \
 	enigma2-plugin-extensions-arabicsavior \
 	enigma2-plugin-extensions-backupflash \
 	enigma2-plugin-extensions-keyadder \
 	enigma2-plugin-extensions-raedquicksignal \
-	enigma2-plugin-drivers-usbserial \
 	enigma2-plugin-extensions-backupsuite \
 	enigma2-plugin-extensions-autobouquets \
 	enigma2-plugin-extensions-bouquetmakerxtream \
@@ -170,19 +177,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-oscamstatus \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-xtraevent \
-	enigma2-plugin-security-firewall \
-	enigma2-plugin-skins-e2darkos \
-	enigma2-plugin-skins-octetfhd \
-	enigma2-plugin-skins-pd1loi-hd-night \
-	enigma2-plugin-skins-pli-hd \
-	enigma2-plugin-skins-pli-hd-fullnight \
-	enigma2-plugin-skins-simple-gray \
-	enigma2-plugin-systemplugins-crossepg \
-	enigma2-plugin-systemplugins-hrtunerproxy \
-	enigma2-plugin-systemplugins-misplslcnscan \
-	enigma2-plugin-systemplugins-newvirtualkeyboard \
-	enigma2-plugin-systemplugins-satipserver \
-	enigma2-plugin-systemplugins-serviceapp \
 	enigma2-plugin-extensions-enigmalight \
 	enigma2-plugin-extensions-enigmawelt \
 	enigma2-plugin-extensions-fontinfo \
@@ -196,7 +190,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-openmultiboot \
 	enigma2-plugin-extensions-refreshbouquet \
 	enigma2-plugin-extensions-weathermsn \
-	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-extensions-xmodem \
 	enigma2-plugin-extensions-xstreamity \
 	enigma2-plugin-extensions-automatic-fullbackup \
@@ -205,13 +198,20 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-ts-sateditor \
 	enigma2-plugin-extensions-vcs \
 	enigma2-plugin-extensions-xmodem \
+	enigma2-plugin-extensions-yahooweather \
+	enigma2-plugin-extensions-weatherplugin \
+	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-systemplugins-extnumberzap \
 	enigma2-plugin-systemplugins-extrafancontrol \
 	enigma2-plugin-systemplugins-mountmanager \
 	enigma2-plugin-systemplugins-signalfinder \
 	enigma2-plugin-systemplugins-terrestrialscan \
-	enigma2-plugin-extensions-yahooweather \
-	enigma2-plugin-extensions-weatherplugin \
+	enigma2-plugin-systemplugins-crossepg \
+	enigma2-plugin-systemplugins-hrtunerproxy \
+	enigma2-plugin-systemplugins-misplslcnscan \
+	enigma2-plugin-systemplugins-newvirtualkeyboard \
+	enigma2-plugin-systemplugins-satipserver \
+	enigma2-plugin-systemplugins-serviceapp \
 	alsa-plugins \
 	enigma2-plugins \
 	enigma2-plugins-alliance \
