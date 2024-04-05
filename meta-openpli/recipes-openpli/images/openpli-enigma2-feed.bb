@@ -200,6 +200,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-xmodem \
 	enigma2-plugin-extensions-yahooweather \
 	enigma2-plugin-extensions-weatherplugin \
+	enigma2-plugin-systemplugins-m3uiptv \
 	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-systemplugins-extnumberzap \
 	enigma2-plugin-systemplugins-extrafancontrol \
