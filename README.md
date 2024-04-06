@@ -89,9 +89,15 @@ sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/<
 sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/all all
 
 sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/cortexa15hf-neon-vfpv4 cortexa15hf-neon-vfpv4
-  
+
 sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/mips32el mips32el
 ```
+With recent Apache2, run:
+```
+sudo chown -Rf <username> openpli-dm920-python3/build/tmp/deploy/ipk
+```
+To fix permission problem with symlinks.
+
 Add hostname or ip address to the site.conf file (exist after make command), e.g. at the end of the file.
 ```
 DISTRO_HOST = " <your ip address or hostname> "
