@@ -66,7 +66,7 @@ cd openpli-dreambox-oe-core
 
 ![Selection_002](https://user-images.githubusercontent.com/1761779/130413735-8f2a0caf-e3f7-4264-b33e-b474ac13d245.png)
 
-When the build is finished, the image openpli-enigma2-GCC-12.2-(box-name).rootfs.tar.(xz_or_bz2_or_zip) is in the:
+When the build is finished, the image openpli-enigma2-GCC-13.2-(box-name).rootfs.tar.(xz_or_bz2_or_zip) is located in the:
 ```
 build/tmp/deploy/images/<box name>/
 ```
