@@ -16,11 +16,11 @@ https://github.com/oe-alliance/oe-alliance-core
 
 
 -Submodules bitbake, openembedded-core and meta-openembedded from master branch,<br>
-&nbsp;with git snapshot of March 4, 2024.<br>
+&nbsp;with git snapshot of April 7, 2024.<br>
 -GCC 13.2.0 <br>
 -Glibc 2.39<br>
 -ffmpeg 6.1<br>
--GStreamer 1.22.10<br>
+-GStreamer 1.22.11<br>
 -Python 3.12.2<br>
 -OpenSSL 3.2.1<br>
 -Busybox 1.36.1<br>
@@ -92,17 +92,15 @@ sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/c
 
 sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/mips32el mips32el
 ```
-With recent Apache2, run:
+With recent Apache2, fix file permission problem with symlinks:
 ```
 sudo chown -Rf <username> openpli-dm920-python3/build/tmp/deploy/ipk
 ```
-To fix permission problem with symlinks.
-
-Add hostname or ip address to the site.conf file (exist after make command), e.g. at the end of the file.
+<br>Add hostname or ip address to the site.conf file (file exist after make command), e.g. at the end of the file.
 ```
 DISTRO_HOST = " <your ip address or hostname> "
 ```
-To update the image or feed, run:
+<br>To update the image or feed, run:
 ```
 ./build_image.sh
 ```
