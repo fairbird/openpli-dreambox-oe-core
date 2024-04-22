@@ -13,5 +13,5 @@ SRC_URI[sha256sum] = "dd439a7b02433e47968c25a45a76704201c4ef2167deb49830281c379b
 
 do_install:append() {
 	# python-lzma already provides __init__.py(c) files
-	rm -rf ${D}${libdir}/${PYTHON_DIR}/site-packages/backports/__init__.py*
+	rm -rf ${D}${PYTHON_SITEPACKAGES_DIR}/backports/__init__.py*
 }
