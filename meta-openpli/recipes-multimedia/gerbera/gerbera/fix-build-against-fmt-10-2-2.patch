@@ -16,7 +16,7 @@ index 9fbb5d8e..0cf73054 100644
 +#include <fmt/ranges.h>
  
  struct SQLIdentifier {
-     SQLIdentifier(const std::string& name, char quote_begin, char quote_end)
+     SQLIdentifier(std::string name, char quote_begin, char quote_end)
 diff --git a/src/util/logger.h b/src/util/logger.h
 index 00e01630..1205dce1 100644
 --- a/src/util/logger.h
