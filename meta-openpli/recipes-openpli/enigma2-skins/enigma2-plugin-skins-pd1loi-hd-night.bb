@@ -8,7 +8,7 @@ inherit gitpkgv allarch
 PV = "2.6.1+git"
 PKGV = "2.6.1+git${GITPKGV}"
 
-SRC_URI = "git://github.com/PD1LOI/Pd1loi-HD-night.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/OpenPLi/Pd1loi-HD-night.git;protocol=https;branch=main"
 
 FILES:${PN} = "/usr"
 
