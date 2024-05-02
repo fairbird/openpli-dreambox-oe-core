@@ -11,7 +11,8 @@ PV = "24.3.0"
 PYPI_PACKAGE = "twisted"
 
 SRC_URI:append = "https://files.pythonhosted.org/packages/fc/8d/9c09d75173984d3b0f0dcf65d885fe61a06de11db2c30b1196d85f631cfc/twisted-${PV}.tar.gz \
-                  file://0001-Revert-Remove-twisted.web.client.getPage-and-friends.patch \
+		file://0001-fix-writing-after-channel-is-closed.patch \
+		file://0001-Revert-Remove-twisted.web.client.getPage-and-friends.patch \
 "
 SRC_URI:remove = "https://files.pythonhosted.org/packages/source/T/Twisted/Twisted-${PV}.tar.gz;downloadfilename=Twisted-${PV}.tar.gz"
 
@@ -22,3 +23,5 @@ PACKAGES += "${PN}-newsfragments"
 FILES:${PN}-newsfragments = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/newsfragments \
 "
+
+FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dist-info/*"
