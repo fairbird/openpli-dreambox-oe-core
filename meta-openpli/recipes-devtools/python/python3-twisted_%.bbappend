@@ -8,3 +8,5 @@ SRC_URI:append = " \
 "
 
 FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/twisted-${PV}.dist-info/*"
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
