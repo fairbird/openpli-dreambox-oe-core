@@ -25,3 +25,5 @@ FILES:${PN}-newsfragments = " \
 "
 
 FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dist-info/*"
+
+include python3-package-split.inc
