@@ -71,8 +71,8 @@ DEPENDS = "\
 
 DESCRIPTION_enigma2-plugin-extensions-btdevicesmanager = "BT devices manger to pair e.x keyboard or mouse"
 RDEPENDS_enigma2-plugin-extensions-btdevicesmanager = "bluez5-testtools bluez5 bluez-hcidump bluez-conf bluez-hidd bluez-alsa alsa-utils-aplay python3-pexpect"
-DESCRIPTION_enigma2-plugin-extensions-dlnaserver = "this is dlna server using minidlna"
-RDEPENDS_enigma2-plugin-extensions-dlnaserver = "minidlna"
+#DESCRIPTION_enigma2-plugin-extensions-dlnaserver = "this is dlna server using minidlna"
+#RDEPENDS_enigma2-plugin-extensions-dlnaserver = "minidlna"
 DESCRIPTION_enigma2-plugin-extensions-fempa = "Norwegian P4 FEM PAA radio show player."
 DESCRIPTION_enigma2-plugin-extensions-ondemand = "Watch on demand TV."
 RDEPENDS_enigma2-plugin-extensions-ondemand = "python3-beautifulsoup python3-dnspython python3-lxml python3-pyamf python3-simplejson"

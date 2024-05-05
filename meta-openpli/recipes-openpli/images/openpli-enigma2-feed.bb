@@ -162,6 +162,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-drivers-usbserial \
 	enigma2-plugin-extensions-arabicsavior \
 	enigma2-plugin-extensions-backupflash \
+	enigma2-plugin-extensions-dlnaserver \
 	enigma2-plugin-extensions-keyadder \
 	enigma2-plugin-extensions-raedquicksignal \
 	enigma2-plugin-extensions-backupsuite \
