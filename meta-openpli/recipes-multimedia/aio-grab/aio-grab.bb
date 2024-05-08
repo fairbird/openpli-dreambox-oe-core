@@ -11,12 +11,14 @@ PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
 GITHUB_URI ?= "git://github.com"
-SRC_URI = "${GITHUB_URI}/oe-alliance/${BPN}.git;protocol=https;branch=master \
-           file://use-size-t-as-data-type.patch \
-"
+SRC_URI = "${GITHUB_URI}/oe-alliance/${BPN}.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "ac_cv_prog_c_openmp=-fopenmp"
+
+GLIBC_64BIT_TIME_FLAGS = ""
+
+INSANE_SKIP = "32bit-time"
