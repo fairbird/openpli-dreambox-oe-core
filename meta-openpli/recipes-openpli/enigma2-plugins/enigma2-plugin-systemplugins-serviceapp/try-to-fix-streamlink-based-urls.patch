@@ -1,0 +1,25 @@
+From 44eae7772569d48e0955a8fc819ae543e66a1223 Mon Sep 17 00:00:00 2001
+From: jbleyel <jbleyel@gmx.net>
+Date: Sat, 11 May 2024 10:58:31 +0200
+Subject: try to fix streamlink based urls
+
+!! This needs to be well tested.
+
+# This patch tooken from https://github.com/oe-mirrors/serviceapp/commit/44eae7772569d48e0955a8fc819ae543e66a1223
+
+diff --git a/src/serviceapp/serviceapp.cpp b/src/serviceapp/serviceapp.cpp
+index 55ea9b3..d3cc9c2 100644
+--- a/src/serviceapp/serviceapp.cpp
++++ b/src/serviceapp/serviceapp.cpp
+@@ -226,7 +226,10 @@ eServiceApp::eServiceApp(eServiceReference ref):
+ 	m_decoder_time_valid_state(0)
+ {
+ 	options = createOptions(ref);
+-	extplayer = createPlayer(ref, getHeaders(ref.path));
++	if(!ref.alternativeurl.empty())
++		m_ref.path = ref.alternativeurl;
++
++	extplayer = createPlayer(ref, getHeaders(m_ref.path));
+ 	player = new PlayerBackend(extplayer);
+ 
+ 	m_subtitle_widget = 0;
