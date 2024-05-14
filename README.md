@@ -28,9 +28,21 @@ and more.<br>
 <br>
 <br>
 Feel free to send pull-request.
-
-Tested with Ubuntu 24.04 LTS (GNU/Linux 6.8.8-generic x86_64).
 <br>
+<br>
+Tested with Ubuntu 24.04 LTS.
+
+Due to new security features, run on each OS startup:
+
+See:
+https://ubuntu.com/blog/whats-new-in-security-for-ubuntu-24-04-lts
+
+If you cogt this error (Operation not permitted) You need to give
+<br>
+```
+sudo apparmor_parser -R /etc/apparmor.d/unprivileged_userns
+sudo mv /etc/apparmor.d/unprivileged_userns /etc/apparmor.d/disable
+```
 <br>
 # Dependencies:
 1. Install required packages
