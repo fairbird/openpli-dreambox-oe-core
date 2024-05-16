@@ -6,4 +6,8 @@ RDEPENDS:{$PN} = "lzo lz4"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-inherit update-rc.d
+SRC_URI:append = " file://update-resolv-conf.sh"
+
+do_install:append() {
+	install -m 775 ${WORKDIR}/update-resolv-conf.sh ${D}${sysconfdir}/openvpn/update-resolv-conf.sh
+}
