@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/oe-mirrors/yampmusicplayer"
 MAINTAINER = "oe-a"
 PRIORITY = "optional"
 require conf/license/license-gplv2.inc
-require conf/python/python3-compileall.inc
+require classes/python3-compileall.inc
 
 RDEPENDS:${PN} = "${PYTHON_PN}-sqlite3 ${PYTHON_PN}-tinytag ${PYTHON_PN}-beautifulsoup4"
 
