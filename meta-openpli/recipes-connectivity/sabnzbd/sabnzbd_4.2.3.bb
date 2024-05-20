@@ -14,7 +14,7 @@ RDEPENDS:${PN} = "\
     python3-cryptography python3-feedparser python3-cheroot python3-cherrypy python3-portend python3-chardet \
     python3-notify2 python3-puremagic python3-guessit python3-sgmllib3k python3-more-itertools python3-modules \
     python3-rebulk python3-babelfish python3-dateutil python3-pysocks python3-jaraco.context python3-setuptools \
-    python3-jaraco.functools python3-jaraco.collections python3-jaraco.text python3-jaraco.classes python3-sabctools \
+    python3-jaraco.functools python3-jaraco.collections python3-jaraco.text python3-jaraco.classes python3-sabctools python3-apprise \
     "
 
 RRECOMMENDS:${PN} = "par2cmdline unrar"
@@ -25,8 +25,8 @@ SRC_URI = "https://github.com/sabnzbd/sabnzbd/releases/download/${PV}/SABnzbd-${
     file://init-functions \
     "
 
-SRC_URI[md5sum] = "afb88648a2b90a06be8e0a336a711fc9"
-SRC_URI[sha256sum] = "f16314cf4032dcaccfd0b4af4d0e67a55c37f31870af3ca90f80d5f547ed8c25"
+SRC_URI[md5sum] = "6cc8ea77a4781c36e6146e90861c4fcf"
+SRC_URI[sha256sum] = "c9902c212df3e6b7208c850e6ceab244afc4b3e173459c425db9be4df902bd44"
 
 S = "${WORKDIR}/SABnzbd-${PV}"
 
