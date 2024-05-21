@@ -5,9 +5,8 @@ SECTION = "multimedia"
 LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
 
-SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;branch=python3;protocol=https \
+SRC_URI = "git://gitlab.com/MOHAMED_OS/e2iplayer.git;branch=main;protocol=https \
 	file://no-need-to-check-depends.patch \
-	file://fix-iAVSwitch-import.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -29,6 +28,10 @@ RRECOMMENDS:${PN} = " \
         python3-json \
         python3-shell \
         "
+
+do_install:append() {
+    rm -rf ${D}/${libdir}/enigma2/python/Plugins/Extensions/IPTVPlayer/bin
+}
 
 RDEPENDS:{PN}-src = "${PN}"
 
