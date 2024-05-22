@@ -2587,7 +2587,7 @@ index 90f4ecfd26..29334a500a 100644
 --- a/sysdeps/x86_64/Makefile
 +++ b/sysdeps/x86_64/Makefile
 @@ -13,6 +13,13 @@ ifeq ($(subdir),csu)
- gen-as-const-headers += features-offsets.sym link-defines.sym
+ gen-as-const-headers += link-defines.sym
  endif
  
 +ifeq ($(subdir),stdlib)
