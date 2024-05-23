@@ -147,3 +147,5 @@ sysroot_stage_all() {
 }
 
 INSANE_SKIP:${PN} = "installed-vs-shipped"
+
+CFLAGS += "-Wno-error=implicit-function-declaration"
