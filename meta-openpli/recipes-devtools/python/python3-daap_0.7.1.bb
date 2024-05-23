@@ -18,3 +18,5 @@ SRC_URI = "git://github.com/abdelgmartinezl/PythonDaap;protocol=https;branch=mas
 S = "${WORKDIR}/git"
 
 include python3-package-split.inc
+
+CFLAGS += "-Wno-error=int-conversion -Wno-error=implicit-function-declaration -Wno-error=incompatible-pointer-types"
