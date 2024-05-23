@@ -15,3 +15,5 @@ EXTRA_OEMAKE = " \
 	prefix=${prefix} libdir=${libdir} incdir=${includedir}/librtmp bindir=${bindir} mandir=${mandir}"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+CFLAGS += "-Wno-error=incompatible-pointer-types"
