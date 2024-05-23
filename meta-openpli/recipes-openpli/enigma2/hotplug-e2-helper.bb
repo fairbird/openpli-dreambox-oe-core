@@ -14,3 +14,5 @@ SRC_URI = "${GITHUB_URI}/OpenPLi/${BPN}.git;protocol=https;branch=master"
 S = "${WORKDIR}/git"
 
 inherit autotools
+
+CFLAGS += "-Wno-error=implicit-function-declaration"
