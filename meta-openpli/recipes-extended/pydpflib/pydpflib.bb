@@ -7,6 +7,7 @@ DEPENDS = "libusb-compat libusb1 python3"
 SRC_URI="git://github.com/atvcaptain/dpf-ax.git;branch=dreamlayers;protocol=https \
          file://set-python-version-to-312.patch \ 
          file://replace-py-ty-with-py--set-type.patch \
+         file://fix-incompatible-pointer-type.patch \
 "
 
 S = "${WORKDIR}/git"
