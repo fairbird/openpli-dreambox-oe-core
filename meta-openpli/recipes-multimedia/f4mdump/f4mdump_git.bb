@@ -38,7 +38,7 @@ SRCF4M =+ "src/tinyxml2.cpp"
 
 do_compile () {
 	rm -f *.o
-	${CC} ${SRCRTMP} -c -fdata-sections -ffunction-sections -Os -Wall -Wl,--gc-sections -I${D}/${libdir} -I${D}/${includedir} -I${S}/ext/librtmp -lz ${LDFLAGS}
+	${CC} ${SRCRTMP} -c -fdata-sections -ffunction-sections -Wno-incompatible-pointer-types -Os -Wall -Wl,--gc-sections -I${D}/${libdir} -I${D}/${includedir} -I${S}/ext/librtmp -lz ${LDFLAGS}
 	${CXX} ${SRCF4M} -Os -Wno-narrowing -lssl -lcrypto -lz -std=c++0x -I${S}/inc -I${S}/ext -I${S}/ext/librtmp *.o -o f4mdump ${LDFLAGS}
 	rm -f *.o
 }
