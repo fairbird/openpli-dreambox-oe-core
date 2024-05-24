@@ -12,7 +12,9 @@ inherit gittag allarch setuptools3-openplugins gettext
 PV = "git"
 PKGV = "${GITPKGVTAG}"
 
-SRC_URI = "git://github.com/oe-mirrors/yampmusicplayer.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/oe-mirrors/yampmusicplayer.git;protocol=https;branch=main \
+	file://setuptools-62.patch \
+"
 
 S = "${WORKDIR}/git"
 
