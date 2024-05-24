@@ -14,6 +14,7 @@ PKGV = "68+gitr${GITPKGV}"
 
 SRC_URI = "git://github.com/OpenVisionE2/exteplayer3.git;protocol=https;branch=master \
            file://port-to-ffmpeg7.patch \
+           file://fix-implicit-declaration-of-function.patch \
 "
 
 S = "${WORKDIR}/git"
