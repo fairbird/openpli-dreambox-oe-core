@@ -10,7 +10,9 @@ PV = "1.1+git"
 PKGV = "1.1+git${GITPKGV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/e2iplayer/e2isubparser.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/e2iplayer/e2isubparser.git;protocol=https;branch=master \
+           file://port-to-python3.patch \
+"
 
 S = "${WORKDIR}/git"
 
