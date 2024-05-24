@@ -1,0 +1,25 @@
+diff --git a/external/ffmpeg/put_bits.h b/external/ffmpeg/put_bits.h
+index d5ad189..aeabc0f 100755
+--- a/external/ffmpeg/put_bits.h
++++ b/external/ffmpeg/put_bits.h
+@@ -33,6 +33,8 @@
+ #include <limits.h>
+ #include "libavutil/avassert.h"
+ 
++unsigned av_mod_uintp2(unsigned a, unsigned p);
++
+ typedef struct PutBitContext {
+     uint32_t bit_buf;
+     int bit_left;
+diff --git a/external/ffmpeg/src/bitstream.c b/external/ffmpeg/src/bitstream.c
+index 7c8a2a2..61089d8 100755
+--- a/external/ffmpeg/src/bitstream.c
++++ b/external/ffmpeg/src/bitstream.c
+@@ -31,6 +31,7 @@
+ #include <libavutil/avassert.h>
+ #include <ffmpeg/put_bits.h>
+ 
++void *memcpy(void *dest, const void * src, size_t n);
+ 
+ void avpriv_align_put_bits(PutBitContext *s)
+ {
