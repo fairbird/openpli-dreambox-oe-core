@@ -7,18 +7,20 @@ require classes/python3-compileall.inc
 
 RDEPENDS:${PN} = "python3-sqlite3 python3-tinytag python3-beautifulsoup4"
 
-inherit gittag allarch setuptools3-openplugins gettext
+inherit gitpkgv gettext setuptools3-openplugins
 
-PV = "git"
-PKGV = "${GITPKGVTAG}"
+PV = "3.3.1+git"
+PKGV = "3.3.1+git${GITPKGV}"
 
-SRC_URI = "git://github.com/oe-mirrors/yampmusicplayer.git;protocol=https;branch=main \
-	file://setuptools-62.patch \
-"
+SRC_URI = "git://github.com/oe-mirrors/yampmusicplayer.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
 
+PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/YampMusicPlayer"
 do_install() {
+    install -d ${D}${PLUGINPATH}
+    cp -r ${S}/plugin/* ${D}${PLUGINPATH}
+    chmod a+rX ${D}${PLUGINPATH}
     install -d ${D}${sysconfdir}/enigma2
     echo 1234567890abcdef7890123456789012 > ${D}${sysconfdir}/enigma2/YampFanarttvPersonalApi.key
 }
