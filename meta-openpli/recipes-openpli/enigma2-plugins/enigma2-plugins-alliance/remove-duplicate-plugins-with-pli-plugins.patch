@@ -2,7 +2,7 @@ diff --git a/Makefile.am b/Makefile.am
 index d4ff451..47df8be 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -2,128 +2,40 @@ ACLOCAL_AMFLAGS = -I m4
+@@ -2,127 +2,40 @@ ACLOCAL_AMFLAGS = -I m4
  
  SUBDIRS = \
  	advhdmi \
@@ -63,7 +63,6 @@ index d4ff451..47df8be 100644
 -	ofdb \
 -	orfat \
 -	orfteletext \
--	partnerbox \
 -	permanentclock \
  	pipservicerelation \
  	podcast \
@@ -131,7 +130,7 @@ index d4ff451..47df8be 100644
  if TPM
  SUBDIRS += \
  	mytube \
-@@ -134,19 +46,13 @@ SUBDIRS += \
+@@ -134,25 +46,13 @@ SUBDIRS += \
  	pluginsort 
  endif
  
@@ -142,11 +141,17 @@ index d4ff451..47df8be 100644
 -endif
 -
  if REMOTETIMER2
- SUBDIRS += 	remotetimer2
+ SUBDIRS += remotetimer2
  else
- SUBDIRS += 	remotetimer
+ SUBDIRS += remotetimer
  endif
  
+-if PARTNERBOX2
+-SUBDIRS += partnerbox2
+-else
+-SUBDIRS += partnerbox
+-endif
+-
 -SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport mediathekviewweb
 +SUBDIRS += tetris Series2Folder epgexport
  
