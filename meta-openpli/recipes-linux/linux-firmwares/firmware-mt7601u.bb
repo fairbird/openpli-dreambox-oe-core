@@ -4,7 +4,8 @@ require conf/license/license-close.inc
 inherit allarch
 SRC_URI = "file://firmware-mt7601u.zip"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
 PACKAGES = "${PN}"
 FILES:${PN} += "${nonarch_base_libdir}/firmware"
