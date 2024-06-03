@@ -10,17 +10,6 @@ SRC_URI:append = " \
         file://0007-hls-main-thread-block.patch \
 "
 
-SRC_URI:remove = "file://0004-opencv-resolve-missing-opencv-data-dir-in-yocto-buil.patch"
-
-PACKAGECONFIG:append = " \
-    assrender faac faad libde265 neon opusparse resindvd rtmp \
-"
-
-PACKAGECONFIG:remove = "rsvg"
+PACKAGECONFIG:append = " faac faad opusparse rtmp"
 
 EXTRA_OEMESON:remove = "-Dkate=disabled"
-
-PV = "1.24.3"
-
-SRC_URI[md5sum] = "4371fd500cc142be875c0ca7b24398cf"
-SRC_URI[sha256sum] = "e90f26c7dc9c76f4aa599b758cfd6d8c10d6a0b9cb265ba2c3c9bdf3888558f8"
