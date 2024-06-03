@@ -7,7 +7,8 @@ inherit allarch
 
 SRC_URI = "file://dvb-demod-avl6882.zip"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
 PACKAGES = "${PN}"
 FILES:${PN} += "${nonarch_base_libdir}/firmware"

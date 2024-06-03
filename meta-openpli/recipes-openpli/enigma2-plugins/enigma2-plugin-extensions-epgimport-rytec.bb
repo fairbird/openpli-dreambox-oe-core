@@ -9,7 +9,8 @@ inherit allarch
 PV = "20230617"
 SRC_URI = "http://rytecepg.wanwizard.eu/rytec.sources.xml.${PV}.gz"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
 RREPLACES:${PN} = "enigma2-plugin-extensions-xmltvimport-rytec"
 RCONFLICTS:${PN} = "enigma2-plugin-extensions-xmltvimport-rytec"
