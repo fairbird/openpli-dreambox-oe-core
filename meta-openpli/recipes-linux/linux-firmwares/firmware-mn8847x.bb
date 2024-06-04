@@ -1,7 +1,8 @@
 LICENSE = "CLOSED"
 SRC_URI = "file://mn8847x.zip"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
 PACKAGES = "${PN}"
 FILES:${PN} += "${nonarch_base_libdir}/firmware"

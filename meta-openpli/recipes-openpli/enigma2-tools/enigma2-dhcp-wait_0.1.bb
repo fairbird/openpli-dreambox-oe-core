@@ -5,7 +5,8 @@ require conf/license/license-gplv2.inc
 
 SRC_URI = "file://enigma2_dhcp_wait.sh"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
 do_install() {
 	install -d ${D}/usr/bin

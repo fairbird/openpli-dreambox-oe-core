@@ -5,7 +5,8 @@ DEPENDS = "glib-2.0 bluez5"
 
 SRC_URI = "file://main.conf file://uart.conf"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
 do_install () {
     install -m 0755 -d ${D}${sysconfdir}/bluetooth/
