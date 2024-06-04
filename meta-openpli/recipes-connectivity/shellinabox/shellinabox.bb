@@ -45,3 +45,7 @@ do_install:append() {
         install -m 755 ${UNPACKDIR}/shellinabox.init ${D}${sysconfdir}/init.d/shellinabox
     fi
 }
+
+CFLAGS = "-Wno-error=incompatible-pointer-types \
+	  -Wno-error=implicit-function-declaration \
+"
