@@ -8,6 +8,10 @@ PV = "1.2"
 SRC_URI = "file://stb-hwclock \
            file://stb-hwclock.init \
 "
+
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
+
 inherit update-rc.d
 
 INITSCRIPT_NAME = "stb-hwclock"
