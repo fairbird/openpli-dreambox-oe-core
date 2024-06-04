@@ -25,3 +25,8 @@ do_install() {
     install -m 755 ${S}/ofgwrite_bin ${D}/usr/bin
     install -m 755 ${S}/ofgwrite_test ${D}/usr/bin
 }
+
+CFLAGS = "-Wno-error=implicit-function-declaration \
+	   -Wno-error=discarded-qualifiers \
+	   -Wno-error=discarded-array-qualifiers \
+"
