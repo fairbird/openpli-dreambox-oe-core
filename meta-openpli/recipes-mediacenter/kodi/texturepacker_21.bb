@@ -1,6 +1,6 @@
 SUMMARY = "Kodi texture packer"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM ?= "file:///${WORKDIR}/git/LICENSE.md;md5=7b423f1c9388eae123332e372451a4f7"
+LIC_FILES_CHKSUM ?= "file:///${UNPACKDIR}/git/LICENSE.md;md5=7b423f1c9388eae123332e372451a4f7"
 
 SRCREV = "${AUTOREV}"
 PV = "21.0+gitr"
@@ -17,9 +17,9 @@ DEPENDS = " \
     lzo \
 "
 
-OECMAKE_CXX_FLAGS:append = " -DTARGET_POSIX -std=gnu++17 -I${WORKDIR}/git/xbmc/linux"
+OECMAKE_CXX_FLAGS:append = " -DTARGET_POSIX -std=gnu++17 -I${UNPACKDIR}/git/xbmc/linux"
 
-EXTRA_OECMAKE = "-DKODI_SOURCE_DIR=${WORKDIR}/git"
+EXTRA_OECMAKE = "-DKODI_SOURCE_DIR=${UNPACKDIR}/git"
 
 do_install() {
     install -d ${D}${bindir}

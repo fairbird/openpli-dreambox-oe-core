@@ -20,8 +20,8 @@ S = "${WORKDIR}/DPO_RT3070_LinuxSTA_V${PV}_20100604"
 
 # Source is in .tar.tar.bz2 format.
 do_unpack() {
-    mkdir -p ${WORKDIR}
-    cd ${WORKDIR}
+    mkdir -p ${UNPACKDIR}
+    cd ${UNPACKDIR}
     bzip2 -dc %s ${DL_DIR}/DPO_RT3070_LinuxSTA_V${PV}_20100604.tar.bz2 | tar x --no-same-owner -O -f - | tar x --no-same-owner -f -
 }
 

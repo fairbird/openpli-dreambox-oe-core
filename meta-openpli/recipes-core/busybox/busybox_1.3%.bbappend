@@ -48,13 +48,13 @@ RPROVIDES:${PN}-telnetd += "virtual-telnetd"
 
 do_install:append() {
     if grep "CONFIG_FEATURE_TELNETD_STANDALONE=y" ${B}/.config; then
-	install -m 0755 ${WORKDIR}/telnetd ${D}${sysconfdir}/init.d/telnetd.${BPN}
+	install -m 0755 ${UNPACKDIR}/telnetd ${D}${sysconfdir}/init.d/telnetd.${BPN}
 	sed -i "s:/usr/sbin/:${sbindir}/:" ${D}${sysconfdir}/init.d/telnetd.${BPN}
     fi
     rm -rf ${D}${sysconfdir}/mdev
     sed -i "/[/][s][h]*$/d" ${D}${sysconfdir}/busybox.links.nosuid
-    install -m 0755 ${WORKDIR}/vi.sh ${D}${base_bindir}/vi.sh
-    install -m 0755 ${WORKDIR}/ntp.script ${D}${sysconfdir}/udhcpc.d/55ntp
+    install -m 0755 ${UNPACKDIR}/vi.sh ${D}${base_bindir}/vi.sh
+    install -m 0755 ${UNPACKDIR}/ntp.script ${D}${sysconfdir}/udhcpc.d/55ntp
 }
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${P}:"

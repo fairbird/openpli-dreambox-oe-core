@@ -27,10 +27,10 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
 do_install() {
     install -d ${D}${sysconfdir}/modules-load.d
-    install -m 0644 ${WORKDIR}/modules ${D}${sysconfdir}/modules-load.d/${PN}.conf
+    install -m 0644 ${UNPACKDIR}/modules ${D}${sysconfdir}/modules-load.d/${PN}.conf
     install -d ${D}/lib/modules/${DM_LOCALVERSION}/extra
-    install -m 0644 ${WORKDIR}/LICENSE ${D}/lib/modules/${DM_LOCALVERSION}/extra
-    install -m 0644 ${WORKDIR}/*.ko ${D}/lib/modules/${DM_LOCALVERSION}/extra
+    install -m 0644 ${UNPACKDIR}/LICENSE ${D}/lib/modules/${DM_LOCALVERSION}/extra
+    install -m 0644 ${UNPACKDIR}/*.ko ${D}/lib/modules/${DM_LOCALVERSION}/extra
 }
 
 PACKAGES = "${PN}"

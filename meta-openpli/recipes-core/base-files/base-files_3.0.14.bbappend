@@ -18,10 +18,10 @@ do_install:append() {
 	rm -fr ${D}/tmp
 
 	install -d ${D}${sysconfdir}/profile.d
-	install -m 0644 ${WORKDIR}/utf8.sh ${D}${sysconfdir}/profile.d/utf8.sh
+	install -m 0644 ${UNPACKDIR}/utf8.sh ${D}${sysconfdir}/profile.d/utf8.sh
 
 	install -d ${D}${sysconfdir}/udev
-	install -m 0755 ${WORKDIR}/mount-helper.sh       ${D}${sysconfdir}/udev
+	install -m 0755 ${UNPACKDIR}/mount-helper.sh       ${D}${sysconfdir}/udev
 
 	# Inject machine specific blacklists into mount-helper:
 	perl -i -pe 's:(\@BLACKLISTED\@):${MTD_BLACK}:s' ${D}${sysconfdir}/udev/mount-helper.sh

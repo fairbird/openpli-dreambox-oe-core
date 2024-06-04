@@ -14,7 +14,7 @@ do_install:append() {
 	rm -f ${D}${sysconfdir}/auto.smb ${D}${sysconfdir}/auto.misc ${D}${sysconfdir}/autofs_ldap_auth.conf
 	sed -i 's/^TIMEOUT=300/TIMEOUT=30/' ${D}${sysconfdir}/default/autofs
 	install -d ${D}${sysconfdir}/default/volatiles
-	install -m 644 ${WORKDIR}/99_autofs ${D}${sysconfdir}/default/volatiles/99_autofs
+	install -m 644 ${UNPACKDIR}/99_autofs ${D}${sysconfdir}/default/volatiles/99_autofs
 }
 
 pkg_postinst:${PN} () {

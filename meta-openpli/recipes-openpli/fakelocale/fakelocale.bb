@@ -29,13 +29,13 @@ RPROVIDES:${PN} = "virtual-locale-ar virtual-locale-bg virtual-locale-ca virtual
 
 do_install() {
 	install -d ${D}${LOCALEDIR2}
-	install ${WORKDIR}/locale.alias ${D}${LOCALEDIR2}
+	install ${UNPACKDIR}/locale.alias ${D}${LOCALEDIR2}
 
 	install -d ${D}${LOCALEDIR}
 	cp -r --preserve=mode,links ${S}/* ${D}/${LOCALEDIR}
 
 	install -d ${D}${LOCALEDIR}/fake/LC_MESSAGES
-	install ${WORKDIR}/SYS_LC_MESSAGES ${D}${LOCALEDIR}/fake/LC_MESSAGES/
+	install ${UNPACKDIR}/SYS_LC_MESSAGES ${D}${LOCALEDIR}/fake/LC_MESSAGES/
 
 	for lang in ${LANGUAGES}; do
 		ln -s ../fake/LC_MESSAGES ${D}${LOCALEDIR}/${lang}/LC_MESSAGES

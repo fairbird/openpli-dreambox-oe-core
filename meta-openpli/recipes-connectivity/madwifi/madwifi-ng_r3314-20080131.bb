@@ -29,29 +29,29 @@ addtask postpatch after do_patch before do_configure
 
 do_postpatch() {
         rm -rf hal
-        cp -a ${WORKDIR}/ath_hal-${HAL_VERSION} hal
-        rm -f ${WORKDIR}/patches/104-autocreate_none.patch
-        rm -f ${WORKDIR}/patches/446-single_module.patch
-        rm -f ${WORKDIR}/patches/470-mac_addresss_from_ath5k_platform_data.patch
-        for i in ${WORKDIR}/patches/*.patch; do
+        cp -a ${UNPACKDIR}/ath_hal-${HAL_VERSION} hal
+        rm -f ${UNPACKDIR}/patches/104-autocreate_none.patch
+        rm -f ${UNPACKDIR}/patches/446-single_module.patch
+        rm -f ${UNPACKDIR}/patches/470-mac_addresss_from_ath5k_platform_data.patch
+        for i in ${UNPACKDIR}/patches/*.patch; do
                 patch -p1 -i $i
         done
-        patch -p1 -i ${WORKDIR}/remove-wprobe.patch
-        patch -p1 -i ${WORKDIR}/fix-module-autoload.patch
-        patch -p1 -i ${WORKDIR}/fix-build-3.1.patch
-        patch -p1 -i ${WORKDIR}/fix-build-3.2.patch
-        patch -p1 -i ${WORKDIR}/ath-rate-ctlname.patch
-        patch -p1 -i ${WORKDIR}/set-affinity-hint.patch
-        patch -p1 -i ${WORKDIR}/workaround-high-interrupt-latency.patch
+        patch -p1 -i ${UNPACKDIR}/remove-wprobe.patch
+        patch -p1 -i ${UNPACKDIR}/fix-module-autoload.patch
+        patch -p1 -i ${UNPACKDIR}/fix-build-3.1.patch
+        patch -p1 -i ${UNPACKDIR}/fix-build-3.2.patch
+        patch -p1 -i ${UNPACKDIR}/ath-rate-ctlname.patch
+        patch -p1 -i ${UNPACKDIR}/set-affinity-hint.patch
+        patch -p1 -i ${UNPACKDIR}/workaround-high-interrupt-latency.patch
 }
 
 do_postpatch:append:dm8000() {
-        patch -p1 -i ${WORKDIR}/dm8000-nand-error-hack.patch
+        patch -p1 -i ${UNPACKDIR}/dm8000-nand-error-hack.patch
 }
 
 do_install:append() {
 	install -d ${D}${sysconfdir}/network/if-pre-up.d
-	install -m 0755 ${WORKDIR}/madwifi-smp-affinity ${D}${sysconfdir}/network/if-pre-up.d
+	install -m 0755 ${UNPACKDIR}/madwifi-smp-affinity ${D}${sysconfdir}/network/if-pre-up.d
 	install -d ${D}${sysconfdir}/network/if-post-down.d
 	ln -sf ../if-pre-up.d/madwifi-smp-affinity ${D}${sysconfdir}/network/if-post-down.d
 }

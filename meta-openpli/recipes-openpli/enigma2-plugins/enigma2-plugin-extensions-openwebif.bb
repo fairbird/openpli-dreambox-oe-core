@@ -41,7 +41,7 @@ SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=ht
 
 SRC_URI:append_dm8000 = " file://get-rid-of-orgdream-check.patch"
 
-S="${WORKDIR}/git"
+S = "${WORKDIR}/git"
 
 do_compile() {
 	rm -rf ${S}/plugin/public/static/remotes >/dev/null 2>&1 || true

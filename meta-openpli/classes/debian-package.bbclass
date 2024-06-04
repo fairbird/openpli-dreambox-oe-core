@@ -8,7 +8,7 @@
 DEBIAN_SRC_URI ?= ""
 SRC_URI = "${DEBIAN_SRC_URI}"
 
-DEBIAN_UNPACK_DIR ?= "${WORKDIR}/${BP}"
+DEBIAN_UNPACK_DIR ?= "${UNPACKDIR}/${BP}"
 S = "${DEBIAN_UNPACK_DIR}"
 DPV ?= "${PV}"
 DEBIAN_USE_SNAPSHOT ?= "0"
@@ -21,13 +21,13 @@ DEBIAN_SDO_URL ?= "http://snapshot.debian.org"
 # Make "debian" sub folder be inside source code folder
 addtask debian_unpack_extra after do_unpack before do_debian_patch
 do_debian_unpack_extra() {
-	if [ -d ${WORKDIR}/debian ]; then
+	if [ -d ${UNPACKDIR}/debian ]; then
 		rm -rf ${DEBIAN_UNPACK_DIR}/debian
-		mv ${WORKDIR}/debian ${DEBIAN_UNPACK_DIR}/
-	elif [ -f ${WORKDIR}/${BPN}_${DPV}.diff ]; then
+		mv ${UNPACKDIR}/debian ${DEBIAN_UNPACK_DIR}/
+	elif [ -f ${UNPACKDIR}/${BPN}_${DPV}.diff ]; then
 		rm -rf ${DEBIAN_UNPACK_DIR}/debian
 		cd ${DEBIAN_UNPACK_DIR}
-		patch -p1 < ${WORKDIR}/${BPN}_${DPV}.diff
+		patch -p1 < ${UNPACKDIR}/${BPN}_${DPV}.diff
 	fi
 }
 

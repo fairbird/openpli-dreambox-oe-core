@@ -10,4 +10,4 @@ PKGV = "2.0+git${GITPKGV}"
 
 SRC_URI = "git://github.com/scriptmelvin/enigma2-plugin-extensions-infobarweather.git;protocol=https;branch=main"
 
-S="${WORKDIR}/git"
+S = "${WORKDIR}/git"

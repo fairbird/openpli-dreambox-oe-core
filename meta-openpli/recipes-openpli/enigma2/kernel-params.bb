@@ -15,5 +15,5 @@ CONFFILES:${PN} = "${sysconfdir}/sysctl.conf"
 
 do_install() {
 	install -d ${D}${sysconfdir}
-	install -m 0640 ${WORKDIR}/sysctl.conf ${D}${sysconfdir}/sysctl.conf
+	install -m 0640 ${UNPACKDIR}/sysctl.conf ${D}${sysconfdir}/sysctl.conf
 }

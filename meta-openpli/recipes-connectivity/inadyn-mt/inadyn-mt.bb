@@ -30,7 +30,7 @@ do_install() {
 	install -d ${D}${bindir}
 	install -m 755 ${B}/bin/linux/inadyn-mt ${D}${bindir}
 	install -d ${D}${sysconfdir}
-	install -m 644 ${WORKDIR}/inadyn.conf ${D}${sysconfdir}
+	install -m 644 ${UNPACKDIR}/inadyn.conf ${D}${sysconfdir}
 	install -d ${D}${sysconfdir}/init.d
-	install -m 755 ${WORKDIR}/inadyn-mt.sh ${D}${sysconfdir}/init.d/inadyn-mt
+	install -m 755 ${UNPACKDIR}/inadyn-mt.sh ${D}${sysconfdir}/init.d/inadyn-mt
 }

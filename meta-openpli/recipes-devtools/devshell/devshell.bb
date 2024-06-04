@@ -49,7 +49,7 @@ do_install() {
 do_deploy() {
 	shellfile="${TARGET_PREFIX}${DISTRO}-${MACHINE}-devshell"
 
-	cd ${WORKDIR}
+	cd ${UNPACKDIR}
 
 	cp $shellfile tmpfile
 	echo "#!/bin/bash --rcfile" > $shellfile

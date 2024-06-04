@@ -27,9 +27,9 @@ do_package_qa[noexec] = "1"
 
 do_install:prepend() {
 	install -d ${B}${datadir}/fonts
-	cp -f ${WORKDIR}/OpenSans-Bold.ttf ${B}${datadir}/fonts/OpenSans-Bold.ttf
-	cp -f ${WORKDIR}/OpenSans-Regular.ttf ${B}${datadir}/fonts/OpenSans-Regular.ttf
-	cp -f ${WORKDIR}/segoe-ui-bold.ttf ${B}${datadir}/fonts/segoe-ui-bold.ttf
+	cp -f ${UNPACKDIR}/OpenSans-Bold.ttf ${B}${datadir}/fonts/OpenSans-Bold.ttf
+	cp -f ${UNPACKDIR}/OpenSans-Regular.ttf ${B}${datadir}/fonts/OpenSans-Regular.ttf
+	cp -f ${UNPACKDIR}/segoe-ui-bold.ttf ${B}${datadir}/fonts/segoe-ui-bold.ttf
 }
 
 do_install() {

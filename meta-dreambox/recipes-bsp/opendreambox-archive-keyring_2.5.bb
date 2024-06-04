@@ -10,7 +10,7 @@ S = "${WORKDIR}"
 
 do_install() {
     install -d ${D}${sysconfdir}/apt/trusted.gpg.d
-    install -m 644 ${WORKDIR}/opendreambox-krogoth.gpg ${D}${sysconfdir}/apt/trusted.gpg.d
+    install -m 644 ${UNPACKDIR}/opendreambox-krogoth.gpg ${D}${sysconfdir}/apt/trusted.gpg.d
 }
 
 RDEPENDS:${PN} = "gpgv"

@@ -196,9 +196,9 @@ EXTRA_OECMAKE = " \
     -DENABLE_DVDCSS=OFF \
     -DENABLE_DEBUGFISSION=OFF \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-    -Dgroovy_SOURCE_DIR=${WORKDIR}/groovy-${PV_groovy} \
-    -Dapache-commons-lang_SOURCE_DIR=${WORKDIR}/commons-lang3-${PV_commons-lang3} \
-    -Dapache-commons-text_SOURCE_DIR=${WORKDIR}/commons-text-${PV_commons-text} \
+    -Dgroovy_SOURCE_DIR=${UNPACKDIR}/groovy-${PV_groovy} \
+    -Dapache-commons-lang_SOURCE_DIR=${UNPACKDIR}/commons-lang3-${PV_commons-lang3} \
+    -Dapache-commons-text_SOURCE_DIR=${UNPACKDIR}/commons-text-${PV_commons-text} \
 "
 
 # OECMAKE_GENERATOR="Unix Makefiles"

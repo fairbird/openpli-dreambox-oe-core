@@ -24,14 +24,14 @@ do_install:append() {
     cp -R ${S}/python/plugin/EnigmaLight ${D}${libdir}/enigma2/python/Plugins/Extensions
 
     install -d ${D}/home/elight-addons
-    cp -R ${WORKDIR}/git/elight-addons/config_samples ${D}/home/elight-addons
+    cp -R ${UNPACKDIR}/git/elight-addons/config_samples ${D}/home/elight-addons
 
     install -d ${D}/home/elight-addons/profiles_empty
     cp ${S}/python/plugin/EnigmaLight/profiles/* ${D}/home/elight-addons/profiles_empty
 
     install -d ${D}/home/elight-addons/wifilight
-    cp -R ${WORKDIR}/git/elight-addons/wifilight ${D}/home/elight-addons/
-    cp -R ${WORKDIR}/git/elight-addons/config_samples ${D}/home/elight-addons/wifilight
+    cp -R ${UNPACKDIR}/git/elight-addons/wifilight ${D}/home/elight-addons/
+    cp -R ${UNPACKDIR}/git/elight-addons/config_samples ${D}/home/elight-addons/wifilight
 }
 
 

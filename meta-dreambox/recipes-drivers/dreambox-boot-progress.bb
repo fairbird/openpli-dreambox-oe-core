@@ -17,7 +17,7 @@ do_install () {
 #
 	install -d ${D}${sysconfdir}/init.d
 	install -d ${D}${sysconfdir}/rcS.d
-	install -m 0755 ${WORKDIR}/progress ${D}${sysconfdir}/init.d
+	install -m 0755 ${UNPACKDIR}/progress ${D}${sysconfdir}/init.d
 #
 # Create runlevel links
 #

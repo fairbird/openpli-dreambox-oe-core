@@ -4,7 +4,7 @@ SRC_URI:append = " file://alsactl.conf"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/
-    install -m 0644 ${WORKDIR}/alsactl.conf ${D}${sysconfdir}/
+    install -m 0644 ${UNPACKDIR}/alsactl.conf ${D}${sysconfdir}/
 }
 
 FILES:${PN}:append = " ${sysconfdir}/ "

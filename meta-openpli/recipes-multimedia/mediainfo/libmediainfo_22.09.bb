@@ -5,7 +5,7 @@ HOMEPAGE = "https://mediaarea.net/en/MediaInfo"
 SECTION = "libs"
 PRIORITY = "optional"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/MediaInfoLib/LICENSE;md5=8f93c85175cbc94ea160ad08cc157822"
+LIC_FILES_CHKSUM = "file://${UNPACKDIR}/MediaInfoLib/LICENSE;md5=8f93c85175cbc94ea160ad08cc157822"
 
 DEPENDS += "libtinyxml2 libzen zlib"
 

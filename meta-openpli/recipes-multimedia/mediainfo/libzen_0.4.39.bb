@@ -6,7 +6,7 @@ HOMEPAGE = "https://mediaarea.net/en/MediaInfo"
 SECTION = "libs"
 PRIORITY = "optional"
 LICENSE = "Zlib"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/ZenLib/License.txt;md5=3fc93316cd7abee66f851588fbcde985"
+LIC_FILES_CHKSUM = "file://${UNPACKDIR}/ZenLib/License.txt;md5=3fc93316cd7abee66f851588fbcde985"
 
 SRC_URI= "https://mediaarea.net/download/source/libzen/${PV}/libzen_${PV}.tar.bz2"
 SRC_URI[md5sum] = "b1087fb2cbf3de4d7d5f7344d1f89bea"

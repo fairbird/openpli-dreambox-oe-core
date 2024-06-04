@@ -14,7 +14,7 @@ RMWORK_ORIG_TASK := "${BB_DEFAULT_TASK}"
 BB_DEFAULT_TASK = "rm_work_all"
 
 do_rm_work () {
-    cd ${WORKDIR}
+    cd ${UNPACKDIR}
     for dir in *
     do
         if [ `basename ${S}` = $dir ]; then
@@ -25,7 +25,7 @@ do_rm_work () {
     done
     # Need to add pseudo back or subsqeuent work in this workdir
     # might fail since setscene may not rerun to recreate it
-    mkdir ${WORKDIR}/pseudo/
+    mkdir ${UNPACKDIR}/pseudo/
 
     # Change normal stamps into setscene stamps as they better reflect the
     # fact WORKDIR is now empty

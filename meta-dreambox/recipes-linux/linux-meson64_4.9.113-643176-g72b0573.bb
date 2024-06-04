@@ -30,7 +30,7 @@ KERNEL_CC += "${TOOLCHAIN_OPTIONS}"
 KERNEL_LD += "${TOOLCHAIN_OPTIONS}"
 
 S = "${WORKDIR}/${BPN}-v${PV}"
-B = "${WORKDIR}/build"
+B = "${UNPACKDIR}/build"
 
 CMDLINE = "${@kernel_console(d)} root=/dev/mmcblk0p7 rootwait rootfstype=ext4 no_console_suspend"
 
