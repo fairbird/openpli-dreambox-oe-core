@@ -12,7 +12,8 @@ SRC_URI = "file://__init__.py \
 "
 RDEPENDS:${PN} = "minidlna"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 FILES:${PN} = "${libdir}/enigma2/python/Plugins/Extensions/DLNAServer/*"
 PACKAGES = "${PN}"
 

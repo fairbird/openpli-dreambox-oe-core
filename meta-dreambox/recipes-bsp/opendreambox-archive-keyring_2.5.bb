@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f242b441da515e30c7b07f2cc6f4d5c"
 SRC_URI = "file://opendreambox-krogoth.gpg \
            file://LICENSE"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
 do_install() {
     install -d ${D}${sysconfdir}/apt/trusted.gpg.d
