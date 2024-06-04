@@ -27,6 +27,9 @@ SRC_URI = "http://http.debian.net/debian/pool/main/f/flip/flip_${PV}.orig.tar.gz
            file://30-stdin.patch \
            file://copyright"
 
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
+
 SRC_URI[md5sum] = "beaf2ec0c986fec9862539da72fbbc62"
 SRC_URI[sha256sum] = "4cd45e581c71d7bcf1ab824a47fb9263fe5371ce702879a7d2efa08d27253471"
 
