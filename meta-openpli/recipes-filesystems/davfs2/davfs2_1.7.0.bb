@@ -11,6 +11,7 @@ RRECOMMENDS:${PN} = "kernel-module-coda"
 SRC_URI = "http://download.savannah.nongnu.org/releases/davfs2/${BP}.tar.gz \
            file://0001-allow-building-against-newer-neon.patch \
            file://neon-config \
+           file://davfs2.cfg \
            file://volatiles"
 
 SRC_URI[sha256sum] = "251db75a27380cca1330b1b971700c5e5dcc0c90e5a47622285f0140edfe3a2f"
@@ -28,8 +29,8 @@ EXTRA_OECONF = "--with-neon \
 CONFFILES:${PN} = "${sysconfdir}/davfs2/davfs2.conf ${sysconfdir}/davfs2/secrets"
 
 do_install:prepend () {
-	cp ${UNPACKDIR}/davfs2-${PV}/etc/davfs2.conf ${UNPACKDIR}/build/etc
-	cp ${UNPACKDIR}/davfs2-${PV}/etc/secrets ${UNPACKDIR}/build/etc
+	cp ${WORKDIR}/davfs2-${PV}/etc/davfs2.conf ${WORKDIR}/build/etc
+	cp ${WORKDIR}/davfs2-${PV}/etc/secrets ${WORKDIR}/build/etc
 }
 
 do_install:append () {
