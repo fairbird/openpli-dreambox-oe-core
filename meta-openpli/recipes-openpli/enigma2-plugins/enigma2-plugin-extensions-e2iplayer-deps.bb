@@ -22,6 +22,9 @@ PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 PR = "r2"
 
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
+
 SRC_URI = "git://github.com/oe-mirrors/e2iplayer-deps.git;protocol=https;branch=master"
 
 S1 = "${UNPACKDIR}/git/e2isubparser"
