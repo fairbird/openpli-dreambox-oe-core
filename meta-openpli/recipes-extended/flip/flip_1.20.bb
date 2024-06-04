@@ -17,7 +17,7 @@ LICENSE = "GPL-2.0-or-later"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/debian:"
 
-LIC_FILES_CHKSUM = "file://../copyright;md5=b6e7f553d5b9c366d42bfceaf296636f"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/sources-unpack/copyright;md5=b6e7f553d5b9c366d42bfceaf296636f"
 
 PV = "1.20"
 
@@ -26,9 +26,6 @@ SRC_URI = "http://http.debian.net/debian/pool/main/f/flip/flip_${PV}.orig.tar.gz
            file://20-manpage.patch \
            file://30-stdin.patch \
            file://copyright"
-
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
 
 SRC_URI[md5sum] = "beaf2ec0c986fec9862539da72fbbc62"
 SRC_URI[sha256sum] = "4cd45e581c71d7bcf1ab824a47fb9263fe5371ce702879a7d2efa08d27253471"
