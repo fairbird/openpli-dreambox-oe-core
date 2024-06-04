@@ -57,7 +57,6 @@ IMAGE_INSTALL = " \
 	cdtextinfo \
 	cifs-utils \
 	cronie \
-	dhrystone \
 	distro-feed-configs \
 	dropbear \
 	e2fsprogs-e2fsck \
