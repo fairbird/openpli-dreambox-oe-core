@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/CheetahTemplate3/cheetah3;protocol=https;branch=mast
 
 SRCREV = "854b47d528f912fc7bd520277f1c11d1b127f56b"
 
-S="${WORKDIR}/git"
+S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} = "python3-pickle python3-pprint"
 RDEPENDS:${PN}:class-native = ""

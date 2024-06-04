@@ -14,7 +14,7 @@ do_compile() {
 
 do_install() {
     install -d ${D}/etc/init.d/
-    install -m 0755 ${WORKDIR}/dm-shutdown.sh ${D}/etc/init.d/dm-shutdown
+    install -m 0755 ${UNPACKDIR}/dm-shutdown.sh ${D}/etc/init.d/dm-shutdown
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

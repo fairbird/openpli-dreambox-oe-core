@@ -23,7 +23,7 @@ DEPENDS = "zlib ucl-native"
 S = "${WORKDIR}/upx-${PV}-src"
 
 do_compile() {
-    oe_runmake UPX_LZMA_VERSION=0x465 UPX_LZMADIR="${WORKDIR}/lzma-465" all
+    oe_runmake UPX_LZMA_VERSION=0x465 UPX_LZMADIR="${UNPACKDIR}/lzma-465" all
 }
 
 do_install:append() {

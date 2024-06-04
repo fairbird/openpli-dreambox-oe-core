@@ -23,13 +23,13 @@ do_compile() {
 
 do_install() {
     install -d ${D}${base_bindir}
-    install -m 755 ${WORKDIR}/fake-hwclock ${D}${base_bindir}
+    install -m 755 ${UNPACKDIR}/fake-hwclock ${D}${base_bindir}
 
     install -d ${D}${sysconfdir}/default
-    install -m 644 ${WORKDIR}/fake-hwclock.default ${D}${sysconfdir}/default/fake-hwclock
+    install -m 644 ${UNPACKDIR}/fake-hwclock.default ${D}${sysconfdir}/default/fake-hwclock
 
     install -d ${D}${INIT_D_DIR}
-    install -m 755 ${WORKDIR}/fake-hwclock.init ${D}${INIT_D_DIR}/fake-hwclock
+    install -m 755 ${UNPACKDIR}/fake-hwclock.init ${D}${INIT_D_DIR}/fake-hwclock
 }
 
 pkg_postinst:${PN}:prepend () {

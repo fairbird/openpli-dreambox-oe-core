@@ -32,8 +32,8 @@ INITSCRIPT_PARAMS = "stop 00 0 6 ."
 
 do_install:append() {
 	install -m 755 -d ${D}${sysconfdir}
-	install -m 644 ${WORKDIR}/minidlna.conf ${D}${sysconfdir}/
+	install -m 644 ${UNPACKDIR}/minidlna.conf ${D}${sysconfdir}/
 	install -m 755 -d ${D}${sysconfdir}/init.d/
-	install -m 755 ${WORKDIR}/readymedia.sh ${D}${sysconfdir}/init.d/
+	install -m 755 ${UNPACKDIR}/readymedia.sh ${D}${sysconfdir}/init.d/
 	install -m 755 -d ${D}${localstatedir}/lib/readymedia/
 }

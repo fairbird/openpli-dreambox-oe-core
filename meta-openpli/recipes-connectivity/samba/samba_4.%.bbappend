@@ -78,18 +78,18 @@ do_install:append() {
 	rm -fR ${D}${sysconfdir}/sysconfig
 	rm -f ${D}${sysconfdir}/init.d/samba
 	install -d ${D}${sysconfdir}/pam.d
-	install -m 644 ${WORKDIR}/pam.config ${D}${sysconfdir}/pam.d/samba
+	install -m 644 ${UNPACKDIR}/pam.config ${D}${sysconfdir}/pam.d/samba
 	install -d ${D}${sysconfdir}/samba
-	install -m 644 ${WORKDIR}/smb.conf ${D}${sysconfdir}/samba
-	install -m 644 ${WORKDIR}/smb-secure.conf ${D}${sysconfdir}/samba
-	install -m 644 ${WORKDIR}/smb-user.conf ${D}${sysconfdir}/samba
+	install -m 644 ${UNPACKDIR}/smb.conf ${D}${sysconfdir}/samba
+	install -m 644 ${UNPACKDIR}/smb-secure.conf ${D}${sysconfdir}/samba
+	install -m 644 ${UNPACKDIR}/smb-user.conf ${D}${sysconfdir}/samba
 	touch ${D}${sysconfdir}/samba/smb-shares.conf
-	install -m 755 ${WORKDIR}/samba.sh ${D}${sysconfdir}/init.d
+	install -m 755 ${UNPACKDIR}/samba.sh ${D}${sysconfdir}/init.d
 	install -d ${D}${sysconfdir}/samba/shares
-	install -m 644 ${WORKDIR}/share.template ${D}${sysconfdir}/samba/shares
+	install -m 644 ${UNPACKDIR}/share.template ${D}${sysconfdir}/samba/shares
 	install -d ${D}${sysconfdir}/samba/private
-	install -m 644 ${WORKDIR}/users.map ${D}${sysconfdir}/samba/private
-	install -m 644 ${WORKDIR}/smbpasswd ${D}${sysconfdir}/samba/private
+	install -m 644 ${UNPACKDIR}/users.map ${D}${sysconfdir}/samba/private
+	install -m 644 ${UNPACKDIR}/smbpasswd ${D}${sysconfdir}/samba/private
 }
 
 pkg_postinst:${BPN}-common:prepend() {

@@ -19,7 +19,7 @@ python __anonymous() {
 do_install:append() {
 	if ${@['false', 'true'][xinetd_enabled(d)]}; then
 		install -d ${D}${sysconfdir}/xinetd.d
-		for srcfile in ${WORKDIR}/*.xinetd.in; do
+		for srcfile in ${UNPACKDIR}/*.xinetd.in; do
 			dstfile=`basename $srcfile .xinetd.in`
 			sed -e 's,@BINDIR@,${bindir},' \
 			    -e 's,@SBINDIR@,${sbindir},' \

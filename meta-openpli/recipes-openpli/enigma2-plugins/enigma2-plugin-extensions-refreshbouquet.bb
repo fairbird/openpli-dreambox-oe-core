@@ -10,6 +10,6 @@ PKGV = "2.0+git${GITPKGV}"
 
 SRC_URI = "git://github.com/ims21/RefreshBouquet.git;protocol=https;branch=master"
 
-S="${WORKDIR}/git"
+S = "${WORKDIR}/git"
 
 inherit setuptools3-openplugins

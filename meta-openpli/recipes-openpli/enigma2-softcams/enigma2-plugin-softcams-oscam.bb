@@ -56,7 +56,7 @@ EXTRA_OECMAKE += "\
 
 do_install() {
 	install -d ${D}${sysconfdir}/tuxbox/config/oscam
-	install -m 0644 ${WORKDIR}/oscam.* ${D}${sysconfdir}/tuxbox/config/oscam/
+	install -m 0644 ${UNPACKDIR}/oscam.* ${D}${sysconfdir}/tuxbox/config/oscam/
 	install -d ${D}${bindir}
 	install -m 0755 ${B}/oscam ${D}${bindir}
 }

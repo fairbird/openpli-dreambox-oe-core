@@ -41,7 +41,7 @@ do_compile() {
 
 do_install:append() {
 	install -d ${D}/etc/init.d
-	install -m 0755 ${WORKDIR}/pyload.init ${D}/etc/init.d/pyload
+	install -m 0755 ${UNPACKDIR}/pyload.init ${D}/etc/init.d/pyload
 }
 
 include python3-package-split.inc

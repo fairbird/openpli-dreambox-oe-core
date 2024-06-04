@@ -28,7 +28,7 @@ inherit update-rc.d
 
 do_install() {
 	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 ${WORKDIR}/firewall.sh ${D}${sysconfdir}/init.d/firewall
+	install -m 0755 ${UNPACKDIR}/firewall.sh ${D}${sysconfdir}/init.d/firewall
 	install -d ${D}${sysconfdir}
-	install -m 0755 ${WORKDIR}/firewall.users ${D}${sysconfdir}/firewall.users
+	install -m 0755 ${UNPACKDIR}/firewall.users ${D}${sysconfdir}/firewall.users
 }

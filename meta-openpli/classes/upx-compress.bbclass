@@ -8,7 +8,7 @@ do_upx() {
 			echo "Sorry UPX doesn't work reliably on arm.."
 			echo "So no compression for your platform."
 		else
-			find "${WORKDIR}/packages-split" -type f -executable | while read line
+			find "${UNPACKDIR}/packages-split" -type f -executable | while read line
 			do
 				if echo "${line}" | grep -q '/\.debug/'
 				then

@@ -60,7 +60,7 @@ EXTRA_OECMAKE += "\
 
 do_install() {
 	install -d ${D}/etc/tuxbox/config/ncam
-	install -m 0644 ${WORKDIR}/ncam.* ${D}/etc/tuxbox/config/
+	install -m 0644 ${UNPACKDIR}/ncam.* ${D}/etc/tuxbox/config/
 	install -d ${D}/usr/bin
 	install -m 0755 ${B}/ncam ${D}/usr/bin
 }

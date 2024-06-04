@@ -24,7 +24,7 @@ do_install() {
 	install -d ${D}/etc
 	install -m 0644 ${S}/CCcam.cfg ${D}/etc/CCcam.cfg
 	install -d ${D}/etc/ppanels
-	install -m 0644 ${WORKDIR}/CCcam.xml ${D}/etc/ppanels/CCcam.xml
+	install -m 0644 ${UNPACKDIR}/CCcam.xml ${D}/etc/ppanels/CCcam.xml
 }
 
 SRC_URI[softcam.md5sum] = "042bc8d82075dbc806787270ffa237f6"

@@ -17,5 +17,5 @@ do_compile() {
 
 do_install() {
 	install -d ${D}${sysconfdir}
-	install -m 0644 ${WORKDIR}/inittab ${D}${sysconfdir}/inittab
+	install -m 0644 ${UNPACKDIR}/inittab ${D}${sysconfdir}/inittab
 }
