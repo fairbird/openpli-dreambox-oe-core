@@ -16,8 +16,12 @@ SRC_URI = " \
             file://modules \
 "
 
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
+
 do_compile() {
 }
+
 do_populate_sysroot() {
 }
 
