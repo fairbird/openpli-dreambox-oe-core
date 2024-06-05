@@ -103,6 +103,24 @@ KERNEL_IMAGEDEST = "boot"
 
 FILES:${KERNEL_PACKAGE_NAME}-image = "${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}.gz"
 
+export KCFLAGS = " -Wno-error=incompatible-pointer-types \
+                   -Wno-error=declaration-missing-parameter-type \
+                   -Wno-error=unused-label \
+                   -Wno-error=enum-compare \
+                   -Wno-error=implicit-int \
+                   -Wno-error=stringop-overflow \
+                   -Wno-error=unused-variable \
+                   -Wno-error=int-conversion \
+                   -Wno-error=array-bounds \
+                   -Wno-error=dangling-pointer \
+                   -Wno-error=misleading-indentation \
+                   -Wno-error=array-parameter \
+                   -Wno-error=stringop-overread \
+                   -Wno-error=int-in-bool-context \
+                   -Wno-error=unused-const-variable \
+                   -Wno-error=maybe-uninitialized \           
+"
+
 do_install:append() {
         ${STRIP} ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${KERNEL_VERSION}
         gzip -9 ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${KERNEL_VERSION}

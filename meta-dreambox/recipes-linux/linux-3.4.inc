@@ -8,7 +8,20 @@ inherit kernel siteinfo
 CMDLINE ?= ""
 LOCALVERSION ?= ""
 
-export KCFLAGS += " -O1"
+export KCFLAGS = " -O1 \
+                  -Wno-error=incompatible-pointer-types \
+                  -Wno-error=address-of-packed-member \
+                  -Wno-error=unused-result \
+                  -Wno-error=format-overflow \
+                  -Wno-error=stringop-overflow \
+                  -Wno-error=unused-variable \
+                  -Wno-error=int-conversion \
+                  -Wno-error=array-parameter \
+                  -Wno-error=unused-function \
+                  -Wno-error=stringop-overread \
+                  -Wno-error=unused-const-variable \
+                  -Wno-error=maybe-uninitialized \           
+"
 
 #kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
 kernel_conf_variable() {
