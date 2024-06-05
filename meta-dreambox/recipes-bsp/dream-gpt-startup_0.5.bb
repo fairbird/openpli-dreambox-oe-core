@@ -9,6 +9,9 @@ SRC_URI = "file://startup.zip \
     file://dream-data.sh \
 "
 
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
+
 do_install () {
     install -m 0755 -d ${D}${sysconfdir}/init.d
     install -m 0755 -d ${D}${sysconfdir}/rc3.d
