@@ -18,3 +18,4 @@ SRC_URI[sha256sum] = "35ce0ee1741ea38def304ddfe84a958901413aa829698357f0bee5bb8f
 
 inherit autotools pkgconfig
 
+CFLAGS = "-Wno-error=incompatible-pointer-types"
