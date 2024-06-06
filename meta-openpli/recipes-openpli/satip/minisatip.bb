@@ -25,6 +25,8 @@ INITSCRIPT_PARAMS = "defaults 80"
 
 EXTRA_OECONF = "--disable-netcv"
 
+CFLAGS = "-Wno-error=implicit-function-declaration"
+
 do_configure:prepend () {
 }
 
