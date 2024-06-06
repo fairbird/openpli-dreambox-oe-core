@@ -106,7 +106,7 @@ IMAGE_INSTALL = " \
 	${@bb.utils.contains("TARGET_ARCH", "arm", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("TARGET_ARCH", "aarch64", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "nowifi", "", "network-usb-drivers-meta", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "emmc", "dosfstools mtools e2fsprogs-resize2fs partitions-by-name bzip2 rsync" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "emmc", "dosfstools mtools e2fsprogs-resize2fs partitions-by-name rsync" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "fastboot", "dosfstools mtools android-tools" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "recovery", "recovery" , "", d)} \
 	"
