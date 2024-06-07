@@ -22,7 +22,7 @@ S = "${WORKDIR}/mt7610u_wifi_sta_v3002_dpo_20130916"
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR}"
 
-# need only for dreambox linux-meson64 4.9
+# need only for dreambox linux-meson64 4.9 + GCC 14
 export KCFLAGS += " -Wno-error=misleading-indentation \
                     -Wno-error=aggressive-loop-optimizations \
                     -Wno-error=int-to-pointer-cast \
@@ -37,6 +37,15 @@ export KCFLAGS += " -Wno-error=misleading-indentation \
                     -Wno-error=incompatible-pointer-types \
                     -Wno-error=ignored-qualifiers \
                     -Wno-error \
+                    -Wno-format \
+                    -Wno-address \
+                    -Wno-return-mismatch \
+                    -Wno-format-extra-args \
+                    -Wno-frame-larger-than \
+                    -Wno-return-type \
+                    -Wno-unused-variable \
+                    -Wno-missing-attributes \
+                    -Wno-address-of-packed-member \
 "
 
 do_install() {
