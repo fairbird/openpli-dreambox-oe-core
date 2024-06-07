@@ -27,7 +27,7 @@ index b42045d..199cb68 100755
 @@ -370,7 +370,6 @@ class ConfigMenu(ConfigBaseWidget):
  
          list.append(getConfigListEntry('\\c00289496' + _("----- BASIC CONFIGURATION (OK) -----"), config.plugins.iptvplayer.basicConfVisible))
-         if basicConfVisible: #BASIC CONFIGURATION
+         if basicConfVisible:  # BASIC CONFIGURATION
 -            list.append(getConfigListEntry(_("Auto check for plugin update"), config.plugins.iptvplayer.autoCheckForUpdate))
              list.append(getConfigListEntry(_("The preferred update server"), config.plugins.iptvplayer.preferredupdateserver))
              if config.plugins.iptvplayer.preferredupdateserver.value == '2':
