@@ -12,7 +12,7 @@ SRC_URI = "https://source.mynonpublic.com/ini/20120911_RT3573_Linux_STA_v2.5.0.0
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 
-# need only for dreambox linux-meson64 4.9
+# need only for dreambox linux-meson64 4.9 + GCC 14
 export KCFLAGS += " -Wno-error=misleading-indentation \
                     -Wno-error=aggressive-loop-optimizations \
                     -Wno-error=int-to-pointer-cast \
@@ -27,6 +27,15 @@ export KCFLAGS += " -Wno-error=misleading-indentation \
                     -Wno-error=incompatible-pointer-types \
                     -Wno-error=ignored-qualifiers \
                     -Wno-error \
+                    -Wno-format \
+                    -Wno-address \
+                    -Wno-return-mismatch \
+                    -Wno-format-extra-args \
+                    -Wno-frame-larger-than \
+                    -Wno-return-type \
+                    -Wno-unused-variable \
+                    -Wno-missing-attributes \
+                    -Wno-address-of-packed-member \
 "
 
 S = "${WORKDIR}/20120911_RT3573_Linux_STA_v2.5.0.0_Rev4_DPO"
