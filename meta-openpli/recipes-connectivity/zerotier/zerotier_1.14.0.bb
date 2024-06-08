@@ -31,7 +31,7 @@ inherit autotools-brokensep update-rc.d systemd
 EXTRA_OEMAKE = " ZT_SSO_SUPPORTED=0 "
 
 do_compile:prepend:mipsel() {
-    export LDLIBS+=-latomic
+    export LDLIBS=-latomic
 }
 
 do_install:append() {
