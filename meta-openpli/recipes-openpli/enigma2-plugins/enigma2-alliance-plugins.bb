@@ -56,6 +56,7 @@ PROVIDES = "\
 DEPENDS = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'transcoding', 'virtual-transtreamproxy' , '', d)} \
     python3-dnspython python3-beautifulsoup4 python3-lxml python3-simplejson python3-pyamf python3-icalendar python3-pyusb python3-six-native \
+    djmount \
     rtmpdump \
     minidlna \
     hddtemp \
