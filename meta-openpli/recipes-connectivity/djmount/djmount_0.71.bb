@@ -29,6 +29,11 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/djmount/djmount-0.71.tar.gz \
 SRC_URI[md5sum] = "c922753e706c194bf82a8b6ca77e6a9a"
 SRC_URI[sha256sum] = "aa5bb482af4cbd42695a7e396043d47b53d075ac2f6aa18a8f8e11383c030e4f"
 
+CFLAGS = "-Wno-error=discarded-qualifiers \
+	  -Wno-error=implicit-function-declaration \
+	  -Wno-error=builtin-declaration-mismatch \
+"
+
 do_configure:prepend() {
 	cp ${STAGING_DATADIR_NATIVE}/gettext/config.rpath ${S}/libupnp/config.aux/config.rpath
 }
