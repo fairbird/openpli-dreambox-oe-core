@@ -29,6 +29,11 @@ SRC_URI:append =" \
 	"
 EXTRA_OECONF = "--with-external-libupnp-prefix='${STAGING_LIBDIR}' --with-fuse-prefix='${STAGING_LIBDIR}'"
 
+CFLAGS = "-Wno-error=discarded-qualifiers \
+	  -Wno-error=implicit-function-declaration \
+	  -Wno-error=builtin-declaration-mismatch \
+"
+
 S = "${WORKDIR}/git"
 
 do_configure:prepend() {
