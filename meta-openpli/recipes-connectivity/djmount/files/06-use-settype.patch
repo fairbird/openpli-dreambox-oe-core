@@ -1,0 +1,13 @@
+diff --git a/libupnp/threadutil/inc/ithread.h b/libupnp/threadutil/inc/ithread.h
+index b785f63..5b2e834 100755
+--- a/libupnp/threadutil/inc/ithread.h
++++ b/libupnp/threadutil/inc/ithread.h
+@@ -179,7 +179,7 @@ extern "C" {
+  *      Returns EINVAL if the kind is not supported.
+  *      See man page for pthread_mutexattr_setkind_np
+  *****************************************************************************/
+-#define ithread_mutexattr_setkind_np pthread_mutexattr_setkind_np
++#define ithread_mutexattr_setkind_np pthread_mutexattr_settype
+ 
+ 
+ /****************************************************************************

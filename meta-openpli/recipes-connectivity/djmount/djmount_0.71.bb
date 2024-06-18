@@ -1,9 +1,8 @@
 DESCRIPTION = "mount UPnP server content as a linux filesystem"
 HOMEPAGE = "http://djmount.sourceforge.net/"
-LICENSE = "GPL-2.0-only"
-DEPENDS = "libupnp1.6 fuse"
-RDEPENDS:${PN} = "fuse"
-PR = "r4"
+LICENSE = "GPL-2.0-or-later"
+DEPENDS = "libupnp fuse"
+RDEPENDS:${PN} = "libupnp fuse"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 
@@ -12,32 +11,29 @@ INITSCRIPT_PARAMS = "defaults"
 
 inherit autotools update-rc.d pkgconfig gettext
 
-EXTRA_OECONF = "--with-external-libupnp --with-fuse-prefix='${STAGING_LIBDIR}'"
+# libupnp make doesn't support it
+PARALLEL_MAKE = ""
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/djmount/djmount-0.71.tar.gz \
+SRC_URI = "git://github.com/SHTrassEr/djmount.git;protocol=https;branch=master"
+
+CFLAGS:append = " -std=gnu89 -fcommon"
+
+SRC_URI:append =" \
 	file://init \
-	file://configure.ac.patch \
-	file://rt_bool_arg_enable.m4.patch \
-	file://01-djmount.1.patch \
-	file://02-libupnp-1.6.6.patch \
-	file://03-libupnp-1.6.13.patch \
+	file://01-configure.ac.patch \
+	file://02-rt_bool_arg_enable.m4.patch \
+	file://03-djmount.1.patch \
 	file://04-support-fstab-mounting.patch \
-	file://05-avoid-crash-by-using-size_t.patch \
-	file://005-fix-build-with-gettext-0.20.x.patch \
+	file://05-fix-build-with-gettext-0.20.x.patch \
+	file://06-use-settype.patch \
 	"
+EXTRA_OECONF = "--with-external-libupnp-prefix='${STAGING_LIBDIR}' --with-fuse-prefix='${STAGING_LIBDIR}'"
 
-SRC_URI[md5sum] = "c922753e706c194bf82a8b6ca77e6a9a"
-SRC_URI[sha256sum] = "aa5bb482af4cbd42695a7e396043d47b53d075ac2f6aa18a8f8e11383c030e4f"
-
-CFLAGS = "-Wno-error=discarded-qualifiers \
-	  -Wno-error=implicit-function-declaration \
-	  -Wno-error=builtin-declaration-mismatch \
-"
+S = "${WORKDIR}/git"
 
 do_configure:prepend() {
 	cp ${STAGING_DATADIR_NATIVE}/gettext/config.rpath ${S}/libupnp/config.aux/config.rpath
 }
-
 do_install:append() {
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${UNPACKDIR}/init ${D}${sysconfdir}/init.d/djmount
