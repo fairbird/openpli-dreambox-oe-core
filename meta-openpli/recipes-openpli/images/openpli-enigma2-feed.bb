@@ -87,7 +87,7 @@ OPTIONAL_PACKAGES += " \
 	python3-pysnmp \
 	python3-requests \
 	python3-tinytag \
-	python3-transmissionrpc \
+	python3-transmission-rpc \
 	python3-tqdm \
 	python3-yenc \
 	python3-youtube-dl \
