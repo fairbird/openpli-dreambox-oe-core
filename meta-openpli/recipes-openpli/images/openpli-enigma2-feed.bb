@@ -167,7 +167,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-skins-steampunk \
 	enigma2-plugin-skincomponents-advancedmovieselection-steampunk-skin \
 	enigma2-plugin-skincomponents-advancedmovieselection-ultimate-skin \
-	enigma2-plugin-skincomponents-bmediacenter-ax-blue-skin \
 	enigma2-plugin-skincomponents-mediaportal-ax-blue-skin \
 	enigma2-plugin-skincomponents-mediaportal-blue-line-skin \
 	enigma2-plugin-skincomponents-mediaportal-smoke-hd-skin \
