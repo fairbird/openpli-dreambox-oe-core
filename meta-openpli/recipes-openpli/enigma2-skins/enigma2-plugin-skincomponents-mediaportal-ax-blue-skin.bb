@@ -24,5 +24,4 @@ do_install() {
     cp -rp ${S}/usr/lib/* ${D}${libdir}/
 }
 
-do_populate_sysroot[noexec] = "1"
 do_package_qa[noexec] = "1"
