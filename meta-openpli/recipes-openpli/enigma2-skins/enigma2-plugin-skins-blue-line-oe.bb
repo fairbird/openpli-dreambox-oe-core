@@ -10,7 +10,7 @@ PV = "1.8+git"
 PKGV = "1.8+git${GITPKGV}"
 VER="1.8"
 
-RDEPENDS:${PN} = "enigma2-plugin-systemplugins-weathercomponenthandler, enigma2-plugin-skincomponents-weathercomponent"
+RDEPENDS:${PN} = "enigma2-plugin-extensions-weatherplugin"
 
 SRC_URI="git://github.com/stein17/Skins-for-openATV.git;protocol=https;branch=python3"
 
