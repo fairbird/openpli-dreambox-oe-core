@@ -83,11 +83,12 @@ OPTIONAL_PACKAGES += " \
 	python3-lxml \
 	python3-levenshtein \
 	python3-mechanize \
+	python3-tmdbsimple \
 	python3-ntplib \
 	python3-pysnmp \
 	python3-requests \
 	python3-tinytag \
-	python3-transmission-rpc \
+	python3-transmissionrpc \
 	python3-tqdm \
 	python3-yenc \
 	python3-youtube-dl \
