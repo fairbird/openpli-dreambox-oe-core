@@ -163,14 +163,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-skins-blue-line-oe \
 	enigma2-plugin-skins-glamouraurafhd \
 	enigma2-plugin-skins-madmax-impossible \
-	enigma2-plugin-skins-multibox-fhd \
 	enigma2-plugin-skins-steampunk \
-	enigma2-plugin-skincomponents-advancedmovieselection-steampunk-skin \
-	enigma2-plugin-skincomponents-advancedmovieselection-ultimate-skin \
-	enigma2-plugin-skincomponents-mediaportal-ax-blue-skin \
-	enigma2-plugin-skincomponents-mediaportal-blue-line-skin \
-	enigma2-plugin-skincomponents-mediaportal-smoke-hd-skin \
-	enigma2-plugin-skincomponents-skyrecorder-fhd-skin \
 	enigma2-plugin-security-firewall \
 	enigma2-plugin-drivers-usbserial \
 	enigma2-plugin-extensions-arabicsavior \
