@@ -18,7 +18,7 @@ SRC_URI += "file://0002-fix-mpegts.patch \
             file://0014-add-demux-h-file-to-headers.patch \
            "
 
-SRC_URI:remove = "file://av1_ordering_info.patch file://vulkan_av1_stable_API.patch"
+SRC_URI:remove = "file://av1_ordering_info.patch file://vulkan_av1_stable_API.patch file://vulkan_fix_gcc14.patch"
 
 PACKAGECONFIG:append = " gpl libbluray libfreetype librtmp libxml2 openssl x264"
 
