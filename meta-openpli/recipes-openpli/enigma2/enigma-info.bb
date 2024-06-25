@@ -2,7 +2,7 @@ SUMMARY = "enigma.info used by BoxInfo"
 PRIORITY = "required"
 MAINTAINER = "oe-alliance team"
 
-DEPENDS = "virtual/kernel"
+do_install[depends] += "virtual/kernel:do_package_qa"
 
 require conf/license/openpli-gplv2.inc
 
@@ -35,11 +35,13 @@ inherit python3-dir
 INFOFILE = "${libdir}/enigma.info"
 
 inherit linux-kernel-base
-export KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
 
 do_install[nostamp] = "1"
 
 do_install() {
+    # Kernel version
+    KERNEL_VERSION="${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${PKGDATA_DIR}/kernel-depmod/kernel-abiversion')}"
+
     DRIVERSDATE='N/A'
     # machine specific
     if [ "${MACHINE}" = "dm7080" ]; then
