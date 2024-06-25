@@ -46,6 +46,7 @@ OPTIONAL_PACKAGES += " \
 	inadyn-mt \
 	inetutils \
 	iperf3 \
+	ipkg-tools \
 	iproute2 \
 	iputils \
 	joe \
