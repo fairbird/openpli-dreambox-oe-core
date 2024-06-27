@@ -6,8 +6,8 @@ require classes/python3-compileall.inc
 
 inherit gitpkgv setuptools3-openplugins gettext
 
-PV = "2.1+git"
-PKGV = "2.1+git${GITPKGV}"
+PV = "2.2+git"
+PKGV = "2.2+git${GITPKGV}"
 
 SRC_URI = "git://github.com/fairbird/WeatherPlugin.git;protocol=https;branch=master"
 
