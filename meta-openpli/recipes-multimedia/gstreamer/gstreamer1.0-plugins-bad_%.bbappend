@@ -1,6 +1,11 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
+PV = "1.24.5"
+
+SRC_URI[sha256sum] = "3029bfd7265314d609dc8eab503675a344ea46e8274fd73ab34566c8442dc847"
+
 PACKAGE_NO_LOCALE = "1"
+
 SRC_URI:append = " \
         file://0001-Revert-tsdemux-Limit-the-maximum-PES-payload-size.patch \
         file://0002-Revert-tsdemux-always-take-the-seek-segment-stop-int.patch \
@@ -9,6 +14,8 @@ SRC_URI:append = " \
         file://0006-dvbapi5-fix-old-kernel.patch \
         file://0007-hls-main-thread-block.patch \
 "
+
+SRC_URI:remove = "file://0001-uvcgadget-Use-g_path_get_basename-instead-of-libc-ba.patch"
 
 PACKAGECONFIG:append = " faac faad opusparse rtmp"
 
