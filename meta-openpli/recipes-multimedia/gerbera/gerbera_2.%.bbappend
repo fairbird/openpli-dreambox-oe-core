@@ -2,11 +2,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PV = "2.1.0"
 
-SRCREV = "a9bab24e043b5612a0264dbd753f85e1254a5873"
+SRCREV = "f1f266efbb0a6adac160e428cd14c20f6ecd3e5d"
 
 SRC_URI:append = " \
-           file://fix-build-against-fmt-10-2-2.patch \
-           file://fix-build-fmt-10-2-pre3.patch \
            file://config.xml \
            file://init \
 "
