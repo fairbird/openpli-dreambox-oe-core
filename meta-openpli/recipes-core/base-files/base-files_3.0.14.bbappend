@@ -5,9 +5,9 @@ do_install_basefilesissue[vardeps] += "DISTRO_NAME DISTRO_VERSION"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://utf8.sh \
-	file://mount-helper.sh \
-"
+SRC_URI += "file://utf8.sh"
+SRC_URI += "file://mount-helper.sh"
+SRC_URI += "file://filesystems"
 
 do_install:append() {
 	rm -rf ${D}/mnt
@@ -19,6 +19,8 @@ do_install:append() {
 
 	install -d ${D}${sysconfdir}/profile.d
 	install -m 0644 ${UNPACKDIR}/utf8.sh ${D}${sysconfdir}/profile.d/utf8.sh
+
+	install -m 0644 ${UNPACKDIR}/filesystems ${D}${sysconfdir}/filesystems
 
 	install -d ${D}${sysconfdir}/udev
 	install -m 0755 ${UNPACKDIR}/mount-helper.sh       ${D}${sysconfdir}/udev
