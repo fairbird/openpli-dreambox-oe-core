@@ -2,7 +2,7 @@
 INITSCRIPT_NAME = "openvpn"
 INITSCRIPT_PARAMS = "defaults"
 
-RDEPENDS:{$PN} = "lzo lz4"
+RDEPENDS:${PN} = "lzo lz4"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
