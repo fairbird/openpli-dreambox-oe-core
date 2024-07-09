@@ -1,8 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PV = "2.1.0"
+PV = "2.2.0"
 
-SRCREV = "f1f266efbb0a6adac160e428cd14c20f6ecd3e5d"
+SRCREV = "821d364d611dc30b3ef8a5e9beb0bf3e71b25199"
 
 SRC_URI:append = " \
            file://config.xml \
