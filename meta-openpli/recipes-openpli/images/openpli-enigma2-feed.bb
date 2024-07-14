@@ -153,6 +153,7 @@ OPTIONAL_BSP_ENIGMA2_PACKAGES ?= ""
 ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
 	dvb-usb-drivers-meta \
+	enigma2-binary-plugins \
 	enigma2-display-skins \
 	enigma2-plugin-skins-e2darkos \
 	enigma2-plugin-skins-octetfhd \
