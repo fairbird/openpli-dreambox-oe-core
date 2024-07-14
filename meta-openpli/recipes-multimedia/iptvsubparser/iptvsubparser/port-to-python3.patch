@@ -114,7 +114,7 @@ index f131f02..371bd71 100755
 +	NULL,                /* m_free */
 +};
 +
-+PyMODINIT_FUNC PyInit_subparser(void)
++PyMODINIT_FUNC PyInit__subparser(void)
  {
 -    Py_InitModule("_subparser", _subparserMethods);
 -}
