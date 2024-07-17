@@ -4,12 +4,11 @@ MAINTAINER = "OpenPLi team <info@openpli.org>"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8e37f34d0e40d32ea2bc90ee812c9131"
 
-PACKAGES = "\
+PACKAGES += "\
 	enigma2-plugin-extensions-lcd4linux \
 	enigma2-plugin-extensions-moviecut \
 	enigma2-plugin-systemplugins-networkbrowser \
 	enigma2-plugin-systemplugins-vps \
-	enigma2-binary-plugins \
 	"
 
 inherit gitpkgv python3native pkgconfig gettext python3targetconfig
@@ -38,7 +37,7 @@ ALLOW_EMPTY:${PN} = "1"
 FILES:enigma2-plugin-extensions-lcd4linux += "${libdir}/enigma2/python/Components/*"
 
 FILES:${PN}-meta = "${datadir}/meta"
-FILES:${PN}-dbg = "/usr/src/debug"
+FILES:${PN}-dbg = "${prefix}/src/debug"
 PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
