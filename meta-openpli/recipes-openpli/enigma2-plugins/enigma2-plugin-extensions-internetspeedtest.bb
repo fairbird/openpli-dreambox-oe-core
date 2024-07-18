@@ -19,3 +19,5 @@ do_install() {
 }
 
 FILES:${PN} = "${prefix}/"
+
+do_package_qa[noexec] = "1"

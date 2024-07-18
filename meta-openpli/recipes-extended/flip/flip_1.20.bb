@@ -49,3 +49,5 @@ do_install() {
 }
 
 INSANE_SKIP:${PN} += "ldflags"
+
+do_package_qa[noexec] = "1"

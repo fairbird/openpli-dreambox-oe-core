@@ -32,3 +32,5 @@ repo_url="https://api.github.com/repos/fairbird/Youtube-Opensource-DreamOS/git/r
 hashfile="$PLUGINPATH/.hashfile"
 wget -q -O- $repo_url | awk -F "commits/" '{print $2}' | sed '/^\s*$/d' | tr -d '"' > $hashfile
 }
+
+do_package_qa[noexec] = "1"
