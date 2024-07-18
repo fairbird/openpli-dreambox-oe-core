@@ -39,6 +39,7 @@ inherit linux-kernel-base
 do_install[nostamp] = "1"
 
 do_install() {
+    YOCTO=`cd "${COREBASE}" && git describe --match=yocto* | cut -d '-' -f 2`
     # Kernel version
     KERNEL_VERSION="${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${PKGDATA_DIR}/kernel-depmod/kernel-abiversion')}"
 
@@ -136,6 +137,7 @@ do_install() {
     printf "vfdsymbol=${HAVE_VFDSYMBOL}\n" >> ${D}${INFOFILE}
     printf "wol=${HAVE_WOL}\n" >> ${D}${INFOFILE}
     printf "wwol=${HAVE_WWOL}\n" >> ${D}${INFOFILE}
+    printf "yocto='${YOCTO}'\n" >> ${D}${INFOFILE}
     printf "yuv=${HAVE_YUV}\n" >> ${D}${INFOFILE}
     printf "checksum=%s\n" $(md5sum "${D}${INFOFILE}" | awk '{print $1}') >> ${D}${INFOFILE}
 }
