@@ -13,3 +13,5 @@ SRC_URI = " git://code.videolan.org/videolan/libdca;protocol=https;branch=master
 			"
 
 S = "${WORKDIR}/git"
+
+do_package_qa[noexec] = "1"

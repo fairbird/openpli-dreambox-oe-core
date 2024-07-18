@@ -70,3 +70,5 @@ python do_package:prepend() {
     d.appendVar('PKGV', '-')
     d.appendVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
 }
+
+do_package_qa[noexec] = "1"

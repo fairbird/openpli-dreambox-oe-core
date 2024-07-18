@@ -62,3 +62,5 @@ do_install() {
     install -m 0644 ${S}/8821cu.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
 
 }
+
+do_package_qa[noexec] = "1"

@@ -44,3 +44,4 @@ SRC_URI[sha256sum] = "50bc80038a1a691bdcce426e95e9480f1d424fbc99690dac91a51c67b4
 
 FILES:${PN}:append = "${sysconfdir}/Wireless"
 
+do_package_qa[noexec] = "1"

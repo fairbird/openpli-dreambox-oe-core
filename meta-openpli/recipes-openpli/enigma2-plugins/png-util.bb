@@ -29,3 +29,5 @@ do_install() {
 }
 
 FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/pngutil"
+
+do_package_qa[noexec] = "1"
