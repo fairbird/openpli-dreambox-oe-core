@@ -185,6 +185,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-ppanel \
 	enigma2-plugin-extensions-serienrecorder \
 	enigma2-plugin-extensions-oscamstatus \
+	enigma2-plugin-extensions-sdgradio \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-xtraevent \
 	enigma2-plugin-extensions-enigmalight \
