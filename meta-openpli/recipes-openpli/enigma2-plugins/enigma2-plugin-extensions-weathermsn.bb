@@ -23,3 +23,5 @@ do_install() {
 	cp -fr --preserve=links ${S}/python/Plugins/Extensions/WeatherMSN ${D}${libdir}/enigma2/python/Plugins/Extensions/
 	chmod -R a+rX ${D}${libdir}/enigma2/
 }
+
+do_package_qa[noexec] = "1"

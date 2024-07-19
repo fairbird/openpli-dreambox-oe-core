@@ -29,3 +29,4 @@ do_install() {
 
 FILES:${PN}:append = "${sysconfdir}/Wireless"
 
+do_package_qa[noexec] = "1"

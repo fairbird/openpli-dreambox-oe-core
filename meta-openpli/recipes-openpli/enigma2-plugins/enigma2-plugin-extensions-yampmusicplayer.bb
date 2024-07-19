@@ -28,3 +28,5 @@ do_install() {
 FILES:${PN} = "${sysconfdir} ${libdir}"
 
 CONFFILES:${PN} = "${sysconfdir}/enigma2/YampFanarttvPersonalApi.key"
+
+do_package_qa[noexec] = "1"

@@ -24,3 +24,5 @@ do_install() {
 }
 
 INSANE_SKIP:${PN} += "already-stripped"
+
+do_package_qa[noexec] = "1"

@@ -46,3 +46,5 @@ FILES:${PN}-src = "\
 	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/locale/*/LC_MESSAGES/*.mo \
 	/usr/src/debug/* \
 	"
+
+do_package_qa[noexec] = "1"

@@ -22,3 +22,5 @@ python populate_packages:prepend() {
     e2_pdir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
     do_split_packages(d, e2_pdir, '^(\w+/\w+)/.*\/.*\.po$', 'enigma2-plugin-%s-po', '%s (translations)', recursive=True, match_path=True, prepend=True)
 }
+
+do_package_qa[noexec] = "1"

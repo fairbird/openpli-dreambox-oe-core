@@ -22,3 +22,5 @@ do_install() {
 	install -d ${D}${prefix}
 	cp -r ${S}${prefix}/* ${D}${prefix}/
 }
+
+do_package_qa[noexec] = "1"

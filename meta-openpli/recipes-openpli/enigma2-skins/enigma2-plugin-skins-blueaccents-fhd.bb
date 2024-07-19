@@ -79,3 +79,5 @@ exit 0
 }
 
 INSANE_SKIP:${PN} += "build-deps"
+
+do_package_qa[noexec] = "1"

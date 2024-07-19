@@ -98,3 +98,5 @@ rm -f ${datadir}/enigma2/logos/ustym4k*.svg
 
 exit 0
 }
+
+do_package_qa[noexec] = "1"

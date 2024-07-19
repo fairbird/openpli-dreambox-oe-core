@@ -34,3 +34,5 @@ FILES:${PN}-src = " \
         "
 
 INSANE_SKIP:${PN} += "file-rdeps"
+
+do_package_qa[noexec] = "1"

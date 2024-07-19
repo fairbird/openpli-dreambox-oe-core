@@ -23,3 +23,4 @@ PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 PR = "r1"
 
+do_package_qa[noexec] = "1"

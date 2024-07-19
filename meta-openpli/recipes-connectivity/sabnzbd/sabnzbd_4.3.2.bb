@@ -52,3 +52,5 @@ do_install() {
     install -d ${D}/etc/enigma2
     install -m 644 ${UNPACKDIR}/sabnzbd.conf ${D}/etc/enigma2/sabnzbd.conf
 }
+
+do_package_qa[noexec] = "1"

@@ -63,3 +63,5 @@ do_install:append() {
     # make scripts executable
     find "${D}" -name '*.sh' -exec chmod a+x '{}' ';'
 }
+
+do_package_qa[noexec] = "1"

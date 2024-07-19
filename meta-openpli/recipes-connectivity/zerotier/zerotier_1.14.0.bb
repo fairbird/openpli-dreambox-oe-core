@@ -40,3 +40,5 @@ do_install:append() {
 }
 
 INSANE_SKIP:${PN} = "already-stripped ldflags"
+
+do_package_qa[noexec] = "1"

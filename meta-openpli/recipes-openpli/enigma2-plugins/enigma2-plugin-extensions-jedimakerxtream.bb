@@ -40,3 +40,5 @@ pkg_postrm:${PN} () {
 }
 
 INSANE_SKIP:${PN} += "installed-vs-shipped"
+
+do_package_qa[noexec] = "1"

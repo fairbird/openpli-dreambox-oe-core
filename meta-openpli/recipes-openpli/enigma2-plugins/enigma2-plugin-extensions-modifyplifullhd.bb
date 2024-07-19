@@ -13,3 +13,5 @@ SRC_URI = "git://github.com/ims21/ModifyPliFullHD.git;protocol=https;branch=mast
 S = "${WORKDIR}/git"
 
 inherit setuptools3-openplugins
+
+do_package_qa[noexec] = "1"

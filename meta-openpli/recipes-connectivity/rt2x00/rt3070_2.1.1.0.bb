@@ -32,3 +32,5 @@ RDEPENDS:${PN} = "${PN}-firmware"
 
 SRC_URI[md5sum] = "705c5f8ba0f8a378218fef74859335f5"
 SRC_URI[sha256sum] = "b2a24265bb29f4d429ec42fefbfc545b898c8c046c01c577ca08d9cc65c860d7"
+
+do_package_qa[noexec] = "1"

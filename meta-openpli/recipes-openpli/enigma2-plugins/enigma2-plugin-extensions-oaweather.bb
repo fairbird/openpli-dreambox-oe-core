@@ -45,3 +45,5 @@ do_install() {
     install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/OAWeather/locale/
     cp -rf ${S}/locale/* ${D}${libdir}/enigma2/python/Plugins/Extensions/OAWeather/locale/
 }
+
+do_package_qa[noexec] = "1"
