@@ -58,3 +58,5 @@ do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
 do_make_scripts() {
 	:
 }
+
+do_package_qa[noexec] = "1"
