@@ -21,3 +21,5 @@ inherit setuptools3-openplugins
 
 RDEPENDS:${PN} = "python3-core rtl-sdr redsea dab-cmdline-sdgradio dab-cmdline-sdgradio-pcm dab-cmdline-sdgradio-wav"
 
+do_package_qa[noexec] = "1"
+
