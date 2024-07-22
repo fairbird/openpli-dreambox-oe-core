@@ -24,4 +24,4 @@ do_install() {
 	chmod -R a+rX ${D}${libdir}/enigma2/
 }
 
-do_package_qa[noexec] = "1"
+

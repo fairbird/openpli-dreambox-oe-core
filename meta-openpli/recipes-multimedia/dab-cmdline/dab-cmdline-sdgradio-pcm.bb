@@ -34,4 +34,4 @@ do_install:append() {
 	mv ${D}${bindir}/dab-rtlsdr-sdgradio ${D}${bindir}/dab-rtlsdr-sdgradio-pcm
 }
 
-do_package_qa[noexec] = "1"
+

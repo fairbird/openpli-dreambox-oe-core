@@ -28,4 +28,4 @@ do_install() {
     install -m 644 ${S}/process.py ${D}${PYTHON_SITEPACKAGES_DIR}/
 }
 
-do_package_qa[noexec] = "1"
+

@@ -21,4 +21,4 @@ do_install() {
 
 FILES:${PN} = "${bindir}/replex"
 
-do_package_qa[noexec] = "1"
+

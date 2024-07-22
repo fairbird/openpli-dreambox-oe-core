@@ -107,4 +107,4 @@ FILES:${PN}-dev += "${libdir}/enigma2/python/*.la"
 FILES:${PN}-staticdev += "${libdir}/enigma2/python/*.a"
 FILES:${PN}-dbg += "${libdir}/enigma2/python/.debug"
 
-do_package_qa[noexec] = "1"
+

@@ -22,4 +22,4 @@ inherit cmake pkgconfig
  
 EXTRA_OECONF = "--enable-driver-detach"
 
-do_package_qa[noexec] = "1"
+

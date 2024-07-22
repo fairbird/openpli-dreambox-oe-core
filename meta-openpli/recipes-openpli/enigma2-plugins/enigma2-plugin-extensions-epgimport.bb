@@ -40,4 +40,4 @@ do_install:prepend (){
 
 INSANE_SKIP:${PN} = "installed-vs-shipped"
 
-do_package_qa[noexec] = "1"
+

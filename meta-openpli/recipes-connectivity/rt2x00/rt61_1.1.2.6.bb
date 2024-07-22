@@ -33,4 +33,4 @@ do_install() {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-do_package_qa[noexec] = "1"
+

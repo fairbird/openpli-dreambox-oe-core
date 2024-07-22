@@ -63,4 +63,4 @@ do_install() {
 
 }
 
-do_package_qa[noexec] = "1"
+

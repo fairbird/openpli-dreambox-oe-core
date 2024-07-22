@@ -32,6 +32,6 @@ do_install() {
 	python3 -m compileall -o2 -b ${D}${prefix}
 }
 
-do_package_qa[noexec] = "1"
+
 
 INSANE_SKIP:${PN} += "already-stripped"

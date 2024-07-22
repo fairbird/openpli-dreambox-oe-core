@@ -192,4 +192,4 @@ addtask kernel_link_images after do_compile before do_install
 
 INSANE_SKIP:${PN} = "patch-fuzz"
 
-do_package_qa[noexec] = "1"
+

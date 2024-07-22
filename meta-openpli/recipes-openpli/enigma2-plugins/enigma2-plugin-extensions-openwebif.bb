@@ -122,4 +122,4 @@ RPROVIDES:${PN}-terminal =+ "enigma2-plugin-extensions-openwebif-terminal"
 
 INSANE_SKIP:${PN} = "installed-vs-shipped"
 
-do_package_qa[noexec] = "1"
+

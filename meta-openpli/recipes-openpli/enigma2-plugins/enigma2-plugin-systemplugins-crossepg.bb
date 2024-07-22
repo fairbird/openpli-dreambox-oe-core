@@ -55,6 +55,6 @@ FILES:${PN}-src:append = " ${libdir}/${PYTHON_DIR}/crossepg.py"
 FILES:${PN}-dbg:append = " /usr/crossepg/scripts/mhw2epgdownloader/.debug /usr/crossepg/scripts/mhw2epgdownloader/.debug"
 FILES_SOLIBSDEV = ""
 
-do_package_qa[noexec] = "1"
+
 
 CFLAGS += "-Wno-error=implicit-function-declaration"

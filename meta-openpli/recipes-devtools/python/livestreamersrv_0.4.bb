@@ -32,4 +32,4 @@ do_install:append() {
 
 FILES:${PN} = "/"
 
-do_package_qa[noexec] = "1"
+

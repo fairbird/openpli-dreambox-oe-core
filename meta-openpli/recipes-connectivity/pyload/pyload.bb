@@ -46,4 +46,4 @@ do_install:append() {
 
 include python3-package-split.inc
 
-do_package_qa[noexec] = "1"
+

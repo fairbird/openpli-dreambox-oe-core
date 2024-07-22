@@ -56,4 +56,4 @@ do_package_qa() {
 SRC_URI[md5sum] = "acf7e361f6c1b3a87c5da5befb81cde6"
 SRC_URI[sha256sum] = "d090e8b93d64ed33e96274ef68382643ef4a94d9904f5d68fc1444298e020c75"
 
-do_package_qa[noexec] = "1"
+

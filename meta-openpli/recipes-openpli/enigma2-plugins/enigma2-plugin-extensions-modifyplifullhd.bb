@@ -14,4 +14,4 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3-openplugins
 
-do_package_qa[noexec] = "1"
+

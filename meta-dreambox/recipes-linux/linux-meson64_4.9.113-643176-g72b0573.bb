@@ -75,4 +75,4 @@ do_install:prepend() {
 do_rm_work() {
 }
 
-do_package_qa[noexec] = "1"
+

@@ -18,4 +18,4 @@ inherit allarch
 SRC_URI[md5sum] = "1e7a5dc574e0268574fcda3fd5cf52f7"
 SRC_URI[sha256sum] = "e2d3ac1aaf4815e0c9531bc3fb7f56f30604cd52351332f1f8d6a28bb9a953bf"
 
-do_package_qa[noexec] = "1"
+

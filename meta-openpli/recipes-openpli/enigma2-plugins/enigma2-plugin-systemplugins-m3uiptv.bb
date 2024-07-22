@@ -36,4 +36,4 @@ FILES:${PN} = "${pluginpath}/"
 
 FILES:${PN}-src = "${pluginpath}/*.py"
 
-do_package_qa[noexec] = "1"
+

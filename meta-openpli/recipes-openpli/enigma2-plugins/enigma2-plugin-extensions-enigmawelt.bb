@@ -29,4 +29,4 @@ rm -r ${libdir}/enigma2/python/Plugins/Extensions/Enigmawelt 2>/dev/null
 exit 0
 }
 
-do_package_qa[noexec] = "1"
+

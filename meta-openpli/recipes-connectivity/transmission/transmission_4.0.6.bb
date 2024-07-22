@@ -61,4 +61,4 @@ CONFFILES:${PN} = "${sysconfdir}/default/transmission-daemon"
 
 SYSTEMD_SERVICE:${PN} = "transmission-daemon.service"
 
-do_package_qa[noexec] = "1"
+

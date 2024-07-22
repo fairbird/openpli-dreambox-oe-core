@@ -47,4 +47,4 @@ do_install() {
     ln -sf rclone ${D}${bindir}/mount.rclone
 }
 
-do_package_qa[noexec] = "1"
+

@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
 
 FILES:${PN} = "/usr"
 
-do_package_qa[noexec] = "1"
+
 
 do_install:prepend() {
 	install -d ${B}${datadir}/fonts

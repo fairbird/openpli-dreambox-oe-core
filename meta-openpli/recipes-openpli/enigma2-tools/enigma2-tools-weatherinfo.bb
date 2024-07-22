@@ -22,4 +22,4 @@ do_install() {
     install -m 0644 ${S}/Weatherinfo.py ${D}${libdir}/enigma2/python/Tools/Weatherinfo.py
 }
 
-do_package_qa[noexec] = "1"
+

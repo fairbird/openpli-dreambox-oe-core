@@ -47,4 +47,4 @@ FILES:${PN}-src = "\
 	/usr/src/debug/* \
 	"
 
-do_package_qa[noexec] = "1"
+

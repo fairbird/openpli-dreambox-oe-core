@@ -23,4 +23,4 @@ do_install() {
 	cp -r ${S}${prefix}/* ${D}${prefix}/
 }
 
-do_package_qa[noexec] = "1"
+

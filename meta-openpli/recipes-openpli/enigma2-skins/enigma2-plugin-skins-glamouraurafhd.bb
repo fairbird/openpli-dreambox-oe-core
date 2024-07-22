@@ -84,4 +84,4 @@ echo "Glamour Aura FHD ATV skin is now being removed from your receiver."
 echo "                                                                  "
 }
 
-do_package_qa[noexec] = "1"
+

@@ -61,4 +61,4 @@ KERNEL_EXTRA_ARGS = "EXTRA_CFLAGS=-Wno-attribute-alias"
 do_rm_work() {
 }
 
-do_package_qa[noexec] = "1"
+

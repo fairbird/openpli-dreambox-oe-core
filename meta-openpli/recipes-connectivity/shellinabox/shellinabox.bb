@@ -50,4 +50,4 @@ CFLAGS = "-Wno-error=incompatible-pointer-types \
 	  -Wno-error=implicit-function-declaration \
 "
 
-do_package_qa[noexec] = "1"
+

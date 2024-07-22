@@ -23,4 +23,4 @@ do_install() {
 	python3 -O -m compileall ${D}${libdir}/enigma2/python/Plugins/
 }
 
-do_package_qa[noexec] = "1"
+

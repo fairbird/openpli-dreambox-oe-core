@@ -17,4 +17,4 @@ do_install () {
 	install -m 755 ${S}/blindscan-s2 ${D}/${bindir}
 }
 
-do_package_qa[noexec] = "1"
+

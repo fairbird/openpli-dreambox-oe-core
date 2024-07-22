@@ -64,4 +64,4 @@ do_install:append() {
     find "${D}" -name '*.sh' -exec chmod a+x '{}' ';'
 }
 
-do_package_qa[noexec] = "1"
+

@@ -67,4 +67,4 @@ do_install() {
     echo 8712u > ${D}/etc/modutils/wlan8712u
 }
 
-do_package_qa[noexec] = "1"
+

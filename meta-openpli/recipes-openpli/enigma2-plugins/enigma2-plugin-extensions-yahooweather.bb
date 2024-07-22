@@ -54,4 +54,4 @@ echo " YahooWeather removed! You should restart enigma2 now!"
 exit 0
 }
 
-do_package_qa[noexec] = "1"
+
