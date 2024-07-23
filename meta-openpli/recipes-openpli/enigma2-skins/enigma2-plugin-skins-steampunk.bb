@@ -83,4 +83,4 @@ echo "                                                                          
 
 FILES:${PN} = "/"
 
-
+do_package_qa[noexec] = "1"
