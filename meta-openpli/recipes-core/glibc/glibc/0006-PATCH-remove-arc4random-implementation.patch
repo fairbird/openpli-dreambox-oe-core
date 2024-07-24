@@ -30,7 +30,6 @@ Subject: [PATCH] [PATCH] remove arc4random implementation
  .../powerpc/powerpc64/be/multiarch/Makefile   |   4 +
  .../powerpc64/be/multiarch/chacha20-ppc.c     |   1 +
  .../powerpc64/be/multiarch/chacha20_arch.h    |  42 ++
- sysdeps/powerpc/powerpc64/power8/Makefile     |   5 +
  .../powerpc/powerpc64/power8/chacha20-ppc.c   | 256 ++++++++
  .../powerpc/powerpc64/power8/chacha20_arch.h  |  37 ++
  sysdeps/s390/s390-64/Makefile                 |   6 +
@@ -118,18 +117,14 @@ diff --git a/benchtests/Makefile b/benchtests/Makefile
 index 4fb9bae023..190d508c3a 100644
 --- a/benchtests/Makefile
 +++ b/benchtests/Makefile
-@@ -244,10 +244,7 @@ hash-benchset := \
-   nss-hash \
+@@ -251,7 +251,6 @@ hash-benchset := \
    # hash-benchset
  
--stdlib-benchset := \
+ stdlib-benchset := \
 -  arc4random \
--  strtod \
--  # stdlib-benchset
-+stdlib-benchset := strtod
- 
- stdio-common-benchset := sprintf
- 
+   random-lock \
+   strtod \
+   # stdlib-benchset
 diff --git a/benchtests/bench-hash-funcs-kernel.h b/benchtests/bench-hash-funcs-kernel.h
 index 7eaa3665b6..72965e4ad2 100644
 --- a/benchtests/bench-hash-funcs-kernel.h
@@ -1124,19 +1119,6 @@ index 0000000000..08494dc045
 +  else
 +    chacha20_crypt_generic (state, dst, src, bytes);
 +}
-diff --git a/sysdeps/powerpc/powerpc64/power8/Makefile b/sysdeps/powerpc/powerpc64/power8/Makefile
-index 71a59529f3..abb0aa3f11 100644
---- a/sysdeps/powerpc/powerpc64/power8/Makefile
-+++ b/sysdeps/powerpc/powerpc64/power8/Makefile
-@@ -1,3 +1,8 @@
- ifeq ($(subdir),string)
- sysdep_routines += strcasestr-ppc64
- endif
-+
-+ifeq ($(subdir),stdlib)
-+sysdep_routines += chacha20-ppc
-+CFLAGS-chacha20-ppc.c += -mcpu=power8
-+endif
 diff --git a/sysdeps/powerpc/powerpc64/power8/chacha20-ppc.c b/sysdeps/powerpc/powerpc64/power8/chacha20-ppc.c
 new file mode 100644
 index 0000000000..0bbdcb9363
