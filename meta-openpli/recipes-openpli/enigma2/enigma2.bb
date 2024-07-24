@@ -33,6 +33,7 @@ RDEPENDS:${PN} = " \
 	ethtool \
 	glibc-gconv-iso8859-15 \
 	oe-alliance-branding \
+	enigma2-locale-meta \
 	${PYTHON_RDEPS} \
 	"
 
@@ -223,6 +224,10 @@ EXTRA_OECONF = "\
 	${@bb.utils.contains("MACHINE_FEATURES", "nolcd", "--with-nolcd" , "", d)} \
 	"
 
+# Save po files
+PACKAGES =+ "${PN}-po"
+FILES:${PN}-po = "${datadir}/enigma2/po/*.po ${datadir}/enigma2/po/*.pot"
+
 # pass the enigma branch to automake
 EXTRA_OEMAKE = "\
 	ENIGMA2_BRANCH=${ENIGMA2_BRANCH} \
@@ -271,6 +276,9 @@ python populate_packages:prepend() {
     do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True, extra_depends='')
     do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True, extra_depends='')
     do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', '%s (debug)', recursive=True, match_path=True, prepend=True, extra_depends='')
+
+    enigma2_podir = bb.data.expand('${datadir}/enigma2/po', d)
+    do_split_packages(d, enigma2_podir, '^(\w+)/[a-zA-Z0-9_/]+.*$', 'enigma2-locale-%s', '%s', recursive=True, match_path=True, prepend=True, extra_depends="enigma2")
 }
 
 RRECOMMENDS:${PN}:append:dm900 = " enigma2-plugin-systemplugins-fsblupdater"
