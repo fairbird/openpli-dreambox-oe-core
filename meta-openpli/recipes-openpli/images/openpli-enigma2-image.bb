@@ -67,7 +67,6 @@ IMAGE_INSTALL = " \
 	minilocale \
 	fuse-exfat \
 	gettext \
-	glibc-binary-localedata-en-gb \
 	hdparm \
 	kernel-params \
 	libavahi-client \
