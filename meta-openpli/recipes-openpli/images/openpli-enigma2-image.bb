@@ -64,7 +64,7 @@ IMAGE_INSTALL = " \
 	e2fsprogs-mke2fs \
 	e2fsprogs-tune2fs \
 	enigma2 \
-	fakelocale \
+	minilocale \
 	fuse-exfat \
 	gettext \
 	glibc-binary-localedata-en-gb \
