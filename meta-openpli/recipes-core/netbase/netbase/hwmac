@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ "x$IFACE" != "xeth0" -a "x$IFACE" != "x--all" ] && exit 0
+
+if [ -f /etc/enigma2/hwmac ]; then
+	macadr=`cat /etc/enigma2/hwmac`
+	if [  "$macadr" != "" ];then
+		busybox ip link set addr $macadr dev eth0 2>/dev/null || :
+	fi
+fi
+
