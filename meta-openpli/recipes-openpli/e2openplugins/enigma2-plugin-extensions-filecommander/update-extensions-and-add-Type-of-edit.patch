@@ -1,0 +1,53 @@
+From 02533514d692cd7437fd8e998b444dbabce79652 Mon Sep 17 00:00:00 2001
+From: fairbird <rrrr53@hotmail.com>
+Date: Sat, 27 Jul 2024 16:56:34 +0300
+Subject: [PATCH] Update extensions and add Type of edit
+---
+ addons/key_actions.py |  2 +-
+ addons/type_utils.py  | 13 ++++++++++++-
+ 2 files changed, 13 insertions(+), 2 deletions(-)
+
+diff --git a/plugin/addons/key_actions.py b/plugin/addons/key_actions.py
+index d8e0821..53e0872 100644
+--- a/plugin/addons/key_actions.py
++++ b/plugin/addons/key_actions.py
+@@ -55,7 +55,7 @@ from .type_utils import ImageViewer, MoviePlayer, vEditor
+ # for locale (gettext)
+ from . import _, ngettext
+ 
+-TEXT_EXTENSIONS = frozenset((".txt", ".log", ".py", ".xml", ".html", ".meta", ".bak", ".lst", ".cfg", ".conf", ".srt"))
++TEXT_EXTENSIONS = frozenset((".txt", ".log", ".py", ".xml", ".html", ".meta", ".bak", ".lst", ".cfg", ".conf", ".srt", ".socket", ".key"))
+ 
+ try:
+ 	from Screens import DVD
+diff --git a/plugin/addons/type_utils.py b/plugin/addons/type_utils.py
+index d4ddf5c..359e150 100644
+--- a/plugin/addons/type_utils.py
++++ b/plugin/addons/type_utils.py
+@@ -191,6 +191,14 @@ class vEditor(Screen, HelpableScreen):
+ 			pass
+ 
+ 	def editLine(self):
++		menu = []
++		menu.append(("Edit by Input Type", "Input"))
++		menu.append(("Edit by Virtual Keyboard", "Virtual"))
++		self.session.openWithCallback(self.OpenditLine, ChoiceBox, title=_("Select Edit Type:"), list=menu)
++
++	def OpenditLine(self, choice):
++		if choice is None:
++			return
+ 		try:
+ 			self.findtab = -1
+ 			self.selLine = self["filedata"].getSelectionIndex()
+@@ -240,7 +248,10 @@ class vEditor(Screen, HelpableScreen):
+ 
+ 			length = getMaxPosition(editableText, self["InputBoxWide_input"], end=firstpos_end) - 1
+ 
+-			self.session.openWithCallback(self.callbackEditLine, InputBoxWide, title="%s %s" % (_("Original:"), editableText), visible_width=length, overwrite=False, firstpos_end=firstpos_end, allmarked=False, windowTitle=_("Edit line ") + str(self.selLine + 1), text=editableText)
++			if choice[1] == "Input":
++				self.session.openWithCallback(self.callbackEditLine, InputBoxWide, title="%s %s" % (_("Original:"), editableText), visible_width=length, overwrite=False, firstpos_end=firstpos_end, allmarked=False, windowTitle=_("Edit line ") + str(self.selLine + 1), text=editableText)
++			else:
++				self.session.openWithCallback(self.callbackEditLine, VirtualKeyBoard, title="%s %s" % (_("Original:"), editableText), visible_width=length, text=editableText)
+ 		except:
+ 			msg = self.session.open(MessageBox, _("This line is not editable!"), MessageBox.TYPE_ERROR)
+ 			msg.setTitle(_("Error..."))
