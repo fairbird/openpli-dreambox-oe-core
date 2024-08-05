@@ -175,6 +175,9 @@ RDEPENDS:${PN}-build-dependencies = "\
 	python3-twisted-web \
 	"
 
+RREPLACES:enigma2-plugin-systemplugins-lcnscanner = "enigma2-plugin-systemplugins-terrestrialscan"
+RCONFLICTS:enigma2-plugin-systemplugins-lcnscanner = "enigma2-plugin-systemplugins-terrestrialscan"
+
 inherit gitpkgv python3native python3targetconfig
 
 PV = "${PYTHON_BASEVERSION}+git"

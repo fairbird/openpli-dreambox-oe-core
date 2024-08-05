@@ -220,7 +220,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-extrafancontrol \
 	enigma2-plugin-systemplugins-mountmanager \
 	enigma2-plugin-systemplugins-signalfinder \
-	enigma2-plugin-systemplugins-terrestrialscan \
 	enigma2-plugin-systemplugins-crossepg \
 	enigma2-plugin-systemplugins-hrtunerproxy \
 	enigma2-plugin-systemplugins-misplslcnscan \
