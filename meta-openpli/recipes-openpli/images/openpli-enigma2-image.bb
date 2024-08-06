@@ -64,7 +64,7 @@ IMAGE_INSTALL = " \
 	e2fsprogs-mke2fs \
 	e2fsprogs-tune2fs \
 	enigma2 \
-	minilocale \
+	fakelocale \
 	fuse-exfat \
 	gettext \
 	hdparm \
