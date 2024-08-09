@@ -17,6 +17,8 @@ PV = "1.0"
 S = "${WORKDIR}/sources"
 UNPACKDIR = "${S}"
 
+TARGET_CC_ARCH += "${LDFLAGS}"
+
 do_compile() {
     make -f Makefile
 }
