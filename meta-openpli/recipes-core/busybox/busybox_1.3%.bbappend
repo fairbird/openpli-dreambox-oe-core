@@ -3,7 +3,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 PR .= ".3"
 
 SRC_URI:append = " \
-            file://reverse-cbq.patch \
             file://mount_single_uuid.patch \
             file://use_ipv6_when_ipv4_unroutable.patch \
             file://telnetd \
