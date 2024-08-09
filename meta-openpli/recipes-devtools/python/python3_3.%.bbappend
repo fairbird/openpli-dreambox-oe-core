@@ -5,6 +5,10 @@ PACKAGECONFIG = "readline gdbm ${@bb.utils.filter('DISTRO_FEATURES', 'lto', d)}"
 
 inherit python3-dir
 
+PV = "3.12.5"
+
+SRC_URI[sha256sum] = "fa8a2e12c5e620b09f53e65bcd87550d2e5a1e2e04bf8ba991dcc55113876397"
+
 FILES:${PN}-src += " \
     ${libdir}/${PYTHON_DIR}/*.py \
     ${libdir}/${PYTHON_DIR}/*/*.py \
