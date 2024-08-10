@@ -65,7 +65,6 @@ OPTIONAL_PACKAGES += " \
 	net-tools \
 	ntfs-3g \
 	ntp \
-	ntpq \
 	openmultiboot \
 	openresolv \
 	ofgwrite \
