@@ -9,6 +9,7 @@ DEPENDS = " \
 	avahi \
 	freetype \
 	gettext-native \
+	gstreamer1.0-plugins-base gstreamer1.0 \
 	jpeg \
 	libdreamdvd libdvbsi++ fribidi libmad libpng libsigc++-3 giflib libxml2 \
 	openssl libudfread \
@@ -42,7 +43,6 @@ RRECOMMENDS:${PN} = " \
 	hotplug-e2-helper \
 	glibc-gconv-utf-16 \
 	python3-sendfile \
-	virtual-enigma2-mediaservice \
 	${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", \
 	" \
 	${GST_BASE_RDEPS} \
@@ -213,6 +213,7 @@ EXTRA_OECONF = "\
 	--with-libsdl=no --with-boxtype=${MACHINE} \
 	--enable-dependency-tracking \
 	ac_cv_prog_c_openmp=-fopenmp \
+	--with-gstversion=1.0 \
 	${@get_crashaddr(d)} \
 	BUILD_SYS=${BUILD_SYS} \
 	HOST_SYS=${HOST_SYS} \
