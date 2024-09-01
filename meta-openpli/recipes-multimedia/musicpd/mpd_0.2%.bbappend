@@ -4,15 +4,12 @@ DEPENDS:remove = "boost"
 
 inherit gitpkgv
 
-SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
-			file://mpd.conf.in \
-			file://mpd.init \
-"
+SRC_URI:append = " file://mpd.init"
 
-SRCREV = "bd59c889f3fafd874b41606edfa858b7485e712d"
+SRCREV = "a3a07280e8386fea3be811ea3315670d623c88e2"
 
-PV = "0.23.14+git"
-PKGV = "0.23.14+git${GITPKGV}"
+PV = "0.23.15+git"
+PKGV = "0.23.15+git${GITPKGV}"
 
 do_install:append() {
 	install -d ${D}${localstatedir}/lib/mpd/playlists
