@@ -193,6 +193,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-freechannels \
 	enigma2-plugin-extensions-fritzcall \
 	enigma2-plugin-extensions-infobarweather \
+	enigma2-plugin-extensions-iptv-org-playlists \
 	enigma2-plugin-extensions-managerautofs \
 	enigma2-plugin-extensions-mediaplayer2 \
 	enigma2-plugin-extensions-modifyplifullhd \
@@ -218,6 +219,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-extrafancontrol \
 	enigma2-plugin-systemplugins-mountmanager \
 	enigma2-plugin-systemplugins-signalfinder \
+	enigma2-plugin-systemplugins-terrestrialbouquet \
 	enigma2-plugin-systemplugins-crossepg \
 	enigma2-plugin-systemplugins-hrtunerproxy \
 	enigma2-plugin-systemplugins-misplslcnscan \
