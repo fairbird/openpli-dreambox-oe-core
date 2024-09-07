@@ -5,7 +5,7 @@ SECTION = "multimedia"
 LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
 
-SRC_URI = "git://gitlab.com/MOHAMED_OS/e2iplayer.git;branch=main;protocol=https \
+SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;protocol=http;branch=python3;protocol=https \
 	file://no-need-to-check-depends.patch \
 "
 
