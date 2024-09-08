@@ -5,7 +5,7 @@ require classes/python3-compileall.inc
 
 inherit gitpkgv python3-dir
 
-DEPENDS = "python3 curl ffmpeg openssl zlib"
+DEPENDS = "python3 curl ffmpeg openssl zlib python3-pycurl"
 RRECOMMENDS:${PN} = " \
     ffmpeg \
     exteplayer3 \
