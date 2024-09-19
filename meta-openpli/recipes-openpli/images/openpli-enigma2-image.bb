@@ -70,6 +70,10 @@ IMAGE_INSTALL = " \
 	hdparm \
 	kernel-params \
 	libavahi-client \
+	libxcrypt-compat \
+	libcrypto-compat-0.9.7 \
+	libcrypto-compat-0.9.8 \
+	libcrypto-compat-1.0.0 \
 	modutils-loadscript \
 	nfs-utils \
 	nfs-utils-client \
