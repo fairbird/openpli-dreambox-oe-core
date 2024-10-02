@@ -24,6 +24,7 @@ RDEPENDS:${PN} = "python3-core \
     python3-shell \
     python3-singledispatch \
     python3-websocket-client \
+    python3-trio \
     "
 
 PV = "git"
