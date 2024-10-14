@@ -30,14 +30,14 @@ and more.<br>
 Feel free to send pull-request.
 <br>
 <br>
-Tested with Ubuntu 24.04 LTS.
+Note Ubuntu 24.04 LTS and 24.10!<br>
 
-# Due to new security features, run on each OS startup:
+# Due to new security features:
 
 See:
 https://ubuntu.com/blog/whats-new-in-security-for-ubuntu-24-04-lts
 
-If you cogt this error (Operation not permitted) You need to give
+If you get this error (Operation not permitted) You need to give
 ```
 sudo apparmor_parser -R /etc/apparmor.d/unprivileged_userns
 sudo mv /etc/apparmor.d/unprivileged_userns /etc/apparmor.d/disable
