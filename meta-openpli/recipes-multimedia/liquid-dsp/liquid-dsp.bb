@@ -25,3 +25,6 @@ do_install() {
 	install -m 755 -p ${S}/libliquid.a ${D}${libdir}
 	install -m 644 -p ${S}/include/liquid.h ${D}${includedir}/liquid
 }
+
+FILES:${PN} = "${libdir}"
+FILES:${PN}-dev = "${includedir} ${libdir}/libliquid.a"
