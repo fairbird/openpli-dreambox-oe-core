@@ -2,16 +2,23 @@ diff --git a/src/tmbdYTTrailer.py b/src/tmbdYTTrailer.py
 index 2d6ea5f..2f32acf 100644
 --- a/src/tmbdYTTrailer.py
 +++ b/src/tmbdYTTrailer.py
-@@ -4,7 +4,8 @@ import os
- from json import load
- from urllib.parse import quote
- from urllib.request import urlopen
--from twisted.web.client import downloadPage
+@@ -4,14 +4,8 @@ from sys import version_info
+ 
+ import os
+ 
+-if version_info[0] == 2:
+-	# Python 2
+-	from urllib import quote
+-	from urllib2 import urlopen
+-else:
+-	from urllib.parse import quote
+-	from urllib.request import urlopen
+-
 +from twisted.internet.reactor import callInThread
 +from requests import get, exceptions
  
- from enigma import ePicLoad, eTimer, eServiceReference
- from Components.ActionMap import ActionMap, HelpableActionMap
+ from json import load
+ from twisted.web.client import downloadPage
 @@ -217,9 +218,20 @@ class TmbdYTTrailerList(Screen, tmbdYTTrailer):
  			if not entry[2]:
  				self.decodeThumbnail(entry[0])
