@@ -4,7 +4,7 @@ AUTHOR = "Alex Grönholm <alex.gronholm@nextday.fi>"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d5caa317463c433575efff1d2fe206d7"
 
-DEPENDS += "${PYTHON_PN}-flit-scm-native"
+DEPENDS += "python3-flit-scm-native"
 
 PYPI_PACKAGE = "exceptiongroup"
 
@@ -14,4 +14,4 @@ SRC_URI[sha256sum] = "a4785e48b045528f5bfe627b6ad554ff32def154f42372786903b7abcf
 
 BBCLASSEXTEND = "native nativesdk"
 
-include ${PYTHON_PN}-package-split.inc
+include python3-package-split.inc

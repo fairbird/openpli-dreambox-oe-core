@@ -2,7 +2,7 @@ DESCRIPTION = "Tool to create bouquets based on playlists from github.com/iptv-o
 MAINTAINER = "Huevos"
 HOMEPAGE = "https://github.com/Huevos/iptv-org-playlists-plugin-for-enigma2"
 
-inherit gitpkgv allarch ${PYTHON_PN}native gettext
+inherit gitpkgv allarch python3native gettext
 
 require conf/license/license-gplv2.inc
 
@@ -12,7 +12,7 @@ PKGV = "1.0+git${GITPKGV}"
 SRC_URI = "git://github.com/Huevos/iptv-org-playlists-plugin-for-enigma2.git;protocol=https;branch=master"
 
 RDEPENDS:${PN} = "\
-    ${PYTHON_PN}-requests \
+    python3-requests \
     "
 
 S = "${WORKDIR}/git"

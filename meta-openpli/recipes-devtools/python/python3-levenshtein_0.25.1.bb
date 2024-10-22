@@ -1,7 +1,7 @@
 SUMMARY = "Python Levenshtein"
 HOMEPAGE = "http://github.com/joncasdam/python-Levenshtein"
 SECTION = "devel/python"
-DEPENDS = "${PYTHON_PN}"
+DEPENDS = "python3"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = " file://COPYING;md5=e4dc568e8869637acb7c89f0889d8130"
 
