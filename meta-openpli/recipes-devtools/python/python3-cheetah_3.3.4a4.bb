@@ -8,7 +8,7 @@ inherit setuptools3
 
 SRC_URI = "git://github.com/CheetahTemplate3/cheetah3;protocol=https;branch=master"
 
-SRCREV = "854b47d528f912fc7bd520277f1c11d1b127f56b"
+SRCREV = "63d7ef20b213907d6c9340f60c92012934cfd462"
 
 S = "${WORKDIR}/git"
 
