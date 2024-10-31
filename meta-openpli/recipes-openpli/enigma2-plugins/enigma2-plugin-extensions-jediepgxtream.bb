@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/kiddac/Jedi-EPG-XStream.git;protocol=https;branch=ma
            file://get-rid-of-fuzzywuzzy.patch \
            "
 
-RDEPENDS:${PN} = "python3-requests python3-difflib  python3-thefuzz"
+RDEPENDS:${PN} = "python3-requests python3-difflib python3-thefuzz"
 
 S = "${WORKDIR}/git"
 

@@ -22,7 +22,7 @@ index 4c0fc0e..dbde54d 100644
          self.onLayoutFinish.append(self.__layoutFinished)
  
      def enablelist1(self):
-@@ -151,32 +155,6 @@ class JediEPGXtream_Main(Screen):
+@@ -151,25 +155,6 @@ class JediEPGXtream_Main(Screen):
          self.disablelist3()
          self.disablelist4()
  
@@ -45,16 +45,9 @@ index 4c0fc0e..dbde54d 100644
 -                print(e)
 -                dependencies = False
 -
--        if dependencies is False:
--            chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediEPGXtream/dependencies.sh", 0o0755)
--            cmd1 = ". /usr/lib/enigma2/python/Plugins/Extensions/JediEPGXtream/dependencies.sh"
--            self.session.openWithCallback(self.start, Console, title="Checking Python Dependencies", cmdlist=[cmd1], closeOnSuccess=False)
--        else:
--            self.start()
--
-     def clear_caches(self):
-         try:
-             system("echo 1 > /proc/sys/vm/drop_caches")
+         if dependencies is False:
+             chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediEPGXtream/dependencies.sh", 0o0755)
+             cmd1 = ". /usr/lib/enigma2/python/Plugins/Extensions/JediEPGXtream/dependencies.sh"
 @@ -530,13 +508,6 @@ class JediEPGXtream_Main(Screen):
      def getMatchList(self, name):
          from difflib import get_close_matches
