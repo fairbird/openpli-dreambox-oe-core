@@ -16,3 +16,5 @@ S = "${WORKDIR}/backports.lzma-${PV}"
 inherit setuptools3
 
 include python3-package-split.inc
+
+CFLAGS = "-Wno-error=implicit-function-declaration"
