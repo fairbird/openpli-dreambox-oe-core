@@ -8,6 +8,7 @@ SRC_URI="git://github.com/atvcaptain/dpf-ax.git;branch=dreamlayers;protocol=http
          file://set-python-version-to-313.patch \ 
          file://replace-py-ty-with-py--set-type.patch \
          file://fix-incompatible-pointer-type.patch \
+         file://migrate-to-new-buffer-protocol.patch \
 "
 
 S = "${WORKDIR}/git"
