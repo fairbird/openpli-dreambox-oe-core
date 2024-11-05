@@ -23,7 +23,7 @@ https://github.com/oe-alliance/oe-alliance-core
 -GStreamer 1.24.6<br>
 -Python 3.13.0<br>
 -OpenSSL 3.3.1<br>
--Busybox 1.36.1<br>
+-Busybox 1.37.0<br>
 and more.<br>
 <br>
 <br>
