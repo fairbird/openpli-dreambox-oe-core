@@ -86,6 +86,7 @@ OPTIONAL_PACKAGES += " \
 	python3-mechanize \
 	python3-tmdbsimple \
 	python3-ntplib \
+	python3-puremagic \
 	python3-pysnmp \
 	python3-requests \
 	python3-tinytag \
