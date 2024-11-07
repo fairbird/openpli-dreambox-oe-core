@@ -4,9 +4,18 @@ SRC_URI = "git://github.com/Dima73/${PLUGINNAME}.git;protocol=https;branch=maste
 
 S = "${WORKDIR}/git"
 
+include python3-package-split.inc
 inherit gitpkgv setuptools3-openplugins
+require classes/python3-compileall.inc
 
 PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 
-include python3-package-split.inc
+do_install:append() {
+	if ${@bb.utils.contains('PLUGIN_PATH','','true','false',d)}; then 
+		install -d ${D}/${libdir}/enigma2/python/Plugins/${PLUGIN_PATH}/locale
+		cp -rf ${S}/build/lib/${PLUGIN_PATH}/locale/ ${D}/${libdir}/enigma2/python/Plugins/${PLUGIN_PATH}/
+	fi
+}
+
+

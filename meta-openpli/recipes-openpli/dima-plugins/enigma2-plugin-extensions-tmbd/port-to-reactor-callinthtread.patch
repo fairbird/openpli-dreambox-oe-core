@@ -1,8 +1,8 @@
 diff --git a/src/tmbdYTTrailer.py b/src/tmbdYTTrailer.py
-index 2d6ea5f..2f32acf 100644
+index 012403a..d7a9619 100644
 --- a/src/tmbdYTTrailer.py
 +++ b/src/tmbdYTTrailer.py
-@@@ -14,7 +14,8 @@ else:
+@@ -14,7 +14,8 @@ else:
  
  
  from json import load
@@ -12,7 +12,7 @@ index 2d6ea5f..2f32acf 100644
  
  from enigma import ePicLoad, eTimer, eServiceReference
  from Components.ActionMap import ActionMap, HelpableActionMap
-@@ -217,9 +218,20 @@ class TmbdYTTrailerList(Screen, tmbdYTTrailer):
+@@ -228,9 +229,20 @@ class TmbdYTTrailerList(Screen, tmbdYTTrailer):
  			if not entry[2]:
  				self.decodeThumbnail(entry[0])
  			else:
