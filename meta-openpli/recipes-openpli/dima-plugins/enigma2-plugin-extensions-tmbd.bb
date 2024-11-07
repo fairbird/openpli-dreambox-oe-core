@@ -19,3 +19,5 @@ RDEPENDS:${PN} = " \
 SRC_URI += " \
            file://port-to-reactor-callinthtread.patch \
 "
+
+PR = "r1"
