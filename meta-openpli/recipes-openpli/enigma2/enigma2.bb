@@ -35,6 +35,7 @@ RDEPENDS:${PN} = " \
 	glibc-gconv-iso8859-15 \
 	oe-alliance-branding \
 	enigma2-locale-meta \
+	virtual-gstreamer1.0-dvbmediasink \
 	${PYTHON_RDEPS} \
 	"
 
