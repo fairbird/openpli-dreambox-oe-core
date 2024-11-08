@@ -65,11 +65,14 @@ GST_BASE_RDEPS = "\
 	gstreamer1.0-plugins-base-playback \
 	gstreamer1.0-plugins-base-subparse \
 	gstreamer1.0-plugins-base-typefindfunctions \
+	gstreamer1.0-plugins-base-videoconvertscale \
 	gstreamer1.0-plugins-base-vorbis \
 	gstreamer1.0-plugins-base-rawparse \
 "
 
 GST_GOOD_RDEPS = "\
+	gstreamer1.0-plugins-good-amrnb \
+	gstreamer1.0-plugins-good-amrwbdec \
 	gstreamer1.0-plugins-good-apetag \
 	gstreamer1.0-plugins-good-audioparsers \
 	gstreamer1.0-plugins-good-autodetect \
@@ -80,11 +83,13 @@ GST_GOOD_RDEPS = "\
 	gstreamer1.0-plugins-good-id3demux \
 	gstreamer1.0-plugins-good-isomp4 \
 	gstreamer1.0-plugins-good-matroska \
+	gstreamer1.0-plugins-good-mpg123 \
 	gstreamer1.0-plugins-good-rtp \
 	gstreamer1.0-plugins-good-rtpmanager \
 	gstreamer1.0-plugins-good-rtsp \
 	gstreamer1.0-plugins-good-soup \
 	gstreamer1.0-plugins-good-udp \
+	gstreamer1.0-plugins-good-vpx \
 	gstreamer1.0-plugins-good-wavparse \
 	gstreamer1.0-plugins-good-wavpack \
 "
