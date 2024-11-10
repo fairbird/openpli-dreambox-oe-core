@@ -173,7 +173,7 @@ $(TOPDIR)/conf/openpli.conf: $(DEPDIR)/.openpli.conf.$(OPENPLI_CONF_HASH)
 	@echo 'BBINCLUDELOGS = "yes"' >> $@
 	@echo 'CONF_VERSION = "2"' >> $@
 	@echo 'DISTRO = "openpli"' >> $@
-	@echo 'EXTRA_IMAGE_FEATURES = "debug-tweaks"' >> $@
+	@echo 'EXTRA_IMAGE_FEATURES = "allow-empty-password empty-root-password allow-root-login post-install-logging"' >> $@
 	@echo 'USER_CLASSES = "buildstats"' >> $@
 
 LOCAL_CONF_HASH := $(call hash, \
