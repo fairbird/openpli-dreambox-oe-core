@@ -14,7 +14,7 @@ PV = "git"
 PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-alliance/oe-alliance-plugins.git;protocol=https;branch=master \
-	file://remove-unused-plugins.patch \
+	file://remove-duplicate-plugins-with-pli-plugins.patch \
 "
 
 S = "${WORKDIR}/git"
