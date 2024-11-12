@@ -157,6 +157,7 @@ DEMUXTOOL ?= "replex"
 
 DESCRIPTION:append:enigma2-plugin-extensions-cutlisteditor = "enables you to cut your movies."
 RDEPENDS:enigma2-plugin-extensions-cutlisteditor = "aio-grab"
+RDEPENDS:enigma2-plugin-extensions-filecommander = "python3-puremagic"
 DESCRIPTION:append:enigma2-plugin-extensions-graphmultiepg = "shows a graphical timeline EPG."
 DESCRIPTION:append:enigma2-plugin-extensions-pictureplayer = "displays photos on the TV."
 DESCRIPTION:append:enigma2-plugin-systemplugins-positionersetup = "helps you installing a motorized dish."
@@ -296,5 +297,3 @@ RRECOMMENDS:${PN}:append:dm900 = " enigma2-plugin-systemplugins-fsblupdater"
 RRECOMMENDS:${PN}:append:dm920 = " enigma2-plugin-systemplugins-fsblupdater"
 RRECOMMENDS:${PN}:append:dreamone = " enigma2-plugin-systemplugins-amlfrq"
 RRECOMMENDS:${PN}:append:dreamtwo = " enigma2-plugin-systemplugins-amlfrq"
-
-
