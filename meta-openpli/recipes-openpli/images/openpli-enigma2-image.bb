@@ -2,6 +2,7 @@ inherit image
 
 IMAGE_LINGUAS = ""
 IMAGE_FEATURES += "package-management"
+EXTRA_IMAGE_FEATURES = ""
 
 ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-audiosync \
