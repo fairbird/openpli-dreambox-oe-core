@@ -2,7 +2,6 @@ inherit image
 
 IMAGE_LINGUAS = ""
 IMAGE_FEATURES += "package-management"
-EXTRA_IMAGE_FEATURES = "allow-empty-password empty-root-password allow-root-login post-install-logging"
 
 ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-audiosync \
