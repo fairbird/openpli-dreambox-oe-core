@@ -1,0 +1,13 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 17da486..36aea65 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -3,7 +3,7 @@
+ # https://github.com/zopefoundation/meta/tree/master/config/c-code
+ 
+ [build-system]
+-requires = ["setuptools<74"]
++requires = ["setuptools<77"]
+ build-backend = "setuptools.build_meta"
+ 
+ [tool.coverage.run]
