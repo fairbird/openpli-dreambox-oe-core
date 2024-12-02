@@ -34,7 +34,7 @@ DEPENDS += " \
             exiv2 \
             libdcadec \
             faad2 \
-            ffmpeg-6.1.1 \
+            ffmpeg \
             fontconfig \
             fribidi \
             glib-2.0 \
