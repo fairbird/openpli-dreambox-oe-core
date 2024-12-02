@@ -1,23 +1,23 @@
-From 841112c612a9c7952939a98e165b84207184e638 Mon Sep 17 00:00:00 2001
-From: Captain <captain.onboard@web.de>
-Date: Fri, 17 Jul 2020 21:00:25 +0200
+From 256f92db5a1f8c617d0f30c1eddca56f45e96ebd Mon Sep 17 00:00:00 2001
+From: Captain <openatv@gmail.com>
+Date: Wed, 22 May 2024 21:22:47 +0200
 Subject: [PATCH] e2-player
 
 ---
  cmake/treedata/common/cores.txt               |   1 +
  system/playercorefactory.xml                  |  12 +-
  xbmc/cores/Enigma2Player/CMakeLists.txt       |   6 +
- xbmc/cores/Enigma2Player/Enigma2Player.cpp    | 799 ++++++++++++++++++
+ xbmc/cores/Enigma2Player/Enigma2Player.cpp    | 802 ++++++++++++++++++
  xbmc/cores/Enigma2Player/Enigma2Player.h      |  96 +++
  .../playercorefactory/PlayerCoreConfig.cpp    |   5 +
  .../playercorefactory/PlayerCoreFactory.cpp   |   8 +
- 7 files changed, 926 insertions(+), 1 deletion(-)
+ 7 files changed, 929 insertions(+), 1 deletion(-)
  create mode 100644 xbmc/cores/Enigma2Player/CMakeLists.txt
  create mode 100644 xbmc/cores/Enigma2Player/Enigma2Player.cpp
  create mode 100644 xbmc/cores/Enigma2Player/Enigma2Player.h
 
 diff --git a/cmake/treedata/common/cores.txt b/cmake/treedata/common/cores.txt
-index d23939d314..5e5c6cbf80 100644
+index d23939d..5e5c6cb 100644
 --- a/cmake/treedata/common/cores.txt
 +++ b/cmake/treedata/common/cores.txt
 @@ -4,5 +4,6 @@ xbmc/cores/DllLoader                   cores/dll-loader
@@ -28,7 +28,7 @@ index d23939d314..5e5c6cbf80 100644
  xbmc/cores/paplayer                    cores/paplayer
  xbmc/cores/playercorefactory           cores/playercorefactory
 diff --git a/system/playercorefactory.xml b/system/playercorefactory.xml
-index f928311cf0..0b5acfb909 100644
+index f928311..8e25021 100644
 --- a/system/playercorefactory.xml
 +++ b/system/playercorefactory.xml
 @@ -8,9 +8,17 @@
@@ -61,7 +61,7 @@ index f928311cf0..0b5acfb909 100644
      <!-- DVDs -->
 diff --git a/xbmc/cores/Enigma2Player/CMakeLists.txt b/xbmc/cores/Enigma2Player/CMakeLists.txt
 new file mode 100644
-index 0000000000..fc672758ff
+index 0000000..fc67275
 --- /dev/null
 +++ b/xbmc/cores/Enigma2Player/CMakeLists.txt
 @@ -0,0 +1,6 @@
@@ -73,10 +73,10 @@ index 0000000000..fc672758ff
 +
 diff --git a/xbmc/cores/Enigma2Player/Enigma2Player.cpp b/xbmc/cores/Enigma2Player/Enigma2Player.cpp
 new file mode 100644
-index 0000000000..dfb01b7739
+index 0000000..150f3f2
 --- /dev/null
 +++ b/xbmc/cores/Enigma2Player/Enigma2Player.cpp
-@@ -0,0 +1,800 @@
+@@ -0,0 +1,802 @@
 +/*
 + *  Copyright (C) 2005-2018 Team Kodi
 + *  This file is part of Kodi - https://kodi.tv
@@ -108,6 +108,7 @@ index 0000000000..dfb01b7739
 +#include "ServiceBroker.h"
 +#include "cores/AudioEngine/Interfaces/AE.h"
 +#include "cores/DataCacheCore.h"
++#include "messaging/ApplicationMessenger.h" 
 +#if defined(TARGET_WINDOWS)
 +  #include "utils/CharsetConverter.h"
 +  #include <Windows.h>
@@ -436,6 +437,7 @@ index 0000000000..dfb01b7739
 +  m_callback.OnAVStarted(m_file);
 +
 +  bool ret = true;
++  CServiceBroker::GetAppMessenger()->PostMsg(TMSG_SWITCHTOFULLSCREEN);
 +#if defined(TARGET_WINDOWS_DESKTOP)
 +  ret = ExecuteAppW32(strFName.c_str(),strFArgs.c_str());
 +#elif defined(TARGET_ANDROID)
@@ -879,7 +881,7 @@ index 0000000000..dfb01b7739
 +
 diff --git a/xbmc/cores/Enigma2Player/Enigma2Player.h b/xbmc/cores/Enigma2Player/Enigma2Player.h
 new file mode 100644
-index 0000000000..403fa88b88
+index 0000000..d0de424
 --- /dev/null
 +++ b/xbmc/cores/Enigma2Player/Enigma2Player.h
 @@ -0,0 +1,96 @@
@@ -980,7 +982,7 @@ index 0000000000..403fa88b88
 +  CFileItem m_file;
 +};
 diff --git a/xbmc/cores/playercorefactory/PlayerCoreConfig.cpp b/xbmc/cores/playercorefactory/PlayerCoreConfig.cpp
-index 545062e050..6c4718d736 100644
+index 545062e..6c4718d 100644
 --- a/xbmc/cores/playercorefactory/PlayerCoreConfig.cpp
 +++ b/xbmc/cores/playercorefactory/PlayerCoreConfig.cpp
 @@ -21,6 +21,7 @@
@@ -1003,7 +1005,7 @@ index 545062e050..6c4718d736 100644
  #if defined(HAS_UPNP)
    else if (m_type.compare("remote") == 0)
 diff --git a/xbmc/cores/playercorefactory/PlayerCoreFactory.cpp b/xbmc/cores/playercorefactory/PlayerCoreFactory.cpp
-index 419d34fd18..dc412a6e21 100644
+index fae40d8..8cae329 100644
 --- a/xbmc/cores/playercorefactory/PlayerCoreFactory.cpp
 +++ b/xbmc/cores/playercorefactory/PlayerCoreFactory.cpp
 @@ -14,6 +14,7 @@
@@ -1013,8 +1015,8 @@ index 419d34fd18..dc412a6e21 100644
 +#include "cores/Enigma2Player/Enigma2Player.h"
  #include "dialogs/GUIDialogContextMenu.h"
  #include "guilib/LocalizeStrings.h"
- #include "profiles/ProfileManager.h"
-@@ -349,6 +350,11 @@ bool CPlayerCoreFactory::LoadConfiguration(const std::string &file, bool clear)
+ #include "music/MusicFileItemClassify.h"
+@@ -369,6 +370,11 @@ bool CPlayerCoreFactory::LoadConfiguration(const std::string &file, bool clear)
      VideoPlayer->m_bPlaysVideo = true;
      m_vecPlayerConfigs.emplace_back(std::move(VideoPlayer));
  
@@ -1026,7 +1028,7 @@ index 419d34fd18..dc412a6e21 100644
      auto paplayer = std::make_unique<CPlayerCoreConfig>("PAPlayer", "music", nullptr);
      paplayer->m_bPlaysAudio = true;
      m_vecPlayerConfigs.emplace_back(std::move(paplayer));
-@@ -381,6 +387,8 @@ bool CPlayerCoreFactory::LoadConfiguration(const std::string &file, bool clear)
+@@ -401,6 +407,8 @@ bool CPlayerCoreFactory::LoadConfiguration(const std::string &file, bool clear)
          internaltype = "music";
        else if (type == "externalplayer")
          internaltype = "external";

@@ -45,7 +45,7 @@ do_install:append() {
                -e 's:${STAGING_DIR_HOST}:/:g' \
                -e 's:${STAGING_DIR_NATIVE}:/:g' \
                -e 's:${prefix}/${libdir}:${libdir}:g' \
-               -e 's:${UNPACKDIR}=::g' \ 
+               -e 's:${WORKDIR}=::g' \ 
             ${D}${libdir}/pkgconfig/*.pc
 }
 

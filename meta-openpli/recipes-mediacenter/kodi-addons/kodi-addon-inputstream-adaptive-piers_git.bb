@@ -11,13 +11,14 @@ DEPENDS += "expat pugixml"
 RDEPENDS:${PN} += "ldd"
 RRECOMMENDS:${PN} = "kernel-module-ext2"
 
-SRCREV = "358dbacd9ce0e5fd3697c6901ff2ac66af142a7b"
-PV = "21.1.2+gitr"
+SRCREV = "2147f080462d10ccb315eec3074a12db3b99cab5"
+PV = "22.1.4+gitr"
 
-KODIADDONBRANCH = "Omega"
+KODIADDONBRANCH = "Piers"
 
 SRC_URI = "git://github.com/xbmc/inputstream.adaptive.git;protocol=https;branch=${KODIADDONBRANCH} \
-        file://define-INPUTSTREAM_MAX_STREAM_COUNT-ifndef.patch"
+        file://define-INPUTSTREAM_MAX_STREAM_COUNT-ifndef.patch \
+        file://fix-missing-include.patch"
 
 S = "${WORKDIR}/git"
 

@@ -1,6 +1,6 @@
 LICENSE = "GPL-2.0-or-later"
 require conf/license/license-gplv2.inc
-require kodi-omega.inc 
+require kodi-piers.inc
 
 DEPENDS += " \
             zip-native \
@@ -31,7 +31,7 @@ OECMAKE_GENERATOR = "Unix Makefiles"
 
 EXTRA_OECMAKE = " \
     -DADDONS_TO_BUILD=pvr.${KODIADDONPLUGIN} \
-    -DADDON_SRC_PREFIX=${UNPACKDIR}/git \
+    -DADDON_SRC_PREFIX=${WORKDIR}/git \
     -DCMAKE_BUILD_TYPE=Debug -DVMTRACE=1 -DPARANOIA=1 \
     -DCMAKE_INSTALL_PREFIX=${datadir}/kodi/addons \
     -DKODI_INCLUDE_DIR=${STAGING_INCDIR}/kodi \
