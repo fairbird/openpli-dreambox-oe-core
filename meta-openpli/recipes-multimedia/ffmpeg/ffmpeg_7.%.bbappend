@@ -14,7 +14,6 @@ SRC_URI += "file://0001-makefile-add-demux-header.patch \
             file://0011-rtsp.patch \
             file://0012-dxva2.patch \
             file://0013-add-av_stream_get_first_dts-for-chromium.patch \
-            file://ffmpeg_ac4.patch \
             "
 
 PACKAGECONFIG:append = " gpl libbluray dav1d libfreetype librtmp libxml2 openssl x264"
