@@ -14,5 +14,3 @@ RDEPENDS:${PN} += " \
 "
 
 BBCLASSEXTEND = "native nativesdk"
-
-include python3-package-split.inc
