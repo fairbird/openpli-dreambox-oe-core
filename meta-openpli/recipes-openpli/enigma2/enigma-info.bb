@@ -16,6 +16,7 @@ deltask source_date_epoch
 
 RCONFLICTS:${PN} = "enigma-kernel-module"
 RREPLACES:${PN} = "enigma-kernel-module"
+DEPENDS = "virtual/kernel"
 
 SSTATE_SKIP_CREATION = "1"
 
