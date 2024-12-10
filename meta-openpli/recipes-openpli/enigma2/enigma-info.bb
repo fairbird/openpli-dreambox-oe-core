@@ -44,6 +44,10 @@ do_install() {
     # Kernel version
     KERNEL_VERSION="${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${PKGDATA_DIR}/kernel-depmod/kernel-abiversion')}"
 
+    # OE version info
+    OE_NAME=master
+    OE_VERSION=5.2
+
     DRIVERSDATE='N/A'
     # machine specific
     if [ "${MACHINE}" = "dm7080" ]; then
@@ -118,7 +122,7 @@ do_install() {
     printf "mtdrootfs='${MTD_ROOTFS}'\n" >> ${D}${INFOFILE}
     printf "multilib=${HAVE_MULTILIB}\n" >> ${D}${INFOFILE}
     printf "multitranscoding=${HAVE_MULTITRANSCODING}\n" >> ${D}${INFOFILE}
-    printf "oe='${OE_VER}'\n" >> ${D}${INFOFILE}
+    printf "oe=${OE_NAME} (${OE_VERSION})\n" >> ${D}${INFOFILE}
     printf "platform='${STB_PLATFORM}'\n" >> ${D}${INFOFILE}
     printf "python='${PYTHON_BASEVERSION}'\n" >> ${D}${INFOFILE}
     printf "rca=${HAVE_RCA}\n" >> ${D}${INFOFILE}
