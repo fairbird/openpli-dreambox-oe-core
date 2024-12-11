@@ -63,6 +63,7 @@ SRC_URI = " \
     file://0015-fcrypt-fix-bitoperation-for-gcc.patch \
     file://devinitdata-gcc11.patch \
     file://fix-build-with-binutils-2.41.patch \
+    file://0001-add-support-for-tbs5930-tbs5590.patch \
 "
 
 PACKAGES_DYNAMIC = "kernel-*"

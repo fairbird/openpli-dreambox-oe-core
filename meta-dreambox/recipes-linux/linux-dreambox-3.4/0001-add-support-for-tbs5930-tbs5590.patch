@@ -1,0 +1,1227 @@
+From d0a55fa4fcda8183e1027f774c13a3c2a446d802 Mon Sep 17 00:00:00 2001
+From: fairbird <rrrr53@hotmail.com>
+Date: Wed, 11 Dec 2024 14:48:54 +0300
+Subject: [PATCH] add support for tbs5930 & tbs5590
+
+---
+
+diff --git a/drivers/media/dvb/dvb-usb/Kconfig b/drivers/media/dvb/dvb-usb/Kconfig
+index cef4dad..8f11a0f 100644
+--- a/drivers/media/dvb/dvb-usb/Kconfig
++++ b/drivers/media/dvb/dvb-usb/Kconfig
+@@ -418,6 +418,26 @@ config DVB_USB_TECHNISAT_USB2
+ 	help
+ 	  Say Y here to support the Technisat USB2 DVB-S/S2 device
+ 
++config DVB_USB_TBS5930
++	tristate "TurboSight TBS5930 DVB-S2/S2x USB2.0 support"
++	depends on DVB_USB
++	select DVB_PLL if MEDIA_SUBDRV_AUTOSELECT
++	select DVB_M88RS6060 if MEDIA_SUBDRV_AUTOSELECT
++	help
++	  Say Y here to support the TurboSight TBS5930 DVB-S/S2/S2x USB2.0 receivers
++
++config DVB_USB_TBS5590
++	   tristate "Turbosight TBS5590 usb2.0 capture support"
++		depends on DVB_USB
++		select DVB_SI2183 if MEDIA_SUBDRV_AUTOSELECT
++		select MEDIA_TUNER_SI2157 if MEDIA_SUBDRV_AUTOSELECT
++	select MEDIA_TUNER_AV201X if MEDIA_SUBDRV_AUTOSELECT
++	select DVB_TBSPRIV if MEDIA_SUBDRV_AUTOSELECT
++		help
++		 say Y here to support the Turbosight 5590 capture support
++		  Say Y here to support the Turbosight TBS5590 USB2.0 DVB-T/T2/C/C2/S/S2/S2x ASI-IN device
++
++
+ config DVB_USB_IT913X
+ 	tristate "it913x driver"
+ 	depends on DVB_USB
+diff --git a/drivers/media/dvb/dvb-usb/Makefile b/drivers/media/dvb/dvb-usb/Makefile
+index 77e54a7..b340ca3 100644
+--- a/drivers/media/dvb/dvb-usb/Makefile
++++ b/drivers/media/dvb/dvb-usb/Makefile
+@@ -120,6 +120,12 @@ obj-$(CONFIG_DVB_USB_A867) += dvb-usb-a867.o
+ dvb-usb-rtl28xxu-objs = rtl28xxu.o
+ obj-$(CONFIG_DVB_USB_RTL28XXU) += dvb-usb-rtl28xxu.o
+ 
++dvb-usb-tbs5930-objs = tbs5930.o
++obj-$(CONFIG_DVB_USB_TBS5930) += dvb-usb-tbs5930.o
++
++dvb-usb-tbs5590-objs = tbs5590.o
++obj-$(CONFIG_DVB_USB_TBS5590) += dvb-usb-tbs5590.o
++
+ ccflags-y += -I$(srctree)/drivers/media/dvb/dvb-core
+ ccflags-y += -I$(srctree)/drivers/media/dvb/frontends/
+ # due to tuner-xc3028
+diff --git a/drivers/media/dvb/dvb-usb/tbs5590.c b/drivers/media/dvb/dvb-usb/tbs5590.c
+new file mode 100644
+index 0000000..2a73129
+--- /dev/null
++++ b/drivers/media/dvb/dvb-usb/tbs5590.c
+@@ -0,0 +1,765 @@
++/*
++ * TurboSight TBS 5590  driver
++ *
++ * Copyright (c) 2017 Davin <smailedavin@hotmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License as published by the
++ * Free Software Foundation, version 2.
++ *
++ */
++
++#include <linux/version.h>
++#include "tbs5590.h"
++#include "si2183.h"
++#include "si2157.h"
++#include "av201x.h"
++#include "tbs_priv.h"
++#include "m88rs6060.h"
++#include "cxd2878.h"
++
++#define TBS5590_READ_MSG 0
++#define TBS5590_WRITE_MSG 1
++
++//#define TBS5590_RC_QUERY (0x1a00)
++//#define TBS5590_VOLTAGE_CTRL (0x1800)
++
++
++#define ecp3_addr 0x50
++#define ecp3_base_addr 0x8000
++#define ecp3_lnb 0x50
++#define ecp3_rfctrl 0x48
++#define ecp3_tsctrl 0x38
++#define ecp3_ledctrl 0x58
++
++struct tbs5590_state {
++	struct i2c_client *i2c_client_demod;
++	struct i2c_client *i2c_client_tuner; 
++	u32 last_key_pressed;
++};
++
++static struct av201x_config tbs5590_av201x_cfg = {
++	.i2c_address = 0x62,
++	.id          = ID_AV2018,
++	.xtal_freq   = 27000,
++};
++
++/* debug */
++static int dvb_usb_tbs5590_debug;
++module_param_named(debug, dvb_usb_tbs5590_debug, int, 0644);
++MODULE_PARM_DESC(debug, "set debugging level (1=info 2=xfer (or-able))." 
++							DVB_USB_DEBUG_STATUS);
++
++DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
++
++static int tbs5590_op_rw(struct usb_device *dev, u8 request, u16 value,
++				u16 index, u8 * data, u16 len, int flags)
++{
++	int ret;
++	void *u8buf;
++
++	unsigned int pipe = (flags == TBS5590_READ_MSG) ?
++			usb_rcvctrlpipe(dev, 0) : usb_sndctrlpipe(dev, 0);
++	u8 request_type = (flags == TBS5590_READ_MSG) ? USB_DIR_IN : USB_DIR_OUT;
++	u8buf = kmalloc(len, GFP_KERNEL);
++	if (!u8buf)
++		return -ENOMEM;
++
++	if (flags == TBS5590_WRITE_MSG)
++		memcpy(u8buf, data, len);
++	ret = usb_control_msg(dev, pipe, request, request_type | USB_TYPE_VENDOR,
++				value, index , u8buf, len, 2000);
++
++	if (flags == TBS5590_READ_MSG)
++		memcpy(data, u8buf, len);
++	kfree(u8buf);
++	return ret;
++}
++
++/* I2C */
++static int tbs5590_i2c_transfer(struct i2c_adapter *adap, 
++					struct i2c_msg msg[], int num)
++{
++	struct dvb_usb_device *d = i2c_get_adapdata(adap);
++	int i = 0;
++	u8 buf6[50];
++	u8 inbuf[50];
++
++	if (!d)
++		return -ENODEV;
++	if (mutex_lock_interruptible(&d->i2c_mutex) < 0)
++		return -EAGAIN;
++
++	switch (num) {
++	case 2:
++		buf6[0]=msg[1].len;//lenth
++		buf6[1]=msg[0].addr<<1;//demod addr
++		//register
++		buf6[2] = msg[0].buf[0];
++
++		tbs5590_op_rw(d->udev, 0x90, 0, 0,
++					buf6, 3, TBS5590_WRITE_MSG);
++		//msleep(5);
++		tbs5590_op_rw(d->udev, 0x91, 0, 0,
++					inbuf, buf6[0], TBS5590_READ_MSG);
++		memcpy(msg[1].buf, inbuf, msg[1].len);
++
++		break;
++	case 1:
++		if (msg[0].flags == 0) {
++			buf6[0] = msg[0].len+1;//lenth
++			buf6[1] = msg[0].addr<<1;//addr
++			for(i=0;i<msg[0].len;i++) {
++				buf6[2+i] = msg[0].buf[i];//register
++			}
++			tbs5590_op_rw(d->udev, 0x80, 0, 0,
++				buf6, msg[0].len+2, TBS5590_WRITE_MSG);
++		} else {
++			buf6[0] = msg[0].len;//length
++			buf6[1] = (msg[0].addr<<1) | 0x01;//addr
++			tbs5590_op_rw(d->udev, 0x93, 0, 0,
++					buf6, 2, TBS5590_WRITE_MSG);
++			//msleep(5);
++			tbs5590_op_rw(d->udev, 0x91, 0, 0,
++				inbuf, buf6[0], TBS5590_READ_MSG);
++			memcpy(msg[0].buf, inbuf, msg[0].len);
++		}
++		//msleep(3);	
++
++		break;
++	}
++
++	mutex_unlock(&d->i2c_mutex);
++	return num;
++}
++
++static int ecp3_read(struct i2c_adapter *adap,unsigned char chipaddr,u16 regAddr,
++							unsigned char num,unsigned char *buf)
++{
++	struct dvb_usb_device *d = i2c_get_adapdata(adap);
++
++	unsigned char reg[2]={(regAddr>>8)&0xff,regAddr&0xff};
++	unsigned char tmp[8];
++
++	tmp[0] = 2+2;   //lenth
++	tmp[1] = chipaddr; //chipaddr
++	tmp[2] = 0x6  ;    //ecp3 register addr
++	tmp[3] = reg[0];
++	tmp[4] = reg[1];
++	tbs5590_op_rw(d->udev, 0x80, 0, 0,
++		tmp, 5, TBS5590_WRITE_MSG);
++
++	tmp[0] = 1+2;   //lenth
++	tmp[1] = chipaddr; //chipaddr
++	tmp[2] = 0x3 ;     //ecp3 register addr
++	tmp[3] = 0x88;    //read flag
++	tbs5590_op_rw(d->udev, 0x80, 0, 0,
++		tmp, 4, TBS5590_WRITE_MSG);
++
++//	read	
++	tmp[0] = num;//lenth
++	tmp[1] = chipaddr;//demod addr
++	//register
++	tmp[2] = 0x8;
++	
++	tbs5590_op_rw(d->udev, 0x90, 0, 0,
++				tmp, 3, TBS5590_WRITE_MSG);
++	//msleep(5);
++	tbs5590_op_rw(d->udev, 0x91, 0, 0,
++				buf, tmp[0], TBS5590_READ_MSG);
++
++
++	return 0;
++}
++
++static int ecp3_write(struct i2c_adapter *adap,unsigned char chipaddr,u16 regAddr,
++							unsigned char num,unsigned char *buf)
++{
++	struct dvb_usb_device *d = i2c_get_adapdata(adap);
++	int i;
++	unsigned char reg[2]={(regAddr>>8)&0xff,regAddr&0xff};
++	unsigned char tmp[12];
++
++	tmp[0] = 2+2;   //lenth
++	tmp[1] = chipaddr; //chipaddr
++	tmp[2] = 0x6 ;     //ecp3 register addr
++	tmp[3] = reg[0];
++	tmp[4] = reg[1];
++	tbs5590_op_rw(d->udev, 0x80, 0, 0,
++		tmp, 5, TBS5590_WRITE_MSG);
++
++
++	tmp[0] = num+2;   //lenth
++	tmp[1] = chipaddr; //chipaddr
++	tmp[2] = 0x8 ;     //ecp3 register addr
++	for(i=0; i<num;i++)
++	{
++	 tmp[3+i]=buf[i];
++	}
++	tbs5590_op_rw(d->udev, 0x80, 0, 0,
++		tmp, tmp[0]+3 , TBS5590_WRITE_MSG);	
++
++	tmp[0] = 1+2;   //lenth
++	tmp[1] = chipaddr; //chipaddr
++	tmp[2] = 0x3 ;     //ecp3 register addr
++	tmp[3] = 0x80;    //write flag
++	tbs5590_op_rw(d->udev, 0x80, 0, 0,
++		tmp, 4, TBS5590_WRITE_MSG);
++
++	return 0;
++}
++static u32 tbs5590_i2c_func(struct i2c_adapter *adapter)
++{
++	return I2C_FUNC_I2C;
++}
++
++static struct i2c_algorithm tbs5590_i2c_algo = {
++	.master_xfer = tbs5590_i2c_transfer,
++	.functionality = tbs5590_i2c_func,
++};
++
++static int tbs5590_set_voltage(struct dvb_frontend *fe, 
++						enum fe_sec_voltage voltage)
++{
++	struct dvb_usb_adapter *udev_adap =
++		(struct dvb_usb_adapter *)(fe->dvb->priv);
++	unsigned char iobuffer[8];
++	
++	ecp3_read(&udev_adap->dev->i2c_adap,ecp3_addr,(ecp3_base_addr+ecp3_lnb),8,iobuffer);
++	switch(voltage){
++	     case SEC_VOLTAGE_OFF:
++		 		iobuffer[2] = (iobuffer[2]&0xfe)|0x1;
++		 	break;
++		 case SEC_VOLTAGE_13:
++		 		iobuffer[2] = iobuffer[2]&0xfe;
++				iobuffer[1] = iobuffer[1]&0xfe;
++		 	break;
++		 case SEC_VOLTAGE_18:
++		 		iobuffer[2] = iobuffer[2]&0xfe;
++				iobuffer[1] = (iobuffer[1]&0xfe)|0x1;
++		 	break;
++		default:
++			return -EINVAL;
++	}
++
++	ecp3_write(&udev_adap->dev->i2c_adap,ecp3_addr,(ecp3_base_addr+ecp3_lnb),8,iobuffer);
++	
++	return 0;
++}
++
++static void tbs5590_RF_ctrl(struct i2c_adapter *i2c,u8 rf_in,u8 flag)
++{
++	unsigned char iobuffer[8];
++	
++	ecp3_read(i2c,ecp3_addr,(ecp3_base_addr+ecp3_rfctrl),8,iobuffer);
++	
++	if(flag)
++		iobuffer[0] = (iobuffer[0]&0xfe)|0x1;
++	else
++		iobuffer[0] = iobuffer[0]&0xfe;
++	
++	ecp3_write(i2c,ecp3_addr,(ecp3_base_addr+ecp3_rfctrl),8,iobuffer);
++
++	return ;
++}
++static void tbs5590_TS_ctrl(struct i2c_adapter*i2c,u8 flag)
++{
++	unsigned char iobuffer[8];
++	
++	ecp3_read(i2c,ecp3_addr,(ecp3_base_addr+ecp3_tsctrl),8,iobuffer);
++	
++	if(flag)
++		iobuffer[2] = (iobuffer[2]&0xfe)|0x1;
++	else
++		iobuffer[2] = iobuffer[2]&0xfe;
++	
++	ecp3_write(i2c,ecp3_addr,(ecp3_base_addr+ecp3_tsctrl),8,iobuffer);
++
++	return ;
++
++}
++static void tbs5590_LED_ctrl(struct i2c_adapter*i2c,u8 flag)
++{
++	unsigned char iobuffer[8];
++	
++	ecp3_read(i2c,ecp3_addr,(ecp3_base_addr+ecp3_ledctrl),8,iobuffer);
++	switch(flag){
++		default:
++		case 2:
++			iobuffer[0] = (iobuffer[0]&0xE0)|0x1;
++			break;
++		case 1:
++			iobuffer[0] = (iobuffer[0]&0xE0)|0x4;
++			break;
++		case 4:
++		case 6:
++		case 7:
++			iobuffer[0] = (iobuffer[0]&0xE0)|0x2;
++			break;
++		case 5:
++			iobuffer[0] = (iobuffer[0]&0xE0)|0x8;
++			break;
++		case 8:
++			iobuffer[0] = (iobuffer[0]&0xE0)|0x10;
++			break;
++
++	}
++	ecp3_write(i2c,ecp3_addr,(ecp3_base_addr+ecp3_ledctrl),8,iobuffer);
++
++	return ;
++}
++static int tbs5590_read_mac_address(struct dvb_usb_device *d, u8 mac[6])
++{
++	int i,ret;
++	u8 ibuf[3] = {0, 0,0};
++	u8 eeprom[256], eepromline[16];
++
++	for (i = 0; i < 256; i++) {
++		ibuf[0]=1;//lenth
++		ibuf[1]=0xa0;//eeprom addr
++		ibuf[2]=i;//register
++		ret = tbs5590_op_rw(d->udev, 0x90, 0, 0,
++					ibuf, 3, TBS5590_WRITE_MSG);
++		ret = tbs5590_op_rw(d->udev, 0x91, 0, 0,
++					ibuf, 1, TBS5590_READ_MSG);
++			if (ret < 0) {
++				err("read eeprom failed.");
++				return -1;
++			} else {
++				eepromline[i%16] = ibuf[0];
++				eeprom[i] = ibuf[0];
++			}
++			
++			if ((i % 16) == 15) {
++				deb_xfer("%02x: ", i - 15);
++				debug_dump(eepromline, 16, deb_xfer);
++			}
++	}
++	memcpy(mac, eeprom + 16, 6);
++	return 0;
++};
++
++static struct dvb_usb_device_properties tbs5590_properties;
++
++static struct tbs_cfg tbs5590_tbs_cfg = {
++		.adr = 0x88,
++		.flag = 1,		
++		.rf = 0,			
++		.TS_switch = tbs5590_TS_ctrl,
++		.LED_switch = tbs5590_LED_ctrl,
++			
++		.write_properties = NULL , 
++		.read_properties = NULL ,
++
++} ;
++static struct cxd2878_config tbs5590_Gl6822_cfg = {
++	
++		.addr_slvt = 0x64,
++		.xtal      = SONY_DEMOD_XTAL_24000KHz,
++		.tuner_addr = 0x60,
++		.tuner_xtal = SONY_ASCOT3_XTAL_24000KHz,
++		.ts_mode	= 1,
++		.ts_ser_data = 0,
++		.ts_clk = 1,
++		.ts_clk_mask= 1,
++		.ts_valid = 0,
++		.atscCoreDisable = 0,
++		.lock_flag = 1,
++		.write_properties = NULL, 
++		.read_properties = NULL,
++		.RF_switch = tbs5590_RF_ctrl,
++		.TS_switch = tbs5590_TS_ctrl,
++		.LED_switch = tbs5590_LED_ctrl,
++	};
++static int tbs5590_frontend_attach(struct dvb_usb_adapter *adap)
++{
++	struct dvb_usb_device *d = adap->dev;
++	struct tbs5590_state *st = d->priv;
++	struct i2c_adapter *adapter;
++	struct i2c_client *client_demod;
++	struct i2c_client *client_tuner;
++	struct i2c_board_info info;
++	struct si2183_config si2183_config;
++	struct si2157_config si2157_config;
++	struct m88rs6060_cfg m88rs6060_config;
++	u8 buf[20];
++	u16 hardware_ver;
++
++	buf[0] = 1+2;   //lenth
++	buf[1] = 0x50; //chipaddr
++	buf[2] = 0x2;      //ecp3 register addr
++	buf[3] = 0x55;
++	tbs5590_op_rw(d->udev, 0x80, 0, 0,
++		buf, 4, TBS5590_WRITE_MSG);
++
++	//	read	
++	buf[0] = 2;//lenth
++	buf[1] = 0x50;//demod addr
++	//register
++	buf[2] = 0x0;
++	
++	tbs5590_op_rw(d->udev, 0x90, 0, 0,
++				buf, 3, TBS5590_WRITE_MSG);
++	//msleep(5);
++	tbs5590_op_rw(d->udev, 0x91, 0, 0,
++				buf, buf[0], TBS5590_READ_MSG);
++	
++	
++	hardware_ver = (buf[0]<<8)+buf[1];
++	printk("Get ecp3ID High Bit 0x%x  Low Bit 0x%x ,hardware version %x \n",buf[0],buf[1],hardware_ver);
++	if(hardware_ver==0)return 0;
++	
++	if(hardware_ver == 0x5301){	
++	/* attach frontend */
++	memset(&si2183_config,0,sizeof(si2183_config));
++	si2183_config.i2c_adapter = &adapter;
++	si2183_config.fe = &adap->fe_adap[0].fe;	
++	si2183_config.ts_mode = SI2183_TS_PARALLEL;
++	si2183_config.ts_clock_gapped = true;
++	si2183_config.rf_in = 0;
++	si2183_config.RF_switch = tbs5590_RF_ctrl;
++	si2183_config.TS_switch = tbs5590_TS_ctrl;
++	si2183_config.LED_switch = tbs5590_LED_ctrl;
++	si2183_config.agc_mode = 0x5 ;
++	memset(&info, 0, sizeof(struct i2c_board_info));
++	strscpy(info.type, "si2183", I2C_NAME_SIZE);
++	info.addr = 0x67;
++	info.platform_data = &si2183_config;
++	request_module(info.type);
++	client_demod = i2c_new_client_device(&d->i2c_adap, &info);
++	if (!i2c_client_has_driver(client_demod))
++		return -ENODEV;
++
++	if (!try_module_get(client_demod->dev.driver->owner)) {
++		i2c_unregister_device(client_demod);
++		return -ENODEV;
++	}
++
++	st->i2c_client_demod = client_demod;
++
++	/* dvb core doesn't support 2 tuners for 1 demod so
++	   we split the adapter in 2 frontends */
++
++	adap->fe_adap[0].fe2 = &adap->fe_adap[0]._fe2;
++	memcpy(adap->fe_adap[0].fe2, adap->fe_adap[0].fe, sizeof(struct dvb_frontend));
++
++	/* terrestrial tuner */
++	memset(adap->fe_adap[0].fe->ops.delsys, 0, MAX_DELSYS);
++	adap->fe_adap[0].fe->ops.delsys[0] = SYS_DVBT;
++	adap->fe_adap[0].fe->ops.delsys[1] = SYS_DVBT2;
++	adap->fe_adap[0].fe->ops.delsys[2] = SYS_DVBC_ANNEX_A;
++	adap->fe_adap[0].fe->ops.delsys[3] = SYS_ISDBT;
++	adap->fe_adap[0].fe->ops.delsys[4] = SYS_DVBC_ANNEX_B;
++
++	/* attach ter tuner */
++	memset(&si2157_config, 0, sizeof(si2157_config));
++	si2157_config.fe = adap->fe_adap[0].fe;
++	si2157_config.if_port = 1;
++	memset(&info, 0, sizeof(struct i2c_board_info));
++	strscpy(info.type, "si2157", I2C_NAME_SIZE);
++	info.addr = 0x61;
++	info.platform_data = &si2157_config;
++	request_module(info.type);
++	client_tuner = i2c_new_client_device(adapter, &info);
++	if (!i2c_client_has_driver(client_tuner)) {
++		module_put(client_demod->dev.driver->owner);
++		i2c_unregister_device(client_demod);
++		return -ENODEV;
++	}
++	if (!try_module_get(client_tuner->dev.driver->owner)) {
++		i2c_unregister_device(client_tuner);
++		module_put(client_demod->dev.driver->owner);
++		i2c_unregister_device(client_demod);
++		return -ENODEV;
++	}
++
++	st->i2c_client_tuner = client_tuner;
++
++	memset(adap->fe_adap[0].fe2->ops.delsys, 0, MAX_DELSYS);
++	adap->fe_adap[0].fe2->ops.delsys[0] = SYS_DVBS;
++	adap->fe_adap[0].fe2->ops.delsys[1] = SYS_DVBS2;
++	adap->fe_adap[0].fe2->ops.delsys[2] = SYS_DSS;
++	adap->fe_adap[0].fe2->id = 1;
++
++	if (dvb_attach(av201x_attach, adap->fe_adap[0].fe2, &tbs5590_av201x_cfg,
++			adapter) == NULL) {
++		return -ENODEV;
++	}
++	else {
++		buf[0] = 1;
++		buf[1] = 0;
++		tbs5590_op_rw(d->udev, 0x8a, 0, 0,
++					buf, 2, TBS5590_WRITE_MSG);
++		
++		adap->fe_adap[0].fe2->ops.set_voltage = tbs5590_set_voltage;
++		
++	}
++
++	}
++	else if(hardware_ver==0x5590){
++	/*attach ter/cable frontend*/
++	adap->fe_adap[0].fe = dvb_attach(cxd2878_attach, &tbs5590_Gl6822_cfg, &d->i2c_adap);
++
++	if(adap->fe_adap[0].fe==NULL){
++		return -ENODEV;
++	}
++	
++	/* attach satellite frontend */
++	memset(&m88rs6060_config,0,sizeof(m88rs6060_config));
++	m88rs6060_config.fe = &adap->fe_adap[0].fe2;
++	m88rs6060_config.clk = 27000000;
++	m88rs6060_config.i2c_wr_max = 33;
++	m88rs6060_config.ts_mode = MtFeTsOutMode_Parallel;
++	m88rs6060_config.ts_pinswitch = 0;
++	m88rs6060_config.envelope_mode = 0;
++	m88rs6060_config.demod_adr = 0x69;
++	m88rs6060_config.tuner_adr = 0x2c;
++	m88rs6060_config.repeater_value = 0x11;
++	m88rs6060_config.read_properties = NULL;
++	m88rs6060_config.write_properties  = NULL;
++	m88rs6060_config.RF_switch = tbs5590_RF_ctrl;
++	m88rs6060_config.TS_switch = tbs5590_TS_ctrl;
++	m88rs6060_config.LED_switch = tbs5590_LED_ctrl;
++
++	memset(&info, 0, sizeof(struct i2c_board_info));
++	strscpy(info.type, "m88rs6060", I2C_NAME_SIZE);
++	info.addr = 0x69;
++	info.platform_data = &m88rs6060_config;
++	request_module(info.type);
++	client_demod = i2c_new_client_device(&d->i2c_adap,&info);
++	if(!i2c_client_has_driver(client_demod))
++				return -ENODEV;
++	if (!try_module_get(client_demod->dev.driver->owner)) {
++			i2c_unregister_device(client_demod);
++			return -ENODEV;
++	}
++//	buf[0] = 1;
++//	buf[1] = 0;
++//	tbs5590_op_rw(d->udev, 0x8a, 0, 0,
++//				buf, 2, TBS5590_WRITE_MSG);
++	
++	adap->fe_adap[0].fe2->ops.set_voltage = tbs5590_set_voltage;
++	}
++
++	buf[0] = 0;
++	buf[1] = 0;
++	tbs5590_op_rw(d->udev, 0xb7, 0, 0,
++			buf, 2, TBS5590_WRITE_MSG);
++	buf[0] = 8;
++	buf[1] = 1;
++	tbs5590_op_rw(d->udev, 0x8a, 0, 0,
++			buf, 2, TBS5590_WRITE_MSG);
++
++
++	
++	strscpy(adap->fe_adap[0].fe->ops.info.name,d->props.devices[0].name,52);
++	strcat(adap->fe_adap[0].fe->ops.info.name," DVB-T/T2/C/C2/ISDB-T");
++	strscpy(adap->fe_adap[0].fe2->ops.info.name,d->props.devices[0].name,52);
++	strcat(adap->fe_adap[0].fe2->ops.info.name," DVB-S/S2/S2X");
++
++	return 0;
++}
++
++static int tbs5590_ASI_attach(struct dvb_usb_adapter *adap)
++{
++	struct dvb_usb_device *u = adap->dev;
++
++	adap->fe_adap[0].fe = dvb_attach(tbs_attach,&u->i2c_adap, &tbs5590_tbs_cfg,0);
++			
++	if ( adap->fe_adap[0].fe == NULL) {
++		return -ENODEV;
++	}
++	
++	strscpy(adap->fe_adap[0].fe->ops.info.name,u->props.devices[0].name,52);
++	strcat(adap->fe_adap[0].fe->ops.info.name," ASI-IN");
++
++	return 0;
++
++}
++
++static struct usb_device_id tbs5590_table[] = {
++	{USB_DEVICE(0x734c, 0x5590)},
++	{ }
++};
++
++MODULE_DEVICE_TABLE(usb, tbs5590_table);
++
++static int tbs5590_load_firmware(struct usb_device *dev,
++			const struct firmware *frmwr)
++{
++	u8 *b, *p;
++	int ret = 0, i;
++	u8 reset;
++	const struct firmware *fw;
++	switch (dev->descriptor.idProduct) {
++	case 0x5521:
++		ret = request_firmware(&fw, tbs5590_properties.firmware, &dev->dev);
++		if (ret != 0) {
++			err("did not find the firmware file. (%s) "
++			"Please see linux/Documentation/dvb/ for more details "
++			"on firmware-problems.", tbs5590_properties.firmware);
++			return ret;
++		}
++		break;
++	default:
++		fw = frmwr;
++		break;
++	}
++	info("start downloading TBS5590 firmware");
++	p = kmalloc(fw->size, GFP_KERNEL);
++	reset = 1;
++	/*stop the CPU*/
++	tbs5590_op_rw(dev, 0xa0, 0x7f92, 0, &reset, 1, TBS5590_WRITE_MSG);
++	tbs5590_op_rw(dev, 0xa0, 0xe600, 0, &reset, 1, TBS5590_WRITE_MSG);
++
++	if (p != NULL) {
++		memcpy(p, fw->data, fw->size);
++		for (i = 0; i < fw->size; i += 0x40) {
++			b = (u8 *) p + i;
++			if (tbs5590_op_rw(dev, 0xa0, i, 0, b , 0x40,
++					TBS5590_WRITE_MSG) != 0x40) {
++				err("error while transferring firmware");
++				ret = -EINVAL;
++				break;
++			}
++		}
++		/* restart the CPU */
++		reset = 0;
++		if (ret || tbs5590_op_rw(dev, 0xa0, 0x7f92, 0, &reset, 1,
++					TBS5590_WRITE_MSG) != 1) {
++			err("could not restart the USB controller CPU.");
++			ret = -EINVAL;
++		}
++		if (ret || tbs5590_op_rw(dev, 0xa0, 0xe600, 0, &reset, 1,
++					TBS5590_WRITE_MSG) != 1) {
++			err("could not restart the USB controller CPU.");
++			ret = -EINVAL;
++		}
++
++		msleep(100);
++		kfree(p);
++	}
++	return ret;
++}
++
++static struct dvb_usb_device_properties tbs5590_properties = {
++	.caps = DVB_USB_IS_AN_I2C_ADAPTER,
++	.usb_ctrl = DEVICE_SPECIFIC,
++	.firmware = "dvb-usb-id5590.fw",
++	.size_of_priv = sizeof(struct tbs5590_state),
++	.no_reconnect = 1,
++
++	.i2c_algo = &tbs5590_i2c_algo,
++
++	.generic_bulk_ctrl_endpoint = 0x81,
++	/* parameter for the MPEG2-data transfer */
++	.num_adapters = 2,
++	.download_firmware = tbs5590_load_firmware,
++	.read_mac_address = tbs5590_read_mac_address,
++	.adapter = {{
++		.num_frontends = 1,
++		.fe = {{
++			.frontend_attach = tbs5590_frontend_attach,
++			.streaming_ctrl = NULL,
++			.tuner_attach = NULL,
++			.stream = {
++				.type = USB_BULK,
++				.count = 8,
++				.endpoint = 0x82,
++				.u = {
++					.bulk = {
++						.buffersize = 4096,
++					}
++				}
++			},
++		},},
++			
++	},{
++		.num_frontends = 1,
++		.fe = {{
++			.frontend_attach = tbs5590_ASI_attach,
++			.streaming_ctrl = NULL,
++			.stream = {
++				.type = USB_BULK,
++				.count = 8,
++				.endpoint = 0x82,
++				.u = {
++					.bulk = {
++						.buffersize = 4096,
++					}
++				}
++			},
++		}}
++}},
++
++	.num_device_descs = 1,
++	.devices = {
++		{"TurboSight TBS 5590",
++			{&tbs5590_table[0], NULL},
++			{NULL},
++		}
++	}
++};
++
++static int tbs5590_probe(struct usb_interface *intf,
++		const struct usb_device_id *id)
++{
++	if (0 == dvb_usb_device_init(intf, &tbs5590_properties,
++			THIS_MODULE, NULL, adapter_nr)) {
++		return 0;
++	}
++	return -ENODEV;
++}
++
++static void tbs5590_disconnect(struct usb_interface *intf)
++{
++#if 0
++	struct dvb_usb_device *d = usb_get_intfdata(intf);
++	struct tbs5590_state *st = d->priv;
++	struct i2c_client *client;
++
++	/* remove I2C client for tuner */
++	client = st->i2c_client_tuner;
++	if (client) {
++		module_put(client->dev.driver->owner);
++		i2c_unregister_device(client);
++	}
++
++	/* remove I2C client for demodulator */
++	client = st->i2c_client_demod;
++	if (client) {
++		module_put(client->dev.driver->owner);
++		i2c_unregister_device(client);
++	}
++#endif	
++	dvb_usb_device_exit(intf);
++}
++
++static struct usb_driver tbs5590_driver = {
++	.name = "tbs5590",
++	.probe = tbs5590_probe,
++	.disconnect = tbs5590_disconnect,
++	.id_table = tbs5590_table,
++};
++
++static int __init tbs5590_module_init(void)
++{
++	int ret =  usb_register(&tbs5590_driver);
++	if (ret)
++		err("usb_register failed. Error number %d", ret);
++
++	return ret;
++}
++
++static void __exit tbs5590_module_exit(void)
++{
++	usb_deregister(&tbs5590_driver);
++}
++
++module_init(tbs5590_module_init);
++module_exit(tbs5590_module_exit);
++
++MODULE_AUTHOR("Davin  <smiledavin@hotmail.com>");
++MODULE_DESCRIPTION("TurboSight TBS 5590 driver");
++MODULE_VERSION("1.0");
++MODULE_LICENSE("GPL");
+diff --git a/drivers/media/dvb/dvb-usb/tbs5590.h b/drivers/media/dvb/dvb-usb/tbs5590.h
+new file mode 100644
+index 0000000..c58eaf6
+--- /dev/null
++++ b/drivers/media/dvb/dvb-usb/tbs5590.h
+@@ -0,0 +1,8 @@
++#ifndef _TBS5590_H_
++#define _TBS5590_H_
++
++#define DVB_USB_LOG_PREFIX "tbs5590"
++#include "dvb-usb.h"
++
++#define deb_xfer(args...) dprintk(dvb_usb_tbs5590_debug, 0x02, args)
++#endif
+diff --git a/drivers/media/dvb/dvb-usb/tbs5930.c b/drivers/media/dvb/dvb-usb/tbs5930.c
+new file mode 100644
+index 0000000..5ddb666
+--- /dev/null
++++ b/drivers/media/dvb/dvb-usb/tbs5930.c
+@@ -0,0 +1,364 @@
++/*
++ * TurboSight TBS 5930  driver
++ *
++ * Copyright (c) 2017 Davin <smailedavin@hotmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License as published by the
++ * Free Software Foundation, version 2.
++ *
++ */
++
++#include <linux/version.h>
++#include "tbs5930.h"
++#include "m88rs6060.h"
++
++#define TBS5930_READ_MSG 0
++#define TBS5930_WRITE_MSG 1
++
++#define TBS5930_RC_QUERY (0x1a00)
++#define TBS5930_VOLTAGE_CTRL (0x1800)
++
++struct tbs5930_state {
++	struct i2c_client *i2c_client; 
++	u8 initialized;
++};
++
++
++
++/* debug */
++static int dvb_usb_tbs5930_debug;
++module_param_named(debug, dvb_usb_tbs5930_debug, int, 0644);
++MODULE_PARM_DESC(debug, "set debugging level (1=info 2=xfer (or-able))." 
++							DVB_USB_DEBUG_STATUS);
++
++DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
++
++static int tbs5930_op_rw(struct usb_device *dev, u8 request, u16 value,
++				u16 index, u8 * data, u16 len, int flags)
++{
++	int ret;
++	void *u8buf;
++
++	unsigned int pipe = (flags == TBS5930_READ_MSG) ?
++			usb_rcvctrlpipe(dev, 0) : usb_sndctrlpipe(dev, 0);
++	u8 request_type = (flags == TBS5930_READ_MSG) ? USB_DIR_IN : USB_DIR_OUT;
++	u8buf = kmalloc(len, GFP_KERNEL);
++	if (!u8buf)
++		return -ENOMEM;
++
++	if (flags == TBS5930_WRITE_MSG)
++		memcpy(u8buf, data, len);
++	ret = usb_control_msg(dev, pipe, request, request_type | USB_TYPE_VENDOR,
++				value, index , u8buf, len, 2000);
++
++	if (flags == TBS5930_READ_MSG)
++		memcpy(data, u8buf, len);
++	kfree(u8buf);
++	return ret;
++}
++
++/* I2C */
++static int tbs5930_i2c_transfer(struct i2c_adapter *adap, 
++					struct i2c_msg msg[], int num)
++{
++	struct dvb_usb_device *d = i2c_get_adapdata(adap);
++	int i = 0;
++	u8 buf6[35];
++	u8 inbuf[35];
++
++	if (!d)
++		return -ENODEV;
++	if (mutex_lock_interruptible(&d->i2c_mutex) < 0)
++		return -EAGAIN;
++   		
++	switch (num) {
++	case 2:
++		buf6[0]=msg[1].len;//lenth
++		buf6[1]=msg[0].addr<<1;//demod addr
++		//register
++		buf6[2] = msg[0].buf[0];
++
++		tbs5930_op_rw(d->udev, 0x90, 0, 0,
++					buf6, 3, TBS5930_WRITE_MSG);
++		//msleep(5);
++		tbs5930_op_rw(d->udev, 0x91, 0, 0,
++					inbuf, buf6[0], TBS5930_READ_MSG);
++		memcpy(msg[1].buf, inbuf, msg[1].len);
++
++		break;
++	case 1:
++		buf6[0] = msg[0].len+1;//lenth
++		buf6[1] = msg[0].addr<<1;//addr
++		for(i=0;i<msg[0].len;i++) {
++			buf6[2+i] = msg[0].buf[i];//register
++		}
++		tbs5930_op_rw(d->udev, 0x80, 0, 0,
++			buf6, msg[0].len+2, TBS5930_WRITE_MSG);
++		break;
++	}
++		
++	mutex_unlock(&d->i2c_mutex);
++	return num;
++}
++
++static u32 tbs5930_i2c_func(struct i2c_adapter *adapter)
++{
++	return I2C_FUNC_I2C;
++}
++
++static struct i2c_algorithm tbs5930_i2c_algo = {
++	.master_xfer = tbs5930_i2c_transfer,
++	.functionality = tbs5930_i2c_func,
++};
++
++static int tbs5930_read_mac_address(struct dvb_usb_device *d, u8 mac[6])
++{
++	int i,ret;
++	u8 ibuf[3] = {0, 0,0};
++	u8 eeprom[256], eepromline[16];
++
++	for (i = 0; i < 256; i++) {
++		ibuf[0]=1;//lenth
++		ibuf[1]=0xa0;//eeprom addr
++		ibuf[2]=i;//register
++		ret = tbs5930_op_rw(d->udev, 0x90, 0, 0,
++					ibuf, 3, TBS5930_WRITE_MSG);
++		ret = tbs5930_op_rw(d->udev, 0x91, 0, 0,
++					ibuf, 1, TBS5930_READ_MSG);
++			if (ret < 0) {
++				err("read eeprom failed.");
++				return -1;
++			} else {
++				eepromline[i%16] = ibuf[0];
++				eeprom[i] = ibuf[0];
++			}
++			
++			if ((i % 16) == 15) {
++				deb_xfer("%02x: ", i - 15);
++				debug_dump(eepromline, 16, deb_xfer);
++			}
++	}
++	memcpy(mac, eeprom + 16, 6);
++	return 0;
++};
++
++static struct dvb_usb_device_properties tbs5930_properties;
++
++static int tbs5930_frontend_attach(struct dvb_usb_adapter *adap)
++{
++	struct dvb_usb_device *d = adap->dev;
++	struct tbs5930_state *st = d->priv;
++	struct i2c_client *client;
++	struct i2c_board_info info;
++	struct m88rs6060_cfg m88rs6060_config;
++	u8 buf[20];
++	/* attach frontend */
++	memset(&m88rs6060_config,0,sizeof(m88rs6060_config));
++	m88rs6060_config.fe = &adap->fe_adap[0].fe;
++	m88rs6060_config.clk = 27000000;
++	m88rs6060_config.i2c_wr_max = 33;
++	m88rs6060_config.ts_mode = MtFeTsOutMode_Common;
++	m88rs6060_config.ts_pinswitch = 0;
++	m88rs6060_config.envelope_mode = 0;
++	m88rs6060_config.demod_adr = 0x69;
++	m88rs6060_config.tuner_adr = 0x2c;
++	m88rs6060_config.repeater_value = 0x11;
++	m88rs6060_config.read_properties = NULL;
++	m88rs6060_config.write_properties  = NULL;
++
++	memset(&info, 0, sizeof(struct i2c_board_info));
++	strscpy(info.type, "m88rs6060", I2C_NAME_SIZE);
++	info.addr = 0x69;
++	info.platform_data = &m88rs6060_config;
++	request_module(info.type);
++	client = i2c_new_client_device(&d->i2c_adap,&info);
++	if(!i2c_client_has_driver(client))
++				return -ENODEV;
++	if (!try_module_get(client->dev.driver->owner)) {
++			i2c_unregister_device(client);
++			return -ENODEV;
++	}
++
++	st->i2c_client = client;
++
++	buf[0] = 0;
++	buf[1] = 0;
++	tbs5930_op_rw(d->udev, 0xb7, 0, 0,
++			buf, 2, TBS5930_WRITE_MSG);
++	buf[0] = 8;
++	buf[1] = 1;
++	tbs5930_op_rw(d->udev, 0x8a, 0, 0,
++			buf, 2, TBS5930_WRITE_MSG);
++	msleep(10);
++	
++	strscpy(adap->fe_adap[0].fe->ops.info.name,d->props.devices[0].name,52);
++
++	return 0;
++}
++
++static struct usb_device_id tbs5930_table[] = {
++	{USB_DEVICE(0x734c, 0x5930)},
++	{ }
++};
++
++MODULE_DEVICE_TABLE(usb, tbs5930_table);
++
++static int tbs5930_load_firmware(struct usb_device *dev,
++			const struct firmware *frmwr)
++{
++	u8 *b, *p;
++	int ret = 0, i;
++	u8 reset;
++	const struct firmware *fw;
++	switch (dev->descriptor.idProduct) {
++	case 0x5930:
++		ret = request_firmware(&fw, tbs5930_properties.firmware, &dev->dev);
++		if (ret != 0) {
++			err("did not find the firmware file. (%s) "
++			"Please see linux/Documentation/dvb/ for more details "
++			"on firmware-problems.", tbs5930_properties.firmware);
++			return ret;
++		}
++		break;
++	default:
++		fw = frmwr;
++		break;
++	}
++	info("start downloading TBS5930 firmware");
++	p = kmalloc(fw->size, GFP_KERNEL);
++	reset = 1;
++	/*stop the CPU*/
++	tbs5930_op_rw(dev, 0xa0, 0x7f92, 0, &reset, 1, TBS5930_WRITE_MSG);
++	tbs5930_op_rw(dev, 0xa0, 0xe600, 0, &reset, 1, TBS5930_WRITE_MSG);
++
++	if (p != NULL) {
++		memcpy(p, fw->data, fw->size);
++		for (i = 0; i < fw->size; i += 0x40) {
++			b = (u8 *) p + i;
++			if (tbs5930_op_rw(dev, 0xa0, i, 0, b , 0x40,
++					TBS5930_WRITE_MSG) != 0x40) {
++				err("error while transferring firmware");
++				ret = -EINVAL;
++				break;
++			}
++		}
++		/* restart the CPU */
++		reset = 0;
++		if (ret || tbs5930_op_rw(dev, 0xa0, 0x7f92, 0, &reset, 1,
++					TBS5930_WRITE_MSG) != 1) {
++			err("could not restart the USB controller CPU.");
++			ret = -EINVAL;
++		}
++		if (ret || tbs5930_op_rw(dev, 0xa0, 0xe600, 0, &reset, 1,
++					TBS5930_WRITE_MSG) != 1) {
++			err("could not restart the USB controller CPU.");
++			ret = -EINVAL;
++		}
++
++		msleep(100);
++		kfree(p);
++	}
++	return ret;
++}
++
++static struct dvb_usb_device_properties tbs5930_properties = {
++	.caps = DVB_USB_IS_AN_I2C_ADAPTER,
++	.usb_ctrl = DEVICE_SPECIFIC,
++	.firmware = "dvb-usb-id5930.fw",
++	.size_of_priv = sizeof(struct tbs5930_state),
++	.no_reconnect = 1,
++
++	.i2c_algo = &tbs5930_i2c_algo,
++
++	.generic_bulk_ctrl_endpoint = 0x81,
++	/* parameter for the MPEG2-data transfer */
++	.num_adapters = 1,
++	.download_firmware = tbs5930_load_firmware,
++	.read_mac_address = tbs5930_read_mac_address,
++	.adapter = {{
++		.num_frontends = 1,
++		.fe = {{
++			.frontend_attach = tbs5930_frontend_attach,
++			.streaming_ctrl = NULL,
++			.tuner_attach = NULL,
++			.stream = {
++				.type = USB_BULK,
++				.count = 8,
++				.endpoint = 0x82,
++				.u = {
++					.bulk = {
++						.buffersize = 4096,
++					}
++				}
++			},
++		}
++
++		},
++		
++	}},
++
++	.num_device_descs = 1,
++	.devices = {
++		{"TurboSight TBS 5930 DVB-S/S2/S2x",
++			{&tbs5930_table[0], NULL},
++			{NULL},
++		}
++	}
++};
++
++static int tbs5930_probe(struct usb_interface *intf,
++		const struct usb_device_id *id)
++{
++	if (0 == dvb_usb_device_init(intf, &tbs5930_properties,
++			THIS_MODULE, NULL, adapter_nr)) {
++		return 0;
++	}
++	return -ENODEV;
++}
++
++static void tbs5930_disconnect(struct usb_interface *intf)
++{
++#if 1
++	struct dvb_usb_device *d = usb_get_intfdata(intf);
++	struct tbs5930_state *st = d->priv;
++	struct i2c_client *client;
++
++	/* remove I2C client for tuner/demod*/
++	client = st->i2c_client;
++	if (client) {
++		module_put(client->dev.driver->owner);
++		i2c_unregister_device(client);
++	}
++#endif
++	dvb_usb_device_exit(intf);
++}
++
++static struct usb_driver tbs5930_driver = {
++	.name = "tbs5930",
++	.probe = tbs5930_probe,
++	.disconnect = tbs5930_disconnect,
++	.id_table = tbs5930_table,
++};
++
++static int __init tbs5930_module_init(void)
++{
++	int ret =  usb_register(&tbs5930_driver);
++	if (ret)
++		err("usb_register failed. Error number %d", ret);
++
++	return ret;
++}
++
++static void __exit tbs5930_module_exit(void)
++{
++	usb_deregister(&tbs5930_driver);
++}
++
++module_init(tbs5930_module_init);
++module_exit(tbs5930_module_exit);
++
++MODULE_AUTHOR("Davin zhang<Davin@tbsdtv.com>");
++MODULE_DESCRIPTION("TurboSight TBS 5930 driver");
++MODULE_VERSION("1.0");
++MODULE_LICENSE("GPL");
+diff --git a/drivers/media/dvb/dvb-usb/tbs5930.h b/drivers/media/dvb/dvb-usb/tbs5930.h
+new file mode 100644
+index 0000000..31224a7
+--- /dev/null
++++ b/drivers/media/dvb/dvb-usb/tbs5930.h
+@@ -0,0 +1,8 @@
++#ifndef _TBS5930_H_
++#define _TBS5930_H_
++
++#define DVB_USB_LOG_PREFIX "tbs5930"
++#include "dvb-usb.h"
++
++#define deb_xfer(args...) dprintk(dvb_usb_tbs5930_debug, 0x02, args)
++#endif
+-- 
+2.43.0
+
