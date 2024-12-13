@@ -30,6 +30,7 @@ SRC_URI = " \
     file://0004-fcrypt-fix-bitoperation-for-gcc.patch \
     file://fix-build-with-binutils-2.41.patch \
     file://0001-add-support-for-tbs5930-tbs5590.patch \
+    file://0001-add-support-for-si2183.patch \
 "
 
 SRC_URI[kernel.md5sum] = "967f72983655e2479f951195953e8480"
