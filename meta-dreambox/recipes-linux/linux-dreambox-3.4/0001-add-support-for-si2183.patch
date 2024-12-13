@@ -1135,7 +1135,7 @@ index 0000000..a74aae4
 +#ifndef SI2183_H
 +#define SI2183_H
 +
-+#include <dvb_frontend.h>
++#include <linux/dvb/frontend.h>
 +/*
 + * I2C address
 + * 0x64
