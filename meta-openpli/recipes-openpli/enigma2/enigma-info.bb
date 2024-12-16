@@ -16,7 +16,6 @@ deltask source_date_epoch
 
 RCONFLICTS:${PN} = "enigma-kernel-module"
 RREPLACES:${PN} = "enigma-kernel-module"
-DEPENDS = "virtual/kernel"
 
 SSTATE_SKIP_CREATION = "1"
 
@@ -109,7 +108,7 @@ do_install() {
     printf "imglanguage='${LANGUAGE}'\n" >> ${D}${INFOFILE}
     printf "imgrevision='${BUILD_VERSION}'\n" >> ${D}${INFOFILE}
     printf "imgversion='${IMAGE_VERSION}'\n" >> ${D}${INFOFILE}
-    printf "kernel='${KERNEL_VERSION}'\n" >> ${D}${INFOFILE}
+    printf "kernel='${PREFERRED_VERSION_${PREFERRED_PROVIDER_virtual/kernel}}'\n" >> ${D}${INFOFILE}
     printf "kexecmb=${HAVE_KEXECMB}\n" >> ${D}${INFOFILE}
     printf "kernelfile='${KERNEL_FILE}'\n" >> ${D}${INFOFILE}
     printf "machinebuild='${MACHINEBUILD}'\n" >> ${D}${INFOFILE}
