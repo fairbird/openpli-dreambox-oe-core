@@ -9,14 +9,17 @@ diff --git a/drivers/media/dvb/frontends/Kconfig b/drivers/media/dvb/frontends/K
 index 2481792..37397dc 100644
 --- a/drivers/media/dvb/frontends/Kconfig
 +++ b/drivers/media/dvb/frontends/Kconfig
-@@ -728,6 +728,13 @@ config DVB_M88RS2000
+@@ -728,6 +728,16 @@ config DVB_M88RS2000
  	  A DVB-S tuner module.
  	  Say Y when you want to support this frontend.
  
++comment "Multistandard (satellite + cable + terrestrial) frontends"
++	depends on DVB_CORE
++
 +config DVB_SI2183
-+	tristate "Silicon Labs Si2183"
++	tristate "Silicon Labs Si2183 DVB-T/T2/C/C2/S/S2/S2X/ISDB-T demodulator"
 +	depends on DVB_CORE && I2C
-+	default m if DVB_FE_CUSTOMISE
++	default m if !MEDIA_SUBDRV_AUTOSELECT
 +	help
 +	  Say Y when you want to support this frontend.
 +
@@ -38,7 +41,7 @@ new file mode 100644
 index 0000000..5e067d9
 --- /dev/null
 +++ b/drivers/media/dvb/frontends/si2183.c
-@@ -0,0 +1,1073 @@
+@@ -0,0 +1,1060 @@
 +/*
 + * Silicon Labs Si2183(2) DVB-T/T2/C/C2/S/S2 demodulator driver
 + *
@@ -117,7 +120,7 @@ index 0000000..5e067d9
 +		.buf = (char *)buf,
 +	};
 +
-+	ret = __i2c_transfer(client->adapter, &msg, 1);
++	ret = i2c_transfer(client->adapter, &msg, 1);
 +	return (ret == 1) ? count : ret;
 +}
 +
@@ -132,7 +135,7 @@ index 0000000..5e067d9
 +		.buf = buf,
 +	};
 +
-+	ret = __i2c_transfer(client->adapter, &msg, 1);
++	ret = i2c_transfer(client->adapter, &msg, 1);
 +	return (ret == 1) ? count : ret;
 +}
 +
@@ -294,20 +297,6 @@ index 0000000..5e067d9
 +	if (ret) {
 +		dev_err(&client->dev, "read_status fe%d cmd_exec failed=%d\n", fe->id, ret);
 +		goto err;
-+	}
-+
-+	switch ((cmd.args[2] >> 1) & 0x03) {
-+	case 0x01:
-+		*status = FE_HAS_SIGNAL | FE_HAS_CARRIER;
-+		break;
-+	case 0x03:
-+		*status = FE_HAS_SIGNAL | FE_HAS_CARRIER | FE_HAS_VITERBI |
-+				FE_HAS_SYNC | FE_HAS_LOCK;
-+		c->cnr.stat[0].svalue = cmd.args[3] * 1000 / 4;
-+		break;
-+	default:
-+		c->cnr.stat[0].svalue = 0;
-+		break;
 +	}
 +
 +	dev->fe_status = *status;
@@ -579,9 +568,6 @@ index 0000000..5e067d9
 +		dev->active_fe |= (1 << fe->id);
 +		return 0;
 +	}
-+
-+	c->cnr.len = 1;
-+	c->cnr.stat[0].scale = FE_SCALE_DECIBEL;
 +
 +	/* initialize */
 +	memcpy(cmd.args, "\xc0\x12\x00\x0c\x00\x0d\x16\x00\x00\x00\x00\x00\x00", 13);
@@ -1036,8 +1022,12 @@ index 0000000..5e067d9
 +		list_add(&base->silist, &silist);
 +
 +		/* create mux i2c adapter for tuners */
-+		base->tuner_adapter = i2c_add_mux_adapter(client->adapter, &client->adapter->dev,
-+				client, 0, 0, 0, si2183_select, si2183_deselect);
++		base->tuner_adapter = i2c_add_mux_adapter(client->adapter,
++						client, // mux_dev should match the expected "void *mux_dev"
++						0,      // force_nr
++						0,      // chan_id
++						si2183_select,
++						si2183_deselect);
 +		if (base->tuner_adapter == NULL) {
 +			ret = -ENODEV;
 +			goto err_base_kfree;
@@ -1166,6 +1156,3 @@ index 0000000..a74aae4
 +};
 +
 +#endif
--- 
-2.43.0
-
