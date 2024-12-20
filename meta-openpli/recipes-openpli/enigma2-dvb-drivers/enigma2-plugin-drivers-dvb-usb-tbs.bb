@@ -12,6 +12,7 @@ RRECOMMENDS:${PN} = " \
 	kernel-module-stv0288 \
 	kernel-module-stb6000 \
 	firmware-dvb-usb-tbs5925 \
+	firmware-dvb-usb-tbs5930
 	firmware-dvb-usb-tbs5980 \
 	"
 

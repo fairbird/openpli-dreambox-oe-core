@@ -24,6 +24,7 @@ SRC_URI = "https://source.mynonpublic.com/dreambox/${BPN}-v${PV}.tar.xz \
            file://fix-build-with-binutils-2.41.patch \
            file://0001-add-support-for-tbs5930-tbs5590.patch \
            file://0001-add-support-for-si2183.patch \
+           file://0001-add-support-for-m88rs6060.patch \
 "
 
 SRC_URI[md5sum] = "2b77df9bf64f825925172790c54f8ead"
