@@ -1,6 +1,6 @@
 MODULE = "Foreca"
 DESCRIPTION = "Weather forecast for the upcoming 10 days"
-RDEPENDS:${PN} = "python3-html"
+RDEPENDS:${PN} = "python3-html python3-pillow"
 
 require openplugins.inc
 inherit setuptools3-openplugins
