@@ -135,7 +135,6 @@ PYTHON_RDEPS = " \
 	python3-process \
 	python3-puremagic \
 	python3-pyusb \
-	python3-service-identity \
 	python3-shell \
 	python3-threading \
 	python3-twisted-core \
