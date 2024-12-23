@@ -7,4 +7,6 @@ SRC_URI:append = " \
 	file://0001-Revert-Remove-twisted.web.client.getPage-and-friends.patch \
 "
 
+include python3-package-split.inc
+
 INSANE_SKIP:${PN} = "installed-vs-shipped"
