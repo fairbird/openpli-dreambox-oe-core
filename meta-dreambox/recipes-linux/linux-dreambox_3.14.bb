@@ -32,7 +32,7 @@ SRC_URI = " \
     file://move-default-dialect-to-SMB3.patch \
     file://fix-multiple-defs-yyloc.patch \
     file://fix-build-with-binutils-2.41.patch \
-    file://0001-add-support-for-tbs5930-tbs5590.patch \
+    file://0001-add-support-for-tbs5930.patch \
     file://0001-add-support-for-si2183.patch \
 "
 
