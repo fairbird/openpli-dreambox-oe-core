@@ -70,22 +70,14 @@ S = "${WORKDIR}/git"
 DEPENDS = " \
 	python3-pillow \
 	python3-pyopenssl \
-	python3-pyusb \
 	python3-requests \
 	python3-six \
-	python3-simplejson \
 	python3-treq \
-	python3-dateutil \
 	python3-mutagen \
 	python3-twisted \
-	python3-daap \
 	dvdbackup \
 	streamripper \
-	libdvdread \
 	libcddb \
-	libtirpc \
-	png-util \
-	pydpflib \
 	"
 
 do_compile() {
