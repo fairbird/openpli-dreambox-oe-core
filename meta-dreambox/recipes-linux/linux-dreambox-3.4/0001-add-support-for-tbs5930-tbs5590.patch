@@ -483,7 +483,7 @@ index 0000000..2a73129
 +	si2183_config.LED_switch = tbs5590_LED_ctrl;
 +	si2183_config.agc_mode = 0x5 ;
 +	memset(&info, 0, sizeof(struct i2c_board_info));
-+	strscpy(info.type, "si2183", I2C_NAME_SIZE);
++	strlcpy(info.type, "si2183", I2C_NAME_SIZE);
 +	info.addr = 0x67;
 +	info.platform_data = &si2183_config;
 +	request_module(info.type);
@@ -517,7 +517,7 @@ index 0000000..2a73129
 +	si2157_config.fe = adap->fe_adap[0].fe;
 +	si2157_config.if_port = 1;
 +	memset(&info, 0, sizeof(struct i2c_board_info));
-+	strscpy(info.type, "si2157", I2C_NAME_SIZE);
++	strlcpy(info.type, "si2157", I2C_NAME_SIZE);
 +	info.addr = 0x61;
 +	info.platform_data = &si2157_config;
 +	request_module(info.type);
@@ -583,7 +583,7 @@ index 0000000..2a73129
 +	m88rs6060_config.LED_switch = tbs5590_LED_ctrl;
 +
 +	memset(&info, 0, sizeof(struct i2c_board_info));
-+	strscpy(info.type, "m88rs6060", I2C_NAME_SIZE);
++	strlcpy(info.type, "m88rs6060", I2C_NAME_SIZE);
 +	info.addr = 0x69;
 +	info.platform_data = &m88rs6060_config;
 +	request_module(info.type);
@@ -613,9 +613,9 @@ index 0000000..2a73129
 +
 +
 +	
-+	strscpy(adap->fe_adap[0].fe->ops.info.name,d->props.devices[0].name,52);
++	strlcpy(adap->fe_adap[0].fe->ops.info.name,d->props.devices[0].name,52);
 +	strcat(adap->fe_adap[0].fe->ops.info.name," DVB-T/T2/C/C2/ISDB-T");
-+	strscpy(adap->fe_adap[0].fe2->ops.info.name,d->props.devices[0].name,52);
++	strlcpy(adap->fe_adap[0].fe2->ops.info.name,d->props.devices[0].name,52);
 +	strcat(adap->fe_adap[0].fe2->ops.info.name," DVB-S/S2/S2X");
 +
 +	return 0;
@@ -631,7 +631,7 @@ index 0000000..2a73129
 +		return -ENODEV;
 +	}
 +	
-+	strscpy(adap->fe_adap[0].fe->ops.info.name,u->props.devices[0].name,52);
++	strlcpy(adap->fe_adap[0].fe->ops.info.name,u->props.devices[0].name,52);
 +	strcat(adap->fe_adap[0].fe->ops.info.name," ASI-IN");
 +
 +	return 0;
@@ -1014,19 +1014,19 @@ index 0000000..5ddb666
 +	m88rs6060_config.write_properties  = NULL;
 +
 +	memset(&info, 0, sizeof(struct i2c_board_info));
-+	strscpy(info.type, "m88rs6060", I2C_NAME_SIZE);
++	strlcpy(info.type, "m88rs6060", I2C_NAME_SIZE);
 +	info.addr = 0x69;
 +	info.platform_data = &m88rs6060_config;
 +	request_module(info.type);
-+	client = i2c_new_client_device(&d->i2c_adap,&info);
-+	if(!i2c_client_has_driver(client))
-+				return -ENODEV;
-+	if (!try_module_get(client->dev.driver->owner)) {
-+			i2c_unregister_device(client);
-+			return -ENODEV;
-+	}
++//	client = i2c_new_client_device(&d->i2c_adap,&info);
++//	if(!i2c_client_has_driver(client))
++//				return -ENODEV;
++//	if (!try_module_get(client->dev.driver->owner)) {
++//			i2c_unregister_device(client);
++//			return -ENODEV;
++//	}
 +
-+	st->i2c_client = client;
++//	st->i2c_client = client;
 +
 +	buf[0] = 0;
 +	buf[1] = 0;
@@ -1038,7 +1038,7 @@ index 0000000..5ddb666
 +			buf, 2, TBS5930_WRITE_MSG);
 +	msleep(10);
 +	
-+	strscpy(adap->fe_adap[0].fe->ops.info.name,d->props.devices[0].name,52);
++	strlcpy(adap->fe_adap[0].fe->ops.info.name,d->props.devices[0].name,52);
 +
 +	return 0;
 +}
