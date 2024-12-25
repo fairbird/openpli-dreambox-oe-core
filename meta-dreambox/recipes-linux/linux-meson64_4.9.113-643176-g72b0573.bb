@@ -22,7 +22,6 @@ SRC_URI = "https://source.mynonpublic.com/dreambox/${BPN}-v${PV}.tar.xz \
            file://hide_sdcardfs_info.patch \
            file://use_address-of_operator_on_section_symbols.patch \
            file://fix-build-with-binutils-2.41.patch \
-           file://0001-add-support-for-tbs5930.patch \
            file://0001-add-support-for-si2183.patch \
 "
 
