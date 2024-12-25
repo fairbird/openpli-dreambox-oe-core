@@ -30,12 +30,14 @@ diff --git a/drivers/media/dvb/frontends/Makefile b/drivers/media/dvb/frontends/
 index 2b844a4..761f383 100644
 --- a/drivers/media/dvb/frontends/Makefile
 +++ b/drivers/media/dvb/frontends/Makefile
-@@ -100,4 +100,4 @@ obj-$(CONFIG_DVB_A8293) += a8293.o
- obj-$(CONFIG_DVB_TDA10071) += tda10071.o
- obj-$(CONFIG_DVB_RTL2830) += rtl2830.o
- obj-$(CONFIG_DVB_M88RS2000) += m88rs2000.o
--
+@@ -75,6 +75,7 @@ obj-$(CONFIG_DVB_A8293) += a8293.o
+ obj-$(CONFIG_DVB_AF9013) += af9013.o
+ obj-$(CONFIG_DVB_CX24116) += cx24116.o
+ obj-$(CONFIG_DVB_SI21XX) += si21xx.o
 +obj-$(CONFIG_DVB_SI2183) += si2183.o
+ obj-$(CONFIG_DVB_STV0288) += stv0288.o
+ obj-$(CONFIG_DVB_STB6000) += stb6000.o
+ obj-$(CONFIG_DVB_S921) += s921.o
 diff --git a/drivers/media/dvb/frontends/si2183.c b/drivers/media/dvb/frontends/si2183.c
 new file mode 100644
 index 0000000..5e067d9
