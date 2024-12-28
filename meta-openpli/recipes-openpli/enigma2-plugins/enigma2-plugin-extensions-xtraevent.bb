@@ -10,14 +10,14 @@ include python3-package-split.inc
 
 RDEPENDS:${PN} += "\
 	python3-image \
-	python3-imaging \
+	python3-pillow \
 	python3-requests \
 	"
 
 S = "${WORKDIR}/git"
 
-PV = "5.2+git"
-PKGV = "5.2+git${GITPKGV}"
+PV = "6.805+git"
+PKGV = "6.805+git${GITPKGV}"
 
 FILES:${PN} = "${prefix}/"
 
