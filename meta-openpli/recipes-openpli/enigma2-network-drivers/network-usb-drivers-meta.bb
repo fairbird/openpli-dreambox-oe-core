@@ -24,12 +24,6 @@ RDEPENDS:${PN} = "\
 	enigma2-plugin-drivers-network-usb-mt7601u \
 	enigma2-plugin-drivers-network-usb-rtl8152 \
 	enigma2-plugin-drivers-network-usb-lan78xx \
-	${OPTIONAL_WIFI_PACKAGES} \
+	${@ 'enigma2-plugin-drivers-network-usb-rtl88xxau' if ("${KERNEL_VERSION}" and bb.utils.vercmp_string("${KERNEL_VERSION}", '4.4') >= 0) else '' } \
+	${@ 'enigma2-plugin-drivers-network-usb-rtl8852cu' if ("${KERNEL_VERSION}" and bb.utils.vercmp_string("${KERNEL_VERSION}", '3.10') >= 0) else '' } \
 "
-
-OPTIONAL_WIFI_PACKAGES = "\
-    ${@ 'enigma2-plugin-drivers-network-usb-rtl88xxau'     if ("${KERNEL_VERSION}" and bb.utils.vercmp_string("${KERNEL_VERSION}", '4.4') >= 0) else '' } \
-    ${@ 'enigma2-plugin-drivers-network-usb-rtl8852cu'     if ("${KERNEL_VERSION}" and bb.utils.vercmp_string("${KERNEL_VERSION}", '3.10') >= 0) else '' } \
-"
-
-
