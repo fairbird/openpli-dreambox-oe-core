@@ -7,12 +7,23 @@ inherit gitpkgv
 
 PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
+PR = "r0"
 
-GITHUB_URI ?= "git://github.com"
-SRC_URI = "${GITHUB_URI}/OpenPLi/${BPN}.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/OpenPLi/${BPN}.git;protocol=https;branch=master \
+            file://fix-compile-with-gcc14.patch"
 
 S = "${WORKDIR}/git"
 
 inherit autotools
 
-CFLAGS += "-Wno-error=implicit-function-declaration"
+do_configure:prepend() {
+    touch ${UNPACKDIR}/NEWS
+    touch ${UNPACKDIR}/README
+    touch ${UNPACKDIR}/AUTHORS
+    touch ${UNPACKDIR}/ChangeLog
+}
+
+pkg_postinst:${PN} () {
+    rm -f $D/autofs
+    true
+}
