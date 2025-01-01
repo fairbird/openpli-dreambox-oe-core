@@ -16,6 +16,8 @@ DEPENDS = " \
 	python3-twisted python3-wifi \
 	swig-native \
 	tuxtxt-enigma2 \
+	enigma2-plugin-drivers-ntfs-3g \
+	enigma2-plugin-drivers-exfat \
 	${@bb.utils.contains("MACHINE_FEATURES", "alsamixer", "ffmpeg" , "", d)} \
 	"
 
@@ -136,6 +138,7 @@ PYTHON_RDEPS = " \
 	python3-puremagic \
 	python3-pyusb \
 	python3-shell \
+	python3-trio \
 	python3-threading \
 	python3-twisted-core \
 	python3-twisted \

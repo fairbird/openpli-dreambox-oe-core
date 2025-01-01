@@ -20,8 +20,6 @@ SRC_URI:append = " \
 # include/mtd/* we cannot build in parallel with mtd-utils
 DEPENDS += "mtd-utils"
 
-INITSCRIPT_PARAMS:${PN}-mdev = "start 04 S ."
-
 RDEPENDS:${PN} += "odhcp6c"
 
 RRECOMMENDS:${PN} += "${PN}-inetd"
@@ -50,7 +48,6 @@ do_install:append() {
 	install -m 0755 ${UNPACKDIR}/telnetd ${D}${sysconfdir}/init.d/telnetd.${BPN}
 	sed -i "s:/usr/sbin/:${sbindir}/:" ${D}${sysconfdir}/init.d/telnetd.${BPN}
     fi
-    rm -rf ${D}${sysconfdir}/mdev
     sed -i "/[/][s][h]*$/d" ${D}${sysconfdir}/busybox.links.nosuid
     install -m 0755 ${UNPACKDIR}/vi.sh ${D}${base_bindir}/vi.sh
     install -m 0755 ${UNPACKDIR}/ntp.script ${D}${sysconfdir}/udhcpc.d/55ntp

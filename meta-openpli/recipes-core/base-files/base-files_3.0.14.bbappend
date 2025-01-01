@@ -6,7 +6,6 @@ do_install_basefilesissue[vardeps] += "DISTRO_NAME DISTRO_VERSION"
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://utf8.sh"
-SRC_URI += "file://mount-helper.sh"
 SRC_URI += "file://filesystems"
 
 do_install:append() {
@@ -23,10 +22,6 @@ do_install:append() {
 	install -m 0644 ${UNPACKDIR}/filesystems ${D}${sysconfdir}/filesystems
 
 	install -d ${D}${sysconfdir}/udev
-	install -m 0755 ${UNPACKDIR}/mount-helper.sh       ${D}${sysconfdir}/udev
-
-	# Inject machine specific blacklists into mount-helper:
-	perl -i -pe 's:(\@BLACKLISTED\@):${MTD_BLACK}:s' ${D}${sysconfdir}/udev/mount-helper.sh
 
 	if [ "${MACHINEBUILD}" = "dreamone" -o "${MACHINEBUILD}" = "dreamtwo" ]; then
 		mkdir ${D}/data
