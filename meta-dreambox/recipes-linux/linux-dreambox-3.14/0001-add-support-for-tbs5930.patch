@@ -1,434 +1,54 @@
-From 38bddaf87bd1cf4626937978575a2e123b80bff1 Mon Sep 17 00:00:00 2001
-From: atefganm <atef_anim_1974@yahoo.com>
-Date: Wed, 11 Dec 2024 10:46:42 +0300
+From c47b92be319646ca984dbe9c8e92ac40b1138914 Mon Sep 17 00:00:00 2001
+From: fairbird <rrrr53@hotmail.com>
+Date: Sat, 28 Dec 2024 15:18:07 +0300
 Subject: [PATCH] add support for tbs5930
 
 ---
 
-diff --git a/drivers/media/usb/dvb-usb/Kconfig b/drivers/media/usb/dvb-usb/Kconfig
-index 9a327fb..6b5a64d 100644
---- a/drivers/media/usb/dvb-usb/Kconfig
-+++ b/drivers/media/usb/dvb-usb/Kconfig
-@@ -318,6 +318,14 @@ config DVB_USB_TECHNISAT_USB2
- 	help
- 	  Say Y here to support the Technisat USB2 DVB-S/S2 device
+diff --git a/drivers/media/dvb-core/dvb_frontend.h b/drivers/media/dvb-core/dvb_frontend.h
+index 371b6caf..7c36d9c5 100644
+--- a/drivers/media/dvb-core/dvb_frontend.h
++++ b/drivers/media/dvb-core/dvb_frontend.h
+@@ -48,6 +48,10 @@
+  */
+ #define MAX_DELSYS	8
  
-+config DVB_USB_TBS5930
-+	tristate "TurboSight TBS5930 DVB-S2/S2x USB2.0 support"
-+	depends on DVB_USB
-+	select DVB_PLL if MEDIA_SUBDRV_AUTOSELECT
-+	select DVB_M88RS6060 if MEDIA_SUBDRV_AUTOSELECT
-+	help
-+	  Say Y here to support the TurboSight TBS5930 DVB-S/S2/S2x USB2.0 receivers
++/* Helper definitions to be used at frontend drivers */
++#define kHz 1000UL
++#define MHz 1000000UL
 +
- config DVB_USB_TBS
- 	tristate "TurboSight DVB-S/S2 USB2.0 support"
- 	depends on DVB_USB
-diff --git a/drivers/media/usb/dvb-usb/Makefile b/drivers/media/usb/dvb-usb/Makefile
-index cb00137..2bd900f 100644
---- a/drivers/media/usb/dvb-usb/Makefile
-+++ b/drivers/media/usb/dvb-usb/Makefile
-@@ -79,6 +79,9 @@ obj-$(CONFIG_DVB_USB_TECHNISAT_USB2) += dvb-usb-technisat-usb2.o
- dvb-usb-tbsusb-objs := tbs-usb.o
- obj-$(CONFIG_DVB_USB_TBS) += dvb-usb-tbsusb.o
+ struct dvb_frontend_tune_settings {
+ 	int min_delay_ms;
+ 	int step_size;
+@@ -305,6 +309,11 @@ struct dvb_frontend_ops {
+ 	int (*ts_bus_ctrl)(struct dvb_frontend* fe, int acquire);
+ 	int (*set_lna)(struct dvb_frontend *);
  
-+dvb-usb-tbs5930-objs = tbs5930.o
-+obj-$(CONFIG_DVB_USB_TBS5930) += dvb-usb-tbs5930.o
++	void(*spi_read)( struct dvb_frontend *fe,struct ecp3_info *ecp3inf);
++	void(*spi_write)( struct dvb_frontend *fe,struct ecp3_info *ecp3inf);
++	void(*eeprom_read)( struct dvb_frontend *fe,struct eeprom_info *peepinf);
++	void(*eeprom_write)( struct dvb_frontend *fe,struct eeprom_info *peepinf);
 +
- ccflags-y += -I$(srctree)/drivers/media/dvb-core
- ccflags-y += -I$(srctree)/drivers/media/dvb-frontends/
- # due to tuner-xc3028
-diff --git a/drivers/media/usb/dvb-usb/tbs5930.c b/drivers/media/usb/dvb-usb/tbs5930.c
-new file mode 100644
-index 0000000..5ddb666
---- /dev/null
-+++ b/drivers/media/usb/dvb-usb/tbs5930.c
-@@ -0,0 +1,364 @@
-+/*
-+ * TurboSight TBS 5930  driver
-+ *
-+ * Copyright (c) 2017 Davin <smailedavin@hotmail.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms of the GNU General Public License as published by the
-+ * Free Software Foundation, version 2.
-+ *
-+ */
+ 	/* These callbacks are for devices that implement their own
+ 	 * tuning algorithms, rather than a simple swzigzag
+ 	 */
+@@ -374,6 +383,9 @@ struct dtv_frontend_properties {
+ 	/* Multistream specifics */
+ 	u32			stream_id;
+ 
++	/* Physical Layer Scrambling specifics */
++	u32			scrambling_sequence_index;
 +
-+#include <linux/version.h>
-+#include "tbs5930.h"
-+#include "m88rs6060.h"
-+
-+#define TBS5930_READ_MSG 0
-+#define TBS5930_WRITE_MSG 1
-+
-+#define TBS5930_RC_QUERY (0x1a00)
-+#define TBS5930_VOLTAGE_CTRL (0x1800)
-+
-+struct tbs5930_state {
-+	struct i2c_client *i2c_client; 
-+	u8 initialized;
-+};
-+
-+
-+
-+/* debug */
-+static int dvb_usb_tbs5930_debug;
-+module_param_named(debug, dvb_usb_tbs5930_debug, int, 0644);
-+MODULE_PARM_DESC(debug, "set debugging level (1=info 2=xfer (or-able))." 
-+							DVB_USB_DEBUG_STATUS);
-+
-+DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
-+
-+static int tbs5930_op_rw(struct usb_device *dev, u8 request, u16 value,
-+				u16 index, u8 * data, u16 len, int flags)
-+{
-+	int ret;
-+	void *u8buf;
-+
-+	unsigned int pipe = (flags == TBS5930_READ_MSG) ?
-+			usb_rcvctrlpipe(dev, 0) : usb_sndctrlpipe(dev, 0);
-+	u8 request_type = (flags == TBS5930_READ_MSG) ? USB_DIR_IN : USB_DIR_OUT;
-+	u8buf = kmalloc(len, GFP_KERNEL);
-+	if (!u8buf)
-+		return -ENOMEM;
-+
-+	if (flags == TBS5930_WRITE_MSG)
-+		memcpy(u8buf, data, len);
-+	ret = usb_control_msg(dev, pipe, request, request_type | USB_TYPE_VENDOR,
-+				value, index , u8buf, len, 2000);
-+
-+	if (flags == TBS5930_READ_MSG)
-+		memcpy(data, u8buf, len);
-+	kfree(u8buf);
-+	return ret;
-+}
-+
-+/* I2C */
-+static int tbs5930_i2c_transfer(struct i2c_adapter *adap, 
-+					struct i2c_msg msg[], int num)
-+{
-+	struct dvb_usb_device *d = i2c_get_adapdata(adap);
-+	int i = 0;
-+	u8 buf6[35];
-+	u8 inbuf[35];
-+
-+	if (!d)
-+		return -ENODEV;
-+	if (mutex_lock_interruptible(&d->i2c_mutex) < 0)
-+		return -EAGAIN;
-+   		
-+	switch (num) {
-+	case 2:
-+		buf6[0]=msg[1].len;//lenth
-+		buf6[1]=msg[0].addr<<1;//demod addr
-+		//register
-+		buf6[2] = msg[0].buf[0];
-+
-+		tbs5930_op_rw(d->udev, 0x90, 0, 0,
-+					buf6, 3, TBS5930_WRITE_MSG);
-+		//msleep(5);
-+		tbs5930_op_rw(d->udev, 0x91, 0, 0,
-+					inbuf, buf6[0], TBS5930_READ_MSG);
-+		memcpy(msg[1].buf, inbuf, msg[1].len);
-+
-+		break;
-+	case 1:
-+		buf6[0] = msg[0].len+1;//lenth
-+		buf6[1] = msg[0].addr<<1;//addr
-+		for(i=0;i<msg[0].len;i++) {
-+			buf6[2+i] = msg[0].buf[i];//register
-+		}
-+		tbs5930_op_rw(d->udev, 0x80, 0, 0,
-+			buf6, msg[0].len+2, TBS5930_WRITE_MSG);
-+		break;
-+	}
-+		
-+	mutex_unlock(&d->i2c_mutex);
-+	return num;
-+}
-+
-+static u32 tbs5930_i2c_func(struct i2c_adapter *adapter)
-+{
-+	return I2C_FUNC_I2C;
-+}
-+
-+static struct i2c_algorithm tbs5930_i2c_algo = {
-+	.master_xfer = tbs5930_i2c_transfer,
-+	.functionality = tbs5930_i2c_func,
-+};
-+
-+static int tbs5930_read_mac_address(struct dvb_usb_device *d, u8 mac[6])
-+{
-+	int i,ret;
-+	u8 ibuf[3] = {0, 0,0};
-+	u8 eeprom[256], eepromline[16];
-+
-+	for (i = 0; i < 256; i++) {
-+		ibuf[0]=1;//lenth
-+		ibuf[1]=0xa0;//eeprom addr
-+		ibuf[2]=i;//register
-+		ret = tbs5930_op_rw(d->udev, 0x90, 0, 0,
-+					ibuf, 3, TBS5930_WRITE_MSG);
-+		ret = tbs5930_op_rw(d->udev, 0x91, 0, 0,
-+					ibuf, 1, TBS5930_READ_MSG);
-+			if (ret < 0) {
-+				err("read eeprom failed.");
-+				return -1;
-+			} else {
-+				eepromline[i%16] = ibuf[0];
-+				eeprom[i] = ibuf[0];
-+			}
-+			
-+			if ((i % 16) == 15) {
-+				deb_xfer("%02x: ", i - 15);
-+				debug_dump(eepromline, 16, deb_xfer);
-+			}
-+	}
-+	memcpy(mac, eeprom + 16, 6);
-+	return 0;
-+};
-+
-+static struct dvb_usb_device_properties tbs5930_properties;
-+
-+static int tbs5930_frontend_attach(struct dvb_usb_adapter *adap)
-+{
-+	struct dvb_usb_device *d = adap->dev;
-+	struct tbs5930_state *st = d->priv;
-+	struct i2c_client *client;
-+	struct i2c_board_info info;
-+	struct m88rs6060_cfg m88rs6060_config;
-+	u8 buf[20];
-+	/* attach frontend */
-+	memset(&m88rs6060_config,0,sizeof(m88rs6060_config));
-+	m88rs6060_config.fe = &adap->fe_adap[0].fe;
-+	m88rs6060_config.clk = 27000000;
-+	m88rs6060_config.i2c_wr_max = 33;
-+	m88rs6060_config.ts_mode = MtFeTsOutMode_Common;
-+	m88rs6060_config.ts_pinswitch = 0;
-+	m88rs6060_config.envelope_mode = 0;
-+	m88rs6060_config.demod_adr = 0x69;
-+	m88rs6060_config.tuner_adr = 0x2c;
-+	m88rs6060_config.repeater_value = 0x11;
-+	m88rs6060_config.read_properties = NULL;
-+	m88rs6060_config.write_properties  = NULL;
-+
-+	memset(&info, 0, sizeof(struct i2c_board_info));
-+	strlcpy(info.type, "m88rs6060", I2C_NAME_SIZE);
-+	info.addr = 0x69;
-+	info.platform_data = &m88rs6060_config;
-+	request_module(info.type);
-+	//client = i2c_new_client_device(&d->i2c_adap,&info);
-+	//if(!i2c_client_has_driver(client))
-+	//			return -ENODEV;
-+	//if (!try_module_get(client->dev.driver->owner)) {
-+	//		i2c_unregister_device(client);
-+	//		return -ENODEV;
-+	//}
-+
-+	//st->i2c_client = client;
-+
-+	buf[0] = 0;
-+	buf[1] = 0;
-+	tbs5930_op_rw(d->udev, 0xb7, 0, 0,
-+			buf, 2, TBS5930_WRITE_MSG);
-+	buf[0] = 8;
-+	buf[1] = 1;
-+	tbs5930_op_rw(d->udev, 0x8a, 0, 0,
-+			buf, 2, TBS5930_WRITE_MSG);
-+	msleep(10);
-+	
-+	strlcpy(adap->fe_adap[0].fe->ops.info.name,d->props.devices[0].name,52);
-+
-+	return 0;
-+}
-+
-+static struct usb_device_id tbs5930_table[] = {
-+	{USB_DEVICE(0x734c, 0x5930)},
-+	{ }
-+};
-+
-+MODULE_DEVICE_TABLE(usb, tbs5930_table);
-+
-+static int tbs5930_load_firmware(struct usb_device *dev,
-+			const struct firmware *frmwr)
-+{
-+	u8 *b, *p;
-+	int ret = 0, i;
-+	u8 reset;
-+	const struct firmware *fw;
-+	switch (dev->descriptor.idProduct) {
-+	case 0x5930:
-+		ret = request_firmware(&fw, tbs5930_properties.firmware, &dev->dev);
-+		if (ret != 0) {
-+			err("did not find the firmware file. (%s) "
-+			"Please see linux/Documentation/dvb/ for more details "
-+			"on firmware-problems.", tbs5930_properties.firmware);
-+			return ret;
-+		}
-+		break;
-+	default:
-+		fw = frmwr;
-+		break;
-+	}
-+	info("start downloading TBS5930 firmware");
-+	p = kmalloc(fw->size, GFP_KERNEL);
-+	reset = 1;
-+	/*stop the CPU*/
-+	tbs5930_op_rw(dev, 0xa0, 0x7f92, 0, &reset, 1, TBS5930_WRITE_MSG);
-+	tbs5930_op_rw(dev, 0xa0, 0xe600, 0, &reset, 1, TBS5930_WRITE_MSG);
-+
-+	if (p != NULL) {
-+		memcpy(p, fw->data, fw->size);
-+		for (i = 0; i < fw->size; i += 0x40) {
-+			b = (u8 *) p + i;
-+			if (tbs5930_op_rw(dev, 0xa0, i, 0, b , 0x40,
-+					TBS5930_WRITE_MSG) != 0x40) {
-+				err("error while transferring firmware");
-+				ret = -EINVAL;
-+				break;
-+			}
-+		}
-+		/* restart the CPU */
-+		reset = 0;
-+		if (ret || tbs5930_op_rw(dev, 0xa0, 0x7f92, 0, &reset, 1,
-+					TBS5930_WRITE_MSG) != 1) {
-+			err("could not restart the USB controller CPU.");
-+			ret = -EINVAL;
-+		}
-+		if (ret || tbs5930_op_rw(dev, 0xa0, 0xe600, 0, &reset, 1,
-+					TBS5930_WRITE_MSG) != 1) {
-+			err("could not restart the USB controller CPU.");
-+			ret = -EINVAL;
-+		}
-+
-+		msleep(100);
-+		kfree(p);
-+	}
-+	return ret;
-+}
-+
-+static struct dvb_usb_device_properties tbs5930_properties = {
-+	.caps = DVB_USB_IS_AN_I2C_ADAPTER,
-+	.usb_ctrl = DEVICE_SPECIFIC,
-+	.firmware = "dvb-usb-id5930.fw",
-+	.size_of_priv = sizeof(struct tbs5930_state),
-+	.no_reconnect = 1,
-+
-+	.i2c_algo = &tbs5930_i2c_algo,
-+
-+	.generic_bulk_ctrl_endpoint = 0x81,
-+	/* parameter for the MPEG2-data transfer */
-+	.num_adapters = 1,
-+	.download_firmware = tbs5930_load_firmware,
-+	.read_mac_address = tbs5930_read_mac_address,
-+	.adapter = {{
-+		.num_frontends = 1,
-+		.fe = {{
-+			.frontend_attach = tbs5930_frontend_attach,
-+			.streaming_ctrl = NULL,
-+			.tuner_attach = NULL,
-+			.stream = {
-+				.type = USB_BULK,
-+				.count = 8,
-+				.endpoint = 0x82,
-+				.u = {
-+					.bulk = {
-+						.buffersize = 4096,
-+					}
-+				}
-+			},
-+		}
-+
-+		},
-+		
-+	}},
-+
-+	.num_device_descs = 1,
-+	.devices = {
-+		{"TurboSight TBS 5930 DVB-S/S2/S2x",
-+			{&tbs5930_table[0], NULL},
-+			{NULL},
-+		}
-+	}
-+};
-+
-+static int tbs5930_probe(struct usb_interface *intf,
-+		const struct usb_device_id *id)
-+{
-+	if (0 == dvb_usb_device_init(intf, &tbs5930_properties,
-+			THIS_MODULE, NULL, adapter_nr)) {
-+		return 0;
-+	}
-+	return -ENODEV;
-+}
-+
-+static void tbs5930_disconnect(struct usb_interface *intf)
-+{
-+#if 1
-+	struct dvb_usb_device *d = usb_get_intfdata(intf);
-+	struct tbs5930_state *st = d->priv;
-+	struct i2c_client *client;
-+
-+	/* remove I2C client for tuner/demod*/
-+	client = st->i2c_client;
-+	if (client) {
-+		module_put(client->dev.driver->owner);
-+		i2c_unregister_device(client);
-+	}
-+#endif
-+	dvb_usb_device_exit(intf);
-+}
-+
-+static struct usb_driver tbs5930_driver = {
-+	.name = "tbs5930",
-+	.probe = tbs5930_probe,
-+	.disconnect = tbs5930_disconnect,
-+	.id_table = tbs5930_table,
-+};
-+
-+static int __init tbs5930_module_init(void)
-+{
-+	int ret =  usb_register(&tbs5930_driver);
-+	if (ret)
-+		err("usb_register failed. Error number %d", ret);
-+
-+	return ret;
-+}
-+
-+static void __exit tbs5930_module_exit(void)
-+{
-+	usb_deregister(&tbs5930_driver);
-+}
-+
-+module_init(tbs5930_module_init);
-+module_exit(tbs5930_module_exit);
-+
-+MODULE_AUTHOR("Davin zhang<Davin@tbsdtv.com>");
-+MODULE_DESCRIPTION("TurboSight TBS 5930 driver");
-+MODULE_VERSION("1.0");
-+MODULE_LICENSE("GPL");
-diff --git a/drivers/media/usb/dvb-usb/tbs5930.h b/drivers/media/usb/dvb-usb/tbs5930.h
-new file mode 100644
-index 0000000..31224a7
---- /dev/null
-+++ b/drivers/media/usb/dvb-usb/tbs5930.h
-@@ -0,0 +1,8 @@
-+#ifndef _TBS5930_H_
-+#define _TBS5930_H_
-+
-+#define DVB_USB_LOG_PREFIX "tbs5930"
-+#include "dvb-usb.h"
-+
-+#define deb_xfer(args...) dprintk(dvb_usb_tbs5930_debug, 0x02, args)
-+#endif
+ 	/* ATSC-MH specifics */
+ 	u8			atscmh_fic_ver;
+ 	u8			atscmh_parade_id;
 diff --git a/drivers/media/dvb-frontends/Kconfig b/drivers/media/dvb-frontends/Kconfig
-index e8f1235..1401e9b 100644
+index dd12a1eb..3fb97180 100644
 --- a/drivers/media/dvb-frontends/Kconfig
 +++ b/drivers/media/dvb-frontends/Kconfig
-@@ -42,6 +42,14 @@ config DVB_M88DS3103
- 	help
- 	  Say Y when you want to support this frontend.
+@@ -45,6 +45,14 @@ config DVB_M88DS3103
+ comment "Multistandard (cable + terrestrial) frontends"
+ 	depends on DVB_CORE
  
 +config DVB_M88RS6060
 +        tristate "Montage Technology M88RS6060 Demodulation and tuner"
@@ -436,13 +56,13 @@ index e8f1235..1401e9b 100644
 +        select REGMAP_I2C
 +        default m if !MEDIA_SUBDRV_AUTOSELECT
 +        help
-+          Say Y when you want to support this frontend.
++          Say Y when you want to support this frontend.	
 +
- comment "Multistandard (cable + terrestrial) frontends"
- 	depends on DVB_CORE
- 
+ config DVB_DRXK
+ 	tristate "Micronas DRXK based"
+ 	depends on DVB_CORE && I2C
 diff --git a/drivers/media/dvb-frontends/Makefile b/drivers/media/dvb-frontends/Makefile
-index bad2289..e350a9d 100644
+index 0c75a6aa..7f735251 100644
 --- a/drivers/media/dvb-frontends/Makefile
 +++ b/drivers/media/dvb-frontends/Makefile
 @@ -106,5 +106,6 @@ obj-$(CONFIG_DVB_TDA10071) += tda10071.o
@@ -454,10 +74,10 @@ index bad2289..e350a9d 100644
  
 diff --git a/drivers/media/dvb-frontends/m88rs6060.c b/drivers/media/dvb-frontends/m88rs6060.c
 new file mode 100644
-index 0000000..a50cdef
+index 00000000..c1d52863
 --- /dev/null
 +++ b/drivers/media/dvb-frontends/m88rs6060.c
-@@ -0,0 +1,3588 @@
+@@ -0,0 +1,3655 @@
 +//SPX-License-Identifier: GPL-2.0-or-later
 +/*
 + * Montage Technology M88rs6060 demodulator and tuner drivers
@@ -843,7 +463,7 @@ index 0000000..a50cdef
 +	 ret = i2c_transfer(i2c, &msg, 1);
 +	 if (ret != 1) {
 +		dev_err(&i2c->dev,
-+			"si5351(ret=%i, reg=0x%02x, value=0x%02hhn)\n",
++			"si5351(ret=%i, reg=0x%02x, value=0x%02x)\n",
 +			 ret, reg, data);
 +		return -EREMOTEIO;
 +		}	
@@ -2389,6 +2009,10 @@ index 0000000..a50cdef
 +	int ret;
 +	u32 symbol_rate_KSs;
 +	unsigned tmp, tmp1;
++	static const struct reg_sequence reset_buf[] = {
++		{0x7, 0x80}, {0x7, 0x0}
++
++	};
 +	u32 realFreq;
 +	s16 lpf_offset_KHz = 0;
 +	u32 target_mclk = 144000;
@@ -2424,6 +2048,9 @@ index 0000000..a50cdef
 +	symbol_rate_KSs = c->symbol_rate / 1000;
 +	realFreq = c->frequency;
 +	/*reset */
++	ret = regmap_multi_reg_write(dev->regmap, reset_buf, 2);
++	if (ret)
++		goto err;
 +
 +	msleep(2);
 +	/*clear ts */
@@ -2577,6 +2204,11 @@ index 0000000..a50cdef
 +		isi = 0;
 +		pls_mode = 0;
 +		pls_code = 1;
++	}
++
++	if (c->scrambling_sequence_index) {
++		pls_mode = 1;
++		pls_code = c->scrambling_sequence_index;
 +	}
 +
 +	if (pls_mode)
@@ -3646,43 +3278,43 @@ index 0000000..a50cdef
 +            case MtFeModMode_32Apsk:
 +                 p->modulation = APSK_32; break;
 +            case MtFeModMode_64Apsk:
-+                p->modulation = APSK_32; break;
++                p->modulation = APSK_64; break;
 +            case MtFeModMode_Qpsk:
 +            default:   p->modulation = QPSK; break;
 +        }
 +         switch(p_info.code_rate)
 +		{
-+			case MtFeCodeRate_1_4:		p->fec_inner = FEC_3_4;     	break;
-+			case MtFeCodeRate_1_3:		p->fec_inner = FEC_2_3;		break;
-+			case MtFeCodeRate_2_5:		p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_1_2:		p->fec_inner = FEC_1_2;		break;
-+			case MtFeCodeRate_3_5:		p->fec_inner = FEC_3_5;		break;
-+			case MtFeCodeRate_2_3:		p->fec_inner = FEC_2_3;		break;
-+			case MtFeCodeRate_3_4:		p->fec_inner = FEC_3_4;		break;
-+			case MtFeCodeRate_4_5:		p->fec_inner = FEC_4_5;		break;
-+			case MtFeCodeRate_5_6:		p->fec_inner = FEC_5_6;		break;
-+			case MtFeCodeRate_8_9:		p->fec_inner = FEC_8_9;		break;
-+			case MtFeCodeRate_9_10:		p->fec_inner = FEC_9_10;	break;
-+			case MtFeCodeRate_5_9:		p->fec_inner = FEC_8_9;		break;
-+			case MtFeCodeRate_7_9:		p->fec_inner = FEC_8_9;		break;
-+			case MtFeCodeRate_4_15:		p->fec_inner = FEC_4_5;		break;
-+			case MtFeCodeRate_7_15:		p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_8_15:		p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_11_15:	p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_13_18:	p->fec_inner = FEC_9_10;	break;
-+			case MtFeCodeRate_9_20:		p->fec_inner = FEC_9_10;	break;
-+			case MtFeCodeRate_11_20:	p->fec_inner = FEC_1_2;		break;
-+			case MtFeCodeRate_23_36:	p->fec_inner = FEC_2_3;	 	break;
-+			case MtFeCodeRate_25_36:	p->fec_inner = FEC_5_6;		break;
-+			case MtFeCodeRate_11_45:	p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_13_45:	p->fec_inner = FEC_3_5;		break;
-+			case MtFeCodeRate_14_45:	p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_26_45:	p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_28_45:	p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_29_45:	p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_31_45:	p->fec_inner = FEC_3_5;		break;
-+			case MtFeCodeRate_32_45:	p->fec_inner = FEC_2_5;		break;
-+			case MtFeCodeRate_77_90:	p->fec_inner = FEC_9_10;	break;
++			case MtFeCodeRate_1_4:		p->fec_inner = FEC_1_4;     	break;
++			case MtFeCodeRate_1_3:		p->fec_inner = FEC_1_3;	break;
++			case MtFeCodeRate_2_5:		p->fec_inner = FEC_2_5;	break;
++			case MtFeCodeRate_1_2:		p->fec_inner = FEC_1_2;	break;
++			case MtFeCodeRate_3_5:		p->fec_inner = FEC_3_5;	break;
++			case MtFeCodeRate_2_3:		p->fec_inner = FEC_2_3;	break;
++			case MtFeCodeRate_3_4:		p->fec_inner = FEC_3_4;	break;
++			case MtFeCodeRate_4_5:		p->fec_inner = FEC_4_5;	break;
++			case MtFeCodeRate_5_6:		p->fec_inner = FEC_5_6;	break;
++			case MtFeCodeRate_8_9:		p->fec_inner = FEC_8_9;	break;
++			case MtFeCodeRate_9_10:	p->fec_inner = FEC_9_10;	break;
++			case MtFeCodeRate_5_9:		p->fec_inner = FEC_5_9;	break;
++			case MtFeCodeRate_7_9:		p->fec_inner = FEC_7_9;	break;
++			case MtFeCodeRate_4_15:	p->fec_inner = FEC_4_15;	break;
++			case MtFeCodeRate_7_15:	p->fec_inner = FEC_7_15;	break;
++			case MtFeCodeRate_8_15:	p->fec_inner = FEC_8_15;	break;
++			case MtFeCodeRate_11_15:	p->fec_inner = FEC_11_15;	break;
++			case MtFeCodeRate_13_18:	p->fec_inner = FEC_13_18;	break;
++			case MtFeCodeRate_9_20:	p->fec_inner = FEC_9_20;	break;
++			case MtFeCodeRate_11_20:	p->fec_inner = FEC_11_20;	break;
++			case MtFeCodeRate_23_36:	p->fec_inner = FEC_23_36;	break;
++			case MtFeCodeRate_25_36:	p->fec_inner = FEC_25_36;	break;
++			case MtFeCodeRate_11_45:	p->fec_inner = FEC_11_45;	break;
++			case MtFeCodeRate_13_45:	p->fec_inner = FEC_13_45;	break;
++			case MtFeCodeRate_14_45:	p->fec_inner = FEC_14_45;	break;
++			case MtFeCodeRate_26_45:	p->fec_inner = FEC_26_45;	break;
++			case MtFeCodeRate_28_45:	p->fec_inner = FEC_28_45;	break;
++			case MtFeCodeRate_29_45:	p->fec_inner = FEC_29_45;	break;
++			case MtFeCodeRate_31_45:	p->fec_inner = FEC_31_45;	break;
++			case MtFeCodeRate_32_45:	p->fec_inner = FEC_32_45;	break;
++			case MtFeCodeRate_77_90:	p->fec_inner = FEC_77_90;	break;
 +			default:			p->fec_inner = FEC_NONE;  	break;
 +		}
 +		p->pilot = p_info.is_pilot_on ? PILOT_ON : PILOT_OFF;
@@ -3694,11 +3326,11 @@ index 0000000..a50cdef
 +		   case MtFeRollOff_0p20:
 +		   		p->rolloff = ROLLOFF_20;break;
 +		   case MtFeRollOff_0p15:
-+		   		p->rolloff = ROLLOFF_25;break;
++		   		p->rolloff = ROLLOFF_15;break;
 +		   case MtFeRollOff_0p10:
-+		   		p->rolloff = ROLLOFF_20;break;
++		   		p->rolloff = ROLLOFF_10;break;
 +		   case MtFeRollOff_0p05:
-+		   		p->rolloff = ROLLOFF_25;break;
++		   		p->rolloff = ROLLOFF_5;break;
 +		   	default:
 +		   		p->rolloff = ROLLOFF_AUTO;break;		   				   				   				
 +		}
@@ -3706,42 +3338,95 @@ index 0000000..a50cdef
 +
 + return 0;
 +}
-+static void m88rs6060_spi_read(struct dvb_frontend *fe)
++static void m88rs6060_spi_read(struct dvb_frontend *fe,
++			       struct ecp3_info *ecp3inf)
 +{
 +	struct i2c_client *client = fe->demodulator_priv;
 +	struct m88rs6060_dev *dev = i2c_get_clientdata(client);
 +	struct i2c_adapter *i2c = dev->base->i2c;
 +
++	if (dev->config.read_properties)
++		dev->config.read_properties(i2c, ecp3inf->reg,
++				     &(ecp3inf->data));
++
 +	return;
 +}
 +
-+static void m88rs6060_spi_write(struct dvb_frontend *fe)
++static void m88rs6060_spi_write(struct dvb_frontend *fe,
++				struct ecp3_info *ecp3inf)
 +{
 +		struct i2c_client *client = fe->demodulator_priv;
 +	struct m88rs6060_dev *dev = i2c_get_clientdata(client);
 +	struct i2c_adapter *i2c = dev->base->i2c;
 +
++	if (dev->config.write_properties)
++		dev->config.write_properties(i2c, ecp3inf->reg,
++				      ecp3inf->data);
 +	return;
 +}
 +
-+static void m88rs6060_eeprom_read(struct dvb_frontend *fe)
++static void m88rs6060_eeprom_read(struct dvb_frontend *fe, struct eeprom_info *eepinf)
 +{
 +	struct i2c_client *client = fe->demodulator_priv;
 +	struct m88rs6060_dev *dev = i2c_get_clientdata(client);
 +	struct i2c_adapter *i2c = dev->base->i2c;
 +
++	if (dev->config.read_eeprom)
++		dev->config.read_eeprom(i2c, eepinf->reg,
++				      &(eepinf->data));
 +	return ;
 +}
 +
-+static void m88rs6060_eeprom_write(struct dvb_frontend *fe)
++static void m88rs6060_eeprom_write(struct dvb_frontend *fe,struct eeprom_info *eepinf)
 +{
 +	struct i2c_client *client = fe->demodulator_priv;
 +	struct m88rs6060_dev *dev = i2c_get_clientdata(client);
 +	struct i2c_adapter *i2c = dev->base->i2c;
 +
++	if (dev->config.write_eeprom)
++		dev->config.write_eeprom(i2c, eepinf->reg,
++				      eepinf->data);
 +	return ;
 +}
 +
++static const struct dvb_frontend_ops m88rs6060_ops = {
++	.delsys = {SYS_DVBS, SYS_DVBS2},
++	.info = {
++		 .name = "Montage m88rs6060",
++		 .frequency_min = 950 * MHz,
++		 .frequency_max = 2150 * MHz,
++		 .symbol_rate_min = 1000000,
++		 .symbol_rate_max = 45000000,
++		.caps			= FE_CAN_INVERSION_AUTO |
++					  FE_CAN_FEC_AUTO       |
++					  FE_CAN_QPSK           |
++					  FE_CAN_RECOVER	|
++					  FE_CAN_2G_MODULATION  |
++					  FE_CAN_MULTISTREAM
++	},
++
++	.init = m88rs6060_init,
++#ifdef HWTUNE
++	.get_frontend_algo = m88rs6060_get_algo,
++	.tune = m88rs6060_tune,
++	#else
++	.set_frontend = m88rs6060_set_frontend,
++#endif
++	.get_frontend    = m88rs6060_get_frontend,
++	.read_status = m88rs6060_read_status,
++	.read_ber = m88rs6060_read_ber,
++	.read_signal_strength = m88rs6060_read_signal_strength,
++	.read_snr = m88rs6060_read_snr,
++	.set_voltage = m88rs6060_set_voltage,
++	.set_tone = m88rs6060_set_tone,
++	.diseqc_send_burst = m88rs6060_diseqc_send_burst,
++	.diseqc_send_master_cmd = m88rs6060_diseqc_send_master_cmd,
++	.spi_read = m88rs6060_spi_read,
++	.spi_write = m88rs6060_spi_write,
++	.eeprom_read = m88rs6060_eeprom_read,
++	.eeprom_write = m88rs6060_eeprom_write,
++
++};
 +static int m88rs6060_ready(struct m88rs6060_dev *dev)
 +{
 +	//struct m88rs6060_dev *dev= i2c_get_clientdata(client);
@@ -3781,7 +3466,7 @@ index 0000000..a50cdef
 +	if (ret)
 +		goto err_release_firmware;
 +
-+	dev_dbg(&i2c->dev, " firmware size  = %u data %02x %02x %02x\n",
++	dev_dbg(&i2c->dev, " firmware size  = %lu data %02x %02x %02x\n",
 +		 firmware->size, firmware->data[0], firmware->data[1],
 +		 firmware->data[2]);
 +
@@ -3929,6 +3614,7 @@ index 0000000..a50cdef
 +
 +	dev->mclk = 96000;
 +
++	memcpy(&dev->fe.ops, &m88rs6060_ops, sizeof(struct dvb_frontend_ops));
 +	*cfg->fe = &dev->fe;
 +	dev->fe_status = 0;
 +
@@ -3978,6 +3664,7 @@ index 0000000..a50cdef
 +	/* set cold state */
 +	dev->warm = false;
 +
++	dev_dbg(&client->dev, "found the chip of %s.", m88rs6060_ops.info.name);
 +	//ready chip
 +	m88rs6060_ready(dev);
 +	 
@@ -4048,7 +3735,7 @@ index 0000000..a50cdef
 +MODULE_FIRMWARE(M88RS6060_FIRMWARE);
 diff --git a/drivers/media/dvb-frontends/m88rs6060.h b/drivers/media/dvb-frontends/m88rs6060.h
 new file mode 100644
-index 0000000..8fe2598
+index 00000000..d31bf92d
 --- /dev/null
 +++ b/drivers/media/dvb-frontends/m88rs6060.h
 @@ -0,0 +1,146 @@
@@ -4062,7 +3749,7 @@ index 0000000..8fe2598
 +
 +#ifndef _M88RS6060_H_
 +#define _M88RS6060_H_
-+#include <dvb_frontend.h>
++#include <linux/dvb/frontend.h>
 +
 +#define MT_FE_MCLK_KHZ   96000
 +
@@ -4200,7 +3887,7 @@ index 0000000..8fe2598
 +#endif
 diff --git a/drivers/media/dvb-frontends/m88rs6060_priv.h b/drivers/media/dvb-frontends/m88rs6060_priv.h
 new file mode 100644
-index 0000000..7e1c828
+index 00000000..edaec523
 --- /dev/null
 +++ b/drivers/media/dvb-frontends/m88rs6060_priv.h
 @@ -0,0 +1,290 @@
@@ -4494,3 +4181,555 @@ index 0000000..7e1c828
 +};
 +//
 +#endif
+diff --git a/drivers/media/usb/dvb-usb/Kconfig b/drivers/media/usb/dvb-usb/Kconfig
+index c5d95662..fdc240e7 100644
+--- a/drivers/media/usb/dvb-usb/Kconfig
++++ b/drivers/media/usb/dvb-usb/Kconfig
+@@ -318,6 +318,14 @@ config DVB_USB_TECHNISAT_USB2
+ 	help
+ 	  Say Y here to support the Technisat USB2 DVB-S/S2 device
+ 
++config DVB_USB_TBS5930
++	tristate "TurboSight TBS5930 DVB-S2/S2x USB2.0 support"
++	depends on DVB_USB
++	select DVB_PLL if MEDIA_SUBDRV_AUTOSELECT
++	select DVB_M88RS6060 if MEDIA_SUBDRV_AUTOSELECT
++	help
++	  Say Y here to support the TurboSight TBS5930 DVB-S/S2/S2x USB2.0 receivers
++
+ config DVB_USB_TBS
+ 	tristate "TurboSight DVB-S/S2 USB2.0 support"
+ 	depends on DVB_USB	  
+diff --git a/drivers/media/usb/dvb-usb/Makefile b/drivers/media/usb/dvb-usb/Makefile
+index acdd1efd..537159e1 100644
+--- a/drivers/media/usb/dvb-usb/Makefile
++++ b/drivers/media/usb/dvb-usb/Makefile
+@@ -76,6 +76,9 @@ obj-$(CONFIG_DVB_USB_AZ6027) += dvb-usb-az6027.o
+ dvb-usb-technisat-usb2-objs := technisat-usb2.o
+ obj-$(CONFIG_DVB_USB_TECHNISAT_USB2) += dvb-usb-technisat-usb2.o
+ 
++dvb-usb-tbs5930-objs = tbs5930.o
++obj-$(CONFIG_DVB_USB_TBS5930) += dvb-usb-tbs5930.o
++
+ ccflags-y += -I$(srctree)/drivers/media/dvb-core
+ ccflags-y += -I$(srctree)/drivers/media/dvb-frontends/
+ # due to tuner-xc3028
+diff --git a/drivers/media/usb/dvb-usb/tbs5930.c b/drivers/media/usb/dvb-usb/tbs5930.c
+new file mode 100644
+index 00000000..a4921523
+--- /dev/null
++++ b/drivers/media/usb/dvb-usb/tbs5930.c
+@@ -0,0 +1,364 @@
++/*
++ * TurboSight TBS 5930  driver
++ *
++ * Copyright (c) 2017 Davin <smailedavin@hotmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License as published by the
++ * Free Software Foundation, version 2.
++ *
++ */
++
++#include <linux/version.h>
++#include "tbs5930.h"
++#include "m88rs6060.h"
++
++#define TBS5930_READ_MSG 0
++#define TBS5930_WRITE_MSG 1
++
++#define TBS5930_RC_QUERY (0x1a00)
++#define TBS5930_VOLTAGE_CTRL (0x1800)
++
++struct tbs5930_state {
++	struct i2c_client *i2c_client; 
++	u8 initialized;
++};
++
++
++
++/* debug */
++static int dvb_usb_tbs5930_debug;
++module_param_named(debug, dvb_usb_tbs5930_debug, int, 0644);
++MODULE_PARM_DESC(debug, "set debugging level (1=info 2=xfer (or-able))." 
++							DVB_USB_DEBUG_STATUS);
++
++DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
++
++static int tbs5930_op_rw(struct usb_device *dev, u8 request, u16 value,
++				u16 index, u8 * data, u16 len, int flags)
++{
++	int ret;
++	void *u8buf;
++
++	unsigned int pipe = (flags == TBS5930_READ_MSG) ?
++			usb_rcvctrlpipe(dev, 0) : usb_sndctrlpipe(dev, 0);
++	u8 request_type = (flags == TBS5930_READ_MSG) ? USB_DIR_IN : USB_DIR_OUT;
++	u8buf = kmalloc(len, GFP_KERNEL);
++	if (!u8buf)
++		return -ENOMEM;
++
++	if (flags == TBS5930_WRITE_MSG)
++		memcpy(u8buf, data, len);
++	ret = usb_control_msg(dev, pipe, request, request_type | USB_TYPE_VENDOR,
++				value, index , u8buf, len, 2000);
++
++	if (flags == TBS5930_READ_MSG)
++		memcpy(data, u8buf, len);
++	kfree(u8buf);
++	return ret;
++}
++
++/* I2C */
++static int tbs5930_i2c_transfer(struct i2c_adapter *adap, 
++					struct i2c_msg msg[], int num)
++{
++	struct dvb_usb_device *d = i2c_get_adapdata(adap);
++	int i = 0;
++	u8 buf6[35];
++	u8 inbuf[35];
++
++	if (!d)
++		return -ENODEV;
++	if (mutex_lock_interruptible(&d->i2c_mutex) < 0)
++		return -EAGAIN;
++   		
++	switch (num) {
++	case 2:
++		buf6[0]=msg[1].len;//lenth
++		buf6[1]=msg[0].addr<<1;//demod addr
++		//register
++		buf6[2] = msg[0].buf[0];
++
++		tbs5930_op_rw(d->udev, 0x90, 0, 0,
++					buf6, 3, TBS5930_WRITE_MSG);
++		//msleep(5);
++		tbs5930_op_rw(d->udev, 0x91, 0, 0,
++					inbuf, buf6[0], TBS5930_READ_MSG);
++		memcpy(msg[1].buf, inbuf, msg[1].len);
++
++		break;
++	case 1:
++		buf6[0] = msg[0].len+1;//lenth
++		buf6[1] = msg[0].addr<<1;//addr
++		for(i=0;i<msg[0].len;i++) {
++			buf6[2+i] = msg[0].buf[i];//register
++		}
++		tbs5930_op_rw(d->udev, 0x80, 0, 0,
++			buf6, msg[0].len+2, TBS5930_WRITE_MSG);
++		break;
++	}
++		
++	mutex_unlock(&d->i2c_mutex);
++	return num;
++}
++
++static u32 tbs5930_i2c_func(struct i2c_adapter *adapter)
++{
++	return I2C_FUNC_I2C;
++}
++
++static struct i2c_algorithm tbs5930_i2c_algo = {
++	.master_xfer = tbs5930_i2c_transfer,
++	.functionality = tbs5930_i2c_func,
++};
++
++static int tbs5930_read_mac_address(struct dvb_usb_device *d, u8 mac[6])
++{
++	int i,ret;
++	u8 ibuf[3] = {0, 0,0};
++	u8 eeprom[256], eepromline[16];
++
++	for (i = 0; i < 256; i++) {
++		ibuf[0]=1;//lenth
++		ibuf[1]=0xa0;//eeprom addr
++		ibuf[2]=i;//register
++		ret = tbs5930_op_rw(d->udev, 0x90, 0, 0,
++					ibuf, 3, TBS5930_WRITE_MSG);
++		ret = tbs5930_op_rw(d->udev, 0x91, 0, 0,
++					ibuf, 1, TBS5930_READ_MSG);
++			if (ret < 0) {
++				err("read eeprom failed.");
++				return -1;
++			} else {
++				eepromline[i%16] = ibuf[0];
++				eeprom[i] = ibuf[0];
++			}
++			
++			if ((i % 16) == 15) {
++				deb_xfer("%02x: ", i - 15);
++				debug_dump(eepromline, 16, deb_xfer);
++			}
++	}
++	memcpy(mac, eeprom + 16, 6);
++	return 0;
++};
++
++static struct dvb_usb_device_properties tbs5930_properties;
++
++static int tbs5930_frontend_attach(struct dvb_usb_adapter *adap)
++{
++	struct dvb_usb_device *d = adap->dev;
++	struct tbs5930_state *st = d->priv;
++	struct i2c_client *client;
++	struct i2c_board_info info;
++	struct m88rs6060_cfg m88rs6060_config;
++	u8 buf[20];
++	/* attach frontend */
++	memset(&m88rs6060_config,0,sizeof(m88rs6060_config));
++	m88rs6060_config.fe = &adap->fe_adap[0].fe;
++	m88rs6060_config.clk = 27000000;
++	m88rs6060_config.i2c_wr_max = 33;
++	m88rs6060_config.ts_mode = MtFeTsOutMode_Common;
++	m88rs6060_config.ts_pinswitch = 0;
++	m88rs6060_config.envelope_mode = 0;
++	m88rs6060_config.demod_adr = 0x69;
++	m88rs6060_config.tuner_adr = 0x2c;
++	m88rs6060_config.repeater_value = 0x11;
++	m88rs6060_config.read_properties = NULL;
++	m88rs6060_config.write_properties  = NULL;
++
++	memset(&info, 0, sizeof(struct i2c_board_info));
++	strlcpy(info.type, "m88rs6060", I2C_NAME_SIZE);
++	info.addr = 0x69;
++	info.platform_data = &m88rs6060_config;
++	request_module(info.type);
++	client = i2c_new_device(&d->i2c_adap,&info);
++	if(!i2c_client_has_driver(client))
++				return -ENODEV;
++	if (!try_module_get(client->dev.driver->owner)) {
++			i2c_unregister_device(client);
++			return -ENODEV;
++	}
++
++	st->i2c_client = client;
++
++	buf[0] = 0;
++	buf[1] = 0;
++	tbs5930_op_rw(d->udev, 0xb7, 0, 0,
++			buf, 2, TBS5930_WRITE_MSG);
++	buf[0] = 8;
++	buf[1] = 1;
++	tbs5930_op_rw(d->udev, 0x8a, 0, 0,
++			buf, 2, TBS5930_WRITE_MSG);
++	msleep(10);
++	
++	strlcpy(adap->fe_adap[0].fe->ops.info.name,d->props.devices[0].name,52);
++
++	return 0;
++}
++
++static struct usb_device_id tbs5930_table[] = {
++	{USB_DEVICE(0x734c, 0x5930)},
++	{ }
++};
++
++MODULE_DEVICE_TABLE(usb, tbs5930_table);
++
++static int tbs5930_load_firmware(struct usb_device *dev,
++			const struct firmware *frmwr)
++{
++	u8 *b, *p;
++	int ret = 0, i;
++	u8 reset;
++	const struct firmware *fw;
++	switch (dev->descriptor.idProduct) {
++	case 0x5930:
++		ret = request_firmware(&fw, tbs5930_properties.firmware, &dev->dev);
++		if (ret != 0) {
++			err("did not find the firmware file. (%s) "
++			"Please see linux/Documentation/dvb/ for more details "
++			"on firmware-problems.", tbs5930_properties.firmware);
++			return ret;
++		}
++		break;
++	default:
++		fw = frmwr;
++		break;
++	}
++	info("start downloading TBS5930 firmware");
++	p = kmalloc(fw->size, GFP_KERNEL);
++	reset = 1;
++	/*stop the CPU*/
++	tbs5930_op_rw(dev, 0xa0, 0x7f92, 0, &reset, 1, TBS5930_WRITE_MSG);
++	tbs5930_op_rw(dev, 0xa0, 0xe600, 0, &reset, 1, TBS5930_WRITE_MSG);
++
++	if (p != NULL) {
++		memcpy(p, fw->data, fw->size);
++		for (i = 0; i < fw->size; i += 0x40) {
++			b = (u8 *) p + i;
++			if (tbs5930_op_rw(dev, 0xa0, i, 0, b , 0x40,
++					TBS5930_WRITE_MSG) != 0x40) {
++				err("error while transferring firmware");
++				ret = -EINVAL;
++				break;
++			}
++		}
++		/* restart the CPU */
++		reset = 0;
++		if (ret || tbs5930_op_rw(dev, 0xa0, 0x7f92, 0, &reset, 1,
++					TBS5930_WRITE_MSG) != 1) {
++			err("could not restart the USB controller CPU.");
++			ret = -EINVAL;
++		}
++		if (ret || tbs5930_op_rw(dev, 0xa0, 0xe600, 0, &reset, 1,
++					TBS5930_WRITE_MSG) != 1) {
++			err("could not restart the USB controller CPU.");
++			ret = -EINVAL;
++		}
++
++		msleep(100);
++		kfree(p);
++	}
++	return ret;
++}
++
++static struct dvb_usb_device_properties tbs5930_properties = {
++	.caps = DVB_USB_IS_AN_I2C_ADAPTER,
++	.usb_ctrl = DEVICE_SPECIFIC,
++	.firmware = "dvb-usb-id5930.fw",
++	.size_of_priv = sizeof(struct tbs5930_state),
++	.no_reconnect = 1,
++
++	.i2c_algo = &tbs5930_i2c_algo,
++
++	.generic_bulk_ctrl_endpoint = 0x81,
++	/* parameter for the MPEG2-data transfer */
++	.num_adapters = 1,
++	.download_firmware = tbs5930_load_firmware,
++	.read_mac_address = tbs5930_read_mac_address,
++	.adapter = {{
++		.num_frontends = 1,
++		.fe = {{
++			.frontend_attach = tbs5930_frontend_attach,
++			.streaming_ctrl = NULL,
++			.tuner_attach = NULL,
++			.stream = {
++				.type = USB_BULK,
++				.count = 8,
++				.endpoint = 0x82,
++				.u = {
++					.bulk = {
++						.buffersize = 4096,
++					}
++				}
++			},
++		}
++
++		},
++		
++	}},
++
++	.num_device_descs = 1,
++	.devices = {
++		{"TurboSight TBS 5930 DVB-S/S2/S2x",
++			{&tbs5930_table[0], NULL},
++			{NULL},
++		}
++	}
++};
++
++static int tbs5930_probe(struct usb_interface *intf,
++		const struct usb_device_id *id)
++{
++	if (0 == dvb_usb_device_init(intf, &tbs5930_properties,
++			THIS_MODULE, NULL, adapter_nr)) {
++		return 0;
++	}
++	return -ENODEV;
++}
++
++static void tbs5930_disconnect(struct usb_interface *intf)
++{
++#if 1
++	struct dvb_usb_device *d = usb_get_intfdata(intf);
++	struct tbs5930_state *st = d->priv;
++	struct i2c_client *client;
++
++	/* remove I2C client for tuner/demod*/
++	client = st->i2c_client;
++	if (client) {
++		module_put(client->dev.driver->owner);
++		i2c_unregister_device(client);
++	}
++#endif
++	dvb_usb_device_exit(intf);
++}
++
++static struct usb_driver tbs5930_driver = {
++	.name = "tbs5930",
++	.probe = tbs5930_probe,
++	.disconnect = tbs5930_disconnect,
++	.id_table = tbs5930_table,
++};
++
++static int __init tbs5930_module_init(void)
++{
++	int ret =  usb_register(&tbs5930_driver);
++	if (ret)
++		err("usb_register failed. Error number %d", ret);
++
++	return ret;
++}
++
++static void __exit tbs5930_module_exit(void)
++{
++	usb_deregister(&tbs5930_driver);
++}
++
++module_init(tbs5930_module_init);
++module_exit(tbs5930_module_exit);
++
++MODULE_AUTHOR("Davin zhang<Davin@tbsdtv.com>");
++MODULE_DESCRIPTION("TurboSight TBS 5930 driver");
++MODULE_VERSION("1.0");
++MODULE_LICENSE("GPL");
+diff --git a/drivers/media/usb/dvb-usb/tbs5930.h b/drivers/media/usb/dvb-usb/tbs5930.h
+new file mode 100644
+index 00000000..3d8af031
+--- /dev/null
++++ b/drivers/media/usb/dvb-usb/tbs5930.h
+@@ -0,0 +1,8 @@
++#ifndef _TBS5930_H_
++#define _TBS5930_H_
++
++#define DVB_USB_LOG_PREFIX "tbs5930"
++#include "dvb-usb.h"
++
++#define deb_xfer(args...) dprintk(dvb_usb_tbs5930_debug, 0x02, args)
++#endif
+diff --git a/include/linux/i2c.h b/include/linux/i2c.h
+index deddeb8c..040c62fd 100644
+--- a/include/linux/i2c.h
++++ b/include/linux/i2c.h
+@@ -512,6 +512,11 @@ extern void i2c_del_driver(struct i2c_driver *);
+ #define i2c_add_driver(driver) \
+ 	i2c_register_driver(THIS_MODULE, driver)
+ 
++static inline bool i2c_client_has_driver(struct i2c_client *client)
++{
++	return !IS_ERR_OR_NULL(client) && client->dev.driver;
++}	
++
+ extern struct i2c_client *i2c_use_client(struct i2c_client *client);
+ extern void i2c_release_client(struct i2c_client *client);
+ 
+diff --git a/include/linux/regmap.h b/include/linux/regmap.h
+index 4149f1a9..48a8bc65 100644
+--- a/include/linux/regmap.h
++++ b/include/linux/regmap.h
+@@ -49,6 +49,22 @@ struct reg_default {
+ 	unsigned int def;
+ };
+ 
++/**
++ * struct reg_sequence - An individual write from a sequence of writes.
++ *
++ * @reg: Register address.
++ * @def: Register value.
++ * @delay_us: Delay to be applied after the register write in microseconds
++ *
++ * Register/value pairs for sequences of writes with an optional delay in
++ * microseconds to be applied after each write.
++ */
++struct reg_sequence {
++	unsigned int reg;
++	unsigned int def;
++	unsigned int delay_us;
++};
++
+ #ifdef CONFIG_REGMAP
+ 
+ enum regmap_endian {
+diff --git a/include/uapi/linux/dvb/frontend.h b/include/uapi/linux/dvb/frontend.h
+index c56d77c4..00192898 100644
+--- a/include/uapi/linux/dvb/frontend.h
++++ b/include/uapi/linux/dvb/frontend.h
+@@ -156,15 +156,37 @@ typedef enum fe_code_rate {
+ 	FEC_1_2,
+ 	FEC_2_3,
+ 	FEC_3_4,
++	FEC_1_3,
++	FEC_1_4,
+ 	FEC_4_5,
+ 	FEC_5_6,
++	FEC_5_9,
+ 	FEC_6_7,
+ 	FEC_7_8,
++	FEC_7_9,
++	FEC_7_15,
+ 	FEC_8_9,
++	FEC_8_15,
+ 	FEC_AUTO,
+ 	FEC_3_5,
+ 	FEC_9_10,
+ 	FEC_2_5,
++	FEC_4_15,
++	FEC_11_15,
++	FEC_11_20,
++	FEC_13_18,
++	FEC_9_20,
++	FEC_23_36,
++	FEC_25_36,
++	FEC_11_45,
++	FEC_13_45,
++	FEC_14_45,
++	FEC_26_45,
++	FEC_28_45,
++	FEC_29_45,
++	FEC_31_45,
++	FEC_32_45,
++	FEC_77_90,
+ } fe_code_rate_t;
+ 
+ 
+@@ -156,6 +156,7 @@ typedef enum fe_modulation {
+ 	PSK_8,
+ 	APSK_16,
+ 	APSK_32,
++	APSK_64,
+ 	DQPSK,
+ 	QAM_4_NR,
+ } fe_modulation_t;
+@@ -284,6 +306,18 @@ struct dvb_frontend_event {
+ };
+ #endif
+ 
++struct ecp3_info
++{
++	__u8 reg;
++	__u32 data;
++};
++
++struct eeprom_info
++{
++	__u8 reg;
++	__u8 data;
++};
++
+ /* S2API Commands */
+ #define DTV_UNDEFINED		0
+ #define DTV_TUNE		1
+@@ -388,6 +422,9 @@ typedef enum fe_rolloff {
+ 	ROLLOFF_20,
+ 	ROLLOFF_25,
+ 	ROLLOFF_AUTO,
++	ROLLOFF_15,
++	ROLLOFF_10,
++	ROLLOFF_5,
+ } fe_rolloff_t;
+ 
+ typedef enum fe_delivery_system {
+@@ -588,6 +625,12 @@ struct dtv_properties {
+ #define FE_SET_FRONTEND_TUNE_MODE  _IO('o', 81) /* unsigned int */
+ #define FE_GET_EVENT		   _IOR('o', 78, struct dvb_frontend_event)
+ 
++#define FE_ECP3FW_READ    _IOR('o', 90, struct ecp3_info)
++#define FE_ECP3FW_WRITE   _IOW('o', 91, struct ecp3_info)
++
++#define FE_EEPROM_READ    _IOR('o', 96, struct eeprom_info)
++#define FE_EEPROM_WRITE   _IOW('o', 97, struct eeprom_info)
++
+ #define FE_DISHNETWORK_SEND_LEGACY_CMD _IO('o', 80) /* unsigned int */
+ 
+ #endif /*_DVBFRONTEND_H_*/
