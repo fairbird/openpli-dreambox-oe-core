@@ -16,8 +16,6 @@ DEPENDS = " \
 	python3-twisted python3-wifi \
 	swig-native \
 	tuxtxt-enigma2 \
-	enigma2-plugin-drivers-ntfs-3g \
-	enigma2-plugin-drivers-exfat \
 	${@bb.utils.contains("MACHINE_FEATURES", "alsamixer", "ffmpeg" , "", d)} \
 	"
 
@@ -37,6 +35,8 @@ RDEPENDS:${PN} = " \
 	glibc-gconv-iso8859-15 \
 	oe-alliance-branding \
 	enigma2-locale-meta \
+	enigma2-plugin-drivers-ntfs-3g \
+	enigma2-plugin-drivers-exfat \
 	virtual-gstreamer1.0-dvbmediasink \
 	${PYTHON_RDEPS} \
 	${@bb.utils.contains("DISTRO_FEATURES", "e2hotplug", "checkinternet" , "hotplug-e2-helper", d)} \
