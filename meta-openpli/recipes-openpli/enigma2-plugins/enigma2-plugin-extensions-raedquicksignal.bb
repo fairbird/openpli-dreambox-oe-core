@@ -2,11 +2,10 @@ DESCRIPTION = "plugin to show information for channels such as (SNR, AGC, picon,
 MAINTAINER = "RAED - fairbird"
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/fairbird/RaedQuickSignal;protocol=https;branch=main"
 
-inherit gitpkgv setuptools3-openplugins
+inherit gitpkgv setuptools3-openplugins python3-compileall
 
 RDEPENDS:${PN} += "\
 	python3-requests \

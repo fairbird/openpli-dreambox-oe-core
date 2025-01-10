@@ -3,8 +3,7 @@ MAINTAINER = "kiddac"
 require conf/license/license-gplv2.inc
 HOMEPAGE = "https://github.com/kiddac/Jedi-EPG-XStream"
 
-inherit gitpkgv allarch
-require classes/python3-compileall.inc
+inherit gitpkgv allarch python3-compileall
 
 SRCREV="${AUTOREV}"
 

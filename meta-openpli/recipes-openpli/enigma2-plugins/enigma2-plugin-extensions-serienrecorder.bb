@@ -16,8 +16,7 @@ SRC_URI = "\
 
 S = "${WORKDIR}/git"
 
-inherit gitpkgv setuptools3-openplugins
-require classes/python3-compileall.inc
+inherit gitpkgv setuptools3-openplugins python3-compileall
 
 PV = "1+git"
 PKGV = "1+git${GITPKGV}"

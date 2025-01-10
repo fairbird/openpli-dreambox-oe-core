@@ -8,8 +8,7 @@ DEPENDS = "enigma-info"
 
 ALLOW_EMPTY:${PN} = "1"
 
-inherit gitpkgv
-require classes/python3-compileall.inc
+inherit gitpkgv python3-compileall
 
 PV = "1.0+gitr${SRCPV}"
 PKGV = "1.0+gitr${GITPKGV}"
@@ -98,5 +97,3 @@ rm -f ${datadir}/enigma2/logos/ustym4k*.svg
 
 exit 0
 }
-
-

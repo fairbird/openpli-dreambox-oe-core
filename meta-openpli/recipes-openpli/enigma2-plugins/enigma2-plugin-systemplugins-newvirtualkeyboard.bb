@@ -2,11 +2,10 @@ DESCRIPTION = "NewVirtualKeyBoard plugin by mfaraj57 & RAED"
 MAINTAINER = "RAED - fairbird"
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/fairbird/NewVirtualKeyBoard;protocol=https;branch=main"
 
-inherit gitpkgv setuptools3-openplugins gettext
+inherit gitpkgv setuptools3-openplugins gettext python3-compileall
 
 S = "${WORKDIR}/git"
 

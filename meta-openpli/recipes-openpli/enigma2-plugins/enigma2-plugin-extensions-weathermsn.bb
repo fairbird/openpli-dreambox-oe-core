@@ -4,9 +4,8 @@ MAINTAINER = "Sirius"
 LICENSE = "GPL-3.0-or-later"
 HOMEPAGE = "www.gisclub.tv"
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
-inherit gitpkgv python3native
+inherit gitpkgv python3native python3-compileall
 
 SRCREV = "${AUTOREV}"
 PV = "1.3.+git"

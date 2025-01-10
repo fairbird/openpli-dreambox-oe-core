@@ -2,9 +2,8 @@ SUMMARY = "MadMax Fhd Poster by Madhouse & StixMax"
 MAINTAINER = "madhouse"
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
-inherit gittag
+inherit gittag python3-compileall
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"

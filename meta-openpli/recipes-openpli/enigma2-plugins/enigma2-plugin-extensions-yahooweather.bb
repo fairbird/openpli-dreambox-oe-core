@@ -3,9 +3,8 @@ MAINTAINER = "original by m43c0 and mmark and mod by mogli123"
 SECTION = "extra"
 PRIORITY = "optional"
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
-inherit gitpkgv python3native autotools-brokensep gettext
+inherit gitpkgv python3native autotools-brokensep gettext python3-compileall
 
 PV = "1.2.+git"
 PKGV = "1.2.+git${GITPKGV}"
@@ -53,5 +52,3 @@ rm -r /usr/lib/enigma2/python/Plugins/Extensions/YahooWeather
 echo " YahooWeather removed! You should restart enigma2 now!"
 exit 0
 }
-
-

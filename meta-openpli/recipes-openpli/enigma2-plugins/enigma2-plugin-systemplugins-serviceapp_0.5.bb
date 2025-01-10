@@ -2,7 +2,6 @@ DESCRIPTION = "serviceapp service for enigma2"
 AUTHOR = "Maroš Ondrášek <mx3ldev@gmail.com>"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-require classes/python3-compileall.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,7 +18,7 @@ SRC_URI = "git://github.com/mx3L/serviceapp.git;protocol=https;branch=develop \
 
 S = "${WORKDIR}/git"
 
-inherit autotools gitpkgv pkgconfig python3native python3targetconfig
+inherit autotools gitpkgv pkgconfig python3native python3targetconfig python3-compileall
 
 PV = "git"
 PKGV = "git${GITPKGV}"
@@ -46,5 +45,3 @@ FILES:${PN}-src = "\
 	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceApp/locale/*/LC_MESSAGES/*.mo \
 	/usr/src/debug/* \
 	"
-
-

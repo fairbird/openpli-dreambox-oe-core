@@ -2,10 +2,9 @@ DESCRIPTION = "Tool to create a terrestrial bouquet according to logical channel
 MAINTAINER = "Huevos"
 HOMEPAGE = "https://github.com/Huevos/TerrestrialBouquet"
 
-inherit gitpkgv allarch gettext
+inherit gitpkgv allarch gettext python3-compileall
 
 require classes/python3-compileall.inc
-require conf/license/license-gplv2.inc
 
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"

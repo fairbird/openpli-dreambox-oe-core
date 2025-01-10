@@ -2,14 +2,13 @@ DESCRIPTION = "Handle your EPG on enigma2 from various sources (opentv, xmltv, c
 HOMEPAGE = "https://github.com/oe-alliance/e2openplugin-CrossEPG"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=4fbd65380cdd255951079008b364516c"
-require classes/python3-compileall.inc
 
 DEPENDS = "curl libxml2 python3 swig-native zlib"
 RDEPENDS:${PN} += "enigma2 libcurl python3-core python3-compression xz"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit gitpkgv python3-dir python3native
+inherit gitpkgv python3-dir python3native python3-compileall
 
 SRCREV = "${AUTOREV}"
 PV = "0.9.1+gitr"
@@ -54,7 +53,5 @@ FILES:${PN}:append = " /usr/crossepg ${libdir}/libcrossepg.so ${libdir}/${PYTHON
 FILES:${PN}-src:append = " ${libdir}/${PYTHON_DIR}/crossepg.py"
 FILES:${PN}-dbg:append = " /usr/crossepg/scripts/mhw2epgdownloader/.debug /usr/crossepg/scripts/mhw2epgdownloader/.debug"
 FILES_SOLIBSDEV = ""
-
-
 
 CFLAGS += "-Wno-error=implicit-function-declaration"

@@ -6,9 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 RDEPENDS:${PN} = "enigma2-tools-weatherinfo"
 
-require classes/python3-compileall.inc
-
-inherit gettext gittag
+inherit gettext gittag python3-compileall
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"
@@ -45,5 +43,3 @@ do_install() {
     install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/OAWeather/locale/
     cp -rf ${S}/locale/* ${D}${libdir}/enigma2/python/Plugins/Extensions/OAWeather/locale/
 }
-
-

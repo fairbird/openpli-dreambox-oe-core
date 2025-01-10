@@ -2,9 +2,7 @@ DESCRIPTION = "WeatherPlugin by Dr.Best modified by RAED"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-require classes/python3-compileall.inc
-
-inherit gitpkgv setuptools3-openplugins gettext
+inherit gitpkgv setuptools3-openplugins gettext python3-compileall
 
 PV = "2.2+git"
 PKGV = "2.2+git${GITPKGV}"
@@ -22,5 +20,3 @@ do_install() {
 }
 
 INSANE_SKIP:${PN} += "already-stripped"
-
-

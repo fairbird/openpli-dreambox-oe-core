@@ -4,11 +4,9 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 HOMEPAGE = "https://github.com/DimitarCC"
 
-require classes/python3-compileall.inc
-
 RDEPENDS:${PN} = "python3-multiprocessing python3-requests"
 
-inherit gitpkgv allarch gettext setuptools3-openplugins
+inherit gitpkgv allarch gettext setuptools3-openplugins python3-compileall
 
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"

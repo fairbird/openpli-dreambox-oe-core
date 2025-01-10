@@ -1,9 +1,8 @@
 SUMMARY = "Meta package for installing all dependencies for SSS' E2iPlayer"
 MAINTAINER = "samsamsam"
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
-inherit gitpkgv python3-dir
+inherit gitpkgv python3-dir python3-compileall
 
 DEPENDS = "python3 curl ffmpeg openssl zlib python3-pycurl"
 RRECOMMENDS:${PN} = " \

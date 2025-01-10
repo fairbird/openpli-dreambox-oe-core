@@ -2,11 +2,10 @@ DESCRIPTION = "ArabicSavior plugin by (mfaraj57 & RAED) to fix arabic fonts and 
 MAINTAINER = "RAED - fairbird"
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/fairbird/ArabicSavior;protocol=https;branch=main"
 
-inherit gitpkgv setuptools3-openplugins
+inherit gitpkgv setuptools3-openplugins python3-compileall
 
 S = "${WORKDIR}/git"
 
@@ -24,5 +23,3 @@ do_install() {
 }
 
 INSANE_SKIP:${PN} += "already-stripped"
-
-

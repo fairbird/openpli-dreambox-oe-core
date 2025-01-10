@@ -2,7 +2,6 @@ MODULE = "OpenWebif"
 DESCRIPTION = "Control your receiver with a browser"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://README;md5=26abba37d1c2fcbf96a087ceb8e1db86"
-require classes/python3-compileall.inc
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
@@ -26,7 +25,7 @@ RDEPENDS:${PN} = "\
 	python3-unixadmin \
 	"
 
-inherit gittag setuptools3_legacy gettext
+inherit gittag setuptools3_legacy gettext python3-compileall
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"
@@ -121,5 +120,3 @@ RCONFLICTS:${PN}-terminal = "enigma2-plugin-extensions-openwebif-terminal"
 RPROVIDES:${PN}-terminal =+ "enigma2-plugin-extensions-openwebif-terminal"
 
 INSANE_SKIP:${PN} = "installed-vs-shipped"
-
-

@@ -1,7 +1,6 @@
 DESCRIPTION = "Firewall"
 
 require conf/license/openpli-gplv2.inc
-require classes/python3-compileall.inc
 
 RDEPENDS:${PN} = " \	
 	${@bb.utils.contains_any("MACHINE", "dreamone dreamtwo", "", \
@@ -25,7 +24,7 @@ UNPACKDIR = "${S}"
 INITSCRIPT_NAME = "firewall"
 INITSCRIPT_PARAMS = "defaults"
 
-inherit update-rc.d
+inherit update-rc.d python3-compileall
 
 do_install() {
 	install -d ${D}${sysconfdir}/init.d

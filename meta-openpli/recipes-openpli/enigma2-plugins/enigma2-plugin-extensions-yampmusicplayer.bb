@@ -3,11 +3,10 @@ HOMEPAGE = "https://github.com/oe-mirrors/yampmusicplayer"
 MAINTAINER = "oe-a"
 PRIORITY = "optional"
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 RDEPENDS:${PN} = "python3-sqlite3 python3-tinytag python3-beautifulsoup4"
 
-inherit gitpkgv gettext setuptools3-openplugins
+inherit gitpkgv gettext setuptools3-openplugins python3-compileall
 
 PV = "3.3.1+git"
 PKGV = "3.3.1+git${GITPKGV}"

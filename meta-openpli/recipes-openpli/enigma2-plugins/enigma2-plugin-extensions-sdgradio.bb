@@ -6,7 +6,6 @@ HOMEPAGE = "http://satdreamgr.com"
 LICENSE = "PD"
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/oe-mirrors/SDGRadio.git;branch=master;protocol=https"
 
@@ -17,7 +16,7 @@ PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 PR = "r3"
 
-inherit setuptools3-openplugins
+inherit setuptools3-openplugins python3-compileall
 
 RDEPENDS:${PN} = "python3-core rtl-sdr redsea dab-cmdline-sdgradio dab-cmdline-sdgradio-pcm dab-cmdline-sdgradio-wav"
 

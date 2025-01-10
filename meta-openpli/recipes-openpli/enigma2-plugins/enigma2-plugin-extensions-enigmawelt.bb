@@ -2,12 +2,10 @@ SUMMARY = "The biggest DreamOS/Enigma2 Video Blog"
 MAINTAINER = "enigmawelt jbleyel CommanderData2338"
 HOMEPAGE = "https://enigmawelt.de"
 SECTION = "base"
-inherit allarch
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
-inherit gittag
+inherit allarch gittag python3-compileall
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"
@@ -28,5 +26,3 @@ pkg_postrm:${PN}() {
 rm -r ${libdir}/enigma2/python/Plugins/Extensions/Enigmawelt 2>/dev/null
 exit 0
 }
-
-

@@ -2,9 +2,8 @@ SUMMARY = "Skin Full HD"
 MAINTAINER = "stein17"
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
-inherit gitpkgv
+inherit gitpkgv python3-compileall
 
 PV = "3.4+git"
 PKGV = "3.4+git${GITPKGV}"

@@ -3,9 +3,8 @@ DESCRIPTION = "Automatically build and update bouquets from the DVB stream."
 MAINTAINER = "oe-alliance team"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
-require classes/python3-compileall.inc
 
-inherit autotools-brokensep gettext gitpkgv python3targetconfig python3native
+inherit autotools-brokensep gettext gitpkgv python3targetconfig python3native python3-compileall
 
 SRCREV = "${AUTOREV}"
 PV = "3.3+git"

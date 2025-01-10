@@ -2,11 +2,10 @@ DESCRIPTION = "BackUpFlash plugin by (RAED & mfaraj57) to Create Backup and flas
 MAINTAINER = "RAED - fairbird"
 
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 SRC_URI = "git://github.com/fairbird/BackUpFlash;protocol=https;branch=main"
 
-inherit gitpkgv setuptools3-openplugins
+inherit gitpkgv setuptools3-openpluginsgitpkgv python3-compileall
 
 RDEPENDS:${PN} += "\
 	wget \
@@ -31,7 +30,5 @@ do_install() {
 	cp -r ${S}${prefix}/* ${D}${prefix}/
 	python3 -m compileall -o2 -b ${D}${prefix}
 }
-
-
 
 INSANE_SKIP:${PN} += "already-stripped"

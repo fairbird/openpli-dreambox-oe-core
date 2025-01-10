@@ -3,7 +3,6 @@ HOMEPAGE = "https://www.linuxsat-support.com"
 MAINTAINER = "kiddac"
 PRIORITY = "optional"
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
 RDEPENDS:${PN} = "python3 python3-multiprocessing python3-requests \
                   python3-imaging python3-pillow \
@@ -14,7 +13,7 @@ PV = "3.71+git"
 PKGV = "3.71+git${GITPKGV}"
 PR = "r0"
 
-inherit gitpkgv
+inherit gitpkgv python3-compileall
 
 SRC_URI = "git://github.com/kiddac/XStreamity.git;protocol=https;branch=master"
 

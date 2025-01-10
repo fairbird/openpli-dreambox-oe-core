@@ -1,9 +1,8 @@
 SUMMARY = "Glamour Aura FHD skin for new generation STBs"
 MAINTAINER = "MCelliotG"
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
-inherit allarch gitpkgv
+inherit allarch gitpkgv python3-compileall
 
 PV = "14.x+git"
 PKGV = "14.x+git${GITPKGV}"

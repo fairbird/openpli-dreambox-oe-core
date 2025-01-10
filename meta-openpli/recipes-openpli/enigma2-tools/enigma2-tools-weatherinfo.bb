@@ -4,9 +4,9 @@ SECTION = "base"
 PRIORITY = "required"
 LICENSE = "proprietary"
 require conf/license/license-gplv2.inc
-require classes/python3-compileall.inc
 
-inherit gitpkgv
+inherit gitpkgv python3-compileall
+
 PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 PR = "r0"
