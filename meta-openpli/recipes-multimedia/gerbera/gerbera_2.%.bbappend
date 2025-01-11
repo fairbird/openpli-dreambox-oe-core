@@ -5,6 +5,10 @@ SRC_URI:append = " \
            file://init \
 "
 
+PV = "2.4.1"
+
+SRCREV = "870dd32d42f626dc2246d34b2224ffb6fd73e205"
+
 inherit update-rc.d gitpkgv
 
 INITSCRIPT_NAME = "gerbera"
