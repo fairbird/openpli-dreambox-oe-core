@@ -4,7 +4,7 @@ DEPENDS:remove = "boost"
 
 inherit gitpkgv
 
-SRC_URI:append = " file://mpd.init"
+SRC_URI:append = " file://mpd.init file://fix-build-fmt-11-1-1.patch"
 SRC_URI:remove = "file://0001-meson.build-support-building-with-ICU-76.patch"
 
 SRCREV = "b1677bf79c437e6de937da9f82260a1d24ad6bd2"
