@@ -7,10 +7,10 @@ inherit gitpkgv
 SRC_URI:append = " file://mpd.init"
 SRC_URI:remove = "file://0001-meson.build-support-building-with-ICU-76.patch"
 
-SRCREV = "7774c3369e1484dc5dec6d7d9572e0a57e9c5302"
+SRCREV = "b1677bf79c437e6de937da9f82260a1d24ad6bd2"
 
-PV = "0.23.15+git"
-PKGV = "0.23.15+git${GITPKGV}"
+PV = "0.23.16+git"
+PKGV = "0.23.16+git${GITPKGV}"
 
 do_install:append() {
 	install -d ${D}${localstatedir}/lib/mpd/playlists
