@@ -5,6 +5,7 @@
 # Attempt to mount any added block devices and umount any removed devices
 
 MOUNT="/bin/mount"
+PMOUNT="/usr/bin/pmount"
 UMOUNT="/bin/umount"
 LOG="/tmp/udev.log"
 
@@ -267,6 +268,12 @@ name="`basename "$DEVNAME"`"
 [ -e /sys/block/$name/device/media ] && media_type=`cat /sys/block/$name/device/media`
 
 if [ "$ACTION" = "add" ]; then
+	if [ -x "$PMOUNT" ]; then
+		$PMOUNT $DEVNAME 2> /dev/null
+	elif [ -x $MOUNT ]; then
+		$MOUNT $DEVNAME 2> /dev/null
+	fi
+
 	FLASHEXPANDERDEV=`cat /proc/mounts | grep '.FlashExpander' | cut -d " " -f1`
 	if [ -n "$FLASHEXPANDERDEV" ]; then
 		MOUNTPOINT=`cat /proc/mounts | grep ${FLASHEXPANDERDEV} | cut -d " " -f2`
