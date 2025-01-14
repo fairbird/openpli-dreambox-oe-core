@@ -1,5 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
+PR .= ".1"
+
 SRC_URI += " \
     file://mount.sh \
     file://automount.rules \
