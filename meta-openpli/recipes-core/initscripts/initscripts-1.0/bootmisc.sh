@@ -59,7 +59,14 @@ fi
 if test ! -L /tmp && test -d /var/tmp
 then
 	rm -rf /tmp
-	ln -sf /var/tmp /tmp
+	ln -sf /var/tmp/ /tmp
+fi
+
+#
+# Update dynamic library cache, but only if ld.so.conf is present
+#
+if [ -e /etc/ld.so.conf ] ; then
+	/sbin/ldconfig
 fi
 
 : exit 0
