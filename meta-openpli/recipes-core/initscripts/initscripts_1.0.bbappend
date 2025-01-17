@@ -5,10 +5,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${P}:"
 RDEPENDS:${PN}:append = " sdparm bash"
 RRECOMMENDS:${PN} = ""
 
-SRC_URI += "file://hotplug.sh \
-            file://nocam.sh \
-            file://nocard.sh \
-"
+SRC_URI += "file://hotplug.sh"
 
 do_install:append() {
     # umountnfs should run before network stops (which is at K40)
