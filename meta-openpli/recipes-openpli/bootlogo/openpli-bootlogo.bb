@@ -1,4 +1,4 @@
-DESCRIPTION = "Open Vision bootlogo"
+DESCRIPTION = "OpenPLi bootlogo"
 SECTION = "base"
 PRIORITY = "required"
 MAINTAINER = "PLi team"
