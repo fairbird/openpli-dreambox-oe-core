@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT.txt;md5=dc94785ad7ae0960293331f807d14628"
 RDEPENDS:${PN} = "\
 	python3-core python3-shell python3-compression python3-crypt python3-ctypes python3-sqlite3 \
 	python3-cheetah python3-misc python3-html python3-email python3-sabyenc3 python3-sabctools \
-	python3-rebulk python3-dateutil python3-babelfish python3-pysocks python3-pip p7zip python3-apprise \
+	python3-rebulk python3-dateutil python3-babelfish python3-pysocks python3-pip python3-apprise \
 	"
 
-RRECOMMENDS:${PN} = "par2cmdline unrar"
+RRECOMMENDS:${PN} = "par2cmdline unrar 7zip-full"
 
 SRC_URI = "https://github.com/sabnzbd/sabnzbd/releases/download/${PV}/SABnzbd-${PV}-src.tar.gz \
     file://sabnzbd \

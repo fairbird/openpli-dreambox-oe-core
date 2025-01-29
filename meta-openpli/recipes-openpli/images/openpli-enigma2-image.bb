@@ -80,7 +80,7 @@ IMAGE_INSTALL = " \
 	openpli-bootlogo \
 	openssh-sftp-server \
 	opkg \
-	p7zip \
+	7zip \
 	packagegroup-base \
 	packagegroup-core-boot \
 	parted \
