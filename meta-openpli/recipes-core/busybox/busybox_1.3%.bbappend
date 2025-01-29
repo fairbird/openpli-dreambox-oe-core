@@ -14,6 +14,7 @@ SRC_URI:append = " \
             file://0002-Extended-network-interfaces-support.patch \
             file://0003-Revert-ip-fix-ip-oneline-a.patch \
             file://0004-libbb-make-unicode-printable.patch \
+            file://0005-reverse-cbq.patch \
             "
 
 # we do not really depend on mtd-utils, but as mtd-utils replaces 
