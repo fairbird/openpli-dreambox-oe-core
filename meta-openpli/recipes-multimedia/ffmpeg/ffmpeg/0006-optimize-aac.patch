@@ -1,5 +1,3 @@
-diff --git a/libavcodec/aac/aacdec.h b/libavcodec/aac/aacdec.h
-index e5a79a7139..9f8c857732 100644
 --- a/libavcodec/aac/aacdec.h
 +++ b/libavcodec/aac/aacdec.h
 @@ -418,7 +418,7 @@ typedef struct AACDecDSP {
@@ -11,8 +9,6 @@ index e5a79a7139..9f8c857732 100644
                        IndividualChannelStream *ics, int decode);
  
      void (*apply_ltp)(AACDecContext *ac, SingleChannelElement *sce);
-diff --git a/libavcodec/aacps.c b/libavcodec/aacps.c
-index 6008edd332..fa3636eec5 100644
 --- a/libavcodec/aacps.c
 +++ b/libavcodec/aacps.c
 @@ -396,7 +396,7 @@ static void map_val_20_to_34(INTFLOAT par[PS_MAX_NR_IIDICC])
