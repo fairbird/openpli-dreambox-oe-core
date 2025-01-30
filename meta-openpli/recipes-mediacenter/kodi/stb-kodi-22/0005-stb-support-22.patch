@@ -1,19 +1,19 @@
 From c0507f3bf14b96e52db02f5f4f649628f7dc2117 Mon Sep 17 00:00:00 2001
 From: Captain <openatv@gmail.com>
 Date: Sat, 18 May 2024 05:06:22 +0200
-Subject: [PATCH] stb-support-21
+Subject: [PATCH] stb-support-22
 
 ---
  xbmc/addons/addoninfo/AddonInfoBuilder.cpp    |   12 +
  .../VideoPlayer/VideoRenderers/CMakeLists.txt |    1 +
  .../VideoShaders/CMakeLists.txt               |    1 +
  .../VideoShaders/VideoFilterShaderGLES.cpp    |    5 +
- xbmc/platform/linux/input/CMakeLists.txt      |    8 +-
+ xbmc/platform/linux/input/CMakeLists.txt      |   10 +-
  xbmc/platform/linux/input/Keymap.h            |   36 +
  .../linux/input/LinuxInputDevices.cpp         | 1593 +++++++++++++++++
  xbmc/platform/linux/input/LinuxInputDevices.h |  125 ++
  xbmc/system_gl.h                              |    3 +
- xbmc/utils/CMakeLists.txt                     |    5 +
+ xbmc/utils/CMakeLists.txt                     |    7 +
  xbmc/utils/DreamboxUtils.cpp                  |  103 ++
  xbmc/utils/DreamboxUtils.h                    |   25 +
  xbmc/utils/EGLUtils.cpp                       |   21 +
@@ -47,7 +47,7 @@ Subject: [PATCH] stb-support-21
  xbmc/windowing/egl/WinSystemSTBContext.h      |   43 +
  xbmc/windowing/egl/WinSystemstb.cpp           |  547 ++++++
  xbmc/windowing/egl/WinSystemstb.h             |   79 +
- 43 files changed, 6347 insertions(+), 4 deletions(-)
+ 43 files changed, 6350 insertions(+), 5 deletions(-)
  create mode 100644 xbmc/platform/linux/input/Keymap.h
  create mode 100644 xbmc/platform/linux/input/LinuxInputDevices.cpp
  create mode 100644 xbmc/platform/linux/input/LinuxInputDevices.h
@@ -84,7 +84,7 @@ Subject: [PATCH] stb-support-21
  create mode 100644 xbmc/windowing/egl/WinSystemstb.h
 
 diff --git a/xbmc/addons/addoninfo/AddonInfoBuilder.cpp b/xbmc/addons/addoninfo/AddonInfoBuilder.cpp
-index 1a23a9e368c..4c5fa8f84f0 100644
+index 14301e43e85..923be0255e4 100644
 --- a/xbmc/addons/addoninfo/AddonInfoBuilder.cpp
 +++ b/xbmc/addons/addoninfo/AddonInfoBuilder.cpp
 @@ -779,6 +779,12 @@ const char* CAddonInfoBuilder::GetPlatformLibraryName(const tinyxml2::XMLElement
@@ -161,18 +161,20 @@ index 4f6ffc00612..4e2680e4ead 100644
    CLog::Log(LOGDEBUG, "GLES: using scaling method: {}", m_method);
    CLog::Log(LOGDEBUG, "GLES: using shader: {}", shadername);
 diff --git a/xbmc/platform/linux/input/CMakeLists.txt b/xbmc/platform/linux/input/CMakeLists.txt
-index 6f3bb68eee8..913ba7a31bc 100644
+index 6f3bb68eee8..d2c6da2c769 100644
 --- a/xbmc/platform/linux/input/CMakeLists.txt
 +++ b/xbmc/platform/linux/input/CMakeLists.txt
-@@ -6,7 +6,7 @@ if(TARGET ${APP_NAME_LC}::LircClient)
+@@ -6,8 +6,8 @@ if(TARGET ${APP_NAME_LC}::LircClient)
    list(APPEND HEADERS LIRC.h)
  endif()
  
 -if("gbm" IN_LIST CORE_PLATFORM_NAME_LC)
+-  if(TARGET ${APP_NAME_LC}::LibInput)
 +if("gbm" IN_LIST CORE_PLATFORM_NAME_LC OR "stb" IN_LIST CORE_PLATFORM_NAME_LC)
-   if(TARGET ${APP_NAME_LC}::LibInput)
++    if(TARGET ${APP_NAME_LC}::LibInput)
      list(APPEND SOURCES LibInputHandler.cpp
                          LibInputKeyboard.cpp
+                         LibInputPointer.cpp
 @@ -22,6 +22,12 @@ if("gbm" IN_LIST CORE_PLATFORM_NAME_LC)
    endif()
  endif()
@@ -1973,13 +1975,14 @@ index ff7ead6b429..18446f79c92 100644
  #include <GLES2/gl2.h>
  #include <GLES2/gl2ext.h>
 diff --git a/xbmc/utils/CMakeLists.txt b/xbmc/utils/CMakeLists.txt
-index 13dbe058a9d..d6ec9a8c667 100644
+index 7379405cd56..c878d138311 100644
 --- a/xbmc/utils/CMakeLists.txt
 +++ b/xbmc/utils/CMakeLists.txt
-@@ -183,6 +183,11 @@ set(HEADERS ActorProtocol.h
+@@ -185,10 +185,17 @@ set(HEADERS ActorProtocol.h
              XMLUtils.h
              XTimeUtils.h)
  
++
 +if (WITH_PLATFORM STREQUAL "dreambox-cortexa15" OR WITH_PLATFORM STREQUAL "dreambox-mipsel")
 +  list(APPEND SOURCES DreamboxUtils.cpp)
 +  list(APPEND HEADERS DreamboxUtils.h)
@@ -1988,6 +1991,11 @@ index 13dbe058a9d..d6ec9a8c667 100644
  if(TARGET ${APP_NAME_LC}::XSLT)
    list(APPEND SOURCES XSLTUtils.cpp)
    list(APPEND HEADERS XSLTUtils.h)
+ endif()
++
+ if(TARGET ${APP_NAME_LC}::EGL)
+   list(APPEND SOURCES EGLUtils.cpp
+                       EGLFence.cpp)
 diff --git a/xbmc/utils/DreamboxUtils.cpp b/xbmc/utils/DreamboxUtils.cpp
 new file mode 100644
 index 00000000000..2e77071c46c
@@ -2129,10 +2137,10 @@ index 00000000000..3f845cbfc44
 +bool dreambox_mode_to_resolution(const char *mode, RESOLUTION_INFO *res);
 +
 diff --git a/xbmc/utils/EGLUtils.cpp b/xbmc/utils/EGLUtils.cpp
-index 40338121db6..8537aff2891 100644
+index 01867354cf3..902c27fbde5 100644
 --- a/xbmc/utils/EGLUtils.cpp
 +++ b/xbmc/utils/EGLUtils.cpp
-@@ -22,6 +22,19 @@
+@@ -25,6 +25,19 @@
  namespace
  {
  
@@ -2152,7 +2160,7 @@ index 40338121db6..8537aff2891 100644
  #define X(VAL) std::make_pair(VAL, #VAL)
  std::map<EGLint, const char*> eglAttributes =
  {
-@@ -84,15 +97,18 @@ std::map<EGLenum, const char*> eglErrors =
+@@ -87,15 +100,18 @@ std::map<EGLenum, const char*> eglErrors =
  
  std::map<EGLint, const char*> eglErrorType =
  {
@@ -2171,7 +2179,7 @@ index 40338121db6..8537aff2891 100644
  void EglErrorCallback(EGLenum error,
                        const char* command,
                        EGLint messageType,
-@@ -118,6 +134,7 @@ void EglErrorCallback(EGLenum error,
+@@ -121,6 +137,7 @@ void EglErrorCallback(EGLenum error,
    CLog::Log(LOGDEBUG, "EGL Debugging:\nError: {}\nCommand: {}\nType: {}\nMessage: {}", errorStr,
              command, typeStr, message ? message : "");
  }
@@ -2179,7 +2187,7 @@ index 40338121db6..8537aff2891 100644
  
  std::set<std::string> CEGLUtils::GetClientExtensions()
  {
-@@ -172,6 +189,7 @@ void CEGLUtils::Log(int logLevel, const std::string& what)
+@@ -175,6 +192,7 @@ void CEGLUtils::Log(int logLevel, const std::string& what)
  CEGLContextUtils::CEGLContextUtils(EGLenum platform, std::string const& platformExtension)
  : m_platform{platform}
  {
@@ -2187,15 +2195,15 @@ index 40338121db6..8537aff2891 100644
    if (CEGLUtils::HasClientExtension("EGL_KHR_debug"))
    {
      auto eglDebugMessageControl = CEGLUtils::GetRequiredProcAddress<PFNEGLDEBUGMESSAGECONTROLKHRPROC>("eglDebugMessageControlKHR");
-@@ -184,6 +202,7 @@ CEGLContextUtils::CEGLContextUtils(EGLenum platform, std::string const& platform
+@@ -187,6 +205,7 @@ CEGLContextUtils::CEGLContextUtils(EGLenum platform, std::string const& platform
  
      eglDebugMessageControl(EglErrorCallback, eglDebugAttribs);
    }
 +#endif
  
-   m_platformSupported = CEGLUtils::HasClientExtension("EGL_EXT_platform_base") && CEGLUtils::HasClientExtension(platformExtension);
- }
-@@ -401,11 +420,13 @@ bool CEGLContextUtils::CreateContext(CEGLAttributesVec contextAttribs)
+   m_platformSupported = CEGLUtils::HasClientExtension("EGL_EXT_platform_base") &&
+                         CEGLUtils::HasClientExtension(platformExtension);
+@@ -400,11 +419,13 @@ bool CEGLContextUtils::CreateContext(CEGLAttributesVec contextAttribs)
    if (CEGLUtils::HasExtension(m_eglDisplay, "EGL_IMG_context_priority"))
      contextAttribs.Add({{EGL_CONTEXT_PRIORITY_LEVEL_IMG, EGL_CONTEXT_PRIORITY_HIGH_IMG}});
  
@@ -2210,7 +2218,7 @@ index 40338121db6..8537aff2891 100644
    m_eglContext = eglCreateContext(m_eglDisplay, eglConfig,
                                    EGL_NO_CONTEXT, contextAttribs.Get());
 diff --git a/xbmc/utils/GLUtils.cpp b/xbmc/utils/GLUtils.cpp
-index 3c1fcec43e5..7658113a869 100644
+index 84ed88435ea..1f337029a05 100644
 --- a/xbmc/utils/GLUtils.cpp
 +++ b/xbmc/utils/GLUtils.cpp
 @@ -42,7 +42,7 @@ std::map<GLenum, const char*> glErrors =

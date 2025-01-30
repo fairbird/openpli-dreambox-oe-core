@@ -1451,7 +1451,7 @@ index 0000000000..c48a48774c
 +	{
 +		//m_sourceinfo.is_streaming = TRUE;
 +
-+		m_pInputStream = new CDVDInputStreamFile(m_item, XFILE::READ_TRUNCATED | XFILE::READ_BITRATE | XFILE::READ_CHUNKED);
++		m_pInputStream = new CDVDInputStreamFile(m_item, XFILE::READ_TRUNCATED | XFILE::READ_BITRATE);
 +		
 +		m_uri = g_strdup((const gchar *) "appsrc://");
 +	}
@@ -1987,7 +1987,7 @@ index 0000000000..c48a48774c
 +				{
 +					if (!StringUtils::EqualsNoCase(settings->GetString(CSettings::SETTING_LOCALE_AUDIOLANGUAGE), "original"))
 +					{
-+						std::string audio_language = g_langInfo.GetAudioLanguage();
++						std::string audio_language = g_langInfo.GetAudioLanguage(true);
 +						if (g_LangCodeExpander.CompareISO639Codes(audio_language, g_LangCodeExpander.ConvertToISO6392B((char *)str)))
 +						{
 +							g_object_set (GST_ELEMENT(m_playbin), "current-audio", i, NULL);

@@ -10,12 +10,14 @@ PACKAGE_ARCH = "${MACHINE}"
 inherit ccache cmake gettext pkgconfig python3targetconfig
 
 DEPENDS += " \
+            autoconf-native automake-native \
             fmt \
             flatbuffers flatbuffers-native \
             fstrcmp \
             rapidjson \
             crossguid \
-            libdvdnav libdvdcss libdvdread libudfread \
+            libudfread \
+            ffmpeg \
             git-native \
             curl-native \
             gperf-native \
@@ -26,20 +28,16 @@ DEPENDS += " \
             yasm-native \
             zip-native \
             \
-            autoconf-native \
-            automake-native \
             avahi \
             bzip2 \
             curl \
             exiv2 \
             libdcadec \
             faad2 \
-            ffmpeg \
             fontconfig \
             fribidi \
             glib-2.0 \
             giflib \
-            gnutls \
             libass \
             libcdio \
             libcec \
@@ -47,7 +45,7 @@ DEPENDS += " \
             libbluray \
             libmicrohttpd \
             libnfs \
-            libpcre2 \
+            libpcre \
             libplist \
             libsquish \
             libssh \
@@ -73,7 +71,7 @@ DEPENDS += " \
           "
 inherit gitpkgv
 # 22.0 Piers
-SRCREV = "${AUTOREV}"
+SRCREV = "12245d0921025b159f605d6d11b47a13f861657e"
 
 # 'patch' doesn't support binary diffs
 PATCHTOOL = "git"
@@ -88,11 +86,17 @@ PV_commons-text = "1.12.0"
 SRC_URI[groovy.sha256sum] = "7089dd7a1e84adc814d616f5ec2f7d7dac2044a0a0457f3341b3b92d30204229"
 SRC_URI[commons-lang.sha256sum] = "08b93712bed7f48725d93c44d70c71e7e661af390f22f0f3e6ba61e3af3cea36"
 SRC_URI[commons-text.sha256sum] = "265a149c7e0c1ebfe019bbe0226f8c1f6474811054d459145510ea2eed93a11a"
+SRC_URI[libdvdcss.sha256sum] = "f38c4a4e7a4f4da6d8e83b8852489aa3bb6588a915dc41f5ee89d9aad305a06e"
+SRC_URI[libdvdread.sha256sum] = "719130091e3adc9725ba72df808f24a14737a009dca5a4c38c601c0c76449b62"
+SRC_URI[libdvdnav.sha256sum] = "584f62a3896794408d46368e2ecf2c6217ab9c676ce85921b2d68b8961f49dfc"
 
 SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
-           https://archive.apache.org/dist/groovy/${PV_groovy}/distribution/apache-groovy-binary-${PV_groovy}.zip;name=groovy \
+           https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-${PV_groovy}.zip;name=groovy \
            https://dlcdn.apache.org/commons/lang/binaries/commons-lang3-${PV_commons-lang3}-bin.tar.gz;name=commons-lang \
            https://dlcdn.apache.org/commons/text/binaries/commons-text-${PV_commons-text}-bin.tar.gz;name=commons-text \
+           https://github.com/xbmc/libdvdcss/archive/refs/tags/1.4.3-Next-Nexus-Alpha2-2.tar.gz;name=libdvdcss;downloadfilename=libdvdcss.tar.gz;unpack=0 \
+           https://github.com/xbmc/libdvdread/archive/refs/tags/6.1.3-Next-Nexus-Alpha2-2.tar.gz;name=libdvdread;downloadfilename=libdvdread.tar.gz;unpack=0 \
+           https://github.com/xbmc/libdvdnav/archive/refs/tags/6.1.1-Next-Nexus-Alpha2-2.tar.gz;name=libdvdnav;downloadfilename=libdvdnav.tar.gz;unpack=0 \
            file://0001-flatbuffers-22.patch \
            file://0002-readd-Touchscreen-settings.patch \
            file://0003-shader-nopow-22.patch \
@@ -102,13 +106,11 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
            file://0007-adapt-window-system-registration.patch \
            file://0008-reinstate-system-h.patch \
            file://0009-reinstate-platform-defines.patch \
-           file://0011-cmake-includedirs.patch \
-           file://0012-taglib2.patch \
-           file://0013-DVDDemuxFFmpeg-fixed-compile-against-ffmpeg-7.patch \
-           file://0014-cmake-findsmbclient.patch \
-           file://0015-ifdef-on-gles3-texture-mappings.patch \
-           file://0100-e2-player.patch \
-           file://0101-gst-player.patch \
+           file://0010-older-gles.patch \
+           file://0011-FindSmbClient-dont-use-pkgconfig-includedir.patch \
+           file://0100-stb-player.patch \
+           ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0101-e2-player.patch', d)} \
+           ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0102-gst-player.patch', d)} \
           "
 
 S = "${WORKDIR}/git"
@@ -124,7 +126,9 @@ WINDOWSYSTEM ?= "stb"
 #https://github.com/xbmc/xbmc/commit/d159837cf736c9ba17772ba52e4ce95aa3625528
 APPRENDERSYSTEM ?= "gles"
 
-PACKAGECONFIG ?= "${ACCEL} ${WINDOWSYSTEM} pulseaudio lcms lto \
+#TOOLCHAIN:arm ?= "clang"
+
+PACKAGECONFIG ?= "${ACCEL} ${WINDOWSYSTEM} pulseaudio samba lcms lto \
                    ${@bb.utils.contains('TOOLCHAIN', 'clang', 'clang', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', 'lld', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
@@ -146,6 +150,7 @@ PACKAGECONFIG[vaapi] = "-DENABLE_VAAPI=ON,-DENABLE_VAAPI=OFF,libva"
 PACKAGECONFIG[vdpau] = "-DENABLE_VDPAU=ON,-DENABLE_VDPAU=OFF,libvdpau"
 PACKAGECONFIG[mysql] = "-DENABLE_MYSQLCLIENT=ON,-DENABLE_MYSQLCLIENT=OFF,mysql5"
 PACKAGECONFIG[pulseaudio] = "-DENABLE_PULSEAUDIO=ON,-DENABLE_PULSEAUDIO=OFF,pulseaudio"
+PACKAGECONFIG[samba] = ",,samba"
 PACKAGECONFIG[lcms] = ",,lcms"
 
 # Compilation tunes
@@ -155,10 +160,10 @@ PACKAGECONFIG[clang] = "-DENABLE_CLANGFORMAT=ON -DENABLE_CLANGTIDY=ON,-DENABLE_C
 PACKAGECONFIG[gold] = "-DENABLE_GOLD=ON,-DENABLE_GOLD=OFF"
 PACKAGECONFIG[lto] = "-DUSE_LTO=${@oe.utils.cpu_count()},-DUSE_LTO=OFF"
 
+CXXFLAGS:append:mipsarch = " -latomic"
 LDFLAGS += "${TOOLCHAIN_OPTIONS}"
 LDFLAGS:append:mipsarch = " -latomic"
-EXTRA_OECMAKE:append:mipsarch = " -DWITH_ARCH=${TARGET_ARCH} \
-                                -DCMAKE_CXX_FLAGS=-latomic"
+EXTRA_OECMAKE:append:mipsarch = " -DWITH_ARCH=${TARGET_ARCH}"
 
 KODI_DISABLE_INTERNAL_LIBRARIES = " \
   -DENABLE_INTERNAL_CROSSGUID=OFF \
@@ -167,14 +172,14 @@ KODI_DISABLE_INTERNAL_LIBRARIES = " \
   -DENABLE_INTERNAL_FSTRCMP=0 \
   -DENABLE_INTERNAL_RapidJSON=OFF \
   -DENABLE_INTERNAL_SPDLOG=OFF \
+  -DENABLE_INTERNAL_FFMPEG=OFF \
 "
 
 # Allow downloads during internals build
 do_compile[network] = "1"
 
-# Options to choose toolchain other than gcc
-#TOOLCHAIN:arm ?= "clang"
 #RUNTIME:arm ?= "llvm"
+
 RUNTIME_NM = "${@bb.utils.contains('RUNTIME', 'llvm', '${TARGET_PREFIX}llvm-nm', '${TARGET_PREFIX}gcc-nm', d)}"
 
 EXTRA_OECMAKE = " \
@@ -205,9 +210,12 @@ EXTRA_OECMAKE = " \
     -Dgroovy_SOURCE_DIR=${UNPACKDIR}/groovy-${PV_groovy} \
     -Dapache-commons-lang_SOURCE_DIR=${UNPACKDIR}/commons-lang3-${PV_commons-lang3} \
     -Dapache-commons-text_SOURCE_DIR=${UNPACKDIR}/commons-text-${PV_commons-text} \
+    -DLIBDVDNAV_URL=${UNPACKDIR}/libdvdnav.tar.gz \
+    -DLIBDVDREAD_URL=${UNPACKDIR}/libdvdread.tar.gz \
+    -DLIBDVDCSS_URL=${UNPACKDIR}/libdvdcss.tar.gz \
 "
 
-OECMAKE_GENERATOR = "Unix Makefiles"
+OECMAKE_GENERATOR="Unix Makefiles"
 # PARALLEL_MAKE = " "
 
 FULL_OPTIMIZATION:armv7a = "-fomit-frame-pointer -O3 -ffast-math"
@@ -233,6 +241,7 @@ do_configure:prepend() {
 }
 
 INSANE_SKIP:${PN} = "rpaths already-stripped textrel"
+INSANE_SKIP = "src-uri-bad"
 
 FILES:${PN} = "${libdir}/kodi ${libdir}/xbmc"
 FILES:${PN} += "${bindir}/kodi ${bindir}/xbmc ${bindir}/kodi-TexturePacker"
@@ -247,33 +256,22 @@ FILES:${PN}-dbg += "${libdir}/kodi/.debug ${libdir}/kodi/*/.debug ${libdir}/kodi
 RRECOMMENDS:${PN}:append = " libcec \
                              libcurl \
                              libnfs \
-                             sqlite3 \
                              nss \
                              os-release \
                              ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'xrandr xinit mesa-demos', '', d)} \
                              python3 \
-                             python3-compression \
-                             python3-crypt \
                              python3-ctypes \
-                             python3-datetime \
-                             python3-db \
-                             python3-image \
-                             python3-difflib \
-                             python3-html \
-                             python3-json \
-                             python3-mechanize \
-                             python3-multiprocessing \
                              python3-netclient \
-                             python3-pillow \
-                             python3-profile \
-                             python3-pycryptodome \
-                             python3-pycryptodomex \
-                             python3-regex \
-                             python3-setuptools \
+                             python3-html \
+                             python3-difflib \
+                             python3-json \
                              python3-shell \
-                             python3-six \
                              python3-sqlite3 \
+                             python3-compression \
                              python3-xmlrpc \
+                             python3-pycryptodomex \
+                             python3-mechanize \
+                             python3-profile \
                              tzdata-africa \
                              tzdata-americas \
                              tzdata-antarctica \
