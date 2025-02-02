@@ -3,6 +3,45 @@
 # it again later, but that may destroy settings that you did.
 # Restore files from backup dir with the most recent timestamp
 
+function restartNetwork
+{
+	# stop network services
+	[ -f /etc/init.d/ntpd ] && /etc/init.d/ntpd stop
+	[ -f /etc/init.d/avahi-daemon ] && /etc/init.d/avahi-daemon stop
+	/etc/init.d/networking stop
+	killall -9 udhcpc
+	rm /var/run/udhcpc*
+
+	# enumerate network interfaces
+	local ifaces=`ip link | awk -F: '$0 !~ "lo|vir|^[^0-9]"{print $2;getline}'`
+
+	# force the interfaces down and flush them
+	for iface in $ifaces; do
+		ifdown $iface
+		ip addr flush dev $iface scope global
+	done
+
+	# restart the services
+	/etc/init.d/dbus-1 reload
+	/etc/init.d/networking start
+	[ -f /etc/init.d/avahi-daemon ] && /etc/init.d/avahi-daemon start
+
+	# wait until we have a network again
+	echo "**** Waiting for network ****"
+	for i in {1..60}; do
+		gw=`netstat -rn | grep UG | awk '{print $2}'`
+		if [ ! -z "$gw" ]; then
+			echo "> Online !"
+			break
+		fi
+		sleep 1
+	done
+
+	[ -f /etc/init.d/ntpd ] && /etc/init.d/ntpd start
+}
+
+# ---[ main ]---------------------------------------
+
 BACKUPDIR=/media/hdd
 MACADDR=`cat /sys/class/net/eth0/address | cut -b 1,2,4,5,7,8,10,11,13,14,16,17`
 
@@ -14,6 +53,9 @@ MACADDR=`cat /sys/class/net/eth0/address | cut -b 1,2,4,5,7,8,10,11,13,14,16,17`
 
 # check if we have dropbear installed
 ( test -f /etc/init.d/dropbear ) && HAS_DROPBEAR=yes
+
+# check if we have autofs installed
+( test -f /etc/init.d/autofs ) && HAS_AUTOFS=yes
 
 # Make a safety backup of the smb.conf, we may need that later
 if [ -n ${HAS_SAMBA} ]; then
@@ -31,7 +73,19 @@ if [ -n ${HAS_DROPBEAR} ]; then
 	fi
 fi
 
-if [ "$1x" == "startx" ] || [ -z "$1" ]; then
+# Make a safety backup of the auto.master and auto.net, if user need that later
+if [ -n ${HAS_AUTOFS} ]; then
+	AUTOFSMASTER=/etc/auto.master
+	if [ -f ${AUTOFSMASTER} ]; then
+		cp ${AUTOFSMASTER} ${AUTOFSMASTER}.orig
+	fi
+	AUTOFSNET=/etc/auto.net
+	if [ -f ${AUTOFSNET} ]; then
+		cp ${AUTOFSNET} ${AUTOFSNET}.orig
+	fi
+fi
+
+if [ "$1x" == "startx" ] || [ "$1x" == "networkx" ] || [ -z "$1" ]; then
 	# Best candidate:
 	#	If a MAC Address dependent backup was found, use that
 	#	Always use the latest version
@@ -66,6 +120,21 @@ if [ ! -f ${BACKUPDIR}/backup/.timestamp ]; then
 	exit 0
 fi
 
+if [ "$1x" == "networkx" ]; then
+	if [ -f ${BACKUPDIR}/backup/PLi-AutoBackup${MACADDR}.tar.gz ]; then
+		echo "Restoring network config from: ${BACKUPDIR}/backup/ for ${MACADDR}"
+		tar -xzf ${BACKUPDIR}/backup/PLi-AutoBackup${MACADDR}.tar.gz etc/network/ etc/wpa\* -C /
+	elif [ -f ${BACKUPDIR}/backup/PLi-AutoBackup.tar.gz ]; then
+		echo "Restoring network config from: ${BACKUPDIR}/backup/"
+		tar -xzf ${BACKUPDIR}/backup/PLi-AutoBackup.tar.gz etc/network/ etc/wpa\* -C /
+	else
+		echo "PLi-AutoBackup.tar.gz not found"
+		exit 1
+	fi
+	restartNetwork
+	exit 0
+fi
+
 if [ -f ${BACKUPDIR}/backup/PLi-AutoBackup${MACADDR}.tar.gz ]; then
 	echo "Restoring from: ${BACKUPDIR}/backup/ for ${MACADDR}"
 	tar -xzf ${BACKUPDIR}/backup/PLi-AutoBackup${MACADDR}.tar.gz -C /
@@ -76,6 +145,7 @@ else
 	echo "PLi-AutoBackup.tar.gz not found"
 	exit 1
 fi
+restartNetwork
 
 echo ${BACKUPDIR} > /tmp/backupdir
 
@@ -199,6 +269,11 @@ if [ -n ${HAS_DROPBEAR} ]; then
 fi
 
 [ -s /tmp/crontab ] && crontab /tmp/crontab
+
+# if we have autofs installed, restart it
+if [ -n ${HAS_AUTOFS} ]; then
+	/etc/init.d/autofs restart
+fi
 
 # custom cron jobs in /etc?
 # if [[ -d /etc/cron/crontabs && ! -L /etc/cron ]]; then
