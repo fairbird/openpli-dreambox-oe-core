@@ -9,9 +9,9 @@ RDEPENDS:${PN} = "python3 python3-multiprocessing python3-requests \
 "
 
 SRCREV = "${AUTOREV}"
-PV = "3.71+git"
-PKGV = "3.71+git${GITPKGV}"
-PR = "r0"
+PV = "git"
+PKGV = "${GITPKGVTAG}"
+PR = "r1"
 
 inherit gitpkgv python3-compileall
 
