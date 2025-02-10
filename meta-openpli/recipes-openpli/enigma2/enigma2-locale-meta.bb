@@ -12,8 +12,6 @@ RRECOMMENDS:${PN} = "\
     enigma2-locale-de \
     enigma2-locale-el \
     enigma2-locale-en \
-    enigma2-locale-en-au \
-    enigma2-locale-en-gb \
     enigma2-locale-es \
     enigma2-locale-et \
     enigma2-locale-fa \
@@ -41,7 +39,6 @@ RRECOMMENDS:${PN} = "\
     enigma2-locale-sk \
     enigma2-locale-sl \
     enigma2-locale-sr \
-    enigma2-locale-sq \
     enigma2-locale-sv \
     enigma2-locale-th \
     enigma2-locale-tr \
