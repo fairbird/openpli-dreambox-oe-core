@@ -39,7 +39,7 @@ RDEPENDS:${PN} = " \
 	enigma2-plugin-drivers-exfat \
 	virtual-gstreamer1.0-dvbmediasink \
 	${PYTHON_RDEPS} \
-	${@bb.utils.contains("DISTRO_FEATURES", "e2hotplug", "checkinternet" , "hotplug-e2-helper", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "e2hotplug", "" , "hotplug-e2-helper", d)} \
 	"
 
 RRECOMMENDS:${PN} = " \
