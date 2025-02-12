@@ -174,7 +174,7 @@ RDEPENDS:enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION:append:enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 # Note that these tools lack recipes
 RDEPENDS:enigma2-plugin-extensions-dvdburn = "dvd+rw-tools dvdauthor mjpegtools cdrkit ${DEMUXTOOL}"
-RDEPENDS:enigma2-plugin-systemplugins-hotplug = "${@bb.utils.contains("DISTRO_FEATURES", "e2hotplug", "checkinternet" , "hotplug-e2-helper", d)}"
+RDEPENDS:enigma2-plugin-systemplugins-hotplug = "${@bb.utils.contains("DISTRO_FEATURES", "e2hotplug", "" , "hotplug-e2-helper", d)}"
 
 # Fake package that doesn't actually get built, but allows OE to detect
 # the RDEPENDS for the plugins above, preventing [build-deps] warnings.
