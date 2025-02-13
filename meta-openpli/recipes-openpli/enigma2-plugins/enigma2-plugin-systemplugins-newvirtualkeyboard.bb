@@ -11,8 +11,8 @@ S = "${WORKDIR}/git"
 
 SRCREV = "${AUTOREV}"
 
-PV = "1.1+git"
-PKGV = "1.1+git${GITPKGV}"
+PV = "13.1+git"
+PKGV = "13.1+git${GITPKGV}"
 
 FILES:${PN} = "${prefix}/"
 
