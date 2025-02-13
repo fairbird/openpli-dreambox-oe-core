@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
            file://fix-build-fmt-11-1-1.patch \
            "
 
-SRCREV = "b1677bf79c437e6de937da9f82260a1d24ad6bd2"
+SRCREV = "b8289ae9236987dece48af7eb4bf229c3751a48f"
 
 PV = "0.23.16+git"
 PKGV = "0.23.16+git${GITPKGV}"
