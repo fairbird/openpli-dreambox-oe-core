@@ -5,7 +5,7 @@ DEPENDS = "python3"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = " file://COPYING;md5=e4dc568e8869637acb7c89f0889d8130"
 
-DEPENDS = "ninja-native cmake-native python3-scikit-build-native python3-scikit-build-core-native"
+DEPENDS = "ninja-native cmake-native python3-scikit-build-core-native"
 
 PYPI_PACKAGE = "levenshtein"
 
