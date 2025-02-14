@@ -1,62 +1,6 @@
-require conf/license/openpli-gplv2.inc
-require softcam.inc
-inherit cmake gitpkgv 
+require oscam-common.inc
 
-DESCRIPTION = "OScam ${PV} Open Source Softcam"
-LICENSE = "GPL-3.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+SRC_ORIGIN ?= "git://git.streamboard.tv/common/oscam.git;protocol=https;branch=master"
 
-PV = "1.20+git"
-PKGV = "1.20+git${GITPKGV}"
-
-SRC_URI = "git://git.streamboard.tv/common/oscam.git;protocol=https;branch=master"
-
-DEPENDS = "libusb openssl libdvbcsa"
-RDEPENDS:${PN} += "enigma2-plugin-extensions-oscamstatus libdvbcsa libusb1"
-
-LDFLAGS:prepend = "-ludev -ldvbcsa "
-
-S = "${WORKDIR}/git"
-B = "${S}"
-
+CAMTITLE = "OSCam ${PV}: Open Source Softcam"
 CAMNAME = "oscam"
-CAMSTART = "exec start-stop-daemon -S -x /usr/bin/oscam -- -b -r 2 -c /etc/tuxbox/config/oscam"
-CAMSTOP =  "exec start-stop-daemon -K -R 2 -x /usr/bin/oscam"
-
-SRC_URI += " \
-	file://oscam.conf \
-	file://oscam.server \
-	file://oscam.srvid \
-	file://oscam.user \
-	file://oscam.provid"
-
-CONFFILES = "${sysconfdir}/tuxbox/config/oscam/oscam.conf ${sysconfdir}/tuxbox/config/oscam/oscam.server ${sysconfdir}/tuxbox/config/oscam/oscam.srvid ${sysconfdir}/tuxbox/config/oscam/oscam.user ${sysconfdir}/tuxbox/config/oscam/oscam.provid"
-
-FILES:${PN} = "${bindir}/oscam ${sysconfdir}/tuxbox/config/oscam/* ${sysconfdir}/init.d/softcam.oscam"
-
-EXTRA_OECMAKE += "\
-	-DOSCAM_SYSTEM_NAME=Tuxbox \
-	-DWEBIF=1 \
-	-DWITH_STAPI=0 \
-	-DHAVE_LIBUSB=1 \
-	-DSTATIC_LIBUSB=0 \
-	-DWITH_SSL=1 \
-	-DIPV6SUPPORT=1 \
-	-DCLOCKFIX=0 \
-	-DHAVE_PCSC=1 \
-	-DCARDREADER_SMARGO=1 \
-	-DCARDREADER_PCSC=1 \
-	-DCW_CYCLE_CHECK=1 \
-	-DCS_CACHEEX=1 \
-	-DMODULE_CONSTCW=1 \
-	-DMODULE_SCAM=1 \
-	-DMODULE_STREAMRELAY=1 \
-	-DHAVE_LIBDVBCSA=1 \
-	"
-
-do_install() {
-	install -d ${D}${sysconfdir}/tuxbox/config/oscam
-	install -m 0644 ${UNPACKDIR}/oscam.* ${D}${sysconfdir}/tuxbox/config/oscam/
-	install -d ${D}${bindir}
-	install -m 0755 ${B}/oscam ${D}${bindir}
-}
