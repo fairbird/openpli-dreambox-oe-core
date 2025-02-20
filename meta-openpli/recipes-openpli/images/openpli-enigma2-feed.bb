@@ -129,7 +129,6 @@ OPTIONAL_PACKAGES += " \
 	zerotier \
 	zip \
 	zsh \
-	network-usb-drivers-meta \
 	enigma2-plugin-drivers-network-usb-ath9k-htc \
 	enigma2-plugin-drivers-network-usb-r8723a \
 	enigma2-plugin-drivers-network-usb-rt8723bs \
