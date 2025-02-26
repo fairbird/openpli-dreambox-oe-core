@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
 
 inherit gitpkgv python3-compileall
 
-PR = "r12"
+PR = "r14"
 
 RDEPENDS:${PN} = " \
 	python3-codecs \
