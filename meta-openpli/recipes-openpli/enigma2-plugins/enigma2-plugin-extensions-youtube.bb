@@ -20,8 +20,7 @@ RDEPENDS:${PN} = " \
 	python3-datetime \
 	python3-email \
 	python3-json \
-	python3-netclient \
-	python3-threading \
+	python3-io \
 	"
 
 pkg_postinst_ontarget:${PN}() {
