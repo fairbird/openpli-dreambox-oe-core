@@ -6,7 +6,10 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
 
 GITHUB_URI ?= "git://github.com"
-SRC_URI = "${GITHUB_URI}/OpenPLi/gst-plugin-subsink.git;protocol=https;branch=master"
+SRC_URI = "${GITHUB_URI}/OpenPLi/gst-plugin-subsink.git;protocol=https;branch=master \
+           file://drop-unused-gst-plugin-cvs-macro.patch \
+           file://drop-superfluous-gst-error-macro.patch \
+"
 
 S = "${WORKDIR}/git"
 
