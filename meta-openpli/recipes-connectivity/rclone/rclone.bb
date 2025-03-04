@@ -13,7 +13,6 @@ RDEPENDS:${PN}-dev = "bash python3-core"
 
 inherit gittag go-mod upx-compress
 
-SRCREV = "${AUTOREV}"
 PV = "git"
 PKGV = "${GITPKGVTAG}"
 
