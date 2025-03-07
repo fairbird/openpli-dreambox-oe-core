@@ -1,4 +1,4 @@
-DEPENDS += "scikit-build-core-native ninja-native"
+DEPENDS += "python3-scikit-build-core-native ninja-native"
 
 inherit python_pep517 python3targetconfig
 
