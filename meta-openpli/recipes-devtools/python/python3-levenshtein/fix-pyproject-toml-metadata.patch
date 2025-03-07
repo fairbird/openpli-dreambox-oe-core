@@ -1,0 +1,13 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 53f573d..1cedf34 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -25,6 +25,8 @@ classifiers=[
+   "Programming Language :: Python :: 3.13",
+   "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+ ]
++
++[project.urls]
+ Homepage = "https://github.com/rapidfuzz/Levenshtein"
+ Documentation = "https://rapidfuzz.github.io/Levenshtein/"
+ Repository = "https://github.com/rapidfuzz/Levenshtein.git"
