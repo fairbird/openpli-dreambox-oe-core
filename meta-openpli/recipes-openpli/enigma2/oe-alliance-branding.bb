@@ -12,7 +12,7 @@ PV = "git"
 PKGV = "git${GITPKGV}"
 PR = "r0"
 
-do_configure[nostamp] = "1"
+SSTATE_SKIP_CREATION = "1"
 
 BRANCH="master"
 
@@ -97,6 +97,27 @@ do_configure:prepend() {
         else
             DRIVERSDATE='N/A'
         fi
+}
+
+do_install:append() {
+    install -d ${D}/usr/share/enigma2
+    install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/images/boxes
+    install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/static
+    if [ ${MACHINEBUILD} = "dm520" ]; then
+        install -m 0644 ${S}/BoxBranding/boxes/dm520.png ${D}/usr/share/enigma2/dm520.png
+        ln -sf /usr/share/enigma2/dm520.png ${D}${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/images/boxes/dm520.png
+        install -m 0644 ${S}/BoxBranding/boxes/dm525.png ${D}/usr/share/enigma2/dm525.png
+        ln -sf /usr/share/enigma2/dm525.png ${D}${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/images/boxes/dm525.png
+    elif [ ${MACHINEBUILD} = "dm900" ]; then
+        install -m 0644 ${S}/BoxBranding/boxes/dm900.png ${D}/usr/share/enigma2/dm900.png
+        ln -sf /usr/share/enigma2/dm900.png ${D}${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/images/boxes/dm900.png
+        install -m 0644 ${S}/BoxBranding/boxes/dm920.png ${D}/usr/share/enigma2/dm920.png
+        ln -sf /usr/share/enigma2/dm920.png ${D}${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/images/boxes/dm920.png
+    else
+        install -m 0644 ${S}/BoxBranding/boxes/${MACHINEBUILD}.png ${D}/usr/share/enigma2/${MACHINEBUILD}.png
+        ln -sf /usr/share/enigma2/${MACHINEBUILD}.png ${D}${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/images/boxes/${MACHINEBUILD}.png
+    fi
+    ln -sf /usr/share/enigma2/rc_models ${D}${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/public/static/remotes
 }
 
 FILES:${PN}-src = "${libdir}/enigma2/python/Components/*.py ${libdir}/enigma2/python/Components/*.pyc"
