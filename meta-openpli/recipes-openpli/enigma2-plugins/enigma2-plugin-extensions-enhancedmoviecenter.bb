@@ -42,7 +42,6 @@ FILES:${PN} = "${sysconfdir} ${libdir}"
 
 FILES:${PN}-po = "${libdir}/enigma2/python/Plugins/Extensions/EnhancedMovieCenter/locale/*/*/*.po"
 
-do_populate_sysroot[noexec] = "1"
 do_package_qa[noexec] = "1"
 
 pkg_postinst:${PN}() {
