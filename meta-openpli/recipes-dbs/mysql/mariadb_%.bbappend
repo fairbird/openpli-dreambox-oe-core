@@ -1,3 +1,5 @@
+RDEPENDS:${PN}-server += "bash"
+
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
     oe_multilib_header mysql/mariadb_version.h mysql/server/my_config.h mysql/server/private/config.h
