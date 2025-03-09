@@ -37,15 +37,10 @@ Note Ubuntu 24.04 LTS and 24.10!<br>
 See:
 https://ubuntu.com/blog/whats-new-in-security-for-ubuntu-24-04-lts
 
-Remove AppArmor to accelerate the build process to fix error (Operation not permitted).
+Note: Ubuntu 24.04 LTS and 24.10 users
+Due to new security features, add new /etc/sysctl.d/60-apparmor-namespace.conf file with the following contents to fix error (Operation not permitted):
 ```
-sudo apparmor_status
-
-sudo systemctl stop apparmor
-
-sudo systemctl disable apparmor
-
-sudo apt purge apparmor
+sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 
 ```
 # Dependencies:
 1. Install required packages
