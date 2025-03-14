@@ -115,6 +115,7 @@ OPTIONAL_PACKAGES += " \
 	tcpdump \
 	tmux \
 	transmission \
+	mediamtx \
 	udpxy \
 	upx \
 	ubuntu-font-family \
