@@ -115,6 +115,8 @@ OPTIONAL_PACKAGES += " \
 	tcpdump \
 	tmux \
 	transmission \
+	tsanalyze \
+	tsduck \
 	mediamtx \
 	udpxy \
 	upx \
