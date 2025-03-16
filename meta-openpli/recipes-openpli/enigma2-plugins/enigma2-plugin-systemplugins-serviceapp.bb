@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "enigma2 uchardet openssl"
-RDEPENDS:${PN} = "enigma2 uchardet openssl exteplayer3 python3-json"
+RDEPENDS:${PN} = "enigma2 uchardet openssl exteplayer3 gstplayer python3-json"
 RCONFLICTS:${PN} = "enigma2-plugin-extensions-serviceapp"
 RREPLACES:${PN} = "enigma2-plugin-extensions-serviceapp"
 
