@@ -4,7 +4,7 @@ AUTHOR = "Maroš Ondrášek <mx3ldev@gmail.com>"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 
-inherit gitpkgv python3-compileall
+inherit gitpkgv
 
 PR = "r17"
 
@@ -19,7 +19,7 @@ RDEPENDS:${PN} = " \
 	unrar \
 	"
 
-SRC_URI = "git://github.com/fairbird/subssupport;protocol=git;branch=master;protocol=https"
+SRC_URI = "git://github.com/popking159/ssupport;protocol=git;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
 
@@ -29,5 +29,5 @@ FILES:${PN} = "${pluginpath}/"
 
 do_install() {
     install -d ${D}${pluginpath}
-    cp -r ${S}/plugin/* ${D}${pluginpath}/
+    cp -r ${S}/src/* ${D}${pluginpath}/
 }
