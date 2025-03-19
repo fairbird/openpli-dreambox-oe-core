@@ -13,8 +13,7 @@ PV = "69+gitr"
 PKGV = "69+gitr${GITPKGV}"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/oe-mirrors/exteplayer3.git;branch=master;protocol=https \
-            file://port-to-ffmpeg7.patch"
+SRC_URI = "git://github.com/skyjet18/exteplayer3.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 
@@ -33,6 +32,8 @@ SOURCE_FILES =+ "output/writer/common/writer.c"
 SOURCE_FILES =+ "output/linuxdvb_buffering.c"
 SOURCE_FILES =+ "output/graphic_subtitle.c"
 SOURCE_FILES =+ "playback/playback.c"
+SOURCE_FILES =+ "tools/debug.c"
+SOURCE_FILES =+ "tools/strbuffer.c"
 SOURCE_FILES =+ "external/ffmpeg/src/bitstream.c"
 SOURCE_FILES =+ "external/ffmpeg/src/latmenc.c"
 SOURCE_FILES =+ "external/ffmpeg/src/mpeg4audio.c"

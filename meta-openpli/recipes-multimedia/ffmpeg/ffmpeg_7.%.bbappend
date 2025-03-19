@@ -1,4 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/skyjet18:"
 
 PR = "r1"
 
@@ -14,6 +15,32 @@ SRC_URI += "file://0001-makefile-add-demux-header.patch \
             file://0011-rtsp.patch \
             file://0012-dxva2.patch \
             file://0013-add-av_stream_get_first_dts-for-chromium.patch \
+            \
+            file://support-for-multiple-decryption-keys.patch \
+            file://debug-logs-for-multiple-decryption-keys.patch \
+            file://support-for-parsing-cenc-keys-from-MPD-playlist.patch \
+            file://possibility-to-set-decryption-keys-directly-in-HLS.patch \
+            file://fixed-parsing-webvtt-with-STYLE-and-REGION-block.patch \
+            file://avformat-hls-fix-to-seek-logic.patch \
+            file://avformat-mov-fix-to-detect-if-stream-position-has-been-reset.patch \
+            file://support-for-HLS-WebVTT-MPEG-timestamp-map.patch \
+            file://Add-subtitle-support.patch \
+            file://fixed-segfault-in-hls-subtitle-handling.patch \
+            file://dont-reload-manifest-often-then-needed.patch \
+            file://fixed-subtitles-segments-update.patch \
+            file://dont-read-new-segments-too-fast-to-avoid-HTTP-404-error.patch \
+            file://dont-use-byterange-when-loading-subtitles-or-playlist.patch \
+            file://use-min-buffer-time-when-selecting-start-offset-for-live-stream.patch \
+            file://option-to-insert-fake-subtitle-at-the-end.patch \
+            file://improved-handling-manifests-with-one-segment.patch \
+            file://fixed-subtitle-search-after-seek.patch \
+            file://fixed-proper-segment-number-calculation.patch \
+            file://set-optimal-http-settings-based-on-media-type.patch \
+            file://dont-skip-first-segment.patch \
+            file://fix-integer-overflow-by-seeking.patch \
+            file://startover-attribute-to-manifest.patch \
+            file://improved-handling-of-event-type-playlist.patch \
+            file://check-borders-when-seeking-in-live-mode.patch \
             "
 
 PACKAGECONFIG:append = " gpl libbluray dav1d libfreetype librtmp libxml2 openssl x264 x265 srt"
