@@ -12,7 +12,7 @@ DEPENDS = "gettext curl libedit"
 
 S = "${WORKDIR}/git"
 
-inherit gitpkgv autotools-brokensep pkgconfig gettext
+inherit gitpkgv pkgconfig gettext
 
 PV = "3.21+gitr"
 PKGV = "3.21+git${GITPKGV}"
@@ -20,3 +20,8 @@ PR = "r0"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 EXTRA_OEMAKE = "NOTEST=1 NOPCSC=1 NODTAPI=1 NOSRT=1 MAIN_ARCH=${TUNE_PKGARCH} SYSROOT=${D}"
+
+do_install() {
+	cd ${S}
+	oe_runmake 'DESTDIR=${D}' install
+}

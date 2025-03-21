@@ -13,7 +13,7 @@ DEPENDS = "openssl"
 
 SRC_URI = "git://github.com/oe-alliance/ofgwrite.git;protocol=https;branch=master"
 
-inherit autotools-brokensep pkgconfig
+inherit pkgconfig
 
 S = "${WORKDIR}/git"
 

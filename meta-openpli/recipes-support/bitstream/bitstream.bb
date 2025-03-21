@@ -13,13 +13,14 @@ PKGV = "1.0+git${GITPKGV}"
 SRC_URI = "git://code.videolan.org/videolan/bitstream.git;protocol=https;branch=master"
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep pkgconfig
+inherit pkgconfig
 
 do_compile:prepend() {
 	sed -i 's#/usr/local#/usr#' ${S}/Makefile
 }
 
 do_install:append() {
+	cd ${S}
+	oe_runmake 'DESTDIR=${D}' install
 	install -d ${D}${includedir}
 }
-

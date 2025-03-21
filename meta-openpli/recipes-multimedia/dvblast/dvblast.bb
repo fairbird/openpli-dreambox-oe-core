@@ -16,9 +16,11 @@ SRC_URI = "git://code.videolan.org/videolan/dvblast.git;protocol=https;branch=ma
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep
-
 do_compile:prepend() {
         sed -i 's#/usr/local#/usr#' ${S}/Makefile
 }
 
+do_install() {
+    cd ${S}
+    oe_runmake 'DESTDIR=${D}' install
+}

@@ -20,7 +20,7 @@ CXXFLAGS = " -std=c++11"
 
 EXTRA_OECONF = "LIBDVBCSA=yes ENIGMA=yes debug "
 
-inherit autotools-brokensep update-rc.d
+inherit update-rc.d
 
 INITSCRIPT_NAME = "satpi"
 
@@ -30,6 +30,8 @@ do_configure:prepend () {
 }
 
 do_install () {
+    cd ${S}
+    oe_runmake 'DESTDIR=${D}' install
     install -d -m 0755 ${D}/${bindir}
     install -m 0755 ${S}/satpi ${D}/${bindir}/
     install -d -m 0755 ${D}/etc/init.d
@@ -39,3 +41,5 @@ do_install () {
     cp -r --preserve=timestamps ${S}/web ${D}/${datadir}/${PN}
     cp -r --preserve=timestamps ${S}/mapping.m3u ${D}/${bindir}
 }
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"

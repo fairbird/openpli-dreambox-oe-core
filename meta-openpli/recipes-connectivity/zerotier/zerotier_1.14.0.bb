@@ -26,7 +26,7 @@ S = "${WORKDIR}/git"
 
 INITSCRIPT_NAME = "zerotier"
 
-inherit autotools-brokensep update-rc.d systemd
+inherit update-rc.d systemd
 
 EXTRA_OEMAKE = " ZT_SSO_SUPPORTED=0 "
 
@@ -35,6 +35,8 @@ do_compile:prepend:mipsel() {
 }
 
 do_install:append() {
+    cd ${S}
+    oe_runmake 'DESTDIR=${D}' install
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${UNPACKDIR}/zerotier ${D}${sysconfdir}/init.d/zerotier
 }
