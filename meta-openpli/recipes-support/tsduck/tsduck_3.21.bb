@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 
 inherit gitpkgv autotools-brokensep pkgconfig gettext
 
-PV = "3.21+gitr${SRCPV}"
+PV = "3.21+gitr"
 PKGV = "3.21+git${GITPKGV}"
 PR = "r0"
 

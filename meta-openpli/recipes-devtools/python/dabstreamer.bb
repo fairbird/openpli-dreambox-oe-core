@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 
 SRCREV = "${AUTOREV}"
 
-PV = "0.1+git${SRCPV}"
+PV = "0.1+git"
 PKGV = "0.1+git${GITPKGV}"
 
 PACKAGES = "${PN}"

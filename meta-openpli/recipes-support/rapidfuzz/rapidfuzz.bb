@@ -10,7 +10,7 @@ S = "${WORKDIR}/git"
 
 inherit gitpkgv pkgconfig scikit-build-core
 
-PV = "3.12.2.+git${SRCPV}"
+PV = "3.12.2.+git"
 PKGV = "3.12.2+git${GITPKGV}"
 
 FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}"
