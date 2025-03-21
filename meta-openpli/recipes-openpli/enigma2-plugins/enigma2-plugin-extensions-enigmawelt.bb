@@ -5,7 +5,7 @@ SECTION = "base"
 
 require conf/license/license-gplv2.inc
 
-inherit allarch gittag python3-compileall
+inherit allarch gitpkgv python3-compileall
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"

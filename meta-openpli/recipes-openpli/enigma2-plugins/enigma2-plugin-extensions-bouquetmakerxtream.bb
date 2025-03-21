@@ -9,7 +9,7 @@ SRCREV="${AUTOREV}"
 PV = "git${SRCPV}"
 PKGV = "${GITPKGV}"
 
-inherit gittag allarch
+inherit gitpkgv allarch
 
 RDEPENDS:${PN} = "python3 python3-requests python3-pillow"
 

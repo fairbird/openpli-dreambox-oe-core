@@ -3,7 +3,7 @@ MAINTAINER = "madhouse"
 
 require conf/license/license-gplv2.inc
 
-inherit gittag python3-compileall
+inherit gitpkgv python3-compileall
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"

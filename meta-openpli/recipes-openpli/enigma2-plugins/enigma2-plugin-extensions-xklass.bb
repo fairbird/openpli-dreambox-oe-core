@@ -6,7 +6,7 @@ require conf/license/license-gplv2.inc
 
 RDEPENDS:${PN} = "python3-pillow python3-requests wget"
 
-inherit gittag allarch python3-compileall
+inherit gitpkgv allarch python3-compileall
 
 SRCREV = "${AUTOREV}"
 PV = "git"

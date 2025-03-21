@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/COPYING;md5=bed161b82a1ecab65ff7ba3c
 RDEPENDS:${PN} = "bash"
 RDEPENDS:${PN}-dev = "bash python3-core"
 
-inherit gittag go-mod upx-compress
+inherit gitpkgv go-mod upx-compress
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"

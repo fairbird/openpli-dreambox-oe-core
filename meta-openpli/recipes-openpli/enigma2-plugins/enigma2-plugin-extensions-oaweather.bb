@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 RDEPENDS:${PN} = "enigma2-tools-weatherinfo"
 
-inherit gettext gittag python3-compileall
+inherit gettext gitpkgv python3-compileall
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"

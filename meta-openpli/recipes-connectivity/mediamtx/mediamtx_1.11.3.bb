@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/bluenviron/mediamtx"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=77fd2623bd5398430be5ce60489c2e81"
 
-inherit gittag go-mod update-rc.d systemd upx-compress
+inherit gitpkgv go-mod update-rc.d systemd upx-compress
 
 VERSION := "${PV}"
 SRCREV = "b66efd66da92ce475f3bf2a229efa56724f3fa64"
