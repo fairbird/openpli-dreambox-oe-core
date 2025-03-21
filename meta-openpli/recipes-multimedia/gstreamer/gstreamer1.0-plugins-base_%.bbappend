@@ -12,6 +12,7 @@ SRC_URI:append = " \
            file://0003-riff-media-added-fourcc-to-all-ffmpeg-mpeg4-video-caps.patch \
 "
 
+LDFLAGS:append:mipsarch = " -latomic"
 
 PACKAGECONFIG:append = " opus"
 

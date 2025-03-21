@@ -20,3 +20,5 @@ SRC_URI:remove = "file://0001-uvcgadget-Use-g_path_get_basename-instead-of-libc-
 PACKAGECONFIG:append = " faac faad opusparse rtmp"
 
 EXTRA_OEMESON:remove = "-Dkate=disabled"
+
+LDFLAGS:append:mipsarch = " -latomic"
