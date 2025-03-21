@@ -11,8 +11,8 @@ DEPENDS = "libxml2 bash-completion"
 
 inherit python3-dir setuptools3 gitpkgv
 
-PV = "git"
-PKGV = "${GITPKGVTAG}"
+PV = "2021.12.17+git"
+PKGV = "2021.12.17+${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/ytdl-org/youtube-dl.git;protocol=https;branch=master"
 
