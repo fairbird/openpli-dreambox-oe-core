@@ -38,3 +38,5 @@ INITSCRIPT_NAME = "udpxy.sh"
 INITSCRIPT_PARAMS = "defaults"
 
 inherit update-rc.d
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
