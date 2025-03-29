@@ -43,6 +43,7 @@ OPTIONAL_PACKAGES += " \
 	hdparm \
 	htop \
 	flip \
+	ifuse \
 	inadyn-mt \
 	inetutils \
 	iperf3 \
