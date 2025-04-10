@@ -8,9 +8,10 @@ Based on OpenPLi, also derived from Hains source.<br>
 # WARRNING : The compile images for DM800se and DM500HD to External flash only For [Multiboot]. Because it is more than 64MB
  ***************************************************************************************************************************
 
-Thanks to OpenPLi, Open-Alliance and Hains.
+Thanks to OpenPLi, openATV, Open-Alliance and Hains.
 
 https://github.com/OpenPLi/openpli-oe-core<br>
+https://github.com/openatv/enigma2<br>
 https://github.com/Hains/openpli-dm920-python3<br>
 https://github.com/oe-alliance/oe-alliance-core
 
