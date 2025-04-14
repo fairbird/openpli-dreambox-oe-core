@@ -2363,7 +2363,7 @@ CONFIG_WLAN_VENDOR_ATH=y
 # CONFIG_ATH5K is not set
 # CONFIG_ATH5K_PCI is not set
 # CONFIG_ATH9K is not set
-# CONFIG_ATH9K_HTC is not set
+CONFIG_ATH9K_HTC=m
 # CONFIG_CARL9170 is not set
 # CONFIG_ATH6KL is not set
 # CONFIG_AR5523 is not set
