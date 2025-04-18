@@ -11,7 +11,7 @@ inherit gettext gitpkgv python3-compileall
 PV = "git"
 PKGV = "${GITPKGVTAG}"
 
-SRC_URI="git://github.com/oe-alliance/OAWeather;protocol=https;branch=main"
+SRC_URI = "git://github.com/oe-alliance/OAWeather;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
 

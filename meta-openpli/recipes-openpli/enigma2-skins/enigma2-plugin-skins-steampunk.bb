@@ -10,7 +10,7 @@ PKGV = "1.1+git${GITPKGV}"
 
 RDEPENDS:${PN} = "enigma2-plugin-extensions-weatherplugin"
 
-SRC_URI="git://github.com/stein17/Skins-for-openATV.git;protocol=https;branch=python3"
+SRC_URI = "git://github.com/stein17/Skins-for-openATV.git;protocol=https;branch=python3"
 
 S = "${WORKDIR}/git/Steampunk"
 

@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.realtek.com/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://README.md;md5=3de16b8559dfb7e7295238b96e262cde"
 
-DEPENDS ="bc-native"
+DEPENDS = "bc-native"
 
 SRC_URI = "git://github.com/atvcaptain/RTL8192EU.git;protocol=https;branch=master"
 
@@ -62,5 +62,3 @@ do_install() {
         install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
         install -m 0644 ${S}/8192eu.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
 }
-
-

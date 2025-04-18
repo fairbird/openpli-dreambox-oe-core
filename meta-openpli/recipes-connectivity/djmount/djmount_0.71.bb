@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/SHTrassEr/djmount.git;protocol=https;branch=master"
 
 CFLAGS:append = " -std=gnu89 -fcommon"
 
-SRC_URI:append =" \
+SRC_URI:append = " \
 	file://init \
 	file://01-configure.ac.patch \
 	file://02-rt_bool_arg_enable.m4.patch \

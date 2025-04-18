@@ -7,11 +7,11 @@ inherit gitpkgv python3-compileall
 
 PV = "3.4+git"
 PKGV = "3.4+git${GITPKGV}"
-VER="3.4"
+VER = "3.4"
 
 RDEPENDS:${PN} = "enigma2-plugin-extensions-weatherplugin"
 
-SRC_URI="git://github.com/stein17/Skins-for-openATV.git;protocol=https;branch=python3"
+SRC_URI = "git://github.com/stein17/Skins-for-openATV.git;protocol=https;branch=python3"
 
 FILES:${PN} = "${libdir} /usr/share"
 

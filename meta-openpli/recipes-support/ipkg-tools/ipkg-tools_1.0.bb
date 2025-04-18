@@ -10,7 +10,7 @@ RDEPENDS:${PN} = "binutils zstd"
 S = "${WORKDIR}/sources"
 UNPACKDIR = "${S}"
 
-SRC_URI="file://ipkg-tools.zip"
+SRC_URI = "file://ipkg-tools.zip"
 
 SRC_URI[md5sum] = "17da94f251f052958f3c5c2bb4ef7a1d"
 SRC_URI[sha256sum] = "162c404baa3e17e9b54d4be71d5bb8d7e871ee09339c838b0234eccf15e59119"
@@ -23,4 +23,4 @@ do_install() {
     install -m 0755 ${UNPACKDIR}/ipkg-unbuild ${D}/usr/bin/ipkg-unbuild
 }
 
-INSANE_SKIP:${PN} ="file-rdeps"
+INSANE_SKIP:${PN} = "file-rdeps"

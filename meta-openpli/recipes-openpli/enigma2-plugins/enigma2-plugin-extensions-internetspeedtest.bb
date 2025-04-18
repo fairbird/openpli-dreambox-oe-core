@@ -8,7 +8,7 @@ inherit gitpkgv setuptools3-openplugins gettext
 PV = "git"
 PKGV = "git${GITPKGV}"
 
-SRC_URI="git://github.com/fairbird/Internet-Speedtest.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/fairbird/Internet-Speedtest.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 

@@ -61,7 +61,7 @@ CONFFILES:${BPN}-common += " \
 						"
 
 RPROVIDES:${PN} += "pam-pluginsmbpass"
-RRECOMMENDS:${PN}-base+= "wsdd pam-pluginsmbpass"
+RRECOMMENDS:${PN}-base += "wsdd pam-pluginsmbpass"
 
 do_install:prepend() {
 	install -d ${D}${sysconfdir}/sudoers.d
@@ -134,7 +134,7 @@ FILES:lib${PN}-base += "\
 					"
 
 # move some libraries from libsamba-base to libwbclient to fix circular dependencies
-FILES:libwbclient ="${libdir}/libwbclient.so.* \
+FILES:libwbclient = "${libdir}/libwbclient.so.* \
 					${libdir}/samba/libwinbind-client.so \
 					${libdir}/samba/libwinbind-client-samba4.so \
 					${libdir}/samba/libreplace-samba4.so \

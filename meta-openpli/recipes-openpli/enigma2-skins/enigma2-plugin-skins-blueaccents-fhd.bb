@@ -10,7 +10,7 @@ inherit gitpkgv python3-compileall
 PV = "1.1+git"
 PKGV = "1.1+git${GITPKGV}"
 
-SRC_URI="git://github.com/stein17/Skins-for-openATV.git;protocol=https;branch=python3"
+SRC_URI = "git://github.com/stein17/Skins-for-openATV.git;protocol=https;branch=python3"
 
 FILES:${PN} = "/"
 

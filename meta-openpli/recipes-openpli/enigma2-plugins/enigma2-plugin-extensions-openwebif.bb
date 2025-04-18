@@ -29,7 +29,7 @@ inherit gitpkgv setuptools3_legacy gettext python3-compileall
 PV = "git"
 PKGV = "${GITPKGVTAG}"
 
-BRANCH="main"
+BRANCH = "main"
 
 SRC_URI = "git://github.com/oe-alliance/OpenWebif.git;protocol=https;branch=${BRANCH} \
 	file://set-packages-explicit.patch \

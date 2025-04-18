@@ -14,9 +14,9 @@ PR = "r0"
 
 SSTATE_SKIP_CREATION = "1"
 
-BRANCH="master"
+BRANCH = "master"
 
-SRC_URI="git://github.com/oe-mirrors/branding-module.git;protocol=https;branch=${BRANCH} \
+SRC_URI = "git://github.com/oe-mirrors/branding-module.git;protocol=https;branch=${BRANCH} \
         file://Add_VFDSymbol_SoCFamily.patch \
 "
 
