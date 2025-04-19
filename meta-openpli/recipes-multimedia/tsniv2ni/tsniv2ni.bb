@@ -13,6 +13,6 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep pkgconfig
+inherit pkgconfig
 
 TARGET_CC_ARCH += "${LDFLAGS}"
