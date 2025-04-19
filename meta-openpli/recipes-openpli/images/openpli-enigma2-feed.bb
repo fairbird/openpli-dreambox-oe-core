@@ -170,6 +170,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-skins-ax-blue-fhd \
 	enigma2-plugin-skins-blueaccents-fhd \
 	enigma2-plugin-skins-blue-line-oe \
+	enigma2-plugin-skins-gradient-fhd \
 	enigma2-plugin-skins-glamouraurafhd \
 	enigma2-plugin-skins-madmax-impossible \
 	enigma2-plugin-skins-steampunk \
