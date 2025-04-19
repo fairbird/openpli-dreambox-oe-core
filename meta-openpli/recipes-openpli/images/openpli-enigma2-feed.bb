@@ -23,12 +23,14 @@ OPTIONAL_PACKAGES += " \
 	cups \
 	davfs2 \
 	diffutils \
+	dabstreamer \
 	dosfstools \
 	dvb-apps \
 	dvblast \
 	dvbsnoop \
 	dvdfs \
 	edid-decode \
+	eti-tools \
 	evtest \
 	exfatprogs \
 	exteplayer3 \
@@ -113,6 +115,7 @@ OPTIONAL_PACKAGES += " \
 	sshpass \
 	strace \
 	streamlinksrv \
+	tsniv2ni \
 	tcpdump \
 	tmux \
 	transmission \
