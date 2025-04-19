@@ -22,7 +22,7 @@ https://github.com/oe-alliance/oe-alliance-core
 -Glibc 2.41<br>
 -ffmpeg 7.1<br>
 -GStreamer 1.26.0<br>
--Python 3.13.2<br>
+-Python 3.13.3<br>
 -OpenSSL 3.4.1<br>
 -Busybox 1.37.0<br>
 and more.<br>
@@ -31,17 +31,17 @@ and more.<br>
 Feel free to send pull-request.
 <br>
 <br>
-Note Ubuntu 24.04 LTS and 24.10!<br>
 
-# Due to new security features:
+# Note Ubuntu: Due to new security features:
 
 See:
 https://ubuntu.com/blog/whats-new-in-security-for-ubuntu-24-04-lts
 
-Note: Ubuntu 24.04 LTS and 24.10 users
-Due to new security features, add new /etc/sysctl.d/60-apparmor-namespace.conf file with the following contents to fix error (Operation not permitted):
+Modify AppArmor config file with the following contents to fix error (Operation not permitted):
 ```
-sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 
+echo 'kernel.apparmor_restrict_unprivileged_userns=0' | sudo tee /etc/sysctl.d/60-apparmor-namespace.conf > /dev/null && sudo sysctl --system
+
+sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 ```
 # Dependencies:
 1. Install required packages
@@ -76,7 +76,7 @@ cd openpli-dreambox-oe-core
 
 ![Selection_002](https://user-images.githubusercontent.com/1761779/130413735-8f2a0caf-e3f7-4264-b33e-b474ac13d245.png)
 
-When the build is finished, the image openpli-enigma2-GCC-13.2-(box-name).rootfs.tar.(xz_or_bz2_or_zip) is located in the:
+When the build is finished, the image openpli-enigma2-GCC-x.x-(box-name).rootfs.tar.(xz_or_bz2_or_zip) is located in the:
 ```
 build/tmp/deploy/images/<box name>/
 ```
