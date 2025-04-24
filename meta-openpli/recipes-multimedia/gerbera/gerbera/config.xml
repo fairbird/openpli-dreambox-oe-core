@@ -69,7 +69,7 @@
         <map from="m3u" to="audio/x-mpegurl"/>
         <map from="pls" to="audio/x-scpls"/>
         <map from="flv" to="video/x-flv"/>
-		<map from="avi" to="video/divx"/>
+		<map from="avi" to="video/divx"/> 
 		<map from="ts" to="video/mpeg"/>
 		<map from="vob" to="video/mpeg"/>
 		<map from="wav" to="audio/wav"/>

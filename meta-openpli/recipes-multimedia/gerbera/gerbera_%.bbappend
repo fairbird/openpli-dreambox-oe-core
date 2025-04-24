@@ -1,11 +1,12 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI:append = " \
-           file://config.xml \
-           file://init \
+	file://fix-build-linking-order.patch \
+	file://config.xml \
+	file://init \
 "
 
-inherit update-rc.d gitpkgv
+inherit update-rc.d
 
 INITSCRIPT_NAME = "gerbera"
 INITSCRIPT_PARAMS = "defaults 90"
@@ -22,3 +23,7 @@ do_install:append() {
 FILES:${PN} += "${sysconfdir}"
 
 CONFFILES:${PN} = "${sysconfdir}/gerbera/config.xml"
+
+PV = "2.5.0"
+
+SRCREV = "92261f4994b0875a60c6288592fc8bbe953eea25"
