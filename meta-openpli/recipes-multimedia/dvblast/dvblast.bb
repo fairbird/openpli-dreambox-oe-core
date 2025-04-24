@@ -7,12 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ed7e492ee44e70125a5d42e118354a13"
 
 inherit gitpkgv
 
-PV = "1.0+git"
-PKGV = "1.0+git${GITPKGV}"
+PV = "3.4+git"
+PKGV = "3.4+git${GITPKGV}"
 
 DEPENDS = "bitstream libev"
 
-SRC_URI = "git://code.videolan.org/videolan/dvblast.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/videolan/dvblast.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 
