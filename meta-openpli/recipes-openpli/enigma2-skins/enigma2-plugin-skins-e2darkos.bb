@@ -10,7 +10,9 @@ RRECOMMENDS:${PN} = "enigma2-boxlogos"
 PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
-SRC_URI = "git://github.com/DimitarCC/E2-DarkOS-skin.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/DimitarCC/E2-DarkOS-skin.git;protocol=https;branch=main  \
+		file://Add-entryFont-and-valueFont.patch \
+"
 
 S = "${WORKDIR}/git"
 

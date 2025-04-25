@@ -1,0 +1,21 @@
+From f9f211416b3ed262a04bad23d4117952f411c5a9 Mon Sep 17 00:00:00 2001
+From: RAED <rrrr53@hotmail.com>
+Date: Wed, 2 Apr 2025 15:59:29 +0300
+Subject: [PATCH] Add entryFont and valueFont
+
+---
+ usr/share/enigma2/E2-DarkOS/skin.xml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/usr/share/enigma2/E2-DarkOS/skin.xml b/usr/share/enigma2/E2-DarkOS/skin.xml
+index bef326f..a8bf074 100644
+--- a/usr/share/enigma2/E2-DarkOS/skin.xml
++++ b/usr/share/enigma2/E2-DarkOS/skin.xml
+@@ -265,6 +265,7 @@
+ 	<!-- Window -->
+ 	<windowstyle id="0" type="skinned">
+ 		<title offset="25,10" font="Bold;36" />
++		<configList entryFont="Regular;28" valueFont="Regular;28" />
+ 		<color name="Background" color="background" />
+ 		<color name="LabelForeground" color="foreground" />
+ 		<color name="ListboxBackground" color="background" />
