@@ -5,7 +5,6 @@
 # Attempt to mount any added block devices and umount any removed devices
 
 MOUNT="/bin/mount"
-PMOUNT="/usr/bin/pmount"
 UMOUNT="/bin/umount"
 LOG="/tmp/udev.log"
 
@@ -214,7 +213,12 @@ automount() {
 
 	# Deal with specific file system exceptions
 	case $ID_FS_TYPE in
-	ntfs|exfat)
+	exfat)
+		MOUNTPOINT=/sys/fs/fuse/connections
+		mount -t fusectl fusectl $MOUNTPOINT >/dev/null 2>&1
+		MOUNT="mount.exfat-fuse"
+		;;
+	ntfs)
 		MOUNTPOINT=/sys/fs/fuse/connections
 		mount -t fusectl fusectl $MOUNTPOINT >/dev/null 2>&1
 		MOUNT="$MOUNT -t fuseblk"
@@ -268,12 +272,6 @@ name="`basename "$DEVNAME"`"
 [ -e /sys/block/$name/device/media ] && media_type=`cat /sys/block/$name/device/media`
 
 if [ "$ACTION" = "add" ]; then
-	if [ -x "$PMOUNT" ]; then
-		$PMOUNT $DEVNAME 2> /dev/null
-	elif [ -x $MOUNT ]; then
-		$MOUNT $DEVNAME 2> /dev/null
-	fi
-
 	FLASHEXPANDERDEV=`cat /proc/mounts | grep '.FlashExpander' | cut -d " " -f1`
 	if [ -n "$FLASHEXPANDERDEV" ]; then
 		MOUNTPOINT=`cat /proc/mounts | grep ${FLASHEXPANDERDEV} | cut -d " " -f2`
@@ -359,7 +357,7 @@ if [ "$ACTION" = "add" ]; then
 		# If the device isn't mounted at this point, it isn't
 		# configured in fstab (note the root filesystem can show up as
 		# /dev/root in /proc/mounts, so check the device number too)
-		if ! ps aux | grep -v grep | grep -q enigma2; then
+		if ps aux | grep -v grep | grep -q enigma2; then
 			if expr $MAJOR "*" 256 + $MINOR != `stat -c %d /`; then
 				grep -q "^$DEVNAME " /proc/mounts || automount
 			fi
