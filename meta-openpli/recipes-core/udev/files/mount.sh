@@ -45,11 +45,11 @@ log() {
 	fi
 
 	if [ $# -eq 1 ]; then
-		echo "udev/mount.sh" "$1" >> $LOG
-		#logger "udev/mount.sh" "$1"
+		echo "$(date '+%Y-%m-%d %H:%M:%S') udev" "$*" >> $LOG
+		#logger "udev" "$*"
 	else
-		echo "udev/mount.sh" "$DEVNAME: $1 $2" >> $LOG
-		#logger "udev/mount.sh" "$DEVNAME: $1 $2"
+		echo "$(date '+%Y-%m-%d %H:%M:%S') udev" "$DEVNAME: $*" >> $LOG
+		#logger "udev" "$DEVNAME: $*"
 	fi
 }
 
@@ -201,6 +201,13 @@ automount() {
 	# If no label, use the device name
 	if [[ -z "${LABEL}" ]]; then
 		LABEL="$NAME"
+	fi
+
+	# rewrite first sata device to hdd if none in fstab present
+	if  [ $LABEL = "sda1" ]; then
+		if ! grep -qs "/media/hdd" /etc/fstab; then
+			LABEL=hdd
+		fi
 	fi
 
 	# Create the mountpoint for the device
@@ -357,23 +364,16 @@ if [ "$ACTION" = "add" ]; then
 		# If the device isn't mounted at this point, it isn't
 		# configured in fstab (note the root filesystem can show up as
 		# /dev/root in /proc/mounts, so check the device number too)
-		if ps aux | grep -v grep | grep -q enigma2; then
 			if expr $MAJOR "*" 256 + $MINOR != `stat -c %d /`; then
 				grep -q "^$DEVNAME " /proc/mounts || automount
 			fi
-		fi
 	else
 		log "No filesystem detected for device $DEVNAME, skipping."
 	fi
 
 	# inform E2 of the hotplug action only for partitions
 	# Check if enigma2 process is running
-	if ps aux | grep -v grep | grep -q enigma2; then
-		log "enigma2 running"
-		notify true
-	else
-		notify false
-	fi
+	notify false
 fi
 
 if [ "$ACTION" = "remove" ] || [ "$ACTION" = "change" ] && [ -x "$UMOUNT" ] && [ -n "$DEVNAME" ]; then
@@ -381,7 +381,6 @@ if [ "$ACTION" = "remove" ] || [ "$ACTION" = "change" ] && [ -x "$UMOUNT" ] && [
 	do
 		$UMOUNT $mnt
 	done
-	
 
 	if [ ${name:0:2} == "sr" ]; then
 		log "CD/DVD Detectet. $DEVNAME"
