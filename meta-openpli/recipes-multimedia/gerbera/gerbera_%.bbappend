@@ -1,5 +1,9 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
+PV = "2.5.0"
+
+SRCREV = "92261f4994b0875a60c6288592fc8bbe953eea25"
+
 SRC_URI:append = " \
 	file://fix-build-linking-order.patch \
 	file://config.xml \
