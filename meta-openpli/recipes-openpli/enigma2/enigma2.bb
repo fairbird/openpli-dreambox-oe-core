@@ -275,6 +275,8 @@ FILES:${PN}-src = "\
 	${libdir}/enigma2/python/*/*/*/*.py \
 	"
 
+TARGET_CFLAGS += "-DGLIBC_64BIT_TIME_FLAGS"
+
 do_install:append() {
 	install -d ${D}${datadir}/keymaps
 	if [ "${base_libdir}" = "/lib64" ] ; then
