@@ -17,3 +17,5 @@ S = "${WORKDIR}/git"
 inherit gitpkgv autotools-brokensep pkgconfig
 PV = "1.3.7+git"
 PKGV = "1.3.7+git${GITPKGV}"
+
+CFLAGS += "-std=gnu17"

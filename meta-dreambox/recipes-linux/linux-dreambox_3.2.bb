@@ -53,6 +53,7 @@ SRC_URI = " \
     file://kernel-add-support-for-gcc12.patch \
     file://kernel-add-support-for-gcc13.patch \
     file://kernel-add-support-for-gcc14.patch \
+    file://kernel-add-support-for-gcc15.patch \
     file://build-with-gcc12-fixes.patch \
     file://misc_latin1_to_utf8_conversions.patch \
     file://0001-dvb_frontend-backport-multistream-support.patch \
@@ -103,7 +104,8 @@ KERNEL_IMAGEDEST = "boot"
 
 FILES:${KERNEL_PACKAGE_NAME}-image = "${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}.gz"
 
-export KCFLAGS = " -Wno-error=incompatible-pointer-types \
+export KCFLAGS = " -std=gnu17 \
+                   -Wno-error=incompatible-pointer-types \
                    -Wno-error=declaration-missing-parameter-type \
                    -Wno-error=unused-label \
                    -Wno-error=enum-compare \

@@ -1,8 +1,5 @@
-diff --git a/include/linux/compiler-gcc13.h b/include/linux/compiler-gcc13.h
-new file mode 100644
-index 0000000..ba064fa
 --- /dev/null
-+++ b/include/linux/compiler-gcc13.h
++++ b/include/linux/compiler-gcc15.h
 @@ -0,0 +1,59 @@
 +#ifndef __LINUX_COMPILER_H
 +#error "Please don't include <linux/compiler-gcc12.h> directly, include <linux/compiler.h> instead."

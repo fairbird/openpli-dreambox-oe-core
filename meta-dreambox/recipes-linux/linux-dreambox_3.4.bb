@@ -21,6 +21,7 @@ SRC_URI = " \
     file://kernel-add-support-for-gcc12.patch \
     file://kernel-add-support-for-gcc13.patch \
     file://kernel-add-support-for-gcc14.patch \
+    file://kernel-add-support-for-gcc15.patch \
     file://build-with-gcc12-fixes.patch \
     file://genksyms_fix_typeof_handling.patch \
     file://defconfig \
@@ -68,6 +69,8 @@ KERNEL_IMAGETYPE = "${@bb.utils.contains('MACHINE', 'dm520', 'vmlinux.gz', 'vmli
 KERNEL_IMAGETYPES = "${@bb.utils.contains('MACHINE', 'dm520', '', 'vmlinux.gz', d)}"
 
 KERNEL_ENABLE_CGROUPS = "1"
+
+export KCFLAGS += " -std=gnu17"
 
 RDEPENDS:${KERNEL_PACKAGE_NAME}-image = "flash-scripts"
 

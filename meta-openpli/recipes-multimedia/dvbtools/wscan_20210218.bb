@@ -15,3 +15,5 @@ S = "${WORKDIR}/w_scan-${PV}"
 inherit autotools
 
 FILES:${PN} += "${datadir}"
+
+CFLAGS += "-std=gnu17"

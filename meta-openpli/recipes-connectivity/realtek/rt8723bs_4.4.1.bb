@@ -35,8 +35,9 @@ S = "${WORKDIR}/git"
 
 inherit module
 
-# need only for dreambox linux-meson64 4.9 + GCC 14
-export KCFLAGS += " -Wno-error=misleading-indentation \
+# need only for dreambox linux-meson64 4.9 + GCC 15
+export KCFLAGS += " -std=gnu17 \
+                    -Wno-error=misleading-indentation \
                     -Wno-error=aggressive-loop-optimizations \
                     -Wno-error=int-to-pointer-cast \
                     -Wno-error=restrict \

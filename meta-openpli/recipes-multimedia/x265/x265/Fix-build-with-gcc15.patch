@@ -1,0 +1,12 @@
+diff --git a/dynamicHDR10/json11/json11.cpp b/dynamicHDR10/json11/json11.cpp
+index 3344220f..4f08b690 100755
+--- a/dynamicHDR10/json11/json11.cpp
++++ b/configure
+@@ -22,6 +22,7 @@
+ #include "json11.h"
+ #include <cassert>
+ #include <cmath>
++#include <cstdint>
+ #include <cstdlib>
+ #include <cstdio>
+ #include <limits>

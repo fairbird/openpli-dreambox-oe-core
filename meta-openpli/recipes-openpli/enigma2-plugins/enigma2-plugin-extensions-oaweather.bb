@@ -43,3 +43,5 @@ do_install() {
     install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/OAWeather/locale/
     cp -rf ${S}/locale/* ${D}${libdir}/enigma2/python/Plugins/Extensions/OAWeather/locale/
 }
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
