@@ -27,6 +27,10 @@ do_install:append() {
 		mkdir ${D}/data
 		printf '/dev/dreambox-data\t/data\t\tauto\tdefaults\t\t\t\t0 0\n' >> ${D}${sysconfdir}/fstab
 	fi
+	if [ "${MACHINEBUILD}" = "dm820" -o "${MACHINEBUILD}" = "dm7080" ]; then
+		mkdir ${D}/data
+		printf '/dev/mmcblk0p2\t/data\t\tauto\tdefaults\t\t\t\t0 0\n' >> ${D}${sysconfdir}/fstab
+	fi
 	if [ "${MACHINEBUILD}" = "dm900" -o "${MACHINEBUILD}" = "dm920" ]; then
 		mkdir ${D}/data
 		printf '/dev/mmcblk0p3\t/data\t\tauto\tdefaults\t\t\t\t0 0\n' >> ${D}${sysconfdir}/fstab

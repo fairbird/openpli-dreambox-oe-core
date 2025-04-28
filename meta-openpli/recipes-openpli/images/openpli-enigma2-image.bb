@@ -113,6 +113,7 @@ IMAGE_INSTALL = " \
 	${@bb.utils.contains("MACHINE_FEATURES", "emmc", "dosfstools mtools e2fsprogs-resize2fs partitions-by-name rsync" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "fastboot", "dosfstools mtools android-tools" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "recovery", "recovery" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "dreamboxv2", "multiboot-selector", "", d)} \
 	"
 
 GETEXTRA = "edid-decode"
