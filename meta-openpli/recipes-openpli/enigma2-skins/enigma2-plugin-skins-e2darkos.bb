@@ -11,7 +11,7 @@ PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://github.com/DimitarCC/E2-DarkOS-skin.git;protocol=https;branch=main  \
-		file://Add-entryFont-and-valueFont.patch \
+		file://patch-skin-to-more-compatible.patch \
 "
 
 S = "${WORKDIR}/git"

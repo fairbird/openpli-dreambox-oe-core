@@ -1,0 +1,78 @@
+From f9f211416b3ed262a04bad23d4117952f411c5a9 Mon Sep 17 00:00:00 2001
+From: RAED <rrrr53@hotmail.com>
+Date: Wed, 2 Apr 2025 15:59:29 +0300
+Subject: [PATCH] Add entryFont and valueFont
+
+---
+ usr/share/enigma2/E2-DarkOS/skin.xml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/usr/share/enigma2/E2-DarkOS/skin.xml b/usr/share/enigma2/E2-DarkOS/skin.xml
+index bef326f..a8bf074 100644
+--- a/usr/share/enigma2/E2-DarkOS/skin.xml
++++ b/usr/share/enigma2/E2-DarkOS/skin.xml
+@@ -265,6 +265,7 @@
+ 	<!-- Window -->
+ 	<windowstyle id="0" type="skinned">
+ 		<title offset="25,10" font="Bold;36" />
++		<configList entryFont="Regular;28" valueFont="Regular;28" />
+ 		<color name="Background" color="background" />
+ 		<color name="LabelForeground" color="foreground" />
+ 		<color name="ListboxBackground" color="background" />
+@@ -1031,36 +1031,26 @@ if callable(loadLogo):
+ 		<eLabel position="515,460" size="889,2" zPosition="-5" backgroundColor="dark_grey" />
+ 		<widget source="streams" render="Listbox" scrollbarMode="showNever" enableWrapAround="1" scrollbarWidth="3" scrollbarSliderBorderWidth="0" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#080808" position="515,495" size="889,320" zPosition="3" transparent="1" itemCornerRadius="6">
+ 		<convert type="TemplatedMultiContent">
+-						{"templates":
+-							{"default": ( 45, [ 
+-								MultiContentEntryText(pos = (25, 2), size = (60, 40),font = 0, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER,text = 2), # key,
+-								MultiContentEntryText(pos = (90, 2), size = (310, 40), font = 0, flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER,text = 3), # description,
+-								MultiContentEntryText(pos = (420, 2), size = (400, 40), font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER,text = 4), # language,
+-								MultiContentEntryPixmapAlphaBlend(pos = (840, 6), size = (32, 32), png = 6), # selection,
+-							], True, "showNever"),
+-							"notselected": (45, [ 
+-								MultiContentEntryText(pos = (25, 2), size = (60, 40),font = 0, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER,text = 2), # key,
+-								MultiContentEntryText(pos = (90, 2), size = (310, 40), font = 0, flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER,text = 3), # description,
+-								MultiContentEntryText(pos = (420, 2), size = (400, 40), font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER,text = 4), # language,
+-								MultiContentEntryPixmapAlphaBlend(pos = (840, 6), size = (32, 32), png = 6), # selection,
+-							], False, "showNever"),
+-							"subs": (45,[
+-								MultiContentEntryText(pos = (25, 2), size = (60, 40),font = 0, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER,text = 2), # key,
+-								MultiContentEntryText(pos = (90, 2), size = (310, 40), font = 0, flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER,text = 3), # description,
+-								MultiContentEntryText(pos = (420, 2), size = (400, 40), font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER,text = 4), # language,
+-								MultiContentEntryPixmapAlphaBlend(pos = (840, 6), size = (32, 32), png = 6), # selection,
+-							],True,"showNever"),
+-							"subs_notselected": (45,[
+-								MultiContentEntryText(pos = (25, 2), size = (60, 40),font = 0, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER,text = 2), # key,
+-								MultiContentEntryText(pos = (90, 2), size = (310, 40), font = 0, flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER,text = 3), # description,
+-								MultiContentEntryText(pos = (420, 2), size = (400, 40), font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER,text = 4), # language,
+-								MultiContentEntryPixmapAlphaBlend(pos = (840, 6), size = (32, 32), png = 6), # selection,
+-							],False,"showNever")
+-							},
+-						"fonts": [gFont("Regular", 28), gFont("Regular", 28)],
+-						"itemHeight": 45
+-						}
+-					</convert>
++				{"templates":
++					{"default": (37, [
++						MultiContentEntryText(pos = (7,1), size = (67,37), font = 0, flags = RT_HALIGN_LEFT, text = 2), # key,
++						MultiContentEntryText(pos = (75,1), size = (15,37), font = 0, flags = RT_HALIGN_LEFT, text = 1), # number,
++						MultiContentEntryText(pos = (90,1), size = (300,37), font = 0, flags = RT_HALIGN_LEFT, text = 3), # description,
++						MultiContentEntryText(pos = (390,1), size = (660,37), font = 0, flags = RT_HALIGN_LEFT, text = 4), # language,
++						MultiContentEntryText(pos = (1050,6), size = (22,37), font = 1, flags = RT_HALIGN_RIGHT, text = 5), # selection,
++					], True, "showNever"),
++					"notselected": (37, [
++						MultiContentEntryText(pos = (7,1), size = (67,37), font = 0, flags = RT_HALIGN_LEFT, text = 2), # key,
++						MultiContentEntryText(pos = (75,1), size = (15,37), font = 0, flags = RT_HALIGN_LEFT, text = 1), # number,
++						MultiContentEntryText(pos = (90,1), size = (300,37), font = 0, flags = RT_HALIGN_LEFT, text = 3), # description,
++						MultiContentEntryText(pos = (390,1), size = (660,37), font = 0, flags = RT_HALIGN_LEFT, text = 4), # language,
++						MultiContentEntryText(pos = (1050,6), size = (22,37), font = 1, flags = RT_HALIGN_RIGHT, text = 5), # selection,
++					], False, "showNever")
++					},
++				"fonts": [gFont("Regular",30), gFont("Regular",24)],
++				"itemHeight": 37
++				}
++			</convert>
+ 		</widget>
+ 		<widget addon="Pager" connection="streams" position="545,835" size="860,25" transparent="1" backgroundColor="background" />
+ 		<eLabel backgroundColor="red" position="535,239" size="4,35" zPosition="2" />
