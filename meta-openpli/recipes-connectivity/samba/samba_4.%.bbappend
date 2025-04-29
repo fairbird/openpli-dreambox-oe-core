@@ -1,6 +1,8 @@
 # version
 PR = "r3"
 
+CFLAGS += "-Wno-error=incompatible-pointer-types"
+
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 # Remove acl, cups etc. support.
