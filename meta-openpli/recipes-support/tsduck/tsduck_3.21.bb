@@ -18,7 +18,7 @@ PV = "3.21+gitr"
 PKGV = "3.21+git${GITPKGV}"
 PR = "r0"
 
-TARGET_CC_ARCH += "${LDFLAGS}"
+TARGET_CC_ARCH += "${LDFLAGS} -Wno-unused-result"
 EXTRA_OEMAKE = "NOTEST=1 NOPCSC=1 NODTAPI=1 NOSRT=1 MAIN_ARCH=${TUNE_PKGARCH} SYSROOT=${D}"
 
 do_install() {

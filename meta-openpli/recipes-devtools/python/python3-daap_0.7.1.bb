@@ -13,6 +13,7 @@ SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/abdelgmartinezl/PythonDaap;protocol=https;branch=master \
            file://python-daap.patch \
            file://The-member-ob_type-is-not-present-in-the-pcapobject.patch \
+           file://fix-compile-with-gcc-15.patch \
 "
 
 S = "${WORKDIR}/git"

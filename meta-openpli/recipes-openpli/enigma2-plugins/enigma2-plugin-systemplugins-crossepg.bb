@@ -22,7 +22,7 @@ SRC_URI = "git://github.com/oe-alliance/e2openplugin-CrossEPG.git;protocol=https
 
 S = "${WORKDIR}/git"
 
-CFLAGS:append = " -I${STAGING_INCDIR}/libxml2/ -I${STAGING_INCDIR}/${PYTHON_DIR}/"
+CFLAGS:append = " -std=gnu17 -I${STAGING_INCDIR}/libxml2/ -I${STAGING_INCDIR}/${PYTHON_DIR}/"
 
 do_compile() {
     echo ${PV} > ${S}/VERSION

@@ -36,7 +36,7 @@ index df6e2c3cf5f..791230ce914 100644
  						<param name="label" value="$LOCALIZE[33060]" />
  					</include>
 diff --git a/cmake/modules/FindFFMPEG.cmake b/cmake/modules/FindFFMPEG.cmake
-index 49f18ca9c2a..10940d6c1b3 100644
+index a3a686c7e06..6903c6e7404 100644
 --- a/cmake/modules/FindFFMPEG.cmake
 +++ b/cmake/modules/FindFFMPEG.cmake
 @@ -48,6 +48,12 @@ macro(buildFFMPEG)
@@ -53,7 +53,7 @@ index 49f18ca9c2a..10940d6c1b3 100644
      set(CROSS_ARGS -DDEPENDS_PATH=${DEPENDS_PATH}
                     -DPKG_CONFIG_EXECUTABLE=${PKG_CONFIG_EXECUTABLE}
 @@ -97,13 +103,13 @@ macro(buildFFMPEG)
-     add_dependencies(ffmpeg ${APP_NAME_LC}::Dav1d)
+     add_dependencies(${${CMAKE_FIND_PACKAGE_NAME}_MODULE_LC} ${APP_NAME_LC}::Dav1d)
    endif()
  
 -  find_program(BASH_COMMAND bash)
@@ -192,19 +192,19 @@ index 00000000000..e1fe54a13d2
 +
 +list(APPEND PLATFORM_DEFINES -DMESA_EGL_NO_X11_HEADERS)
 diff --git a/cmake/scripts/linux/ArchSetup.cmake b/cmake/scripts/linux/ArchSetup.cmake
-index ab142177c81..07f3d6aef04 100644
+index c3192c63e87..4d7de3775d8 100644
 --- a/cmake/scripts/linux/ArchSetup.cmake
 +++ b/cmake/scripts/linux/ArchSetup.cmake
-@@ -46,6 +46,10 @@ else()
-   elseif(CPU MATCHES loongarch64)
-     set(ARCH loongarch64)
-     set(NEON False)
+@@ -37,6 +37,10 @@ else()
+   elseif(CPU MATCHES aarch64 OR CPU MATCHES arm64)
+     set(ARCH aarch64)
+     set(NEON True)
 +  elseif(CPU MATCHES "cortexa15")
 +    set(ARCH arm)
 +    set(NEON True)
 +    set(NEON_FLAGS "-Wno-psabi -Wa,-march=armv7ve -mtune=cortex-a15 -mfpu=neon-vfpv4 -mvectorize-with-neon-quad -fPIC -mcpu=cortex-a15 -mfloat-abi=hard")
    else()
-     message(SEND_ERROR "Unknown CPU: ${CPU}")
+     set(ARCH ${CPU})
    endif()
 diff --git a/cmake/treedata/common/stb.txt b/cmake/treedata/common/stb.txt
 new file mode 100644
@@ -214,10 +214,10 @@ index 00000000000..2606a0f9995
 @@ -0,0 +1 @@
 +xbmc/windowing/egl   windowing/egl    # STB
 diff --git a/system/settings/settings.xml b/system/settings/settings.xml
-index d96133149e6..4a1ad930c9d 100755
+index d2a48c93315..a5faf504dd4 100755
 --- a/system/settings/settings.xml
 +++ b/system/settings/settings.xml
-@@ -613,7 +613,7 @@
+@@ -619,7 +619,7 @@
            <control type="list" format="string" />
          </setting>
          <setting id="subtitles.fontname" type="string" label="14089" help="36185">
@@ -226,7 +226,7 @@ index d96133149e6..4a1ad930c9d 100755
            <default>DEFAULT</default>
            <constraints>
              <options>subtitlesfonts</options>
-@@ -810,7 +810,7 @@
+@@ -816,7 +816,7 @@
            <control type="spinner" format="integer" delayed="true"/>
          </setting>
          <setting id="subtitles.charset" type="string" label="735" help="36189">
@@ -235,7 +235,7 @@ index d96133149e6..4a1ad930c9d 100755
            <default>DEFAULT</default>
            <constraints>
              <options>charsets</options>
-@@ -3249,7 +3249,7 @@
+@@ -3253,7 +3253,7 @@
          <setting id="audiooutput.processquality" type="integer" label="13505" help="36169">
            <requirement>HAS_AE_QUALITY_LEVELS</requirement>
            <level>2</level>
@@ -244,7 +244,7 @@ index d96133149e6..4a1ad930c9d 100755
            <constraints>
              <options>aequalitylevels</options>
            </constraints>
-@@ -3267,7 +3267,7 @@
+@@ -3271,7 +3271,7 @@
          </setting>
          <setting id="audiooutput.samplerate" type="integer" label="458" help="36523">
            <level>2</level>
@@ -253,7 +253,7 @@ index d96133149e6..4a1ad930c9d 100755
            <dependencies>
              <dependency type="visible">
                <and>
-@@ -3279,10 +3279,6 @@
+@@ -3283,10 +3283,6 @@
            <constraints>
              <options>
                <option label="34124">44100</option>
@@ -264,7 +264,7 @@ index d96133149e6..4a1ad930c9d 100755
                <option label="34129">352800</option>
                <option label="34130">384000</option>
              </options>
-@@ -4115,7 +4111,7 @@
+@@ -4119,7 +4115,7 @@
        <group id="2" label="14270">
          <setting id="locale.country" type="string" label="14271" help="36115">
            <level>0</level>

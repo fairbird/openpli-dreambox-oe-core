@@ -24,6 +24,8 @@ CONFFILES:${PN} = "${sysconfdir}/inadyn.conf"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
+CFLAGS += "-std=gnu17"
+
 do_compile() {
 	make -f makefile-deprecated
 }

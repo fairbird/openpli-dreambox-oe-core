@@ -17,6 +17,8 @@ EXTRA_OECONF = "--disable-oggtest \
 		--with-ogg=${STAGING_LIBDIR} \
 		--with-vorbis=${STAGING_LIBDIR}"
 
+CFLAGS += "-std=gnu17"
+
 inherit autotools pkgconfig
 
 # Fixup for missing "foreign" and "subdir-objects" in automake

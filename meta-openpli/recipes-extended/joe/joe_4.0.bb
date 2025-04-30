@@ -12,6 +12,8 @@ inherit autotools update-alternatives
 
 RDEPENDS:${PN} = "ncurses-terminfo"
 
+CFLAGS += "-std=gnu17"
+
 EXTRA_OECONF:prepend = "--bindir=/bin"
 
 ALTERNATIVE:${PN} = "editor"
