@@ -1,4 +1,4 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/gcc-14.2:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/gcc-15.1:"
 
 do_configure () {
     export CXX="${CXX} -nostdinc++ -nostdlib++"
