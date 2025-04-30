@@ -16,6 +16,9 @@ SRC_URI = "git://github.com/videolan/dvblast.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 
+do_configure() {
+}
+ 
 do_compile:prepend() {
         sed -i 's#/usr/local#/usr#' ${S}/Makefile
 }

@@ -15,6 +15,9 @@ S = "${WORKDIR}/git"
 
 inherit pkgconfig
 
+do_configure() {
+}
+
 do_compile:prepend() {
 	sed -i 's#/usr/local#/usr#' ${S}/Makefile
 }

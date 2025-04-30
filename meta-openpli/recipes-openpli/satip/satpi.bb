@@ -26,7 +26,7 @@ INITSCRIPT_NAME = "satpi"
 
 INITSCRIPT_PARAMS = "defaults 80"
 
-do_configure:prepend () {
+do_configure() {
 }
 
 do_install () {
