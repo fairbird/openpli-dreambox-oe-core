@@ -1,0 +1,26 @@
+--- a/include/os/rt_linux.h	2013-09-12 13:27:14.000000000 +0800
++++ b/include/os/rt_linux.h	2014-03-23 11:45:03.907628847 +0800
+@@ -279,8 +279,8 @@ typedef struct file* RTMP_OS_FD;
+ 
+ typedef struct _OS_FS_INFO_
+ {
+-	int				fsuid;
+-	int				fsgid;
++	kuid_t				fsuid;
++	kgid_t				fsgid;
+ 	mm_segment_t	fs;
+ } OS_FS_INFO;
+ 
+--- a/sta/sta_cfg.c	2013-09-12 13:27:14.000000000 +0800
++++ b/sta/sta_cfg.c	2014-12-15 11:49:50.747843025 +0800
+@@ -5763,7 +5763,10 @@
+             wrq->u.data.length = strlen(extra) + 1; /* 1: size of '\0' */
+             break;
+         case SHOW_DRVIER_VERION:
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wdate-time"
+             snprintf(extra, size, "Driver version-%s, %s %s\n", STA_DRIVER_VERSION, __DATE__, __TIME__ );
++#pragma GCC diagnostic pop
+             wrq->u.data.length = strlen(extra) + 1; /* 1: size of '\0' */
+             break;
+ #ifdef DOT11_N_SUPPORT

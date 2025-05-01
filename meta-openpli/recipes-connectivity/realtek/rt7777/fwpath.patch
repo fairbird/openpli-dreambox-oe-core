@@ -1,0 +1,47 @@
+--- DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/include/os/rt_drv.h.orig	2016-05-29 18:20:23.805996235 +0200
++++ DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/include/os/rt_drv.h	2016-05-29 18:21:27.666282290 +0200
+@@ -56,17 +56,17 @@
+ #ifdef CONFIG_STA_SUPPORT
+ 
+ #ifdef RTMP_MAC_USB
+-#define STA_PROFILE_PATH			"/etc/Wireless/RT2870STA/RT2870STA.dat"
++#define STA_PROFILE_PATH			"/etc/Wireless/RT7777/RT2870STA.dat"
+ #define STA_DRIVER_VERSION			"3.0.0.3"
+ #ifdef MULTIPLE_CARD_SUPPORT
+-#define CARD_INFO_PATH			"/etc/Wireless/RT2870STA/RT2870STACard.dat"
++#define CARD_INFO_PATH			"/etc/Wireless/RT7777/RT2870STACard.dat"
+ #endif /* MULTIPLE_CARD_SUPPORT */
+ #endif /* RTMP_MAC_USB */
+ 
+ #endif /* CONFIG_STA_SUPPORT */
+ 
+ #ifdef SINGLE_SKU_V2
+-#define SINGLE_SKU_TABLE_FILE_NAME	"/etc/Wireless/RT2870STA/SingleSKU.dat"
++#define SINGLE_SKU_TABLE_FILE_NAME	"/etc/Wireless/RT7777/SingleSKU.dat"
+ #endif /* SINGLE_SKU_V2 */
+ 
+ /***********************************************************************************
+--- DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/include/os/rt_linux.h.orig	2016-05-29 18:22:05.691261738 +0200
++++ DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/include/os/rt_linux.h	2016-05-29 18:22:30.800587830 +0200
+@@ -127,10 +127,10 @@
+ #ifdef CONFIG_STA_SUPPORT
+ 
+ #ifdef RTMP_MAC_USB
+-#define STA_PROFILE_PATH			"/etc/Wireless/RT2870STA/RT2870STA.dat"
++#define STA_PROFILE_PATH			"/etc/Wireless/RT7777/RT2870STA.dat"
+ #define STA_DRIVER_VERSION			"3.0.0.3"
+ #ifdef MULTIPLE_CARD_SUPPORT
+-#define CARD_INFO_PATH			"/etc/Wireless/RT2870STA/RT2870STACard.dat"
++#define CARD_INFO_PATH			"/etc/Wireless/RT7777/RT2870STACard.dat"
+ #endif /* MULTIPLE_CARD_SUPPORT */
+ #endif /* RTMP_MAC_USB */
+ 
+@@ -138,7 +138,7 @@
+ extern	const struct iw_handler_def rt28xx_iw_handler_def;
+ 
+ #ifdef SINGLE_SKU_V2
+-#define SINGLE_SKU_TABLE_FILE_NAME	"/etc/Wireless/RT2870STA/SingleSKU.dat"
++#define SINGLE_SKU_TABLE_FILE_NAME	"/etc/Wireless/RT7777/SingleSKU.dat"
+ #endif /* SINGLE_SKU_V2 */
+ 
+ #endif /* CONFIG_STA_SUPPORT */
