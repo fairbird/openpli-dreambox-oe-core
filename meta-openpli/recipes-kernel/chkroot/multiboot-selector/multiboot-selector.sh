@@ -10,6 +10,9 @@
 # It dynamically detects available STARTUP and STARTUP_* files
 # and validates images by mounting their corresponding root device.
 #
+# You can pass a image/slot number via parameter to avoid user
+# interaction.
+# 
 # ===============================================================
 
 # Multiboot Selector
@@ -88,7 +91,25 @@ ROOT_PARTITIONS=()
 KERNEL_PATHS=()
 ROOT_SUBDIRS=()
 
-BOOT="/dev/mmcblk0boot1"
+if grep -q -E "dm820|dm7080|dm900|dm920" /proc/stb/info/model || grep -q -E "beyonwizu4|et11000|sf4008" /proc/stb/info/boxtype; then
+	BOOT="/dev/mmcblk0boot1"
+else
+	for i in /sys/block/mmcblk0/mmcblk0p*; do
+		if [ -f "$i/uevent" ]; then
+			partname=$(grep '^PARTNAME=' "$i/uevent" | cut -d '=' -f 2)
+			devname=`cat /$i/uevent | grep DEVNAME | cut -d '=' -f 2`
+			case "$partname" in
+			  others)
+				BOOT="/dev/$devname"
+				;;
+			  other2)
+				BOOT="/dev/mmcblk0boot1"
+				;;
+			esac
+		fi
+	done
+fi
+echo "BOOT found:$BOOT"
 
 echo 0 > /sys/block/mmcblk0boot1/force_ro
 mount -t vfat "$BOOT" /boot 2>/dev/null
@@ -126,14 +147,17 @@ if [ ${#images[@]} -eq 0 ]; then
     exit 1
 fi
 
-# Show available options
-echo "Please select an image:"
-for i in "${!images[@]}"; do
-    echo "${choices[$i]}) ${images[$i]}"
-done
+# Show available options when no image/slot number is passed as a parameter
+image_choice=$1
+if [ -z "$image_choice" ]; then
+    echo "Please select an image:"
+    for i in "${!images[@]}"; do
+        echo "${choices[$i]}) ${images[$i]}"
+    done
 
-# User selection
-read -p "Select an image (1-8): " image_choice
+    # User selection
+    read -p "Select an image (1-${#images[@]}): " image_choice
+fi
 
 # Check if the selection is valid
 valid_choice=false
@@ -173,12 +197,5 @@ cp "/boot/$STARTUP_FILE" "/boot/STARTUP"
 # Display selected options for debugging or logging
 echo "Selected ROOT partition: $ROOT_PARTITION"
 echo "Selected ROOTSUBDIR: $ROOT_SUBDIR"
-
+sync
 echo "Script finished."
-
-
-
-
-
-
-
