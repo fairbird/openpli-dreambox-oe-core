@@ -1,1 +1,1 @@
-KERNEL_CC:append = " -std=gnu11"
+export KCFLAGS += "-std=gnu17"
