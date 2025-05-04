@@ -10,6 +10,8 @@ SRC_URI = "https://source.mynonpublic.com/gigablue/wlan/RT3070_RT3370_RT5370_RT5
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 
+export KCFLAGS += " -std=gnu17"
+
 S = "${WORKDIR}/RT3070_RT3370_RT5370_RT5372"
 
 do_install() {

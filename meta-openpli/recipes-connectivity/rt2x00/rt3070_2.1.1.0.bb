@@ -12,6 +12,8 @@ SRC_URI = "http://www.ralinktech.com.tw/data/drivers/2009_0525_RT3070_Linux_STA_
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 
+export KCFLAGS += " -std=gnu17"
+
 S = "${WORKDIR}/2009_0525_RT3070_Linux_STA_v${PV}"
 
 do_install() {
