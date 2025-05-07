@@ -266,6 +266,7 @@ FILES:${PN}-src = "\
 	${libdir}/enigma2/python/NavigationInstance.py \
 	${libdir}/enigma2/python/PowerTimer.py \
 	${libdir}/enigma2/python/RecordTimer.py \
+	${libdir}/enigma2/python/Scheduler.py \
 	${libdir}/enigma2/python/ServiceReference.py \
 	${libdir}/enigma2/python/skin.py \
 	${libdir}/enigma2/python/timer.py \
