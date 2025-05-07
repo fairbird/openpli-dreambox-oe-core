@@ -75,6 +75,7 @@ OPTIONAL_PACKAGES += " \
 	openresolv \
 	openssh \
 	openvpn \
+	libpcsc-perl \
 	parted \
 	picocom \
 	ppp \
