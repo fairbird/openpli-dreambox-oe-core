@@ -41,6 +41,7 @@ OPTIONAL_PACKAGES += " \
 	google-dns \
 	grep \
 	gstplayer \
+	gstplayer2 \
 	hddtemp \
 	hdparm \
 	htop \
