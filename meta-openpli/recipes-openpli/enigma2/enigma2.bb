@@ -32,6 +32,7 @@ RDEPENDS:${PN} = " \
 	enigma2-timezones \
 	enigma2-remote \
 	ethtool \
+	rsync \
 	glibc-gconv-iso8859-15 \
 	oe-alliance-branding \
 	enigma2-locale-meta \
