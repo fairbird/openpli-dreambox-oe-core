@@ -1,6 +1,6 @@
-From 94a2149807a6450a14867daa604678058b21a489 Mon Sep 17 00:00:00 2001
+From 22203141e5b10e6f2a9318f948b94b7aed947478 Mon Sep 17 00:00:00 2001
 From: fairbird <rrrr53@hotmail.com>
-Date: Wed, 28 Feb 2024 13:31:01 +0300
+Date: Sat, 10 May 2025 18:15:46 +0300
 Subject: [PATCH] patch
 
 ---
@@ -8,92 +8,57 @@ Subject: [PATCH] patch
  1 file changed, 11 insertions(+), 43 deletions(-)
 
 diff --git a/EPGImport/plugin.py b/EPGImport/plugin.py
-index 22cef53..935a1aa 100644
+index 1e53125..d4ac9e0 100644
 --- a/EPGImport/plugin.py
 +++ b/EPGImport/plugin.py
-@@ -13,13 +13,6 @@ import time
+@@ -14,8 +14,6 @@ from . import EPGImport
+ from . import EPGConfig
  
- import enigma
  
--try:
--    from Components.SystemInfo import BoxInfo
--    IMAGEDISTRO = BoxInfo.getItem("distro")
--except:
--    from boxbranding import getImageDistro
--    IMAGEDISTRO = getImageDistro()
+-from Components.SystemInfo import BoxInfo
 -
  # Config
  from Components.ActionMap import ActionMap
  from Components.Button import Button
-@@ -63,7 +56,7 @@ def calcDefaultStarttime():
+@@ -64,7 +62,6 @@ BouquetChannelListList = None
+ serviceIgnoreList = None
+ filterCounter = 0
+ isFilterRunning = 0
+-IMAGEDISTRO = BoxInfo.getItem("distro")
  
- #Set default configuration
- config.plugins.epgimport = ConfigSubsection()
--config.plugins.epgimport.enabled = ConfigEnableDisable(default=False)
-+config.plugins.epgimport.enabled = ConfigEnableDisable(default=True)
- config.plugins.epgimport.runboot = ConfigSelection(default="4", choices=[
- 		("1", _("always")),
- 		("2", _("only manual boot")),
-@@ -72,10 +65,8 @@ config.plugins.epgimport.runboot = ConfigSelection(default="4", choices=[
- 		])
+ SOURCE_LINKS = {
+ 	0: "https://github.com/oe-alliance/EPGimport-Sources/archive/refs/heads/main.tar.gz",
+@@ -87,10 +84,9 @@ config.plugins.epgimport.repeat_import = ConfigInteger(default=0, limits=(0, 23)
  config.plugins.epgimport.runboot_restart = ConfigYesNo(default=False)
  config.plugins.epgimport.runboot_day = ConfigYesNo(default=False)
--config.plugins.epgimport.wakeupsleep = ConfigEnableDisable(default=False)
  config.plugins.epgimport.wakeup = ConfigClock(default=calcDefaultStarttime())
 -# Different default in OpenATV:
 -config.plugins.epgimport.showinplugins = ConfigYesNo(default=IMAGEDISTRO != "openatv")
 +config.plugins.epgimport.showinplugins = ConfigYesNo(default=True)
  config.plugins.epgimport.showinextensions = ConfigYesNo(default=True)
- config.plugins.epgimport.deepstandby = ConfigSelection(default="skip", choices=[
- 		("wakeup", _("wake up and import")),
-@@ -84,7 +75,7 @@ config.plugins.epgimport.deepstandby = ConfigSelection(default="skip", choices=[
- config.plugins.epgimport.standby_afterwakeup = ConfigYesNo(default=False)
- config.plugins.epgimport.shutdown = ConfigYesNo(default=False)
- config.plugins.epgimport.longDescDays = ConfigNumber(default=5)
--#config.plugins.epgimport.showinmainmenu = ConfigYesNo(default = False)
-+config.plugins.epgimport.showinmainmenu = ConfigYesNo(default = False)
- config.plugins.epgimport.deepstandby_afterimport = NoSave(ConfigYesNo(default=False))
- config.plugins.epgimport.parse_autotimer = ConfigYesNo(default=False)
- config.plugins.epgimport.import_onlybouquet = ConfigYesNo(default=False)
-@@ -377,7 +368,7 @@ class EPGImportConfig(ConfigListScreen, Screen):
- 		self.cfg_runboot_restart = getConfigListEntry(_("Skip import on restart GUI"), self.EPG.runboot_restart)
- 		self.cfg_showinextensions = getConfigListEntry(_("Show \"EPGImport\" in extensions"), self.EPG.showinextensions)
- 		self.cfg_showinplugins = getConfigListEntry(_("Show \"EPGImport\" in plugins"), self.EPG.showinplugins)
--#		self.cfg_showinmainmenu = getConfigListEntry(_("Show \"EPG Importer\" in main menu"), self.EPG.showinmainmenu)
-+		self.cfg_showinmainmenu = getConfigListEntry(_("Show \"EPG Importer\" in main menu"), self.EPG.showinmainmenu)
- 		self.cfg_longDescDays = getConfigListEntry(_("Load long descriptions up to X days"), self.EPG.longDescDays)
- 		self.cfg_parse_autotimer = getConfigListEntry(_("Run AutoTimer after import"), self.EPG.parse_autotimer)
- 		self.cfg_clear_oldepg = getConfigListEntry(_("Clearing current EPG before import"), config.plugins.epgimport.clear_oldepg)
-@@ -399,6 +390,7 @@ class EPGImportConfig(ConfigListScreen, Screen):
- 				list.append(self.cfg_runboot_restart)
- 		list.append(self.cfg_showinextensions)
- 		list.append(self.cfg_showinplugins)
-+		list.append(self.cfg_showinmainmenu)
- 		list.append(self.cfg_import_onlybouquet)
- 		list.append(self.cfg_import_onlyiptv)
- 		if hasattr(enigma.eEPGCache, 'flushEPG'):
-@@ -753,11 +745,11 @@ def start_import(session, **kwargs):
- def main(session, **kwargs):
+-# config.plugins.epgimport.showinmainmenu = ConfigYesNo(default=False)
++config.plugins.epgimport.showinmainmenu = ConfigYesNo(default=False)
+ config.plugins.epgimport.deepstandby = ConfigSelection(
+ 	default="skip",
+ 	choices=[
+@@ -730,6 +726,13 @@ def main(session, **kwargs):
  	session.openWithCallback(doneConfiguring, EPGImportConfig)
  
--#def main_menu(menuid, **kwargs):
--#	if menuid == "mainmenu" and config.plugins.epgimport.showinmainmenu.getValue():
--#		return [(_("EPG Importer"), start_import, "epgimporter", 45)]
--#	else:
--#		return []
+ 
 +def main_menu(menuid, **kwargs):
 +	if menuid == "mainmenu" and config.plugins.epgimport.showinmainmenu.getValue():
 +		return [(_("EPG Importer"), start_import, "epgimporter", 45)]
 +	else:
 +		return []
++
++
+ def doneConfiguring(*retVal):
+ 	"""user has closed configuration, check new values...."""
+ 	if autoStartTimer is not None:
+@@ -1133,29 +1136,6 @@ extDescriptor = PluginDescriptor(name=_("EPG-Importer Now"), description=descrip
+ pluginlist = PluginDescriptor(name=_("EPG-Importer"), description=description, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
  
  
- def doneConfiguring(session, retval):
-@@ -1095,30 +1087,6 @@ config.plugins.epgimport.showinextensions.addNotifier(setExtensionsmenu, initial
- extDescriptor = PluginDescriptor(name=_("EPG-Importer"), description=description, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=extensionsmenu)
- pluginlist = PluginDescriptor(name=_("EPG-Importer"), description=description, where=PluginDescriptor.WHERE_PLUGINMENU, icon='plugin.png', fnc=main)
- 
--
 -def epgmenu(menuid, **kwargs):
 -	if IMAGEDISTRO in ("openvix", "openbh", "ventonsupport", "egami", "openhdf", "opendroid"):
 -		if menuid == "epg":
@@ -120,7 +85,7 @@ index 22cef53..935a1aa 100644
  def Plugins(**kwargs):
  	result = [
  		PluginDescriptor(
-@@ -1135,7 +1103,7 @@ def Plugins(**kwargs):
+@@ -1172,7 +1152,7 @@ def Plugins(**kwargs):
  			name=_("EPG-Importer"),
  			description=description,
  			where=PluginDescriptor.WHERE_MENU,
@@ -129,6 +94,3 @@ index 22cef53..935a1aa 100644
  		),
  	]
  	if config.plugins.epgimport.showinextensions.value:
--- 
-2.40.1
-
