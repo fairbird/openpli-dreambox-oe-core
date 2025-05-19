@@ -4,5 +4,4 @@
   available = yes
   create mask = 0666
   directory mask = 0777
-  wide links = yes
   follow symlinks = yes
