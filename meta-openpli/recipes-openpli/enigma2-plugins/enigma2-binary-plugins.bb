@@ -41,7 +41,6 @@ FILES:${PN}-dbg = "${prefix}/src/debug"
 PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-LDFLAGS += "-ltirpc"
 
 S = "${WORKDIR}/git"
 
@@ -63,6 +62,7 @@ DEPENDS = " \
 	dvdbackup \
 	libtirpc \
 	png-util \
+	libtirpc \
 	"
 
 
