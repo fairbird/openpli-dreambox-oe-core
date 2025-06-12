@@ -42,7 +42,6 @@ PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 LDFLAGS += "-ltirpc"
-CXXFLAGS = " -std=c++11"
 
 S = "${WORKDIR}/git"
 
