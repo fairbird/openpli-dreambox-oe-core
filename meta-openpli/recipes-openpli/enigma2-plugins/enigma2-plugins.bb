@@ -25,7 +25,7 @@ RDEPENDS:enigma2-plugin-extensions-bonjour = "avahi-daemon"
 RRECOMMENDS:enigma2-plugin-systemplugins-blindscan = "virtual/blindscan-dvbs"
 RRECOMMENDS:enigma2-plugin-extensions-transmission = "transmission transmission-client"
 
-inherit gitpkgv python3native pkgconfig gettext python3targetconfig autotools-brokensep allarch
+inherit gitpkgv pkgconfig gettext python3targetconfig autotools-brokensep allarch
 
 # needed to prevent autotools from running C compiler checks, which
 # fails in allarch (as there is no cross compiler for this ARCH !!
