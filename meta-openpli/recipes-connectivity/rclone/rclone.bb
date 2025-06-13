@@ -15,6 +15,7 @@ inherit gitpkgv go-mod upx-compress
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"
+PR = "r1"
 
 SRC_URI = "git://github.com/rclone/rclone.git;protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX} \
            file://rclonefs"
