@@ -112,11 +112,6 @@ python populate_packages:prepend () {
         getControlLines(mydir, d, package.split('-')[-1])
 }
 
-do_install:append() {
-	# remove leftover webinterface garbage
-	rm -rf ${D}${libdir}/enigma2/python/Plugins/Extensions/WebInterface
-}
-
 # Nothing of this recipe should end up in sysroot, so blank it away.
 sysroot_stage_all() {
     :
