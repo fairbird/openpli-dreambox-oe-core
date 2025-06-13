@@ -26,7 +26,7 @@ do_install() {
 	cp -r ${S}${prefix}/* ${D}${prefix}/
 	install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/PICONS
 	cp -r ${S}/tmp/RaedQuickSignal/* ${D}/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/PICONS
-	python3 -m compileall -o2 -b ${D}${prefix}
+	python3 -m compileall -o2 -b ${D}${prefix} -d /
 }
 
 INSANE_SKIP:${PN} += "already-stripped"

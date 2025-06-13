@@ -24,7 +24,7 @@ FILES:${PN} = "${prefix}/"
 do_install() {
 	install -d ${D}${prefix}
 	cp -r ${S}${prefix}/* ${D}${prefix}/
-	python3 -m compileall -o2 -b ${D}${prefix}
+	python3 -m compileall -o2 -b ${D}${prefix} -d /
 }
 
 RDEPENDS:{PN}-src = "${PN}"
