@@ -212,7 +212,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-mediaplayer2 \
 	enigma2-plugin-extensions-modifyplifullhd \
 	enigma2-plugin-extensions-jediepgxtream \
-	enigma2-plugin-extensions-jedimakerxtream \
 	enigma2-plugin-extensions-moviemanager \
 	enigma2-plugin-extensions-oaweather \
 	enigma2-plugin-extensions-openmultiboot \
