@@ -25,6 +25,7 @@ RRECOMMENDS:${PN} = " \
         python3-e2icjson \
         python3-json \
         python3-shell \
+       python3-websocket-client \
         "
 
 do_install:append() {
