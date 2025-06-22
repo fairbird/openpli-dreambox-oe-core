@@ -1,17 +1,27 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+inherit upx-compress
 
-SRC_URI += "file://login-blank-password.patch"
-
-INITSCRIPT_PACKAGES = ""
-
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+SRC_URI += "file://ftp.service"
 
 CFLAGS += "-std=gnu17"
 LDFLAGS:append = " -lssl -lcrypto"
 
+do_configure:prepend() {
+    sed -i 's#undef VSF_BUILD_SSL#define VSF_BUILD_SSL#' ${S}/builddefs.h
+}
+
 do_install:append() {
-	rm ${D}${sysconfdir}/init.d/vsftpd
-	rm ${D}${sysconfdir}/vsftpd.ftpusers
-	rm ${D}${sysconfdir}/vsftpd.user_list
+    rm -f ${D}${sysconfdir}/vsftpd.user_list
+    mkdir -p ${D}${sysconfdir}/avahi/services
+    install -m 644 ${UNPACKDIR}/ftp.service ${D}${sysconfdir}/avahi/services
+    if [ -n "${PAMLIB}" ]; then
+        grep -v 'pam_shells.so' ${D}${sysconfdir}/pam.d/vsftpd > $D/tmp/vsftpd
+        install -m 644 $D/tmp/vsftpd ${D}${sysconfdir}/pam.d/vsftpd
+    fi
+    sed -i "s: nullok::" ${D}${sysconfdir}/pam.d/vsftpd
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        rm ${D}/etc/init.d/vsftpd || true
+    fi
 }
 
 pkg_postinst_ontarget:${PN}:append () {
@@ -19,3 +29,25 @@ pkg_postinst_ontarget:${PN}:append () {
 chown root /etc/vsftpd.conf
 }
 
+pkg_postinst:${PN}:append() {
+#!/bin/sh
+
+if [ -n "$D" ]; then
+	set +e
+	grep -qE '^kids:' $D/etc/passwd
+	if [[ $? -ne 0 ]] ; then
+		echo 'kids:x:500:500:Linux User,,,:/media:/bin/false' >> $D/etc/passwd
+		echo 'kids:!:16560:0:99999:7:::' >> $D/etc/shadow
+	fi
+fi
+
+
+if [ -z "$D" ]; then
+	set +e
+	grep -qE '^kids:' /etc/passwd
+	if [[ $? -ne 0 ]] ; then
+		adduser -h /media -s /bin/false -H -D -u 500 kids 2>/dev/null || adduser -h /media -s /bin/false -H -D kids
+	fi
+
+fi
+}

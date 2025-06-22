@@ -1,31 +1,37 @@
+B = "${S}"
+
+INITSCRIPT_PARAMS = "defaults 17"
+
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-EXTRA_OECONF += "--with-confdir=/etc/default"
+SRC_URI += " file://volatiles.99_autofs file://auto.network file://autofs.default"
 
-SRC_URI += " file://99_autofs"
+EXTRA_OECONF += "--with-confdir=/etc/default --with-mapdir=/etc"
 
-CONFFILES = "${sysconfdir}/auto.master ${sysconfdir}/auto.net"
+# Remove bash scripting from init script (meaning, remove "function"
+# from each shell function)
+do_configure:prepend () {
+	for bashfile in redhat/autofs.init.in samples/rc.autofs.in
+	do
+		sed -i 's.#!/bin/bash.#!/bin/sh.' $bashfile
+		sed -i 's/^function //g' $bashfile
+	done
+}
 
 # Remove and change configuration files
 do_install:append() {
-	echo "/media/net /etc/auto.net --ghost" > ${D}${sysconfdir}/auto.master
-	echo "# automounter configuration" > ${D}${sysconfdir}/auto.net
-	chmod 0644 ${D}${sysconfdir}/auto.net
-	rm -f ${D}${sysconfdir}/auto.smb ${D}${sysconfdir}/auto.misc ${D}${sysconfdir}/autofs_ldap_auth.conf
-	sed -i 's/^TIMEOUT=300/TIMEOUT=30/' ${D}${sysconfdir}/default/autofs
-	install -d ${D}${sysconfdir}/default/volatiles
-	install -m 644 ${UNPACKDIR}/99_autofs ${D}${sysconfdir}/default/volatiles/99_autofs
+    echo "/media/autofs  /etc/auto.network  --ghost" > ${D}/etc/auto.master
+    rm -f ${D}/etc/auto.smb ${D}/etc/auto.misc ${D}/etc/autofs_ldap_auth.conf
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        rm ${D}/etc/init.d/autofs || true
+    else
+        [ -e ${D}/etc/init.d/autofs ] && sed -i 's/count -lt 15/count -lt 60/' ${D}/etc/init.d/autofs
+        [ -e ${D}/etc/init.d/autofs ] && sed -i 's/sleep 20/sleep 1/' ${D}/etc/init.d/autofs
+    fi
+    install -d ${D}${sysconfdir}/default/volatiles
+    install -m 644 ${UNPACKDIR}/volatiles.99_autofs ${D}${sysconfdir}/default/volatiles/99_autofs
+    install -m 644 ${UNPACKDIR}/auto.network ${D}/etc/auto.network
+    install -m 644 ${UNPACKDIR}/autofs.default ${D}/etc/default/autofs
 }
 
-pkg_postinst:${PN} () {
-	if [ -z "$D" ]; then
-		if [ ! -d /var/run/autofs ]; then
-			mkdir -p /var/run/autofs
-			chmod 770 /var/run/autofs
-		fi
-		if [ ! -d /media/net ]; then
-			mkdir -p /media/net
-			chmod 755 /media/net
-		fi
-	fi
-}
+CONFFILES:${PN} = "/etc/auto.network"
