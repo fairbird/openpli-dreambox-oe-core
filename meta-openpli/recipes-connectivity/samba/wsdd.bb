@@ -7,17 +7,14 @@ require conf/license/license-gplv2.inc
 DEPENDS = "util-linux samba"
 
 SRC_URI = " \
-	file://Makefile \
-	file://wsdd.c \
-	"
+    file://Makefile \
+    file://wsdd.c \
+    "
 
-PR = "r1"
-PV = "1.0"
+PV = "1.08"
 
 S = "${WORKDIR}/sources"
 UNPACKDIR = "${S}"
-
-TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_compile() {
     make -f Makefile
@@ -27,3 +24,5 @@ do_install() {
     install -d ${D}/${sbindir}
     install -m 755 ${S}/wsdd ${D}/${sbindir}
 }
+
+INSANE_SKIP:${PN} += "ldflags"
