@@ -14,11 +14,6 @@ do_install:append() {
     rm -f ${D}${sysconfdir}/vsftpd.user_list
     mkdir -p ${D}${sysconfdir}/avahi/services
     install -m 644 ${UNPACKDIR}/ftp.service ${D}${sysconfdir}/avahi/services
-    if [ -n "${PAMLIB}" ]; then
-        grep -v 'pam_shells.so' ${D}${sysconfdir}/pam.d/vsftpd > $D/tmp/vsftpd
-        install -m 644 $D/tmp/vsftpd ${D}${sysconfdir}/pam.d/vsftpd
-    fi
-    sed -i "s: nullok::" ${D}${sysconfdir}/pam.d/vsftpd
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         rm ${D}/etc/init.d/vsftpd || true
     fi
