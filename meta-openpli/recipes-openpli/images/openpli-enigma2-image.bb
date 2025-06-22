@@ -106,6 +106,9 @@ IMAGE_INSTALL = " \
 	wget \
 	mtd-utils \
 	mtd-utils-ubifs \
+	packagegroup-base-nfs \
+	packagegroup-base-smbfs-client \
+	packagegroup-base-smbfs-server \
 	${ENIGMA2_PLUGINS} \
 	${ROOTFS_PKGMANAGE} \
 	${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "${NORMAL_IMAGE}", d)} \
