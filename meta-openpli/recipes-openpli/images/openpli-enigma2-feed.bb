@@ -127,6 +127,7 @@ OPTIONAL_PACKAGES += " \
 	udpxy \
 	upx \
 	ubuntu-font-family \
+	ushare \
 	v4l-utils \
 	vim \
 	wget \
