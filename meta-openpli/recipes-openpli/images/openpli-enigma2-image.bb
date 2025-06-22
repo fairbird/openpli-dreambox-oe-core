@@ -52,6 +52,7 @@ DEPENDS += " \
 	"
 
 IMAGE_INSTALL = " \
+	autofs \
 	aio-grab \
 	avahi-daemon \
 	ca-certificates \

@@ -13,7 +13,6 @@ OPTIONAL_PACKAGES ?= ""
 OPTIONAL_BSP_PACKAGES ?= ""
 OPTIONAL_PACKAGES += " \
 	astra-sm \
-	autofs \
 	autossh \
 	bitratecalc \
 	btrfs-tools \
