@@ -4,7 +4,7 @@ MAINTAINER = "OpenPLi team <info@openpli.org>"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8e37f34d0e40d32ea2bc90ee812c9131"
 
-PACKAGE_ARCH = "all"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PACKAGES_DYNAMIC = "enigma2-plugin-(?!pli-).*"
 
@@ -25,16 +25,7 @@ RDEPENDS:enigma2-plugin-extensions-bonjour = "avahi-daemon"
 RRECOMMENDS:enigma2-plugin-systemplugins-blindscan = "virtual/blindscan-dvbs"
 RRECOMMENDS:enigma2-plugin-extensions-transmission = "transmission transmission-client"
 
-inherit gitpkgv pkgconfig gettext python3targetconfig autotools-brokensep allarch
-
-# needed to prevent autotools from running C compiler checks, which
-# fails in allarch (as there is no cross compiler for this ARCH !!
-CC = ""
-CFLAGS = ""
-CPP = ""
-CPPFLAGS = ""
-CXX = ""
-CXXFLAGS = ""
+inherit gitpkgv pkgconfig gettext python3targetconfig autotools-brokensep
 
 PV = "y-git"
 PKGV = "y-git${GITPKGV}"
@@ -133,5 +124,3 @@ sysroot_stage_all() {
 }
 
 INSANE_SKIP:${PN} = "installed-vs-shipped"
-
-CFLAGS += "-Wno-error=implicit-function-declaration"
