@@ -113,7 +113,7 @@ python populate_packages:prepend () {
                 d.setVar('MAINTAINER:' + full_package, line[12:])
 
 
-    mydir = d.getVar('D') + "/../git/"
+    mydir = d.getVar('S', True) + "/"
     for package in d.getVar('PACKAGES').split():
         getControlLines(mydir, package.split('-')[-1])
 }
