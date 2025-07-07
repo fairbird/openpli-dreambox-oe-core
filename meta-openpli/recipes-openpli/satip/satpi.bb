@@ -13,8 +13,8 @@ SRC_URI = "git://github.com/Barracuda09/SATPI.git;protocol=http;branch=master;pr
 
 PV = "git"
 
-S = "${UNPACKDIR}/git"
-BUILD = "${UNPACKDIR}/git"
+S = "${UNPACKDIR}/${BP}"
+BUILD = "${UNPACKDIR}/${BP}"
 
 CXXFLAGS = " -std=c++11"
 

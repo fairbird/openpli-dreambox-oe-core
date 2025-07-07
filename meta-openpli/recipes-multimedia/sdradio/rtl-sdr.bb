@@ -14,7 +14,7 @@ SRC_URI = "git://git.osmocom.org/rtl-sdr;protocol=https;branch=master"
 
 SRCREV = "${AUTOREV}"
  
-S = "${UNPACKDIR}/git"
+S = "${UNPACKDIR}/${BP}"
  
 DEPENDS = "libusb1"
  

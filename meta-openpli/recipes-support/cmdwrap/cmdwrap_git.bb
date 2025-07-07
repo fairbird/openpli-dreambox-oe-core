@@ -12,7 +12,7 @@ PR = "r0"
 SRC_URI = "git://github.com/oe-mirrors/e2iplayer-deps.git;protocol=https;branch=master"
 SRCREV = "${AUTOREV}"
 
-S = "${UNPACKDIR}/git/cmdwrap"
+S = "${UNPACKDIR}/${BP}/cmdwrap"
 
 SOURCE_FILES = "src/cmdwrap.c"
 

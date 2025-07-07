@@ -14,8 +14,8 @@ SRC_URI = " \
 UPSTREAMVERSION = "1.0d"
 PV = "${UPSTREAMVERSION}+git"
 
-S = "${UNPACKDIR}/git"
-BUILD = "${UNPACKDIR}/git"
+S = "${UNPACKDIR}/${BP}"
+BUILD = "${UNPACKDIR}/${BP}"
 
 inherit autotools-brokensep update-rc.d
 

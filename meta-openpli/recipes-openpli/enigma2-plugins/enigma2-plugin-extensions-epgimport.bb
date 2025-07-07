@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=m
 	file://Remove-unused-codes.patch \
 "
 
-S = "${UNPACKDIR}/git/src"
+S = "${UNPACKDIR}/${BP}/src"
 
 RDEPENDS:${PN} = "python3-compression python3-shell python3-backports-lzma python3-pkgutil"
 RRECOMMENDS:${PN} = "${PN}-sources"

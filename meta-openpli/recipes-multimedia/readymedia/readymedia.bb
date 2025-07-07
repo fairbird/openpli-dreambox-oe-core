@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/OpenVisionE2/minidlna.git;protocol=https;branch=mast
 			file://readymedia.sh \
 			file://minidlna.conf \
 "
-S = "${UNPACKDIR}/git"
+S = "${UNPACKDIR}/${BP}"
 
 do_configure:prepend() {
 		sed -i 's/AM_INIT_AUTOMAKE.*$/AM_INIT_AUTOMAKE([foreign subdir-objects])/' ${S}/configure.ac

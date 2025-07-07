@@ -12,6 +12,6 @@ PR = "r0"
 
 SRC_URI = "git://github.com/OpenVisionE2/gst-ifdsrc.git;protocol=https;branch=master"
 
-S = "${UNPACKDIR}/git/gst-ifdsrc/gst-ifdsrc"
+S = "${UNPACKDIR}/${BP}/gst-ifdsrc/gst-ifdsrc"
 
 FILES:${PN} += "${libdir}/gstreamer-1.0"

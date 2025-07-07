@@ -12,7 +12,7 @@ ASNEEDED = ""
 
 EXTRA_OECMAKE = " \
 	  -DADDONS_TO_BUILD=inputstream.adaptive \
-	  -DADDON_SRC_PREFIX=${UNPACKDIR}/git \
+	  -DADDON_SRC_PREFIX=${UNPACKDIR}/${BP} \
 	  -DCMAKE_BUILD_TYPE=Debug \
 	  -DCMAKE_INSTALL_PREFIX=${datadir}/kodi/addons \
           -DKODI_INCLUDE_DIR=${STAGING_INCDIR}/kodi \

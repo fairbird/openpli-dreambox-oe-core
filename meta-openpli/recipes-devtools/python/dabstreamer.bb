@@ -8,7 +8,7 @@ require conf/license/license-gplv2.inc
 RDEPENDS:${PN} = "eti-tools python3-core tsniv2ni"
 
 SRC_URI = "git://github.com/satdreamgr/dabstreamer.git;protocol=https;branch=master"
-S = "${UNPACKDIR}/git"
+S = "${UNPACKDIR}/${BP}"
 
 inherit gitpkgv
 SRCREV = "${AUTOREV}"

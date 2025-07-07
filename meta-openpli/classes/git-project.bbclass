@@ -1,4 +1,4 @@
-S = "${UNPACKDIR}/git"
+S = "${UNPACKDIR}/${BP}"
 
 inherit gitpkgv
 

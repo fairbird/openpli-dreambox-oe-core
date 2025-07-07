@@ -16,4 +16,4 @@ SRC_URI = "\
 PV = "git"
 PKGV = "git${GITPKGV}"
 
-S = "${UNPACKDIR}/git"
+S = "${UNPACKDIR}/${BP}"
