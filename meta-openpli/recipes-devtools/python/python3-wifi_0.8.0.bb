@@ -11,7 +11,4 @@ SRC_URI = "git://github.com/oe-mirrors/wifi.git;branch=master;protocol=https fil
 SRCREV ?= "ea9b8896d9866ac752b60f87e767d2a9565d00cb"
 
 inherit setuptools3
-
-S = "${UNPACKDIR}/git"
-
 include python3-package-split.inc

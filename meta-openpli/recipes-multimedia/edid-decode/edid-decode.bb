@@ -12,7 +12,4 @@ PKGV = "1.0+git${GITPKGV}"
 # SRC_URI = "git://git.linuxtv.org/edid-decode.git;protocol=https;branch=master"
 
 SRC_URI = "git://github.com/oe-mirrors/edid-decode.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 inherit meson pkgconfig

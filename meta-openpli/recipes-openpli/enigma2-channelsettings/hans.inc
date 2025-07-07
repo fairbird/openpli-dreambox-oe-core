@@ -4,9 +4,6 @@ PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://gitlab.openpli.org/openpli/hanssettings.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 RDEPENDS:${PN} = "xz"
 
 inherit gitpkgv allarch

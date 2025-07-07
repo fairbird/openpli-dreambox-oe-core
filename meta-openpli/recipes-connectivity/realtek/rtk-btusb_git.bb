@@ -6,9 +6,6 @@ require conf/license/license-close.inc
 inherit module
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/atvcaptain/LINUX_BT_USB_DRIVER.git;protocol=https;branch=main"
-
-S = "${UNPACKDIR}/git"
-
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 
 # need only for dreambox linux-meson64 4.9 + GCC 15

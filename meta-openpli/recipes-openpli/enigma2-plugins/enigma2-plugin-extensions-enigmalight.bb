@@ -13,9 +13,6 @@ PKGV = "1.42+git${GITPKGV}"
 PR = "r12"
 
 SRC_URI = "git://github.com/nickersk/enigmalight.git;protocol=https;branch=python3"
-
-S = "${UNPACKDIR}/git"
-
 inherit autotools-brokensep pkgconfig
 
 do_install:append() {

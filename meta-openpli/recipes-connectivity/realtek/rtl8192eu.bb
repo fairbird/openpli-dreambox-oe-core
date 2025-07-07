@@ -8,9 +8,6 @@ DEPENDS = "bc-native"
 SRC_URI = "git://github.com/atvcaptain/RTL8192EU.git;protocol=https;branch=master"
 
 SRCREV = "${AUTOREV}"
-
-S = "${UNPACKDIR}/git"
-
 inherit module
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
@@ -41,9 +38,6 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-missing-attributes \
                     -Wno-address-of-packed-member \
 "
-
-S = "${UNPACKDIR}/git"
-
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP
     oe_runmake 'M={D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless' \

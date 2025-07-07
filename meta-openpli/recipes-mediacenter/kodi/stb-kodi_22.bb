@@ -118,9 +118,6 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
            ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0101-e2-player.patch', d)} \
            ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0102-gst-player.patch', d)} \
           "
-
-S = "${UNPACKDIR}/git"
-
 ACCEL ?= ""
 ACCEL:x86 = "vaapi vdpau"
 ACCEL:x86-64 = "vaapi vdpau"

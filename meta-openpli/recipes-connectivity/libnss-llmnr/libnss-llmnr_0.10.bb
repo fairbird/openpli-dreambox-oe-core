@@ -12,9 +12,6 @@ PV = "git"
 PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/jmaggard10/nss-llmnr.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 EXTRA_OECONF = "--libdir=${base_libdir} --disable-lynx"
 
 # suppress warning, but don't bother with autonamer

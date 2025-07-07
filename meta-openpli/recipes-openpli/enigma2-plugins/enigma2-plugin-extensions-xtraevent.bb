@@ -13,9 +13,6 @@ RDEPENDS:${PN} += "\
 	python3-pillow \
 	python3-requests \
 	"
-
-S = "${UNPACKDIR}/git"
-
 PV = "6.805+git"
 PKGV = "6.805+git${GITPKGV}"
 

@@ -14,7 +14,4 @@ PV = "22.0.0+gitr"
 KODIADDONBRANCH = "Piers"
 
 SRC_URI = "git://github.com/xbmc/inputstream.rtmp.git;protocol=https;branch=${KODIADDONBRANCH}"
-
-S = "${UNPACKDIR}/git"
-
 KODIADDONNAME = "inputstream.rtmp"

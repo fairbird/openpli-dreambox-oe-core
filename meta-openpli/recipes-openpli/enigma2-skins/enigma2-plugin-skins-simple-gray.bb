@@ -11,9 +11,6 @@ PKGV = "1.0+git${GITPKGV}"
 SRC_URI = "git://github.com/Taapat/skin-SimpleGray.git;protocol=https;branch=master"
 
 FILES:${PN} = "${prefix}/"
-
-S = "${UNPACKDIR}/git"
-
 do_compile() {
 	python3 -O -m compileall ${S}${libdir}/enigma2/python/Components/
 }

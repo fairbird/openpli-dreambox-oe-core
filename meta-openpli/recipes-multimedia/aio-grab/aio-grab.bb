@@ -12,9 +12,6 @@ PKGV = "1.0+git${GITPKGV}"
 
 GITHUB_URI ?= "git://github.com"
 SRC_URI = "${GITHUB_URI}/oe-alliance/${BPN}.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "ac_cv_prog_c_openmp=-fopenmp"

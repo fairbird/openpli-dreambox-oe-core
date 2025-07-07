@@ -14,9 +14,6 @@ inherit python3-dir gitpkgv
 SRCREV = "${AUTOREV}"
 
 SRC_URI = "git://github.com/oe-mirrors/livestreamersrv;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 do_install:append() {
     install -d ${D}${sbindir}
     install -d ${D}${datadir}

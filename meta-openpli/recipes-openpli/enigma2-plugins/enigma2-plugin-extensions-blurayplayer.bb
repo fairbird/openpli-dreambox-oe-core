@@ -13,7 +13,4 @@ PKGV = "1+git${GITPKGV}"
 BRANCH = "openpli"
 
 SRC_URI = "git://github.com/Taapat/enigma2-plugin-blurayplayer.git;branch=${BRANCH};protocol=https"
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN}-dbg += "${libdir}/enigma2/python/Plugins/Extensions/BlurayPlayer/.debug"

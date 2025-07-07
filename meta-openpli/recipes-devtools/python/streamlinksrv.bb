@@ -16,9 +16,6 @@ PV = "1.8.4+git"
 PKGV = "1.8.4+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-mirrors/livestreamersrv;protocol=https;branch=streamlinksrv"
-
-S = "${UNPACKDIR}/git"
-
 do_install:append() {
     install -d ${D}${sbindir}
     install -d ${D}${datadir}

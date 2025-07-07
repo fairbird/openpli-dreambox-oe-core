@@ -9,9 +9,6 @@ PV = "git"
 PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/fairbird/Internet-Speedtest.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 do_install() {
 	install -d ${D}${prefix}
 	cp -r ${S}${prefix}/* ${D}${prefix}/

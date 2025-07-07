@@ -21,9 +21,6 @@ SRC_URI = "git://github.com/zerotier/ZeroTierOne.git;protocol=https;branch=main 
         file://0001-accept-external-ldflags.patch \
         file://0003-dont-enable-AES-hwcaps-for-arm.patch \
 "
-
-S = "${UNPACKDIR}/git"
-
 INITSCRIPT_NAME = "zerotier"
 
 inherit update-rc.d systemd

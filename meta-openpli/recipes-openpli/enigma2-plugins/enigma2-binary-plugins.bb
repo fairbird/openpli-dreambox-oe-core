@@ -41,9 +41,6 @@ FILES:${PN}-dbg = "${prefix}/src/debug"
 PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-
-S = "${UNPACKDIR}/git"
-
 DEPENDS = " \
 	python3-pyopenssl \
 	streamripper \

@@ -1,9 +1,6 @@
 HOMEPAGE = "https://github.com/Dima73/${PLUGINNAME}"
 
 SRC_URI = "git://github.com/Dima73/${PLUGINNAME}.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 include python3-package-split.inc
 
 inherit gitpkgv setuptools3-openplugins python3-compileall

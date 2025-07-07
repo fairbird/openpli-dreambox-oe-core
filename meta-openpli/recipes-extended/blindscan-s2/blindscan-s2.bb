@@ -9,9 +9,6 @@ SRC_URI = "git://github.com/OpenVisionE2/blindscan-s2.git;protocol=https;branch=
 inherit gitpkgv
 PV = "1+git"
 PKGV = "1+git${GITPKGV}"
-
-S = "${UNPACKDIR}/git"
-
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install () {

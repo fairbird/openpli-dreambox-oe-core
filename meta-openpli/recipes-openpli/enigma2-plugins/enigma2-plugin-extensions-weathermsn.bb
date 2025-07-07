@@ -14,9 +14,6 @@ PKGV = "1.3.+git${GITPKGV}"
 SRC_URI = "git://github.com/oe-mirrors/enigma2-plugins.git;protocol=https;branch=master"
 
 FILES:${PN} = "${libdir}/enigma2/"
-
-S = "${UNPACKDIR}/git"
-
 do_install() {
 	install -d ${D}${libdir}/enigma2/python/Plugins/Extensions
 	cp -fr --preserve=links ${S}/python/Plugins/Extensions/WeatherMSN ${D}${libdir}/enigma2/python/Plugins/Extensions/

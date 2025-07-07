@@ -8,9 +8,6 @@ DEPENDS = "bc-native"
 SRC_URI = "git://github.com/edision-open/RTL8723DS_WiFi_linux.git;protocol=https;branch=master"
 
 SRCREV = "94eef3f7cb762b7309824be6cd2b6af75ac80bbd"
-
-S = "${UNPACKDIR}/git"
-
 inherit module
 
 EXTRA_OEMAKE = 'KSRC="${STAGING_KERNEL_BUILDDIR}" USER_EXTRA_CFLAGS="-Wno-date-time" CONFIG_RTW_DEBUG=n'

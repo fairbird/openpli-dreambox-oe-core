@@ -10,9 +10,6 @@ inherit autotools pkgconfig
 SRC_URI = "git://github.com/juhovh/shairplay.git;protocol=https;branch=master \
            file://remove-dns-sd-h-header-file-check.patch \
 "
-
-S = "${UNPACKDIR}/git"
-
 do_install:append(){
     install -d ${D}/${includedir}/shairplay
     install -m 0644 ${S}/include/shairplay/*.h ${D}/${includedir}/shairplay/

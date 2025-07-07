@@ -9,9 +9,6 @@ SRC_URI = "git://github.com/ldo/dvdauthor;protocol=https;branch=master file://fi
 inherit gitpkgv
 PV = "0.7.1+git"
 PKGV = "0.7.1+git${GITPKGV}"
-
-S = "${UNPACKDIR}/git"
-
 do_configure:prepend() {
 	mkdir -p ${S}/autotools
 	cp ${STAGING_DATADIR_NATIVE}/gettext/config.rpath ${S}/autotools/

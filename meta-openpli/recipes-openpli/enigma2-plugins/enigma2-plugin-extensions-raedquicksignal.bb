@@ -11,9 +11,6 @@ RDEPENDS:${PN} += "\
 	python3-requests \
 	python3-six \
 	"
-
-S = "${UNPACKDIR}/git"
-
 SRCREV = "${AUTOREV}"
 
 PV = "17.6+git"

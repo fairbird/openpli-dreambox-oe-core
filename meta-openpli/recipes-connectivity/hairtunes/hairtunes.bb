@@ -13,9 +13,6 @@ SRCREV = "${AUTOREV}"
 require conf/license/license-gplv2.inc
 
 SRC_URI = "git://github.com/skaman/shairport.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN} = "${bindir}/*"
 
 do_compile() {

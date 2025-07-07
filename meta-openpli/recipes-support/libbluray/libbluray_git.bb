@@ -12,9 +12,6 @@ inherit gitpkgv setuptools3 autotools-brokensep pkgconfig
 
 PV = "v1.1.0+git"
 PKGV = "v1.1.0+git${GITPKGV}"
-
-S = "${UNPACKDIR}/git"
-
 EXTRA_OECONF = " \
 	--disable-bdjava-jar \
 	--disable-doxygen-doc \

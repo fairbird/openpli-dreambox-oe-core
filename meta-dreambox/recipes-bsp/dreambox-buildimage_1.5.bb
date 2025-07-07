@@ -15,9 +15,6 @@ SRCREV = "95d4dd192e659f297e782fd71edbee038f9dc443"
 SRC_URI = "git://github.com/oe-mirrors/buildimage.git;protocol=https;branch=master \
     file://0001-add-e-option-for-warn-only.patch \
 "
-
-S = "${UNPACKDIR}/git"
-
 inherit autotools
 
 OPENDREAMBOX_PROJECT = "buildimage"

@@ -26,9 +26,6 @@ EXTRA_OECONF = "--disable-runtime-loading --disable-utmp"
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} ssl"
 PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
 PACKAGECONFIG[ssl] = "--enable-ssl,--disable-ssl,openssl"
-
-S = "${UNPACKDIR}/git"
-
 INITSCRIPT_NAME = "shellinabox"
 SYSTEMD_SERVICE = "shellinabox.service"
 

@@ -13,9 +13,6 @@ PKGV = "3.4+git${GITPKGV}"
 DEPENDS = "bitstream libev"
 
 SRC_URI = "git://github.com/videolan/dvblast.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 do_configure() {
 }
  

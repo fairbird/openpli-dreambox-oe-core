@@ -14,9 +14,6 @@ inherit gitpkgv allarch
 RDEPENDS:${PN} = "python3 python3-requests python3-pillow"
 
 SRC_URI = "git://github.com/kiddac/Bouquet_Maker_Xtream.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN} = " ${libdir}/enigma2/python/Plugins/Extensions/BouquetMakerXtream \
                 ${libdir}/enigma2/python/Components/Renderer"
 

@@ -12,9 +12,6 @@ PKGV = "1.0+git${GITPKGV}"
 PR = "r0"
 
 SRC_URI = "git://github.com/OpenVisionE2/f4mdump.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 SRCRTMP = "ext/librtmp/amf.c"
 SRCRTMP =+ "ext/librtmp/hashswf.c"
 SRCRTMP =+ "ext/librtmp/log.c"

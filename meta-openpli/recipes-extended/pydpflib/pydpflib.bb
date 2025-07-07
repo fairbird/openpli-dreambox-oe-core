@@ -10,9 +10,6 @@ SRC_URI = "git://github.com/atvcaptain/dpf-ax.git;branch=dreamlayers;protocol=ht
          file://fix-incompatible-pointer-type.patch \
          file://migrate-to-new-buffer-protocol.patch \
 "
-
-S = "${UNPACKDIR}/git"
-
 inherit pkgconfig gitpkgv python3native
 
 SRCREV = "${AUTOREV}"

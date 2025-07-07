@@ -14,9 +14,6 @@ SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/oe-alliance/kodiext.git;protocol=https;branch=master \
         file://advancedsettings.xml \
         "
-
-S = "${UNPACKDIR}/git"
-
 do_install:append() {
 	install -d ${D}/usr/share/kodi/system
 	install -m 0755 ${UNPACKDIR}/advancedsettings.xml ${D}/usr/share/kodi/system

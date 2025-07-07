@@ -7,9 +7,6 @@ DEPENDS = "python3-pybind11-native"
 
 SRC_URI = "git://github.com/junka/tsanalyze.git;protocol=https;branch=master"
 SRCREV = "eb71e512764080233fa0a4d29f2452ef3733c107"
-
-S = "${UNPACKDIR}/git"
-
 inherit cmake python3targetconfig python3native
 
 do_install() {

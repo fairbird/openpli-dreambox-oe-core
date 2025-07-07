@@ -10,9 +10,6 @@ PKGV = "git${GITPKGV}"
 SRC_URI = "git://github.com/oe-alliance/remotes;protocol=https;branch=master"
 
 FILES:${PN} = "/"
-
-S = "${UNPACKDIR}/git"
-
 do_install() {
 	install -d ${D}${datadir}/enigma2/
 	install -d ${D}${datadir}/enigma2/rc_models

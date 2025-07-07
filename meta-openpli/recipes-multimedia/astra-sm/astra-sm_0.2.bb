@@ -15,9 +15,6 @@ SRC_URI = "git://gitlab.com/berdyansk/astra-sm.git;protocol=http;branch=master \
 	file://tools.patch \
 	file://replace-sys-siglist.patch \
 	"
-
-S = "${UNPACKDIR}/git"
-
 inherit autotools-brokensep pkgconfig gettext
 
 do_install:append() {

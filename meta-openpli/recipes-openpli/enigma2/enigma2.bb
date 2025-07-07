@@ -202,9 +202,6 @@ GITHUB_URI ?= "git://github.com"
 SRC_URI = "${GITHUB_URI}/fairbird/enigma2-dreambox.git;branch=${ENIGMA2_BRANCH};protocol=https"
 
 LDFLAGS:prepend = " -lxml2 "
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN} += "${datadir}/keymaps"
 FILES:${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta ${PN}-build-dependencies"

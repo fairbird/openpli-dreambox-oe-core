@@ -19,9 +19,6 @@ BRANCH = "master"
 SRC_URI = "git://github.com/oe-mirrors/branding-module.git;protocol=https;branch=${BRANCH} \
         file://Add_VFDSymbol_SoCFamily.patch \
 "
-
-S = "${UNPACKDIR}/git"
-
 EXTRA_OECONF = " \
     BUILD_SYS=${BUILD_SYS} \
     HOST_SYS=${HOST_SYS} \

@@ -12,7 +12,4 @@ PV = "0.21+git"
 PKGV = "0.21+git${GITPKGV}"
 
 SRC_URI = "git://github.com/windytan/redsea.git;protocol=http;branch=master;protocol=https"
-
-S = "${UNPACKDIR}/git"
-
 inherit pkgconfig meson

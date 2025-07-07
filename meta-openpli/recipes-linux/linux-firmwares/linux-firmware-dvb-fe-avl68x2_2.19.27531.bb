@@ -5,9 +5,6 @@ LICENSE = "CLOSED"
 SRC_URI = "git://github.com/edision-open/linux-firmware.git;protocol=https;branch=master"
 
 SRCREV = "824e8de5b7a048eaf49221f7ba788dbb79123715"
-
-S = "${UNPACKDIR}/git"
-
 inherit allarch
 
 do_install() {

@@ -12,9 +12,6 @@ PKGV = "1.0+git${GITPKGV}"
 PR = "r0"
 
 SRC_URI = "git://github.com/openatv/WeatherInfo.git;branch=main;protocol=https"
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN} = "${libdir}"
 
 do_install() {

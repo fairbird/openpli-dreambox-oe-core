@@ -10,9 +10,6 @@ inherit gitpkgv setuptools3-openplugins python3-compileall
 RDEPENDS:${PN} += "\
 	python3-six \
 	"
-
-S = "${UNPACKDIR}/git"
-
 SRCREV = "${AUTOREV}"
 
 PV = "8.2+git"

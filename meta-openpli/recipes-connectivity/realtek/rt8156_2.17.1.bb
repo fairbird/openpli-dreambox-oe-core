@@ -9,9 +9,6 @@ LIC_FILES_CHKSUM = "file://ReadMe.txt;md5=bd3fdc588b21f7451c03b1bbaebeb4ce"
 
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/atvcaptain/realtek-r8152-linux.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR}"
 
 do_compile () {

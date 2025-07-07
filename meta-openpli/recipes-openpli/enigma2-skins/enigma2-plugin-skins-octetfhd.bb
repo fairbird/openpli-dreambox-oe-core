@@ -18,9 +18,6 @@ SRC_URI = "git://github.com/OpenVisionE2/OctEtFHD-skin.git;protocol=git;protocol
 		file://OpenSans-Regular.ttf \
 		file://segoe-ui-bold.ttf \
 "
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN} = "/usr"
 
 

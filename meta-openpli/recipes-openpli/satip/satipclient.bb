@@ -12,9 +12,6 @@ SRC_URI = " \
     file://satipclient.sh \
     file://auto-detect-and-avoid-ioctl-conflicts.patch \
 "
-
-S = "${UNPACKDIR}/git"
-
 inherit gitpkgv autotools update-rc.d
 
 INITSCRIPT_NAME = "satipclient"

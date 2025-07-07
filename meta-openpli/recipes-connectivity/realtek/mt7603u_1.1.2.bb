@@ -38,9 +38,6 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-address-of-packed-member \
                     -Wno-tautological-compare \
 "
-
-S = "${UNPACKDIR}/git"
-
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
     install -m 0644 ${S}/os/linux/mt7603u_sta.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless

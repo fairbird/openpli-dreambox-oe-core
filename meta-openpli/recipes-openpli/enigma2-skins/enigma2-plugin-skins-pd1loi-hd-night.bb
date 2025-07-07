@@ -11,9 +11,6 @@ PKGV = "2.6.1+git${GITPKGV}"
 SRC_URI = "git://github.com/PD1LOI/Pd1loi-HD-night.git;protocol=https;branch=main"
 
 FILES:${PN} = "/usr"
-
-S = "${UNPACKDIR}/git"
-
 do_compile() {
 }
 

@@ -11,9 +11,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74f65085a4958dced34e7b33cdf95eaf"
 DEPENDS = "krb5 libbsd libssh openssl readline"
 
 SRC_URI = "git://github.com/sebastinas/yafc.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 inherit gitpkgv autotools-brokensep pkgconfig
 PV = "1.3.7+git"
 PKGV = "1.3.7+git${GITPKGV}"

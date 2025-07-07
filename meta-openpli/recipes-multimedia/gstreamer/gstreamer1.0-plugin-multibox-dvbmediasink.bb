@@ -12,9 +12,6 @@ RPROVIDES:${PN} += "virtual-gstreamer1.0-dvbmediasink"
 GSTVERSION = "1.0"
 
 SRC_URI = "git://github.com/christophecvr/gstreamer1.0-plugin-multibox-dvbmediasink;branch=openatv-dev;protocol=https"
-
-S = "${UNPACKDIR}/git"
-
 inherit gitpkgv
 
 PV = "${GSTVERSION}+git"

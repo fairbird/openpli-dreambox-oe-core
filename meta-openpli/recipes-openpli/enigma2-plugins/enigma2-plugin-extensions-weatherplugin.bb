@@ -8,9 +8,6 @@ PV = "2.2+git"
 PKGV = "2.2+git${GITPKGV}"
 
 SRC_URI = "git://github.com/fairbird/WeatherPlugin.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN} = "${prefix}/"
 
 do_install() {

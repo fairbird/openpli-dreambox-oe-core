@@ -6,9 +6,6 @@ require conf/license/license-gplv2.inc
 SRC_URI = "git://github.com/fairbird/NewVirtualKeyBoard;protocol=https;branch=main"
 
 inherit gitpkgv setuptools3-openplugins gettext python3-compileall
-
-S = "${UNPACKDIR}/git"
-
 SRCREV = "${AUTOREV}"
 
 PV = "13.1+git"

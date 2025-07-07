@@ -12,9 +12,6 @@ PV = "git"
 PKGV = "${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/oe-alliance/OAWeather;protocol=https;branch=main"
-
-S = "${UNPACKDIR}/git"
-
 PACKAGES =+ "${PN}-po"
 
 FILES:${PN} += "${libdir}/enigma2/python/Components/*/*.pyc ${libdir}/enigma2/python/Plugins/Extensions/OAWeather/*.pyc \

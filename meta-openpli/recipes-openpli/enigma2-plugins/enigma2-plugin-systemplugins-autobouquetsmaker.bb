@@ -19,9 +19,6 @@ EXTRA_OECONF = " \
     STAGING_INCDIR=${STAGING_INCDIR} \
     STAGING_LIBDIR=${STAGING_LIBDIR} \
     "
-
-S = "${UNPACKDIR}/git"
-
 INSANE_SKIP:${PN} += "already-stripped build-deps ldflags"
 
 python populate_packages:prepend() {

@@ -11,9 +11,6 @@ PKGV = "0.1+git${GITPKGV}"
 SRC_URI = "git://github.com/fairbird/skin-PLiHD.git;branch=python3;protocol=https"
 
 FILES:${PN} = "${datadir}/enigma2/"
-
-S = "${UNPACKDIR}/git"
-
 do_compile() {
 }
 

@@ -17,9 +17,6 @@ EXTRA_OECONF = " \
     STAGING_INCDIR=${STAGING_INCDIR} \
     STAGING_LIBDIR=${STAGING_LIBDIR} \
     "
-
-S = "${UNPACKDIR}/git"
-
 DEPENDS = "enigma2"
 RDEPENDS:${PN} = "enigma2"
 

@@ -14,9 +14,6 @@ SRC_URI = "git://github.com/Huevos/iptv-org-playlists-plugin-for-enigma2.git;pro
 RDEPENDS:${PN} = "\
     python3-requests \
     "
-
-S = "${UNPACKDIR}/git"
-
 pluginpath = "/usr/lib/enigma2/python/Plugins/Extensions/iptv-org-playlists"
 
 do_install:append() {

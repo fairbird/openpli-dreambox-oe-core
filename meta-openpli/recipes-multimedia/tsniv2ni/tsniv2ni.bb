@@ -10,9 +10,6 @@ SRC_URI = "git://github.com/satdreamgr/tsniv2ni.git;protocol=https;branch=master
           file://0001-fix-error-reference-to-size-is-ambiguous.patch \
 "
 SRCREV = "${AUTOREV}"
-
-S = "${UNPACKDIR}/git"
-
 inherit pkgconfig
 
 TARGET_CC_ARCH += "${LDFLAGS}"

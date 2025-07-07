@@ -14,9 +14,6 @@ PV = "0.3+git"
 PKGV = "0.3+git${GITPKGV}"
 
 SRC_URI = "git://github.com/mnlipp/CoCy;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 inherit setuptools3
 
 # txt file which should go into -doc

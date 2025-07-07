@@ -27,9 +27,6 @@ inherit update-rc.d setuptools3_legacy
 SRC_URI = "git://github.com/pyload/pyload.git;branch=main;protocol=https \
 	file://pyload.init \
 "
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN} = "/usr/* /etc/*"
 
 INITSCRIPT_NAME = "${PN}"

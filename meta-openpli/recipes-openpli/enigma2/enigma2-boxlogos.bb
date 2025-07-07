@@ -14,9 +14,6 @@ PKGV = "1.0+gitr${GITPKGV}"
 do_configure[nostamp] = "1"
 
 SRC_URI = "git://github.com/DimitarCC/e2-boxlogos.git;protocol=https;branch=main"
-
-S = "${UNPACKDIR}/git"
-
 do_install() {
     install -d ${D}${datadir}/enigma2/logos
     if [ -f "${S}/box/${MACHINEBUILD}.svg" ] ; then

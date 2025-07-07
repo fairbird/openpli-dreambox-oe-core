@@ -13,9 +13,6 @@ RRECOMMENDS:${PN} = "enigma2-plugin-extensions-weathermsn enigma2-plugin-extensi
 SRC_URI = "git://github.com/MCelliotG/GlamourAuraFHD-ATV-skin.git;protocol=https;branch=master"
 
 FILES:${PN} = "/usr/*"
-
-S = "${UNPACKDIR}/git"
-
 do_install() {
     install -d ${D}/usr/share/enigma2
     cp -rp ${S}/usr ${D}/

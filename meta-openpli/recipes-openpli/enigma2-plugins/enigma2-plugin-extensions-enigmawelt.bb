@@ -11,9 +11,6 @@ PV = "git"
 PKGV = "${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/enigmawelt/enigmawelt.de.git;protocol=https;branch=main"
-
-S = "${UNPACKDIR}/git"
-
 FILES:${PN} = "${libdir}"
 
 do_install() {

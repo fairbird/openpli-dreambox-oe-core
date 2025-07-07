@@ -11,9 +11,6 @@ PKGV = "1.1.0+git${GITPKGV}"
 SRC_URI = "git://github.com/oe-mirrors/libdvbcsa.git;protocol=https;branch=master \
            file://libdvbcsa.pc \
 "
-
-S = "${UNPACKDIR}/git"
-
 inherit autotools lib_package pkgconfig
 
 TUNE_32_64   = "${@bb.utils.contains("TUNE_FEATURES", "mips64",        "--enable-uint64",  "--enable-uint32", d)}"

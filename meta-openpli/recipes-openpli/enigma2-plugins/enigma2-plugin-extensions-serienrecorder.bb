@@ -13,9 +13,6 @@ SRC_URI = "\
 	file://git/setup.py \
 	file://git/setup_translate.py \
 	"
-
-S = "${UNPACKDIR}/git"
-
 inherit gitpkgv setuptools3-openplugins python3-compileall
 
 PV = "1+git"

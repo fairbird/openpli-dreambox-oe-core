@@ -8,9 +8,6 @@ DEPENDS = "bc-native"
 SRC_URI = "git://github.com/atvcaptain/RTL8192FU.git;protocol=https;branch=main"
 
 SRCREV = "${AUTOREV}"
-
-S = "${UNPACKDIR}/git"
-
 inherit module
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR} KSRC=${STAGING_KERNEL_DIR}"
@@ -32,9 +29,6 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-error=ignored-qualifiers \
                     -Wno-error \
 "
-
-S = "${UNPACKDIR}/git"
-
 do_install() {
         install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
         install -m 0644 ${S}/8192fu.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless

@@ -12,9 +12,6 @@ SRC_URI = "git://github.com/NetworkConfiguration/openresolv.git;protocol=https;b
            file://resolvconf.conf \
            file://resolvconf.if-down \
            file://volatiles.99_openresolv"
-
-S = "${UNPACKDIR}/git"
-
 inherit allarch
 
 do_configure() {

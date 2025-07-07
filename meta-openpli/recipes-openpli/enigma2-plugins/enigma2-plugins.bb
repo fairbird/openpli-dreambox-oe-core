@@ -64,9 +64,6 @@ FILES:${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 
 inherit autotools-brokensep
-
-S = "${UNPACKDIR}/git"
-
 DEPENDS = " \
 	python3-pillow \
 	python3-pyopenssl \

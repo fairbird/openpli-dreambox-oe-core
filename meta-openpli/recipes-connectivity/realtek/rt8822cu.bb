@@ -39,9 +39,6 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-missing-attributes \
                     -Wno-address-of-packed-member \
 "
-
-S = "${UNPACKDIR}/git"
-
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP
     oe_runmake 'M={D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless' \

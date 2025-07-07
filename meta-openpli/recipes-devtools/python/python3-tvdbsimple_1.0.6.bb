@@ -14,9 +14,6 @@ PKGV = "1.0.6+git${GITPKGV}"
 SRC_URI = "git://github.com/phate89/tvdbsimple.git;protocol=https;branch=master \
     file://0001-remove-version-check.patch \
 "
-
-S = "${UNPACKDIR}/git"
-
 inherit setuptools3
 
 include python3-package-split.inc

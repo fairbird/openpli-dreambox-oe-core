@@ -16,9 +16,6 @@ SRC_URI = "git://github.com/openwrt/odhcp6c.git;protocol=https;branch=master \
            file://ifdown \
            file://odhcp6c-update \
           "
-
-S = "${UNPACKDIR}/git"
-
 EXTRA_OEMAKE = " \
     'CC=${CC}' \
 "

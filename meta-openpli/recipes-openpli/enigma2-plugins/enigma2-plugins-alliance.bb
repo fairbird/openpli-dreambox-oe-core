@@ -54,9 +54,6 @@ FILES:${PN}-src += " /usr/lib/enigma2/python/Components/Converter/RefToPiconName
 
 PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-
-S = "${UNPACKDIR}/git"
-
 DEPENDS = "enigma2 \
     python3-pyopenssl \
     python3-gdata-python3 \

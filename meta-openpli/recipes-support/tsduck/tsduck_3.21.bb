@@ -9,9 +9,6 @@ SRC_URI = "git://github.com/tsduck/tsduck.git;protocol=https;branch=master"
 SRCREV = "0fbbc7e06460abb1fe1358233b66ae15b4fce122" 
 
 DEPENDS = "gettext curl libedit"
-
-S = "${UNPACKDIR}/git"
-
 inherit gitpkgv pkgconfig gettext
 
 PV = "3.21+gitr"

@@ -11,9 +11,6 @@ PKGV = "1.2.+git${GITPKGV}"
 PR = "r0"
 
 SRC_URI = "git://github.com/oe-alliance/YahooWeather.git;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 EXTRA_OECONF = " \
     BUILD_SYS=${BUILD_SYS} \
     HOST_SYS=${HOST_SYS} \

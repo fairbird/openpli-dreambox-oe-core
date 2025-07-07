@@ -16,9 +16,6 @@ PV = "git"
 PKGV = "${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/yt-dlp/yt-dlp;protocol=https;branch=master"
-
-S = "${UNPACKDIR}/git"
-
 EXTRA_OEMAKE = "PYTHON=${PYTHON}"
 
 do_compile:prepend() {

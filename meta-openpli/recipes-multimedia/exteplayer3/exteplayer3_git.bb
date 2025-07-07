@@ -14,9 +14,6 @@ PKGV = "177+gitr${GITPKGV}"
 
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/skyjet18/exteplayer3.git;branch=master;protocol=https"
-
-S = "${UNPACKDIR}/git"
-
 SOURCE_FILES = "main/exteplayer.c"
 SOURCE_FILES =+ "container/container.c"
 SOURCE_FILES =+ "container/container_ffmpeg.c"
