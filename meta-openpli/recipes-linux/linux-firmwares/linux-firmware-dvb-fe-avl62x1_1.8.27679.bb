@@ -6,7 +6,7 @@ SRC_URI = "git://github.com/edision-open/linux-firmware.git;protocol=https;branc
 
 SRCREV = "824e8de5b7a048eaf49221f7ba788dbb79123715"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit allarch
 

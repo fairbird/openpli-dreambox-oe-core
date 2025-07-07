@@ -31,7 +31,7 @@ SRC_URI:append:dm500hdv2 = " \
 SRC_URI:append:dm800sev2 = " \
             file://dreambox.patch \
             "
-S = "${WORKDIR}/AX88179_178A_LINUX_DRIVER_v1.4.1_SOURCE"
+S = "${UNPACKDIR}/AX88179_178A_LINUX_DRIVER_v1.4.1_SOURCE"
 
 EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR}"
 

@@ -5,7 +5,7 @@ PKGV = "1.0+git${GITPKGV}"
 
 FILES:${PN} = "picon"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_install() {
 	install -d ${D}/picon

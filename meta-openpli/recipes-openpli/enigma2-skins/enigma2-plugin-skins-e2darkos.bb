@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/DimitarCC/E2-DarkOS-skin.git;protocol=https;branch=m
 		file://patch-skin-to-more-compatible.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 # files installed by both enigma2 and enigma2-plugin-skins-e2darkos
 do_install:append() {

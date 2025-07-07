@@ -13,6 +13,6 @@ PKGV = "0.21+git${GITPKGV}"
 
 SRC_URI = "git://github.com/windytan/redsea.git;protocol=http;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit pkgconfig meson

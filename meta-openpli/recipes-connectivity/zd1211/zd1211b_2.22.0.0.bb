@@ -17,7 +17,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "0ac1145f1f30d883694b4a1317f142c4"
 SRC_URI[sha256sum] = "262f44f0d1274d2baf6548e53df96c6664b076f39e3aaeeb022bbd5caccbe3e3"
 
-S = "${WORKDIR}/ZD1211LnxDrv_2_22_0_0"
+S = "${UNPACKDIR}/ZD1211LnxDrv_2_22_0_0"
 
 do_compile() {
         unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS

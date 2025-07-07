@@ -21,7 +21,7 @@ SRC_URI = "http://openlinux.amlogic.com:8000/download/ARM/wifi/wifi-fw-${PV}.tar
 SRC_URI[md5sum] = "3fd7fbbc31b9c0c9e73554763f0cfd84"
 SRC_URI[sha256sum] = "289d1125a9f5ad4376d676da2fac8d76e4d03089f9c1bd45cd7dacaced6453d8"
 
-S = "${WORKDIR}/wifi-fw-${PV}"
+S = "${UNPACKDIR}/wifi-fw-${PV}"
 
 do_compile() {
 	:

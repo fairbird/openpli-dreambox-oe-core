@@ -10,7 +10,7 @@ SRCREV = "0fbbc7e06460abb1fe1358233b66ae15b4fce122"
 
 DEPENDS = "gettext curl libedit"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit gitpkgv pkgconfig gettext
 

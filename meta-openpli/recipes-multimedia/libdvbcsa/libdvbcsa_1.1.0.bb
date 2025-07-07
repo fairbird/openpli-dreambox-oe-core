@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/oe-mirrors/libdvbcsa.git;protocol=https;branch=maste
            file://libdvbcsa.pc \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit autotools lib_package pkgconfig
 

@@ -10,6 +10,6 @@ SRC_URI = "git://github.com/oe-alliance-mirrors/${BPN}.git;protocol=https;branch
 			file://libgcrypt-gpg-error-use-pkgconfig.patch \
 			"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit autotools lib_package pkgconfig

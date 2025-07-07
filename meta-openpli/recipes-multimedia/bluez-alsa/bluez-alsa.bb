@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
 
 FILESEXTRAPATHS:append := "${THISDIR}/files:"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit update-rc.d systemd pkgconfig autotools
 

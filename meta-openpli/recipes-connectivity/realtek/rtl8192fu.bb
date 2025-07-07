@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/atvcaptain/RTL8192FU.git;protocol=https;branch=main"
 
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit module
 
@@ -33,7 +33,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-error \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_install() {
         install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless

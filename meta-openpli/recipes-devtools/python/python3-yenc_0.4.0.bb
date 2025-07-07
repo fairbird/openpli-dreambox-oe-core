@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/oe-mirrors/python3-yenc.git;protocol=https;branch=ma
 
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit setuptools3 gitpkgv
 

@@ -10,7 +10,7 @@ inherit allarch
 
 FILES:${PN} = "picons"
 
-S = "${WORKDIR}/picons"
+S = "${UNPACKDIR}/picons"
 
 do_install() {
 	install -d ${D}/picon

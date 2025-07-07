@@ -12,7 +12,7 @@ PR = "r0"
 
 SRC_URI = "git://github.com/oe-alliance/YahooWeather.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 EXTRA_OECONF = " \
     BUILD_SYS=${BUILD_SYS} \

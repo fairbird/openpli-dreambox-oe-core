@@ -9,7 +9,7 @@ inherit autotools gitpkgv pkgconfig python3native
 GITHUB_URI ?= "git://github.com"
 SRC_URI = "${GITHUB_URI}/OpenPLi/tuxtxt.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git/tuxtxt"
+S = "${UNPACKDIR}/git/tuxtxt"
 
 PV = "2.0+git"
 PKGV = "2.0+git${GITPKGV}"

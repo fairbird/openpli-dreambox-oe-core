@@ -10,7 +10,7 @@ CONFLICTS:${PN} = "hamsterdb"
 
 SRC_URI = "git://github.com/cruppstahl/upscaledb.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit gitpkgv autotools
 

@@ -15,7 +15,7 @@ PKGV = "4.0.+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-mirrors/EnhancedMovieCenter.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 EXTRA_OECONF = " \
     BUILD_SYS=${BUILD_SYS} \

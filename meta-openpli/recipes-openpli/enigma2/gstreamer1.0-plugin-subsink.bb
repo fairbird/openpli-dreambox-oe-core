@@ -11,7 +11,7 @@ SRC_URI = "${GITHUB_URI}/OpenPLi/gst-plugin-subsink.git;protocol=https;branch=ma
            file://drop-superfluous-gst-error-macro.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit gitpkgv
 

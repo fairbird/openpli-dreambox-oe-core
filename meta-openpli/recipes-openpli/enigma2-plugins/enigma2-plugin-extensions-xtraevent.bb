@@ -14,7 +14,7 @@ RDEPENDS:${PN} += "\
 	python3-requests \
 	"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 PV = "6.805+git"
 PKGV = "6.805+git${GITPKGV}"

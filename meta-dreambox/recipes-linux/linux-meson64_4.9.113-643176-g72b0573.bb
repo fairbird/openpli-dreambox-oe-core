@@ -28,8 +28,8 @@ SRC_URI[sha256sum] = "8d47072d819464d68b1b1072013795f925104dc09ad36e0bf9e0c70040
 KERNEL_CC += "${TOOLCHAIN_OPTIONS}"
 KERNEL_LD += "${TOOLCHAIN_OPTIONS}"
 
-S = "${WORKDIR}/${BPN}-v${PV}"
-B = "${WORKDIR}/build"
+S = "${UNPACKDIR}/${BPN}-v${PV}"
+B = "${UNPACKDIR}/build"
 
 CMDLINE = "${@kernel_console(d)} root=/dev/mmcblk0p7 rootwait rootfstype=ext4 no_console_suspend"
 

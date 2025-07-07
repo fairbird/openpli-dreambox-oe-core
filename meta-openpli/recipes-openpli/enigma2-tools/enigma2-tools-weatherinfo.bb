@@ -13,7 +13,7 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openatv/WeatherInfo.git;branch=main;protocol=https"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 FILES:${PN} = "${libdir}"
 

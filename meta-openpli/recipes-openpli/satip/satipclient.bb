@@ -13,7 +13,7 @@ SRC_URI = " \
     file://auto-detect-and-avoid-ioctl-conflicts.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit gitpkgv autotools update-rc.d
 

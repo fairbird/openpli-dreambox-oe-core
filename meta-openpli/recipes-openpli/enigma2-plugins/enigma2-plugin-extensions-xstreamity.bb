@@ -17,7 +17,7 @@ inherit gitpkgv python3-compileall
 
 SRC_URI = "git://github.com/kiddac/XStreamity.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 FILES:${PN} = " ${libdir}/enigma2/python/Components/Converter/* \
                 ${libdir}/enigma2/python/Components/Renderer/* \

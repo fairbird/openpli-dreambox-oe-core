@@ -25,13 +25,13 @@ SRC_URI = "git://github.com/${PVRGIT}/pvr.${KODIADDONPLUGIN}.git;destsuffix=pvr.
 
 inherit cmake pkgconfig gettext gitpkgv
 
-S = "${WORKDIR}/pvr.${KODIADDONPLUGIN}"
+S = "${UNPACKDIR}/pvr.${KODIADDONPLUGIN}"
 
 OECMAKE_GENERATOR = "Unix Makefiles"
 
 EXTRA_OECMAKE = " \
     -DADDONS_TO_BUILD=pvr.${KODIADDONPLUGIN} \
-    -DADDON_SRC_PREFIX=${WORKDIR}/git \
+    -DADDON_SRC_PREFIX=${UNPACKDIR}/git \
     -DCMAKE_BUILD_TYPE=Debug -DVMTRACE=1 -DPARANOIA=1 \
     -DCMAKE_INSTALL_PREFIX=${datadir}/kodi/addons \
     -DKODI_INCLUDE_DIR=${STAGING_INCDIR}/kodi \

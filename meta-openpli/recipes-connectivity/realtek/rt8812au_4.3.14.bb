@@ -45,7 +45,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-address-of-packed-member \
 "
 
-S = "${WORKDIR}/rtl8812AU-driver-4.3.14"
+S = "${UNPACKDIR}/rtl8812AU-driver-4.3.14"
 
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP

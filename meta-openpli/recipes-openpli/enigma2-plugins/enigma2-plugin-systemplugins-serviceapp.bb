@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/oe-mirrors/serviceapp.git;branch=sig3;protocol=https
 		file://fix-debug-print.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit autotools gitpkgv python3native pkgconfig gettext python3targetconfig python3-compileall
 

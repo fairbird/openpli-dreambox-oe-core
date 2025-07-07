@@ -14,7 +14,7 @@ SRC_URI = "https://src.fedoraproject.org/repo/pkgs/usb_modeswitch/usb-modeswitch
     file://makefile.patch \
 "
 
-S = "${WORKDIR}/usb-modeswitch-${PV}"
+S = "${UNPACKDIR}/usb-modeswitch-${PV}"
 
 EXTRA_OEMAKE = "TCL=${bindir}/tclsh"
 

@@ -16,6 +16,6 @@ KODIADDONBRANCH = "Leia"
 SRC_URI = "git://github.com/xbmc/inputstream.rtmp.git;protocol=https;branch=${KODIADDONBRANCH} \
          "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 KODIADDONNAME = "inputstream.rtmp"

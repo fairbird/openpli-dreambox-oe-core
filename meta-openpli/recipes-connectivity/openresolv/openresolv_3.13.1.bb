@@ -2,7 +2,7 @@ SUMMARY = "management framework for resolv.conf"
 AUTHOR = "Roy Marples <roy@marples.name>"
 HOMEPAGE = "http://roy.marples.name/projects/openresolv"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/resolvconf.in;beginline=4;endline=26;md5=e962049f535f7385f0f2a0ac9638cd43"
+LIC_FILES_CHKSUM = "file://${UNPACKDIR}/git/resolvconf.in;beginline=4;endline=26;md5=e962049f535f7385f0f2a0ac9638cd43"
 PR = "r0"
 
 SRC_URI = "git://github.com/NetworkConfiguration/openresolv.git;protocol=https;branch=master \
@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/NetworkConfiguration/openresolv.git;protocol=https;b
            file://resolvconf.if-down \
            file://volatiles.99_openresolv"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit allarch
 

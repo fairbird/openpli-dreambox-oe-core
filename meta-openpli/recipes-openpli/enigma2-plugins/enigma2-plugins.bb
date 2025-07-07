@@ -65,7 +65,7 @@ PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 
 inherit autotools-brokensep
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 DEPENDS = " \
 	python3-pillow \

@@ -30,7 +30,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-error \
 "
 
-S = "${WORKDIR}/rtl8189ES_linux"
+S = "${UNPACKDIR}/rtl8189ES_linux"
 
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP

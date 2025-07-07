@@ -9,7 +9,7 @@ PKGV = "2+git${GITPKGV}"
 PR = "3"
 
 SRC_URI = "git://github.com/OpenPLi/tuxbox-xml.git;protocol=https;branch=master"
-S = "${WORKDIR}/git/xml"
+S = "${UNPACKDIR}/git/xml"
 FILES:${PN} = "${sysconfdir}/tuxbox/* ${prefix}/* ${localstatedir}/*"
 
 RDEPENDS:${PN} = "xz"

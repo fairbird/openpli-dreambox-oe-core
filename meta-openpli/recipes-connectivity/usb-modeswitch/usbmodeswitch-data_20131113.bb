@@ -16,7 +16,7 @@ SRC_URI += " https://src.fedoraproject.org/repo/pkgs/usb_modeswitch-data/usb-mod
     file://usbmodeswitch-data_20131217.patch \
     "
 
-S = "${WORKDIR}/usb-modeswitch-data-${PV}"
+S = "${UNPACKDIR}/usb-modeswitch-data-${PV}"
 
 do_compile() {
 }

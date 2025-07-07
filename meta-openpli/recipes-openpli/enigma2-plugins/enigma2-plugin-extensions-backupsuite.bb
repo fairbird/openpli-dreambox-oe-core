@@ -15,7 +15,7 @@ RDEPENDS:${PN} = " \
 	${@bb.utils.contains("IMAGE_FSTYPES", "tar.bz2", "bzip2" , "", d)} \
 	"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 PV = "git"
 PKGV = "git${GITPKGV}"

@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/fairbird/skin-PLiHD.git;branch=python3;protocol=http
 
 FILES:${PN} = "${datadir}/enigma2/"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_compile() {
 }

@@ -11,7 +11,7 @@ RDEPENDS:${PN} += "\
 	python3-six \
 	"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 SRCREV = "${AUTOREV}"
 

@@ -6,7 +6,7 @@ DEPENDS += "python3-cython-native"
 
 SRC_URI = "git://github.com/rapidfuzz/rapidfuzz;branch=main;protocol=https"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit gitpkgv pkgconfig scikit-build-core
 

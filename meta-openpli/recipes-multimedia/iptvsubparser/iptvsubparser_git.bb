@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/e2iplayer/e2isubparser.git;protocol=https;branch=mas
            file://port-to-python3.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 SOURCE_FILES = "src/subparsermodule.c"
 SOURCE_FILES =+ "src/vlc/src/subtitle.c"

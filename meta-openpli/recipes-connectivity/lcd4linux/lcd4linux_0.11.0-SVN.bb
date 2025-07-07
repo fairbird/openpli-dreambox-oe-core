@@ -17,7 +17,7 @@ CFLAGS += "-fgnu89-inline"
 SRC_URI = "svn://ssl.bulix.org/svn/lcd4linux/;module=trunk;protocol=https;rev=1200 \
     file://lcd4linux.init"
 
-S =  "${WORKDIR}/trunk"
+S =  "${UNPACKDIR}/trunk"
 
 addtask setlibtool before do_configure after do_patch
 
@@ -43,6 +43,6 @@ do_install:append() {
     install -d ${D}/${sysconfdir}
     install -m 0600 ${S}/lcd4linux.conf.sample  ${D}/${sysconfdir}/lcd4linux.conf
     install -d ${D}/${INIT_D_DIR}
-    install -m 0755 ${WORKDIR}/lcd4linux.init ${D}/${INIT_D_DIR}/lcd4linux
+    install -m 0755 ${UNPACKDIR}/lcd4linux.init ${D}/${INIT_D_DIR}/lcd4linux
 }
 

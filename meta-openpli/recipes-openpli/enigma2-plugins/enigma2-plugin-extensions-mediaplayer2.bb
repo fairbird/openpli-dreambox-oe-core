@@ -14,7 +14,7 @@ PKGV = "0.8+git${GITPKGV}"
 
 SRC_URI = "git://github.com/oe-mirrors/mediaplayer2.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 python populate_packages:prepend() {
     e2_pdir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)

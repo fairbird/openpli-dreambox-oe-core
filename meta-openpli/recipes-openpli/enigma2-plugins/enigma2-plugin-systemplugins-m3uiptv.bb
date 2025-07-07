@@ -15,6 +15,6 @@ SRC_URI = "git://github.com/DimitarCC/iptv-m3u-reader.git;protocol=https;branch=
 
 RRECOMMENDS:${PN} = "enigma2-plugin-extensions-tmbd"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 FILES:${PN}-src = "${pluginpath}/*.py"

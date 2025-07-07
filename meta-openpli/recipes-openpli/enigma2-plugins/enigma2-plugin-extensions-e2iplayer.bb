@@ -7,7 +7,7 @@ require conf/license/license-gplv2.inc
 
 SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;protocol=http;branch=python3;protocol=https"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit gitpkgv
 PV = "git"

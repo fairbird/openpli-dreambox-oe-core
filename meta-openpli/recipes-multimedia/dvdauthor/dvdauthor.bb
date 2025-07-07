@@ -10,7 +10,7 @@ inherit gitpkgv
 PV = "0.7.1+git"
 PKGV = "0.7.1+git${GITPKGV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_configure:prepend() {
 	mkdir -p ${S}/autotools

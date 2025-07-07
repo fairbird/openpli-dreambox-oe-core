@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/oe-alliance/oe-alliance-tuxbox-common.git;protocol=h
 
 FILES:${PN} = "/"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_install() {
     install -d ${D}/etc/tuxbox/

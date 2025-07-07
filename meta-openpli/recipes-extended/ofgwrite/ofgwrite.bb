@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/oe-alliance/ofgwrite.git;protocol=https;branch=maste
 
 inherit pkgconfig
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 CFLAGS += "-std=gnu17"
 

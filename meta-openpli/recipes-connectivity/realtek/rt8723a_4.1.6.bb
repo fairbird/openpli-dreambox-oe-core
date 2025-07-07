@@ -51,7 +51,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-address-of-packed-member \
 "
 
-S = "${WORKDIR}/rtl8723A_WiFi_linux_v4.1.6_7336.20140624"
+S = "${UNPACKDIR}/rtl8723A_WiFi_linux_v4.1.6_7336.20140624"
 
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP

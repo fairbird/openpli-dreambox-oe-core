@@ -39,7 +39,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-tautological-compare \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless

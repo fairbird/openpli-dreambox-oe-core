@@ -6,7 +6,7 @@ SRC_URI = "git://github.com/fairbird/NetSpeedTest;protocol=https;branch=master"
 
 inherit gitpkgv setuptools3-openplugins gettext
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 SRCREV = "${AUTOREV}"
 PV = "1.1+git"

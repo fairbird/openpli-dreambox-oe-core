@@ -13,7 +13,7 @@ SRC_URI += " http://code-ini.com/software/tools/usb-modeswitch-data-${PV}.tar.gz
         file://usb-modeswitch-data-20120930.patch \
         "
 
-S = "${WORKDIR}/usb-modeswitch-data-${PV}"
+S = "${UNPACKDIR}/usb-modeswitch-data-${PV}"
 
 do_compile() {
 }

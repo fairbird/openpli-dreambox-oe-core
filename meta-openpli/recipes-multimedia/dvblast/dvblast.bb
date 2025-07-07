@@ -14,7 +14,7 @@ DEPENDS = "bitstream libev"
 
 SRC_URI = "git://github.com/videolan/dvblast.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_configure() {
 }

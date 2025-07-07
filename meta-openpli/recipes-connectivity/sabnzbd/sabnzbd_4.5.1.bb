@@ -26,7 +26,7 @@ SRC_URI = "https://github.com/sabnzbd/sabnzbd/releases/download/${PV}/SABnzbd-${
 SRC_URI[md5sum] = "842b3b3b598a89987a3ce173ea9b7607"
 SRC_URI[sha256sum] = "fa1ec07a20769bcd863099cc40e8f20a336221505137bb1b52d981506333fc1c"
 
-S = "${WORKDIR}/SABnzbd-${PV}"
+S = "${UNPACKDIR}/SABnzbd-${PV}"
 
 INSTALLDIR = "${libdir}/${PN}"
 

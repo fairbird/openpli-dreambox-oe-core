@@ -11,7 +11,7 @@ PV = "2.2.0"
 SRC_URI = "git://github.com/Pulse-Eight/platform.git;branch=master;protocol=https"
 SRCREV = "5a786dd580972a2dc89941ea60dc08c0314e0e4d"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit cmake pkgconfig
 

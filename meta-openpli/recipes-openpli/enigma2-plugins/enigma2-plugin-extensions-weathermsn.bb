@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/oe-mirrors/enigma2-plugins.git;protocol=https;branch
 
 FILES:${PN} = "${libdir}/enigma2/"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_install() {
 	install -d ${D}${libdir}/enigma2/python/Plugins/Extensions

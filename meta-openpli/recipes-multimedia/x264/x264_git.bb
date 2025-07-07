@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/oe-alliance-mirrors/x264;protocol=https;branch=maste
 
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit lib_package pkgconfig perlnative
 

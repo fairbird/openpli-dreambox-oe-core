@@ -17,7 +17,7 @@ do_configure () {
 }
 
 do_check() {
-    export DEJAGNU="${WORKDIR}/dejagnu/site.exp"
+    export DEJAGNU="${UNPACKDIR}/dejagnu/site.exp"
 
     # HACK: this works around the configure setting CXX with -nostd* args
     sed -i 's/-nostdinc++ -nostdlib++//g' $(find ${B} -name testsuite_flags | head -1)

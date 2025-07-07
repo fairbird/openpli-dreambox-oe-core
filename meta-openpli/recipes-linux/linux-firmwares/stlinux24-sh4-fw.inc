@@ -6,7 +6,7 @@ SRC_URI = "http://archive.stlinux.com/stlinux/2.4/updates/RPMS/sh4/${STLINUX_FW_
 INC_PR = "r6"
 
 
-S = "${WORKDIR}/opt/STM/STLinux-2.4/devkit/sh4/target"
+S = "${UNPACKDIR}/opt/STM/STLinux-2.4/devkit/sh4/target"
 
 # fix architecture mismatch QA error
 INSANE_SKIP:${PN} = "arch"

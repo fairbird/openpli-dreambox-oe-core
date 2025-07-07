@@ -17,7 +17,7 @@ PKGV = "${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/yt-dlp/yt-dlp;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 EXTRA_OEMAKE = "PYTHON=${PYTHON}"
 

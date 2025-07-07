@@ -39,7 +39,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-address-of-packed-member \
 "
 
-S = "${WORKDIR}/20120911_RT3573_Linux_STA_v2.5.0.0_Rev4_DPO"
+S = "${UNPACKDIR}/20120911_RT3573_Linux_STA_v2.5.0.0_Rev4_DPO"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless

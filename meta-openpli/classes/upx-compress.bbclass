@@ -4,7 +4,7 @@ UPX_ARGS ?= "--best"
 
 do_upx() {
     echo "UPX - Binary compression"
-    find "${WORKDIR}/packages-split" -type f -executable | while read line
+    find "${UNPACKDIR}/packages-split" -type f -executable | while read line
     do
 	if echo "${line}" | grep -q '/\.debug/'
 	then

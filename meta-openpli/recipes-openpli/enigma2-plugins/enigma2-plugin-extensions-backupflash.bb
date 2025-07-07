@@ -16,7 +16,7 @@ RDEPENDS:${PN} += "\
 	${@bb.utils.contains("MACHINE_FEATURES", "dreamboxv2", "flash-scripts", "", d)} \
 	"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 SRCREV = "${AUTOREV}"
 

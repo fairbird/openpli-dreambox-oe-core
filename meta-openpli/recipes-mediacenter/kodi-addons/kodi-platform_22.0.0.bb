@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/xbmc/kodi-platform.git;protocol=https;branch=master 
            file://kodi-platform-03_pkgconfig.patch \
           "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit cmake pkgconfig
 
@@ -45,7 +45,7 @@ do_install:append() {
                -e 's:${STAGING_DIR_HOST}:/:g' \
                -e 's:${STAGING_DIR_NATIVE}:/:g' \
                -e 's:${prefix}/${libdir}:${libdir}:g' \
-               -e 's:${WORKDIR}=::g' \ 
+               -e 's:${UNPACKDIR}=::g' \ 
             ${D}${libdir}/pkgconfig/*.pc
 }
 

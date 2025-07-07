@@ -9,7 +9,7 @@ require conf/license/license-gplv2.inc
 
 SRC_URI = "git://github.com/oe-mirrors/SDGRadio.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit gitpkgv
 PV = "1+git"

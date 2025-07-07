@@ -10,6 +10,6 @@ include python3-package-split.inc
 SRC_URI[md5sum] = "29005e7585a90e6a09c881dc3b30edee"
 SRC_URI[sha256sum] = "d9d85dd9c073ea021f8b46670bf075bc3de228ac00c717ca20834821ae73dc80"
 SRC_URI = "http://iniparse.googlecode.com/files/iniparse-${PV}.tar.gz"
-S = "${WORKDIR}/iniparse-${PV}"
+S = "${UNPACKDIR}/iniparse-${PV}"
 
 inherit setuptools3

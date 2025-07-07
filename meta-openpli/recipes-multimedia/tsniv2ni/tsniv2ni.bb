@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/satdreamgr/tsniv2ni.git;protocol=https;branch=master
 "
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit pkgconfig
 

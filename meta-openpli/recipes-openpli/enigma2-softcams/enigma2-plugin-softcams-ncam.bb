@@ -16,7 +16,7 @@ RDEPENDS:${PN} += "enigma2-plugin-extensions-oscamstatus libdvbcsa libusb1"
 
 LDFLAGS:prepend = "-ludev -ldvbcsa "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 B = "${S}"
 
 CAMNAME = "ncam"

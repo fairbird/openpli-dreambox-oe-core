@@ -17,7 +17,7 @@ FILES:${PN} = "/"
 
 
 
-S = "${WORKDIR}/git/Blue-Line-OE-4ATV"
+S = "${UNPACKDIR}/git/Blue-Line-OE-4ATV"
 
 
 do_install() {

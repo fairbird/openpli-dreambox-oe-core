@@ -21,7 +21,7 @@ RDEPENDS:${PN} = " \
 
 SRC_URI = "git://github.com/popking159/ssupport;protocol=git;branch=main;protocol=https"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 pluginpath = "${libdir}/enigma2/python/Plugins/Extensions/SubsSupport"
 

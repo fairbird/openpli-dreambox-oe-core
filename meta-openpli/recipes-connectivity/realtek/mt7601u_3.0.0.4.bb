@@ -41,7 +41,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-address-of-packed-member \
 "
 
-S = "${WORKDIR}/MT7601U"
+S = "${UNPACKDIR}/MT7601U"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless

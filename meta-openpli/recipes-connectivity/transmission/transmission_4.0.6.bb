@@ -21,7 +21,7 @@ SRC_URI = "gitsm://github.com/transmission/transmission;protocol=https;branch=4.
 INITSCRIPT_NAME = "transmission-daemon"
 INITSCRIPT_PARAMS = "defaults 60 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit cmake gettext pkgconfig update-rc.d systemd
 

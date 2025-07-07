@@ -10,7 +10,7 @@ inherit gitpkgv
 PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 

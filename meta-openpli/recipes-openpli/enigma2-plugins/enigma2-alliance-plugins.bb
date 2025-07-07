@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/oe-alliance/oe-alliance-plugins.git;protocol=https;b
 	file://remove-duplicate-plugins-with-pli-plugins.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 PROVIDES = "\
     enigma2-plugin-extensions-btdevicesmanager \

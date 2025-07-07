@@ -41,7 +41,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-address-of-packed-member \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP

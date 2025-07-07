@@ -15,7 +15,7 @@ PR = "r0"
 SRC_URI = "git://github.com/satdreamgr/eti-tools.git;protocol=https;branch=master"
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit pkgconfig
 

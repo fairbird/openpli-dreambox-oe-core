@@ -12,6 +12,6 @@ SRC_URI = "git://github.com/oe-alliance-mirrors/libdca.git;protocol=https;branch
 			file://fix-libdts-link-path.patch \
 			"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 

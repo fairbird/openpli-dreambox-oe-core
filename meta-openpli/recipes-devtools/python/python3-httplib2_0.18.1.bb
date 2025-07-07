@@ -10,7 +10,7 @@ SRC_URI = "https://files.pythonhosted.org/packages/98/3f/0769a851fbb0ecc45826005
 SRC_URI[md5sum] = "0b331f96cdb2ae0e0342d4ea0f5f0502"
 SRC_URI[sha256sum] = "8af66c1c52c7ffe1aa5dc4bcd7c769885254b0756e6e69f953c7f0ab49a70ba3"
 
-S = "${WORKDIR}/httplib2-${PV}"
+S = "${UNPACKDIR}/httplib2-${PV}"
 
 inherit setuptools3 python3-dir
 

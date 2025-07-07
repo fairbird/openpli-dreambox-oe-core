@@ -10,7 +10,7 @@ SRC_URI = "\
 https://files.pythonhosted.org/packages/21/0f/1a9990233076d48aa2084100ba289ca162975e73a688f3a56c0ee2bb441a/backports.lzma-${PV}.tar.gz \
 	file://0001-setup.py-Remove-usr-local-references-for-cross-compi.patch"
 
-S = "${WORKDIR}/backports.lzma-${PV}"
+S = "${UNPACKDIR}/backports.lzma-${PV}"
 
 inherit setuptools3 python3-compileall
 

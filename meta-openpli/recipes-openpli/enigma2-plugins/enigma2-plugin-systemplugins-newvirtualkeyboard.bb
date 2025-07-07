@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/fairbird/NewVirtualKeyBoard;protocol=https;branch=ma
 
 inherit gitpkgv setuptools3-openplugins gettext python3-compileall
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 SRCREV = "${AUTOREV}"
 

@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/oe-mirrors/buildimage.git;protocol=https;branch=mast
     file://0001-add-e-option-for-warn-only.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit autotools
 

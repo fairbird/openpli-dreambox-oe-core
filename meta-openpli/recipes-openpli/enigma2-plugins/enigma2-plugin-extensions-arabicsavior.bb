@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/fairbird/ArabicSavior;protocol=https;branch=main"
 
 inherit gitpkgv setuptools3-openplugins python3-compileall
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 SRCREV = "${AUTOREV}"
 

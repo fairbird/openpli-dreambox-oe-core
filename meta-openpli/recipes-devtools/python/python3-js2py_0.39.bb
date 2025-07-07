@@ -9,7 +9,7 @@ PR = "r0"
 
 SRC_URI = "https://pypi.python.org/packages/52/f8/e0d81d2a1db4025fa6dfa2e0a63f7234d958e11a0497e58c2ff15394c5cb/Js2Py-${PV}.tar.gz"
 
-S = "${WORKDIR}/Js2Py-${PV}"
+S = "${UNPACKDIR}/Js2Py-${PV}"
 
 inherit setuptools3
 

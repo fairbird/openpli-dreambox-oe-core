@@ -12,7 +12,7 @@ DEPENDS = "krb5 libbsd libssh openssl readline"
 
 SRC_URI = "git://github.com/sebastinas/yafc.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit gitpkgv autotools-brokensep pkgconfig
 PV = "1.3.7+git"

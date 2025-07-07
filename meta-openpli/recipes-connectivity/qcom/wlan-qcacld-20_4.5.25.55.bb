@@ -13,7 +13,7 @@ SRC_URI = "${CAF_MIRROR}/qcacld-2.0/snapshot/qcacld-2.0-${PV}.tar.gz \
 
 SRC_URI:append:xc7439 = "file://qcacld-2.0-support-xc7439.patch"
 
-S = "${WORKDIR}/qcacld-2.0-${PV}"
+S = "${UNPACKDIR}/qcacld-2.0-${PV}"
 
 EXTRA_OEMAKE:append:xc7439 = " CONFIG_CLD_HL_SDIO_CORE=y"
 

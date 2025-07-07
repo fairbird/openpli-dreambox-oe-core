@@ -15,7 +15,7 @@ RDEPENDS:${PN} = "\
     python3-requests \
     "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 pluginpath = "/usr/lib/enigma2/python/Plugins/Extensions/iptv-org-playlists"
 

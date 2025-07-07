@@ -6,7 +6,7 @@ INC_PR = "2"
 
 SRC_URI = "http://snapshots.madwifi-project.org/madwifi-trunk/${BP}.tar.gz"
 
-S = "${WORKDIR}/${BP}"
+S = "${UNPACKDIR}/${BP}"
 
 inherit module machine_kernel_pr
 

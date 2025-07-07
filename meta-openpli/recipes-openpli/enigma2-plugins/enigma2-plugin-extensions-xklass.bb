@@ -15,7 +15,7 @@ PR = "r1"
 
 SRC_URI = "git://github.com/kiddac/XKlass.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 FILES:${PN} = " ${libdir}/enigma2/python/Components/Converter/* \
                 ${libdir}/enigma2/python/Components/Renderer/* \

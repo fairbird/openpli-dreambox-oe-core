@@ -12,6 +12,6 @@ PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/fairbird/bitratecalc.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 FILES:${PN} = "${libdir}/bitratecalc.so"

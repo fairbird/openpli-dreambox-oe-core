@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/kiddac/Jedi-EPG-XStream.git;protocol=https;branch=ma
 
 RDEPENDS:${PN} = "python3-requests python3-difflib python3-thefuzz"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 FILES:${PN} = " ${sysconfdir}/enigma2/jediepgxtream/* \
                 ${libdir}/enigma2/python/Plugins/Extensions/JediEPGXtream/*"

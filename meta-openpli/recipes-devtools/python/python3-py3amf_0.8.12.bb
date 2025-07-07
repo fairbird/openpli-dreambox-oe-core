@@ -12,7 +12,7 @@ SRCREV = "2fe5a4a52c4c8fc432038362c866ba1211b74905"
 
 SRC_URI = "git://github.com/StdCarrot/Py3AMF.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit setuptools3_legacy
 

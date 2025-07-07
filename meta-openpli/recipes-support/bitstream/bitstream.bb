@@ -11,7 +11,7 @@ PV = "1.4+git"
 PKGV = "1.4+git${GITPKGV}"
 
 SRC_URI = "git://github.com/videolan/bitstream.git;protocol=https;branch=master"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit pkgconfig
 

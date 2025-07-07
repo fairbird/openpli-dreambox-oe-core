@@ -4,7 +4,7 @@ LICENSE = "unknown"
 
 SRC_URI = "http://www.ralinktech.com.tw/data/RT71W_Firmware_V${PV}.zip"
 
-S = "${WORKDIR}/RT71W_Firmware_V${PV}"
+S = "${UNPACKDIR}/RT71W_Firmware_V${PV}"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware

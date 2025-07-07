@@ -34,7 +34,7 @@ CFLAGS = "-Wno-error=discarded-qualifiers \
 	  -Wno-error=builtin-declaration-mismatch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_configure:prepend() {
 	cp ${STAGING_DATADIR_NATIVE}/gettext/config.rpath ${S}/libupnp/config.aux/config.rpath

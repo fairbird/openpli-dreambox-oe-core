@@ -8,7 +8,7 @@ SRCREV = "030814506e529ef1f1572c7b6e3fc2e4c10cb544"
 
 SRC_URI = "git://github.com/sahlberg/libnfs.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit cmake
 

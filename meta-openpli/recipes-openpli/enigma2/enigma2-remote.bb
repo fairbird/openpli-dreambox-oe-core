@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/oe-alliance/remotes;protocol=https;branch=master"
 
 FILES:${PN} = "/"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_install() {
 	install -d ${D}${datadir}/enigma2/

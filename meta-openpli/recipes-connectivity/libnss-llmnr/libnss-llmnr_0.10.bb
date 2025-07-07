@@ -13,7 +13,7 @@ PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/jmaggard10/nss-llmnr.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 EXTRA_OECONF = "--libdir=${base_libdir} --disable-lynx"
 

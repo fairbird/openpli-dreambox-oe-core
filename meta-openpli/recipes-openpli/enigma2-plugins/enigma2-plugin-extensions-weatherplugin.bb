@@ -9,7 +9,7 @@ PKGV = "2.2+git${GITPKGV}"
 
 SRC_URI = "git://github.com/fairbird/WeatherPlugin.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 FILES:${PN} = "${prefix}/"
 

@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/phate89/tvdbsimple.git;protocol=https;branch=master 
     file://0001-remove-version-check.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit setuptools3
 

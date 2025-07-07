@@ -30,7 +30,7 @@ export KCFLAGS += " -std=gnu17 \
                     -Wno-error \
 "
 
-S = "${WORKDIR}/RT5572"
+S = "${UNPACKDIR}/RT5572"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless

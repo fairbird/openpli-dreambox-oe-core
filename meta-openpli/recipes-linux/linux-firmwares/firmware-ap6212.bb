@@ -12,7 +12,7 @@ SRC_URI = "file://ap6212-wifi-firmware.zip \
            file://ap6212-default \
 "
 
-S = "${WORKDIR}/6212"
+S = "${UNPACKDIR}/6212"
 
 inherit allarch update-alternatives update-rc.d
 

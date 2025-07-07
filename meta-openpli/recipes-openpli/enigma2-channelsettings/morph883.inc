@@ -5,7 +5,7 @@ PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI = "git://github.com/morpheus883/Enigma2-Settings.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 RDEPENDS:${PN} = "xz"
 

@@ -22,7 +22,7 @@ SRC_URI = "git://github.com/zerotier/ZeroTierOne.git;protocol=https;branch=main 
         file://0003-dont-enable-AES-hwcaps-for-arm.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 INITSCRIPT_NAME = "zerotier"
 
