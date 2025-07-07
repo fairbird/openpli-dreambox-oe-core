@@ -43,6 +43,9 @@ echo 'kernel.apparmor_restrict_unprivileged_userns=0' | sudo tee /etc/sysctl.d/6
 
 sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 ```
+# Note: Solution for compile/build nodejs problem:
+https://github.com/fairbird/openpli-dreambox-oe-core/issues/116#event-18499432564
+
 # Dependencies:
 1. Install required packages
 ```
