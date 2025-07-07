@@ -10,8 +10,7 @@ SRC_URI = "file://fake-hwclock \
            file://fake-hwclock.default \
 "
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 inherit update-rc.d
 

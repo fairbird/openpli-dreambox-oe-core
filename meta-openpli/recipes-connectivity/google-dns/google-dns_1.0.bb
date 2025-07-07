@@ -4,8 +4,7 @@ LICENSE = "CLOSED"
 
 SRC_URI = "file://resolv.conf"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_install() {
 	install -d ${D}${sysconfdir}

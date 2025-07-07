@@ -17,8 +17,7 @@ SRC_URI = "https://source.mynonpublic.com/dreambox/dreambox-dvb-modules-${MACHIN
        file://modules \
 "
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 inherit module
 

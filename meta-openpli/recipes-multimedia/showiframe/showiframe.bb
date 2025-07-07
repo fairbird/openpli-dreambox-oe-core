@@ -11,8 +11,7 @@ PR = "r4"
 
 SRC_URI = "file://showiframe.c"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_compile() {
 	${CC} -o showiframe showiframe.c

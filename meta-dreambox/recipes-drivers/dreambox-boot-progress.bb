@@ -8,8 +8,7 @@ PR = "r0"
 require conf/license/openpli-gplv2.inc
 
 SRC_URI = "file://progress"
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_install () {
 #

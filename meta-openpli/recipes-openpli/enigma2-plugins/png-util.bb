@@ -10,8 +10,7 @@ SRC_URI = "\
 	file://png_util.i \
 "
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 inherit python3-dir
 

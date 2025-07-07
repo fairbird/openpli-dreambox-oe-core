@@ -16,8 +16,7 @@ SRC_URI = " \
             file://modules \
 "
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_compile() {
 }

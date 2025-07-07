@@ -6,8 +6,7 @@ PR = "r6"
 
 SRC_URI = "file://inittab"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 INHIBIT_DEFAULT_DEPS = "1"
 

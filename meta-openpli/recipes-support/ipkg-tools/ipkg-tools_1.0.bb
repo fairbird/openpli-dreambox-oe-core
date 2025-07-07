@@ -7,8 +7,7 @@ require conf/license/license-gplv2.inc
 
 RDEPENDS:${PN} = "binutils zstd"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 SRC_URI = "file://ipkg-tools.zip"
 

@@ -18,8 +18,7 @@ SRC_URI = "file://firewall.sh file://firewall.users"
 
 PV = "1.0"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 INITSCRIPT_NAME = "firewall"
 INITSCRIPT_PARAMS = "defaults"

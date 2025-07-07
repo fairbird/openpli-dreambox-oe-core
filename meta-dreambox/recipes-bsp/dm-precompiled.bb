@@ -7,8 +7,7 @@ COMPATIBLE_MACHINE = "^(dreamone|dreamtwo)$"
 
 SRC_URI = "file://others.zip"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_configure() {
 }
