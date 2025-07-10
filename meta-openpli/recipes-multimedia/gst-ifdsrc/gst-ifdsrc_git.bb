@@ -1,16 +1,16 @@
 DESCRIPTION = "A template for writing your own GStreamer plug-in"
 MAINTAINER = "samsamsam"
+require conf/license/license-gplv2.inc
 
 DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base"
 
-require conf/license/openpli-gplv2.inc
 inherit gitpkgv autotools pkgconfig
 
 PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
-PR = "r0"
+PR = "r1"
 
-SRC_URI = "git://github.com/OpenVisionE2/gst-ifdsrc.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/oe-mirrors/iptvplayer-bin-components.git;protocol=https;branch=master"
 
 S = "${UNPACKDIR}/${BP}/gst-ifdsrc/gst-ifdsrc"
 
