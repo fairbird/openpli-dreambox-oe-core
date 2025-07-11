@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-PR .= ".1"
+PR .= ".2"
 
 SRC_URI += " \
     file://mount.sh \
@@ -8,6 +8,8 @@ SRC_URI += " \
     file://localextra.rules \
     file://write-deviceinfo.rules \
     file://device-info.sh \
+    file://startup.sh \
+    file://startup.rules \
 "
 
 do_install:append() {
@@ -16,4 +18,6 @@ do_install:append() {
     fi
     install -m 0644 ${S}/write-deviceinfo.rules    ${D}${sysconfdir}/udev/rules.d/write-deviceinfo.rules
     install -m 0755 ${S}/device-info.sh ${D}${sysconfdir}/udev/scripts/device-info.sh
+    install -m 0644 ${S}/startup.rules    ${D}${sysconfdir}/udev/rules.d/startup.rules
+    install -m 0755 ${S}/startup.sh ${D}${sysconfdir}/udev/scripts/startup.sh
 }
