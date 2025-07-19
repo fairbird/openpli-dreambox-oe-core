@@ -91,6 +91,7 @@ IMAGE_INSTALL = " \
 	python3-ipaddress  \
 	python3-netifaces \
 	python3-pysmb \
+	python3-pycurl \
 	python3-requests \
 	sdparm \
 	stb-hwclock \
