@@ -69,7 +69,6 @@ DEPENDS = "enigma2 \
     libshowiframe \
     libcddb \
     libtirpc \
-    nmap \
     "
 
 RDEPENDS:${PN} = "python3-ctypes"

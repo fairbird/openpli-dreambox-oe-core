@@ -105,6 +105,7 @@ IMAGE_INSTALL = " \
 	vsftpd \
 	xz \
 	wget \
+	nmap \
 	mtd-utils \
 	mtd-utils-ubifs \
 	packagegroup-base-nfs \
