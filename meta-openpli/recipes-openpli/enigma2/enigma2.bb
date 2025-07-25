@@ -47,14 +47,11 @@ RRECOMMENDS:${PN} = " \
 	enigma2-plugin-skins-pli-hd \
 	glibc-gconv-utf-16 \
 	python3-sendfile \
-	${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", \
-	" \
 	${GST_BASE_RDEPS} \
 	${GST_GOOD_RDEPS} \
 	${GST_BAD_RDEPS} \
 	${GST_UGLY_RDEPS} \
 	${GST_BAD_OPUS} \
-	", d)} \
 	"
 
 GST_BASE_RDEPS = "\

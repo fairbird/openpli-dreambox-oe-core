@@ -87,12 +87,14 @@ IMAGE_INSTALL = " \
 	packagegroup-core-boot \
 	parted \
 	pigz \
-	python3-compat2 \
-	python3-ipaddress  \
-	python3-netifaces \
-	python3-pysmb \
-	python3-pycurl \
-	python3-requests \
+	flip \
+	iproute2 \
+	ntfs-3g \
+	ofgwrite \
+	rtmpdump \
+	shellinabox \
+	unrar \
+	zip \
 	sdparm \
 	stb-hwclock \
 	settings-autorestore \
@@ -108,12 +110,20 @@ IMAGE_INSTALL = " \
 	nmap \
 	mtd-utils \
 	mtd-utils-ubifs \
+	python3-future \
+	python3-pexpect \
+	python3-pillow \
+	python3-compat2 \
+	python3-ipaddress  \
+	python3-netifaces \
+	python3-pysmb \
+	python3-pycurl \
+	python3-requests \
 	packagegroup-base-nfs \
 	packagegroup-base-smbfs-client \
 	packagegroup-base-smbfs-server \
 	${ENIGMA2_PLUGINS} \
 	${ROOTFS_PKGMANAGE} \
-	${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "${NORMAL_IMAGE}", d)} \
 	${@bb.utils.contains("TARGET_ARCH", "arm", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("TARGET_ARCH", "aarch64", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "emmc", "dosfstools mtools e2fsprogs-resize2fs partitions-by-name gptfdisk" , "", d)} \
@@ -123,20 +133,6 @@ IMAGE_INSTALL = " \
 	"
 
 GETEXTRA = "edid-decode"
-
-NORMAL_IMAGE = "\
-	flip \
-	iproute2 \
-	ntfs-3g \
-	ofgwrite \
-	python3-future \
-	python3-pexpect \
-	python3-pillow \
-	rtmpdump \
-	shellinabox \
-	unrar \
-	zip \
-	"
 
 export IMAGE_BASENAME = "openpli-enigma2"
 
