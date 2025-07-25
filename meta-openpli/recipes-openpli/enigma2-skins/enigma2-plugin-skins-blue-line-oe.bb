@@ -23,8 +23,8 @@ S = "${UNPACKDIR}/${BP}/Blue-Line-OE-4ATV"
 do_install() {
     install -d ${D}${libdir}
     install -d ${D}/usr/share
-    cp -rp ${S}/usr/lib/* ${D}${libdir}/
-    cp -rp ${S}/usr/share/* ${D}/usr/share/
+    cp --no-preserve=ownership --recursive ${S}/usr/lib/* ${D}${libdir}/
+    cp --no-preserve=ownership --recursive ${S}/usr/share/* ${D}/usr/share/
     chmod -R a+rX ${D}/usr/share/enigma2/
 }
 

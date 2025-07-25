@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/MCelliotG/GlamourAuraFHD-ATV-skin.git;protocol=https
 FILES:${PN} = "/usr/*"
 do_install() {
     install -d ${D}/usr/share/enigma2
-    cp -rp ${S}/usr ${D}/
+    cp --no-preserve=ownership --recursive ${S}/usr ${D}/
     chmod -R a+rX ${D}/usr/share/enigma2/
 }
 
