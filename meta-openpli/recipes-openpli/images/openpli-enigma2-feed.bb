@@ -115,7 +115,9 @@ OPTIONAL_PACKAGES += " \
 	smbnetfs \
 	sshpass \
 	strace \
+	livestreamersrv \
 	streamlinksrv \
+	streamlink \
 	tsniv2ni \
 	tcpdump \
 	tmux \
