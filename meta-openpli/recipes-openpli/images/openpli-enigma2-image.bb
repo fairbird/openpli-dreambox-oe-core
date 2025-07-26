@@ -66,6 +66,10 @@ IMAGE_INSTALL = " \
 	e2fsprogs-mke2fs \
 	e2fsprogs-tune2fs \
 	enigma2 \
+	nano \
+	mc \
+	mc-shell \
+	mc-helpers \
 	minilocale \
 	fuse-exfat \
 	gettext \
