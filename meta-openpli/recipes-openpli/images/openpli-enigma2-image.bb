@@ -74,7 +74,6 @@ IMAGE_INSTALL = " \
 	fuse-exfat \
 	gettext \
 	hdparm \
-	kernel-params \
 	libavahi-client \
 	libxcrypt-compat \
 	libcrypto-compat-0.9.7 \
