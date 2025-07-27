@@ -139,6 +139,9 @@ GETEXTRA = "edid-decode"
 
 export IMAGE_BASENAME = "openpli-enigma2"
 
+# Prevent locales-archive creation to save some space
+IMAGE_LOCALES_ARCHIVE = ""
+
 # Remove the mysterious var/lib/opkg/lists that appears to be the result
 # of the installer that populates the rootfs. I wanted to call this
 # rootfs:remove_opkg_leftovers but that fails to parse.
