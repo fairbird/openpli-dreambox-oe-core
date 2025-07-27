@@ -10,7 +10,8 @@ PYPI_PACKAGE = "exceptiongroup"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "a4785e48b045528f5bfe627b6ad554ff32def154f42372786903b7abcfe1aa16"
+SRC_URI[md5sum] = "85af34d4754844f5becff4fb0f9f87e2"
+SRC_URI[sha256sum] = "b241f5885f560bc56a59ee63ca4c6a8bfa46ae4ad651af316d4e81817bb9fd88"
 
 BBCLASSEXTEND = "native nativesdk"
 
