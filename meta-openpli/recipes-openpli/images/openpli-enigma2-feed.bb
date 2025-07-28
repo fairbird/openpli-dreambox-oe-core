@@ -12,6 +12,7 @@ OPTIONAL_PACKAGES_BROKEN = ""
 OPTIONAL_PACKAGES ?= ""
 OPTIONAL_BSP_PACKAGES ?= ""
 OPTIONAL_PACKAGES += " \
+	autofs \
 	astra-sm \
 	autossh \
 	bitratecalc \
