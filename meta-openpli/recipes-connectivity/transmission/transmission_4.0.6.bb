@@ -13,6 +13,12 @@ PR = "1"
 
 SRC_URI = "gitsm://github.com/transmission/transmission;protocol=https;branch=4.0.x \
         file://0001-build-with-latomic-on-platforms-that-need-it.patch \
+        file://0001-build-bump-CMake-version-to-3.10-4.patch;patchdir=third-party/dht \
+        file://0001-bump-cmake-to-3.10.patch;patchdir=third-party/libb64 \
+        file://0001-Increase-minimum-CMake-version-to-3.10.patch;patchdir=third-party/libdeflate \
+        file://0001-miniupnpc-bump-CMake-version-to-3.14.patch;patchdir=third-party/miniupnpc \
+        file://0001-build-set-minimum-required-CMake-to-3.5.patch;patchdir=third-party/libnatpmp \
+        file://0001-libpsl-bump-CMake-version-to-3.5.patch;patchdir=third-party/libpsl \
         file://init \
         file://service \
         file://config \
