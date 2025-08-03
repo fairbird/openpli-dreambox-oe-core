@@ -45,6 +45,7 @@ PROVIDES = "\
     enigma2-plugin-systemplugins-ventonfancontrol \
     enigma2-plugin-systemplugins-vpledcontrol \
     enigma2-plugin-systemplugins-vuduofancontrol \
+    enigma2-plugin-extensions-plutotv \
     ${@bb.utils.contains("MACHINE_FEATURES", "legacykernel", "" , "enigma2-plugin-systemplugins-wirelessaccesspoint", d)} \
     enigma2-plugin-systemplugins-xtrendfancontrol \
     enigma2-plugin-systemplugins-xtrendremote \
@@ -81,6 +82,8 @@ DESCRIPTION_enigma2-plugin-extensions-tunerserver = "Builds a virtual channels l
 DESCRIPTION_enigma2-plugin-extensions-webbrowser = "Webbrowser launcher"
 FILES:enigma2-plugin-extensions-webbrowser:append = "${datadir}/keymaps"
 RDEPENDS_enigma2-plugin-extensions-webbrowser = "python3-gdata-python3 libqtwebkite4 webbrowser-utils qt4-embedded-fonts qt4-embedded-plugin-imageformat-gif qt4-embedded-plugin-imageformat-ico qt4-embedded-plugin-imageformat-jpeg qt4-embedded-plugin-imageformat-mng qt4-embedded-plugin-imageformat-svg qt4-embedded-plugin-imageformat-tiff qt4-embedded-plugin-iconengine-svgicon"
+DESCRIPTION:enigma2-plugin-extensions-plutotv = "PlutoTV Plugin"
+RDEPENDS:enigma2-plugin-extensions-plutotv = "enigma2-plugin-systemplugins-serviceapp"
 DESCRIPTION_enigma2-plugin-systemplugins-abmcustommiximporter = "Imports ABM CustomMix files from Github."
 DESCRIPTION_enigma2-plugin-systemplugins-audioeffect = "Audio Effect setup"
 DESCRIPTION_enigma2-plugin-systemplugins-channelsimporter = "Imports a copy of the channel list from a remote receiver and loads it on the local receiver."
