@@ -2,6 +2,7 @@ SUMMARY = "DAB decoding library with example of its use"
 SECTION = "libs/multimedia"
 LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
+FILESEXTRAPATHS:append := "${THISDIR}/files:"
 
 SRCREV = "${AUTOREV}"
 
@@ -14,7 +15,9 @@ PV = "1.3+git"
 PKGV = "1.3+git${GITPKGV}"
 PR = "r1"
 
-SRC_URI = "git://github.com/satdreamgr/dab-cmdline.git;protocol=https;branch=sdgradio"
+SRC_URI = "git://github.com/satdreamgr/dab-cmdline.git;protocol=https;branch=sdgradio \
+		file://0001-build-required-CMake-to-3.5.patch \
+"
 
 NEON = "-DNEON_AVAILABLE=ON"
 
