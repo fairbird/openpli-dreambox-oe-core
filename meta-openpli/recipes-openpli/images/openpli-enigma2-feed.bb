@@ -8,6 +8,10 @@ require conf/license/openpli-gplv2.inc
 # Depend on the image, so that it gets build
 DEPENDS = "openpli-enigma2-image package-index-feed"
 
+PROVIDES = "${PN} \
+	enigma2-plugin-extensions-fancontrol2 \
+	"
+
 OPTIONAL_PACKAGES_BROKEN = ""
 OPTIONAL_PACKAGES ?= ""
 OPTIONAL_BSP_PACKAGES ?= ""
