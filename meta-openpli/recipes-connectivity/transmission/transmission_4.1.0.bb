@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ba8199e739948e198310093de27175fa"
 
 DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
 
-# Transmission release 4.0.6
-SRCREV = "38c164933e9f77c110b48fe745861c3b98e3d83e"
-PV = "4.0.6"
+# Transmission release 4.1.0
+SRCREV = "9e15394c65ecddf1b15f7225fa7a4fa29e302505"
+PV = "4.1.0"
 PR = "1"
 
-SRC_URI = "gitsm://github.com/transmission/transmission;protocol=https;branch=4.0.x \
+SRC_URI = "gitsm://github.com/transmission/transmission;protocol=https;branch=main \
         file://0001-build-with-latomic-on-platforms-that-need-it.patch \
         file://0001-build-bump-CMake-version-to-3.10-4.patch;patchdir=third-party/dht \
         file://0001-bump-cmake-to-3.10.patch;patchdir=third-party/libb64 \
