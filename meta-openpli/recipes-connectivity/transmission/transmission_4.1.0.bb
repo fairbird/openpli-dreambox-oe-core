@@ -2,7 +2,7 @@ DESCRIPTION = "Transmission is a BitTorrent client w/ a built-in Ajax-Powered We
 SECTION = "network"
 HOMEPAGE = "www.transmissionbt.com/"
 LICENSE = "GPL-2.0-or-later & GPL-3.0-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=ba8199e739948e198310093de27175fa"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fc328124a2512ae83320a48cdbfeb8f8"
 
 DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
 
@@ -12,13 +12,6 @@ PV = "4.1.0"
 PR = "1"
 
 SRC_URI = "gitsm://github.com/transmission/transmission;protocol=https;branch=main \
-        file://0001-build-with-latomic-on-platforms-that-need-it.patch \
-        file://0001-build-bump-CMake-version-to-3.10-4.patch;patchdir=third-party/dht \
-        file://0001-bump-cmake-to-3.10.patch;patchdir=third-party/libb64 \
-        file://0001-Increase-minimum-CMake-version-to-3.10.patch;patchdir=third-party/libdeflate \
-        file://0001-miniupnpc-bump-CMake-version-to-3.14.patch;patchdir=third-party/miniupnpc \
-        file://0001-build-set-minimum-required-CMake-to-3.5.patch;patchdir=third-party/libnatpmp \
-        file://0001-libpsl-bump-CMake-version-to-3.5.patch;patchdir=third-party/libpsl \
         file://init \
         file://service \
         file://config \
@@ -26,6 +19,7 @@ SRC_URI = "gitsm://github.com/transmission/transmission;protocol=https;branch=ma
 
 INITSCRIPT_NAME = "transmission-daemon"
 INITSCRIPT_PARAMS = "defaults 60 "
+
 inherit cmake gettext pkgconfig update-rc.d systemd
 
 PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
