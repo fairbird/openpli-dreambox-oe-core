@@ -2,6 +2,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_NO_LOCALE = "1"
 
+PV = "1.26.5"
+SRC_URI[sha256sum] = "f0c0e26cbedaa57732cb6a578e8cc13a1164bf18d737d55c333061c52f0c48d7"
+
 SRC_URI:append = " \
            file://0009-glimagesink-Downrank-to-marginal.patch \
            file://0002-subparse-set-need_segment-after-sink-pad-received-GS.patch \
