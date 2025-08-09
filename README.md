@@ -21,8 +21,8 @@ https://github.com/oe-alliance/oe-alliance-core
 -GCC 15.1.0<br>
 -Glibc 2.41<br>
 -ffmpeg 7.1<br>
--GStreamer 1.26.3<br>
--Python 3.13.5<br>
+-GStreamer 1.26.5<br>
+-Python 3.13.6<br>
 -OpenSSL 3.5.0<br>
 -Busybox 1.37.0<br>
 and more.<br>
