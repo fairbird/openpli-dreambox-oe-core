@@ -34,6 +34,8 @@ inherit python3-dir
 
 INFOFILE = "${libdir}/enigma.info"
 
+do_populate_sysroot[depends] += "rust-native:do_populate_sysroot upx-native:do_populate_sysroot"
+
 inherit linux-kernel-base
 
 do_install[nostamp] = "1"
