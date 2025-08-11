@@ -153,7 +153,7 @@ do_install() {
     printf "timerwakeupmode=${TIMERWAKEUP_MODE}\n" >> ${D}${INFOFILE}
     printf "transcoding=${HAVE_TRANSCODING}\n" >> ${D}${INFOFILE}
     printf "ubinize='${UBINIZE_ARGS}'\n" >> ${D}${INFOFILE}
-    grep -q "inherit.*upx-compress" ${OEA-META-OE-BASE}/recipes-oe-alliance/enigma2/enigma2.bb && printf "upx='${UPX_VER}'\n" >> ${D}${INFOFILE}
+    grep -q "inherit.*upx-compress" ${OPENPLI_BASE}/meta-openpli/recipes-openpli/enigma2/enigma2.bb && printf "upx='${UPX_VER}'\n" >> ${D}${INFOFILE}
     printf "vfdsymbol=${HAVE_VFDSYMBOL}\n" >> ${D}${INFOFILE}
     printf "wol=${HAVE_WOL}\n" >> ${D}${INFOFILE}
     printf "wwol=${HAVE_WWOL}\n" >> ${D}${INFOFILE}
