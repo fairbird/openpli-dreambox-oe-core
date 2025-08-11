@@ -23,7 +23,7 @@ https://github.com/oe-alliance/oe-alliance-core
 -ffmpeg 7.1<br>
 -GStreamer 1.26.5<br>
 -Python 3.13.6<br>
--OpenSSL 3.5.0<br>
+-OpenSSL 3.5.2<br>
 -Busybox 1.37.0<br>
 and more.<br>
 <br>
