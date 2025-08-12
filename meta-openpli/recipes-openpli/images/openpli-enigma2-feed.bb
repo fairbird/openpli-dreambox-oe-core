@@ -248,6 +248,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-satipserver \
 	enigma2-plugin-systemplugins-serviceapp \
+	enigma2-plugin-extensions-estalker \
 	alsa-plugins \
 	enigma2-plugins \
 	enigma2-plugins-alliance \
