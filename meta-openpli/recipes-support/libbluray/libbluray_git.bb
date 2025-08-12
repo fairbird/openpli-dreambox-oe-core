@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
 DEPENDS = "freetype libaacs libdca libdvdcss libxml2"
 RDEPENDS:${PN} = "libaacs libdca libdvdcss"
 
-inherit gitpkgv autotools-brokensep pkgconfig
+inherit gitpkgv meson pkgconfig
 
-PV = "v1.3.4+git"
-PKGV = "v1.3.4+git${GITPKGV}"
+PV = "v1.4.0+git"
+PKGV = "v1.4.0+git${GITPKGV}"
 
 SRC_URI = "gitsm://code.videolan.org/videolan/libbluray.git;protocol=https;branch=master"
 
