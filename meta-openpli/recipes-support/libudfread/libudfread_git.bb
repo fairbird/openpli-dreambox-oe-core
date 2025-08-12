@@ -10,5 +10,3 @@ inherit gitpkgv autotools-brokensep pkgconfig
 
 PV = "1.0.0+git"
 PKGV = "1.0.0+git${GITPKGV}"
-
-S = "${UNPACKDIR}/${BP}"
