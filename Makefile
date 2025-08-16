@@ -1,5 +1,4 @@
 #!/usr/bin/make -f
-SHELL := /bin/bash # Use bash syntax to fix error ([[: not found) on ubuntu 22.10
 #
 # Copyright (c) 2010-2012 Dream Multimedia GmbH, Germany
 #                         http://www.dream-multimedia-tv.de/
@@ -196,12 +195,16 @@ $(CURDIR)/site.conf:
 	@echo 'SCONF_VERSION = "1"' >> $@
 	@echo 'BB_NUMBER_THREADS = "$(BB_NUMBER_THREADS)"' >> $@
 	@echo 'PARALLEL_MAKE = "$(PARALLEL_MAKE)"' >> $@
-	@echo 'BUILD_OPTIMIZATION = "-O3 -pipe"' >> $@
+	@echo 'BUILD_OPTIMIZATION = "-O2 -pipe"' >> $@
 	@echo 'DL_DIR = "$(DL_DIR)"' >> $@
+	@echo 'SSTATE_DIR = "$(SSTATE_DIR)"' >> $@
 	@echo 'INHERIT += "rm_work"' >> $@
+	@echo 'INHERIT:remove = "create-spdx"' >> $@
+	@echo 'BB_GIT_SHALLOW_DEPTH = "1"' >> $@
+	@echo 'BB_GIT_SHALLOW = "1"' >> $@
 
 BBLAYERS_CONF_HASH := $(call hash, \
-	'BBLAYERS_CONF_VERSION = "0"' \
+	'BBLAYERS_CONF_VERSION = "5"' \
 	'CURDIR = "$(CURDIR)"' \
 	'BBLAYERS = "$(BBLAYERS)"' \
 	)
