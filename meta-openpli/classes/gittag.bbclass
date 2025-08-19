@@ -21,6 +21,11 @@
 # v1.2, xtest, v2.0" will force you to increment PE to get upgradeable
 # path to v2.0 revisions
 #
+# Another WARNING: Since Walnascar release BB_SHALLOW_GIT will actually
+# perform a shallow initial checkout, which makes it impossible to determine
+# the correct number of commits in the repository - thus using this class
+# is not recommended when shallow cloning is enabled.
+#
 # use example:
 #
 # inherit gittag
@@ -65,6 +70,9 @@ def get_git_pkgv(d, use_tags):
     from shlex import quote
 
     src_uri = d.getVar('SRC_URI').split()
+    unpackdir = d.getVar('UNPACKDIR')
+    def_destsuffix = (d.getVar("BB_GIT_DEFAULT_DESTSUFFIX") or "git") + "/"
+
     fetcher = bb.fetch2.Fetch(src_uri, d)
     ud = fetcher.ud
 
@@ -81,6 +89,7 @@ def get_git_pkgv(d, use_tags):
             format = '_'.join(names)
         else:
             format = 'default'
+
     found = False
     for url in ud.values():
         if url.type == 'git' or url.type == 'gitsm':
@@ -91,7 +100,7 @@ def get_git_pkgv(d, use_tags):
             if not os.path.exists(destdir):
                 return None
 
-		if d.getVar('BB_GIT_SHALLOW') == '1':
+            if d.getVar('BB_GIT_SHALLOW') == '1':
                 bb.warnonce('%s: Shallow cloning enabled - gittag.bbclass will not generate sortable versions' % d.getVar('PN'))
 
             found = True
