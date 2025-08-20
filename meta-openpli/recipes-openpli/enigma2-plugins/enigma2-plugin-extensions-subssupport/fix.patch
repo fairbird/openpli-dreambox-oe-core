@@ -1,0 +1,29 @@
+diff --git a/src/seek.py b/src/seek.py
+--- a/src/seek.py
++++ b/src/seek.py
+@@ -29,7 +29,7 @@
+ try:
+     from .seekers import SubtitlesDownloadError, SubtitlesSearchError, \
+         SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, ElsubtitleSeeker, SubtitlecatSeeker, OpenSubtitles2Seeker, TitulkyComSeeker, \
+-        OpenSubtitlesMoraSeeker, PodnapisiSeeker, SubscenebestSeeker, LocalDriveSeeker, IndexsubtitleSeeker, SubsytsSeeker, MoviesubtitlesSeeker, Sub_Scene_comSeeker, SubdlSeeker, \
++        PodnapisiSeeker, SubscenebestSeeker, LocalDriveSeeker, IndexsubtitleSeeker, SubsytsSeeker, MoviesubtitlesSeeker, Sub_Scene_comSeeker, SubdlSeeker, \
+          TitloviSeeker, PrijevodiOnlineSeeker, MySubsSeeker, SubsourceSeeker, FoursubSeeker, YtssubsSeeker
+     from .seekers.seeker import BaseSeeker
+     from .seekers.utilities import languageTranslate, langToCountry, \
+@@ -38,7 +38,7 @@
+ except (ValueError, ImportError):
+     from seekers import SubtitlesDownloadError, SubtitlesSearchError, \
+         SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, ElsubtitleSeeker, SubtitlecatSeeker, OpenSubtitles2Seeker, TitulkyComSeeker, \
+-        OpenSubtitlesMoraSeeker, PodnapisiSeeker, SubscenebestSeeker, LocalDriveSeeker, IndexsubtitleSeeker, SubsytsSeeker, MoviesubtitlesSeeker, Sub_Scene_comSeeker, SubdlSeeker, \
++        PodnapisiSeeker, SubscenebestSeeker, LocalDriveSeeker, IndexsubtitleSeeker, SubsytsSeeker, MoviesubtitlesSeeker, Sub_Scene_comSeeker, SubdlSeeker, \
+          TitloviSeeker, PrijevodiOnlineSeeker, MySubsSeeker, SubsourceSeeker, FoursubSeeker, YtssubsSeeker
+     from seekers.seeker import BaseSeeker
+     from seekers.utilities import languageTranslate, langToCountry, \
+@@ -64,7 +64,6 @@
+ SUBTITLES_SEEKERS.append(ElsubtitleSeeker)
+ SUBTITLES_SEEKERS.append(Sub_Scene_comSeeker)
+ SUBTITLES_SEEKERS.append(SubscenebestSeeker)
+-SUBTITLES_SEEKERS.append(OpenSubtitlesMoraSeeker)
+ SUBTITLES_SEEKERS.append(MySubsSeeker)
+ SUBTITLES_SEEKERS.append(TitulkyComSeeker)
+ SUBTITLES_SEEKERS.append(PodnapisiSeeker)

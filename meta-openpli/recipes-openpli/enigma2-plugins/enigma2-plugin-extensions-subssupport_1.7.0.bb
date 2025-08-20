@@ -19,7 +19,9 @@ RDEPENDS:${PN} = " \
 	unrar \
 	"
 
-SRC_URI = "git://github.com/popking159/ssupport;protocol=git;branch=main;protocol=https"
+SRC_URI = "git://github.com/popking159/ssupport;protocol=git;branch=main;protocol=https \
+	file://fix.patch \
+"
 pluginpath = "${libdir}/enigma2/python/Plugins/Extensions/SubsSupport"
 
 FILES:${PN} = "${pluginpath}/"
