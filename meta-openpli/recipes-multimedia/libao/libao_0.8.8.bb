@@ -8,7 +8,7 @@ PR = "r1"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-SRC_URI = "http://downloads.xiph.org/releases/ao/libao-${PV}.tar.gz"
+SRC_URI = "git://github.com/oe-mirrors/libao.git;protocol=https;branch=master"
 
 inherit autotools pkgconfig
 
