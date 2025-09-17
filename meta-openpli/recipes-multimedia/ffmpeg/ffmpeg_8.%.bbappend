@@ -19,12 +19,9 @@ SRC_URI += "file://0001-makefile-add-demux-header.patch \
             file://support-for-multiple-decryption-keys.patch \
             file://debug-logs-for-multiple-decryption-keys.patch \
             file://support-for-parsing-cenc-keys-from-MPD-playlist.patch \
-            file://possibility-to-set-decryption-keys-directly-in-HLS.patch \
             file://fixed-parsing-webvtt-with-STYLE-and-REGION-block.patch \
             file://avformat-hls-fix-to-seek-logic.patch \
-            file://avformat-mov-fix-to-detect-if-stream-position-has-been-reset.patch \
             file://support-for-HLS-WebVTT-MPEG-timestamp-map.patch \
-            file://Add-subtitle-support.patch \
             file://fixed-segfault-in-hls-subtitle-handling.patch \
             file://dont-reload-manifest-often-then-needed.patch \
             file://fixed-subtitles-segments-update.patch \
@@ -76,7 +73,6 @@ EXTRA_FFCONF = " \
     --disable-fma4 \
     --disable-avx2 \
     --disable-inline-asm \
-    --disable-yasm \
     --disable-x86asm \
     --disable-fast-unaligned \
     --enable-protocol=http \

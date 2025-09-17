@@ -282,9 +282,9 @@ index 6cb493ceab..c420d8ab10 100644
 +           fate-mov-3elist-encrypted-kid \
 +           fate-mov-frag-encrypted-kid \
 +           fate-mov-tenc-only-encrypted-kid \
-            fate-mov-invalid-elst-entry-count \
-            fate-mov-gpmf-remux \
-            fate-mov-ibi-elst-starts-b \
+            fate-mov-frag-overlap \
+            fate-mov-neg-firstpts-discard-frames \
+ 
 @@ -57,6 +60,15 @@ fate-mov-frag-encrypted: CMD = framemd5 -decryption_key 123456789012345678901234
  # Full-sample encryption and constant IV using only tenc atom (no senc/saio/saiz).
  fate-mov-tenc-only-encrypted: CMD = framemd5 -decryption_key 12345678901234567890123456789012 -i $(TARGET_SAMPLES)/mov/mov-tenc-only-encrypted.mp4
