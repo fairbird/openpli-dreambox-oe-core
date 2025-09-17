@@ -38,6 +38,7 @@ SRC_URI += "file://0001-makefile-add-demux-header.patch \
             file://startover-attribute-to-manifest.patch \
             file://improved-handling-of-event-type-playlist.patch \
             file://check-borders-when-seeking-in-live-mode.patch \
+            file://fixed-playback-of-DASH-with-ampersand-in-BaseURL.patch \
             "
 
 PACKAGECONFIG:append = " gpl libbluray dav1d libfreetype librtmp libxml2 openssl x264 x265 srt"
