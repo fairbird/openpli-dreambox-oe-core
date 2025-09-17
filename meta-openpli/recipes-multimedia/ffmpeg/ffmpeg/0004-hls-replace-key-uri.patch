@@ -9,7 +9,7 @@
      int http_persistent;
      int http_multiple;
      int http_seekable;
-@@ -1350,7 +1352,15 @@ static int open_input(HLSContext *c, struct playlist *pls, struct segment *seg,
+@@ -1350,8 +1352,16 @@ static int open_input(HLSContext *c, struct playlist *pls, struct segment *seg,
  static int read_key(HLSContext *c, struct playlist *pls, struct segment *seg)
  {
      AVIOContext *pb = NULL;
@@ -22,9 +22,11 @@
 +    } else {
 +		key_url = seg->key;
 +    }
-     int ret = open_url(pls->parent, &pb, seg->key, &c->avio_opts, NULL, NULL);
+-    int ret = open_url(pls->parent, &pb, seg->key, &c->avio_opts, NULL, NULL);
++    int ret = open_url(pls->parent, &pb, key_url, &c->avio_opts, NULL, NULL);
      if (ret < 0) {
          av_log(pls->parent, AV_LOG_ERROR, "Unable to open key file %s, %s\n",
+                seg->key, av_err2str(ret));
 @@ -1363,6 +1373,8 @@ static int open_input(HLSContext *c, struct playlist *pls, struct segment *seg,
      }
  
