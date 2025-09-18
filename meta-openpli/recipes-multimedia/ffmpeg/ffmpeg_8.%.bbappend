@@ -18,7 +18,6 @@ SRC_URI += "file://0001-makefile-add-demux-header.patch \
             \
             file://support-for-multiple-decryption-keys.patch \
             file://debug-logs-for-multiple-decryption-keys.patch \
-            file://support-for-parsing-cenc-keys-from-MPD-playlist.patch \
             file://fixed-parsing-webvtt-with-STYLE-and-REGION-block.patch \
             file://avformat-hls-fix-to-seek-logic.patch \
             file://support-for-HLS-WebVTT-MPEG-timestamp-map.patch \
