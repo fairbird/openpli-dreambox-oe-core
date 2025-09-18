@@ -23,9 +23,9 @@ index c166d3367b..7db298abe1 100644
  };
  
 @@ -120,6 +121,7 @@ struct representation {
- 
-     char *cenc_decryption_key;
-     char *cenc_decryption_keys;
+     uint32_t init_sec_buf_read_offset;
+     int64_t cur_timestamp;
+     int is_restart_needed;
 +    enum AVMediaType type;
  };
  
@@ -143,9 +143,9 @@ index c166d3367b..7db298abe1 100644
      for (i = 0; i < c->n_videos; i++) {
          if (!ret)
 @@ -2437,6 +2470,7 @@ static const AVOption dash_options[] = {
+         INT_MIN, INT_MAX, FLAGS},
+     { "cenc_decryption_key", "Media default decryption key (hex)", OFFSET(cenc_decryption_key), AV_OPT_TYPE_STRING, {.str = NULL}, INT_MIN, INT_MAX, .flags = FLAGS },
      { "cenc_decryption_keys", "Media decryption keys by KID (hex)", OFFSET(cenc_decryption_keys), AV_OPT_TYPE_STRING, {.str = NULL}, INT_MIN, INT_MAX, .flags = FLAGS },
-     { "cenc_decryption_video_key", "Media decryption video key scheme_cenc (hex)", OFFSET(cenc_decryption_video_key), AV_OPT_TYPE_STRING, {.str = NULL}, INT_MIN, INT_MAX, .flags = FLAGS },
-     { "cenc_decryption_audio_key", "Media decryption audio key scheme_cenc (hex)", OFFSET(cenc_decryption_audio_key), AV_OPT_TYPE_STRING, {.str = NULL}, INT_MIN, INT_MAX, .flags = FLAGS },
 +    { "fake_last_subtitle", "Insert fake last subtitle to prevent subtitle stream end befor audio/video", OFFSET(fake_last_subtitle), AV_OPT_TYPE_INT, { .i64 = 0 }, 0, 1, .flags = FLAGS },
      {NULL}
  };
