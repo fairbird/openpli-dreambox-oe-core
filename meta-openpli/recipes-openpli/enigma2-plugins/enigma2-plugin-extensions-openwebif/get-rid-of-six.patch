@@ -21,8 +21,8 @@ index 1311d79b..279a0d2e 100644
  					self.last_comment = None
 @@ -66,7 +65,7 @@ for arg in sys.argv[1:]:
  		if c:
- 			for l in c.split('\n'):
- 				print("#. ", l)
+ 			for line in c.split('\n'):
+ 				print("#. ", line)
 -		print('msgid "' + six.ensure_str(k) + '"')
 +		print('msgid "' + k + '"')
  		print('msgstr ""')
