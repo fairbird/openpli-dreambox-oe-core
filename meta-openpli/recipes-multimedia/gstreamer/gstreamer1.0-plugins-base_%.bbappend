@@ -2,8 +2,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_NO_LOCALE = "1"
 
-PV = "1.26.5"
-SRC_URI[sha256sum] = "f0c0e26cbedaa57732cb6a578e8cc13a1164bf18d737d55c333061c52f0c48d7"
+PV = "1.26.6"
+SRC_URI[sha256sum] = "6e13c83be9f7746d7a5b7dbbb44882f214c3afcf32946c9a1f1bab33cc3da5a1"
 
 SRC_URI:append = " \
            file://0009-glimagesink-Downrank-to-marginal.patch \

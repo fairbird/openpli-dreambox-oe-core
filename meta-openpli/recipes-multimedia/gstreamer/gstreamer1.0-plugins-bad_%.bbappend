@@ -2,8 +2,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_NO_LOCALE = "1"
 
-PV = "1.26.5"
-SRC_URI[sha256sum] = "9890f262f3b2a9564dcb629e9eb697d77b93d1f71897eda1a8170b7dcfe73294"
+PV = "1.26.6"
+SRC_URI[sha256sum] = "b3bf4b1ad3017eac1fcf1209eae8a61208f8ef43b9b1ef99b9366acf14d74a79"
 
 SRC_URI:append = " \
         file://0001-Revert-tsdemux-Limit-the-maximum-PES-payload-size.patch \
