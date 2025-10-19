@@ -5,9 +5,9 @@ LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=c4e17b64eab9c128f786f44f0dfb570a"
 DEPENDS += "python3-setuptools-scm-native"
 
-SRC_URI[md5sum] = "0fce2608fcb31c16c81945c73e283724"
-SRC_URI[sha256sum] = "e0b82f797658d26b8613ec8eb563c3b08e6bd6a7921e9d5089bd1175ad1b1740"
+SRC_URI[md5sum] = "5299bba86f892b2a8e7f1678e45b96ff"
+SRC_URI[sha256sum] = "dd414eda6bdb15140e864bc1d1c9625030375d14cbe0b290092867368924a52f"
 
-inherit pypi setuptools3
+inherit pypi python_hatchling
 
 include python3-package-split.inc
