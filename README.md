@@ -43,6 +43,15 @@ echo 'kernel.apparmor_restrict_unprivileged_userns=0' | sudo tee /etc/sysctl.d/6
 
 sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 ```
+
+# Note for Ubuntu 25.10.<br>
+Use coreutils instead of rust-coreutils.<br>
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=16028<br>
+https://discourse.ubuntu.com/t/migration-to-rust-coreutils-in-25-10/59708
+
+```
+sudo apt install coreutils-from-gnu coreutils-from-uutils- --allow-remove-essential
+```
 # Note: Solution for compile/build nodejs problem:
 https://github.com/fairbird/openpli-dreambox-oe-core/issues/116#event-18499432564
 
@@ -118,3 +127,4 @@ DISTRO_HOST = " <your ip address or hostname> "
 ./build_image.sh
 ```
 ==========================================================
+
