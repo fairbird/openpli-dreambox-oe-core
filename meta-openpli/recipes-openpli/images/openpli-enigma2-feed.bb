@@ -84,7 +84,6 @@ OPTIONAL_PACKAGES += " \
 	parted \
 	picocom \
 	ppp \
-	procps \
 	pv \
 	pyload \
 	python3-future \

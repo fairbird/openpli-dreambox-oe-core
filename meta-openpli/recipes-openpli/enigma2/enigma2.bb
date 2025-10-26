@@ -14,6 +14,7 @@ DEPENDS = " \
 	libdreamdvd libdvbsi++ fribidi libmad libpng libsigc++-3 libwebp giflib libxml2 \
 	openssl libudfread \
 	python3-twisted python3-wifi \
+	procps \
 	swig-native \
 	tuxtxt-enigma2 \
 	${@bb.utils.contains("MACHINE_FEATURES", "alsamixer", "ffmpeg" , "", d)} \
