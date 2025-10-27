@@ -27,7 +27,6 @@ RCONFLICTS:${PN} = "enigma2-plugin-pli-softcamsetup"
 RDEPENDS:${PN} = " \
 	bzip2 \
 	alsa-conf \
-	enigma2-dhcp-wait \
 	enigma2-fonts \
 	enigma-info \
 	enigma2-timezones \
