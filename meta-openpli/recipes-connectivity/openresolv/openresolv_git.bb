@@ -1,18 +1,21 @@
 SUMMARY = "management framework for resolv.conf"
 AUTHOR = "Roy Marples <roy@marples.name>"
-HOMEPAGE = "http://roy.marples.name/projects/openresolv"
+HOMEPAGE = "https://github.com/NetworkConfiguration/openresolv"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://${UNPACKDIR}/${BP}/resolvconf.in;beginline=4;endline=26;md5=e962049f535f7385f0f2a0ac9638cd43"
-PR = "r0"
+LIC_FILES_CHKSUM = "file://resolvconf.in;beginline=4;endline=26;md5=e962049f535f7385f0f2a0ac9638cd43"
 
-SRC_URI = "git://github.com/NetworkConfiguration/openresolv.git;protocol=https;branch=master \
+inherit allarch gitpkgv
+
+PV = "3.13.2+git"
+PKGV = "3.13.2+git${GITPKGV}"
+
+SRC_URI = "git://github.com/NetworkConfiguration/openresolv;protocol=https;branch=master \
            file://000resolvconf.if-up \
            file://000resolvconf.ppp.ip-down \
            file://000resolvconf.ppp.ip-up \
            file://resolvconf.conf \
            file://resolvconf.if-down \
            file://volatiles.99_openresolv"
-inherit allarch
 
 do_configure() {
         echo "SYSCONFDIR=${sysconfdir}" > config.mk
@@ -22,6 +25,7 @@ do_configure() {
         echo "MANDIR=${mandir}" >> config.mk
         echo "RCDIR=${sysconfdir}/init.d" >> config.mk
 }
+
 do_install() {
         oe_runmake "DESTDIR=${D}" install
         install -d ${D}${sysconfdir}
@@ -42,15 +46,16 @@ RPROVIDES:${PN} = "resolvconf"
 
 RCONFLICTS:${PN} = "resolvconf"
 
-FILES:${PN} += "/lib/resolvconf"
+FILES:${PN} += "${baselib}/resolvconf"
 
 pkg_postinst:${PN}() {
 if [ -z "$D" -a -x ${sysconfdir}/init.d/populate-volatile.sh ]; then
-	${sysconfdir}/init.d/populate-volatile.sh update
+    ${sysconfdir}/init.d/populate-volatile.sh update
 fi
 }
+
 pkg_postrm:${PN}() {
 if [ -z "$D" -a -x ${sysconfdir}/init.d/populate-volatile.sh ]; then
-	${sysconfdir}/init.d/populate-volatile.sh update
+    ${sysconfdir}/init.d/populate-volatile.sh update
 fi
 }
