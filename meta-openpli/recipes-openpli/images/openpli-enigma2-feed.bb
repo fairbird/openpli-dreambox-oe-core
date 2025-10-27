@@ -42,7 +42,6 @@ OPTIONAL_PACKAGES += " \
 	fio \
 	gdb \
 	gerbera \
-	google-dns \
 	grep \
 	gstplayer \
 	gstplayer2 \
