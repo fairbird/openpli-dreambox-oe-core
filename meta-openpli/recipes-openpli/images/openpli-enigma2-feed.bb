@@ -22,7 +22,6 @@ OPTIONAL_PACKAGES += " \
 	bitratecalc \
 	btrfs-tools \
 	ccid \
-	cloudflare-dns \
 	ctorrent \
 	cups \
 	davfs2 \
