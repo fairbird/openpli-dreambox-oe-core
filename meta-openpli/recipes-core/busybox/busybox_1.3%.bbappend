@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PR .= ".3"
+PR .= ".4"
 
 SRC_URI:append = " \
             file://mount_single_uuid.patch \
@@ -10,6 +10,7 @@ SRC_URI:append = " \
             file://inetd.conf \
             file://vi.sh \
             file://ntp.script \
+            file://simple.script \
             file://0001-Prevent-telnet-connections-from-the-internet-to-the-.patch \
             file://0002-Extended-network-interfaces-support.patch \
             file://0003-Revert-ip-fix-ip-oneline-a.patch \
