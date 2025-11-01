@@ -1,6 +1,11 @@
 #!/bin/sh
 # shellcheck shell=dash
-# Based on odhcp6c sample script and rdnssd merge-hook
+# odhcp6c update script with Enigma2 dnsMode support
+# dnsMode values:
+#   (missing) or 0 = prefer IPv4
+#   1 = prefer IPv6
+#   2 = IPv4 only
+#   3 = IPv6 only
 
 [ -z "$1" ] && echo "Error: should be called from odhcp6c" && exit 1
 
@@ -9,6 +14,16 @@ STATE=$2
 DEBUG=0
 
 DOMAINS=${DOMAINS:=""}
+SETTINGS_FILE="/etc/enigma2/settings"
+
+# Read dnsMode (default = prefer IPv4)
+get_dns_mode() {
+	if [ -f "$SETTINGS_FILE" ]; then
+		grep -m1 '^config\.usage\.dnsMode=' "$SETTINGS_FILE" | cut -d= -f2
+	else
+		echo ""
+	fi
+}
 
 update_resolv() {
 	sysconfdir='/etc'
@@ -31,13 +46,13 @@ update_resolv() {
 	touch "$lockfile"
 
 	limit=3
-	dns4count=$(grep -c "$RE_NSV4" $resolvconf)
+	dns4count=$(grep -c "$RE_NSV4" $resolvconf 2>/dev/null || true)
 	[ "$dns4count" -ge 1 ] && limit=2
 	[ "$dns4count" -ge 2 ] && limit=1
 
 	set -- "$ALL_DOMAINS"
 	DOMAIN="$1"
-	if [ ! "x$DOMAIN" = "x" ]; then
+	if [ -n "$DOMAIN" ]; then
 		echo "domain $DOMAIN" > "$myresolvconf"
 	else
 		grep "^domain " $resolvconf | head -n 1 > "$myresolvconf"
@@ -55,32 +70,57 @@ update_resolv() {
 
 	grep -E -v "^domain|^nameserver|^search|^ *$" $resolvconf >> "$myresolvconf"
 
-	dnscount=0
-	for dns in $ALL_DNS; do
-		dnscount=$((dnscount + 1))
-		if [ $dnscount -le $limit ]; then
-			/bin/echo -n "nameserver $dns" >> "$myresolvconf"
-			case $dns in
-			        fe80*)
-					echo "%$IFACE" >> "$myresolvconf"
-		                	;;
-			        *)
-					echo >> "$myresolvconf"
-					;;
-			esac
-		else
-			break
-		fi
-	done
-	grep "$RE_NSV4" $resolvconf | head -n $((4 - dnscount)) >> "$myresolvconf"
+	# --- Enigma2 dnsMode logic ---
+	DNSMODE=$(get_dns_mode)
+	echo "$0: Using dnsMode=$DNSMODE"
 
-	#if [ "x$(diff $resolvconf $myresolvconf)" = "x" ]; then
-	if diff "$resolvconf" "$myresolvconf" >/dev/null; then
+	IPV4_DNS=""
+	IPV6_DNS=""
+
+	for dns in $ALL_DNS; do
+		case "$dns" in
+								   
+			*:* ) IPV6_DNS="${IPV6_DNS}nameserver $dns
+" ;;
+			*   ) IPV4_DNS="${IPV4_DNS}nameserver $dns
+									  
+					 
+			 
+							
+" ;;
+		esac
+	  
+		
+	
+	done
+																		   
+
+	EXISTING_V4="$(grep "$RE_NSV4" $resolvconf 2>/dev/null || true)"
+	[ -n "$EXISTING_V4" ] && IPV4_DNS="${IPV4_DNS}${EXISTING_V4}
+"
+
+	case "$DNSMODE" in
+		1)
+			echo -n "$IPV6_DNS$IPV4_DNS" >> "$myresolvconf"
+			;;
+		2)
+			echo -n "$IPV4_DNS" >> "$myresolvconf"
+			;;
+		3)
+			echo -n "$IPV6_DNS" >> "$myresolvconf"
+			;;
+		*)
+			echo -n "$IPV4_DNS$IPV6_DNS" >> "$myresolvconf"
+			;;
+	esac
+	# --- end Enigma2 dnsMode logic ---
+
+	if diff "$resolvconf" "$myresolvconf" >/dev/null 2>&1; then
 		rm "$myresolvconf"
 	else
 		mv -f "$myresolvconf" "$resolvconf"
 	fi
-	rm $lockfile
+	rm -f "$lockfile"
 }
 
 setup_interface () {
@@ -121,11 +161,11 @@ setup_interface () {
 			prefixpart="$prefixpart, $prefix"
 		fi
 
-		# TODO: delete this somehow when the prefix disappears
-		#ip -6 route add unreachable "$addr"
+														
+									  
 	done
 
-	# Merge addresses
+				  
 	for entry in $RA_ADDRESSES; do
 		local duplicate=0
 		local addr="${entry%%/*}"
@@ -148,7 +188,7 @@ setup_interface () {
 		if [ "x$realip" = "x/sbin/ip.iproute2" ]; then
 			ip -6 address replace "$addr" dev "$device" preferred_lft "$preferred" valid_lft "$valid"
 		else
-			# Busybox ip does not understand lifetimes
+											 
 			ip -6 address replace "$addr" dev "$device"
 		fi
 	done
@@ -160,11 +200,11 @@ teardown_interface() {
 	for oldaddr in $OLDADDRS; do
 		ip -6 addr delete "$oldaddr" dev "$device"
 	done
-#	ip -6 route replace ff00::/8 dev "$device" metric 256
+													   
 }
 
 read_auto() {
-	# Method auto with option "dhcp" = Use stateless DHCPv6
+														
 
 	DHCP_CONF=$(awk -v par="$IFACE" '
 	/^iface/ && $2==par && $3=="inet6" && $4=="auto" {f=1}
@@ -175,7 +215,7 @@ read_auto() {
 }
 
 read_static() {
-	# Method static with option "autoconf" = Perform stateless autoconfiguration
+																			 
 
 	RA_CONF=$(awk -v par="$IFACE" '
 	/^iface/ && $2==par && $3=="inet6" && $4=="static" {f=1}
@@ -186,7 +226,7 @@ read_static() {
 }
 
 read_dhcp() {
-	# Method dhcp with option "autoconf" = Perform stateless autoconfiguration
+																		   
 
 	RA_CONF=$(awk -v par="$IFACE" '
 	/^iface/ && $2==par && $3=="inet6" && $4=="dhcp" {f=1}
@@ -242,25 +282,25 @@ get_config() {
 merge_dhcp_ra() {
 	if [ "x$DHCP_CONF" = "x0" ] && [ "x$RA_CONF" = "x0" ]; then
 
-		# Neither RA nor DHCPv6
+						 
 
 		ALL_DNS=""
 		ALL_DOMAINS=""
 	elif [ "x$DHCP_CONF" = "x0" ]; then
 
-		# Only RA
+		   
 
 		ALL_DNS=$RA_DNS
 		ALL_DOMAINS=$RA_DOMAINS
 	elif [ "x$RA_CONF" = "x0" ]; then
 
-		# Only DHCP
+			 
 
 		ALL_DNS=$RDNSS
 		ALL_DOMAINS=$DOMAINS
 	else
 
-		# RA and DHCP - Merge RA and DHCPv6
+									 
 
 		for dns in $RDNSS; do
 			local duplicate=0
