@@ -26,6 +26,6 @@ CONFFILES:${PN} = "${sysconfdir}/gerbera/config.xml"
 
 DEPENDS += "jsoncpp icu"
 
-PV = "2.6.1"
+PV = "3.0.0"
 
-SRCREV = "89b37a28d9f648502c617d15a0194669d0e54a94"
+SRCREV = "7846f3dd5d0f848a60d0c3146c3b7290881a8992"
