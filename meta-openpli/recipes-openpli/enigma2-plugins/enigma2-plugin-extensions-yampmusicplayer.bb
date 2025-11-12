@@ -4,7 +4,7 @@ MAINTAINER = "oe-a"
 PRIORITY = "optional"
 require conf/license/license-gplv2.inc
 
-RDEPENDS:${PN} = "python3-sqlite3 python3-tinytag python3-beautifulsoup4"
+RDEPENDS:${PN} = "python3-sqlite3 python3-tinytag python3-beautifulsoup4 python3-mutagen"
 
 inherit gitpkgv gettext setuptools3-openplugins python3-compileall
 
