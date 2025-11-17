@@ -4,3 +4,5 @@ SRC_ORIGIN ?= "git://git.streamboard.tv/common/oscam.git;protocol=https;branch=m
 
 CAMTITLE = "OSCam ${PV}: Open Source Softcam"
 CAMNAME = "oscam"
+
+RDEPENDS:${PN} += "enigma2-plugin-softcams-oscam-whitelist enigma2-plugin-extensions-oscamstatus"

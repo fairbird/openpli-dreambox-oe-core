@@ -8,5 +8,6 @@ DEPENDS = " \
 	${@bb.utils.contains("TARGET_ARCH", "mipsel armv7a", "enigma2-plugin-softcams-cccam", "", d)} \
 	enigma2-plugin-softcams-oscam \
 	enigma2-plugin-softcams-oscam-emu \
+	enigma2-plugin-softcams-oscam-whitelist \
 	enigma2-plugin-softcams-ncam \
 	"
