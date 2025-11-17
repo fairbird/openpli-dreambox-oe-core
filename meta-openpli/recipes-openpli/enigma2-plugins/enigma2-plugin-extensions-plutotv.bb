@@ -7,7 +7,6 @@ inherit gittag setuptools3-openplugins python3-compileall
 
 S = "${UNPACKDIR}/${BP}/src"
 
-SRCREV = "${AUTOREV}"
 PV = "git"
 PKGV = "${GITPKGVTAG}"
 
