@@ -16,8 +16,6 @@ RDEPENDS:${PN} += "enigma2-plugin-extensions-oscamstatus libdvbcsa libusb1"
 
 LDFLAGS:prepend = "-ludev -ldvbcsa "
 
-GLIBC_64BIT_TIME_FLAGS = ""
-
 S = "${UNPACKDIR}/${BP}"
 B = "${S}"
 
