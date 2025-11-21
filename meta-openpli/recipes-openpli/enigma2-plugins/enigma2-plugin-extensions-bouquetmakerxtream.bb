@@ -5,7 +5,6 @@ MAINTAINER = "kiddac"
 PRIORITY = "optional"
 require conf/license/license-gplv2.inc
 
-SRCREV = "${AUTOREV}"
 PV = "git"
 PKGV = "${GITPKGV}"
 
