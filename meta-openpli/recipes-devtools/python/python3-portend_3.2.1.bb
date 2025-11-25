@@ -8,6 +8,6 @@ DEPENDS += "python3-setuptools-scm-native python3-coherent-licensed-native"
 SRC_URI[md5sum] = "c52510e0488592005243209246b1d4f9"
 SRC_URI[sha256sum] = "aa9d40ab1f9e14bdb7d401f42210df35d017c9b97991baeb18568cedfb8c6489"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_hatchling
 
 include python3-package-split.inc
