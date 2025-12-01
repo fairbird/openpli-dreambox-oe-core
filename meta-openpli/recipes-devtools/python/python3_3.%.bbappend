@@ -7,7 +7,6 @@ PACKAGECONFIG = "readline gdbm ${@bb.utils.filter('DISTRO_FEATURES', 'lto', d)}"
 inherit python3-dir
 
 FILES:${PN}-src += " \
-    ${libdir}/${PYTHON_DIR}/*.py \
     ${libdir}/${PYTHON_DIR}/*/*.py \
     ${libdir}/${PYTHON_DIR}/*/*/*.py \
     ${libdir}/${PYTHON_DIR}/*/*/*/*.py \
@@ -44,7 +43,7 @@ python(){
     bb.parse.mark_dependency(d, filename)
 
     with open(filename) as manifest_file:
-        manifest_str =  manifest_file.read()
+        manifest_str = manifest_file.read()
         json_start = manifest_str.find('# EOC') + 6
         manifest_file.seek(json_start)
         manifest_str = manifest_file.read()
