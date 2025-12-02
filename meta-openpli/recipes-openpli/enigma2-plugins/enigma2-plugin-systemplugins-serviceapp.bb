@@ -4,12 +4,12 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "enigma2 uchardet openssl"
-RDEPENDS:${PN} = "enigma2 uchardet openssl exteplayer3 gstplayer python3-json"
+RDEPENDS:${PN} = "enigma2 uchardet openssl exteplayer3 gstplayer gstplayer2 python3-json"
 RCONFLICTS:${PN} = "enigma2-plugin-extensions-serviceapp"
 RREPLACES:${PN} = "enigma2-plugin-extensions-serviceapp"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/oe-mirrors/serviceapp.git;branch=sig3;protocol=https \
+SRC_URI = "git://github.com/oe-mirrors/serviceapp.git;branch=openATV;protocol=https \
 		file://fix-debug-print.patch \
 "
 inherit autotools gitpkgv python3native pkgconfig gettext python3targetconfig python3-compileall
