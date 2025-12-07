@@ -8,7 +8,7 @@ inherit setuptools3
 
 SRC_URI = "git://github.com/CheetahTemplate3/cheetah3;protocol=https;branch=master"
 
-SRCREV = "8cfda363eafdae01b2d8d1b481e4247264af2421"
+SRCREV = "813b30ebe39e4d56c14ee550df2109743e246de7"
 
 RDEPENDS:${PN} = "python3-pickle python3-pprint"
 RDEPENDS:${PN}:class-native = ""
