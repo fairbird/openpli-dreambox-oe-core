@@ -73,7 +73,6 @@ OPTIONAL_PACKAGES += " \
 	ntp \
 	nodejs \
 	openmultiboot \
-	openresolv \
 	ofgwrite \
 	openresolv \
 	openssh \
