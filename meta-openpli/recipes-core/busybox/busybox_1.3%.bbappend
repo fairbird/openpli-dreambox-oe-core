@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PR .= ".5"
+PR .= ".6"
 
 SRC_URI:append = " \
             file://mount_single_uuid.patch \
