@@ -15,6 +15,7 @@ PR = "3"
 SRC_URI = "git://github.com/openwrt/odhcp6c.git;protocol=https;branch=master \
            file://ifup \
            file://ifdown \
+           file://odhcp6c-update \
           "
 
 EXTRA_OEMAKE = " \
@@ -34,6 +35,7 @@ do_install() {
     install -d ${D}${sysconfdir}/network/if-down.d
     install -m 755 ${UNPACKDIR}/ifdown ${D}${sysconfdir}/network/if-down.d/odhcp6c
     install -d ${D}${sbindir}
+    install -m 755 ${UNPACKDIR}/odhcp6c-update ${D}${sbindir}/odhcp6c-update
 }
 
 # opkg
