@@ -31,6 +31,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://fix-mips-build.patch \
            file://fix-build-with-icu-76.patch \
            file://0001-build-support-python-3.13.patch \
+           file://0001-build-support-python-3.14.patch \
            file://fix-mips-build-gcc15.patch \
            "
 
@@ -82,6 +83,8 @@ PACKAGECONFIG[shared] = "--shared"
 PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
 
 EXTRANATIVEPATH += "file-native"
+
+EXTRA_OECONF += "--download=none"
 
 python prune_sources() {
     import shutil
