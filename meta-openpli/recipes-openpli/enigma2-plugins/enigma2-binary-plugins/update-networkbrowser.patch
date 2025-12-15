@@ -1,0 +1,24 @@
+diff --git a/networkbrowser/src/NetworkBrowser.py b/networkbrowser/src/NetworkBrowser.py
+--- a/networkbrowser/src/NetworkBrowser.py
++++ bnetworkbrowser/src/NetworkBrowser.py
+@@ -134,7 +134,7 @@
+ 		del self.Timer
+ 		iAutoMount.stopMountConsole()
+ 		iNetwork.stopRestartConsole()
+-		iNetwork.stopGetInterfacesConsole()
++		iNetwork.stopActivateInterfaceConsolee()
+ 
+ 	def startRun(self):
+ 		self.expanded = []
+diff --git a/networkbrowser/src/MountManager.py b/networkbrowser/src/MountManager.py
+--- a/networkbrowser/src/MountManager.py
++++ bnetworkbrowser/src/MountManager.py
+@@ -64,7 +64,7 @@
+ 
+ 	def cleanup(self):
+ 		iNetwork.stopRestartConsole()
+-		iNetwork.stopGetInterfacesConsole()
++		iNetwork.stopActivateInterfaceConsolee()
+ 
+ 	def updateList(self):
+ 		self.list = []
