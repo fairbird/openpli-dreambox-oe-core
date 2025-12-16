@@ -27,4 +27,11 @@ do_install() {
     chmod -R a+rX ${D}/usr
 }
 
+do_install:append() {
+    rm -f ${D}/usr/lib/enigma2/python/Screens/OScamInfo.py*
+    rm -f ${D}/usr/lib/enigma2/python/Components/Renderer/MSNWeatherPixmap.py*
+    rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ServicePosition.py*
+    rm -f ${D}/usr/lib/enigma2/python/Components/Converter/ConverterRotator.py*
+}
+
 INSANE_SKIP:${PN} = "installed-vs-shipped"
