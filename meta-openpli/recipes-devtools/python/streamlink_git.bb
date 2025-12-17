@@ -33,10 +33,11 @@ PKGV = "${GITPKGVTAG}"
 SRCREV_streamlink = "8f330ba5bc82f58adfb1c07a86c6b1923f16106d"
 SRCREV_plugins = "${AUTOREV}"
 
-SRCREV_FORMAT = "streamlink_plugins"
+SRCREV_FORMAT = "streamlink"
 
-SRC_URI = "git://github.com/streamlink/streamlink.git;protocol=https;name=streamlink;branch=master \
+SRC_URI = "git://github.com/streamlink/streamlink.git;protocol=https;name=streamlink;branch=master;name=streamlink \
            git://github.com/oe-mirrors/streamlink-plugins;protocol=https;name=plugins;destsuffix=additional-plugins;branch=master"
+
 do_unpack:append() {
     bb.build.exec_func('do_prepare_plugins_dir', d)
 }
