@@ -33,6 +33,7 @@ OPTIONAL_PACKAGES += " \
 	dvbsnoop \
 	dvdfs \
 	edid-decode \
+	dnscrypt-proxy \
 	eti-tools \
 	evtest \
 	exfatprogs \
