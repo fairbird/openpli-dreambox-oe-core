@@ -51,7 +51,6 @@ do_compile:prepend() {
 	          ${B}/CMakeFiles/*/link.txt
 }
 
-
 # Make zip package for manual installation
 do_install:append() {
 	install -d ${D}${datadir}/kodi/addons/packages/

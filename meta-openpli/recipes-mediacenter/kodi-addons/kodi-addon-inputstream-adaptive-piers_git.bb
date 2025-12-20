@@ -11,13 +11,14 @@ DEPENDS += "expat pugixml"
 RDEPENDS:${PN} += "ldd"
 RRECOMMENDS:${PN} = "kernel-module-ext2"
 
-SRCREV = "d8e2a9bed7f2deb7ff373b7e9a0c7c8f6538a454"
-PV = "22.1.12+gitr"
+SRCREV = "c8f06ee08054d67a3dda3c8d1a6af38df1f5c688"
+PV = "22.3.4+gitr"
 
 KODIADDONBRANCH = "Piers"
 
 SRC_URI = "git://github.com/xbmc/inputstream.adaptive.git;protocol=https;branch=${KODIADDONBRANCH} \
         file://define-INPUTSTREAM_MAX_STREAM_COUNT-ifndef.patch"
+
 EXTRA_OECMAKE += "-DENABLE_INTERNAL_BENTO4=ON"
 
 # Allow downloads during internals build

@@ -2,6 +2,7 @@ DESCRIPTION = "Enigma2 plugin to launch and play media from Kodi"
 AUTHOR = "Maroš Ondrášek <mx3ldev@gmail.com>"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+require conf/python/python3-compileall.inc
 
 PV = "22"
 PR = "r3"
@@ -14,6 +15,7 @@ SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/oe-alliance/kodiext.git;protocol=https;branch=master \
         file://advancedsettings.xml \
         "
+
 do_install:append() {
 	install -d ${D}/usr/share/kodi/system
 	install -m 0755 ${UNPACKDIR}/advancedsettings.xml ${D}/usr/share/kodi/system
@@ -25,5 +27,5 @@ FILES:${PN} = " \
     /usr/share/kodi/system \
     "
 
-inherit autotools python3-compileall
+inherit autotools
 INSANE_SKIP += "file-deps"

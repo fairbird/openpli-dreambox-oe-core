@@ -55,6 +55,7 @@ DEPENDS += " \
             libxkbcommon \
             libxml2 \
             libxslt \
+            util-linux-libuuid \
             lzo \
             pcre2 \
             nlohmann-json \
@@ -74,7 +75,7 @@ DEPENDS += " \
           "
 inherit gitpkgv
 # 22.0 Piers
-SRCREV = "4434c17e410287ca609bee8622d4b6841bf24a31"
+SRCREV = "3e08130c51dc8337a8de47d150088d65c20ab5d8"
 
 # 'patch' doesn't support binary diffs
 PATCHTOOL = "git"
@@ -83,12 +84,12 @@ PR = "r3"
 
 PV = "22.0+gitr"
 PV_groovy = "4.0.23"
-PV_commons-lang3 = "3.17.0"
-PV_commons-text = "1.13.1"
+PV_commons-lang3 = "3.20.0"
+PV_commons-text = "1.15.0"
 
 SRC_URI[groovy.sha256sum] = "7089dd7a1e84adc814d616f5ec2f7d7dac2044a0a0457f3341b3b92d30204229"
-SRC_URI[commons-lang.sha256sum] = "08b93712bed7f48725d93c44d70c71e7e661af390f22f0f3e6ba61e3af3cea36"
-SRC_URI[commons-text.sha256sum] = "51236deae067ec2d97826f515a495e57002d749cfd9bdd0a19cc35cbeaaccb6d"
+SRC_URI[commons-lang.sha256sum] = "a77875dbc8b7b687e49d914cf00cf7237a548f4163c2a64565b3da999d8b024f"
+SRC_URI[commons-text.sha256sum] = "af36d019def06a31b4d5accf60b13c4de817ec8569af1ffb410eb5ab16b39721"
 SRC_URI[libdvdcss.sha256sum] = "f38c4a4e7a4f4da6d8e83b8852489aa3bb6588a915dc41f5ee89d9aad305a06e"
 SRC_URI[libdvdread.sha256sum] = "719130091e3adc9725ba72df808f24a14737a009dca5a4c38c601c0c76449b62"
 SRC_URI[libdvdnav.sha256sum] = "584f62a3896794408d46368e2ecf2c6217ab9c676ce85921b2d68b8961f49dfc"
@@ -100,6 +101,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
            https://github.com/xbmc/libdvdcss/archive/refs/tags/1.4.3-Next-Nexus-Alpha2-2.tar.gz;name=libdvdcss;downloadfilename=libdvdcss.tar.gz;unpack=0 \
            https://github.com/xbmc/libdvdread/archive/refs/tags/6.1.3-Next-Nexus-Alpha2-2.tar.gz;name=libdvdread;downloadfilename=libdvdread.tar.gz;unpack=0 \
            https://github.com/xbmc/libdvdnav/archive/refs/tags/6.1.1-Next-Nexus-Alpha2-2.tar.gz;name=libdvdnav;downloadfilename=libdvdnav.tar.gz;unpack=0 \
+           file://0001-revert-FFMPEG-8.0.patch \
            file://0001-flatbuffers-22.patch \
            file://0002-readd-Touchscreen-settings.patch \
            file://0003-shader-nopow-22.patch \
@@ -113,11 +115,12 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
            file://0011-FindSmbClient-dont-use-pkgconfig-includedir.patch \
            file://0012-sigintfix-and-libinput-fix.patch \
            file://0013-texturepacker-dont-build-internal.patch \
+           file://0014-older-gl.patch \
            file://0100-stb-player.patch \
-           file://0013-texturepacker-dont-build-internal-for-linux.patch \
-           ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0101-e2-player.patch', d)} \
-           ${@bb.utils.contains_any('MACHINE_FEATURES', 'hisil-3798mv200 hisil-3798mv310 hisi hisil', '' , 'file://0102-gst-player.patch', d)} \
+           file://0101-e2-player.patch \
+           file://0102-gst-player.patch \
           "
+
 ACCEL ?= ""
 ACCEL:x86 = "vaapi vdpau"
 ACCEL:x86-64 = "vaapi vdpau"
@@ -242,6 +245,10 @@ do_configure:prepend() {
     ln -sf $liblto ${STAGING_LIBDIR_NATIVE}/bfd-plugins/liblto_plugin.so
 
 #    sed -i -e 's:CMAKE_NM}:}${TARGET_PREFIX}gcc-nm:' ${S}/xbmc/cores/DllLoader/exports/CMakeLists.txt
+}
+
+do_configure:append() {
+    sed -i '\|^kodi-stb: /usr/lib/libuuid\.so$|d' ${B}/CMakeFiles/kodi.dir/build.make
 }
 
 INSANE_SKIP:${PN} = "rpaths already-stripped textrel installed-vs-shipped"

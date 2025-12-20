@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/xbmc/kodi-platform.git;protocol=https;branch=master 
            file://kodi-platform-02_no-multi-lib.patch \
            file://kodi-platform-03_pkgconfig.patch \
           "
+
 inherit cmake pkgconfig
 
 OECMAKE_GENERATOR = "Unix Makefiles"
@@ -42,7 +43,7 @@ do_install:append() {
                -e 's:${STAGING_DIR_HOST}:/:g' \
                -e 's:${STAGING_DIR_NATIVE}:/:g' \
                -e 's:${prefix}/${libdir}:${libdir}:g' \
-               -e 's:${UNPACKDIR}=::g' \ 
+               -e 's:${WORKDIR}=::g' \ 
             ${D}${libdir}/pkgconfig/*.pc
 }
 
