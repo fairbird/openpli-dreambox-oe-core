@@ -22,6 +22,7 @@ OPTIONAL_PACKAGES += " \
 	bitratecalc \
 	btrfs-tools \
 	ccid \
+	fstrim-cron \
 	ctorrent \
 	cups \
 	davfs2 \
