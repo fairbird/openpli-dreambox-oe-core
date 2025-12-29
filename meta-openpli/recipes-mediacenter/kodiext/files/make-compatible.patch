@@ -1,0 +1,48 @@
+From fc7b25f60213b15fac54484da2fe4ea4ff88fdfd Mon Sep 17 00:00:00 2001
+From: fairbird <rrrr53@hotmail.com>
+Date: Mon, 29 Dec 2025 22:41:29 +0300
+Subject: [PATCH] Fix some code to make it compatible with my image
+
+---
+ plugin.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/plugin/plugin.py b/src/plugin/plugin.py
+index e50b48a..e8fdeb7 100644
+--- a/src/plugin/plugin.py
++++ b/src/plugin/plugin.py
+@@ -8,7 +8,7 @@ from enigma import eTimer, fbClass, eRCInput, getDesktop, eDVBVolumecontrol
+ 
+ from Components.ActionMap import ActionMap
+ from Components.Label import Label
+-from Components.AVSwitch import avSwitch
++from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw
+ from Components.config import config, ConfigSubsection, ConfigYesNo
+ from Components.ActionMap import HelpableActionMap
+ from Components.Console import Console
+@@ -139,7 +139,7 @@ class SetResolution:
+ 			for res in resolutions:
+ 				for rate in rates:
+ 					try:
+-						if avSwitch.isModeAvailable(self.port, res, rate):
++						if video_hw.isModeAvailable(self.port, res, rate):
+ 							self.kodires = res
+ 							self.kodirate = rate
+ 					except Exception:
+@@ -148,11 +148,11 @@ class SetResolution:
+ 	def switch(self, Tokodi=False, Player=False):
+ 		if Tokodi:
+ 			if self.kodires and self.kodirate and self.port:
+-				avSwitch.setMode(self.port, self.kodires, self.kodirate)
++				video_hw.setMode(self.port, self.kodires, self.kodirate)
+ 				fileWriteLine("/proc/stb/video/videomode", self.kodires + self.kodirate.replace("Hz", ""))
+ 		else:
+ 			if self.E2res and self.rate and self.port:
+-				avSwitch.setMode(self.port, self.E2res, self.rate)
++				video_hw.setMode(self.port, self.E2res, self.rate)
+ 
+ 	def ReadData(self):
+ 		self.E2res = config.av.videomode[self.port].value
+-- 
+2.43.0
+

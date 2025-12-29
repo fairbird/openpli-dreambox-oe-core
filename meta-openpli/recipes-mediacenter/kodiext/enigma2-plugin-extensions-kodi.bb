@@ -13,6 +13,7 @@ RRECOMMENDS:${PN} = "${@bb.utils.contains("MACHINE_FEATURES", "no-subssupport", 
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/oe-alliance/kodiext.git;protocol=https;branch=master \
         file://advancedsettings.xml \
+        file://make-compatible.patch \
         "
 
 do_install:append() {
