@@ -10,3 +10,8 @@ SRC_URI = "git://github.com/sahlberg/libnfs.git;protocol=https;branch=master"
 inherit cmake
 
 EXTRA_OECMAKE = "-DBASE_LIB_PATH=${baselib}"
+
+do_configure:prepend() {
+    # Force CMake to accept modern standards
+    sed -i 's/cmake_minimum_required(VERSION .*)/cmake_minimum_required(VERSION 3.5)/' ${S}/CMakeLists.txt
+}
