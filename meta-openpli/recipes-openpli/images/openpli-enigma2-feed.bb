@@ -89,6 +89,7 @@ OPTIONAL_PACKAGES += " \
 	python3-fuzzywuzzy \
 	python3-beautifulsoup4 \
 	python3-js2py \
+	python3-ujson \
 	python3-lxml \
 	python3-levenshtein \
 	python3-mechanize \
