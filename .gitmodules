@@ -3,10 +3,10 @@
 	url = git://git.openembedded.org/bitbake
 [submodule "meta-openembedded"]
 	path = meta-openembedded
-	url = https://github.com/Hains/meta-openembedded.git
+	url = git://git.openembedded.org/meta-openembedded
 [submodule "openembedded-core"]
 	path = openembedded-core
-	url = https://github.com/Hains/openembedded-core.git
+	url = git://git.openembedded.org/openembedded-core
 [submodule "meta-qt5.15"]
 	path = meta-qt5.15
 	url = https://github.com/fairbird/meta-qt5.15.git
