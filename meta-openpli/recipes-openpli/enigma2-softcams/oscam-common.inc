@@ -54,6 +54,7 @@ EXTRA_OECMAKE += "\
 	-DMODULE_STREAMRELAY=1 \
 	-DHAVE_LIBDVBCSA=1 \
 	${@bb.utils.contains_any("TUNE_FEATURES", "neon simd", "-DWITH_ARM_NEON=1", "", d)} \
+	-DWITH_EXTENDED_CW=1 \
 	-DWITH_SIGNING=1 \
 	-DUSE_COMPRESS=1 \
 	-DCOMP_LEVEL="--best" \
