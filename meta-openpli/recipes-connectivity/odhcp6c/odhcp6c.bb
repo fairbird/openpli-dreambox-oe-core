@@ -18,6 +18,8 @@ SRC_URI = "git://github.com/openwrt/odhcp6c.git;protocol=https;branch=master \
            file://odhcp6c-update \
           "
 
+TARGET_CFLAGS:append = " -Wno-error=discarded-qualifiers"
+
 EXTRA_OEMAKE = " \
     'CC=${CC}' \
 "
