@@ -1,23 +1,31 @@
 SUMMARY = "create DVD-Video file system"
-SECTION = "console/multimedia"
-LICENSE = "GPL-2.0-only"
+SECTION = "multimedia"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-DEPENDS = "bison-native fontconfig freetype libdvdread fribidi libpng libxml2 zlib"
 
-SRC_URI = "git://github.com/ldo/dvdauthor;protocol=https;branch=master file://fix-build.patch"
+DEPENDS = "freetype libdvdread fribidi libpng fontconfig libxml2 zlib bison-native"
+
+PARALLEL_MAKE = "-j 1"
 
 inherit gitpkgv
-PV = "0.7.1+git"
-PKGV = "0.7.1+git${GITPKGV}"
-do_configure:prepend() {
-	mkdir -p ${S}/autotools
-	cp ${STAGING_DATADIR_NATIVE}/gettext/config.rpath ${S}/autotools/
-}
 
-inherit autotools gettext pkgconfig
+PV = "0.7.2+git"
+PKGV = "0.7.2+git${GITPKGV}"
+
+SRC_URI = "git://github.com/ldo/dvdauthor.git;protocol=https;branch=master \
+        file://dont-build-docs.patch"
+
+inherit autotools-brokensep gettext pkgconfig
 
 EXTRA_OECONF = " \
-		ac_cv_prog_MAGICKCONFIG= \
-		ac_cv_prog_GMAGICKCONFIG= \
+        ac_cv_prog_MAGICKCONFIG= \
+        ac_cv_prog_GMAGICKCONFIG= \
 "
 
+do_configure:prepend() {
+# fix config.rpath file not found, create if it does not exist (in case of rebuilding without rm_work
+if [ ! -f autotools/config.rpath ]; then
+    mkdir -p autotools
+    touch autotools/config.rpath
+fi
+}
