@@ -135,7 +135,7 @@ index f611b3a..5703b48 100644
  /* An SSL object and associated read-write buffers. */
  typedef struct peer_st {
      SSL *ssl;
-@@ -1081,17 +1168,6 @@ static void do_shutdown_step(PEER *peer)
+@@ -1081,16 +1168,6 @@ static void do_shutdown_step(PEER *peer)
      }
  }
  
@@ -148,7 +148,6 @@ index f611b3a..5703b48 100644
 -    SHUTDOWN,
 -    CONNECTION_DONE
 -} connect_phase_t;
--
 -
  static int renegotiate_op(const SSL_TEST_CTX *test_ctx)
  {
@@ -292,14 +291,14 @@ index 78b03f9..b9967c2 100644
  
  HANDSHAKE_RESULT *HANDSHAKE_RESULT_new(void);
 @@ -95,4 +159,8 @@ int configure_handshake_ctx_for_srp(SSL_CTX *server_ctx, SSL_CTX *server2_ctx,
-                                     CTX_DATA *server2_ctx_data,
-                                     CTX_DATA *client_ctx_data);
+     CTX_DATA *server2_ctx_data,
+     CTX_DATA *client_ctx_data);
  
 +const char *handshake_connect_phase_name(connect_phase_t phase);
 +const char *handshake_status_name(handshake_status_t handshake_status);
 +const char *handshake_peer_status_name(peer_status_t peer_status);
 +
- #endif  /* OSSL_TEST_HANDSHAKE_HELPER_H */
+ #endif /* OSSL_TEST_HANDSHAKE_HELPER_H */
 diff --git a/test/ssl_test.c b/test/ssl_test.c
 index ea60851..9d6b093 100644
 --- a/test/ssl_test.c
