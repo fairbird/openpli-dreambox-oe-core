@@ -1,8 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PV = "1.26.10"
- 
-SRC_URI[sha256sum] = "c8c2fd29cc063a6d26c314cd1a0a3a3060c8a029981b9520fab52c4206d11611"
+PV = "1.28.0"
+
+SRC_URI[sha256sum] = "e3c93db7da2da3b2374ccc2e7394316f9192460abdea81651652791d46ccb8fb"
 
 SRC_URI:remove = "file://ffmpeg-6.0.patch"
 
