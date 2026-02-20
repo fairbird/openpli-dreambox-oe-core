@@ -33,9 +33,6 @@ do_install:append() {
     if [ -e ${D}/usr/lib/${PYTHON_DIR}/test ]; then
       rm -rf ${D}/usr/lib/${PYTHON_DIR}/test
     fi
-    if [ -e ${D}/usr/lib/${PYTHON_DIR}/lib2to3/tests ]; then
-      rm -rf ${D}/usr/lib/${PYTHON_DIR}/lib2to3/tests
-    fi
 }
 
 python(){
@@ -110,4 +107,7 @@ python(){
     d.setVar('PACKAGES', ' '.join(packages))
     d.setVar('ALLOW_EMPTY:${PN}-modules', '1')
     d.setVar('ALLOW_EMPTY:${PN}-pkgutil', '1')
+
+    # Python 3.14: _datetime is now a static built-in module
+    d.setVar('ALLOW_EMPTY:' + pn + '-datetime', '1')
 }
