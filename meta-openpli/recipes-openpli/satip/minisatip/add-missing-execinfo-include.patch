@@ -1,0 +1,10 @@
+--- a/src/utils.cpp
++++ b/src/utils.cpp
+@@ -32,6 +32,7 @@
+ #include <ctype.h>
+ #include <dirent.h>
+ #include <errno.h>
++#include <execinfo.h>
+ #include <fcntl.h>
+ #include <limits.h>
+ #include <math.h>

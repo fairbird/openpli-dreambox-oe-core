@@ -11,17 +11,17 @@ if ! [ -x /usr/bin/minisatip ]; then
 fi
 
 case "$1" in
-	start)
+    start)
 	echo -n "Starting minisatip:"
 	start-stop-daemon -S -x /usr/bin/minisatip -p /var/run/minisatip.pid -- -R /usr/share/minisatip/html $MINISATIP_OPTS > /dev/null
 	echo "."
 	;;
-	stop)
+    stop)
 	echo -n "Stopping minisatip:"
 	start-stop-daemon -K -x /usr/bin/minisatip -p /var/run/minisatip.pid > /dev/null
 	echo "."
 	;;
-	restart)
+    restart)
 	echo -n "Restarting minisatip:"
 	echo
 	$0 stop
@@ -29,7 +29,7 @@ case "$1" in
 	# killall -HUP inetd
 	#echo "."
 	;;
-	*)
+    *)
 	echo "Usage: /etc/init.d/minisatip {start|stop|restart}"
 	exit 1
 	;;
