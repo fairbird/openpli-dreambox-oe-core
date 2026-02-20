@@ -3,11 +3,14 @@ PRIORITY = "optional"
 LICENSE = "GPL-2.0-only"
 DEPENDS = "libxml2"
 SRCDATE = "20090621"
-PV = "0.0+cvs${SRCDATE}"
 
-PR = "r1"
+inherit gitpkgv
 
-SRC_URI = "cvs://anonymous@dvbtools.cvs.sourceforge.net/cvsroot/dvbtools;module=dvbstream"
+SRCREV = "${AUTOREV}"
+PV = "0.0+git${SRCDATE}"
+PKGV = "0.0+git${GITPKGV}"
+
+SRC_URI = "git://github.com/linuxstb/dvbtools;protocol=https;branch=master"
 S = "${UNPACKDIR}/dvbstream"
 
 CFLAGS:append = " ${LDFLAGS} -D_GNU_SOURCE"
