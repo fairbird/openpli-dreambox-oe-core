@@ -3,8 +3,6 @@ inherit packagegroup
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 require conf/license/license-gplv2.inc
 
-export KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
-
 ALLOW_EMPTY:${PN} = "1"
 PACKAGES = "${PN}"
 
@@ -28,8 +26,8 @@ RDEPENDS:${PN} = "\
 "
 
 OPTIONAL_WIFI_PACKAGES = "\
-    ${@ 'enigma2-plugin-drivers-network-usb-rtl88xxau'     if ("${KERNEL_VERSION}" and bb.utils.vercmp_string("${KERNEL_VERSION}", '4.4') >= 0) else '' } \
-    ${@ 'enigma2-plugin-drivers-network-usb-rtl8852cu'     if ("${KERNEL_VERSION}" and bb.utils.vercmp_string("${KERNEL_VERSION}", '3.10') >= 0) else '' } \
+    ${@ 'enigma2-plugin-drivers-network-usb-rtl88xxau'     if bb.utils.vercmp_string_op('${PREFERRED_VERSION_${PREFERRED_PROVIDER_virtual/kernel}}', '4.4', '>=') else '' } \
+    ${@ 'enigma2-plugin-drivers-network-usb-rtl8852cu'     if bb.utils.vercmp_string_op('${PREFERRED_VERSION_${PREFERRED_PROVIDER_virtual/kernel}}', '3.10', '>=') else '' } \
 "
 
 INSANE_SKIP:${PN} += "build-deps"
