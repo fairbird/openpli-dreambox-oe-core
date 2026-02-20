@@ -1,4 +1,4 @@
-PV = "4.22.4"
+PV = "4.24.0rc2"
 HOMEPAGE = "https://www.samba.org/"
 SECTION = "console/network"
 
@@ -16,7 +16,7 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
 export PYTHONHASHSEED = "1"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/samba:"
-SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+SRC_URI = "${SAMBA_MIRROR}/rc/samba-${PV}.tar.gz \
            file://001-samba-4.14-pam.patch \
            file://010-source3-msgsock-nvram-fix.patch \
            file://011-source4-msgsock-nvram-fix.patch \
@@ -58,5 +58,5 @@ SRC_URI:append:arm = " \
            file://500-arm-status-segfault-fix.patch \
           "
 
-SRC_URI[sha256sum] = "a41a828848abdf5e942c900ca178597e18aab7b61d3c06a9b5ba43661988010b"
-UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.22(\.\d+)+).tar.gz"
+SRC_URI[sha256sum] = "ae3ec245ea62f85bfc7fe0758ea9b04cff0474c2614255b4e82ce4c40ebd3565"
+UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.24(\.\d+)+).tar.gz"

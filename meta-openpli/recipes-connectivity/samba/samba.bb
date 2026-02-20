@@ -1,5 +1,3 @@
-PR = "r3"
-
 require samba-source.inc
 require samba-waf.inc
 
@@ -85,7 +83,7 @@ EXTRA_OECONF += "--disable-cups \
                  --with-modulesdir=${libdir} \
                  --with-static-modules=${SAMBA4_MODULES_STATIC},!DEFAULT,!FORCED \
                  --with-shared-modules=${SAMBA4_MODULES_SHARED},!DEFAULT,!FORCED \
-                 --bundled-libraries=NONE,tevent,tevent-util,texpect,tdb,ldb,tdr,cmocka,replace,roken,wind,hx509,asn1,heimbase,hcrypto,krb5,gssapi,heimntlm,hdb,kdc,!asn1_compile,!compile_et \
+                 --bundled-libraries=NONE,tevent,tevent-util,texpect,tdb,ldb,tdr,libquic,libngtcp2_crypto_gnutls,cmocka,replace,roken,wind,hx509,asn1,heimbase,hcrypto,krb5,gssapi,heimntlm,hdb,kdc,!asn1_compile,!compile_et \
                  --private-libraries=tevent,tevent-util,texpect,tdb,ldb,tdr,cmocka,replace \
                  --with-pam --with-pammodulesdir=${base_libdir}/security \
                  --with-pam_smbpass \
@@ -108,8 +106,6 @@ CONFIGUREOPTS = " --prefix=${prefix} \
                   --mandir=${mandir} \
                   ${PACKAGECONFIG_CONFARGS} \
                 "
-
-
 
 do_configure:prepend () {
     # un-bundle dnspython
