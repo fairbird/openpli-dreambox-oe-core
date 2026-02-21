@@ -20,9 +20,10 @@ RDEPENDS:${PN} = " \
 	python3-io \
 	"
 
-pkg_postinst_ontarget:${PN}() {
-PLUGINPATH="/usr/lib/enigma2/python/Plugins/Extensions/YouTube"
-repo_url="https://api.github.com/repos/fairbird/Youtube-Opensource-DreamOS/git/refs/heads/master"
-hashfile="$PLUGINPATH/.hashfile"
-wget -q -O- $repo_url | awk -F "commits/" '{print $2}' | sed '/^\s*$/d' | tr -d '"' > $hashfile
+do_install:append() {
+    install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/YouTube
+    HASH_FILE="${D}${libdir}/enigma2/python/Plugins/Extensions/YouTube/.hashfile"
+    # Get the full SHA from the fetched git repository
+    cd ${S}
+    git rev-parse HEAD > $HASH_FILE
 }
