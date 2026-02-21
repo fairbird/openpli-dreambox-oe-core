@@ -8,8 +8,6 @@ inherit gitpkgv
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
            file://mpd.conf.in \
            file://mpd.init \
-           file://0001-fix-openat2-glibc-2.43.patch \
-           file://0002-fix-fmt-localtime-fmt11.patch \
            "
 
 SRCREV = "360b08b3c4566af18f711562c703285e31263cae"
