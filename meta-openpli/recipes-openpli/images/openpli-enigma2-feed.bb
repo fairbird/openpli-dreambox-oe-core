@@ -230,6 +230,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-historyzapselector \
 	enigma2-plugin-extensions-sundtekcontrolcenter \
 	enigma2-plugin-extensions-ts-sateditor \
+	enigma2-plugin-extensions-vavoo \
 	enigma2-plugin-extensions-vcs \
 	enigma2-plugin-extensions-skymultiview \
 	enigma2-plugin-extensions-xmodem \
