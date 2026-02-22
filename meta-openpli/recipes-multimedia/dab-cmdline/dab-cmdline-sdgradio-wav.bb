@@ -4,8 +4,6 @@ LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
 FILESEXTRAPATHS:append := "${THISDIR}/files:"
 
-SRCREV = "${AUTOREV}"
-
 DEPENDS = "fftw libusb1 faad2 zlib rtl-sdr"
 RDEPENDS:${PN} = "rtl-sdr"
 
