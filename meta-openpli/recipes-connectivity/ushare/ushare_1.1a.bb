@@ -24,6 +24,8 @@ do_configure () {
 		--cross-compile
 }
 
+CFLAGS += "-Wno-error=format-security"
+
 INITSCRIPT_NAME = "ushare"
 INITSCRIPT_PARAMS = "defaults 20"
 

@@ -195,6 +195,7 @@ GITHUB_URI ?= "git://github.com"
 
 SRC_URI = "${GITHUB_URI}/fairbird/enigma2-dreambox.git;branch=${ENIGMA2_BRANCH};protocol=https"
 
+CPPFLAGS += "-Wno-error=format-security"
 LDFLAGS:prepend = " -lxml2 "
 FILES:${PN} += "${datadir}/keymaps"
 FILES:${PN}-meta = "${datadir}/meta"
