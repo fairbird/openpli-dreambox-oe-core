@@ -198,10 +198,13 @@ void readSmbConf()
 		printf("Failed to run testparm\n" );
 		return;
 	} else {
-		fgets(cd_name, sizeof(cd_name)-1, fp);
+		if (fgets(cd_name, sizeof(cd_name)-1, fp) == NULL) {
+			printf("Failed fget() cd_name\n" );
+		} else {
 		pclose(fp);
 		if (cd_name[strlen(cd_name) - 1] == '\n') cd_name[strlen(cd_name) - 1] = '\0';
 		if (cd_name[strlen(cd_name) - 1] == '\r') cd_name[strlen(cd_name) - 1] = '\0';
+		}
 	}
 
 	fp = popen("testparm -s -l --parameter-name=\"workgroup\" 2>/dev/null", "r");
@@ -209,10 +212,13 @@ void readSmbConf()
 		printf("Failed to run testparm\n" );
 		return;
 	} else {
-		fgets(cd_workgroup, sizeof(cd_workgroup)-1, fp);
+		if(fgets(cd_workgroup, sizeof(cd_workgroup)-1, fp) == NULL) {
+			printf("Failed fget() cd_workgroup\n" );
+		} else {
 		pclose(fp);
 		if (cd_workgroup[strlen(cd_workgroup) - 1] == '\n') cd_workgroup[strlen(cd_workgroup) - 1] = '\0';
 		if (cd_workgroup[strlen(cd_workgroup) - 1] == '\r') cd_workgroup[strlen(cd_workgroup) - 1] = '\0';
+		}
 	}
 }
 
