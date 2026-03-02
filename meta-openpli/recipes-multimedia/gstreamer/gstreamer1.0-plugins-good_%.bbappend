@@ -2,9 +2,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_NO_LOCALE = "1"
 
-PV = "1.28.0"
+PV = "1.28.1"
 
-SRC_URI[sha256sum] = "d97700f346fdf9ef5461c035e23ed1ce916ca7a31d6ddad987f774774361db77"
+SRC_URI[sha256sum] = "738e26aee41b7a62050e40b81adc017a110a7f32d1ec49fa6a0300846c44368d"
 
 SRC_URI:append = " \
            file://0001-gstrtpmp4gpay-set-dafault-value-for-MPEG4-without-co.patch \

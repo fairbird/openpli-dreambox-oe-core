@@ -2,9 +2,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_NO_LOCALE = "1"
 
-PV = "1.28.0"
+PV = "1.28.1"
 
-SRC_URI[sha256sum] = "32d825041e5775fc9bf9e8c38e3a5c46c1441eee67f8112572450a9c23c835f0"
+SRC_URI[sha256sum] = "56c1593787f8b5550893d59e4ff29e6bcccf34973316fa55e34ce493e04313a2"
 
 SRC_URI:append = " \
         file://0001-Revert-tsdemux-Limit-the-maximum-PES-payload-size.patch \
@@ -17,6 +17,8 @@ SRC_URI:append = " \
 "
 
 SRC_URI:remove = "file://0001-uvcgadget-Use-g_path_get_basename-instead-of-libc-ba.patch"
+
+PACKAGECONFIG:remove = "rsvg"
 
 PACKAGECONFIG:append = " faac faad opusparse rtmp"
 
