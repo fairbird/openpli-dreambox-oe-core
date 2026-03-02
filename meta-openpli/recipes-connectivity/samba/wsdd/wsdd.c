@@ -198,12 +198,13 @@ void readSmbConf()
 		printf("Failed to run testparm\n" );
 		return;
 	} else {
-		if (fgets(cd_name, sizeof(cd_name)-1, fp) == NULL) {
-			printf("Failed fget() cd_name\n" );
+		if (fgets(cd_name, sizeof(cd_name)-1, fp) != NULL) {
+			pclose(fp);
+			if (cd_name[strlen(cd_name) - 1] == '\n') cd_name[strlen(cd_name) - 1] = '\0';
+			if (cd_name[strlen(cd_name) - 1] == '\r') cd_name[strlen(cd_name) - 1] = '\0';
 		} else {
-		pclose(fp);
-		if (cd_name[strlen(cd_name) - 1] == '\n') cd_name[strlen(cd_name) - 1] = '\0';
-		if (cd_name[strlen(cd_name) - 1] == '\r') cd_name[strlen(cd_name) - 1] = '\0';
+			printf("fget(cd_name) failed\n" );
+			return;
 		}
 	}
 
@@ -212,12 +213,13 @@ void readSmbConf()
 		printf("Failed to run testparm\n" );
 		return;
 	} else {
-		if(fgets(cd_workgroup, sizeof(cd_workgroup)-1, fp) == NULL) {
-			printf("Failed fget() cd_workgroup\n" );
+		if(fgets(cd_workgroup, sizeof(cd_workgroup)-1, fp) != NULL) {
+			pclose(fp);
+			if (cd_workgroup[strlen(cd_workgroup) - 1] == '\n') cd_workgroup[strlen(cd_workgroup) - 1] = '\0';
+			if (cd_workgroup[strlen(cd_workgroup) - 1] == '\r') cd_workgroup[strlen(cd_workgroup) - 1] = '\0';
 		} else {
-		pclose(fp);
-		if (cd_workgroup[strlen(cd_workgroup) - 1] == '\n') cd_workgroup[strlen(cd_workgroup) - 1] = '\0';
-		if (cd_workgroup[strlen(cd_workgroup) - 1] == '\r') cd_workgroup[strlen(cd_workgroup) - 1] = '\0';
+			printf("fget(cd_workgroup) failed\n" );
+			return;
 		}
 	}
 }
