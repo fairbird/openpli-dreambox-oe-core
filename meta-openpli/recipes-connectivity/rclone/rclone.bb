@@ -32,3 +32,5 @@ do_install() {
 	install -m 755 ${UNPACKDIR}/rclonefs ${D}${bindir}
 	ln -sf rclone ${D}${bindir}/mount.rclone
 }
+
+ERROR_QA:remove = "textrel"
