@@ -34,8 +34,8 @@ inherit python3-dir
 
 INFOFILE = "${libdir}/enigma.info"
 
-RUST_VER = "${@d.getVar('RUSTVERSION').replace('%', '') if d.getVar('RUSTVERSION') else ''}"
-UPX_VER = "${@d.getVar('PREFERRED_VERSION_upx').replace('%', '') if d.getVar('PREFERRED_VERSION_upx') else ''}"
+RUST_VER = "${@d.getVar('RUSTVERSION').replace('%', '')}"
+UPX_VER = "${@d.getVar('PREFERRED_VERSION_upx').replace('%', '')}"
 
 inherit linux-kernel-base
 
