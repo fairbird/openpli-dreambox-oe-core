@@ -1,1 +1,1 @@
-EXTRA_OEMESON:append = " -Dexamples=false"
+LDFLAGS:append:mipsarch = " -latomic"
