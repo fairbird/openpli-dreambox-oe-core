@@ -7,9 +7,9 @@ SRC_URI:append = " \
            file://init \
 "
 
-PV = "3.1.0"
+PV = "3.1.1"
 
-SRCREV = "78a1147e65347f12a4a0ae2ec5d43930a9f6f3ba"
+SRCREV = "cdb3941ad837bb69b61893d8a3e34228f52c31d5"
 
 inherit update-rc.d gitpkgv
 
