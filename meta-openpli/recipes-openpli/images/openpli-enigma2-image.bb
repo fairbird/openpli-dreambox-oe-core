@@ -71,6 +71,7 @@ IMAGE_INSTALL = " \
 	mc-helpers \
 	minilocale \
 	fuse-exfat \
+	fstrim-cron \
 	gettext \
 	hdparm \
 	libavahi-client \
