@@ -1,21 +1,26 @@
-#
-# Add init script, removed in OE 1.3
-#
-
-inherit update-rc.d
-
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " \
-                   file://pcscd \
-                   "
+DEPENDS += "libusb1"
+RDEPENDS:${PN} += "libusb1"
+
+SRC_URI:append = " file://pcscd.init"
+
+PACKAGECONFIG = ""
+
+inherit update-rc.d
 
 INITSCRIPT_NAME = "pcscd"
 INITSCRIPT_PARAMS = "defaults"
 
-do_install:append() {
+EXTRA_OECONF = " \
+    --enable-libusb \
+    --enable-usbdropdir=${libdir}/pcsc/drivers \
+"
+
+do_install() {
+    oe_runmake DESTDIR=${D} install
     install -d ${D}/${sysconfdir}/init.d
-    install -m 755 ${UNPACKDIR}/pcscd ${D}/${sysconfdir}/init.d
+    install -m 755 ${UNPACKDIR}/pcscd.init ${D}/${sysconfdir}/init.d/pcscd
 }
 
-FILES:${PN} += "/etc/init.d/pcscd"
+FILES:${PN} =+ "${sysconfdir}/*"
