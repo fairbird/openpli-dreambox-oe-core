@@ -1,0 +1,26 @@
+From: fairbird <rrrr53@hotmail.com>
+Date: Mon, 16 Mar 2026 00:00:00 +0000
+Subject: [PATCH] fix: guard memchr re-declaration against glibc 2.43 _Generic
+
+glibc 2.43 declares memchr via _Generic/_Overloadable macros when
+_FORTIFY_SOURCE is set. Re-declaring it as a plain extern causes:
+  "error: expected identifier or '(' before '_Generic'"
+
+Guard the declaration so it is skipped when memchr is already
+provided as a macro by the system headers.
+---
+ include/l_stdlib.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/include/l_stdlib.h b/include/l_stdlib.h
+--- a/include/l_stdlib.h
++++ b/include/l_stdlib.h
+@@ -221,7 +221,9 @@ extern	int	toupper		(int);
+ 
+ #ifndef HAVE_MEMCHR
++#ifndef memchr
+ extern void *memchr(const void *s, int c, size_t n);
++#endif
+ #endif
+ 
+ #ifndef HAVE_STRNLEN
