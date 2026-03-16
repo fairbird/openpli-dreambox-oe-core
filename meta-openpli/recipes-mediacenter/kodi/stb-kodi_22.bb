@@ -118,6 +118,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
            file://0100-stb-player.patch \
            file://0101-e2-player.patch \
            file://0102-gst-player.patch \
+           file://0001-fix-GLUtils-missing-KHR-debug-constants.patch \
           "
 
 ACCEL ?= ""
