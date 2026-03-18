@@ -1,6 +1,6 @@
-From dfc243c394cb55424b7026cc86723819675c5e9b Mon Sep 17 00:00:00 2001
+From 73348946d9a864c80f74e5a88f32884b65cde2b6 Mon Sep 17 00:00:00 2001
 From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
-Date: Fri, 13 Mar 2026 17:49:42 +0100
+Date: Sat, 14 Mar 2026 11:51:31 +0100
 Subject: [PATCH] Fix build against glibc 2.43
 
 https://lists.gnu.org/archive/html/info-gnu/2026-01/msg00005.html
@@ -8,16 +8,16 @@ https://lists.gnu.org/archive/html/info-gnu/2026-01/msg00005.html
 | locate_kdc.c: In function 'parse_uri_if_https':
 | locate_kdc.c:226:12: error: assignment discards 'const' qualifier from pointer target type [-Werror=discarded-qualifiers]
 |   226 |         cp = strchr(*host, '/');
-|       |            ^
+|       |
 ---
  src/lib/krb5/ccache/ccbase.c                       | 4 ++--
  src/lib/krb5/os/expand_path.c                      | 4 ++--
- src/lib/krb5/os/locate_kdc.c                       | 7 ++++---
+ src/lib/krb5/os/locate_kdc.c                       | 2 +-
  src/plugins/preauth/pkinit/pkinit_crypto.h         | 2 +-
  src/plugins/preauth/pkinit/pkinit_crypto_openssl.c | 6 +++---
  src/plugins/preauth/pkinit/pkinit_identity.c       | 2 +-
  src/plugins/preauth/pkinit/pkinit_matching.c       | 2 +-
- 7 files changed, 14 insertions(+), 13 deletions(-)
+ 7 files changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/src/lib/krb5/ccache/ccbase.c b/src/lib/krb5/ccache/ccbase.c
 index 696b681..9fc7d10 100644
@@ -50,30 +50,18 @@ index 5cbccf0..51bc266 100644
      va_list ap;
  
 diff --git a/src/lib/krb5/os/locate_kdc.c b/src/lib/krb5/os/locate_kdc.c
-index d1df04a..fc9fc5d 100644
+index d1df04a..fa04333 100644
 --- a/src/lib/krb5/os/locate_kdc.c
 +++ b/src/lib/krb5/os/locate_kdc.c
-@@ -217,7 +217,8 @@ static void
- parse_uri_if_https(const char *host_or_uri, k5_transport *transport,
-                    const char **host, const char **uri_path)
- {
--    char *cp;
-+    const char *cp;
-+    char *cp2;
- 
-     if (strncmp(host_or_uri, "https://", 8) == 0) {
+@@ -223,7 +223,7 @@ parse_uri_if_https(const char *host_or_uri, k5_transport *transport,
          *transport = HTTPS;
-@@ -225,8 +226,8 @@ parse_uri_if_https(const char *host_or_uri, k5_transport *transport,
+         *host = host_or_uri + 8;
  
-         cp = strchr(*host, '/');
+-        cp = strchr(*host, '/');
++        cp = (char*)strchr(*host, '/');
          if (cp != NULL) {
--            *cp = '\0';
--            *uri_path = cp + 1;
-+            *cp2 = '\0';
-+            *uri_path = cp2 + 1;
-         }
-     }
- }
+             *cp = '\0';
+             *uri_path = cp + 1;
 diff --git a/src/plugins/preauth/pkinit/pkinit_crypto.h b/src/plugins/preauth/pkinit/pkinit_crypto.h
 index 57bb3cb..f6b6a59 100644
 --- a/src/plugins/preauth/pkinit/pkinit_crypto.h
@@ -146,4 +134,3 @@ index 0ea072c..b3c8df1 100644
      size_t len;
 -- 
 2.51.0
-
