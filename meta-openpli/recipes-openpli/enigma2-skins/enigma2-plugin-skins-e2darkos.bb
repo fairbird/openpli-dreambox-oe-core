@@ -7,8 +7,8 @@ inherit gitpkgv allarch python3-compileall
 
 RRECOMMENDS:${PN} = "enigma2-boxlogos"
 
-PV = "1.0+git"
-PKGV = "1.0+git${GITPKGV}"
+PV = "1.1+git"
+PKGV = "1.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/DimitarCC/E2-DarkOS-skin.git;protocol=https;branch=main  \
 		file://patch-skin-to-more-compatible.patch \
@@ -23,7 +23,8 @@ do_install:append() {
 
 do_install() {
 	install -d ${D}${prefix}
-	cp -r ${S}${prefix}/* ${D}${prefix}/
+	cp -r --no-preserve=ownership ${S}${prefix}/* ${D}${prefix}/
 }
 
 FILES:${PN} = "${prefix}/"
+FILES:${PN}-src = "${prefix}/lib/enigma2/python/Components/Converter/*.py ${prefix}/lib/enigma2/python/Components/Renderer/*.py"
