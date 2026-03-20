@@ -1,5 +1,5 @@
 DESCRIPTION = "meta file for USB DVB drivers"
-
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 require dvb-usb-drivers-meta.inc
 
 DEPENDS = "\
