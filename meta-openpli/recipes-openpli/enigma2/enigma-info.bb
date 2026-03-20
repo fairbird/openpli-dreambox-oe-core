@@ -47,7 +47,7 @@ do_install() {
 
     # OE version info
     OE_NAME=master
-    OE_VERSION=5.3
+    OE_VERSION=6.0
 
     DRIVERSDATE='N/A'
     # machine specific
