@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 SRC_URI = "git://github.com/fairbird/xtraEvent;protocol=https;branch=main"
 
-inherit gitpkgv setuptools3-openplugins
+inherit gittag setuptools3-openplugins
 
 include python3-package-split.inc
 
@@ -13,8 +13,8 @@ RDEPENDS:${PN} += "\
 	python3-pillow \
 	python3-requests \
 	"
-PV = "6.805+git"
-PKGV = "6.805+git${GITPKGV}"
+PV = "git"
+PKGV = "${GITPKGVTAG}"
 
 FILES:${PN} = "${prefix}/"
 

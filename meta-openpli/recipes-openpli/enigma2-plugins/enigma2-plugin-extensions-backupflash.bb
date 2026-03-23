@@ -5,7 +5,7 @@ require conf/license/license-gplv2.inc
 
 SRC_URI = "git://github.com/fairbird/BackUpFlash;protocol=https;branch=main"
 
-inherit gitpkgv setuptools3-openplugins gitpkgv python3-compileall
+inherit setuptools3-openplugins gittag python3-compileall
 
 RDEPENDS:${PN} += "\
 	wget \
@@ -17,8 +17,8 @@ RDEPENDS:${PN} += "\
 	"
 SRCREV = "${AUTOREV}"
 
-PV = "9.8+git"
-PKGV = "9.8+git${GITPKGV}"
+PV = "git"
+PKGV = "${GITPKGVTAG}"
 
 FILES:${PN} = "${prefix}/"
 

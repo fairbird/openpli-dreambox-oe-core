@@ -5,11 +5,11 @@ require conf/license/license-gplv2.inc
 
 SRC_URI = "git://github.com/fairbird/ArabicSavior;protocol=https;branch=main"
 
-inherit gitpkgv setuptools3-openplugins python3-compileall
+inherit gittag setuptools3-openplugins python3-compileall
 SRCREV = "${AUTOREV}"
 
-PV = "2.1+git"
-PKGV = "2.1+git${GITPKGV}"
+PV = "git"
+PKGV = "${GITPKGVTAG}"
 
 FILES:${PN} = "${prefix}/"
 

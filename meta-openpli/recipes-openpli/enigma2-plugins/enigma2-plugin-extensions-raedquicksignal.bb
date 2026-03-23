@@ -5,7 +5,7 @@ require conf/license/license-gplv2.inc
 
 SRC_URI = "git://github.com/fairbird/RaedQuickSignal;protocol=https;branch=main"
 
-inherit gitpkgv setuptools3-openplugins python3-compileall
+inherit gittag setuptools3-openplugins python3-compileall
 
 RDEPENDS:${PN} += "\
 	python3-requests \
@@ -13,8 +13,8 @@ RDEPENDS:${PN} += "\
 	"
 SRCREV = "${AUTOREV}"
 
-PV = "17.6+git"
-PKGV = "17.6+git${GITPKGV}"
+PV = "git"
+PKGV = "${GITPKGVTAG}"
 
 FILES:${PN} = "${prefix}/"
 

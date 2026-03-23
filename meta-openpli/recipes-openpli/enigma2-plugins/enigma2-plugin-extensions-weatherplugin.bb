@@ -2,10 +2,10 @@ DESCRIPTION = "WeatherPlugin by Dr.Best modified by RAED"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-inherit gitpkgv setuptools3-openplugins gettext python3-compileall
+inherit gittag setuptools3-openplugins gettext python3-compileall
 
-PV = "2.2+git"
-PKGV = "2.2+git${GITPKGV}"
+PV = "git"
+PKGV = "${GITPKGVTAG}"
 
 SRC_URI = "git://github.com/fairbird/WeatherPlugin.git;protocol=https;branch=master"
 FILES:${PN} = "${prefix}/"
