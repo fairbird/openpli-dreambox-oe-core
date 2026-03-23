@@ -107,7 +107,6 @@ do_install() {
     printf "imagedevbuild='${DEVELOPER_BUILD_VERSION}'\n" >> ${D}${INFOFILE}
     printf "imagedir='${IMAGEDIR}'\n" >> ${D}${INFOFILE}
     printf "imagefs='${IMAGE_FSTYPES}'\n" >> ${D}${INFOFILE}
-    printf "imagetype='${DISTRO_TYPE}'\n" >> ${D}${INFOFILE}
     printf "imageversion='${DISTRO_VERSION}'\n" >> ${D}${INFOFILE}
     printf "imglanguage='${LANGUAGE}'\n" >> ${D}${INFOFILE}
     printf "imgrevision='${BUILD_VERSION}'\n" >> ${D}${INFOFILE}
