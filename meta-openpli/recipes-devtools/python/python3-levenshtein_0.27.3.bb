@@ -11,6 +11,6 @@ PYPI_PACKAGE = "levenshtein"
 
 SRC_URI[sha256sum] = "1ac326b2c84215795163d8a5af471188918b8797b4953ec87aaba22c9c1f9fc0"
 
-inherit pypi python_setuptools_build_meta
+inherit cmake pypi python_setuptools_build_meta
 
 include python3-package-split.inc
