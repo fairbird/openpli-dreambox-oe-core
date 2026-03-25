@@ -27,12 +27,14 @@ RCONFLICTS:${PN} = "enigma2-plugin-pli-softcamsetup"
 RDEPENDS:${PN} = " \
 	bzip2 \
 	alsa-conf \
+	dhrystone \
 	enigma2-fonts \
 	enigma-info \
 	enigma2-timezones \
 	enigma2-remote \
 	ethtool \
 	rsync \
+	streambench \
 	glibc-gconv-iso8859-15 \
 	oe-alliance-branding \
 	network-usb-drivers-meta \
