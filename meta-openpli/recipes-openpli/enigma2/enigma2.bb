@@ -18,6 +18,7 @@ DEPENDS = " \
 	swig-native \
 	tuxtxt-enigma2 \
 	${@bb.utils.contains("MACHINE_FEATURES", "alsamixer", "ffmpeg" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "e2egl", "virtual/egl virtual/libgles2" , "", d)} \
 	"
 
 # SoftcamSetup is integrated now
@@ -233,6 +234,7 @@ EXTRA_OECONF = "\
 	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd390", "--with-colorlcd390" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd400", "--with-colorlcd400" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "nolcd", "--with-nolcd" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "e2egl", "--with-egl" , "", d)} \
 	"
 
 # Save po files
