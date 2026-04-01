@@ -1,27 +1,18 @@
-DESCRIPTION = "VU+ DLNA Browser plugin"
+DESCRIPTION = "this is dlna/upnp browser using djmount"
+require conf/license/license-gplv2.inc
 
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c9e255efa454e0155c1fd758df7dcaf3"
-BRANCH = "vuplus_experimental"
-S = "${UNPACKDIR}/${BP}"
-SRC_URI = " git://github.com/vuplus-com/dvbapp.git;protocol=https;branch=${BRANCH} \
-			file://enigma2-plugin-systemplugins-dlnabrowser_20130723.patch \
-			file://port-to-python3.patch \
-"
+inherit python3-compileall
 
-inherit gitpkgv
+RDEPENDS:${PN} = "djmount fuse-utils fuse libupnp1.6 neon"
+
+inherit gittag
+
+S = "${UNPACKDIR}/${BP}/src"
+
+SRCREV = "${AUTOREV}"
 PV = "git"
-PKGV = "git${GITPKGV}"
+PKGV = "V${GITPKGVTAG}"
 
-DEPENDS = "djmount fuse libupnp"
-PROVIDES = "enigma2-plugin-systemplugins-dlnabrowser"
-RDEPENDS:${PN} = "djmount fuse-utils fuse libupnp"
-RRECOMMENDS:${PN} = "kernel-module-fuse"
-FILES:${PN} = "${libdir}/enigma2/python/Plugins/Extensions/DLNABrowser/*"
-PACKAGES = "${PN}"
+inherit setuptools3-openplugins
 
-do_install() {
-	install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/DLNABrowser
-	install -m 0644 ${S}/lib/python/Plugins/Extensions/DLNABrowser/*.py ${D}${libdir}/enigma2/python/Plugins/Extensions/DLNABrowser
-	python3 -O -m compileall ${D}${libdir}/enigma2/python/Plugins/
-}
+SRC_URI = "git://github.com/oe-alliance-plugins/DLNABrowser.git;protocol=https;branch=main"

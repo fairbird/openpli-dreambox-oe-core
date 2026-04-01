@@ -142,6 +142,7 @@ OPTIONAL_PACKAGES += " \
 	zerotier \
 	zip \
 	zsh \
+	eplayer5 \
 	enigma2-plugin-drivers-network-usb-ath9k-htc \
 	enigma2-plugin-drivers-network-usb-r8723a \
 	enigma2-plugin-drivers-network-usb-rt8723bs \
@@ -237,6 +238,16 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-yampmusicplayer \
 	enigma2-plugin-extensions-weatherplugin \
 	enigma2-plugin-extensions-plutotv \
+	enigma2-plugin-extensions-estalker \
+	enigma2-plugin-extensions-dlnabrowser \
+	enigma2-plugin-extensions-fempa \
+	enigma2-plugin-extensions-ondemand \
+	enigma2-plugin-extensions-streamtv \
+	enigma2-plugin-extensions-tunerserver \
+	enigma2-plugin-systemplugins-abmcustommiximporter \
+	enigma2-plugin-systemplugins-channelsimporter \
+	enigma2-plugin-systemplugins-multitranscodingsetup \
+	enigma2-plugin-systemplugins-wirelessaccesspoint \
 	enigma2-plugin-systemplugins-m3uiptv \
 	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-systemplugins-extnumberzap \
@@ -250,12 +261,10 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-satipserver \
 	enigma2-plugin-systemplugins-serviceapp \
-	enigma2-plugin-extensions-estalker \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "kodi22", "kodi-addons-meta enigma2-plugin-extensions-kodi", "", d)} \
 	alsa-plugins \
 	enigma2-plugins \
 	enigma2-plugins-alliance \
-	enigma2-alliance-plugins \
 	meta-enigma2-dvdburn \
 	packagegroup-openplugins \
 	picons-enigma2-meta \
