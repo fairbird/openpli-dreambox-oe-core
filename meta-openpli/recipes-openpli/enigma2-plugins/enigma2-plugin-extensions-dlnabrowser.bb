@@ -3,7 +3,7 @@ require conf/license/license-gplv2.inc
 
 inherit python3-compileall
 
-RDEPENDS:${PN} = "djmount fuse-utils fuse libupnp1.6 neon"
+RDEPENDS:${PN} = "djmount fuse-utils fuse libupnp neon"
 
 inherit gittag
 
