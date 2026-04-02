@@ -210,7 +210,6 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-systemplugins-remotecontrolselection \
 	enigma2-plugin-systemplugins-satipclient \
 	enigma2-plugin-systemplugins-satscanlcn \
-	enigma2-plugin-systemplugins-tempfancontrol \
 	enigma2-plugin-systemplugins-wanip \
 	enigma2-plugin-systemplugins-wirelessaccesspoint \
 	"
