@@ -165,6 +165,18 @@ OPTIONAL_PACKAGES += " \
 	${OPTIONAL_BSP_PACKAGES} \
 	"
 
+ALLIANCE_PLUGINS = " \
+	enigma2-plugin-extensions-dlnabrowser \
+	enigma2-plugin-extensions-fempa \
+	enigma2-plugin-extensions-ondemand \
+	enigma2-plugin-extensions-streamtv \
+	enigma2-plugin-extensions-tunerserver \
+	enigma2-plugin-systemplugins-abmcustommiximporter \
+	enigma2-plugin-systemplugins-channelsimporter \
+	enigma2-plugin-systemplugins-multitranscodingsetup \
+	enigma2-plugin-systemplugins-wirelessaccesspoint \
+	"
+
 OPTIONAL_BSP_ENIGMA2_PACKAGES ?= ""
 ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
@@ -239,15 +251,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-weatherplugin \
 	enigma2-plugin-extensions-plutotv \
 	enigma2-plugin-extensions-estalker \
-	enigma2-plugin-extensions-dlnabrowser \
-	enigma2-plugin-extensions-fempa \
-	enigma2-plugin-extensions-ondemand \
-	enigma2-plugin-extensions-streamtv \
-	enigma2-plugin-extensions-tunerserver \
-	enigma2-plugin-systemplugins-abmcustommiximporter \
-	enigma2-plugin-systemplugins-channelsimporter \
-	enigma2-plugin-systemplugins-multitranscodingsetup \
-	enigma2-plugin-systemplugins-wirelessaccesspoint \
 	enigma2-plugin-systemplugins-m3uiptv \
 	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-systemplugins-extnumberzap \
@@ -264,11 +267,12 @@ ENIGMA2_OPTIONAL = " \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "kodi22", "kodi-addons-meta enigma2-plugin-extensions-kodi", "", d)} \
 	alsa-plugins \
 	enigma2-plugins \
-	enigma2-plugins-alliance \
 	meta-enigma2-dvdburn \
 	packagegroup-openplugins \
 	picons-enigma2-meta \
 	softcams-enigma2-meta \
+	enigma2-plugins-alliance \
+	${ALLIANCE_PLUGINS} \
 	${OPTIONAL_BSP_ENIGMA2_PACKAGES} \
 	"
 
