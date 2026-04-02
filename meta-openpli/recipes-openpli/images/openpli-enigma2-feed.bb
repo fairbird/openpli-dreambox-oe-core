@@ -170,7 +170,6 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-autoblchanger \
 	enigma2-plugin-extensions-autobouquets \
 	enigma2-plugin-extensions-bouquetcleanup \
-	enigma2-plugin-extensions-btdevicesmanager \
 	enigma2-plugin-extensions-chefkoch \
 	enigma2-plugin-extensions-chocholousek-picons \
 	enigma2-plugin-extensions-clevertanken \
@@ -208,7 +207,6 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-systemplugins-multitranscodingsetup \
 	enigma2-plugin-systemplugins-radiotimesemulator \
 	enigma2-plugin-systemplugins-remotecontrolselection \
-	enigma2-plugin-systemplugins-satipclient \
 	enigma2-plugin-systemplugins-satscanlcn \
 	enigma2-plugin-systemplugins-wanip \
 	enigma2-plugin-systemplugins-wirelessaccesspoint \

@@ -20,3 +20,5 @@ do_install:append() {
 }
 
 FILES:${PN} += "/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/bin/fbclear"
+
+INSANE_SKIP = "32bit-time"
