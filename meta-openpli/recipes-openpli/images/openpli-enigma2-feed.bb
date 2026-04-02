@@ -166,14 +166,52 @@ OPTIONAL_PACKAGES += " \
 	"
 
 ALLIANCE_PLUGINS = " \
+	enigma2-3rdparty-plugins \
+	enigma2-plugin-extensions-autoblchanger \
+	enigma2-plugin-extensions-autobouquets \
+	enigma2-plugin-extensions-bouquetcleanup \
+	enigma2-plugin-extensions-btdevicesmanager \
+	enigma2-plugin-extensions-chefkoch \
+	enigma2-plugin-extensions-chocholousek-picons \
+	enigma2-plugin-extensions-clevertanken \
 	enigma2-plugin-extensions-dlnabrowser \
+	enigma2-plugin-extensions-e2m3u2bouquet \
+	enigma2-plugin-extensions-e2piconizer \
+	enigma2-plugin-extensions-epgtranslator \
+	enigma2-plugin-extensions-forcefbclnbpower \
 	enigma2-plugin-extensions-fempa \
+	enigma2-plugin-extensions-gerbera \
+	enigma2-plugin-extensions-infobartunerstate \
+	enigma2-plugin-extensions-lamedbmerger \
+	enigma2-plugin-extensions-lottoextended \
+	enigma2-plugin-extensions-mediatomb \
+	enigma2-plugin-extensions-multiquickbutton \
+	enigma2-plugin-extensions-oscamsmartcard \
 	enigma2-plugin-extensions-ondemand \
+	enigma2-plugin-extensions-piconmanager \
+	enigma2-plugin-extensions-piconsmissing\
+	enigma2-plugin-extensions-piconsupdater \
+	enigma2-plugin-extensions-picturecenterfs \
+	enigma2-plugin-extensions-remotechannelstreamconverter \
 	enigma2-plugin-extensions-streamtv \
+	enigma2-plugin-extensions-tuxcom \
+	enigma2-plugin-extensions-tuxterm \
+	enigma2-plugin-extensions-tvspielfilm \
 	enigma2-plugin-extensions-tunerserver \
+	enigma2-plugin-extensions-witaispeechtotext \
+	enigma2-plugin-extensions-xmodem \
+	enigma2-plugin-systemplugins-3gmodemmanager \
+	enigma2-plugin-systemplugins-aboutboxbranding \
 	enigma2-plugin-systemplugins-abmcustommiximporter \
 	enigma2-plugin-systemplugins-channelsimporter \
+	enigma2-plugin-systemplugins-micomupgrade \
 	enigma2-plugin-systemplugins-multitranscodingsetup \
+	enigma2-plugin-systemplugins-radiotimesemulator \
+	enigma2-plugin-systemplugins-remotecontrolselection \
+	enigma2-plugin-systemplugins-satipclient \
+	enigma2-plugin-systemplugins-satscanlcn \
+	enigma2-plugin-systemplugins-tempfancontrol \
+	enigma2-plugin-systemplugins-wanip \
 	enigma2-plugin-systemplugins-wirelessaccesspoint \
 	"
 

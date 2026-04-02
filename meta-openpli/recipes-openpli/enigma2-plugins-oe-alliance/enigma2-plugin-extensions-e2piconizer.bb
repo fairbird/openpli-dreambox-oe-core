@@ -1,0 +1,22 @@
+DESCRIPTION = "E2 Piconizer - Picon Downloader/Creator"
+HOMEPAGE = "https://github.com/kiddac/E2_Piconizer"
+MAINTAINER = "kiddac"
+PRIORITY = "optional"
+require conf/license/license-gplv2.inc
+
+inherit gittag allarch python3-compileall
+
+SRCREV = "${AUTOREV}"
+PV = "git"
+PKGV = "${GITPKGVTAG}"
+
+SRC_URI = "git://github.com/kiddac/E2_Piconizer.git;protocol=https;branch=master"
+
+FILES:${PN} = "${sysconfdir} ${libdir}"
+
+do_install () {
+    install -d ${D}${sysconfdir}/enigma2/E2Piconizer
+    install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/E2Piconizer
+    cp -rf ${S}/E2Piconizer/etc/enigma2/E2Piconizer/* ${D}${sysconfdir}/enigma2/E2Piconizer/
+    cp -rf ${S}/E2Piconizer/usr/lib/enigma2/python/Plugins/Extensions/E2Piconizer/* ${D}${libdir}/enigma2/python/Plugins/Extensions/E2Piconizer/
+}
