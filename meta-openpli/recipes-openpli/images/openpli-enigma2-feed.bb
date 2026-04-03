@@ -180,7 +180,6 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-forcefbclnbpower \
 	enigma2-plugin-extensions-fempa \
 	enigma2-plugin-extensions-gerbera \
-	enigma2-plugin-extensions-infobartunerstate \
 	enigma2-plugin-extensions-lamedbmerger \
 	enigma2-plugin-extensions-lottoextended \
 	enigma2-plugin-extensions-mediatomb \
