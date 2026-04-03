@@ -21,4 +21,8 @@ do_install:append() {
 
 FILES:${PN} += "/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/bin/fbclear"
 
-INSANE_SKIP = "32bit-time"
+INSANE_SKIP:${PN} = "arch file-rdeps 32bit-time ldflags"
+
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_SYSROOT_STRIP = "1"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
