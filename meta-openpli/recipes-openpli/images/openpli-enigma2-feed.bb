@@ -194,7 +194,6 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-remotechannelstreamconverter \
 	enigma2-plugin-extensions-streamtv \
 	enigma2-plugin-extensions-tuxcom \
-	enigma2-plugin-extensions-tuxterm \
 	enigma2-plugin-extensions-tvspielfilm \
 	enigma2-plugin-extensions-tunerserver \
 	enigma2-plugin-extensions-witaispeechtotext \
