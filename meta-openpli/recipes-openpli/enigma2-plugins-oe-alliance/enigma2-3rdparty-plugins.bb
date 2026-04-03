@@ -49,39 +49,3 @@ python populate_packages:prepend () {
 
     d.setVar('PACKAGES', pkgs)
 }
-
-do_deploy() {
-    rm -rf ${DEPLOY_DIR_IPK}/3rdparty
-    rm -rf ${DEPLOY_DIR_IPK}/${MACHINE}_3rdparty
-    install -d 0755 ${DEPLOY_DIR_IPK}/3rdparty
-    install -d 0755 ${DEPLOY_DIR_IPK}/${MACHINE}_3rdparty
-    for i in ${THIRDPARTY_PLUGINS}; do
-        if [ -f $i ]; then
-            install -m 0644 $i ${DEPLOY_DIR_IPK}/3rdparty;
-        fi
-    done;
-    for i in ${THIRDPARTY_MACHINE_PLUGINS}; do
-        if [ -f $i ]; then
-            install -m 0644 $i ${DEPLOY_DIR_IPK}/${MACHINE}_3rdparty;
-        fi
-    done;
-    for i in ${THIRDPARTY_EXTRA_PLUGINS}; do
-        if [ -f $i ]; then
-            install -m 0644 $i ${DEPLOY_DIR_IPK}/3rdparty;
-        fi
-    done;
-    pkgdir=${DEPLOY_DIR_IPK}/3rdparty
-    if [ -e $pkgdir ]; then
-        chmod 0755 $pkgdir
-    fi
-    pkgdir=${DEPLOY_DIR_IPK}/${MACHINE}_3rdparty
-    if [ -e $pkgdir ]; then
-        chmod 0755 $pkgdir
-    fi
-}
-
-do_package_write_ipk() {
-    :
-}
-
-addtask do_deploy before do_package_write after do_package_write_ipk
