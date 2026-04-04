@@ -194,6 +194,7 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-tuxcom \
 	enigma2-plugin-extensions-tvspielfilm \
 	enigma2-plugin-extensions-tunerserver \
+	enigma2-plugin-extensions-worldcam \
 	enigma2-plugin-extensions-witaispeechtotext \
 	enigma2-plugin-extensions-xmodem \
 	enigma2-plugin-systemplugins-3gmodemmanager \
