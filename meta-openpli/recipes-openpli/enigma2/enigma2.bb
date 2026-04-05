@@ -308,3 +308,9 @@ RRECOMMENDS:${PN}:append:dm900 = " enigma2-plugin-systemplugins-fsblupdater"
 RRECOMMENDS:${PN}:append:dm920 = " enigma2-plugin-systemplugins-fsblupdater"
 RRECOMMENDS:${PN}:append:dreamone = " enigma2-plugin-systemplugins-amlfrq"
 RRECOMMENDS:${PN}:append:dreamtwo = " enigma2-plugin-systemplugins-amlfrq"
+
+# Fix QA build-deps errors for wrapper sub-packages
+# These are runtime-only dependencies, not needed at enigma2 build time
+INSANE_SKIP:enigma2-plugin-extensions-streamlinkwrapper += "build-deps"
+INSANE_SKIP:enigma2-plugin-extensions-ytdlwrapper += "build-deps"
+INSANE_SKIP:enigma2-plugin-extensions-ytdlpwrapper += "build-deps"
