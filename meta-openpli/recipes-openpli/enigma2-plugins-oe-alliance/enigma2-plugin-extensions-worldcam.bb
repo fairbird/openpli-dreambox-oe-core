@@ -34,3 +34,6 @@ if [ -d "/usr/lib/enigma2/python/Plugins/Extensions/WorldCam" ]; then
 fi
 exit 0
 }
+
+# These are runtime-only optional dependencies, suppress QA warning
+INSANE_SKIP:${PN} += "build-deps"
