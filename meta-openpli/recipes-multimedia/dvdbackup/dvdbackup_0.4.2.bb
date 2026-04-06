@@ -11,7 +11,10 @@ PR = "r2"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.xz"
 
-SRC_URI += "file://autoconf-warnings-are-not-errors.patch file://fix-build-against-libdreamdvd-612.patch"
+SRC_URI = "https://netix.dl.sourceforge.net/project/dvdbackup/dvdbackup/${BP}/${BP}.tar.xz \
+          file://autoconf-warnings-are-not-errors.patch \
+          file://dvdbackup-libdvdread-6.1.patch \
+"
 
 SRC_URI[md5sum] = "28f273b2f27a3afea3a3c965ddbede86"
 SRC_URI[sha256sum] = "ef8c56fbb82b15b7eef00d2d3118c8253f9770009ed7bb2a5d4849acf88183e6"
