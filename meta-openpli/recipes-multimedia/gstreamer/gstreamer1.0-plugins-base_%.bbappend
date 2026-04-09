@@ -2,9 +2,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_NO_LOCALE = "1"
 
-PV = "1.28.1"
+PV = "1.28.2"
 
-SRC_URI[sha256sum] = "1446a4c2a92ff5d78d88e85a599f0038441d53333236f0c72d72f21a9c132497"
+SRC_URI[sha256sum] = "4db76b3619280037a4047de7d9dbb38613a4272dcc40efb333257124635a888d"
 
 SRC_URI:append = " \
 		file://0002-subparse-set-need_segment-after-sink-pad-received-GS.patch \
