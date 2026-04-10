@@ -107,7 +107,7 @@ OPTIONAL_PACKAGES += " \
 	rsync \
 	rtl-sdr \
 	rtorrent \
-	sabnzbd \
+	sabnzbd3 \
 	samba \
 	satipclient \
 	satpi \
