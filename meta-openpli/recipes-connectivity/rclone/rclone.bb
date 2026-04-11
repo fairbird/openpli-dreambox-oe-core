@@ -11,8 +11,9 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/COPYING;md5=bed161b82a1ecab65ff7ba3c
 RDEPENDS:${PN} = "bash"
 RDEPENDS:${PN}-dev = "bash python3-core"
 
-inherit gitpkgv go-mod upx-compress
+inherit gittag go-mod upx-compress
 
+SRCREV = "cdb3ecb0fb3cd6a1451a80a11f3c5f6bd6d993e4"
 PV = "git"
 PKGV = "${GITPKGVTAG}"
 PR = "r1"
@@ -32,5 +33,3 @@ do_install() {
 	install -m 755 ${UNPACKDIR}/rclonefs ${D}${bindir}
 	ln -sf rclone ${D}${bindir}/mount.rclone
 }
-
-ERROR_QA:remove = "textrel"
