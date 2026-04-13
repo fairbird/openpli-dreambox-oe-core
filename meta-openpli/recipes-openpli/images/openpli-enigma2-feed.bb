@@ -199,6 +199,10 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-worldcam \
 	enigma2-plugin-extensions-witaispeechtotext \
 	enigma2-plugin-extensions-xmodem \
+	enigma2-plugin-extensions-webradiofs \
+	enigma2-plugin-extensions-timfs \
+	enigma2-plugin-extensions-mspfs \
+	enigma2-plugin-extensions-oemediathek \
 	enigma2-plugin-systemplugins-3gmodemmanager \
 	enigma2-plugin-systemplugins-aboutboxbranding \
 	enigma2-plugin-systemplugins-abmcustommiximporter \
