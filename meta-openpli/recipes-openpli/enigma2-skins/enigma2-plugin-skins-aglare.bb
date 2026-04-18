@@ -13,7 +13,7 @@ PKGV = "1.2+git${GITPKGV}"
 VER = "4.7"
 PR = "r0"
 
-SRC_URI = "git://github.com/Belfagor2005/enigma2-plugin-skins-aglare.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/OwnerPlugins/enigma2-plugin-skins-aglare.git;protocol=https;branch=main"
 
 FILES:${PN} = "${prefix}/"
 
