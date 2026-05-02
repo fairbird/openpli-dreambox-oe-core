@@ -1,11 +1,14 @@
 DEPENDS += "openssl"
 
+PARALLEL_MAKEINST = ""
+
 SRC_URI += " \
         file://action_wpa.sh \
         file://functions.sh \
         file://ifupdown.sh \
         file://wpa_action \
         file://wpa_action.8 \
+        file://openssl40-opaque-asn1.patch \
 "
 
 do_configure:append() {
