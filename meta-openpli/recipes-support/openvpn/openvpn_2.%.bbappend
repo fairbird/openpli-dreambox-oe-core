@@ -6,7 +6,7 @@ RDEPENDS:${PN} = "lzo lz4"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " file://update-resolv-conf.sh"
+SRC_URI:append = " file://update-resolv-conf.sh file://openssl40-opaque-asn1.patch"
 
 do_install:append() {
 	install -m 775 ${UNPACKDIR}/update-resolv-conf.sh ${D}${sysconfdir}/openvpn/update-resolv-conf.sh
