@@ -7,10 +7,10 @@ Upstream-Status: Submitted [https://github.com/openssl/openssl/pull/22481]
 
 Signed-off-by: William Lyu <William.Lyu@windriver.com>
 ---
- test/helpers/handshake.c | 137 +++++++++++++++++++++++++++++----------
+ test/helpers/handshake.c | 136 ++++++++++++++++++++++++++++++---------
  test/helpers/handshake.h |  70 +++++++++++++++++++-
  test/ssl_test.c          |  44 +++++++++++++
- 3 files changed, 217 insertions(+), 34 deletions(-)
+ 3 files changed, 217 insertions(+), 33 deletions(-)
 
 diff --git a/test/helpers/handshake.c b/test/helpers/handshake.c
 index f611b3a..5703b48 100644
@@ -119,7 +119,7 @@ index f611b3a..5703b48 100644
  HANDSHAKE_RESULT *HANDSHAKE_RESULT_new(void)
  {
      HANDSHAKE_RESULT *ret;
-@@ -726,15 +822,6 @@ static void configure_handshake_ssl(SSL *server, SSL *client,
+@@ -828,16 +828,6 @@ static void configure_handshake_ssl(SSL *server, SSL *client,
          SSL_set_post_handshake_auth(client, 1);
  }
  
@@ -128,6 +128,7 @@ index f611b3a..5703b48 100644
 -    PEER_SUCCESS,
 -    PEER_RETRY,
 -    PEER_ERROR,
+-    PEER_FINAL_ERROR,
 -    PEER_WAITING,
 -    PEER_TEST_FAILURE
 -} peer_status_t;
@@ -135,7 +136,7 @@ index f611b3a..5703b48 100644
  /* An SSL object and associated read-write buffers. */
  typedef struct peer_st {
      SSL *ssl;
-@@ -1081,16 +1168,6 @@ static void do_shutdown_step(PEER *peer)
+@@ -1077,16 +1164,6 @@ static void do_shutdown_step(PEER *peer)
      }
  }
  
@@ -152,7 +153,7 @@ index f611b3a..5703b48 100644
  static int renegotiate_op(const SSL_TEST_CTX *test_ctx)
  {
      switch (test_ctx->handshake_mode) {
-@@ -1169,19 +1245,6 @@ static void do_connect_step(const SSL_TEST_CTX *test_ctx, PEER *peer,
+@@ -1164,19 +1241,6 @@ static void do_connect_step(const SSL_TEST_CTX *test_ctx, PEER *peer,
      }
  }
  
@@ -172,7 +173,7 @@ index f611b3a..5703b48 100644
  /*
   * Determine the handshake outcome.
   * last_status: the status of the peer to have acted last.
-@@ -1546,6 +1609,10 @@ static HANDSHAKE_RESULT *do_handshake_internal(
+@@ -1541,6 +1605,10 @@ static HANDSHAKE_RESULT *do_handshake_internal(
  
      start = time(NULL);
  
@@ -183,8 +184,8 @@ index f611b3a..5703b48 100644
      /*
       * Half-duplex handshake loop.
       * Client and server speak to each other synchronously in the same process.
-@@ -1567,6 +1634,10 @@ static HANDSHAKE_RESULT *do_handshake_internal(
-                                       0 /* server went last */);
+@@ -1562,6 +1630,10 @@ static HANDSHAKE_RESULT *do_handshake_internal(
+                 0 /* server went last */);
          }
  
 +        save_loop_history(&(ret->history),

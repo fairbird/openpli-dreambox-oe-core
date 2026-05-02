@@ -6,6 +6,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI += "file://openssl-cnf.patch"
 
-PV = "3.6.2"
+PV = "4.0.0"
 
-SRC_URI[sha256sum] = "aaf51a1fe064384f811daeaeb4ec4dce7340ec8bd893027eee676af31e83a04f"
+SRC_URI[sha256sum] = "c32cf49a959c4f345f9606982dd36e7d28f7c58b19c2e25d75624d2b3d2f79ac"
