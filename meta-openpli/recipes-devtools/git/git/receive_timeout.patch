@@ -1,0 +1,16 @@
+--- a/connect.c
++++ b/connect.c
+@@ -766,8 +766,13 @@ int git_connection_is_socket(struct child_process *conn)
+ 
+ static struct child_process *git_tcp_connect(int fd[2], char *host, int flags)
+ {
++	struct timeval tv;
+ 	int sockfd = git_tcp_connect_sock(host, flags);
+ 
++	tv.tv_sec = 90;
++	tv.tv_usec = 0;
++	setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
++
+ 	fd[0] = sockfd;
+ 	fd[1] = dup(sockfd);
+ 
