@@ -252,13 +252,6 @@ EXTRA_OEMAKE = "\
 	ENIGMA2_BRANCH=${ENIGMA2_BRANCH} \
 	"
 
-# Swig generated 200k enigma.py file has no purpose for end users
-# some plugins contain so's, their stripped symbols should not end up in the enigma2 package
-FILES:${PN}-dbg += "\
-	${libdir}/enigma2/python/enigma.py \
-	${libdir}/enigma2/python/Plugins/*/*/.debug \
-	"
-
 # Save some space by not installing sources (StartEnigma.py must remain)
 FILES:${PN}-src = "\
 	${libdir}/enigma2/python/e2reactor.py \

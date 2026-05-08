@@ -120,4 +120,3 @@ FILES:${PN}-src = "${libdir}/enigma2/python/Components/*.py ${libdir}/enigma2/py
 FILES:${PN} = "${libdir}/enigma2/python/*.so /usr/share ${libdir}/enigma2/python/Plugins"
 FILES:${PN}-dev += "${libdir}/enigma2/python/*.la"
 FILES:${PN}-staticdev += "${libdir}/enigma2/python/*.a"
-FILES:${PN}-dbg += "${libdir}/enigma2/python/.debug"

@@ -33,4 +33,3 @@ RDEPENDS:${PN} = "libkodiplatform"
 
 INSANE_SKIP:${PN} = "dev-so"
 FILES:${PN} += "${datadir}/kodi"
-FILES:${PN}-dbg += "${datadir}/kodi/addons/*/.debug/"

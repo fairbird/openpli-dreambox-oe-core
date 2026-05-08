@@ -28,7 +28,6 @@ inherit autotools pkgconfig
 FILES:${PN} = "${libdir}/gstreamer-${GSTVERSION}/*.so*"
 FILES:${PN}-dev += "${libdir}/gstreamer-${GSTVERSION}/*.la"
 FILES:${PN}-staticdev += "${libdir}/gstreamer-${GSTVERSION}/*.a"
-FILES:${PN}-dbg += "${libdir}/gstreamer-${GSTVERSION}/.debug"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

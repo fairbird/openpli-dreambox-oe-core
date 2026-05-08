@@ -18,7 +18,6 @@ do_install:append() {
 
 PACKAGES += "kernel-image-dbg"
 
-FILES:${KERNEL_PACKAGE_NAME}-image-dbg = "/${KERNEL_IMAGEDEST}/.debug"
 FILES:${KERNEL_PACKAGE_NAME}-vmlinux = "/boot/vmlinux-${LINUX_VERSION}"
 
 python populate_packages:prepend() {

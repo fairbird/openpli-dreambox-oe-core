@@ -95,26 +95,3 @@ FILES:${PN}-doc += " \
     ${PYTHON_SITEPACKAGES_DIR}/*/*.misc \
     ${PYTHON_SITEPACKAGES_DIR}/*/*/.gitignore \
     "
-
-FILES:${PN}-dbg += " \
-    ${PYTHON_SITEPACKAGES_DIR}/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*/*/*.egg-info \
-    "

@@ -38,4 +38,3 @@ FILES:${PN}-oss-dev = "${libdir}/ao/plugins-2/liboss*.la"
 
 FILES:${PN} += "${libdir}/ao/plugins-2/*.so ${libdir}/ckport/*"
 FILES:${PN}-dev += "${libdir}/ao/plugins-2/*.la"
-FILES:${PN}-dbg += "${libdir}/ao/plugins-2/.debug"

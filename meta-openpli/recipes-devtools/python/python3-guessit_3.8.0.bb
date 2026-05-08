@@ -82,26 +82,3 @@ FILES:${PN}-doc += " \
     ${PYTHON_SITEPACKAGES_DIR}/LICENSE \
     ${PYTHON_SITEPACKAGES_DIR}/README \
     "
-
-FILES:${PN}-dbg += " \
-    ${PYTHON_SITEPACKAGES_DIR}/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*/*/*.debug \
-    ${PYTHON_SITEPACKAGES_DIR}/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*/*.egg-info \
-    ${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/*/*/*/*/*/*.egg-info \
-    "

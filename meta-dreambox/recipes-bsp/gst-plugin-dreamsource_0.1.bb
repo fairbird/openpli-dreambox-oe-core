@@ -13,4 +13,3 @@ do_install:append() {
 }
 
 FILES:${PN} = "${libdir}/gstreamer-1.0/*.so"
-FILES:${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"

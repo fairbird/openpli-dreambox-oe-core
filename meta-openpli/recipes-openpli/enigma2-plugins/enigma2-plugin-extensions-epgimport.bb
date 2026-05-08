@@ -24,7 +24,6 @@ PACKAGES = "${PN}-src ${PN}-dbg ${PN}"
 PLUGIN = "EPGImport"
 
 FILES:${PN} = "${libdir}/enigma2/python/Plugins/Extensions/${PLUGIN}/ /etc"
-FILES:${PN}-dbg = "${libdir}/enigma2/python/Plugins/Extensions/${PLUGIN}/.debug /usr/src/debug"
 
 # skip this!
 install_egg_info() {
