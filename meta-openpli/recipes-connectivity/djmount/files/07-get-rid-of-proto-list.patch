@@ -1,0 +1,77 @@
+diff --git a/libupnp/upnp/src/inc/global.h b/libupnp/upnp/src/inc/global.h
+index 58d4b82..654b589 100644
+--- a/libupnp/upnp/src/inc/global.h
++++ b/libupnp/upnp/src/inc/global.h
+@@ -49,14 +49,3 @@ typedef unsigned short int UINT2;
+ 
+ /* UINT4 defines a four byte word */
+ typedef unsigned long int UINT4;
+-
+-/* PROTO_LIST is defined depending on how PROTOTYPES is defined above.
+-   If using PROTOTYPES, then PROTO_LIST returns the list, otherwise it
+-   returns an empty list.
+- */
+-
+-#if PROTOTYPES
+-#define PROTO_LIST(list) list
+-#else
+-#define PROTO_LIST(list) ()
+-#endif
+diff --git a/libupnp/upnp/src/inc/md5.h b/libupnp/upnp/src/inc/md5.h
+index c87c8a4..ea31de9 100644
+--- a/libupnp/upnp/src/inc/md5.h
++++ b/libupnp/upnp/src/inc/md5.h
+@@ -33,7 +33,7 @@ typedef struct {
+ 
+ } MD5_CTX;
+ 
+-void MD5Init PROTO_LIST ((MD5_CTX *));
+-void MD5Update PROTO_LIST ((MD5_CTX *, unsigned char *, unsigned int));
+-void MD5Final PROTO_LIST ((unsigned char [16], MD5_CTX *));
++void MD5Init(MD5_CTX *);
++void MD5Update(MD5_CTX *, unsigned char *, unsigned int);
++void MD5Final(unsigned char [16], MD5_CTX *);
+ 
+diff --git a/libupnp/upnp/src/uuid/md5.c b/libupnp/upnp/src/uuid/md5.c
+index 3f6a565..dbe5943 100644
+--- a/libupnp/upnp/src/uuid/md5.c
++++ b/libupnp/upnp/src/uuid/md5.c
+@@ -49,22 +49,22 @@
+ #define S43 15
+ #define S44 21
+ 
+-static void MD5Transform PROTO_LIST( ( UINT4[4],
+-                                       unsigned char[64] ) );
+-static void Encode PROTO_LIST( ( unsigned char *,
+-                                 UINT4 *,
+-                                 unsigned int ) );
+-
+-static void Decode PROTO_LIST( ( UINT4 *,
+-                                 unsigned char *,
+-                                 unsigned int ) );
+-
+-static void MD5_memcpy PROTO_LIST( ( POINTER,
+-                                     POINTER,
+-                                     unsigned int ) );
+-static void MD5_memset PROTO_LIST( ( POINTER,
+-                                     int,
+-                                     unsigned int ) );
++static void MD5Transform( UINT4[4],
++                          unsigned char[64] );
++static void Encode( unsigned char *,
++                    UINT4 *,
++                    unsigned int );
++
++static void Decode( UINT4 *,
++                    unsigned char*,
++                    unsigned int );
++
++static void MD5_memcpy( POINTER,
++                        POINTER,
++                        unsigned int );
++static void MD5_memset( POINTER,
++                        int,
++                        unsigned int );
+ 
+ static unsigned char PADDING[64] = {
+     0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

@@ -1,0 +1,28 @@
+diff --git a/libupnp/upnp/src/uuid/sysdep.c b/libupnp/upnp/src/uuid/sysdep.c
+index 618fd22..51f091c 100644
+--- a/libupnp/upnp/src/uuid/sysdep.c
++++ b/libupnp/upnp/src/uuid/sysdep.c
+@@ -157,8 +157,8 @@ get_random_info( char seed[16] )
+ 
+     gettimeofday( &r.t, ( struct timezone * )0 );
+     gethostname( r.hostname, 256 );
+-    MD5Update( &c, &r, sizeof( randomness ) );
+-    MD5Final( seed, &c );
++    MD5Update( &c, (unsigned char*)&r, sizeof( randomness ) );
++    MD5Final( (unsigned char*)seed, &c );
+ };
+ 
+ #endif
+diff --git a/libupnp/upnp/src/uuid/uuid.c b/libupnp/upnp/src/uuid/uuid.c
+index bbb314f..1636abf 100644
+--- a/libupnp/upnp/src/uuid/uuid.c
++++ b/libupnp/upnp/src/uuid/uuid.c
+@@ -309,7 +309,7 @@ uuid_create_from_name( uuid_upnp * uid, /* resulting UUID */
+     htons( net_nsid.time_hi_and_version );
+ 
+     MD5Init( &c );
+-    MD5Update( &c, &net_nsid, sizeof( uuid_upnp ) );
++    MD5Update( &c, (unsigned char*)&net_nsid, sizeof( uuid_upnp ) );
+     MD5Update( &c, name, namelen );
+     MD5Final( hash, &c );
+ 

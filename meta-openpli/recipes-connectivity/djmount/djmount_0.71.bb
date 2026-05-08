@@ -16,7 +16,7 @@ PARALLEL_MAKE = ""
 
 SRC_URI = "git://github.com/SHTrassEr/djmount.git;protocol=https;branch=master"
 
-CFLAGS:append = " -std=gnu89 -fcommon"
+CFLAGS:append = " -fcommon"
 
 SRC_URI:append = " \
 	file://init \
@@ -26,6 +26,8 @@ SRC_URI:append = " \
 	file://04-support-fstab-mounting.patch \
 	file://05-fix-build-with-gettext-0.20.x.patch \
 	file://06-use-settype.patch \
+	file://07-get-rid-of-proto-list.patch \
+	file://08-cast-structure-to-unsigned-char.patch \
 	"
 EXTRA_OECONF = "--with-external-libupnp-prefix='${STAGING_LIBDIR}' --with-fuse-prefix='${STAGING_LIBDIR}'"
 
