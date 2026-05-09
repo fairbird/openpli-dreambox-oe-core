@@ -10,7 +10,7 @@ RDEPENDS:${PN} = "lzo lz4"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " file://update-resolv-conf.sh file://openssl40-opaque-asn1.patch"
+SRC_URI:append = " file://update-resolv-conf.sh"
 SRC_URI:remove = "file://0001-tests-skip-test-execution-when-cross-compiling.patch"
 
 do_install:append() {
