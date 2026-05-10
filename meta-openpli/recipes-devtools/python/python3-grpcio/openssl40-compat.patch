@@ -1,0 +1,130 @@
+From: OpenEmbedded <oe@oe-alliance.org>
+Date: 2026-05-10
+Subject: [PATCH] tls: fix build with OpenSSL 4.0
+
+OpenSSL 4.0 added const to return types of X509_CRL_get_issuer,
+X509_get_issuer_name, X509_get_subject_name, X509_NAME_get_entry,
+X509_NAME_ENTRY_get_data, X509_EXTENSION_get_data, and made
+ASN1_STRING opaque (direct ->length and ->data access removed).
+
+Upstream-Status: Inappropriate [upstream dead / vendored copy]
+Signed-off-by: OpenEmbedded <oe@oe-alliance.org>
+
+--- a/src/core/credentials/transport/tls/grpc_tls_crl_provider.cc	2026-05-10 13:03:17.971720233 +0000
++++ src/core/credentials/transport/tls/grpc_tls_crl_provider.cc	2026-05-10 13:03:17.976856499 +0000
+@@ -56,7 +56,7 @@
+   if (crl == nullptr) {
+     return absl::InvalidArgumentError("crl cannot be null");
+   }
+-  X509_NAME* issuer = X509_CRL_get_issuer(crl);
++  X509_NAME* issuer = const_cast<X509_NAME*>(X509_CRL_get_issuer(crl));
+   if (issuer == nullptr) {
+     return absl::InvalidArgumentError("crl cannot have null issuer");
+   }
+--- a/src/core/tsi/ssl_transport_security.cc	2026-05-10 13:03:17.973315468 +0000
++++ src/core/tsi/ssl_transport_security.cc	2026-05-10 13:03:18.002774931 +0000
+@@ -408,7 +408,7 @@
+   int common_name_index = -1;
+   X509_NAME_ENTRY* common_name_entry = nullptr;
+   ASN1_STRING* common_name_asn1 = nullptr;
+-  X509_NAME* subject_name = X509_get_subject_name(cert);
++  X509_NAME* subject_name = const_cast<X509_NAME*>(X509_get_subject_name(cert));
+   int utf8_returned_size = 0;
+   if (subject_name == nullptr) {
+     VLOG(2) << "Could not get subject name from certificate.";
+@@ -420,12 +420,12 @@
+     VLOG(2) << "Could not get common name of subject from certificate.";
+     return TSI_NOT_FOUND;
+   }
+-  common_name_entry = X509_NAME_get_entry(subject_name, common_name_index);
++  common_name_entry = const_cast<X509_NAME_ENTRY*>(X509_NAME_get_entry(subject_name, common_name_index));
+   if (common_name_entry == nullptr) {
+     LOG(ERROR) << "Could not get common name entry from certificate.";
+     return TSI_INTERNAL_ERROR;
+   }
+-  common_name_asn1 = X509_NAME_ENTRY_get_data(common_name_entry);
++  common_name_asn1 = const_cast<ASN1_STRING*>(X509_NAME_ENTRY_get_data(common_name_entry));
+   if (common_name_asn1 == nullptr) {
+     LOG(ERROR) << "Could not get common name entry asn1 from certificate.";
+     return TSI_INTERNAL_ERROR;
+@@ -466,7 +466,7 @@
+ static tsi_result peer_property_from_x509_subject(X509* cert,
+                                                   tsi_peer_property* property,
+                                                   bool is_verified_root_cert) {
+-  X509_NAME* subject_name = X509_get_subject_name(cert);
++  X509_NAME* subject_name = const_cast<X509_NAME*>(X509_get_subject_name(cert));
+   if (subject_name == nullptr) {
+     GRPC_TRACE_LOG(tsi, INFO) << "Could not get subject name from certificate.";
+     return TSI_NOT_FOUND;
+@@ -562,16 +562,16 @@
+       char ntop_buf[INET6_ADDRSTRLEN];
+       int af;
+ 
+-      if (subject_alt_name->d.iPAddress->length == 4) {
++      if (ASN1_STRING_length(subject_alt_name->d.iPAddress) == 4) {
+         af = AF_INET;
+-      } else if (subject_alt_name->d.iPAddress->length == 16) {
++      } else if (ASN1_STRING_length(subject_alt_name->d.iPAddress) == 16) {
+         af = AF_INET6;
+       } else {
+         LOG(ERROR) << "SAN IP Address contained invalid IP";
+         result = TSI_INTERNAL_ERROR;
+         break;
+       }
+-      const char* name = inet_ntop(af, subject_alt_name->d.iPAddress->data,
++      const char* name = inet_ntop(af, ASN1_STRING_get0_data(subject_alt_name->d.iPAddress),
+                                    ntop_buf, INET6_ADDRSTRLEN);
+       if (name == nullptr) {
+         LOG(ERROR) << "Could not get IP string from asn1 octet.";
+@@ -855,7 +855,7 @@
+       break;  // We're at the end of stream.
+     }
+     if (root_names != nullptr) {
+-      root_name = X509_get_subject_name(root);
++      root_name = const_cast<X509_NAME*>(X509_get_subject_name(root));
+       if (root_name == nullptr) {
+         LOG(ERROR) << "Could not get name from root certificate.";
+         result = TSI_INVALID_ARGUMENT;
+--- a/src/core/tsi/ssl_transport_security_utils.cc	2026-05-10 13:36:01.125759837 +0000
++++ src/core/tsi/ssl_transport_security_utils.cc	2026-05-10 13:36:01.256077887 +0000
+@@ -281,11 +281,11 @@
+   if (cert == nullptr || crl == nullptr) {
+     return false;
+   }
+-  X509_NAME* cert_issuer_name = X509_get_issuer_name(cert);
++  X509_NAME* cert_issuer_name = const_cast<X509_NAME*>(X509_get_issuer_name(cert));
+   if (cert == nullptr) {
+     return false;
+   }
+-  X509_NAME* crl_issuer_name = X509_CRL_get_issuer(crl);
++  X509_NAME* crl_issuer_name = const_cast<X509_NAME*>(X509_CRL_get_issuer(crl));
+   if (crl_issuer_name == nullptr) {
+     return false;
+   }
+@@ -316,7 +316,7 @@
+   if (cert == nullptr) {
+     return absl::InvalidArgumentError("cert cannot be null");
+   }
+-  X509_NAME* issuer = X509_get_issuer_name(cert);
++  X509_NAME* issuer = const_cast<X509_NAME*>(X509_get_issuer_name(cert));
+   unsigned char* buf = nullptr;
+   int len = i2d_X509_NAME(issuer, &buf);
+   if (len < 0 || buf == nullptr) {
+@@ -338,7 +338,7 @@
+     if (X509_get_ext_by_NID(cert, NID_authority_key_identifier, j) != -1) {
+       return absl::InvalidArgumentError("Could not get AKID from certificate.");
+     }
+-    akid = X509_EXTENSION_get_data(X509_get_ext(cert, j));
++    akid = const_cast<ASN1_OCTET_STRING*>(X509_EXTENSION_get_data(X509_get_ext(cert, j)));
+   } else {
+     return absl::InvalidArgumentError("Could not get AKID from certificate.");
+   }
+@@ -363,7 +363,7 @@
+     if (X509_CRL_get_ext_by_NID(crl, NID_authority_key_identifier, j) != -1) {
+       return absl::InvalidArgumentError("Could not get AKID from crl.");
+     }
+-    akid = X509_EXTENSION_get_data(X509_CRL_get_ext(crl, j));
++    akid = const_cast<ASN1_OCTET_STRING*>(X509_EXTENSION_get_data(X509_CRL_get_ext(crl, j)));
+   } else {
+     return absl::InvalidArgumentError("Could not get AKID from crl.");
+   }
