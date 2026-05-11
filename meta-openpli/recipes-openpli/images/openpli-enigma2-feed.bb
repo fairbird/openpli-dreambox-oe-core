@@ -184,6 +184,7 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-lamedbmerger \
 	enigma2-plugin-extensions-lottoextended \
 	enigma2-plugin-extensions-mediatomb \
+	enigma2-plugin-extensions-movieorganisor \
 	enigma2-plugin-extensions-multiquickbutton \
 	enigma2-plugin-extensions-oscamsmartcard \
 	enigma2-plugin-extensions-piconmanager \
