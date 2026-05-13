@@ -312,8 +312,7 @@ ENIGMA2_OPTIONAL = " \
 	picons-enigma2-meta \
 	softcams-enigma2-meta \
 	enigma2-plugins-alliance \
-	${ALLIANCE_PLUGINS} \
 	${OPTIONAL_BSP_ENIGMA2_PACKAGES} \
 	"
 
-DEPENDS += "${OPTIONAL_PACKAGES} ${ENIGMA2_OPTIONAL}"
+DEPENDS += "${OPTIONAL_PACKAGES} ${ENIGMA2_OPTIONAL} ${ALLIANCE_PLUGINS}"
