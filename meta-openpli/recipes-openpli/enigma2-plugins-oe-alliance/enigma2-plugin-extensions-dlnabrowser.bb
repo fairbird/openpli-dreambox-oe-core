@@ -9,7 +9,6 @@ inherit gittag
 
 S = "${UNPACKDIR}/${BP}/src"
 
-SRCREV = "${AUTOREV}"
 PV = "git"
 PKGV = "V${GITPKGVTAG}"
 

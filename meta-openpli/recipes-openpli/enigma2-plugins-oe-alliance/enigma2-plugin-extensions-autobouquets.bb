@@ -14,7 +14,6 @@ LIC_FILES_CHKSUM = "\
 inherit gitpkgv python3-compileall
 
 AUTOBOUQUETS_BRANCH ?= "release"
-SRCREV = "${AUTOREV}"
 PV = "2.2+git"
 PKGV = "2.2+git${GITPKGV}"
 PR = "r0"
