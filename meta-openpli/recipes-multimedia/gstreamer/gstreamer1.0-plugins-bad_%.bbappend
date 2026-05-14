@@ -10,6 +10,7 @@ SRC_URI:append = " \
         file://0006-dvbapi5-fix-old-kernel.patch \
         file://0007-hls-main-thread-block.patch \
         file://0008-gsthlsaudiometa.patch \
+        file://0009-tsdemux-cc-recovery-hls.patch \
 "
 
 SRC_URI:remove = "file://0001-uvcgadget-Use-g_path_get_basename-instead-of-libc-ba.patch"
