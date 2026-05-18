@@ -1,0 +1,12 @@
+diff --git a/compat/Kbuild.include b/compat/Kbuild.include
+index 0192ecd..43b2757 100644
+--- a/compat/Kbuild.include
++++ b/compat/Kbuild.include
+@@ -6,6 +6,7 @@ kbuild-dir := $(if $(filter /%,$(src)),$(src),$(srctree)/$(src))
+ 
+ ccflags-y += -include $(kbuild-dir)/compat/compat.h
+ asflags-y += -include $(kbuild-dir)/compat/compat-asm.h
++SUBLEVEL := $(or $(SUBLEVEL),79) #fix absence of SUBLEVEL variable seen in Dreambox kernels
+ LINUXINCLUDE := -DCOMPAT_VERSION=$(VERSION) -DCOMPAT_PATCHLEVEL=$(PATCHLEVEL) -DCOMPAT_SUBLEVEL=$(SUBLEVEL) -I$(kbuild-dir)/compat/version $(LINUXINCLUDE)
+ 
+ ifeq ($(wildcard $(srctree)/include/linux/ptr_ring.h),)
