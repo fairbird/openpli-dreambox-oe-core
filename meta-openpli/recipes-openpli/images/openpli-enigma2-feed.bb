@@ -134,8 +134,9 @@ OPTIONAL_PACKAGES += " \
 	v4l-utils \
 	vim \
 	wget \
-	wscan \
+	${@bb.utils.contains_any('MACHINE', 'dm900 dm920 dreamone dreamtwo', 'wireguard-tools', '', d)} \
 	wireless-tools \
+	wscan \
 	xfsprogs \
 	yafc \
 	zeroconf \
