@@ -76,3 +76,33 @@ index bef326f..a8bf074 100644
  		</widget>
  		<widget addon="Pager" connection="streams" position="545,835" size="860,25" transparent="1" backgroundColor="background" />
  		<eLabel backgroundColor="red" position="535,239" size="4,35" zPosition="2" />
+@@ -1385,10 +1375,7 @@ try:
+ except:
+ 	loadLogo = None
+
+-if self.timerRunning:
+-	titleheight = 0
+-else:
+-	titleheight = 0
++titleheight = 0
+
+ self["title_sep"] = Label("")
+ self["title_sep"].GUIcreate(self.instance)
+@@ -1402,7 +1389,7 @@ if (75 + textsize[1]) &gt; 180:
+ 	wsizey = textsize[1] + 80 + 84
+ else:
+ 	wsizey = 180 + 96
+-lenlist = len(self.list)*45
++lenlist = (len(self.list) if self.list else 0)*45
+ if (lenlist &gt; 380):
+ 	lenlist = 380
+ if (180 &gt; wsizey):
+@@ -1412,7 +1399,7 @@ wsizey += lenlist + 25
+
+ if (420 &gt; wsizex):
+ 	wsizex = 420
+-listwidth = self.getListWidth() + 20
++listwidth = (self.getListWidth() + 20) if self.list and hasattr(self, "getListWidth") else 0
+ if (listwidth &gt; 1280):
+ 	listwidth = 1280
+ if (listwidth &gt; wsizex):
