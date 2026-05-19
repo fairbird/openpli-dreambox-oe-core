@@ -82,11 +82,11 @@ PATCHTOOL = "git"
 PR = "r3"
 
 PV = "22.0+gitr"
-PV_groovy = "4.0.23"
+PV_groovy = "4.0.29"
 PV_commons-lang3 = "3.20.0"
 PV_commons-text = "1.15.0"
 
-SRC_URI[groovy.sha256sum] = "7089dd7a1e84adc814d616f5ec2f7d7dac2044a0a0457f3341b3b92d30204229"
+SRC_URI[groovy.sha256sum] = "4a42d976370c6ab373a35ec602440a8a780a7715d55e4117b3028864a247878a"
 SRC_URI[commons-lang.sha256sum] = "a77875dbc8b7b687e49d914cf00cf7237a548f4163c2a64565b3da999d8b024f"
 SRC_URI[commons-text.sha256sum] = "af36d019def06a31b4d5accf60b13c4de817ec8569af1ffb410eb5ab16b39721"
 SRC_URI[libdvdcss.sha256sum] = "f38c4a4e7a4f4da6d8e83b8852489aa3bb6588a915dc41f5ee89d9aad305a06e"
