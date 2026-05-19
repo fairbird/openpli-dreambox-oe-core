@@ -106,3 +106,16 @@ index bef326f..a8bf074 100644
  if (listwidth &gt; 1280):
  	listwidth = 1280
  if (listwidth &gt; wsizex):
+diff --git a/usr/share/enigma2/E2-DarkOS/skin_openpli.xml b/usr/share/enigma2/E2-DarkOS/skin_openpli.xml
+index feca669..feca66a 100644
+--- a/usr/share/enigma2/E2-DarkOS/skin_openpli.xml
++++ b/usr/share/enigma2/E2-DarkOS/skin_openpli.xml
+@@ -38,7 +38,7 @@
+ 	<!-- Plugin manager -->
+ 	<screen name="UpdatePluginMenu" position="fill" title="Software management" flags="wfNoBorder" backgroundColor="transparent">
+ 		<panel name="Screen_Menu1" />
+-		<widget source="menu" render="Listbox" position="396,200" size="1110,900" zPosition="3" transparent="1" enableWrapAround="1" scrollbarMode="showNever">
++		<widget source="menu" render="Listbox" position="396,200" size="1110,460" zPosition="3" transparent="1" enableWrapAround="1" scrollbarMode="showOnDemand">
+ 			<convert type="TemplatedMultiContent">
+ 			{"template": [
+ 					MultiContentEntryText(pos = (75,15),size = (1035,45),flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER,text = 1),# index 0 is the MenuText,
