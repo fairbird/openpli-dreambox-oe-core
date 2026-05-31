@@ -19,9 +19,11 @@ SRC_URI:append = " \
 
 SRC_URI:remove = "file://0001-uvcgadget-Use-g_path_get_basename-instead-of-libc-ba.patch"
 
-PACKAGECONFIG:remove = "rsvg"
+PACKAGECONFIG:remove = "rsvg openssl"
 
-PACKAGECONFIG:append = " faac faad opusparse rtmp"
+PACKAGECONFIG:append = " \
+	assrender faac faad libde265 neon nettle opusparse resindvd rtmp srt \
+"
 
 EXTRA_OEMESON:remove = "-Dkate=disabled"
 
