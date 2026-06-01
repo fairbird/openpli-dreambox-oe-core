@@ -4,71 +4,34 @@ SECTION = "multimedia"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 
-DEPENDS = "ffmpeg libbluray"
-RDEPENDS:${PN} = "ffmpeg libbluray"
+DEPENDS = "ffmpeg-ext zlib bzip2 libxml2 xz libbluray openssl librtmp libudfread"
+RDEPENDS:${PN} += "ffmpeg-ext-libs libxml2 zlib bzip2 liblzma libbluray openssl librtmp libudfread"
 
-inherit gitpkgv
+inherit gitpkgv autotools pkgconfig upx-compress
 
-PV = "180+gitr"
-PKGV = "180+gitr${GITPKGV}"
+SRCREV = "${AUTOREV}"
+PV = "181+git"
+PKGV = "181+git${GITPKGV}"
 
-SRC_URI = "git://github.com/skyjet18/exteplayer3.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/oe-alliance/exteplayer3.git;branch=master;protocol=https"
 
-SOURCE_FILES = "main/exteplayer.c"
-SOURCE_FILES =+ "container/container.c"
-SOURCE_FILES =+ "container/container_ffmpeg.c"
-SOURCE_FILES =+ "manager/manager.c"
-SOURCE_FILES =+ "manager/audio.c"
-SOURCE_FILES =+ "manager/video.c"
-SOURCE_FILES =+ "manager/subtitle.c"
-SOURCE_FILES =+ "output/output_subtitle.c"
-SOURCE_FILES =+ "output/output.c"
-SOURCE_FILES =+ "output/writer/common/pes.c"
-SOURCE_FILES =+ "output/writer/common/misc.c"
-SOURCE_FILES =+ "output/writer/common/writer.c"
-SOURCE_FILES =+ "output/linuxdvb_buffering.c"
-SOURCE_FILES =+ "output/graphic_subtitle.c"
-SOURCE_FILES =+ "playback/playback.c"
-SOURCE_FILES =+ "tools/debug.c"
-SOURCE_FILES =+ "tools/strbuffer.c"
-SOURCE_FILES =+ "external/ffmpeg/src/bitstream.c"
-SOURCE_FILES =+ "external/ffmpeg/src/latmenc.c"
-SOURCE_FILES =+ "external/ffmpeg/src/mpeg4audio.c"
-SOURCE_FILES =+ "external/ffmpeg/src/xiph.c"
-SOURCE_FILES =+ "external/flv2mpeg4/src/m4vencode.c"
-SOURCE_FILES =+ "external/flv2mpeg4/src/flvdecoder.c"
-SOURCE_FILES =+ "external/flv2mpeg4/src/dcprediction.c"
-SOURCE_FILES =+ "external/flv2mpeg4/src/flv2mpeg4.c"
-SOURCE_FILES =+ "external/plugins/src/png.c"
+EXTRA_OECONF = ""
 
-SOURCE_FILES =+ " \
-output/linuxdvb_mipsel.c \
-output/writer/mipsel/writer.c \
-output/writer/mipsel/aac.c \
-output/writer/mipsel/ac3.c \
-output/writer/mipsel/bcma.c \
-output/writer/mipsel/mp3.c \
-output/writer/mipsel/pcm.c \
-output/writer/mipsel/lpcm.c \
-output/writer/mipsel/dts.c \
-output/writer/mipsel/amr.c \
-output/writer/mipsel/h265.c \
-output/writer/mipsel/h264.c \
-output/writer/mipsel/mjpeg.c \
-output/writer/mipsel/mpeg2.c \
-output/writer/mipsel/mpeg4.c \
-output/writer/mipsel/divx3.c \
-output/writer/mipsel/vp.c \
-output/writer/mipsel/wmv.c \
-output/writer/mipsel/vc1.c"
+PACKAGECONFIG ??= ""
+PACKAGECONFIG:append:dreamone = " dreamnextgen"
+PACKAGECONFIG:append:dreamtwo = " dreamnextgen"
+PACKAGECONFIG[dreamnextgen] = "--enable-dreamnextgen,--disable-dreamnextgen,alsa-lib"
 
-do_compile() {
-    ${CC} ${SOURCE_FILES} -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE -DHAVE_FLV2MPEG4_CONVERTER -I${S}/include -I${S}/external -I${S}/external/flv2mpeg4 -I${D}/${libdir} -I${D}/${includedir} ${@bb.utils.contains('TARGET_ARCH', 'aarch64', '-lasound' , '', d)} -lswscale -ldl -lpthread -lavformat -lavcodec -lavutil -lswresample -o exteplayer3 ${LDFLAGS}
+LDFLAGS:append = " \
+    -L${STAGING_LIBDIR}/ffmpeg-ext \
+    -Wl,-rpath,/usr/lib/ffmpeg-ext \
+    -Wl,-rpath-link,${STAGING_LIBDIR}/ffmpeg-ext \
+"
+
+# ffmpeg-ext ships its own pkg-config dir under libdir/ffmpeg-ext/pkgconfig
+# — make configure see it ahead of the system ffmpeg .pc.
+do_configure:prepend() {
+    export PKG_CONFIG_PATH="${STAGING_LIBDIR}/ffmpeg-ext/pkgconfig:${PKG_CONFIG_PATH}"
 }
 
-do_install() {
-    install -d ${D}${bindir}
-    install -m 0755 ${S}/exteplayer3 ${D}${bindir}
-}
-
-INSANE_SKIP:${PN} += "ldflags"
+INSANE_SKIP:${PN} += "ldflags rpaths"
