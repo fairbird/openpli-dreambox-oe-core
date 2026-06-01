@@ -13,13 +13,11 @@ PACKAGES_DYNAMIC = "enigma2-plugin-(?!pli-).*"
 # the system what to build when installing these into an image.
 PACKAGES += "\
 	enigma2-plugin-extensions-mosaic \
-	enigma2-plugin-extensions-fancontrol2 \
 	enigma2-plugin-extensions-bonjour \
 	enigma2-plugin-extensions-transmission \
 	enigma2-plugin-systemplugins-systemtime \
 	"
 RDEPENDS:enigma2-plugin-extensions-mosaic = "aio-grab"
-RDEPENDS:enigma2-plugin-extensions-fancontrol2 = "smartmontools hdparm"
 RDEPENDS:enigma2-plugin-extensions-bonjour = "avahi-daemon"
 
 RRECOMMENDS:enigma2-plugin-systemplugins-blindscan = "virtual/blindscan-dvbs"
