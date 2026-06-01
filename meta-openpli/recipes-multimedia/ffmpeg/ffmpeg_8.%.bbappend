@@ -16,7 +16,6 @@ SRC_URI += "file://0001-makefile-add-demux-header.patch \
             file://0012-dxva2.patch \
             file://0013-add-av_stream_get_first_dts-for-chromium.patch \
             \
-            file://support-for-multiple-decryption-keys.patch \
             file://debug-logs-for-multiple-decryption-keys.patch \
             file://fixed-parsing-webvtt-with-STYLE-and-REGION-block.patch \
             file://avformat-hls-fix-to-seek-logic.patch \
@@ -37,7 +36,6 @@ SRC_URI += "file://0001-makefile-add-demux-header.patch \
             file://startover-attribute-to-manifest.patch \
             file://improved-handling-of-event-type-playlist.patch \
             file://check-borders-when-seeking-in-live-mode.patch \
-            file://fixed-playback-of-DASH-with-ampersand-in-BaseURL.patch \
             "
 
 PACKAGECONFIG:append = " gpl libbluray dav1d libfreetype librtmp libxml2 openssl x264 x265 srt"
