@@ -4,6 +4,8 @@ HOMEPAGE = "http://fstrcmp.sourceforge.net/"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=84269fe9822f573d2cc8131b63febc57"
 
+RDEPENDS:${PN} += "bash"
+
 SRC_URI = "http://fstrcmp.sourceforge.net/fstrcmp-${PV}.D001.tar.gz \
            file://nopdf.patch \
           "
