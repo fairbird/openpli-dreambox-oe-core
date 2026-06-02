@@ -25,6 +25,10 @@ RDEPENDS:enigma2-plugin-extensions-bonjour = "avahi-daemon"
 RRECOMMENDS:enigma2-plugin-systemplugins-blindscan = "virtual/blindscan-dvbs"
 RRECOMMENDS:enigma2-plugin-extensions-transmission = "transmission transmission-client"
 
+PROVIDES = "${PN} \
+	enigma2-plugin-extensions-fancontrol2 \
+	"
+
 inherit gitpkgv pkgconfig gettext python3targetconfig autotools-brokensep
 
 PV = "y-git"
