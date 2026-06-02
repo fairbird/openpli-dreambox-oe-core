@@ -41,7 +41,7 @@
 +
              ff_url_join(url, sizeof(url), "rtp", NULL,
                          namebuf, rtsp_st->sdp_port,
--                        "?localport=%d&ttl=%d&connect=%d&write_to_source=%d",
+-                        "?localrtpport=%d&ttl=%d&connect=%d&write_to_source=%d",
 +                        "?localport=%d&ttl=%d&connect=%d&write_to_source=%d%s%s",
                          rtsp_st->sdp_port, rtsp_st->sdp_ttl,
                          rt->rtsp_flags & RTSP_FLAG_FILTER_SRC ? 1 : 0,
