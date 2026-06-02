@@ -134,3 +134,11 @@ EXTRA_FFCONF = " \
     ${@bb.utils.contains("TARGET_ARCH", "arm", "--enable-armv6 --enable-armv6t2 --enable-vfp --enable-neon", "", d)} \
     ${@bb.utils.contains("TUNE_FEATURES", "aarch64", "--enable-armv8 --enable-vfp --enable-neon", "", d)} \
 "
+
+do_install:append() {
+    mkdir -p ${D}${includedir}/ffmpeg-ext
+    mv ${D}${includedir}/lib* ${D}${includedir}/ffmpeg-ext/ 2>/dev/null || true
+    mkdir -p ${D}${libdir}/ffmpeg-ext/pkgconfig
+    mv ${D}${libdir}/pkgconfig/*.pc ${D}${libdir}/ffmpeg-ext/pkgconfig/ 2>/dev/null || true
+    sed -i 's|includedir=${prefix}/include|includedir=${prefix}/include/ffmpeg-ext|g' ${D}${libdir}/ffmpeg-ext/pkgconfig/*.pc 2>/dev/null || true
+}
