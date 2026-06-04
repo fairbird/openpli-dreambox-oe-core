@@ -64,6 +64,7 @@ OPTIONAL_PACKAGES += " \
 	mtd-utils \
 	mtools \
 	mtr \
+	make \
 	nano \
 	net-tools \
 	ntfs-3g \
