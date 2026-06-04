@@ -46,7 +46,8 @@ static GstStaticPadTemplate sink_template = GST_STATIC_PAD_TEMPLATE(
         "audio/mpeg, mpegversion=(int)4, framed=(boolean)true; "        /* MPEG-4 AAC */
         "audio/x-ac3, framed=(boolean)true; "
         "audio/x-eac3, framed=(boolean)true; "
-        "audio/x-dts, framed=(boolean)true"
+        "audio/x-dts, framed=(boolean)true; "
+        "audio/x-true-hd, framed=(boolean)true"
     ));
 
 G_DEFINE_TYPE(GstDreamAudioSink, gst_dream_audio_sink, GST_TYPE_BASE_SINK)
@@ -59,9 +60,10 @@ static gint codec_id_from_caps(const GstCaps *caps)
     const GstStructure *s = gst_caps_get_structure(caps, 0);
     const gchar *name = gst_structure_get_name(s);
 
-    if (g_str_equal(name, "audio/x-ac3"))  return AV_CODEC_ID_AC3;
-    if (g_str_equal(name, "audio/x-eac3")) return AV_CODEC_ID_EAC3;
-    if (g_str_equal(name, "audio/x-dts"))  return AV_CODEC_ID_DTS;
+    if (g_str_equal(name, "audio/x-ac3"))     return AV_CODEC_ID_AC3;
+    if (g_str_equal(name, "audio/x-eac3"))    return AV_CODEC_ID_EAC3;
+    if (g_str_equal(name, "audio/x-dts"))     return AV_CODEC_ID_DTS;
+    if (g_str_equal(name, "audio/x-true-hd")) return AV_CODEC_ID_TRUEHD;
     if (g_str_equal(name, "audio/mpeg")) {
         gint mv = 0;
         gst_structure_get_int(s, "mpegversion", &mv);
@@ -131,6 +133,9 @@ gst_dream_audio_sink_start(GstBaseSink *bsink)
 
     self->alsa = dream_alsa_new(self->device);
     if (!self->alsa) return FALSE;
+
+    /* Apply pre-start volume — PROP_VOLUME setter no-ops when alsa is NULL. */
+    dream_alsa_set_volume(self->alsa, (int)(self->volume * 100.0 + 0.5));
 
     self->avsync = dream_avsync_new((DreamAvsyncMode)self->tsync_mode);
 
