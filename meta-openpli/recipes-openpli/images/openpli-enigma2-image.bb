@@ -59,6 +59,7 @@ IMAGE_INSTALL = " \
 	cifs-utils \
 	cronie \
 	chrony \
+	coreutils-stdbuf \
 	distro-feed-configs \
 	dropbear \
 	e2fsprogs-e2fsck \
