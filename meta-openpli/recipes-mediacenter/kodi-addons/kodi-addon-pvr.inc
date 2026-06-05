@@ -11,7 +11,6 @@ DEPENDS += " \
             jsonrpc \
             boost \
             virtual/kodi \
-            coreutils-native \
           "
 
 PACKAGE_ARCH = "${MACHINE}"
@@ -42,13 +41,6 @@ EXTRA_OECMAKE = " \
     -DPACKAGE_ZIP=1 \
     -DXLOCALE_NOT_USED=1 \
 "
-
-python () {
-    depends = d.getVar('DEPENDS') or ''
-    depends = depends.replace('coreutils-nativenlohmann-json', 'coreutils-native nlohmann-json')
-    depends = depends.replace('coreutils-nativepugixml', 'coreutils-native pugixml')
-    d.setVar('DEPENDS', depends)
-}
 
 do_compile:prepend() {
 	sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' \

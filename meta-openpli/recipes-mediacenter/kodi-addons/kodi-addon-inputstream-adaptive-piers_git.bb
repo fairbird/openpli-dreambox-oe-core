@@ -22,10 +22,6 @@ SRC_URI = "git://github.com/xbmc/inputstream.adaptive;protocol=https;branch=${KO
 
 EXTRA_OECMAKE += "-DENABLE_INTERNAL_BENTO4=ON"
 
-do_configure:prepend() {
-    sed -i '/#include <vector>/a #include <cstdint>\n#include <limits>' ${S}/src/common/AdaptiveUtils.h
-}
-
 # Allow downloads during internals build
 do_compile[network] = "1"
 
