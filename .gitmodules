@@ -1,12 +1,12 @@
 [submodule "bitbake"]
 	path = bitbake
-	url = git://git.openembedded.org/bitbake
+	url = https://git.openembedded.org/bitbake
 [submodule "meta-openembedded"]
 	path = meta-openembedded
-	url = git://git.openembedded.org/meta-openembedded
+	url = https://git.openembedded.org/meta-openembedded
 [submodule "openembedded-core"]
 	path = openembedded-core
-	url = git://git.openembedded.org/openembedded-core
+	url = https://git.openembedded.org/openembedded-core
 [submodule "meta-qt5.15"]
 	path = meta-qt5.15
-	url = https://github.com/oe-mirrors/meta-qt5.15
+	url = https://github.com/oe-mirrors/meta-qt5.15.git
