@@ -235,6 +235,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-skins-glamouraurafhd \
 	enigma2-plugin-skins-madmax-impossible \
 	enigma2-plugin-skins-steampunk \
+	enigma2-plugin-skincomponents-weathercomponent \
 	enigma2-plugin-security-firewall \
 	enigma2-plugin-drivers-usbserial \
 	enigma2-plugin-extensions-arabicsavior \
