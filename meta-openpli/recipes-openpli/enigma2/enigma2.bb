@@ -299,8 +299,8 @@ python populate_packages:prepend() {
 
 RRECOMMENDS:${PN}:append:dm900 = " enigma2-plugin-systemplugins-fsblupdater"
 RRECOMMENDS:${PN}:append:dm920 = " enigma2-plugin-systemplugins-fsblupdater"
-RRECOMMENDS:${PN}:append:dreamone = " enigma2-plugin-systemplugins-amlfrq"
-RRECOMMENDS:${PN}:append:dreamtwo = " enigma2-plugin-systemplugins-amlfrq"
+RRECOMMENDS:${PN}:append:dreamone = " enigma2-plugin-systemplugins-amlfrq enigma2-plugin-systemplugins-bluetoothsetup"
+RRECOMMENDS:${PN}:append:dreamtwo = " enigma2-plugin-systemplugins-amlfrq enigma2-plugin-systemplugins-bluetoothsetup"
 
 # Fix QA build-deps errors for wrapper sub-packages
 # These are runtime-only dependencies, not needed at enigma2 build time
