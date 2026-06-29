@@ -4,7 +4,7 @@ PE = "1"
 
 inherit kernel machine_kernel_pr
 
-MACHINE_KERNEL_PR:append = ".2"
+MACHINE_KERNEL_PR = "r4"
 
 require linux-dreambox-4.9.inc
 
@@ -21,6 +21,7 @@ SRC_URI = "https://source.mynonpublic.com/dreambox/${BPN}-v${PV}.tar.xz \
            file://hide_sdcardfs_info.patch \
            file://use_address-of_operator_on_section_symbols.patch \
            file://fix-build-with-binutils-2.41.patch \
+           file://aml_tsync_chrdev_ioctl.patch \
 "
 
 SRC_URI[md5sum] = "2b77df9bf64f825925172790c54f8ead"
