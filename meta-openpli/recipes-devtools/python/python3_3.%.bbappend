@@ -6,9 +6,9 @@ SRC_URI += "file://use-legacy-path-for-pycs.patch \
 "
 
 
-PV = "3.14.5"
+PV = "3.14.6"
 
-SRC_URI[sha256sum] = "7e32597b99e5d9a39abed35de4693fa169df3e5850d4c334337ffd6a19a36db6"
+SRC_URI[sha256sum] = "143b1dddefaec3bd2e21e3b839b34a2b7fb9842272883c576420d605e9f30c63"
 
 PACKAGECONFIG = "readline gdbm ${@bb.utils.filter('DISTRO_FEATURES', 'lto', d)}"
 
