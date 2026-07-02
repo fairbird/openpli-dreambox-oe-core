@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/oe-alliance/XMLTV-Import.git;protocol=https;branch=m
 
 S = "${UNPACKDIR}/${BP}/src"
 
-RDEPENDS:${PN} = "python3-compression python3-shell python3-backports-lzma python3-pkgutil"
+RDEPENDS:${PN} = "python3-compression python3-shell python3-backports-lzma python3-pkgutil python3-treq"
 RRECOMMENDS:${PN} = "${PN}-sources"
 
 PACKAGES = "${PN}-src ${PN}-dbg ${PN}"
