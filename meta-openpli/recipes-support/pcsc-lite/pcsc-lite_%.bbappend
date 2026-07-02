@@ -17,10 +17,9 @@ EXTRA_OECONF = " \
     --enable-usbdropdir=${libdir}/pcsc/drivers \
 "
 
-do_install() {
-    oe_runmake DESTDIR=${D} install
-    install -d ${D}/${sysconfdir}/init.d
-    install -m 755 ${UNPACKDIR}/pcscd.init ${D}/${sysconfdir}/init.d/pcscd
+do_install:append() {
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 ${UNPACKDIR}/pcscd.init ${D}${sysconfdir}/init.d/pcscd
 }
 
 FILES:${PN} =+ "${sysconfdir}/*"
