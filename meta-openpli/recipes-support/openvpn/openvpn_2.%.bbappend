@@ -2,11 +2,11 @@
 INITSCRIPT_NAME = "openvpn"
 INITSCRIPT_PARAMS = "defaults"
 
-PV = "2.7.2"
+PV = "2.7.4"
 
 SRC_URI:remove = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz"
 SRC_URI:prepend = "https://github.com/OpenVPN/openvpn/releases/download/v${PV}/${BP}.tar.gz "
-SRC_URI[sha256sum] = "9c3e150a595fc9a375221f2fa9f10524a9c064536cf81c96e3ba66c735b86f26"
+SRC_URI[sha256sum] = "18db05f3d5eee3663db1914590044e5f96ff5cd47b6e7846c6a350806c23dbce"
 
 RDEPENDS:${PN} = "lzo lz4"
 
