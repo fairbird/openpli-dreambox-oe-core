@@ -2,10 +2,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_NO_LOCALE = "1"
 
-PV = "1.28.4"
- 
-SRC_URI[sha256sum] = "a898afd5766172b0049e6781558e0689098bf87b9d82b846c652e571c01d60d8"
-
 SRC_URI:append = " \
 		file://0002-subparse-set-need_segment-after-sink-pad-received-GS.patch \
 		file://0003-riff-media-added-fourcc-to-all-ffmpeg-mpeg4-video-caps.patch \
