@@ -22,7 +22,7 @@ index bef326f..a8bf074 100644
 @@ -1031,36 +1031,26 @@ if callable(loadLogo):
  		<eLabel position="515,460" size="889,2" zPosition="-5" backgroundColor="dark_grey" />
  		<widget source="streams" render="Listbox" scrollbarMode="showNever" enableWrapAround="1" scrollbarWidth="3" scrollbarSliderBorderWidth="0" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#080808" position="515,495" size="889,320" zPosition="3" transparent="1" itemCornerRadius="6">
- 		<convert type="TemplatedMultiContent">
+ 			<convert type="TemplatedMultiContent">
 -						{"templates":
 -							{"default": ( 45, [ 
 -								MultiContentEntryText(pos = (25, 2), size = (60, 40),font = 0, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER,text = 2), # key,
@@ -75,7 +75,7 @@ index bef326f..a8bf074 100644
 +			</convert>
  		</widget>
  		<widget addon="Pager" connection="streams" position="545,835" size="860,25" transparent="1" backgroundColor="background" />
- 		<eLabel backgroundColor="red" position="535,239" size="4,35" zPosition="2" />
+ 		<widget source="key_red" render="FixedLabel" backgroundColor="red" position="535,239" size="4,35" alphatest="on" zPosition="2">
 @@ -1385,10 +1375,7 @@ try:
  except:
  	loadLogo = None
