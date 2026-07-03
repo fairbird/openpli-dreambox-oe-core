@@ -13,6 +13,8 @@ SRC_URI = " git://github.com/ddugovic/uShare.git;branch=master;protocol=https \
 
 inherit autotools-brokensep pkgconfig update-rc.d
 
+CLEANBROKEN = "1"
+
 # the configure script is hand-crafted, it rejects some of the usual
 # configure arguments
 do_configure () {
