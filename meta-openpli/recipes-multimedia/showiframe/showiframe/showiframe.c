@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <poll.h>
 #ifdef HAVE_AMLOGIC
 # include <codec.h>
 #else
@@ -32,38 +33,37 @@ struct video_frame {
 static codec_para_t v_codec_para;
 static codec_para_t *pcodec, *vpcodec;
 
-int blackout_policy(int cmd)
+int blackout_policy(char *path,int cmd)
 {
-	char bcmd[16];
-	char *path = "/sys/class/video/blackout_policy";
-	int fd = open(path, O_CREAT|O_RDWR | O_TRUNC, 0644);
+    int fd;
+    char  bcmd[16];
+    fd = open(path, O_CREAT|O_RDWR | O_TRUNC, 0644);
 
-	if (fd >= 0) {
-		sprintf(bcmd, "%d", cmd);
-		write(fd, bcmd, strlen(bcmd));
-		close(fd);
-		return 0;
-	}
-	return -1;
+    if(fd>=0) {
+        sprintf(bcmd,"%d",cmd);
+        write(fd,bcmd,strlen(bcmd));
+        close(fd);
+        return 0;
+    }
+
+    return -1;
 }
-
 int set_tsync_enable(int enable)
 {
-	char bcmd[16];
-	char *path = "/sys/class/tsync/enable";
-	int fd = open(path, O_CREAT | O_RDWR | O_TRUNC, 0644);
-
-	if (fd >= 0) {
-		sprintf(bcmd, "%d", enable);
-		write(fd, bcmd, strlen(bcmd));
-		close(fd);
-		return 0;
-	}
-	return -1;
+    int fd;
+    char *path = "/sys/class/tsync/enable";
+    char  bcmd[16];
+    fd = open(path, O_CREAT | O_RDWR | O_TRUNC, 0644);
+    if (fd >= 0) {
+        sprintf(bcmd, "%d", enable);
+        write(fd, bcmd, strlen(bcmd));
+        close(fd);
+        return 0;
+    }
+    
+    return -1;
 }
-
 #else
-
 void c(int a)
 {
 	if (a < 0)
@@ -74,10 +74,26 @@ void c(int a)
 }
 #endif
 
+static int wait_for_writable(int fd)
+{
+	struct pollfd pfd;
+	int ret;
+
+	pfd.fd = fd;
+	pfd.events = POLLOUT;
+	pfd.revents = 0;
+	do {
+		ret = poll(&pfd, 1, 3000);
+	} while (ret < 0 && errno == EINTR);
+	if (ret == 0)
+		errno = ETIMEDOUT;
+	return ret > 0 ? 0 : -1;
+}
+
 ssize_t write_all(int fd, const void *buf, size_t count)
 {
-	int retval;
-	char *ptr = (char*)buf;
+	ssize_t retval;
+	const char *ptr = (const char*)buf;
 	size_t handledcount = 0;
 	while (handledcount < count)
 	{
@@ -86,12 +102,19 @@ ssize_t write_all(int fd, const void *buf, size_t count)
 #else
 		retval = write(fd, &ptr[handledcount], count - handledcount);
 #endif
-		if (retval == 0)
-			return -1;
+
+		if (retval == 0) return -1;
 		if (retval < 0)
 		{
-			if (errno == EINTR)
+			if (errno == EINTR) continue;
+#ifndef HAVE_AMLOGIC
+			if (errno == EAGAIN || errno == EWOULDBLOCK)
+			{
+				if (wait_for_writable(fd) < 0)
+					return -1;
 				continue;
+			}
+#endif
 			return retval;
 		}
 		handledcount += retval;
@@ -99,26 +122,54 @@ ssize_t write_all(int fd, const void *buf, size_t count)
 	return handledcount;
 }
 
+static int checked_write_all(int fd, const void *buf, size_t count, const char *what)
+{
+	ssize_t written = write_all(fd, buf, count);
+	if (written != (ssize_t)count)
+	{
+		if (written < 0)
+			perror(what);
+		else
+			fprintf(stderr, "%s: short write %zd/%zu\n", what, written, count);
+		return -1;
+	}
+	return 0;
+}
+
+static int read_all_file(int fd, void *buf, size_t count)
+{
+	char *ptr = (char*)buf;
+	size_t handledcount = 0;
+	while (handledcount < count)
+	{
+		ssize_t retval = read(fd, ptr + handledcount, count - handledcount);
+		if (retval == 0)
+			break;
+		if (retval < 0)
+		{
+			if (errno == EINTR)
+				continue;
+			return -1;
+		}
+		handledcount += retval;
+	}
+	return handledcount == count ? 0 : -1;
+}
+
 int main(int argc, char **argv)
 {
-	int fd = -1;
+#ifdef HAVE_AMLOGIC
+	int fd = 0;
+	int ret;
+#endif
 	struct stat s;
 	if (argc != 2)
 	{
 		printf("usage: %s <iframe>\n", *argv);
 		return 3;
 	}
-
-	int f = open(argv[1], O_RDONLY);
-	if (f < 0)
-	{
-		perror(argv[1]);
-		return 4;
-	}
-	fstat(f, &s);
-
 #ifdef HAVE_AMLOGIC
-	blackout_policy(0); //keep video frame on TV even when app exit, dont black it
+	blackout_policy("/sys/class/video/blackout_policy", 0); //keep video frame on TV even when app exit, dont black it
 
 	vpcodec = &v_codec_para;
 	memset(vpcodec, 0, sizeof(codec_para_t ));
@@ -127,91 +178,164 @@ int main(int argc, char **argv)
 	vpcodec->has_audio = 0;
 	vpcodec->noblock = 0;
 
-	int ret = codec_init(vpcodec);
-	if (ret != CODEC_ERROR_NONE)
+	ret = codec_init(vpcodec);
+	if(ret != CODEC_ERROR_NONE)
 		return 5;
 
 	set_tsync_enable(0);
 	pcodec = vpcodec;
-#else
-	fd = open("/dev/dvb/adapter0/video0", O_WRONLY);
 
-	if (fd <= 0)
+	int f = open(argv[1], O_RDONLY);
+	if (f < 0)
+	{
+		perror(argv[1]);
+		codec_close(vpcodec);
+		return 4;
+	}
+	fstat(f, &s);
+
+	if (fork() != 0)
+		return 0;
+	else
+	{
+		size_t pos=0;
+		int seq_end_avail = 0;
+		struct buf_status vbuf;
+#else
+	int f = open(argv[1], O_RDONLY);
+	if (f < 0)
+	{
+		perror(argv[1]);
+		return 4;
+	}
+	fstat(f, &s);
+
+	int fd = open("/dev/dvb/adapter0/video0", O_WRONLY|O_NONBLOCK);
+
+	if (fd < 0)
 	{
 		perror("/dev/dvb/adapter0/video0");
 		return 2;
 	}
-#endif
-
-	if (fork() != 0)
+	else if (fork() != 0)
 		return 0;
-
-	size_t pos = 0;
-	int seq_end_avail = 0;
-	/* 0x0 0x0 0x1 0xffffffe0 0x10 0x8 0xffffff80 0xffffff80 0x5 0x21 0x0 0x1 0x0 0x1 */
-
-	/* unsigned char pes_header[] = { 0x00, 0x00, 0x01, 0xE0, 0x00, 0x00, 0x80, 0x00, 0x00 }; */
-
-	unsigned char pes_header[] = {0x0, 0x0, 0x1, 0xe0, 0x00, 0x00, 0x80, 0x80, 0x5, 0x21, 0x0, 0x1, 0x0, 0x1};
-
-	unsigned char seq_end[] = { 0x00, 0x00, 0x01, 0xB7 };
-	unsigned char iframe[s.st_size];
-	unsigned char stuffing[8192];
-	memset(stuffing, 0, 8192);
-	read(f, iframe, s.st_size);
-
-#ifndef HAVE_AMLOGIC
-	if(iframe[0] == 0x00 && iframe[1] == 0x00 && iframe[2] == 0x00 && iframe[3] == 0x01 && (iframe[4] & 0x0f) == 0x07)
-		ioctl(fd, VIDEO_SET_STREAMTYPE, 1); // set to mpeg4
 	else
-		ioctl(fd, VIDEO_SET_STREAMTYPE, 0); // set to mpeg2
-	c(ioctl(fd, VIDEO_SELECT_SOURCE, VIDEO_SOURCE_MEMORY));
-	c(ioctl(fd, VIDEO_PLAY));
-	c(ioctl(fd, VIDEO_CONTINUE));
-	c(ioctl(fd, VIDEO_CLEAR_BUFFER));
+	{
+		size_t pos=0;
+		int seq_end_avail = 0;
 #endif
-	while(pos <= (s.st_size-4) && !(seq_end_avail = (!iframe[pos] && !iframe[pos+1] && iframe[pos+2] == 1 && iframe[pos+3] == 0xB7)))
-		++pos;
+		int count = 7;
+		/* 0x0 0x0 0x1 0xffffffe0 0x10 0x8 0xffffff80 0xffffff80 0x5 0x21 0x0 0x1 0x0 0x1 */
+
+		/* unsigned char pes_header[] = { 0x00, 0x00, 0x01, 0xE0, 0x00, 0x00, 0x80, 0x00, 0x00 }; */
+
+		unsigned char pes_header[] = {0x0, 0x0, 0x1, 0xe0, 0x00, 0x00, 0x80, 0x80, 0x5, 0x21, 0x0, 0x1, 0x0, 0x1};
+
+		unsigned char seq_end[] = { 0x00, 0x00, 0x01, 0xB7 };
+		unsigned char *iframe = NULL;
+		unsigned char *stuffing = NULL;
+
+		iframe = malloc(s.st_size);
+		stuffing = calloc(1, 8192);
+		if (!iframe || !stuffing)
+		{
+			perror("malloc");
+			free(iframe);
+			free(stuffing);
+#ifdef HAVE_AMLOGIC
+			codec_close(vpcodec);
+#endif
+			return 5;
+		}
+		if (read_all_file(f, iframe, s.st_size) < 0)
+		{
+			perror(argv[1]);
+			free(iframe);
+			free(stuffing);
+#ifdef HAVE_AMLOGIC
+			codec_close(vpcodec);
+#endif
+			return 4;
+		}
+#ifndef HAVE_AMLOGIC
+		if(iframe[0] == 0x00 && iframe[1] == 0x00 && iframe[2] == 0x00 && iframe[3] == 0x01 && (iframe[4] & 0x0f) == 0x07)
+			ioctl(fd, VIDEO_SET_STREAMTYPE, 1); // set to mpeg4
+		else
+			ioctl(fd, VIDEO_SET_STREAMTYPE, 0); // set to mpeg2
+		c(ioctl(fd, VIDEO_SELECT_SOURCE, VIDEO_SOURCE_MEMORY));
+		c(ioctl(fd, VIDEO_PLAY));
+		c(ioctl(fd, VIDEO_CONTINUE));
+		c(ioctl(fd, VIDEO_CLEAR_BUFFER));
+#endif
+		while(pos <= (s.st_size-4) && !(seq_end_avail = (!iframe[pos] && !iframe[pos+1] && iframe[pos+2] == 1 && iframe[pos+3] == 0xB7)))
+			++pos;
 #ifndef __aarch64__
-	if ((iframe[3] >> 4) != 0xE) // no pes header
-		write_all(fd, pes_header, sizeof(pes_header));
-	else
-		iframe[4] = iframe[5] = 0x00;
-	write_all(fd, iframe, s.st_size);
-	if (!seq_end_avail)
-		write_all(fd, seq_end, sizeof(seq_end));
-	write_all(fd, stuffing, 8192);
+		while(count--){
+			if ((iframe[3] >> 4) != 0xE) // no pes header
+			{
+				if (checked_write_all(fd, pes_header, sizeof(pes_header), "write pes header") < 0)
+					goto error;
+				usleep(8000);
+			}
+			else {
+				iframe[4] = iframe[5] = 0x00;
+			}
+			if (checked_write_all(fd, iframe, s.st_size, "write iframe") < 0)
+				goto error;
+			usleep(8000);
+		}
+		if (!seq_end_avail)
+			if (checked_write_all(fd, seq_end, sizeof(seq_end), "write sequence end") < 0)
+				goto error;
+		if (checked_write_all(fd, stuffing, 8192, "write stuffing") < 0)
+			goto error;
 #else
 		{
 			struct video_frame fr;
 			int pos = 0;
 			memset(&fr, 0, sizeof(fr));
-			fr.bytes[pos] = sizeof(iframe);
+			fr.bytes[pos] = s.st_size;
 			fr.data[pos++] = iframe;
 			fr.pts = 0;
 			if (!seq_end_avail) {
 				fr.bytes[pos] = sizeof(seq_end);
 				fr.data[pos++] = seq_end;
 			}
-			fr.bytes[pos] = sizeof(stuffing);
+			fr.bytes[pos] = 8192;
 			fr.data[pos++] = stuffing;
 			c(ioctl(fd, VIDEO_SET_FRAME, &fr));
 		}
 #endif
 #ifndef HAVE_AMLOGIC
-	usleep(150000);
-	c(ioctl(fd, VIDEO_STOP, 0));
-	c(ioctl(fd, VIDEO_SELECT_SOURCE, VIDEO_SOURCE_DEMUX));
+		usleep(150000);
+		c(ioctl(fd, VIDEO_STOP, 0));
+		c(ioctl(fd, VIDEO_SELECT_SOURCE, VIDEO_SOURCE_DEMUX));
+		free(iframe);
+		free(stuffing);
+		close(f);
+		close(fd);
+		return 0;
+error:
+		ioctl(fd, VIDEO_STOP, 0);
+		ioctl(fd, VIDEO_SELECT_SOURCE, VIDEO_SOURCE_DEMUX);
+		free(iframe);
+		free(stuffing);
+		close(f);
+		close(fd);
+		return 6;
+	}
 #else
-	struct buf_status vbuf;
-	do {
-		ret = codec_get_vbuf_state(pcodec, &vbuf);
-		if (ret != 0)
-			break;
-	} while (vbuf.data_len > 0x100);
-	usleep(200000);
+		do {
+			ret = codec_get_vbuf_state(pcodec, &vbuf);
+			if (ret != 0) 
+				goto error;
+		} while (vbuf.data_len > 0x100);   
+		sleep(2);
+		free(iframe);
+		free(stuffing);
+	}
+error:
 	codec_close(vpcodec);
-
 #endif
 	return 0;
 }
