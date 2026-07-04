@@ -17,7 +17,7 @@ Upstream-Status: Pending
        result = __ Word32CountLeadingZeros(high);
      }
  
--    return __ Tuple<Word32, Word32>(result, __ Word32Constant(0));
+-    return __ template Tuple<Word32, Word32>(result, __ Word32Constant(0));
 +    V<Word32> low_part = result;
 +    return __ Tuple(low_part, __ Word32Constant(0));
    }
@@ -27,7 +27,7 @@ Upstream-Status: Pending
        result = __ Word32CountTrailingZeros(low);
      }
  
--    return __ Tuple<Word32, Word32>(result, __ Word32Constant(0));
+-    return __ template Tuple<Word32, Word32>(result, __ Word32Constant(0));
 +    V<Word32> low_part = result;
 +    return __ Tuple(low_part, __ Word32Constant(0));
    }
