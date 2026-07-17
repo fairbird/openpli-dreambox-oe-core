@@ -3,3 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI:remove = "file://ffmpeg-6.0.patch"
 
 CFLAGS += "-Wno-error=incompatible-pointer-types"
+
+PV = "1.28.5"
+
+SRC_URI[sha256sum] = "452854656056f0b16511a1d9ad4f2679ff5e5a87c89f90cf7ee5dec005ddb1e4"
