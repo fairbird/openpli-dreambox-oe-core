@@ -2,16 +2,13 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 DEPENDS:append = " cxxopts libzip libzippp"
 
-SRC_URI:append = " \
-           file://config.xml \
-           file://init \
-"
-
 PV = "3.2.1"
 PKGV = "3.2.1+git${GITPKGV}"
 
-SRC_URI:remove = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master;tag=v${PV}"
-SRC_URI:prepend = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master "
+SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
+           file://config.xml \
+           file://init \
+"
 
 SRCREV = "d63e666a0874ff953751f882bd10771717420408"
 
