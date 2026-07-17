@@ -1,6 +1,6 @@
 DESCRIPTION = "RapidFuzz provides libraries for fuzzy string matching in various programming languages."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${S}/README.md;md5=1ebcd8a2f59611f123ce43d3356e8e19"
+LIC_FILES_CHKSUM = "file://${S}/README.md;md5=3afd99a254ea5aba925a0a915e2672d4"
 
 DEPENDS += "python3-cython-native"
 
