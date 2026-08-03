@@ -38,7 +38,7 @@ SRCREV_plugins = "${AUTOREV}"
 
 SRCREV_FORMAT = "streamlink"
 
-SRC_URI = "git://github.com/streamlink/streamlink.git;protocol=https;name=streamlink;branch=master;name=streamlink \
+SRC_URI = "git://github.com/streamlink/streamlink;protocol=https;name=streamlink;branch=master \
            git://github.com/oe-mirrors/streamlink-plugins;protocol=https;name=plugins;destsuffix=additional-plugins;branch=master"
 
 do_unpack:append() {
