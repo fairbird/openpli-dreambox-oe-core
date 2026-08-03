@@ -1,12 +1,10 @@
-DEPENDS:remove = "gnutls"
-DEPENDS += "openssl"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PROVIDES =+ " librtmp librtmp1"
+PROVIDES += "librtmp librtmp1"
+RPROVIDES:${PN} += "librtmp librtmp1"
 
-do_configure() {
-}
- 
-EXTRA_OEMAKE = " \
-	CC='${CC}' LD='${LD} ${STAGING_LIBDIR}' XCFLAGS='${CFLAGS}' XLDFLAGS='${LDFLAGS}' \
-	SYS=posix INC=-I${STAGING_INCDIR} DESTDIR=${D} \
-	prefix=${prefix} libdir=${libdir} incdir=${includedir}/librtmp bindir=${bindir} mandir=${mandir}"
+SRC_URI:append = " \
+	file://0001-KSV-patch-2015-12-15.patch \
+	file://0002-fix-build-openssl102q.patch \
+	file://0003-add-movecast-thx-testi.patch \
+	"
