@@ -3,7 +3,7 @@ DESCRIPTION = "liquid-dsp is a free and open-source digital signal processing (D
 MAINTAINER = "Joseph D. Gaeddert <joseph@liquidsdr.org>"
 HOMEPAGE = "http://liquidsdr.org"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=860e4083ceb93ce0939b1a58fcaacb53"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d3387e10507bb9744bf7f7d15a3d3812"
 
 inherit gitpkgv
 
