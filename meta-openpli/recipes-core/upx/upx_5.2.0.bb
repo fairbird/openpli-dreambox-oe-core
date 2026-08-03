@@ -4,10 +4,9 @@ HOMEPAGE = "https://upx.github.io"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=353753597aa110e0ded3508408c6374a"
 
-SRC_URI = "https://github.com/upx/upx/releases/download/v${PV}/upx-${PV}-src.tar.xz"
-SRC_URI[sha256sum] = "8eb914115b306fd9fd2110bd3d27ddb8ae7c5a03bb965f7d10f046a3a4ff9dfe"
+SRCREV = "034b6d0d81c53998c07ad6f34bfead6f5c5445ce"
 
-S = "${UNPACKDIR}/upx-${PV}-src"
+SRC_URI = "gitsm://github.com/upx/upx.git;protocol=https;branch=master"
 
 do_install(){
     install -d ${D}${bindir}
