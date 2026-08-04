@@ -1,7 +1,7 @@
 DESCRIPTION = "Pre-compiled for ${MACHINE}"
 SECTION = "base"
 PRIORITY = "required"
-LICENSE = "CLOSED"
+require conf/license/license-close.inc
 
 COMPATIBLE_MACHINE = "^(dreamone|dreamtwo)$"
 

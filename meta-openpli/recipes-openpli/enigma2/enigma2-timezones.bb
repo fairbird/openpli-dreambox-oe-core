@@ -1,5 +1,4 @@
 SUMMARY = "timezone.xml for enigma2"
-LICENSE = "CLOSED"
 require conf/license/license-close.inc
 
 inherit gitpkgv allarch

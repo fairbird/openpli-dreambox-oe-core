@@ -1,6 +1,6 @@
 DESCRIPTION = "OsCam iCam whitelist"
 MAINTAINER = "AbuBaniaz"
-LICENSE = "CLOSED"
+require conf/license/license-close.inc
 
 PV = "2.0+git${SRCPV}"
 PKGV = "2.0+git${GITPKGV}"
