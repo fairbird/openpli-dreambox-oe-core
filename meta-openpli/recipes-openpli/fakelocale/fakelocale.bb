@@ -2,6 +2,7 @@ SUMMARY = "LC_TIME locale support"
 SECTION = "base"
 PRIORITY = "required"
 MAINTAINER = "OpenPli team"
+require conf/license/license-close.inc
 
 SRC_URI = "file://lctimelocales.tar.gz file://locale.alias file://SYS_LC_MESSAGES file://locale.sh"
 
