@@ -2,7 +2,7 @@ SUMMARY = "A components library for UPnP."
 HOMEPAGE = "http://packages.python.org/cocy"
 AUTHOR = "Michael N. Lipp <mnl@mnl.de>"
 SECTION = "devel/python"
-LICENSE = "GPL-1.0"
+LICENSE = "GPL-1.0-only"
 LIC_FILES_CHKSUM = "file://setup.py;md5=552ebae154a08bed6e46b2207714d6a6"
 
 RDEPENDS:${PN} = "python3-circuits python3-circuits-bricks python3-rbtranslations python3-tenjin"
