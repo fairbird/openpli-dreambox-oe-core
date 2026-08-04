@@ -3,7 +3,7 @@ DESCRIPTION = "SDR for Enigma2 using rtl_fm and dab-cmdline command line tools"
 SECTION = "multimedia"
 MAINTAINER = "SatDreamGR"
 HOMEPAGE = "http://satdreamgr.com"
-LICENSE = "PD"
+LICENSE = "LicenseRef-PD"
 LIC_FILES_CHKSUM = "file://setup.py;beginline=4;endline=4;md5=a340145d59ca0aca0ff7ec9adccdb556"
 SRC_URI = "git://github.com/satdreamgr/SDGRadio.git;protocol=https;branch=master"
 
