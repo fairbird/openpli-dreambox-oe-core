@@ -8,8 +8,6 @@
 #   CAMSTOP: Command to stop the softcam, default to killall ${CAMNAME}
 # Instead of CAMSTART/CAMSTOP, you can create an init.d script called init.${CAMNAME}
 
-LICENSE = "CLOSED"
-
 FILES:${PN} = "/usr/bin /etc"
 
 # no docs, locales etc.

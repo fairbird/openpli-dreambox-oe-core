@@ -1,6 +1,5 @@
 SUMMARY = "Preloadable library to improve large file operations"
 SECTION = "base"
-LICENSE = "CLOSED"
 DEPENDS = "libdlsym"
 
 SRCREV = "6e7b3136e17c28697b3dcea597a334022a931b27"
