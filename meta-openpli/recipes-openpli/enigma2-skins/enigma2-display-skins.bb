@@ -3,7 +3,7 @@ MAINTAINER = "oe-aliance"
 PACKAGES = "${PN}-meta ${PN}"
 PACKAGES_DYNAMIC = "enigma2-plugin-display-*"
 
-LICENSE = "Proprietary"
+LICENSE = "LicenseRef-Proprietary"
 LIC_FILES_CHKSUM = "file://README.md;startline=1;endline=6;md5=c3aa97ff8b8db3a19449f03d81db3654"
 
 inherit gitpkgv

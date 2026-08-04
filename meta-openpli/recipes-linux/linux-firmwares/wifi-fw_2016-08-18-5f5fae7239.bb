@@ -1,4 +1,4 @@
-LICENSE = "Proprietary"
+LICENSE = "LicenseRef-Proprietary"
 LIC_FILES_CHKSUM = "file://qcom9377/wpa_supplicant_8_lib/MODULE_LICENSE_BSD;md5=d41d8cd98f00b204e9800998ecf8427e \
                     file://ath6kl/wpa_supplicant_8_lib/MODULE_LICENSE_BSD;md5=d41d8cd98f00b204e9800998ecf8427e \
                     file://ath6kl/firmware/LICENSE.TXT;md5=bafc4300ca5bbd85b704c45969d15e03 \

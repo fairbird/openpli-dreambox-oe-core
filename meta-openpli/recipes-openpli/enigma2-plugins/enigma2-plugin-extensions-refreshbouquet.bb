@@ -1,6 +1,6 @@
 DESCRIPTION = "Actualize services in bouquets."
 MAINTAINER = "ims(ims21)"
-LICENSE = "Proprietary"
+LICENSE = "LicenseRef-Proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9432c1f3d564948269193fd19a0ad0fd"
 
 inherit gitpkgv

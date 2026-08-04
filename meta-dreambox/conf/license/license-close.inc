@@ -1,2 +1,2 @@
-LICENSE = "Proprietary"
+LICENSE = "LicenseRef-Proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE-CLOSE;md5=6034872de12736a4ad87fe51f402366c"
