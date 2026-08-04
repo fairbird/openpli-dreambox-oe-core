@@ -2,6 +2,7 @@ DESCRIPTION = "qcacld-2.0 module.bbclass mechanism."
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://Android.mk;md5=235cc8d87e0fb1c956be4af0d07074fb"
 CAF_MIRROR = "https://source.codeaurora.org/external/wlan"
+require conf/license/license-close.inc
 
 inherit module
 
