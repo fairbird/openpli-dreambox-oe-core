@@ -11,5 +11,5 @@ inherit gitpkgv
 PV = "0.21+git"
 PKGV = "0.21+git${GITPKGV}"
 
-SRC_URI = "git://github.com/windytan/redsea.git;protocol=http;branch=master;protocol=https"
+SRC_URI = "git://github.com/windytan/redsea.git;protocol=https;branch=master;protocol=https"
 inherit pkgconfig meson

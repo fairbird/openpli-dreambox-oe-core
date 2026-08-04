@@ -5,7 +5,7 @@ SECTION = "multimedia"
 LICENSE = "GPL-2.0-only"
 require conf/license/license-gplv2.inc
 
-SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;protocol=http;branch=python3;protocol=https"
+SRC_URI = "git://github.com/oe-mirrors/e2iplayer.git;protocol=https;branch=python3"
 inherit gittag
 PV = "git"
 PKGV = "${GITPKGVTAG}"
