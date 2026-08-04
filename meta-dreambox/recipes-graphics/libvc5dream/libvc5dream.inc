@@ -1,5 +1,4 @@
 SUMMARY = "Dreambox EGL and GLES2 libraries"
-LICENSE = "CLOSED"
 DEPENDS = "${LIBEGLDEP}"
 PROVIDES = "virtual/egl virtual/libgles2"
 RPROVIDES:${PN} = "virtual-egl virtual-libgles2"
