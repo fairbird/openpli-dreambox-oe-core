@@ -40,9 +40,6 @@ UPX_VER = "${@d.getVar('PREFERRED_VERSION_upx').replace('%', '')}"
 do_install[nostamp] = "1"
 
 do_install() {
-    # Kernel version
-    KERNEL_VERSION="${@get_kernelversion_headers('${STAGING_KERNEL_DIR}') or oe.utils.read_file('${PKGDATA_DIR}/kernel-depmod/kernel-abiversion')}"
-
     # OE version info
     OE_NAME=master
     OE_VERSION=6.0
