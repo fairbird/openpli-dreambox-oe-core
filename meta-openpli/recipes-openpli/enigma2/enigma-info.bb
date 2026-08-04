@@ -37,8 +37,6 @@ INFOFILE = "${libdir}/enigma.info"
 RUST_VER = "${@d.getVar('RUSTVERSION').replace('%', '')}"
 UPX_VER = "${@d.getVar('PREFERRED_VERSION_upx').replace('%', '')}"
 
-inherit linux-kernel-base
-
 do_install[nostamp] = "1"
 
 do_install() {
