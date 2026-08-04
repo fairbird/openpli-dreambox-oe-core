@@ -4,9 +4,8 @@ HOMEPAGE = "https://github.com/oe-mirrors/mediaplayer2.git"
 AUTHOR = "Maroš Ondrášek <mx3ldev@gmail.com> and OE-A"
 LICENSE = "LicenseRef-Proprietary"
 require conf/license/license-gplv2.inc
-require conf/python/python3-compileall.inc
 
-inherit gitpkgv setuptools3-openplugins gettext
+inherit gitpkgv setuptools3-openplugins gettext python3-compileall
 
 RDEPENDS:${PN} = "python3-xmlrpc python3-compression python3-codecs python3-difflib unrar enigma2-plugin-extensions-subssupport"
 
