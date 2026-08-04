@@ -2,6 +2,7 @@ SUMMARY = "The build backend part of an 'An extremely fast Python package and pr
 HOMEPAGE = "https://pypi.org/project/uv-build/"
 
 LICENSE = "Apache-2.0 AND BSD-2-Clause AND MIT"
+
 LIC_FILES_CHKSUM = "file://LICENSE-APACHE;md5=86d3f3a95c324c9479bd8986968f4327 \
                     file://LICENSE-MIT;md5=45674e482567aa99fe883d3270b11184 \
                     file://crates/uv-build/LICENSE-APACHE;md5=86d3f3a95c324c9479bd8986968f4327 \
@@ -13,9 +14,11 @@ LIC_FILES_CHKSUM = "file://LICENSE-APACHE;md5=86d3f3a95c324c9479bd8986968f4327 \
 
 SRC_URI[sha256sum] = "3ca25d4fca52e0598084fab352a4cafe737043f5682e3cb654164f033ba6d736"
 
+DEPENDS += "pkgconf-native zstd-native"
+
 require ${BPN}-crates.inc
 
-inherit pypi python_maturin cargo-update-recipe-crates
+inherit pypi python_maturin cargo-update-recipe-crates pkgconfig
 
 PYPI_PACKAGE = "uv_build"
 
