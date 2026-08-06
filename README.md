@@ -22,7 +22,7 @@ https://github.com/oe-alliance/oe-alliance-core
 -Glibc 2.44<br>
 -ffmpeg 8.1.1<br>
 -GStreamer 1.28.5<br>
--Python 3.14.6<br>
+-Python 3.14.7<br>
 -OpenSSL 4.0.1<br>
 -Busybox 1.38.0<br>
 and more.<br>
