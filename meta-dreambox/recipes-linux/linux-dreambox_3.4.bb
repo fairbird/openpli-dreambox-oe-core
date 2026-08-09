@@ -49,6 +49,7 @@ do_configure:prepend() {
     rm -rf ${STAGING_KERNEL_DIR}/.config
     rm -rf ${STAGING_KERNEL_DIR}/.config.old
     sed -e "/^SUBLEVEL = /d" -i ${S}/Makefile
+    sed -i 's/\bconstexpr\b/is_constexpr/g' ${S}/scripts/unifdef.c
 }
 
 require linux-dreambox-3.4.inc

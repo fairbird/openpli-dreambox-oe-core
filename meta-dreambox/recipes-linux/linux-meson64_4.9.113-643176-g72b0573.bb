@@ -68,11 +68,13 @@ KERNEL_FLASH_ARGS = "-c '${CMDLINE}'"
 
 KERNEL_EXTRA_ARGS = "EXTRA_CFLAGS=-Wno-attribute-alias"
 
+do_configure:prepend() {
+	sed -i 's/\bconstexpr\b/is_constexpr/g' ${S}/scripts/unifdef.c
+}
+
 do_install:prepend() {
 	mv ${B}/arch/arm64/boot/dts/amlogic/${KERNEL_DEVICETREE} ${B}/arch/arm64/boot/
 }
 
 do_rm_work() {
 }
-
-

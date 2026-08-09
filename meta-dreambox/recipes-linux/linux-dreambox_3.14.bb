@@ -51,6 +51,10 @@ CMDLINE = "bmem=640M@384M bmem=384M@2048M console=ttyS0,1000000 root=/dev/mmcblk
 
 DEFCONFIG = "${MACHINE}"
 
+do_configure:prepend() {
+	sed -i 's/\bconstexpr\b/is_constexpr/g' ${S}/scripts/unifdef.c
+}
+
 kernel_do_configure:prepend() {
 	install -d ${B}/usr
 	install -m 0644 ${UNPACKDIR}/chkroot-multiboot.cpio.xz ${B}/

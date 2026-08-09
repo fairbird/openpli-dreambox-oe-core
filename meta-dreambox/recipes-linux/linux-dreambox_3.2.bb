@@ -144,6 +144,7 @@ FILES:${KERNEL_PACKAGE_NAME}-vmlinux = "/boot/vmlinux-${KERNEL_VERSION}*"
 
 do_configure:prepend() {
         sed -e "/^SUBLEVEL = /d" -i ${S}/Makefile
+        sed -i 's/\bconstexpr\b/is_constexpr/g' ${S}/scripts/unifdef.c
 }
 
 pkg_preinst:kernel-image() {
