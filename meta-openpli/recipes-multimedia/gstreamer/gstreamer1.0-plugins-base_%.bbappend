@@ -13,11 +13,13 @@ SRC_URI:append = " \
 		file://0009-glimagesink-Downrank-to-marginal.patch \
 "
 
+PACKAGECONFIG:append = " \
+    cdparanoia gio opus tremor \
+"
+
 LDFLAGS:append:mipsarch = " -latomic"
 
 CFLAGS:append = "${@' -mthumb' if d.getVar('TARGET_ARCH') == 'arm' else ''}"
-
-PACKAGECONFIG:append = " opus"
 
 PACKAGECONFIG[gio] = "-Dgio=enabled,-Dgio=disabled,glib-2.0"
 
@@ -26,3 +28,5 @@ do_install:append() {
         rm -f ${D}${includedir}/KHR/khrplatform.h
         rm -f ${D}${includedir}/GL/glext.h
 }
+
+INSANE_SKIP:libgstgl-1.0 += "file-rdeps"
