@@ -15,6 +15,7 @@ SRC_URI = "https://source.mynonpublic.com/dreambox/${PN}_${PV}_${PACKAGE_ARCH}.t
 S = "${UNPACKDIR}/${PN}_${PV}_${PACKAGE_ARCH}"
 
 INHIBIT_PACKAGE_STRIP = "1"
+INSANE_SKIP:${PN} += "ldflags"
 
 do_install() {
         install -d ${D}${bindir}
