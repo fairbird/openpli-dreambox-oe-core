@@ -32,7 +32,7 @@ OECMAKE_GENERATOR = "Unix Makefiles"
 EXTRA_OECMAKE = " \
     -DADDONS_TO_BUILD=pvr.${KODIADDONPLUGIN} \
     -DADDON_SRC_PREFIX=${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX} \
-    -DCMAKE_BUILD_TYPE=Debug -DVMTRACE=1 -DPARANOIA=1 \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DCMAKE_INSTALL_PREFIX=${datadir}/kodi/addons \
     -DKODI_INCLUDE_DIR=${STAGING_INCDIR}/kodi \
     -DCMAKE_MODULE_PATH='${STAGING_DIR_HOST}${libdir}/kodi;${STAGING_DIR_HOST}${datadir}/kodi/cmake' \
@@ -63,6 +63,7 @@ RDEPENDS:${PN} += "libkodiplatform"
 
 INSANE_SKIP:${PN} = "dev-so file-rdeps"
 FILES:${PN} += "${datadir}/kodi"
+FILES:${PN}-dbg += "${datadir}/kodi/addons/*/.debug/"
 
 do_qa_staging() {
 }
