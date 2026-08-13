@@ -303,7 +303,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-satipserver \
 	enigma2-plugin-systemplugins-serviceapp \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "kodi22", "kodi-addons-meta enigma2-plugin-extensions-stb-kodi-launcher", "", d)} \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "kodi22", "kodi-addons-meta enigma2-plugin-extensions-stbkodilauncher", "", d)} \
 	alsa-plugins \
 	enigma2-plugins \
 	meta-enigma2-dvdburn \
