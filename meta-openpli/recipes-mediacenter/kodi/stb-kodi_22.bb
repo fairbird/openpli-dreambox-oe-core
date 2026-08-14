@@ -83,7 +83,7 @@ SRCREV = "55d3a2927116283f2288e115a359f8446d56dca1"
 # 'patch' doesn't support binary diffs
 PATCHTOOL = "git"
 
-PR = "r85"
+PR = "r90"
 
 PV = "22.0+gitr"
 # Keep package upgrades monotonic when the pinned master revision advances.
@@ -101,7 +101,7 @@ SRC_URI[libdvdread.sha256sum] = "b69f74d9ceea1ed173b579deba99f669c2cb42f3fd06d7d
 SRC_URI[libdvdnav.sha256sum] = "1363cdfaf6e92c0b574579299b5480f5867fb32989451468a28f3f402ec48787"
 
 SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
-           https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-${PV_groovy}.zip;name=groovy \
+           https://archive.apache.org/dist/groovy/${PV_groovy}/distribution/apache-groovy-binary-${PV_groovy}.zip;name=groovy \
            https://dlcdn.apache.org/commons/lang/binaries/commons-lang3-${PV_commons-lang3}-bin.tar.gz;name=commons-lang \
            https://dlcdn.apache.org/commons/text/binaries/commons-text-${PV_commons-text}-bin.tar.gz;name=commons-text \
            https://mirrors.kodi.tv/build-deps/sources/libdvdcss-1.5.0.tar.bz2;name=libdvdcss;downloadfilename=libdvdcss.tar.bz2;unpack=0 \
@@ -155,7 +155,7 @@ DREAM_BCM_STB = "${@'1' if d.getVar('MACHINE') in ('dm7080', 'dm820', 'dm900', '
 DREAM_DM9X0_STB = "${@'1' if d.getVar('MACHINE') in ('dm900', 'dm920') and d.getVar('TARGET_ARCH') == 'arm' else '0'}"
 DREAM_MIPSEL_STB = "${@'1' if d.getVar('MACHINE') in ('dm7080', 'dm820') and d.getVar('TARGET_ARCH') == 'mipsel' else '0'}"
 
-SRC_URI:append = "${@' file://kodi-hisi-wrapper' if d.getVar('HISI_STB') == '1' else ''}"
+SRC_URI:append = "${@' file://kodi-hisi-wrapper file://kodi-hisi-appliance.xml file://0051-hisi-alsa-fast-sink-switch.patch' if d.getVar('HISI_STB') == '1' else ''}"
 SRC_URI:append = "${@' file://kodi-bcm-wrapper' if d.getVar('BCM_DVB_STB') == '1' else ''}"
 SRC_URI:append = "${@' file://kodi-dream-aml-wrapper' if d.getVar('DREAM_AMLOGIC_STB') == '1' else ''}"
 SRC_URI:append = "${@' file://0027-bcm-alsa-hard-recovery.patch' if d.getVar('BCM_DVB_STB') == '1' else ''}"
@@ -349,6 +349,9 @@ do_install:append() {
     elif [ "${HISI_STB}" = "1" ]; then
         mv ${D}${bindir}/kodi ${D}${bindir}/kodi.real
         install -m 0755 ${UNPACKDIR}/kodi-hisi-wrapper ${D}${bindir}/kodi
+        install -d ${D}${datadir}/kodi/system/settings
+        install -m 0644 ${UNPACKDIR}/kodi-hisi-appliance.xml \
+            ${D}${datadir}/kodi/system/settings/appliance.xml
     elif [ "${BCM_DVB_STB}" = "1" ]; then
         mv ${D}${bindir}/kodi ${D}${bindir}/kodi.real
         install -m 0755 ${UNPACKDIR}/kodi-bcm-wrapper ${D}${bindir}/kodi
@@ -427,7 +430,7 @@ RRECOMMENDS:${PN}:append = " libcec \
                              kodi-addon-visualization-matrix \
                              kodi-addon-visualization-waveform \
                              kodi-addon-visualization-shadertoy \
-                             alsa-plugins \
+                             ${@'' if d.getVar('HISI_STB') == '1' else 'alsa-plugins'} \
                            "
 
 RRECOMMENDS:${PN}:append:libc-glibc = " glibc-charmap-ibm850 \
