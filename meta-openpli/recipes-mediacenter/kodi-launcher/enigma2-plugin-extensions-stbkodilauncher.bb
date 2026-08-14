@@ -3,7 +3,7 @@ DESCRIPTION = "Adds Kodi entries to the Enigma2 plugin and extensions menus and 
 
 require conf/license/license-gplv2.inc
 
-RDEPENDS:${PN} += "virtual-kodi kodi-addons-meta"
+RDEPENDS:${PN} += "virtual-kodi"
 
 inherit gittag python3-compileall
 
