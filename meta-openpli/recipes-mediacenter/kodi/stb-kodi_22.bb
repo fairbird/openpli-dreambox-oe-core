@@ -89,11 +89,11 @@ PV = "22.0+gitr"
 # Keep package upgrades monotonic when the pinned master revision advances.
 # gitpkgv expands this to the commit count plus abbreviated source revision.
 PKGV = "22.0+git${GITPKGV}"
-PV_groovy = "4.0.23"
+PV_groovy = "4.0.27"
 PV_commons-lang3 = "3.20.0"
 PV_commons-text = "1.15.0"
 
-SRC_URI[groovy.sha256sum] = "7089dd7a1e84adc814d616f5ec2f7d7dac2044a0a0457f3341b3b92d30204229"
+SRC_URI[groovy.sha256sum] = "bc917c8bb01b2832f124a7bd63a3c72ba5e83ef7f056650dfd9a2f7944960685"
 SRC_URI[commons-lang.sha256sum] = "a77875dbc8b7b687e49d914cf00cf7237a548f4163c2a64565b3da999d8b024f"
 SRC_URI[commons-text.sha256sum] = "af36d019def06a31b4d5accf60b13c4de817ec8569af1ffb410eb5ab16b39721"
 SRC_URI[libdvdcss.sha256sum] = "f204a9d8ac8a8414095d556373e5af9b95bb7cc72bf1467d936a48c961e8c474"
