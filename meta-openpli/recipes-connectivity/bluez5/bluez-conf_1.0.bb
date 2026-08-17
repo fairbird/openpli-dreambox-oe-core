@@ -9,8 +9,8 @@ S = "${UNPACKDIR}"
 
 do_install () {
     install -m 0755 -d ${D}${sysconfdir}/bluetooth/
-    install -m 0644 ${S}/main.conf ${D}${sysconfdir}/bluetooth/main.conf
-    install -m 0644 ${S}/uart.conf ${D}${sysconfdir}/bluetooth/uart.conf
+    install -m 0644 ${UNPACKDIR}/main.conf ${D}${sysconfdir}/bluetooth/main.conf
+    install -m 0644 ${UNPACKDIR}/uart.conf ${D}${sysconfdir}/bluetooth/uart.conf
 }
 
 do_install:append:osnino() {
