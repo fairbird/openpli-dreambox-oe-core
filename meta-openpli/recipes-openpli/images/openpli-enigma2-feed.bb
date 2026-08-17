@@ -111,7 +111,6 @@ OPTIONAL_PACKAGES += " \
 	screen \
 	sed \
 	shairplay \
-	smartmontools \
 	smbnetfs \
 	sshpass \
 	strace \

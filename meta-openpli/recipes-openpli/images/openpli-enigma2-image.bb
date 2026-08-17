@@ -59,11 +59,12 @@ IMAGE_INSTALL = " \
 	cifs-utils \
 	cronie \
 	chrony \
-	socketdaemon \
 	e2-route-metric \
 	coreutils-stdbuf \
 	distro-feed-configs \
 	dropbear \
+	socketdaemon \
+	smartmontools \
 	e2fsprogs-e2fsck \
 	e2fsprogs-mke2fs \
 	e2fsprogs-tune2fs \
