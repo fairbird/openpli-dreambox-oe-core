@@ -60,6 +60,7 @@ IMAGE_INSTALL = " \
 	cronie \
 	chrony \
 	socketdaemon \
+	e2-route-metric \
 	coreutils-stdbuf \
 	distro-feed-configs \
 	dropbear \
