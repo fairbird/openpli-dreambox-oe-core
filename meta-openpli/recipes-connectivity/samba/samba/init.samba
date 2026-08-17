@@ -7,7 +7,7 @@
 # Default-Stop:      0 1 6
 # Should-Start:      slapd cups
 # Should-Stop:       slapd cups
-# Short-Description: start Samba SMB daemons (smbd/WSDD="/usr/sbin/wsdd2"/nmbd)
+# Short-Description: start Samba SMB daemons (smbd/wsdd2/nmbd)
 ### END INIT INFO
 
 WSDD_DISABLED="Yes"
@@ -31,7 +31,7 @@ prepare_shares() {
     [ -f /etc/samba/smb-shares.conf ] && rm /etc/samba/smb-shares.conf
 
     for FILE in /etc/samba/shares/*.conf; do
-    	[ -e "$FILE" ] || continue
+        [ -e "$FILE" ] || continue
         path=$(grep "path\s*=\s*" "$FILE" | tr -d " \t\n\r" | cut -d'=' -f2)
         if [ -n "$path" ] && [ -d "$path" ]; then
             echo "include = $FILE" >> /etc/samba/smb-shares.conf
