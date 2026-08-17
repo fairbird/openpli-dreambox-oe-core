@@ -59,6 +59,7 @@ IMAGE_INSTALL = " \
 	cifs-utils \
 	cronie \
 	chrony \
+	socketdaemon \
 	coreutils-stdbuf \
 	distro-feed-configs \
 	dropbear \
