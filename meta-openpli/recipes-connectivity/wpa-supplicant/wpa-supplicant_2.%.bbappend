@@ -10,6 +10,9 @@ SRC_URI += " \
         file://wpa_action.8 \
 "
 
+# added only for 2.9 (still pinned via PREFERRED_VERSION on some boxes).
+SRC_URI += "${@' file://openssl40-opaque-asn1.patch' if d.getVar('PV') == '2.9' else ''}"
+
 do_configure:append() {
         sed -e '/^CONFIG_TLS = gnutls/d' -i wpa_supplicant/.config
         echo "CONFIG_DEBUG_SYSLOG=y" >> wpa_supplicant/.config
