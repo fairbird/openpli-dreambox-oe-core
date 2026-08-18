@@ -20,6 +20,8 @@ FILES:${PN}-dbg = " \
     ${PYTHON_SITEPACKAGES_DIR}/${PN}/test \
 "
 
+SRC_URI:append = " file://fix-broken-module-import.patch"
+
 include python3-package-split.inc
 
 do_compile[network] = "1"

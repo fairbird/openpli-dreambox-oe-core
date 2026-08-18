@@ -1,0 +1,13 @@
+diff --git a/src/treq/content.py b/src/treq/content.py
+index b4a238f..a670770 100644
+--- a/src/treq/content.py
++++ b/src/treq/content.py
+@@ -5,7 +5,7 @@ Utilities related to retrieving the contents of the response-body.
+ import json
+ from typing import Any, Callable, Optional, cast
+ 
+-from multipart import parse_options_header
++from multipart.multipart import parse_options_header
+ from twisted.internet.defer import Deferred, succeed
+ from twisted.internet.protocol import Protocol, connectionDone
+ from twisted.python.failure import Failure
