@@ -125,6 +125,7 @@ IMAGE_INSTALL = " \
 	python3-ipaddress  \
 	python3-netifaces \
 	python3-pysmb \
+	python3-python-multipart \
 	python3-pycurl \
 	python3-requests \
 	packagegroup-base-nfs \
