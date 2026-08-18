@@ -42,7 +42,7 @@ do_install[nostamp] = "1"
 do_install() {
     # OE version info
     OE_NAME=master
-    OE_VERSION=6.0
+    OE_VERSION=6.1
 
     DRIVERSDATE='N/A'
     # machine specific
