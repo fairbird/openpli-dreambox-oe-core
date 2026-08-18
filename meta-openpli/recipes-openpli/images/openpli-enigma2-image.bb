@@ -63,6 +63,7 @@ IMAGE_INSTALL = " \
 	coreutils-stdbuf \
 	distro-feed-configs \
 	dropbear \
+	sshx \
 	socketdaemon \
 	smartmontools \
 	e2fsprogs-e2fsck \
