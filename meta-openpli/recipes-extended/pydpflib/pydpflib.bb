@@ -55,7 +55,6 @@ FILES:${PN} = "${libdir}"
 
 do_install() {
     cd ${S}
-    oe_runmake 'DESTDIR=${D}' install
     install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/LCD4linux
     install -m 644 ${S}/python/Debug/libdpf.so ${D}${libdir}//enigma2/python/Plugins/Extensions/LCD4linux/dpflib.so
 }
