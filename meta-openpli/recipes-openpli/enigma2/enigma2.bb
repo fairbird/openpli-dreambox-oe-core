@@ -15,7 +15,7 @@ DEPENDS = " \
 	jpeg \
 	libdreamdvd libdvbsi++ fribidi libmad libpng libsigc++-3 libwebp giflib libxml2 \
 	openssl libudfread \
-	python3-treq python3-twisted python3-wifi \
+	python3-treq python3-twisted \
 	procps \
 	swig-native \
 	tuxtxt-enigma2 \
@@ -45,6 +45,7 @@ RDEPENDS:${PN} = " \
 	enigma2-plugin-drivers-ntfs-3g \
 	enigma2-plugin-drivers-exfat \
 	virtual-gstreamer1.0-dvbmediasink \
+	wpa-supplicant wireless-tools python3-wifi \
 	${PYTHON_RDEPS} \
 	${@get_transcoding_plugin_package(d)} \
 	${@bb.utils.contains("DISTRO_FEATURES", "e2hotplug", "" , "hotplug-e2-helper", d)} \
@@ -190,7 +191,6 @@ RDEPENDS:enigma2-plugin-systemplugins-hotplug = "${@bb.utils.contains("DISTRO_FE
 RDEPENDS:${PN}-build-dependencies = "\
 	aio-grab \
 	dvd+rw-tools dvdauthor mjpegtools cdrkit ${DEMUXTOOL} \
-	wpa-supplicant wireless-tools python3-wifi \
 	python3-twisted-web \
 	"
 

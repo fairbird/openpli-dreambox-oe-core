@@ -32,8 +32,6 @@ ENIGMA2_PLUGINS = " \
 	enigma2-plugin-systemplugins-commoninterfaceassignment \
 	enigma2-plugin-systemplugins-fastscan \
 	enigma2-plugin-systemplugins-hotplug \
-	enigma2-plugin-systemplugins-networkwizard \
-	enigma2-plugin-systemplugins-networkbrowser \
 	enigma2-plugin-systemplugins-osd3dsetup \
 	enigma2-plugin-systemplugins-osdpositionsetup \
 	enigma2-plugin-systemplugins-positionersetup \
@@ -42,7 +40,6 @@ ENIGMA2_PLUGINS = " \
 	enigma2-plugin-systemplugins-videoenhancement \
 	enigma2-plugin-systemplugins-videomode \
 	enigma2-plugin-systemplugins-videotune \
-	enigma2-plugin-systemplugins-wirelesslan \
 	"
 
 DEPENDS += " \
