@@ -2,8 +2,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 inherit upx-compress
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
 SRC_URI += "file://openssl-cnf.patch"
 
 SRC_URI:remove = "file://0001-Added-handshake-history-reporting-when-test-fails.patch"
