@@ -28,6 +28,8 @@ LDFLAGS:append = " \
     -Wl,-rpath-link,${STAGING_LIBDIR}/ffmpeg-ext \
 "
 
+CFLAGS:append = " -I${STAGING_INCDIR}/ffmpeg-ext"
+
 # ffmpeg-ext ships its own pkg-config dir under libdir/ffmpeg-ext/pkgconfig
 # — make configure see it ahead of the system ffmpeg .pc.
 do_configure:prepend() {
