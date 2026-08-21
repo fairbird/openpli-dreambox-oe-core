@@ -133,6 +133,7 @@ IMAGE_INSTALL = " \
 	${@bb.utils.contains("TARGET_ARCH", "arm", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("TARGET_ARCH", "aarch64", "${GETEXTRA}", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "no_autofs", "" , "autofs", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "e2egl", "enigma2-plugin-systemplugins-animationsetup", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "emmc", "dosfstools mtools e2fsprogs-resize2fs partitions-by-name gptfdisk" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "fastboot", "dosfstools mtools android-tools" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "recovery", "recovery" , "", d)} \
