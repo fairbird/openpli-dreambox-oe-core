@@ -4,10 +4,9 @@ HOMEPAGE = "https://github.com/Taapat/enigma2-plugin-blurayplayer"
 SECTION = "multimedia"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-require conf/python/python3-compileall.inc
 
-inherit gitpkgv python3native
-SRCREV = "${AUTOREV}"
+inherit gitpkgv python3native python3-compileall
+
 PV = "1+git"
 PKGV = "1+git${GITPKGV}"
 BRANCH = "master"
