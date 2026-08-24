@@ -1,4 +1,5 @@
 SUMMARY = "Inittab for sysvinit"
+PR .= ".2"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
