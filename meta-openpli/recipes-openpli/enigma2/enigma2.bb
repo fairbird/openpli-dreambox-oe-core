@@ -13,7 +13,7 @@ DEPENDS = " \
 	gettext-native \
 	gstreamer1.0-plugins-base gstreamer1.0 \
 	jpeg \
-	libdreamdvd libdvbsi++ fribidi libmad libpng libsigc++-3 libwebp giflib libxml2 \
+	libbluray libdreamdvd libdvbsi++ fribidi libmad libpng libsigc++-3 libwebp giflib libxml2 \
 	openssl libudfread \
 	python3-treq python3-twisted \
 	procps \
@@ -36,6 +36,7 @@ RDEPENDS:${PN} = " \
 	enigma2-timezones \
 	enigma2-remote \
 	ethtool \
+	libbluray \
 	rsync \
 	streambench \
 	glibc-gconv-iso8859-15 \
