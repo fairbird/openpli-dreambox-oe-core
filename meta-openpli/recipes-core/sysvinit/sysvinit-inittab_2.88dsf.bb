@@ -1,8 +1,8 @@
-DESCRIPTION = "Inittab for sysvinit"
+SUMMARY = "Inittab for sysvinit"
 
-require conf/license/openpli-gplv2.inc
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PR = "r6"
+require conf/license/license-gplv2.inc
 
 SRC_URI = "file://inittab"
 
@@ -16,5 +16,5 @@ do_compile() {
 
 do_install() {
 	install -d ${D}${sysconfdir}
-	install -m 0644 ${UNPACKDIR}/inittab ${D}${sysconfdir}/inittab
+	install -m 0644 ${S}/inittab ${D}${sysconfdir}/inittab
 }
