@@ -1,0 +1,24 @@
+diff --git a/libopkg/pkg_depends.c b/libopkg/pkg_depends.c
+index eec8961..0ad470c 100644
+--- a/libopkg/pkg_depends.c
++++ b/libopkg/pkg_depends.c
+@@ -410,15 +410,15 @@ version_constraint_t str_to_constraint(const char **str)
+     /* should these be here to support deprecated designations; dpkg does */
+     else if (strncmp(*str, "<", 1) == 0) {
+         *str += 1;
+-        opkg_msg(NOTICE,
++        /*opkg_msg(NOTICE,
+                  "Deprecated version constraint '<' was used with the same "
+-                 "meaning as '<='. Use '<<' for EARLIER constraint.\n");
++                 "meaning as '<='. Use '<<' for EARLIER constraint.\n");*/
+         return EARLIER_EQUAL;
+     } else if (strncmp(*str, ">", 1) == 0) {
+         *str += 1;
+-        opkg_msg(NOTICE,
++        /*opkg_msg(NOTICE,
+                  "Deprecated version constraint '>' was used with the same "
+-                 "meaning as '>='. Use '>>' for LATER constraint.\n");
++                 "meaning as '>='. Use '>>' for LATER constraint.\n");*/
+         return LATER_EQUAL;
+     } else {
+         return NONE;

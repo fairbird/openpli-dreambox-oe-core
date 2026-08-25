@@ -1,10 +1,22 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://opkg.conf \
-			file://modprobe \
-			"
+SRC_URI += " \
+	file://0001-sanity-check-provides.patch \
+	file://0002-stop_deprecated_version_message.patch \
+	file://0003-make_insane_checks_nonfatal.patch \
+	file://0004-busybox_workaround.patch \
+	file://0005-symlinks-can-be-valid-directories-too.patch \
+	file://0006-reuse-the-installed_files-list-when-possible.patch \
+	file://0007-Revert-libopkg-track-the-number-of-packages-installi.patch \
+	file://0008-fix-installed-time-not-written-with-libsolv.patch \
+	file://filter.patch \
+	file://timeout.patch \
+	file://modprobe \
+	"
 
 do_install:prepend() {
 	install -d ${D}${datadir}/opkg/intercept
 	install -m 755 ${UNPACKDIR}/modprobe ${D}${datadir}/opkg/intercept/
 }
+
+PR = "r11"
