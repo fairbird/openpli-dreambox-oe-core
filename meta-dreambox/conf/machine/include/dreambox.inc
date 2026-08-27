@@ -27,6 +27,7 @@ MACHINE_EXTRA_RRECOMMENDS += " \
     kernel-module-hmac \
     kernel-module-md4 \
     kernel-module-ecb \
+    tpmd \
     kernel-module-fuse \
     kernel-module-nfsd \
     kernel-module-exportfs \
