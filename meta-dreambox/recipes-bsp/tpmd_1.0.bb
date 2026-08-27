@@ -12,7 +12,7 @@ SRC_URI[mips32el.sha256sum] = "969438a72ca7c473903516e845cefe52313c01b4de5692bf2
 SRC_URI[mips32el-nf.md5sum] = "52ef082a5e2291a53204a1cbdfc0ff5a"
 SRC_URI[mips32el-nf.sha256sum] = "4cd699cb9e97cb8cf66053c3c89945b00d8e40184d776232b9251a2350b0d277"
 
-SRC_URI = "https://source.mynonpublic.com/dreambox/${PN}_${PV}_${PACKAGE_ARCH}.tar.bz2;name=${PACKAGE_ARCH} \
+SRC_URI = "https://source.mynonpublic.com/dreambox/${BPN}_${PV}_${PACKAGE_ARCH}.tar.bz2;name=${PACKAGE_ARCH} \
         file://${INITSCRIPT_NAME}.sysvinit \
 "
 
@@ -33,3 +33,5 @@ do_install() {
                 install -m 0755 ${UNPACKDIR}/${INITSCRIPT_NAME}.sysvinit ${D}${INIT_D_DIR}/${INITSCRIPT_NAME}
         fi
 }
+
+INSANE_SKIP:${PN} += "ldflags"
