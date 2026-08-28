@@ -197,6 +197,23 @@ RDEPENDS:${PN}-build-dependencies = "\
 
 RREPLACES:enigma2-plugin-systemplugins-lcnscanner = "enigma2-plugin-systemplugins-terrestrialscan"
 RCONFLICTS:enigma2-plugin-systemplugins-lcnscanner = "enigma2-plugin-systemplugins-terrestrialscan"
+RPROVIDES:${PN} += " \
+    enigma2-plugin-systemplugins-wirelesslan \
+    enigma2-plugin-systemplugins-networkwizard \
+    enigma2-plugin-systemplugins-networkbrowser \
+"
+
+RREPLACES:${PN} += " \
+    enigma2-plugin-systemplugins-wirelesslan \
+    enigma2-plugin-systemplugins-networkwizard \
+    enigma2-plugin-systemplugins-networkbrowser \
+"
+
+RCONFLICTS:${PN} += " \
+    enigma2-plugin-systemplugins-wirelesslan \
+    enigma2-plugin-systemplugins-networkwizard \
+    enigma2-plugin-systemplugins-networkbrowser \
+"
 
 inherit gitpkgv python3native python3targetconfig
 
