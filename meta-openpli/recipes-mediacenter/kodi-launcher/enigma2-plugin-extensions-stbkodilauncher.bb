@@ -2,7 +2,6 @@ SUMMARY = "Minimal Enigma2 launcher for standalone STB Kodi"
 DESCRIPTION = "Adds Kodi entries to the Enigma2 plugin and extensions menus and exits Enigma2 through the existing QUIT_KODI session path."
 
 require conf/license/license-gplv2.inc
-require conf/python/python3-compileall.inc
 
 RDEPENDS:${PN} += "virtual-kodi"
 
@@ -14,7 +13,7 @@ SRCREV = "${AUTOREV}"
 PV = "git"
 PKGV = "V${GITPKGVTAG}"
 
-inherit setuptools3-openplugins
+inherit setuptools3-openplugins python3-compileall
 
 SRC_URI = "git://github.com/oe-alliance-plugins/STBKodiLauncher.git;protocol=https;branch=main"
 
