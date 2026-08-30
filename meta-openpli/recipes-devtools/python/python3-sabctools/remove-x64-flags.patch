@@ -1,73 +1,27 @@
-diff --git a/setup.py b/setup.py
-index e563629..f6a41f8 100644
---- a/setup.py
-+++ b/setup.py
-@@ -195,68 +195,56 @@ class SABCToolsBuild(build_ext):
-             {
-                 "sources": ["src/yencode/encoder_sse2.cc"],
-                 "depends": srcdeps_enc_common + ["encoder_sse_base.h"],
--                "gcc_x86_flags": ["-msse2"],
-             },
-             {
-                 "sources": ["src/yencode/decoder_sse2.cc"],
-                 "depends": srcdeps_dec_common + ["decoder_sse_base.h"],
--                "gcc_x86_flags": ["-msse2"],
-             },
-             {
-                 "sources": ["src/yencode/encoder_ssse3.cc"],
-                 "depends": srcdeps_enc_common + ["encoder_sse_base.h"],
--                "gcc_x86_flags": ["-mssse3"],
-             },
-             {
-                 "sources": ["src/yencode/decoder_ssse3.cc"],
-                 "depends": srcdeps_dec_common + ["decoder_sse_base.h"],
--                "gcc_x86_flags": ["-mssse3"],
-             },
-             {
-                 "sources": ["src/yencode/crc_folding.cc"],
-                 "depends": srcdeps_crc_common,
--                "gcc_x86_flags": ["-mssse3", "-msse4.1", "-mpclmul"],
-             },
-             {
-                 "sources": ["src/yencode/crc_folding_256.cc"],
-                 "depends": srcdeps_crc_common,
--                "gcc_x86_flags": gcc_vpclmulqdq_flags,
-                 "msvc_x86_flags": ["/arch:AVX2"],
-             },
-             {
-                 "sources": ["src/yencode/encoder_avx.cc"],
-                 "depends": srcdeps_enc_common + ["encoder_sse_base.h"],
--                "gcc_x86_flags": ["-mavx", "-mpopcnt"],
-                 "msvc_x86_flags": ["/arch:AVX"],
-             },
-             {
-                 "sources": ["src/yencode/decoder_avx.cc"],
-                 "depends": srcdeps_dec_common + ["decoder_sse_base.h"],
--                "gcc_x86_flags": ["-mavx", "-mpopcnt"],
-                 "msvc_x86_flags": ["/arch:AVX"],
-             },
-             {
-                 "sources": ["src/yencode/encoder_avx2.cc"],
-                 "depends": srcdeps_enc_common + ["encoder_avx_base.h"],
--                "gcc_x86_flags": ["-mavx2", "-mpopcnt", "-mbmi", "-mbmi2", "-mlzcnt"],
-                 "msvc_x86_flags": ["/arch:AVX2"],
-             },
-             {
-                 "sources": ["src/yencode/decoder_avx2.cc"],
-                 "depends": srcdeps_dec_common + ["decoder_avx2_base.h"],
--                "gcc_x86_flags": ["-mavx2", "-mpopcnt", "-mbmi", "-mbmi2", "-mlzcnt"],
-                 "msvc_x86_flags": ["/arch:AVX2"],
-             },
-             {
-                 "sources": ["src/yencode/encoder_vbmi2.cc"],
-                 "depends": srcdeps_enc_common + ["encoder_avx_base.h"],
--                "gcc_x86_flags": gcc_vbmi2_flags + gcc_avx10_flags,
-                 "msvc_x86_flags": ["/arch:AVX512"],
-             },
-             {
-                 "sources": ["src/yencode/decoder_vbmi2.cc"],
-                 "depends": srcdeps_dec_common + ["decoder_avx2_base.h"],
--                "gcc_x86_flags": gcc_vbmi2_flags + gcc_avx10_flags,
-                 "msvc_x86_flags": ["/arch:AVX512"],
-             },
-             {
+diff --git a/src/rapidyenc/CMakeLists.txt b/src/rapidyenc/CMakeLists.txt
+index d5c1e6c..ca79b5b 100644
+--- a/src/rapidyenc/CMakeLists.txt
++++ b/src/rapidyenc/CMakeLists.txt
+@@ -183,14 +183,6 @@ if(MSVC)
+ endif()
+ if(NOT MSVC OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+ 	if(IS_X86)
+-		set_source_files_properties(${SRC_DIR}/encoder_sse2.cc PROPERTIES COMPILE_OPTIONS -msse2)
+-		set_source_files_properties(${SRC_DIR}/decoder_sse2.cc PROPERTIES COMPILE_OPTIONS -msse2)
+-		set_source_files_properties(${SRC_DIR}/encoder_ssse3.cc PROPERTIES COMPILE_OPTIONS -mssse3)
+-		set_source_files_properties(${SRC_DIR}/decoder_ssse3.cc PROPERTIES COMPILE_OPTIONS -mssse3)
+-		set_source_files_properties(${SRC_DIR}/encoder_avx.cc PROPERTIES COMPILE_OPTIONS "-mavx;-mpopcnt")
+-		set_source_files_properties(${SRC_DIR}/decoder_avx.cc PROPERTIES COMPILE_OPTIONS "-mavx;-mpopcnt")
+-		set_source_files_properties(${SRC_DIR}/encoder_avx2.cc PROPERTIES COMPILE_OPTIONS "-mavx2;-mpopcnt;-mbmi;-mbmi2;-mlzcnt")
+-		set_source_files_properties(${SRC_DIR}/decoder_avx2.cc PROPERTIES COMPILE_OPTIONS "-mavx2;-mpopcnt;-mbmi;-mbmi2;-mlzcnt")
+ 		CHECK_CXX_COMPILER_FLAG("-mavx512vbmi2 -mavx512vl -mavx512bw" COMPILER_SUPPORTS_VBMI2)
+ 		CHECK_CXX_COMPILER_FLAG("-mavx512vl -mno-evex512" COMPILER_SUPPORTS_AVX10)
+ 		if(COMPILER_SUPPORTS_AVX10)
+@@ -200,7 +192,6 @@ if(NOT MSVC OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+ 			set_source_files_properties(${SRC_DIR}/encoder_vbmi2.cc PROPERTIES COMPILE_OPTIONS "-mavx512vbmi2;-mavx512vl;-mavx512bw;-mpopcnt;-mbmi;-mbmi2;-mlzcnt")
+ 			set_source_files_properties(${SRC_DIR}/decoder_vbmi2.cc PROPERTIES COMPILE_OPTIONS "-mavx512vbmi2;-mavx512vl;-mavx512bw;-mpopcnt;-mbmi;-mbmi2;-mlzcnt")
+ 		endif()
+-		set_source_files_properties(${SRC_DIR}/crc_folding.cc PROPERTIES COMPILE_OPTIONS "-mssse3;-msse4.1;-mpclmul")
+ 		CHECK_CXX_COMPILER_FLAG("-mvpclmulqdq" COMPILER_SUPPORTS_VPCLMULQDQ)
+ 		if(COMPILER_SUPPORTS_VPCLMULQDQ)
+ 			set_source_files_properties(${SRC_DIR}/crc_folding_256.cc PROPERTIES COMPILE_OPTIONS "-mavx2;-mvpclmulqdq;-mpclmul")
