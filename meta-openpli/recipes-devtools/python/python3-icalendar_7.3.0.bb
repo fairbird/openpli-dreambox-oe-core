@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c1811377eb97cf603a2fc49ed1b0d37f"
 DEPENDS = "python3-pytz python3-dateutil python3-hatch-vcs-native"
 RDEPENDS:${PN} = "python3-pytz python3-dateutil python3-zoneinfo"
 
-SRC_URI[md5sum] = "4abb97cfdc0768e794e49d05c690cfdf"
-SRC_URI[sha256sum] = "95027ece087ab87184d765f03761f25875821f74cdd18d3b57e9c868216d8fde"
+SRC_URI[md5sum] = "db37770cefe75492fdb29ecaf3f746fc"
+SRC_URI[sha256sum] = "7bd001c8e648205e1bde5c6a5b77096598e8d0893dcf57755c6c597635620132"
 
 inherit pypi python_setuptools_build_meta
 
