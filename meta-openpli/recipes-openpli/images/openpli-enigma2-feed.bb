@@ -224,6 +224,9 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-skins-aglare \
 	enigma2-plugin-skins-octetfhd \
 	enigma2-plugin-skins-overlayhd \
+	enigma2-plugin-skins-gradientwqhd \
+	enigma2-plugin-skins-bundesligawqhd \
+	enigma2-plugin-skins-bundesligafhd \
 	enigma2-plugin-skins-pd1loi-hd-night \
 	enigma2-plugin-skins-pli-hd \
 	enigma2-plugin-skins-pli-hd-fullnight \
