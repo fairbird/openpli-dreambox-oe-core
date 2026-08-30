@@ -1,0 +1,13 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 9eb51fb..319bb82 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -49,7 +49,7 @@ dev = [
+ ]
+ 
+ [build-system]
+-requires = ["uv_build>=0.11,<0.12"]
++requires = ["uv_build>=0.11,<0.13"]
+ build-backend = "uv_build"
+ 
+ [tool.uv.build-backend]

@@ -4,13 +4,16 @@ SECTION = "devel/python"
 LICENSE = "BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=df5f9321c8784271adb6c95a3da69f82"
 
+DEPENDS = "python3-uv-build-native"
 RDEPENDS:${PN} = "python3-regex"
 
-SRC_URI += "file://disable-test.patch"
+SRC_URI[md5sum] = "4cd4763a0f4916218e31aeeda69db84f"
+SRC_URI[sha256sum] = "d6df0c8c896e160087c6981f3770ed513ec973a9f4066b9e4b0614eb08ba0ce1"
 
-SRC_URI[md5sum] = "e2c88915303b311cea24b200ab332375"
-SRC_URI[sha256sum] = "0d30bf80fca00fa9c697185ac475daac9bde5f646ce3338c9ff5d5dc1ebdfebc"
+SRC_URI:append = " file://increase-max-version-uv-build.patch"
 
-inherit pypi setuptools3
+S = "${WORKDIR}/rebulk-${PV}"
+
+inherit pypi python_hatchling
 
 include python3-package-split.inc
