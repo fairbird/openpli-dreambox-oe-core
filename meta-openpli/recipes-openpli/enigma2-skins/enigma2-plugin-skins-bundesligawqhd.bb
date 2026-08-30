@@ -7,9 +7,7 @@ require conf/license/license-gplv2.inc
 
 DEPENDS = "gettext-native"
 
-require conf/python/python3-compileall.inc
-
-inherit allarch gitpkgv
+inherit allarch gitpkgv python3-compileall
 
 SRCREV = "${AUTOREV}"
 PV = "1.4+git"
