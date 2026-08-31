@@ -1,14 +1,20 @@
-DESCRIPTION = "USB DVB driver for dtt200u chipsets"
+SUMMARY = "USB DVB driver for dtt200u chipsets"
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
+
+DVBPROVIDER ?= "kernel"
 
 RRECOMMENDS:${PN} = " \
-	firmware-dvb-usb-dtt200u-01 \
-	firmware-dvb-usb-wt220u-02 \
-	firmware-dvb-usb-wt220u-fc03 \
-	firmware-dvb-usb-wt220u-miglia-01 \
-	firmware-dvb-usb-wt220u-zl0353-01 \
-	kernel-module-dvb-usb-dtt200u \
-	"
+    ${DVBPROVIDER}-module-dvb-usb-dtt200u \
+    firmware-dvb-usb-dtt200u-01 \
+    firmware-dvb-usb-wt220u-02 \
+    firmware-dvb-usb-wt220u-fc03 \
+    firmware-dvb-usb-wt220u-miglia-01 \
+    firmware-dvb-usb-wt220u-zl0353-01 \
+    "
 
-PV = "1.1"
+PV = "1.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"

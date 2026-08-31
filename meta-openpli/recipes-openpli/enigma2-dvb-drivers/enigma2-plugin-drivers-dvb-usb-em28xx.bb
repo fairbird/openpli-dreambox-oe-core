@@ -1,12 +1,18 @@
-DESCRIPTION = "USB DVB driver for EM28xx chipset"
+SUMMARY = "USB DVB driver for EM28xx chipset"
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
+
+DVBPROVIDER ?= "kernel"
 
 RRECOMMENDS:${PN} = " \
-	kernel-module-cxd2820r \
-	kernel-module-em28xx-dvb \
-	kernel-module-tda10071 \
-	firmware-dvb-fe-tda10071 \
-	"
+    ${DVBPROVIDER}-module-em28xx-dvb \
+    ${DVBPROVIDER}-module-tda10071 \
+    ${DVBPROVIDER}-module-cxd2820r \
+    firmware-dvb-fe-tda10071 \
+    "
 
-PV = "1.1"
+PV = "1.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"

@@ -1,9 +1,15 @@
-DESCRIPTION = "USB DVB driver for pctv452e chipsets"
+SUMMARY = "USB DVB driver for pctv452e chipsets"
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
+
+DVBPROVIDER ?= "kernel"
 
 RRECOMMENDS:${PN} = " \
-	kernel-module-dvb-usb-pctv452e \
-	"
+    ${DVBPROVIDER}-module-dvb-usb-pctv452e \
+    "
 
-PV = "1.1"
+PV = "1.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"

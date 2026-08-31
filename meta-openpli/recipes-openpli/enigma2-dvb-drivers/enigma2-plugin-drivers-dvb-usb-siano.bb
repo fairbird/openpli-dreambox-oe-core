@@ -1,14 +1,24 @@
-DESCRIPTION = "USB DVB driver for Siano chipset"
+SUMMARY = "USB DVB driver for Siano chipset"
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
+
+DVBPROVIDER ?= "kernel"
 
 RRECOMMENDS:${PN} = " \
-	firmware-dvb-nova-12mhz-b0 \
-	firmware-dvb-siano \
-	firmware-isdbt-nova-12mhz-b0 \
-	kernel-module-smsdvb \
-	kernel-module-smsmdtv \
-	kernel-module-smsusb \
-	"
+    ${DVBPROVIDER}-module-smsusb \
+    ${DVBPROVIDER}-module-smsdvb \
+    ${@bb.utils.contains("MACHINE_FEATURES", "legacykernel", \
+    " \
+    ${DVBPROVIDER}-module-smsmdtv \
+    " , "", d)} \
+    firmware-dvb-siano \
+    firmware-dvb-nova-12mhz-b0 \
+    firmware-isdbt-nova-12mhz-b0 \
+    firmware-dvb-usb-siano-sms2200 \
+    "
 
-PV = "1.1"
+PV = "1.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"

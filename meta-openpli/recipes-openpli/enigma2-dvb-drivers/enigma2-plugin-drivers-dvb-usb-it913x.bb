@@ -1,16 +1,22 @@
-DESCRIPTION = "USB DVB driver for it913x chipsets"
+SUMMARY = "USB DVB driver for it913x chipsets"
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
+
+DVBPROVIDER ?= "kernel"
 
 RRECOMMENDS:${PN} = " \
-        firmware-dvb-usb-af9035-01 \
-        firmware-dvb-usb-af9035-02 \
-        firmware-dvb-usb-it913x \
-        kernel-module-af9033 \
-        kernel-module-dvb-usb-af9035 \
-        kernel-module-dvb-usb-it913x \
-        kernel-module-it913x \
-        kernel-module-it913x-fe \
-	"
+    ${DVBPROVIDER}-module-dvb-usb-it913x \
+    ${DVBPROVIDER}-module-it913x-fe \
+    ${DVBPROVIDER}-module-af9033 \
+    ${DVBPROVIDER}-module-dvb-usb-af9035 \
+    ${DVBPROVIDER}-module-it913x \
+    firmware-dvb-usb-it913x \
+    firmware-dvb-usb-af9035-02 \
+    firmware-dvb-usb-af9035-01 \
+    "
 
-PV = "1.2"
+PV = "1.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"

@@ -1,14 +1,18 @@
-DESCRIPTION = "USB DVB driver for pctv292e chipsets"
+SUMMARY = "pctv 292e tripleStick"
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
 
 RRECOMMENDS:${PN} = " \
-	firmware-dvb-demod-si2168-b40 \
-	kernel-module-em28xx \
-	kernel-module-em28xx-dvb \
-	kernel-module-em28xx-rc \
-	kernel-module-si2157 \
-	kernel-module-si2168 \
-	"
+    kernel-module-em28xx \
+    kernel-module-em28xx-dvb \
+    kernel-module-em28xx-rc \
+    kernel-module-si2168 \
+    kernel-module-si2157 \
+    firmware-dvb-fe-si2168 \
+"
 
-PV = "1.0"
+PV = "2.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"

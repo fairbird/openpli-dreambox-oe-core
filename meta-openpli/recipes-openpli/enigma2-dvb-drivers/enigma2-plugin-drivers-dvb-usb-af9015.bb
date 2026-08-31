@@ -1,22 +1,27 @@
-DESCRIPTION = "USB DVB driver for Afatech 9015 chipset"
+SUMMARY = "USB DVB driver for Afatech 9015 chipset"
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
+
+DVBPROVIDER ?= "kernel"
 
 RRECOMMENDS:${PN} = " \
-	firmware-dvb-fe-af9013 \
-	firmware-dvb-usb-af9015 \
-	kernel-module-af9013 \
-	kernel-module-dvb-pll \
-	kernel-module-dvb-usb \
-	kernel-module-dvb-usb-af9015 \
-	kernel-module-mc44s803 \
-	kernel-module-mt2060 \
-	kernel-module-mxl5005s \
-	kernel-module-mxl5007t \
-	kernel-module-qt1010 \
-	kernel-module-stv0299 \
-	kernel-module-tda18218 \
-	kernel-module-tda18271 \
-	"
+    ${DVBPROVIDER}-module-dvb-usb-af9015 \
+    ${DVBPROVIDER}-module-af9013 \
+    ${DVBPROVIDER}-module-dvb-pll \
+    ${DVBPROVIDER}-module-dvb-usb \
+    ${DVBPROVIDER}-module-mc44s803 \
+    ${DVBPROVIDER}-module-mt2060 \
+    ${DVBPROVIDER}-module-mxl5005s \
+    ${DVBPROVIDER}-module-mxl5007t \
+    ${DVBPROVIDER}-module-qt1010 \
+    ${DVBPROVIDER}-module-tda18218 \
+    ${DVBPROVIDER}-module-tda18271 \
+    firmware-dvb-usb-af9015 \
+    firmware-dvb-fe-af9013 \
+    "
 
-PV = "1.1"
+PV = "1.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"

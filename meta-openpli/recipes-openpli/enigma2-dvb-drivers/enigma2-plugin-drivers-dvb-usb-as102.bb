@@ -1,12 +1,18 @@
-DESCRIPTION = "USB DVB driver for AS102 chipset"
+SUMMARY = "USB DVB driver for AS102 chipset"
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
+
+DVBPROVIDER ?= "kernel"
 
 RRECOMMENDS:${PN} = " \
-	firmware-as102-data1-st \
-	firmware-as102-data2-st \
-	kernel-module-as102-fe \
-	kernel-module-dvb-as102 \
-	"
+    ${DVBPROVIDER}-module-dvb-as102 \
+    ${DVBPROVIDER}-module-as102-fe \
+    firmware-as102-data1-st \
+    firmware-as102-data2-st \
+    "
 
-PV = "1.1"
+PV = "1.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"

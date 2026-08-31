@@ -1,6 +1,8 @@
-DESCRIPTION = "USB DVB driver for TBS Tuners"
+SUMMARY = "Legacy USB DVB driver package for TBS tuners"
+DESCRIPTION = "Compatibility package for older TBS USB tuners supported by the in-kernel dvb-usb-tbsusb driver. New TBS models use separate per-device packages."
+inherit allarch
 
-require dvb-usb-drivers-meta.inc
+require conf/license/license-gplv2.inc
 
 RRECOMMENDS:${PN} = " \
 	kernel-module-dvb-usb-tbsusb \
@@ -13,6 +15,10 @@ RRECOMMENDS:${PN} = " \
 	kernel-module-stb6000 \
 	firmware-dvb-usb-tbs5925 \
 	firmware-dvb-usb-tbs5980 \
+	${@bb.utils.contains("MACHINE_FEATURES", "blindscan-tbs", "enigma2-plugin-systemplugins-blindscan blindscan-s2 astra-sm" , "", d)} \
 	"
 
-PV = "1.1"
+PV = "2.0"
+PR = "r0"
+
+ALLOW_EMPTY:${PN} = "1"
