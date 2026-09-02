@@ -15,10 +15,35 @@ SRC_URI = "git://github.com/atvcaptain/rtl8852bu-wpa3.git;protocol=https;branch=
 
 S = "${UNPACKDIR}/s"
 
-require kcflags.inc
-
 # WPA3-SAE; the driver leaves this path disabled unless we ask for it
 EXTRA_OEMAKE = "KSRC=${STAGING_KERNEL_DIR} USER_EXTRA_CFLAGS=-DCONFIG_KERNEL_PATCH_EXTERNAL_AUTH"
+
+# need only for dreambox linux-meson64 4.9 + GCC 15
+export KCFLAGS += " -std=gnu17 \
+                    -Wno-error=misleading-indentation \
+                    -Wno-error=aggressive-loop-optimizations \
+                    -Wno-error=int-to-pointer-cast \
+                    -Wno-error=restrict \
+                    -Wno-error=int-conversion \
+                    -Wno-error=maybe-uninitialized \
+                    -Wno-error=discarded-qualifiers \
+                    -Wno-error=switch-unreachable \
+                    -Wno-error=bool-operation \
+                    -Wno-error=declaration-after-statement \
+                    -Wno-error=implicit-function-declaration \
+                    -Wno-error=incompatible-pointer-types \
+                    -Wno-error=ignored-qualifiers \
+                    -Wno-error  \
+                    -Wno-format \
+                    -Wno-address \
+                    -Wno-return-mismatch \
+                    -Wno-format-extra-args \
+                    -Wno-frame-larger-than \
+                    -Wno-return-type \
+                    -Wno-unused-variable \
+                    -Wno-missing-attributes \
+                    -Wno-address-of-packed-member \
+"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
