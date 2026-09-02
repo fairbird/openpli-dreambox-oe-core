@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-PR .= ".36"
+PR .= ".37"
 
 SRC_URI += " \
     file://mount.sh \
@@ -11,6 +11,7 @@ SRC_URI += " \
     file://startup.sh \
     file://startup.rules \
     file://40-realtek-zerocd.rules \
+    file://99-dab-rtlsdr.rules \
 "
 
 do_install:append() {
@@ -22,4 +23,5 @@ do_install:append() {
     install -m 0644 ${S}/startup.rules    ${D}${sysconfdir}/udev/rules.d/startup.rules
     install -m 0755 ${S}/startup.sh ${D}${sysconfdir}/udev/scripts/startup.sh
     install -m 0644 ${S}/40-realtek-zerocd.rules   ${D}${sysconfdir}/udev/rules.d/40-realtek-zerocd.rules
+    install -m 0644 ${S}/99-dab-rtlsdr.rules       ${D}${sysconfdir}/udev/rules.d/99-dab-rtlsdr.rules
 }
