@@ -1,12 +1,10 @@
 SUMMARY = "meta file for USB Network drivers"
-inherit packagegroup
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+inherit packagegroup
+
 require conf/license/license-gplv2.inc
 
-ALLOW_EMPTY:${PN} = "1"
-PACKAGES = "${PN}"
-
-PV = "1.0"
+PR = "r2"
 
 RDEPENDS:${PN} = "\
 	enigma2-plugin-drivers-network-usb-rt2500 \
@@ -28,6 +26,7 @@ RDEPENDS:${PN} = "\
 OPTIONAL_WIFI_PACKAGES = "\
     ${@ 'enigma2-plugin-drivers-network-usb-rtl88xxau'     if bb.utils.vercmp_string_op('${PREFERRED_VERSION_${PREFERRED_PROVIDER_virtual/kernel}}', '4.4', '>=') else '' } \
     ${@ 'enigma2-plugin-drivers-network-usb-rtl8852cu'     if bb.utils.vercmp_string_op('${PREFERRED_VERSION_${PREFERRED_PROVIDER_virtual/kernel}}', '3.10', '>=') else '' } \
+    ${@ 'enigma2-plugin-drivers-network-usb-rtl8852bu'     if bb.utils.vercmp_string_op('${PREFERRED_VERSION_${PREFERRED_PROVIDER_virtual/kernel}}', '3.10', '>=') else '' } \
 "
 
 INSANE_SKIP:${PN} += "build-deps"
