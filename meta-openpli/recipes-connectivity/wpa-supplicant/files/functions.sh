@@ -1,16 +1,6 @@
 #!/bin/sh
 
-#####################################################################
-## Purpose
-# This file contains common shell functions used by scripts of the
-# wpasupplicant package to allow ifupdown to manage wpa_supplicant.
-# It also contains some functions used by wpa_action(8) that allow
-# ifupdown to be managed by wpa_cli(8) action events.
-#
-# This file is provided by the wpasupplicant package.
-
-#####################################################################
-# Copyright (C) 2006 - 2009 Debian/Ubuntu wpasupplicant Maintainers 
+# Copyright (C) 2006 Debian/Ubuntu wpasupplicant Maintainers 
 # <pkg-wpa-devel@lists.alioth.debian.org>
 #
 # This program is free software; you can redistribute it and/or
@@ -23,33 +13,22 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# On Debian GNU/Linux systems, the text of the GPL license,
-# version 2, can be found in /usr/share/common-licenses/GPL-2.
+# On Debian GNU/Linux systems, the text of the GPL license can be
+# found in /usr/share/common-licenses/GPL.
 
 #####################################################################
 ## global variables
 # wpa_supplicant variables
 WPA_SUP_BIN="/usr/sbin/wpa_supplicant"
 WPA_SUP_PNAME="wpa_supplicant"
-WPA_SUP_PIDFILE="/var/run/wpa_supplicant.${WPA_IFACE}.pid"
+WPA_SUP_PIDFILE="/var/run/wpa_supplicant.$WPA_IFACE.pid"
 
 # wpa_cli variables
 WPA_CLI_BIN="/usr/sbin/wpa_cli"
 WPA_CLI_PNAME="wpa_cli"
-WPA_CLI_PIDFILE="/var/run/wpa_action.${WPA_IFACE}.pid"
-WPA_CLI_TIMESTAMP="/var/run/wpa_action.${WPA_IFACE}.timestamp"
-WPA_CLI_IFUPDOWN="/var/run/wpa_action.${WPA_IFACE}.ifupdown"
-
-# sendsigs omission interface, present in initscripts (>= 2.86.ds1-48)
-if [ -d /lib/init/rw/sendsigs.omit.d/ ]; then
-	# Debian
-	WPA_SUP_OMIT_PIDFILE="/lib/init/rw/sendsigs.omit.d/wpasupplicant.wpa_supplicant.${WPA_IFACE}.pid"
-elif [ -d /var/run/sendsigs.omit.d/ ]; then
-	# Ubuntu, see https://launchpad.net/bugs/181541 for status
-	WPA_SUP_OMIT_PIDFILE="/var/run/sendsigs.omit.d/wpasupplicant.wpa_supplicant.${WPA_IFACE}.pid"
-else
-	WPA_SUP_OMIT_PIDFILE=
-fi
+WPA_CLI_PIDFILE="/var/run/wpa_action.$WPA_IFACE.pid"
+WPA_CLI_LOGFILE="/var/log/wpa_action.log"
+WPA_CLI_TIMESTAMP="/var/run/wpa_action.$WPA_IFACE.timestamp"
 
 # default ctrl_interface socket directory
 if [ -z "$WPA_CTRL_DIR" ]; then
@@ -68,23 +47,16 @@ fi
 #####################################################################
 ## wpa_cli wrapper
 # Path to common ctrl_interface socket and iface supplied.
-# NB: WPA_CTRL_DIR cannot be used for interactive commands, it is
-# set only in the environment that wpa_cli provides when processing
-# action events.
+# NB: WPA_CTRL_DIR cannot be used for interactive commands.
 #
 wpa_cli () {
-	"$WPA_CLI_BIN" -p "$WPA_CTRL_DIR" -i "$WPA_IFACE" "$@"
-
-	return "$?"
+	$WPA_CLI_BIN -p $WPA_CTRL_DIR -i $WPA_IFACE "$@"
 }
 
 #####################################################################
 ## verbose and stderr message wrapper
 # Ensures a standard and easily identifiable message is printed by
 # scripts using this function library.
-#
-# log		Log a message to syslog when called non-interactively
-#		by wpa_action
 #
 # verbose	To stdout when IF_WPA_VERBOSITY or VERBOSITY is true
 #
@@ -97,21 +69,10 @@ wpa_cli () {
 # NB: when called by wpa_action, there is no redirection (verbose)
 #
 wpa_msg () {
-	if [ "$1" = "log" ]; then
+	
+	if [ -n "$WPA_ACTION" ]; then
 		shift
-		case "$WPA_ACTION" in
-			"CONNECTED"|"DISCONNECTED")
-				[ -x /usr/bin/logger ] || return
-				if [ "$#" -gt 0 ]; then
-					logger -t "wpa_action" "$@"
-				else
-					logger -t "wpa_action"
-				fi
-				;;
-			*)
-				[ "$#" -gt 0 ] && echo "wpa_action: $@"
-				;;
-		esac
+		echo "wpa_action: $@"
 		return
 	fi
 	
@@ -147,8 +108,7 @@ wpa_msg () {
 # If the test fails, but the pidfile exists, it is stale
 #
 test_daemon_pidfile () {
-	local DAEMON
-	local PIDFILE
+	local DAEMON PIDFILE
 	
 	if [ -n "$1" ]; then
 		DAEMON="$1"
@@ -186,140 +146,84 @@ test_wpa_cli () {
 # Start wpa_supplicant via start-stop-dameon with all required
 # options. Will start if environment variable WPA_SUP_CONF is present
 #
-# Default options:
+# Required options:
 # -B	dameonize/background process
 # -D	driver backend ('wext' if none given)
 # -P	process ID file
 # -C	path to ctrl_interface socket directory
-# -s    log to syslog
 #
-# Conditional options:
+# Optional options:
 # -c	configuration file
 # -W	wait for wpa_cli to attach to ctrl_interface socket
 # -b	bridge interface name
-# -f	path to log file
 #
 init_wpa_supplicant () {
-	[ -n "$WPA_SUP_CONF" ] || return 0
-
-	local WPA_SUP_OPTIONS
-	WPA_SUP_OPTIONS="-s -B -P $WPA_SUP_PIDFILE -i $WPA_IFACE"
-
-	if [ -n "$WPA_ACTION_SCRIPT" ]; then
-		if [ -x "$WPA_ACTION_SCRIPT" ]; then
-			WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -W"
-			wpa_msg verbose "wait for wpa_cli to attach"
-		else
-			wpa_msg stderr "action script \"$WPA_ACTION_SCRIPT\" not executable"
+	if [ -n "$WPA_SUP_CONF" ]; then
+		# wpa-action was removed, point to wpa-roam
+		if [ -n "$IF_WPA_ACTION" ]; then
+			wpa_msg stderr "wpa-action support has been removed"
+			wpa_msg stderr "refer to /usr/share/doc/wpasupplicant/README.modes.gz"
 			return 1
 		fi
-	fi
 
-	if [ -n "$IF_WPA_BRIDGE" ]; then
-		WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -b $IF_WPA_BRIDGE"
-		wpa_msg verbose "wpa-bridge $IF_WPA_BRIDGE"
-	fi
+		local WPA_SUP_DRIVER WPA_SUP_OPTIONS
 
-	if [ -n "$IF_WPA_DRIVER" ]; then
-		wpa_msg verbose "wpa-driver $IF_WPA_DRIVER"
-		case "$IF_WPA_DRIVER" in
-			hostap|ipw|madwifi|ndiswrapper)
-				WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -D nl80211,wext"
-				wpa_msg stderr "\"$IF_WPA_DRIVER\" wpa-driver is unsupported"
-				wpa_msg stderr "using \"nl80211,wext\" wpa-driver instead ..."
-				;;
-			*)
-				WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -D $IF_WPA_DRIVER"
-				;;
-		esac
-	else
-		WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -D nl80211,wext"
-		wpa_msg verbose "wpa-driver nl80211,wext (default)"
-	fi
+		if [ -n "$WPA_ACTION_SCRIPT" ]; then
+			if [ -x "$WPA_ACTION_SCRIPT" ]; then
+				WPA_SUP_OPTIONS="-W -B -P $WPA_SUP_PIDFILE -i $WPA_IFACE"
+				wpa_msg verbose "wait for wpa_cli to attach"
+			else
+				wpa_msg stderr "action script \"$WPA_ACTION_SCRIPT\" not executable"
+				return 1
+			fi
+		else
+			WPA_SUP_OPTIONS="-B -P $WPA_SUP_PIDFILE -i $WPA_IFACE"
+		fi
 
-	if [ -n "$IF_WPA_DEBUG_LEVEL" ]; then
-		case "$IF_WPA_DEBUG_LEVEL" in
-			3)
-				WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -t -ddd"
-				;;
-			2)
-				WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -t -dd"
-				;;
-			1)
-				WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -t -d"
-				;;
-			0)
-				# wpa_supplicant default verbosity
-				;;
-			-1)
-				WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -q"
-				;;
-			-2)
-				WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -qq"
-				;;
-		esac
-		wpa_msg verbose "using debug level: $IF_WPA_DEBUG_LEVEL"
-	fi
+		if [ -n "$IF_WPA_BRIDGE" ]; then
+			WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -b $IF_WPA_BRIDGE"
+			wpa_msg verbose "wpa-bridge $IF_WPA_BRIDGE"
+		fi
 
-	if [ -n "$IF_WPA_LOGFILE" ]; then
-		# custom log file
-		WPA_SUP_OPTIONS="$WPA_SUP_OPTIONS -f $IF_WPA_LOGFILE"
-		WPA_SUP_LOGFILE="$IF_WPA_LOGFILE"
-		wpa_msg verbose "logging to $IF_WPA_LOGFILE"
-	fi
+		if [ -n "$IF_WPA_DRIVER" ]; then
+			WPA_SUP_DRIVER="$IF_WPA_DRIVER"
+			wpa_msg verbose "wpa-driver $WPA_SUP_DRIVER"
+		else
+			WPA_SUP_DRIVER="wext"
+			wpa_msg verbose "using default driver type: wpa-driver $WPA_SUP_DRIVER"
+		fi
 
-	wpa_msg verbose "$WPA_SUP_BIN $WPA_SUP_OPTIONS $WPA_SUP_CONF"
+		wpa_msg verbose "$WPA_SUP_BIN $WPA_SUP_OPTIONS -D $WPA_SUP_DRIVER $WPA_SUP_CONF"
+			
+		start-stop-daemon --start --oknodo $DAEMON_VERBOSITY \
+			--name $WPA_SUP_PNAME --startas $WPA_SUP_BIN --pidfile $WPA_SUP_PIDFILE \
+			-- $WPA_SUP_OPTIONS -D $WPA_SUP_DRIVER $WPA_SUP_CONF
+
+		if [ "$?" != "0" ]; then
+			wpa_msg stderr "$WPA_SUP_BIN daemon failed to start"
+			return 1
+		fi
 		
-	start-stop-daemon --start --oknodo $DAEMON_VERBOSITY \
-		--name $WPA_SUP_PNAME --startas $WPA_SUP_BIN --pidfile $WPA_SUP_PIDFILE \
-		-- $WPA_SUP_OPTIONS $WPA_SUP_CONF
-
-	if [ "$?" -ne 0 ]; then
-		wpa_msg stderr "$WPA_SUP_BIN daemon failed to start"
-		return 1
-	fi
-
-	if [ -n "$WPA_SUP_OMIT_PIDFILE" ]; then
-		local WPA_PIDFILE_WAIT
-		local MAX_WPA_PIDFILE_WAIT
-		WPA_PIDFILE_WAIT="0"
-		MAX_WPA_PIDFILE_WAIT="5"
-		until [ -s "$WPA_SUP_PIDFILE" ]; do
-			if [ "$WPA_PIDFILE_WAIT" -ge "$MAX_WPA_PIDFILE_WAIT" ]; then
-				wpa_msg stderr "timed out waiting for creation of $WPA_SUP_PIDFILE"
+		local WPA_SOCKET_WAIT MAX_WPA_SOCKET_WAIT
+		WPA_SOCKET_WAIT="0"
+		MAX_WPA_SOCKET_WAIT="5"
+		until [ -S "$WPA_CTRL_DIR/$WPA_IFACE" ]; do
+			if [ "$WPA_SOCKET_WAIT" -ge "$MAX_WPA_SOCKET_WAIT" ]; then
+				wpa_msg stderr "ctrl_interface socket not found at $WPA_CTRL_DIR/$WPA_IFACE"
 				return 1
 			else
-				wpa_msg verbose "waiting for \"$WPA_SUP_PIDFILE\": " \
-					"$WPA_PIDFILE_WAIT (max. $MAX_WPA_PIDFILE_WAIT)"
+				wpa_msg verbose "waiting for \"$WPA_CTRL_DIR/$WPA_IFACE\": $WPA_SOCKET_WAIT (max. $MAX_WPA_SOCKET_WAIT)"
 			fi
-
-			WPA_PIDFILE_WAIT=$(($WPA_PIDFILE_WAIT + 1))
+			
+			WPA_SOCKET_WAIT=$(($WPA_SOCKET_WAIT + 1))
 			sleep 1
 		done
-		wpa_msg verbose "creating sendsigs omission pidfile: $WPA_SUP_OMIT_PIDFILE"
-		cat "$WPA_SUP_PIDFILE" > "$WPA_SUP_OMIT_PIDFILE"
-	else
-		wpa_msg verbose "sendsigs omission pidfile not created"
-	fi
-
-	local WPA_SOCKET_WAIT
-	local MAX_WPA_SOCKET_WAIT
-	WPA_SOCKET_WAIT="0"
-	MAX_WPA_SOCKET_WAIT="5"
-	until [ -S "$WPA_CTRL_DIR/$WPA_IFACE" ]; do
-		if [ "$WPA_SOCKET_WAIT" -ge "$MAX_WPA_SOCKET_WAIT" ]; then
-			wpa_msg stderr "ctrl_interface socket not found at $WPA_CTRL_DIR/$WPA_IFACE"
-			return 1
-		else
-			wpa_msg verbose "waiting for \"$WPA_CTRL_DIR/$WPA_IFACE\": " \
-				"$WPA_SOCKET_WAIT (max. $MAX_WPA_SOCKET_WAIT)"
-		fi
 		
-		WPA_SOCKET_WAIT=$(($WPA_SOCKET_WAIT + 1))
-		sleep 1
-	done
-	
-	wpa_msg verbose "ctrl_interface socket located at $WPA_CTRL_DIR/$WPA_IFACE"
+		wpa_msg verbose "ctrl_interface socket located at $WPA_CTRL_DIR/$WPA_IFACE"
+	else
+		wpa_msg stderr "init_wpa_supplicant() called without WPA_SUP_CONF"
+		return 1
+	fi
 }
 
 #####################################################################
@@ -328,20 +232,25 @@ init_wpa_supplicant () {
 # the pidfile or ctrl_interface socket path and interface name
 #
 kill_wpa_supplicant () {
-	test_wpa_supplicant || return 0
+	if test_wpa_supplicant; then
+		
+		wpa_msg verbose "terminating $WPA_SUP_PNAME daemon via pidfile $WPA_SUP_PIDFILE"
 
-	wpa_msg verbose "terminating $WPA_SUP_PNAME daemon via pidfile $WPA_SUP_PIDFILE"
+		start-stop-daemon --stop --oknodo $DAEMON_VERBOSITY \
+			--exec $WPA_SUP_BIN --pidfile $WPA_SUP_PIDFILE
+	
+		if [ -f "$WPA_SUP_PIDFILE" ]; then
+			rm -f "$WPA_SUP_PIDFILE"
+		fi
+	elif [ -S "$WPA_CTRL_DIR/$WPA_IFACE" ]; then
 
-	start-stop-daemon --stop --oknodo $DAEMON_VERBOSITY \
-		--exec $WPA_SUP_BIN --pidfile $WPA_SUP_PIDFILE
+		wpa_msg action "terminating via ctrl_interface socket $WPA_CTRL_DIR/$WPA_IFACE"
 
-	if [ -f "$WPA_SUP_PIDFILE" ]; then
-		rm -f "$WPA_SUP_PIDFILE"
-	fi
-
-	if [ -f "$WPA_SUP_OMIT_PIDFILE" ]; then
-		wpa_msg verbose "removing $WPA_SUP_OMIT_PIDFILE"
-		rm -f "$WPA_SUP_OMIT_PIDFILE"
+		wpa_cli terminate >$TO_NULL
+		
+		if [ -S "$WPA_CTRL_DIR/$WPA_IFACE" ]; then
+			rm -f "$WPA_CTRL_DIR/$WPA_IFACE"
+		fi
 	fi
 }
 
@@ -371,20 +280,20 @@ reload_wpa_supplicant () {
 # -B	background process
 #
 init_wpa_cli () {
-	[ -n "$WPA_ACTION_SCRIPT" ] || return 0
+	if [ -n "$WPA_ACTION_SCRIPT" ]; then
+		local WPA_CLI_OPTIONS
+		WPA_CLI_OPTIONS="-B -P $WPA_CLI_PIDFILE -i $WPA_IFACE"
 
-	local WPA_CLI_OPTIONS
-	WPA_CLI_OPTIONS="-B -P $WPA_CLI_PIDFILE -i $WPA_IFACE"
+		wpa_msg verbose "$WPA_CLI_BIN $WPA_CLI_OPTIONS -p $WPA_CTRL_DIR -a $WPA_ACTION_SCRIPT"
+			
+		start-stop-daemon --start --oknodo $DAEMON_VERBOSITY \
+			--name $WPA_CLI_PNAME --startas $WPA_CLI_BIN --pidfile $WPA_CLI_PIDFILE \
+			-- $WPA_CLI_OPTIONS -p $WPA_CTRL_DIR -a $WPA_ACTION_SCRIPT
 
-	wpa_msg verbose "$WPA_CLI_BIN $WPA_CLI_OPTIONS -p $WPA_CTRL_DIR -a $WPA_ACTION_SCRIPT"
-		
-	start-stop-daemon --start --oknodo $DAEMON_VERBOSITY \
-		--name $WPA_CLI_PNAME --startas $WPA_CLI_BIN --pidfile $WPA_CLI_PIDFILE \
-		-- $WPA_CLI_OPTIONS -p $WPA_CTRL_DIR -a $WPA_ACTION_SCRIPT
-
-	if [ "$?" -ne 0 ]; then
-		wpa_msg stderr "$WPA_CLI_BIN daemon failed to start"
-		return 1
+		if [ "$?" != "0" ]; then
+			wpa_msg stderr "$WPA_CLI_BIN daemon failed to start"
+			return 1
+		fi
 	fi
 }
 
@@ -394,23 +303,16 @@ init_wpa_cli () {
 # pidfile
 #
 kill_wpa_cli () {
-	test_wpa_cli || return 0
-	
-	wpa_msg verbose "terminating $WPA_CLI_PNAME daemon via pidfile $WPA_CLI_PIDFILE"
-	
-	start-stop-daemon --stop --oknodo $DAEMON_VERBOSITY \
-		--exec $WPA_CLI_BIN --pidfile $WPA_CLI_PIDFILE
-	
-	if [ -f "$WPA_CLI_PIDFILE" ]; then
-		rm -f "$WPA_CLI_PIDFILE"
-	fi
-
-	if [ -f "$WPA_CLI_TIMESTAMP" ]; then
-		rm -f "$WPA_CLI_TIMESTAMP"
-	fi
-
-	if [ -L "$WPA_CLI_IFUPDOWN" ]; then
-		rm -f "$WPA_CLI_IFUPDOWN"
+	if test_wpa_cli; then
+		
+		wpa_msg verbose "terminating $WPA_CLI_PNAME daemon via pidfile $WPA_CLI_PIDFILE"
+		
+		start-stop-daemon --stop --oknodo $DAEMON_VERBOSITY \
+			--exec $WPA_CLI_BIN --pidfile $WPA_CLI_PIDFILE
+		
+		if [ -f "$WPA_CLI_PIDFILE" ]; then
+			rm -f "$WPA_CLI_PIDFILE"
+		fi
 	fi
 }
 
@@ -430,9 +332,7 @@ wpa_cli_do () {
 		return 0
 	fi
 	
-	local WPACLISET_VALUE
-	local WPACLISET_VARIABLE
-	local WPACLISET_DESC
+	local WPACLISET_VALUE WPACLISET_VARIABLE WPACLISET_DESC
 	
 	case "$2" in
 		ascii)
@@ -470,10 +370,6 @@ wpa_cli_do () {
 	wpa_msg action "$WPACLISET_DESC"
 	
 	wpa_cli $WPACLISET_VARIABLE "$WPACLISET_VALUE" >$TO_NULL
-
-	if [ "$?" -ne 0 ]; then
-		wpa_msg stderr "$WPACLISET_DESC failed!"
-	fi
 }
 
 #####################################################################
@@ -514,14 +410,11 @@ ishex () {
 # 256-bit hexadecimal key must be 64 characters in length
 #
 wpa_key_check_and_set () {
-	if [ "$#" -ne 3 ]; then
+	if [ -z "$1" ]; then
 		return 0
 	fi
 
-	local KEY
-	local KEY_LEN
-	local KEY_TYPE
-	local ENC_TYPE
+	local KEY KEY_TYPE
 	
 	case "$1" in
 		'"'*'"')
@@ -533,67 +426,20 @@ wpa_key_check_and_set () {
 			;;
 	esac
 
-	KEY_LEN="${#KEY}"
-
-	case "$2" in
-		wep_key*)
-			ENC_TYPE="WEP"
-			;;
-		psk)
-			ENC_TYPE="WPA"
-			;;
-		*)
-			return 0
-			;;
-	esac
-
-	if [ "$ENC_TYPE" = "WEP" ]; then
-		if ishex "$KEY"; then
-			case "$KEY_LEN" in
-				10|26|32|58)
-					# 64/128/152/256-bit WEP
-					KEY_TYPE="raw"
-					;;
-				*)
-					KEY_TYPE="ascii"
-					;;
-			esac
-		else
-			KEY_TYPE="ascii"
-		fi
-
-		if [ "$KEY_TYPE" = "ascii" ]; then
-			if [ "$KEY_LEN" -lt "5" ]; then
-				wpa_msg stderr "WARNING: plaintext or ascii WEP key has $KEY_LEN characters,"
-				wpa_msg stderr "it must have at least 5 to be valid."
-			fi
-		fi
-	elif [ "$ENC_TYPE" = "WPA" ]; then
-		if ishex "$KEY"; then
-			case "$KEY_LEN" in
-				64)
-					# 256-bit WPA
-					KEY_TYPE="raw"
-					;;
-				*)
-					KEY_TYPE="ascii"
-					;;
-			esac
-		else
-			KEY_TYPE="ascii"
-		fi
-
-		if [ "$KEY_TYPE" = "ascii" ]; then
-			if [ "$KEY_LEN" -lt "8" ] || [ "$KEY_LEN" -gt "63" ]; then
-				wpa_msg stderr "WARNING: plaintext or ascii WPA key has $KEY_LEN characters,"
-				wpa_msg stderr "it must have between 8 and 63 to be valid."
-				wpa_msg stderr "If the WPA key is a 256-bit hexadecimal key, it must have"
-				wpa_msg stderr "exactly 64 characters."
-			fi
+	if ishex "$KEY" && [ "${#KEY}" -eq "64" ]; then
+		KEY_TYPE="raw"
+	else
+		KEY_TYPE="ascii"
+		if [ "${#KEY}" -lt "8" ] || [ "${#KEY}" -gt "63" ]; then
+			wpa_msg stderr \
+				"plaintext or ascii wpa-psk has ${#KEY} characters, it must have between 8 and 63"
+			wpa_msg stderr \
+				"if wpa-psk truly is a 256-bit hexadecimal key, it must have 64 characters"
 		fi
 	fi
-
-	wpa_cli_do "$KEY" "$KEY_TYPE" set_network "$2" "$3"
+	
+	wpa_cli_do "$KEY" "$KEY_TYPE" \
+		set_network psk wpa-psk
 }
 
 #####################################################################
@@ -625,8 +471,7 @@ conf_wpa_supplicant () {
 	wpa_cli_do "$IF_WPA_PREAUTHENTICATE" raw \
 		preauthenticate wpa-preauthenticate
 		
-	if [ -n "$IF_WPA_SSID" ] || [ "$IF_WPA_DRIVER" = "wired" ] || \
-		[ -n "$IF_WPA_KEY_MGMT" ]; then
+	if [ -n "$IF_WPA_SSID" ] || [ "$IF_WPA_DRIVER" = "wired" ]; then
 		
 		case "$IF_WPA_SSID" in
 			'"'*'"')
@@ -664,8 +509,7 @@ conf_wpa_supplicant () {
 		fi
 	
 		if [ -n "$IF_WPA_PSK" ]; then
-			wpa_key_check_and_set "$IF_WPA_PSK" \
-				psk wpa-psk
+			wpa_key_check_and_set "$IF_WPA_PSK"
 		fi
 		
 		wpa_cli_do "$IF_WPA_PAIRWISE" raw \
@@ -679,12 +523,6 @@ conf_wpa_supplicant () {
 
 		wpa_cli_do "$IF_WPA_FREQUENCY" raw \
 			set_network frequency wpa-frequency
-
-		wpa_cli_do "$IF_WPA_SCAN_FREQ" raw \
-			set_network scan_freq wpa-scan-freq
-
-		wpa_cli_do "$IF_WPA_FREQ_LIST" raw \
-			set_network freq_list wpa-freq-list
 		
 		wpa_cli_do "$IF_WPA_KEY_MGMT" raw \
 			set_network key_mgmt wpa-key-mgmt
@@ -791,25 +629,17 @@ conf_wpa_supplicant () {
 		wpa_cli_do "$IF_WPA_EAPOL_FLAGS" raw \
 			set_network eapol_flags wpa-eapol-flags
 		
-		if [ -n "$IF_WPA_WEP_KEY0" ]; then
-			wpa_key_check_and_set "$IF_WPA_WEP_KEY0" \
-				wep_key0 wpa-wep-key0
-		fi
+		wpa_cli_do "$IF_WPA_WEP_KEY0" raw \
+			set_network wep_key0 wpa-wep-key0
 		
-		if [ -n "$IF_WPA_WEP_KEY1" ]; then
-			wpa_key_check_and_set "$IF_WPA_WEP_KEY1" \
-				wep_key1 wpa-wep-key1
-		fi
-
-		if [ -n "$IF_WPA_WEP_KEY2" ]; then
-			wpa_key_check_and_set "$IF_WPA_WEP_KEY2" \
-				wep_key2 wpa-wep-key2
-		fi
-
-		if [ -n "$IF_WPA_WEP_KEY3" ]; then
-			wpa_key_check_and_set "$IF_WPA_WEP_KEY3" \
-				wep_key3 wpa-wep-key3
-		fi
+		wpa_cli_do "$IF_WPA_WEP_KEY1" raw \
+			set_network wep_key1 wpa-wep-key1
+		
+		wpa_cli_do "$IF_WPA_WEP_KEY2" raw \
+			set_network wep_key2 wpa-wep-key2
+		
+		wpa_cli_do "$IF_WPA_WEP_KEY3" raw \
+			set_network wep_key3 wpa-wep-key3
 		
 		wpa_cli_do "$IF_WPA_WEP_TX_KEYIDX" raw \
 			set_network wep_tx_keyidx wpa-wep-tx-keyidx
@@ -819,6 +649,9 @@ conf_wpa_supplicant () {
 			
 		wpa_cli_do "$IF_WPA_PAC_FILE" ascii \
 			set_network pac_file wpa-pac-file
+		
+		wpa_cli_do "$IF_WPA_MODE" raw \
+			set_network mode wpa-mode
 		
 		wpa_cli_do "$IF_WPA_PEERKEY" raw \
 			set_network peerkey wpa-peerkey
@@ -835,29 +668,42 @@ conf_wpa_supplicant () {
 }
 
 #####################################################################
-## Log wpa_cli environment variables
-wpa_log_env () {
-	wpa_msg log "WPA_IFACE=$WPA_IFACE WPA_ACTION=$WPA_ACTION"
-	wpa_msg log "WPA_ID=$WPA_ID WPA_ID_STR=$WPA_ID_STR WPA_CTRL_DIR=$WPA_CTRL_DIR"
+## wpa_action basic logging
+# Log actions to file, test to see if it is writeable first
+#
+wpa_log_init () {
+	if touch "$WPA_CLI_LOGFILE" 2>/dev/null; then
+		exec >> "$WPA_CLI_LOGFILE" 2>&1
+	fi
+}
+
+# log timestamp and wpa_action arguments
+wpa_log_action () {
+	echo "########## $(date +"%H:%M:%S  %Y-%m-%d") ##########"
+	echo "IFACE=$WPA_IFACE ACTION=$WPA_ACTION"
+}
+
+# log wpa_cli environment variables
+wpa_log_environment () {
+	echo "WPA_ID=$WPA_ID WPA_ID_STR=$WPA_ID_STR"
+	echo "WPA_CTRL_DIR=$WPA_CTRL_DIR"
 }
 
 #####################################################################
 ## hysteresis checking
 # Networking tools such as dhcp clients used with ifupdown can
-# synthesize artificial ACTION events, particuarly just after a
+# synthesize artificial ACTION events, particuarly just after a 
 # DISCONNECTED/CONNECTED events are experienced in quick succession.
 # This can lead to infinite event loops, and in extreme cases has the
 # potential to cause system instability.
 #
 wpa_hysteresis_event () {
-	echo "$(date +%s)" > "$WPA_CLI_TIMESTAMP" 2>/dev/null
+	echo "$(date +%s)" > "$WPA_CLI_TIMESTAMP"
 }
 
 wpa_hysteresis_check () {
 	if [ -f "$WPA_CLI_TIMESTAMP" ]; then
-		local TIME
-		local TIMESTAMP
-		local TIMEWAIT
+		local TIME TIMESTAMP TIMEWAIT
 		TIME=$(date +%s)
 		# current time minus 4 second event buffer
 		TIMEWAIT=$(($TIME-4))
@@ -866,7 +712,7 @@ wpa_hysteresis_check () {
 		# compare values, allowing new action to be processed 
 		# only if last action was more than 4 seconds ago
 		if [ "$TIMEWAIT" -le "$TIMESTAMP" ]; then
-			wpa_msg log "$WPA_ACTION event blocked by hysteresis check"
+			echo "Ignoring $WPA_ACTION event, too soon after previous event"
 			return 1
 		fi
 	fi
@@ -875,40 +721,17 @@ wpa_hysteresis_check () {
 }
 
 #####################################################################
-## ifupdown locking functions
-# A collection of rudimentary locking functions to lock ifup/ifdown
-# actions.
+## identify ifupdown files
+# Identify ifupdown core files, so that state of the interface can be
+# checked. This is the weakest part of the wpa_action roaming scheme,
+# it would be _much_ better if stateless ifupdown capabilities were
+# a reality.
 #
-
-ifupdown_lock () {
-	ln -s lock "$WPA_CLI_IFUPDOWN"
-}
-
-ifupdown_locked () {
-	[ -L "$WPA_CLI_IFUPDOWN" ] && return 0
-
-	return 1
-}
-
-ifupdown_unlock () {
-	rm -f "$WPA_CLI_IFUPDOWN"
-}
-
-#####################################################################
-## apply mapping logic and ifup logical interface
-# Apply mapping logic via id_str or external mapping script, check
-# state of IFACE with respect to ifupdown and ifup logical interaface
-#
-ifup () {
-	local INTERFACES_FILE
-	local IFSTATE_FILE
-	local IFUP_RETVAL
-	local WPA_LOGICAL_IFACE
-
+ifupdown_check () {
 	if [ -e /etc/network/interfaces ]; then
 		INTERFACES_FILE="/etc/network/interfaces"
 	else
-		wpa_msg log "/etc/network/interfaces does not exist, $WPA_IFACE will not be configured"
+		echo "Cannot locate ifupdown's \"interfaces\" file, $WPA_IFACE will not be configured"
 		return 1
 	fi
 
@@ -919,14 +742,29 @@ ifup () {
 		# ubuntu's
 		IFSTATE_FILE="/var/run/network/ifstate"
 	else
-		unset IFSTATE_FILE
+		echo "Cannot locate ifupdown's \"ifstate\" file, $WPA_IFACE will not be configured"
+		return 1
 	fi
+
+	return 0
+}
+
+#####################################################################
+## apply mapping logic and ifup logical interface
+# Apply mapping logic via id_str or external mapping script, check
+# state of IFACE with respect to ifupdown and ifup logical interaface
+#
+ifup () {
+	local WPA_LOGICAL_IFACE
 	
 	if [ -z "$IF_WPA_MAPPING_SCRIPT_PRIORITY" ] && [ -n "$WPA_ID_STR" ]; then
 		WPA_LOGICAL_IFACE="$WPA_ID_STR"
+		echo "Mapping logical interface via id_str: $WPA_LOGICAL_IFACE"
 	fi
 	
 	if [ -z "$WPA_LOGICAL_IFACE" ] && [ -n "$IF_WPA_MAPPING_SCRIPT" ]; then
+		echo "Mapping logical interface via wpa-mapping-script: $IF_WPA_MAPPING_SCRIPT"
+		
 		local WPA_MAP_STDIN
 		
 		WPA_MAP_STDIN=$(set | sed -n 's/^\(IF_WPA_MAP[0-9]*\)=.*/echo \$\1/p')
@@ -938,47 +776,39 @@ ifup () {
 		fi
 		
 		if [ -n "$WPA_LOGICAL_IFACE" ]; then
-			wpa_msg log "mapping script result: $WPA_LOGICAL_IFACE"
+			echo "Mapping script result: $WPA_LOGICAL_IFACE"
 		else
-			wpa_msg log "mapping script failed."
+			echo "Mapping script failed."
 		fi
 	fi
 
 	if [ -z "$WPA_LOGICAL_IFACE" ]; then
 		if [ -n "$IF_WPA_ROAM_DEFAULT_IFACE" ]; then
 			WPA_LOGICAL_IFACE="$IF_WPA_ROAM_DEFAULT_IFACE"
+			echo "Using wpa-roam-default-iface: $WPA_LOGICAL_IFACE"
 		else
 			WPA_LOGICAL_IFACE="default"
+			echo "Using fallback logical interface: $WPA_LOGICAL_IFACE"
 		fi
 	fi
 
 	if [ -n "$WPA_LOGICAL_IFACE" ]; then
-		if egrep -q "^iface[[:space:]]+${WPA_LOGICAL_IFACE}[[:space:]]+inet" "$INTERFACES_FILE"; then
-			: # logical network is defined
+		if egrep -q "^iface[[:space:]]+$WPA_LOGICAL_IFACE[[:space:]]+inet" "$INTERFACES_FILE"; then
+			
+			echo "ifup $WPA_IFACE=$WPA_LOGICAL_IFACE"
+			
+			if grep -q "^$WPA_IFACE=$WPA_IFACE" "$IFSTATE_FILE"; then
+				# Force settings over the unconfigured "master" IFACE
+				/sbin/ifup --force "$WPA_IFACE=$WPA_LOGICAL_IFACE"
+			else
+				/sbin/ifup "$WPA_IFACE=$WPA_LOGICAL_IFACE"
+			fi
 		else
-			wpa_msg log "network settings not defined for $WPA_LOGICAL_IFACE in $INTERFACES_FILE"
-			WPA_LOGICAL_IFACE="default"
+			echo "No network defined for \"$WPA_LOGICAL_IFACE\" in \"$INTERFACES_FILE\""
 		fi
-
-		wpa_msg log "ifup $WPA_IFACE=$WPA_LOGICAL_IFACE"
-
-		ifupdown_lock
-
-		if [ -n "$IFSTATE_FILE" ] && grep -q "^$WPA_IFACE=$WPA_IFACE" "$IFSTATE_FILE"; then
-			# Force settings over the unconfigured "master" IFACE
-			/sbin/ifup -v --force "$WPA_IFACE=$WPA_LOGICAL_IFACE"
-		else
-			/sbin/ifup -v "$WPA_IFACE=$WPA_LOGICAL_IFACE"
-		fi
-		IFUP_RETVAL="$?"
-
-		ifupdown_unlock
+	else
+		echo "No suitable logical interface mapping for ifupdown to configure"
 	fi
-
-	wpa_msg log "creating sendsigs omission pidfile: $WPA_SUP_OMIT_PIDFILE"
-	cat "$WPA_SUP_PIDFILE" > "$WPA_SUP_OMIT_PIDFILE"
-
-	return "$IFUP_RETVAL"
 }
 
 #####################################################################
@@ -986,16 +816,12 @@ ifup () {
 # Check IFACE state and ifdown as requested.
 #
 ifdown () {
-	wpa_msg log "ifdown $WPA_IFACE"
-
-	ifupdown_lock
-
-	/sbin/ifdown -v "$WPA_IFACE"
-
-	ifupdown_unlock
-
-	wpa_msg log "removing sendsigs omission pidfile: $WPA_SUP_OMIT_PIDFILE"
-	rm -f "$WPA_SUP_OMIT_PIDFILE"
+	if grep -q "^$WPA_IFACE" "$IFSTATE_FILE"; then
+		echo "ifdown $WPA_IFACE"
+		/sbin/ifdown "$WPA_IFACE"
+	else
+		echo "Ignoring request to take \"$WPA_IFACE\" down, it is not up"
+	fi
 }
 
 #####################################################################
@@ -1006,10 +832,10 @@ ifdown () {
 # NB: use iproute if present, flushing the IFACE first
 #
 if_post_down_up () {
-	if [ -x /bin/ip ]; then
-		ip addr flush dev "$WPA_IFACE" scope global 2>/dev/null
-		ip link set "$WPA_IFACE" up
+	if [ -x /sbin/ip ]; then
+		/sbin/ip addr flush dev "$WPA_IFACE" 2>/dev/null
+		/sbin/ip link set "$WPA_IFACE" up
 	else
-		ifconfig "$WPA_IFACE" up
+		/sbin/ifconfig "$WPA_IFACE" up
 	fi
 }

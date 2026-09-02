@@ -1,6 +1,12 @@
-DEPENDS += "openssl"
+PR .= ".2"
+
+inherit upx-compress
 
 PARALLEL_MAKEINST = ""
+
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+DEPENDS += "openssl"
 
 SRC_URI += " \
         file://action_wpa.sh \
@@ -8,6 +14,7 @@ SRC_URI += " \
         file://ifupdown.sh \
         file://wpa_action \
         file://wpa_action.8 \
+        file://fix-build-openssl102q.patch \
 "
 
 # added only for 2.9 (still pinned via PREFERRED_VERSION on some boxes).
@@ -40,5 +47,3 @@ do_install:append() {
         ln -s ../../wpa_supplicant/ifupdown.sh ${D}${sysconfdir}/network/if-pre-up.d/${PN}
         ln -s ../../wpa_supplicant/ifupdown.sh ${D}${sysconfdir}/network/if-up.d/${PN}
 }
-
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
