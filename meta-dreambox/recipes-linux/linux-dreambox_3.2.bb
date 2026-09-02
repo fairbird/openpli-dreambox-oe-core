@@ -66,6 +66,7 @@ SRC_URI = " \
     file://fix-build-with-binutils-2.41.patch \
     file://vtbl-ubi.patch \
     file://initramfs-mipsel.cpio.xz;unpack=0 \
+    file://cfg80211-backport-external-auth-3.2.patch \
 "
 
 PACKAGES_DYNAMIC = "kernel-*"

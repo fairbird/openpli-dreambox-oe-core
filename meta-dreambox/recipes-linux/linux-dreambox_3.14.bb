@@ -33,6 +33,7 @@ SRC_URI = " \
     file://fix-multiple-defs-yyloc.patch \
     file://fix-build-with-binutils-2.41.patch \
     file://chkroot-multiboot.cpio.xz;unpack=0 \
+    file://cfg80211-backport-external-auth-3.14.patch\
 "
 
 SRC_URI[kernel.md5sum] = "b621207b3f6ecbb67db18b13258f8ea8"

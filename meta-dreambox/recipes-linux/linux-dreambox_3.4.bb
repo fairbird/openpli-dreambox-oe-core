@@ -33,6 +33,7 @@ SRC_URI = " \
     file://vtbl-ubi.patch \
     file://chkroot-multiboot.cpio.xz;unpack=0 \
     file://initramfs-mipsel.cpio.xz;unpack=0 \
+    file:/cfg80211-backport-external-auth-3.4.patch \
 "
 
 SRC_URI[kernel.md5sum] = "967f72983655e2479f951195953e8480"
