@@ -10,6 +10,8 @@ S = "${UNPACKDIR}"
 
 inherit allarch
 
+PROVIDES += "firmware-dvb-usb-tbs5520"
+
 PACKAGES = " \
     ${PN} \
     firmware-dvb-usb-tbs5931 \
