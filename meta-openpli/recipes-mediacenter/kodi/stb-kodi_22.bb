@@ -137,6 +137,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=master \
            file://0103-native-stbplayer-codec.patch \
            file://0104-bcm-h264-container-framerate.patch \
            file://0054-stb-hardware-audio-delay.patch \
+           file://0055-stb-refresh-family-tolerance.patch \
            file://kodi-stb-wrapper \
            file://kodi-stb-runtime \
            "
