@@ -5,15 +5,15 @@ HOMEPAGE = "https://mediaarea.net/en/MediaInfo"
 SECTION = "utils"
 PRIORIITY = "optional"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://${UNPACKDIR}/MediaInfo/LICENSE;md5=8f93c85175cbc94ea160ad08cc157822"
+LIC_FILES_CHKSUM = "file://${UNPACKDIR}/MediaInfo/LICENSE;md5=9e35b82c62a9516c3b6f9846aac29fd0"
 
 DEPENDS += "libmediainfo libzen zlib"
 
 RDEPENDS:${PN} += "libmediainfo libzen"
 
 SRC_URI = "https://mediaarea.net/download/source/mediainfo/${PV}/mediainfo_${PV}.tar.bz2"
-SRC_URI[md5sum] = "f7425bbaba310b0f489aae39b7a6494e"
-SRC_URI[sha256sum] = "26bfed67861967e96c9e1f3077a8b462f4ff456d3fc7f1dfaf8a51f1339aed4c"
+SRC_URI[md5sum] = "d1c012f87a5ac0787c7025ab07d84df0"
+SRC_URI[sha256sum] = "fdf80b0ed37032091f066ce0c145765a5bc5b3be7b6e4a38d94ca7d96f77e2e6"
 
 S = "${UNPACKDIR}/MediaInfo/Project/GNU/CLI"
 
