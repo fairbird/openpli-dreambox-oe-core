@@ -21,6 +21,8 @@ UNPACKDIR = "${WORKDIR}/u"
 
 S = "${UNPACKDIR}/s"
 
+require kcflags.inc
+
 # WPA3-SAE; the driver leaves this path disabled unless we ask for it
 EXTRA_OEMAKE = "KSRC=${STAGING_KERNEL_DIR} LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR} \
     USER_EXTRA_CFLAGS=-DCONFIG_KERNEL_PATCH_EXTERNAL_AUTH"
@@ -29,5 +31,3 @@ do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
     install -m 0644 ${S}/8821cu.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
 }
-
-
