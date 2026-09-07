@@ -5,11 +5,19 @@ LICENSE = "GPL-2.0-only"
 
 inherit module
 
-LIC_FILES_CHKSUM = "file://ReadMe.txt;md5=bd3fdc588b21f7451c03b1bbaebeb4ce"
+PR = "r1"
+
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/atvcaptain/realtek-r8152-linux.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/oe-alliance-drivers/r8152.git;protocol=https;branch=master;destsuffix=s"
+UNPACKDIR = "${WORKDIR}/u"
+
+S = "${UNPACKDIR}/s"
+
 EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR}"
+
+require kcflags.inc
 
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP
@@ -20,5 +28,4 @@ do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net
     install -m 0644 ${S}/*.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net
 }
-
 
