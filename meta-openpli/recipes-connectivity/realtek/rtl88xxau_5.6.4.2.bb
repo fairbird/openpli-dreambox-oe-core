@@ -1,66 +1,30 @@
-SUMMARY = "Ralink 8812AU / 8821AU v5.6.4.2"
+SUMMARY = "Realtek RTL8811AU, RTL8812AU and RTL8821AU"
 HOMEPAGE = "http://www.realtek.com.tw"
 SECTION = "kernel/modules"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b1918d7d89f091725a3188ff95f7c72b"
+
+DEPENDS = "bc-native"
 
 inherit module
 
-RREPLACES:${PN} = "kernel-module-8812au kernel-module-8814au"
-RCONFLICTS:${PN} = "kernel-module-8812au kernel-module-8814au"
+PR = "r1"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/atvcaptain/rtl8812au.git;protocol=https;branch=v5.6.4.2"
-EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
+SRC_URI = "git://github.com/oe-alliance-drivers/rtl8812au.git;protocol=https;branch=master;destsuffix=s"
+# The default unpack directory "sources" costs six more characters on every
+# object path.
+UNPACKDIR = "${WORKDIR}/u"
 
-do_compile () {
-    unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP
-    oe_runmake 'M={D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless' \
-        'KERNEL_SOURCE=${STAGING_KERNEL_DIR}' \
-        'LINUX_SRC=${STAGING_KERNEL_DIR}' \
-        'KDIR=${STAGING_KERNEL_DIR}' \
-        'KERNDIR=${STAGING_KERNEL_DIR}' \
-        'KSRC=${STAGING_KERNEL_DIR}' \
-        'KERNEL_VERSION=${KERNEL_VERSION}' \
-        'KVER=${KERNEL_VERSION}' \
-        'CC=${KERNEL_CC}' \
-        'AR=${KERNEL_AR}' \
-        'LD=${KERNEL_LD}'
-}
+S = "${UNPACKDIR}/s"
 
-# need only for dreambox linux-meson64 4.9 + GCC 15
-export KCFLAGS += " -std=gnu17 \
-                    -Wno-error=misleading-indentation \
-                    -Wno-error=aggressive-loop-optimizations \
-                    -Wno-error=int-to-pointer-cast \
-                    -Wno-error=restrict \
-                    -Wno-error=int-conversion \
-                    -Wno-error=maybe-uninitialized \
-                    -Wno-error=discarded-qualifiers \
-                    -Wno-error=switch-unreachable \
-                    -Wno-error=bool-operation \
-                    -Wno-error=declaration-after-statement \
-                    -Wno-error=incompatible-pointer-types \
-                    -Wno-error \
-                    -Wno-format \
-                    -Wno-address \
-                    -Wno-return-mismatch \
-                    -Wno-format-extra-args \
-                    -Wno-frame-larger-than \
-                    -Wno-return-type \
-                    -Wno-unused-variable \
-                    -Wno-missing-attributes \
-                    -Wno-address-of-packed-member \
-                    -Wno-tautological-compare \
-"
+require kcflags.inc
+
+# WPA3-SAE; the driver leaves this path disabled unless we ask for it.
+EXTRA_OEMAKE = "KSRC=${STAGING_KERNEL_DIR} LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR} \
+    USER_EXTRA_CFLAGS=-DCONFIG_KERNEL_PATCH_EXTERNAL_AUTH"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
-    install -m 0644 ${S}/88XXau.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
-
+    install -m 0644 ${S}/8812au.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
 }
-
-do_package_qa() {
-}
-
-
