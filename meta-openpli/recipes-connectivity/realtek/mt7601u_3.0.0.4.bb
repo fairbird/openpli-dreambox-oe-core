@@ -4,45 +4,15 @@ SECTION = "kernel/modules"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://iwpriv_usage.txt;md5=8876ae2c103446a442658f1cc2a01b76"
 
-
 inherit module
 
-SRC_URI = "https://source.mynonpublic.com/DPO_MT7601U_LinuxSTA_3.0.0.4_20130913c.zip \
-          file://mt7601u.patch \
-          file://remove_linux_2_4_compability.patch \
-          "
-
+SRCREV = "${AUTOREV}"
+SRC_URI = "git://github.com/oe-alliance-drivers/mt7601u.git;protocol=https;branch=master;destsuffix=s"
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 
-# need for dreambox linux-meson64 4.9 + GCC 15
-export KCFLAGS += " -std=gnu17 \
-                    -Wno-error=misleading-indentation \
-                    -Wno-error=aggressive-loop-optimizations \
-                    -Wno-error=int-to-pointer-cast \
-                    -Wno-error=restrict \
-                    -Wno-error=int-conversion \
-                    -Wno-error=maybe-uninitialized \
-                    -Wno-error=discarded-qualifiers \
-                    -Wno-error=switch-unreachable \
-                    -Wno-error=bool-operation \
-                    -Wno-error=declaration-after-statement \
-                    -Wno-error=implicit-function-declaration \
-                    -Wno-error=incompatible-pointer-types \
-                    -Wno-error=ignored-qualifiers \
-                    -Wno-error \
-                    -Wno-format \
-                    -Wno-address \
-                    -Wno-return-mismatch \
-                    -Wno-format-extra-args \
-                    -Wno-frame-larger-than \
-                    -Wno-return-type \
-                    -Wno-unused-variable \
-                    -Wno-missing-attributes \
-                    -Wno-address-of-packed-member \
-"
+require kcflags.inc
 
-S = "${UNPACKDIR}/MT7601U"
-
+S = "${UNPACKDIR}/s"
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
     install -m 0644 ${S}/os/linux/mt7601Usta.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
@@ -51,9 +21,5 @@ do_install() {
     install -m 0644 ${S}/RT2870STACard.dat ${D}${sysconfdir}/Wireless/MT7601U/MT7601UCard.dat
 }
 
-SRC_URI[md5sum] = "0b6d799d007de1594d8ae5bd34165341"
-SRC_URI[sha256sum] = "43b3814b318d8baeab5138bbdb586461f94a52151135f55185a4b3b4c0ff2fe3"
-
 FILES:${PN}:append = "${sysconfdir}/Wireless"
-
 

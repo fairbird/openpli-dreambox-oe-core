@@ -4,50 +4,15 @@ SECTION = "kernel/modules"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://iwpriv_usage.txt;md5=8876ae2c103446a442658f1cc2a01b76"
 
-
 inherit module
 
-SRC_URI = "file://mt7610u_wifi_sta_v3002_dpo_20130916.tar.bz2 \
-	file://config.patch;patch=1 \
-	file://change_device_name.patch;patch=1 \
-	file://firmware_file_rename.patch;patch=1 \
-	file://new_devices.patch;patch=1 \
-	file://buildfix.patch;patch=1 \
-	"
+SRCREV = "${AUTOREV}"
+SRC_URI = "git://github.com/oe-alliance-drivers/mt7610u.git;protocol=https;branch=master;destsuffix=s"
 
-SRC_URI:append:dm900 = " file://fix_build_arm.patch;patch=1"
-SRC_URI:append:dm920 = " file://fix_build_arm.patch;patch=1"
-
-S = "${UNPACKDIR}/mt7610u_wifi_sta_v3002_dpo_20130916"
-
+S = "${UNPACKDIR}/s"
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR}"
 
-# need only for dreambox linux-meson64 4.9 + GCC 15
-export KCFLAGS += " -std=gnu17 \
-                    -Wno-error=misleading-indentation \
-                    -Wno-error=aggressive-loop-optimizations \
-                    -Wno-error=int-to-pointer-cast \
-                    -Wno-error=restrict \
-                    -Wno-error=int-conversion \
-                    -Wno-error=maybe-uninitialized \
-                    -Wno-error=discarded-qualifiers \
-                    -Wno-error=switch-unreachable \
-                    -Wno-error=bool-operation \
-                    -Wno-error=declaration-after-statement \
-                    -Wno-error=implicit-function-declaration \
-                    -Wno-error=incompatible-pointer-types \
-                    -Wno-error=ignored-qualifiers \
-                    -Wno-error \
-                    -Wno-format \
-                    -Wno-address \
-                    -Wno-return-mismatch \
-                    -Wno-format-extra-args \
-                    -Wno-frame-larger-than \
-                    -Wno-return-type \
-                    -Wno-unused-variable \
-                    -Wno-missing-attributes \
-                    -Wno-address-of-packed-member \
-"
+require kcflags.inc
 
 do_install() {
 	install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
@@ -60,9 +25,5 @@ do_install() {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI[md5sum] = "2b552aff1bbd4effe94185e222eb761e"
-SRC_URI[sha256sum] = "c0061b9010b80c1fc09d78786317957044bde43e2a127ecefd66d4faa12d2906"
-
 FILES:${PN} += "${sysconfdir}/Wireless/mt7610uSTA/mt7610uSTACard.dat ${sysconfdir}/Wireless/mt7610uSTA/mt7610uSTA.dat ${sysconfdir}/Wireless/mt7610uSTA/SingleSKU.dat"
-
 
