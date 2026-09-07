@@ -1,8 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://use-legacy-path-for-pycs.patch \
-	file://openssl40-ssl-module.patch \
-"
+SRC_URI += "file://use-legacy-path-for-pycs.patch"
 
 SRC_URI:remove = "file://CVE-2026-11940.patch file://CVE-2026-11972.patch file://CVE-2026-4360.patch"
 
