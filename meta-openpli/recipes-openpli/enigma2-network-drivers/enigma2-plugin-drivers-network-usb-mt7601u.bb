@@ -1,14 +1,14 @@
 SUMMARY = "mediatek 7601u"
-inherit allarch
+inherit allarch oea-wifi-driver
 
 require conf/license/license-gplv2.inc
 
 RRECOMMENDS:${PN} = " \
-    ${@bb.utils.contains("LINUX_WIFI_mt7106u", "kernel-module-mt7601u", "kernel-module-mt7601u", "mt7601u", d)} \
+    ${@wifi_driver(d, 'mt7601u', 'kernel-module-mt7601u', 'mt7601u')} \
     firmware-mt7601u \
     "
 
 PV = "1.0"
-PR = "r2"
+PR = "r3"
 
 ALLOW_EMPTY:${PN} = "1"
