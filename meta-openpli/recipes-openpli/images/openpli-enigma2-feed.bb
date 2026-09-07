@@ -293,6 +293,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-yampmusicplayer \
 	enigma2-plugin-extensions-plutotv \
 	enigma2-plugin-extensions-estalker \
+	${@bb.utils.contains_any('DEFAULTTUNE', 'cortexa15hf-neon-vfpv4 aarch64', 'enigma2-plugin-extensions-telerising', '', d)} \
 	enigma2-plugin-systemplugins-m3uiptv \
 	enigma2-plugin-systemplugins-netspeedtest \
 	enigma2-plugin-systemplugins-extnumberzap \
