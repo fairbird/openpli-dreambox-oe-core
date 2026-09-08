@@ -184,6 +184,7 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-movieorganisor \
 	enigma2-plugin-extensions-multiquickbutton \
 	enigma2-plugin-extensions-oscamsmartcard \
+	enigma2-plugin-extensions-piconbrowser \
 	enigma2-plugin-extensions-piconmanager \
 	enigma2-plugin-extensions-piconsmissing\
 	enigma2-plugin-extensions-piconsupdater \
