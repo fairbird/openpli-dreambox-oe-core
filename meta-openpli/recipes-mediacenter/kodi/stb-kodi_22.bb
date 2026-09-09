@@ -189,7 +189,6 @@ SRC_URI:append = "${@' file://0044-vuplus-mips-refresh-only-mode-switch.patch' i
 SRC_URI:append = "${@' file://kodi-vuplus-duo4k-advancedsettings.xml' if d.getVar('VUPLUS_DUO4K_LOCALE_FALLBACK') == '1' else ''}"
 SRC_URI:append = "${@' file://0039-xcore-mips-v3d-platform.patch' if d.getVar('XCORE_MIPSEL_STB') == '1' else ''}"
 SRC_URI:append = "${@' file://0042-dreambox-mips-refresh-only-mode-switch.patch' if d.getVar('DREAM_MIPSEL_STB') == '1' else ''}"
-SRC_URI:append = "${@' file://0043-dreambox-mips-alsa-nonblocking-sink-switch.patch' if d.getVar('DREAM_MIPSEL_STB') == '1' else ''}"
 SRC_URI:append = " file://0049-dream-amlogic-audio-stream-state.patch"
 SRC_URI:append = "${@' file://0041-amlogic-meson64-native-codec.patch file://0048-dream-amlogic-hdmi-modes.patch file://amlogic/AMLCodec.cpp file://amlogic/AMLCodec.h file://amlogic/DVDVideoCodecAmlogic.cpp file://amlogic/DVDVideoCodecAmlogic.h file://amlogic/RendererAML.cpp file://amlogic/RendererAML.h file://amlogic/AMLUtils.cpp file://amlogic/AMLUtils.h' if d.getVar('DREAM_AMLOGIC_STB') == '1' else ''}"
 
