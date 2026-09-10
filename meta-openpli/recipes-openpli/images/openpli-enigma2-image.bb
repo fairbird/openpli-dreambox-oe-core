@@ -61,6 +61,7 @@ IMAGE_INSTALL = " \
 	distro-feed-configs \
 	dropbear \
 	sshx \
+	iw \
 	socketdaemon \
 	smartmontools \
 	e2fsprogs-e2fsck \
