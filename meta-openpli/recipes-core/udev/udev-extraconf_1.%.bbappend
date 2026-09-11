@@ -2,6 +2,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 PR .= ".38"
 
+RDEPENDS:${PN}-autonet:append = "util-linux-flock"
+SRC_URI:append = " file://network-async.sh"
+
 SRC_URI += " \
     file://mount.sh \
     file://automount.rules \
@@ -24,4 +27,6 @@ do_install:append() {
     install -m 0755 ${S}/startup.sh ${D}${sysconfdir}/udev/scripts/startup.sh
     install -m 0644 ${S}/40-realtek-zerocd.rules   ${D}${sysconfdir}/udev/rules.d/40-realtek-zerocd.rules
     install -m 0644 ${S}/99-dab-rtlsdr.rules       ${D}${sysconfdir}/udev/rules.d/99-dab-rtlsdr.rules
+
+    install -m 0755 ${S}/network-async.sh ${D}${sysconfdir}/udev/scripts/network.sh
 }

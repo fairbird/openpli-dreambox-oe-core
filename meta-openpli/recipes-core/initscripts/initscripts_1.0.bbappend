@@ -2,7 +2,8 @@ PR .= ".8"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${P}:"
 
-RDEPENDS:${PN}:append = " sdparm bash"
+RDEPENDS:${PN}:append = " util-linux-flock"
+SRC_URI:append = " file://mountnfs-async.sh"
 RRECOMMENDS:${PN} = ""
 
 SRC_URI += "file://hotplug.sh \
@@ -10,6 +11,8 @@ SRC_URI += "file://hotplug.sh \
 "
 
 do_install:append() {
+    install -m 0755 ${S}/mountnfs-async.sh ${D}${sysconfdir}/init.d/mountnfs.sh
+
     # umountnfs should run before network stops (which is at K40)
     ln -sf        ../init.d/umountnfs.sh    ${D}${sysconfdir}/rc6.d/K31umountnfs.sh
     ln -sf        ../init.d/umountnfs.sh    ${D}${sysconfdir}/rc0.d/K31umountnfs.sh
