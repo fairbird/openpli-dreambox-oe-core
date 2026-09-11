@@ -141,7 +141,6 @@ OPTIONAL_PACKAGES += " \
 	zsh \
 	eplayer5 \
 	network-usb-drivers-meta \
-	enigma2-locale-meta \
 	${OPTIONAL_BSP_PACKAGES} \
 	"
 
