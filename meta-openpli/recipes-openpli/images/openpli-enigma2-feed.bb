@@ -140,25 +140,7 @@ OPTIONAL_PACKAGES += " \
 	zip \
 	zsh \
 	eplayer5 \
-	enigma2-plugin-drivers-network-usb-ath9k-htc \
-	enigma2-plugin-drivers-network-usb-r8723a \
-	enigma2-plugin-drivers-network-usb-rt8723bs \
-	enigma2-plugin-drivers-network-usb-ax88179-178a \
-	enigma2-plugin-drivers-network-usb-rtl8192ce \
-	enigma2-plugin-drivers-network-usb-rt3070 \
-	enigma2-plugin-drivers-network-usb-rt3573 \
-	enigma2-plugin-drivers-network-usb-asix \
-	enigma2-plugin-drivers-network-usb-rt2800 \
-	enigma2-plugin-drivers-network-usb-mt7610u \
-	enigma2-plugin-drivers-network-usb-r8712u \
-	enigma2-plugin-drivers-network-usb-rt5572 \
-	enigma2-plugin-drivers-network-usb-rtl8188fu \
-	enigma2-plugin-drivers-network-usb-rtl8192eu \
-	enigma2-plugin-drivers-network-usb-rtl8192fu \
-	enigma2-plugin-drivers-network-usb-rtl8814au \
-	enigma2-plugin-drivers-network-usb-rtl8821cu \
-	enigma2-plugin-drivers-network-usb-rtl8822bu \
-	enigma2-plugin-drivers-network-usb-smsc75xx \
+	enigma2-locale-meta \
 	${OPTIONAL_BSP_PACKAGES} \
 	"
 

@@ -42,11 +42,22 @@ RDEPENDS:${PN} = " \
 	glibc-gconv-iso8859-15 \
 	oe-alliance-branding \
 	network-usb-drivers-meta \
-	enigma2-locale-meta \
 	enigma2-plugin-drivers-ntfs-3g \
 	enigma2-plugin-drivers-exfat \
 	virtual-gstreamer1.0-dvbmediasink \
 	wpa-supplicant wireless-tools python3-wifi \
+	enigma2-plugin-drivers-network-usb-rt2500 \
+	enigma2-plugin-drivers-network-usb-rtl8187 \
+	enigma2-plugin-drivers-network-usb-r8712u \
+	enigma2-plugin-drivers-network-usb-rtl8812au \
+	enigma2-plugin-drivers-network-usb-carl9170 \
+	enigma2-plugin-drivers-network-usb-rt2800 \
+	enigma2-plugin-drivers-network-usb-r8188eu \
+	enigma2-plugin-drivers-network-usb-rt73 \
+	enigma2-plugin-drivers-network-usb-zd1211rw \
+	enigma2-plugin-drivers-network-usb-mt7601u \
+	enigma2-plugin-drivers-network-usb-rtl8152 \
+	enigma2-plugin-drivers-network-usb-lan78xx \
 	${PYTHON_RDEPS} \
 	${@get_transcoding_plugin_package(d)} \
 	${@bb.utils.contains("DISTRO_FEATURES", "e2hotplug", "" , "hotplug-e2-helper", d)} \
