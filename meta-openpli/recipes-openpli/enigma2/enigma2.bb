@@ -41,7 +41,6 @@ RDEPENDS:${PN} = " \
 	streambench \
 	glibc-gconv-iso8859-15 \
 	oe-alliance-branding \
-	network-usb-drivers-meta \
 	enigma2-plugin-drivers-ntfs-3g \
 	enigma2-plugin-drivers-exfat \
 	virtual-gstreamer1.0-dvbmediasink \
