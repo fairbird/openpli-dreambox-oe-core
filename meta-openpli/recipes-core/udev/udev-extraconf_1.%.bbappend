@@ -2,7 +2,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 PR .= ".38"
 
-RDEPENDS:${PN}-autonet:append = "util-linux-flock"
+RDEPENDS:${PN}-autonet:append = " util-linux-flock"
 SRC_URI:append = " file://network-async.sh"
 
 SRC_URI += " \

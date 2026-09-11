@@ -2,7 +2,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-RDEPENDS:${PN}:append = "util-linux-flock"
+RDEPENDS:${PN}:append = " util-linux-flock"
 
 INITSCRIPT_PARAMS = "start 10 2 3 4 5 . stop 80 0 6 1 ."
 
