@@ -4,7 +4,7 @@ inherit packagegroup
 
 require conf/license/license-gplv2.inc
 
-DEPENDS = "\
+RDEPENDS:${PN} = "\
     enigma2-plugin-drivers-network-usb-ath9k-htc \
     enigma2-plugin-drivers-network-usb-carl9170 \
     enigma2-plugin-drivers-network-usb-rt2500 \
