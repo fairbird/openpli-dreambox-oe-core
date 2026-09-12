@@ -1,4 +1,4 @@
-inherit image
+inherit image openpli-image-info
 
 IMAGE_LINGUAS = ""
 IMAGE_FEATURES += "package-management"
