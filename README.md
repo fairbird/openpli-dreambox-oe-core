@@ -20,7 +20,7 @@ https://github.com/oe-alliance/oe-alliance-core
 &nbsp;with git snapshot of September 08, 2026.<br>
 -GCC 16.2.0<br>
 -Glibc 2.44<br>
--ffmpeg 8.1.2<br>
+-ffmpeg 9.0.1<br>
 -GStreamer 1.28.7<br>
 -Python 3.14.7<br>
 -OpenSSL 4.0.2<br>
