@@ -2,7 +2,7 @@ DEPENDS = "libgcc"
 PROVIDES = "linux-dreambox"
 PE = "1"
 
-inherit kernel machine_kernel_pr
+inherit kernel machine_kernel_pr kernel-fixups
 
 MACHINE_KERNEL_PR = "r5"
 
