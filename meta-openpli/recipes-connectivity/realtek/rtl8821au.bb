@@ -11,7 +11,9 @@ inherit gitpkgv module
 SRCREV = "${AUTOREV}"
 PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"
-SRC_URI = "git://github.com/oe-alliance-drivers/rtl8821au.git;protocol=https;branch=master;destsuffix=s"
+SRC_URI = "git://github.com/oe-alliance-drivers/rtl8821au.git;protocol=https;branch=master;destsuffix=s \
+	file://0001-fix-radiotap-coding-ldpc-for-old-kernel.patch \
+"
 # The default unpack directory "sources" costs six more characters on every
 # object path.
 UNPACKDIR = "${WORKDIR}/u"

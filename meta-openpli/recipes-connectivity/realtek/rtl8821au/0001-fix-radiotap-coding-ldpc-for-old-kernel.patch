@@ -1,0 +1,11 @@
+--- a/core/rtw_xmit.c
++++ b/core/rtw_xmit.c
+@@ -5146,7 +5146,7 @@
+ 						if (mcs > 8) mcs = 9;
+ 						pattrib->rate = MGN_VHT1SS_MCS0 + ((nss-1)*10 + mcs);
+ 
+-						if (iterator.this_arg[8] & IEEE80211_RADIOTAP_CODING_LDPC_USER0)
++						if (iterator.this_arg[8] & 0x01)
+ 							pattrib->ldpc = _TRUE;
+ 					}
+ 
