@@ -1,25 +1,27 @@
-SUMMARY = "Realtek 8723A v1.0"
+SUMMARY = "Realtek rtl8188fu"
 HOMEPAGE = "http://www.realtek.com.tw"
 SECTION = "kernel/modules"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://Makefile;md5=6325fabe3996c2783285cc021ee13c96"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-inherit module
+DEPENDS = "bc-native"
 
-MACHINE_KERNEL_PR:append = ".0"
+inherit gitpkgv module
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/oe-alliance-drivers/rtl8723a.git;protocol=https;branch=master;destsuffix=s"
-inherit module
+PV = "git"
+PKGV = "git${GITPKGV}"
+SRC_URI = "git://github.com/oe-alliance-drivers/rtl8188fu.git;protocol=https;branch=master;destsuffix=s"
+
+S = "${UNPACKDIR}/s"
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 
 require kcflags.inc
 
-S = "${UNPACKDIR}/s"
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP
-    oe_runmake 'MODPATH={D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless' \
+    oe_runmake 'M={D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless' \
         'KERNEL_SOURCE=${STAGING_KERNEL_DIR}' \
         'LINUX_SRC=${STAGING_KERNEL_DIR}' \
         'KDIR=${STAGING_KERNEL_DIR}' \
@@ -34,7 +36,6 @@ do_compile () {
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
-    install -m 0644 ${S}/8723au.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
+    install -m 0644 ${S}/rtl8188fu.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
 
 }
-
