@@ -4,6 +4,6 @@ SRC_URI:remove = "file://ffmpeg-6.0.patch"
 
 CFLAGS += "-Wno-error=incompatible-pointer-types"
 
-PV = "1.28.6"
+PV = "1.28.7"
 
-SRC_URI[sha256sum] = "71e6eafb4fff2a66d1bb0ba8d078224dfe7e3397307d8c0bba3dc23606e08f51"
+SRC_URI[sha256sum] = "58da51dd39ecf1cf6faade34cc6412001be2e2e145bca8ae0f45336f60a36ab2"
