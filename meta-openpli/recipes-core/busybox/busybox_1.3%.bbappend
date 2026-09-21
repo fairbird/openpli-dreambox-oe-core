@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PR .= ".6"
+PR .= ".7"
 
 SRC_URI:append = " \
             file://mount_single_uuid.patch \
@@ -16,6 +16,7 @@ SRC_URI:append = " \
             file://0003-Revert-ip-fix-ip-oneline-a.patch \
             file://0004-libbb-make-unicode-printable.patch \
             file://0005-reverse-cbq.patch \
+            file://0006-udhcpc-keep-errno-of-poll-across-monotonic_sec.patch \
             "
 
 # we do not really depend on mtd-utils, but as mtd-utils replaces 
