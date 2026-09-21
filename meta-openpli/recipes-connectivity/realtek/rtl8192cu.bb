@@ -7,7 +7,7 @@ SRCREV = "${AUTOREV}"
 
 PV = "4.0.2+git"
 PKGV = "4.0.2+git${GITPKGV}"
-
+PR = "r1"
 SRC_URI = "git://github.com/oe-alliance-drivers/rtl8192cu.git;protocol=https;branch=master;destsuffix=s"
 
 S = "${UNPACKDIR}/s"
