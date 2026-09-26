@@ -93,6 +93,7 @@ OPTIONAL_PACKAGES += " \
 	python3-puremagic \
 	python3-pysnmp \
 	python3-pyte \
+	python3-qrcode \
 	python3-requests \
 	python3-tinytag \
 	python3-transmission-rpc \
