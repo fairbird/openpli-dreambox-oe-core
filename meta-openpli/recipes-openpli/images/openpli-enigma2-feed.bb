@@ -193,6 +193,7 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-systemplugins-micomupgrade \
 	enigma2-plugin-systemplugins-multitranscodingsetup \
 	enigma2-plugin-systemplugins-radiotimesemulator \
+	enigma2-plugin-systemplugins-remotesupport \
 	enigma2-plugin-systemplugins-remotecontrolselection \
 	enigma2-plugin-systemplugins-satscanlcn \
 	enigma2-plugin-systemplugins-wanip \
