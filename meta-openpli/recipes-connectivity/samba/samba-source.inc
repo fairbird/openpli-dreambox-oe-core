@@ -1,4 +1,4 @@
-V = "4.25.0"
+PV = "4.25.0"
 PR = "r0"
 HOMEPAGE = "https://www.samba.org/"
 SECTION = "console/network"
