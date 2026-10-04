@@ -80,6 +80,7 @@ OPTIONAL_PACKAGES += " \
 	ppp \
 	pv \
 	pyload \
+	python3-curl-cffi \
 	python3-future \
 	python3-fuzzywuzzy \
 	python3-beautifulsoup4 \
