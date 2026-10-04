@@ -15,6 +15,9 @@ SRC_URI:append = " \
         file://0007-hls-main-thread-block.patch \
         file://0008-gsthlsaudiometa.patch \
         file://0009-tsdemux-cc-recovery-hls.patch \
+        file://0010-dash-fix-sliding-window-seek.patch \
+        file://0011-dash-expose-track-labels.patch \
+        file://0012-adaptivedemux-cancel-safe-manifest-update.patch \
 "
 
 SRC_URI:remove = "file://0001-uvcgadget-Use-g_path_get_basename-instead-of-libc-ba.patch"
