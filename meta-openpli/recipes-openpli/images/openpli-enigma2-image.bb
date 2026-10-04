@@ -78,6 +78,7 @@ IMAGE_INSTALL = " \
 	fstrim-cron \
 	gettext \
 	hdparm \
+	recoverymanager \
 	libavahi-client \
 	libxcrypt-compat \
 	libcrypto-compat-0.9.7 \
