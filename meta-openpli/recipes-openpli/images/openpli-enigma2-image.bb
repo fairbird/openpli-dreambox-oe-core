@@ -131,6 +131,18 @@ IMAGE_INSTALL = " \
 	packagegroup-base-nfs \
 	packagegroup-base-smbfs-client \
 	packagegroup-base-smbfs-server \
+	enigma2-plugin-drivers-network-usb-rt2500 \
+	enigma2-plugin-drivers-network-usb-rtl8187 \
+	enigma2-plugin-drivers-network-usb-r8712u \
+	enigma2-plugin-drivers-network-usb-rtl8812au \
+	enigma2-plugin-drivers-network-usb-carl9170 \
+	enigma2-plugin-drivers-network-usb-rt2800 \
+	enigma2-plugin-drivers-network-usb-r8188eu \
+	enigma2-plugin-drivers-network-usb-rt73 \
+	enigma2-plugin-drivers-network-usb-zd1211rw \
+	enigma2-plugin-drivers-network-usb-mt7601u \
+	enigma2-plugin-drivers-network-usb-rtl8152 \
+	enigma2-plugin-drivers-network-usb-lan78xx \
 	${ENIGMA2_PLUGINS} \
 	${ROOTFS_PKGMANAGE} \
 	${@bb.utils.contains("TARGET_ARCH", "arm", "${GETEXTRA}", "", d)} \
