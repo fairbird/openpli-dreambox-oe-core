@@ -20,6 +20,7 @@ OPTIONAL_PACKAGES += " \
 	ccid \
 	ctorrent \
 	cups \
+	curl-impersonate \
 	davfs2 \
 	diffutils \
 	dabstreamer \
