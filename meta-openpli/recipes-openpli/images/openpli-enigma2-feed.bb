@@ -188,6 +188,8 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-timfs \
 	enigma2-plugin-extensions-mspfs \
 	enigma2-plugin-extensions-oemediathek \
+	${@bb.utils.contains("MACHINE_FEATURES", "retrogaming", d.getVar("RETROGAMING_FEED_PACKAGES"), "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "retrogaming-highperformance", d.getVar("RETROGAMING_HIGH_PERFORMANCE_FEED_PACKAGES")} \
 	enigma2-plugin-systemplugins-3gmodemmanager \
 	enigma2-plugin-systemplugins-aboutboxbranding \
 	enigma2-plugin-systemplugins-abmcustommiximporter \
@@ -308,6 +310,44 @@ ENIGMA2_OPTIONAL = " \
 	softcams-enigma2-meta \
 	enigma2-plugins-alliance \
 	${OPTIONAL_BSP_ENIGMA2_PACKAGES} \
+	"
+
+# Normal feed packages, independent of STATIC_FEED; OpenATV rollout is gated above.
+RETROGAMING_FEED_PACKAGES = "\
+	enigma2-plugin-extensions-retrogaming \
+	libretro-2048 \
+	libretro-snes9x \
+	libretro-snes9x2010 \
+	libretro-supafaust \
+	libretro-fceumm \
+	libretro-nestopia \
+	libretro-gambatte \
+	libretro-mgba \
+	libretro-stella2014 \
+	libretro-gearsystem \
+	libretro-clownmdemu \
+	libretro-genesis-plus-gx \
+	libretro-picodrive \
+	libretro-beetle-pce-fast \
+	libretro-fbneo \
+	libretro-mame2003-plus \
+	libretro-pcsx-rearmed \
+	libretro-dosbox-pure \
+	libretro-scummvm \
+	libretro-puae \
+	libretro-vice-x64 \
+	libretro-prboom \
+	libretro-mrboom \
+	libretro-mupen64plus-next \
+	libretro-ppsspp \
+	libretro-flycast \
+	"
+
+RETROGAMING_HIGH_PERFORMANCE_FEED_PACKAGES = "\
+	dolphin-standalone \
+	libretro-mupen64plus-next-gles3 \
+	libretro-virtualjaguar \
+	ppsspp-standalone \
 	"
 
 DEPENDS += "${OPTIONAL_PACKAGES} ${ENIGMA2_OPTIONAL} ${ALLIANCE_PLUGINS}"
