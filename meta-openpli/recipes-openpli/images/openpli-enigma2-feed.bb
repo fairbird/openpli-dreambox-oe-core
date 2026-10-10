@@ -189,7 +189,7 @@ ALLIANCE_PLUGINS = " \
 	enigma2-plugin-extensions-mspfs \
 	enigma2-plugin-extensions-oemediathek \
 	${@bb.utils.contains("MACHINE_FEATURES", "retrogaming", d.getVar("RETROGAMING_FEED_PACKAGES"), "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "retrogaming-highperformance", d.getVar("RETROGAMING_HIGH_PERFORMANCE_FEED_PACKAGES")} \
+	${@bb.utils.contains("MACHINE_FEATURES", "retrogaming-highperformance", d.getVar("RETROGAMING_HIGH_PERFORMANCE_FEED_PACKAGES"), "", d)} \
 	enigma2-plugin-systemplugins-3gmodemmanager \
 	enigma2-plugin-systemplugins-aboutboxbranding \
 	enigma2-plugin-systemplugins-abmcustommiximporter \
