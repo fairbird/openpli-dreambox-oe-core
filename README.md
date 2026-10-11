@@ -1,6 +1,6 @@
 # Depend on Python 3
 
-Build environment for (DM800se, DM500HD, DM800seV2, DM500HDV2, DM520/525, DM820, DM7080 and DM900/920 ... DreamOne/Two not ready yet (Audio issue))
+Build environment for (DM800se, DM500HD, DM800seV2, DM500HDV2, DM520/525, DM820, DM7080, DM900/920 and DreamOne/Two)
 
 Based on OpenPLi, also derived from Hains source.<br>
 
