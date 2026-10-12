@@ -223,7 +223,6 @@ ENIGMA2_BRANCH ?= "develop"
 GITHUB_URI ?= "git://github.com"
 
 SRC_URI = "${GITHUB_URI}/fairbird/enigma2-dreambox.git;branch=${ENIGMA2_BRANCH};protocol=https"
-SRC_URI += "file://0001-keep-orm-ready-timer-alive.patch file://0002-preserve-mount-callback-state.patch"
 
 CPPFLAGS += "-Wno-error=format-security"
 LDFLAGS:prepend = " -lxml2 "
