@@ -1,0 +1,20 @@
+Subject: [PATCH] RetroGaming: use compatible OpenPLi helper APIs
+
+Upstream-Status: Pending
+
+--- a/RetroGaming/plugin.py
++++ b/RetroGaming/plugin.py
+@@ -2,7 +2,12 @@
+ from os.path import dirname, getsize, isabs, isdir, isfile, ismount, join, realpath, relpath
+ from time import strftime
+ from enigma import eConsoleAppContainer, eDBoxLCD, eRCInput, eTimer, fbClass, gMainDC, getDesktop, setSpinnerOnOff
+-from Components.AVSwitch import avSwitch
++from Components import AVSwitch as _avSwitchModule
++if hasattr(_avSwitchModule, "avSwitch"):
++	avSwitch = _avSwitchModule.avSwitch
++else:
++	# OpenPLi keeps HDMI mode/rate control in the Videomode plugin.
++	from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw as avSwitch
+ from Components.ActionMap import ActionMap
+ from Components.Opkg import OpkgComponent
+ from Components.SystemInfo import BoxInfo

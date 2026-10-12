@@ -101,3 +101,5 @@ FILES:${PN} = " \
     ${datadir}/retrogaming \
     ${libdir}/enigma2/python/Plugins/Extensions/RetroGaming \
 "
+
+SRC_URI += "file://0001-retrogaming-openpli-video-backend.patch"
