@@ -2,7 +2,7 @@ SUMMARY = "Open Source Qt WebEngine HbbTV Browser Extension"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://__init__.py;md5=d41d8cd98f00b204e9800998ecf8427e"
-require conf/python/python3-compileall.inc
+inherit python3-compileall
 
 RDEPENDS:${PN} = "openhbbtvbrowser"
 
