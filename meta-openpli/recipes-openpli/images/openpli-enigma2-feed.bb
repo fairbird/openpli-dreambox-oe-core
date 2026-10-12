@@ -302,6 +302,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-satipserver \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "kodi22", "kodi-addons-meta enigma2-plugin-extensions-stbkodilauncher", "", d)} \
+	${@bb.utils.contains('MACHINE_FEATURES', 'retrogaming', ' enigma2-plugin-extensions-retrogaming', '', d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "qthbbtv", "enigma2-plugin-extensions-hbbtv-qt libxml2-qt qtwebkit", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "openhbbtv", "enigma2-plugin-extensions-openhbbtvbrowser openhbbtvbrowser qtwebengine", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "qtstalker", "enigma2-plugin-extensions-stalker-qt libxml2-qt qtwebkit", "", d)} \

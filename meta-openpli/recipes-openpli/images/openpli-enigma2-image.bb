@@ -153,7 +153,6 @@ IMAGE_INSTALL = " \
 	${@bb.utils.contains("MACHINE_FEATURES", "fastboot", "dosfstools mtools android-tools" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "recovery", "recovery" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "chkrootmb", "multiboot-selector", "", d)} \
-	${@bb.utils.contains('MACHINE_FEATURES', 'retrogaming', ' enigma2-plugin-extensions-retrogaming', '', d)} \
 	"
 
 GETEXTRA = "edid-decode"
