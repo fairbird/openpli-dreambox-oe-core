@@ -1,0 +1,811 @@
+From ff9b6bbe79ff4a6745da3be789ce1385b98c58d6 Mon Sep 17 00:00:00 2001
+From: atvcaptain <openatv@gmail.com>
+Date: Wed, 10 Jun 2026 23:09:25 +0200
+Subject: [PATCH] Add-eglfs-libvupl-support-for-INTEGRITY
+
+---
+ src/gui/configure.json                        |  25 +-
+ .../eglfs/api/qeglfsdeviceintegration.cpp     |  12 +
+ .../eglfs/api/qeglfsdeviceintegration_p.h     |   3 +
+ .../platforms/eglfs/api/qeglfsintegration.cpp |  32 ++
+ .../platforms/eglfs/api/qeglfswindow.cpp      |  23 +-
+ .../deviceintegration/deviceintegration.pro   |   1 +
+ .../eglfs_libvupl/eglfs_libvupl.json          |   3 +
+ .../eglfs_libvupl/eglfs_libvupl.pro           |  25 ++
+ .../qeglfslibvuplintegration.cpp              | 375 ++++++++++++++++++
+ .../eglfs_libvupl/qeglfslibvuplintegration.h  |  78 ++++
+ .../eglfs_libvupl/qeglfslibvuplmain.cpp       |  56 +++
+ 11 files changed, 631 insertions(+), 2 deletions(-)
+ create mode 100644 src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/eglfs_libvupl.json
+ create mode 100644 src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/eglfs_libvupl.pro
+ create mode 100644 src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplintegration.cpp
+ create mode 100644 src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplintegration.h
+ create mode 100644 src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplmain.cpp
+
+diff --git a/src/gui/configure.json b/src/gui/configure.json
+index ed6e419f490..ad5db3dedbb 100644
+--- a/src/gui/configure.json
++++ b/src/gui/configure.json
+@@ -223,6 +223,12 @@
+                 { "type": "makeSpec", "spec": "EGL" }
+             ]
+         },
++        "vupl": {
++            "export": "",
++            "sources": [
++                "-Wl,--no-as-needed -lEGL -lvupl -lnxpl -Wl,--as-needed"
++            ]
++        },
+         "freetype": {
+             "label": "FreeType",
+             "test": {
+@@ -871,6 +877,18 @@
+             },
+             "use": "egl"
+         },
++        "egl-libvupl": {
++            "label": "EGL Libvupl",
++            "type": "compile",
++            "test": {
++                "include": [ "eglvuplus.h" ],
++                "main": [
++            "float aspect = 1.0f;",
++            "VUGLES_InitPlatformAndDefaultDisplay(0, &aspect, 1280, 768);"
++                ]
++            },
++            "use": "vupl"
++        },
+         "egl-mali": {
+             "label": "Mali EGL",
+             "type": "compile",
+@@ -1440,6 +1458,11 @@
+             "condition": "features.eglfs && features.gbm && features.kms && features.vsp2",
+             "output": [ "privateFeature" ]
+         },
++        "eglfs_libvupl": {
++            "label": "EGLFS Vuplus",
++            "condition": "features.eglfs && tests.egl-libvupl",
++            "output": [ "privateFeature" ]
++        },
+         "eglfs_mali": {
+             "label": "EGLFS Mali",
+             "condition": "features.eglfs && (tests.egl-mali || tests.egl-mali-2)",
+@@ -1997,7 +2020,7 @@ QMAKE_LIBDIR_OPENGL[_ES2] and QMAKE_LIBS_OPENGL[_ES2] in the mkspec for your pla
+                     "section": "EGLFS details",
+                     "condition": "features.eglfs",
+                     "entries": [
+-                        "eglfs_openwfd", "eglfs_viv", "eglfs_viv_wl", "eglfs_rcar", "eglfs_egldevice", "eglfs_gbm", "eglfs_vsp2", "eglfs_mali", "eglfs_brcm", "eglfs_x11"
++                        "eglfs_openwfd", "eglfs_viv", "eglfs_viv_wl", "eglfs_rcar", "eglfs_egldevice", "eglfs_gbm", "eglfs_vsp2", "eglfs_mali", "eglfs_brcm", "eglfs_x11", "eglfs_libvupl"
+                     ]
+                 },
+                 "linuxfb", "vnc",
+diff --git a/src/plugins/platforms/eglfs/api/qeglfsdeviceintegration.cpp b/src/plugins/platforms/eglfs/api/qeglfsdeviceintegration.cpp
+index 02567ad0b3d..a6a8f4cfc76 100644
+--- a/src/plugins/platforms/eglfs/api/qeglfsdeviceintegration.cpp
++++ b/src/plugins/platforms/eglfs/api/qeglfsdeviceintegration.cpp
+@@ -314,6 +314,18 @@ void QEglFSDeviceIntegration::destroyNativeWindow(EGLNativeWindowType window)
+     Q_UNUSED(window);
+ }
+ 
++void QEglFSDeviceIntegration::setNativeWindowVisible(EGLNativeWindowType window, bool visible)
++{
++    Q_UNUSED(window);
++    Q_UNUSED(visible);
++}
++
++void QEglFSDeviceIntegration::setNativeWindowGeometry(EGLNativeWindowType window, const QRect &rect)
++{
++    Q_UNUSED(window);
++    Q_UNUSED(rect);
++}
++
+ bool QEglFSDeviceIntegration::hasCapability(QPlatformIntegration::Capability cap) const
+ {
+     Q_UNUSED(cap);
+diff --git a/src/plugins/platforms/eglfs/api/qeglfsdeviceintegration_p.h b/src/plugins/platforms/eglfs/api/qeglfsdeviceintegration_p.h
+index 08447a40ea9..3f02cdf78b2 100644
+--- a/src/plugins/platforms/eglfs/api/qeglfsdeviceintegration_p.h
++++ b/src/plugins/platforms/eglfs/api/qeglfsdeviceintegration_p.h
+@@ -55,6 +55,7 @@
+ #include <qpa/qplatformintegration.h>
+ #include <qpa/qplatformscreen.h>
+ #include <QtCore/QString>
++#include <QtCore/QRect>
+ #include <QtGui/QSurfaceFormat>
+ #include <QtGui/QImage>
+ 
+@@ -94,6 +95,8 @@ public:
+                                                    const QSurfaceFormat &format);
+     virtual EGLNativeWindowType createNativeOffscreenWindow(const QSurfaceFormat &format);
+     virtual void destroyNativeWindow(EGLNativeWindowType window);
++    virtual void setNativeWindowVisible(EGLNativeWindowType window, bool visible);
++    virtual void setNativeWindowGeometry(EGLNativeWindowType window, const QRect &rect);
+     virtual bool hasCapability(QPlatformIntegration::Capability cap) const;
+     virtual QPlatformCursor *createCursor(QPlatformScreen *screen) const;
+     virtual bool filterConfig(EGLDisplay display, EGLConfig config) const;
+diff --git a/src/plugins/platforms/eglfs/api/qeglfsintegration.cpp b/src/plugins/platforms/eglfs/api/qeglfsintegration.cpp
+index e26d984cc1f..1e515d889ea 100644
+--- a/src/plugins/platforms/eglfs/api/qeglfsintegration.cpp
++++ b/src/plugins/platforms/eglfs/api/qeglfsintegration.cpp
+@@ -254,8 +254,40 @@ QPlatformVulkanInstance *QEglFSIntegration::createPlatformVulkanInstance(QVulkan
+ }
+ #endif
+ 
++static bool eglfsEnvEnabled(const char *name, bool defaultValue = false)
++{
++    const QByteArray value = qgetenv(name).trimmed().toLower();
++    if (value.isEmpty())
++        return defaultValue;
++
++    return value == "1" || value == "yes" || value == "true" || value == "on" || value == "enabled";
++}
++
++static bool eglfsSafeCompositorEnabled()
++{
++    const QByteArray safeValue = qgetenv("QT_QPA_EGLFS_SAFE_COMPOSITOR").trimmed().toLower();
++    if (!safeValue.isEmpty())
++        return eglfsEnvEnabled("QT_QPA_EGLFS_SAFE_COMPOSITOR", false);
++
++    const QByteArray integration = qgetenv("QT_QPA_EGLFS_INTEGRATION").trimmed().toLower();
++    return integration == "eglfs_libvupl";
++}
++
+ bool QEglFSIntegration::hasCapability(QPlatformIntegration::Capability cap) const
+ {
++    static const bool safeCompositor = eglfsSafeCompositorEnabled();
++    if (safeCompositor) {
++        switch (cap) {
++        case ThreadedOpenGL:
++        case BufferQueueingOpenGL:
++        case RasterGLSurface:
++        case OpenGLOnRasterSurface:
++            return false;
++        default:
++            break;
++        }
++    }
++
+     // We assume that devices will have more and not less capabilities
+     if (qt_egl_device_integration()->hasCapability(cap))
+         return true;
+diff --git a/src/plugins/platforms/eglfs/api/qeglfswindow.cpp b/src/plugins/platforms/eglfs/api/qeglfswindow.cpp
+index 0d7be13a96f..89d70cff7be 100644
+--- a/src/plugins/platforms/eglfs/api/qeglfswindow.cpp
++++ b/src/plugins/platforms/eglfs/api/qeglfswindow.cpp
+@@ -128,6 +128,11 @@ void QEglFSWindow::create()
+ 
+     resetSurface();
+ 
++    if (m_window) {
++        qt_egl_device_integration()->setNativeWindowGeometry(m_window, geometry());
++        qt_egl_device_integration()->setNativeWindowVisible(m_window, window()->isVisible());
++    }
++
+     if (Q_UNLIKELY(m_surface == EGL_NO_SURFACE)) {
+         EGLint error = eglGetError();
+         eglTerminate(screen->display());
+@@ -186,6 +191,9 @@ void QEglFSWindow::destroy()
+ 
+ void QEglFSWindow::invalidateSurface()
+ {
++    if (m_window)
++        qt_egl_device_integration()->setNativeWindowVisible(m_window, false);
++
+     if (m_surface != EGL_NO_SURFACE) {
+         eglDestroySurface(screen()->display(), m_surface);
+         m_surface = EGL_NO_SURFACE;
+@@ -208,6 +216,9 @@ void QEglFSWindow::resetSurface()
+ 
+ void QEglFSWindow::setVisible(bool visible)
+ {
++    if (m_window)
++        qt_egl_device_integration()->setNativeWindowVisible(m_window, visible);
++
+ #ifndef QT_NO_OPENGL
+     QOpenGLCompositor *compositor = QOpenGLCompositor::instance();
+     QList<QOpenGLCompositorWindow *> windows = compositor->windows();
+@@ -235,11 +246,21 @@ void QEglFSWindow::setVisible(bool visible)
+ void QEglFSWindow::setGeometry(const QRect &r)
+ {
+     QRect rect = r;
+-    if (m_flags.testFlag(HasNativeWindow))
++    QRect nativeRect = r;
++    if (m_flags.testFlag(HasNativeWindow)) {
+         rect = screen()->availableGeometry();
++        nativeRect = rect;
++
++        static const bool allowNativePark = qEnvironmentVariableIntValue("QT_QPA_EGLFS_NATIVE_WINDOW_PARK");
++        if (allowNativePark && r.isValid() && r.width() <= 8 && r.height() <= 8)
++            nativeRect = r;
++    }
+ 
+     QPlatformWindow::setGeometry(rect);
+ 
++    if (m_window)
++        qt_egl_device_integration()->setNativeWindowGeometry(m_window, nativeRect);
++
+     QWindowSystemInterface::handleGeometryChange(window(), rect);
+ 
+     const QRect lastReportedGeometry = qt_window_private(window())->geometry;
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/deviceintegration.pro b/src/plugins/platforms/eglfs/deviceintegration/deviceintegration.pro
+index 8c207d14138..5b3fa14e4c4 100644
+--- a/src/plugins/platforms/eglfs/deviceintegration/deviceintegration.pro
++++ b/src/plugins/platforms/eglfs/deviceintegration/deviceintegration.pro
+@@ -2,6 +2,7 @@ TEMPLATE = subdirs
+ QT_FOR_CONFIG += gui-private
+ 
+ qtConfig(eglfs_x11): SUBDIRS += eglfs_x11
++qtConfig(eglfs_libvupl): SUBDIRS += eglfs_libvupl
+ qtConfig(eglfs_gbm): SUBDIRS *= eglfs_kms_support eglfs_kms
+ qtConfig(eglfs_egldevice): SUBDIRS *= eglfs_kms_support eglfs_kms_egldevice
+ qtConfig(eglfs_vsp2): SUBDIRS += eglfs_kms_vsp2
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/eglfs_libvupl.json b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/eglfs_libvupl.json
+new file mode 100644
+index 00000000000..d49d72aa408
+--- /dev/null
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/eglfs_libvupl.json
+@@ -0,0 +1,3 @@
++{
++    "Keys": [ "eglfs_libvupl" ]
++}
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/eglfs_libvupl.pro b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/eglfs_libvupl.pro
+new file mode 100644
+index 00000000000..05f869b4b8e
+--- /dev/null
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/eglfs_libvupl.pro
+@@ -0,0 +1,25 @@
++TARGET = qeglfs-libvupl-integration
++
++QT += core-private gui-private eglfsdeviceintegration-private
++
++# Avoid X11 header collision, use generic EGL native types
++DEFINES += QT_EGL_NO_X11
++
++INCLUDEPATH += $$PWD/../../api
++
++CONFIG += egl
++
++LIBS += -Wl,--no-as-needed -lvupl -lnxpl -Wl,--as-needed
++
++QMAKE_LFLAGS += $$QMAKE_LFLAGS_NOUNDEF
++
++SOURCES += $$PWD/qeglfslibvuplmain.cpp \
++           $$PWD/qeglfslibvuplintegration.cpp
++
++HEADERS += $$PWD/qeglfslibvuplintegration.h
++
++OTHER_FILES += $$PWD/eglfs_libvupl.json
++
++PLUGIN_TYPE = egldeviceintegrations
++PLUGIN_CLASS_NAME = QEglFSlibvuplIntegrationPlugin
++load(qt_plugin)
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplintegration.cpp b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplintegration.cpp
+new file mode 100644
+index 00000000000..f5f1af7d501
+--- /dev/null
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplintegration.cpp
+@@ -0,0 +1,375 @@
++/****************************************************************************
++**
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the plugins of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:LGPL$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU Lesser General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU Lesser
++** General Public License version 3 as published by the Free Software
++** Foundation and appearing in the file LICENSE.LGPL3 included in the
++** packaging of this file. Please review the following information to
++** ensure the GNU Lesser General Public License version 3 requirements
++** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 2.0 or (at your option) the GNU General
++** Public license version 3 or any later version approved by the KDE Free
++** Qt Foundation. The licenses are as published by the Free Software
++** Foundation and appearing in the file LICENSE.GPL2 and LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-2.0.html and
++** https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#include "qeglfslibvuplintegration.h"
++
++#include <QByteArray>
++#include <QRect>
++#include <QThread>
++
++#include <private/qcore_unix_p.h>
++
++#include <fcntl.h>
++#include <stdio.h>
++#include <string>
++
++#include <eglvuplus.h>
++
++QT_BEGIN_NAMESPACE
++
++// Vu+ related local variables
++static VUGLES_PlatformHandle vugles_handle = 0;
++
++static unsigned int vuplClientIdFromWindow(EGLNativeWindowType window)
++{
++    if (!window)
++        return 0;
++
++    return VUGLES_GetClientID(reinterpret_cast<void *>(window));
++}
++
++static int vuplPositiveOrFallback(int value, int fallback)
++{
++    return value > 0 ? value : fallback;
++}
++
++static const char *vuplStringOrNull(const GLubyte *value)
++{
++    return value ? reinterpret_cast<const char *>(value) : "(null)";
++}
++
++static bool vuplEnvEnabled(const char *name, bool defaultValue = false)
++{
++    const QByteArray value = qgetenv(name).trimmed().toLower();
++    if (value.isEmpty())
++        return defaultValue;
++
++    return value == "1" || value == "yes" || value == "true" || value == "on" || value == "enabled";
++}
++
++static bool vuplAlphaEnabled()
++{
++    return vuplEnvEnabled("QT_QPA_EGLFS_LIBVUPL_ALPHA", true);
++}
++
++static bool vuplUpdateGeometryEnabled()
++{
++    return vuplEnvEnabled("QT_QPA_EGLFS_LIBVUPL_UPDATE_GEOMETRY", false);
++}
++
++static bool vuplSafeCompositorEnabled()
++{
++    return vuplEnvEnabled("QT_QPA_EGLFS_SAFE_COMPOSITOR", true);
++}
++
++static bool vuplSetVisibleEnabled()
++{
++    return vuplEnvEnabled("QT_QPA_EGLFS_LIBVUPL_SET_VISIBLE", false);
++}
++
++static void vuplApplyNativeWindowInfo(EGLNativeWindowType window,
++                                      unsigned int clientId,
++                                      const QRect &rect,
++                                      const char *reason)
++{
++    if (!window || !clientId)
++        return;
++
++    VUGLES_NativeWindowInfo win_info;
++    VUGLES_GetDefaultNativeWindowInfo(&win_info);
++    win_info.clientID = clientId;
++    win_info.x = rect.x();
++    win_info.y = rect.y();
++    win_info.width = vuplPositiveOrFallback(rect.width(), 1);
++    win_info.height = vuplPositiveOrFallback(rect.height(), 1);
++
++    fprintf(stderr, "[eglfs_libvupl] VUGLES_UpdateNativeWindow client=%u reason=%s x=%d y=%d w=%d h=%d\n",
++            clientId, reason, win_info.x, win_info.y, win_info.width, win_info.height);
++    VUGLES_UpdateNativeWindow(reinterpret_cast<void *>(window), &win_info);
++
++    vuRect vuRectValue;
++    vuRectValue.x = win_info.x;
++    vuRectValue.y = win_info.y;
++    vuRectValue.width = win_info.width;
++    vuRectValue.height = win_info.height;
++
++    VUGLES_SetPosition(clientId, vuRectValue, true);
++}
++
++QSize QEglFSlibvuplIntegration::screenSize() const
++{
++    return mScreenSize;
++}
++
++int QEglFSlibvuplIntegration::screenDepth() const
++{
++    return 32;
++}
++
++QImage::Format QEglFSlibvuplIntegration::screenFormat() const
++{
++    return vuplAlphaEnabled() ? QImage::Format_ARGB32 : QImage::Format_RGB32;
++}
++
++qreal QEglFSlibvuplIntegration::refreshRate() const
++{
++    return 50;
++}
++
++QSurfaceFormat QEglFSlibvuplIntegration::surfaceFormatFor(const QSurfaceFormat &inputFormat) const
++{
++    QSurfaceFormat format = inputFormat;
++    format.setAlphaBufferSize(vuplAlphaEnabled() ? 8 : 0);
++    format.setRedBufferSize(8);
++    format.setGreenBufferSize(8);
++    format.setBlueBufferSize(8);
++    return format;
++}
++
++void QEglFSlibvuplIntegration::platformInit()
++{
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++    fprintf(stderr, "[eglfs_libvupl] build id openhbbtv-v21-alpha-keep-visible-20260612\n");
++    fprintf(stderr, "[eglfs_libvupl] settings alpha=%d update_geometry=%d safe_compositor=%d set_visible=%d\n",
++            vuplAlphaEnabled() ? 1 : 0,
++            vuplUpdateGeometryEnabled() ? 1 : 0,
++            vuplSafeCompositorEnabled() ? 1 : 0,
++            vuplSetVisibleEnabled() ? 1 : 0);
++
++    QList<QByteArray> env = qgetenv("EGLFS_LIBVUPL_SIZE").split('x');
++    if (env.length() == 2) {
++        const int width = env.at(0).toInt();
++        const int height = env.at(1).toInt();
++        if (width > 0 && height > 0)
++            mScreenSize = QSize(width, height);
++    }
++
++    if (!mScreenSize.isValid())
++        mScreenSize = QSize(1920, 1080);
++
++    float aspect = 1.0f;
++
++    vuInitResult res = VUGLES_InitPlatformAndDefaultDisplay("EGLFS", &aspect,
++                            mScreenSize.width(),  mScreenSize.height());
++    if (res != vuInitSuccess) {
++        fprintf(stderr, "[eglfs_libvupl] VUGLES_InitPlatformAndDefaultDisplay failed: %d\n", int(res));
++        return;
++    }
++
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++
++    VUGLES_RegisterDisplayPlatform(&vugles_handle);
++
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++}
++
++void QEglFSlibvuplIntegration::platformDestroy()
++{
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++    VUGLES_UnregisterDisplayPlatform(vugles_handle);
++    VUGLES_TermPlatform();
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++}
++
++EGLDisplay QEglFSlibvuplIntegration::createDisplay(EGLNativeDisplayType nativeDisplay)
++{
++    Q_UNUSED(nativeDisplay);
++
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++    EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
++    if (display == EGL_NO_DISPLAY) {
++       printf("DEBUG EGL_FALSE %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++       return EGL_NO_DISPLAY;
++    }
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++
++    return display;
++}
++
++EGLNativeDisplayType QEglFSlibvuplIntegration::platformDisplay() const
++{
++    return EGL_DEFAULT_DISPLAY;
++}
++
++EGLNativeWindowType QEglFSlibvuplIntegration::createNativeWindow(QPlatformWindow *platformWindow,
++                                                       const QSize &size,
++                                                       const QSurfaceFormat &format)
++{
++    Q_UNUSED(platformWindow);
++    Q_UNUSED(format);
++
++    void *native_window = 0;
++
++    VUGLES_NativeWindowInfo win_info;
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++    VUGLES_GetDefaultNativeWindowInfo(&win_info);
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++
++    const int screenWidth = vuplPositiveOrFallback(mScreenSize.width(), 1920);
++    const int screenHeight = vuplPositiveOrFallback(mScreenSize.height(), 1080);
++    const int windowWidth = vuplPositiveOrFallback(size.width(), screenWidth);
++    const int windowHeight = vuplPositiveOrFallback(size.height(), screenHeight);
++
++    printf("DEBUG %s %s win_info %d %d screen %d %d\n", __FILE__, __FUNCTION__, windowWidth, windowHeight, screenWidth, screenHeight);
++
++    win_info.width = windowWidth;
++    win_info.height = windowHeight;
++    win_info.x = 0;
++    win_info.y = 0;
++
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++    native_window = VUGLES_CreateNativeWindow(&win_info);
++    printf("DEBUG %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
++    if (native_window == NULL)
++        return EGL_FALSE;
++
++    win_info.clientID = VUGLES_GetClientID(native_window);
++    fprintf(stderr, "%26s ---------------\n", "--------------------------");
++    fprintf(stderr, "%26s #%d\n", "dvb_client", win_info.clientID);
++
++    fprintf(stderr, "%26s ---------------\n", "------- EGL INFO ---------");
++    EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
++    fprintf(stderr, "%26s %s\n", "egl vendor", eglQueryString(display, EGL_VENDOR));
++    fprintf(stderr, "%26s %s\n", "egl version", eglQueryString(display, EGL_VERSION));
++    fprintf(stderr, "%26s ---------------\n", "------- GL INFO ----------");
++    if (eglGetCurrentContext() != EGL_NO_CONTEXT) {
++        fprintf(stderr, "%26s %s\n", "vendor", vuplStringOrNull(glGetString(GL_VENDOR)));
++        fprintf(stderr, "%26s %s\n", "renderer", vuplStringOrNull(glGetString(GL_RENDERER)));
++        fprintf(stderr, "%26s %s\n", "version", vuplStringOrNull(glGetString(GL_VERSION)));
++        fprintf(stderr, "%26s %s\n", "shading language version", vuplStringOrNull(glGetString(GL_SHADING_LANGUAGE_VERSION)));
++    } else {
++        fprintf(stderr, "%26s %s\n", "context", "not current yet");
++    }
++    fprintf(stderr, "%26s ---------------\n", "--------------------------");
++
++    vuRect rect = {
++        (screenWidth - windowWidth) / 2,
++        (screenHeight - windowHeight) / 2,
++        windowWidth,
++        windowHeight
++    };
++
++    fprintf(stderr, "[eglfs_libvupl] create native window client=%u x=%d y=%d w=%d h=%d screen=%dx%d\n",
++            win_info.clientID, rect.x, rect.y, rect.width, rect.height, screenWidth, screenHeight);
++    VUGLES_SetPosition(win_info.clientID, rect, true);
++    if (vuplSetVisibleEnabled()) {
++        fprintf(stderr, "[eglfs_libvupl] VUGLES_SetVisible create client=%u visible=1\n", win_info.clientID);
++        VUGLES_SetVisible(win_info.clientID, true);
++    } else {
++        fprintf(stderr, "[eglfs_libvupl] keep native window compositor-visible client=%u create\n", win_info.clientID);
++    }
++
++    return (EGLNativeWindowType) native_window;
++}
++
++void QEglFSlibvuplIntegration::destroyNativeWindow(EGLNativeWindowType window)
++{
++    const unsigned int clientId = vuplClientIdFromWindow(window);
++    if (clientId && vuplSetVisibleEnabled()) {
++        fprintf(stderr, "[eglfs_libvupl] destroy native window client=%u\n", clientId);
++        VUGLES_SetVisible(clientId, false);
++    } else if (clientId) {
++        fprintf(stderr, "[eglfs_libvupl] destroy native window client=%u without VUGLES_SetVisible\n", clientId);
++    }
++
++    VUGLES_DestroyNativeWindow((void*)window);
++}
++
++void QEglFSlibvuplIntegration::setNativeWindowVisible(EGLNativeWindowType window, bool visible)
++{
++    const unsigned int clientId = vuplClientIdFromWindow(window);
++    if (!clientId)
++        return;
++
++    if (!vuplSetVisibleEnabled()) {
++        fprintf(stderr, "[eglfs_libvupl] ignore Qt native window visible client=%u visible=%d\n",
++                clientId, visible ? 1 : 0);
++        return;
++    }
++
++    fprintf(stderr, "[eglfs_libvupl] VUGLES_SetVisible client=%u visible=%d\n", clientId, visible ? 1 : 0);
++    VUGLES_SetVisible(clientId, visible);
++}
++
++void QEglFSlibvuplIntegration::setNativeWindowGeometry(EGLNativeWindowType window, const QRect &rect)
++{
++    const unsigned int clientId = vuplClientIdFromWindow(window);
++    if (!clientId)
++        return;
++
++    fprintf(stderr, "[eglfs_libvupl] VUGLES_SetPosition client=%u x=%d y=%d w=%d h=%d\n",
++            clientId, rect.x(), rect.y(), rect.width(), rect.height());
++
++    if (vuplUpdateGeometryEnabled()) {
++        vuplApplyNativeWindowInfo(window, clientId, rect, "geometry");
++        return;
++    }
++
++    vuRect vuRectValue;
++    vuRectValue.x = rect.x();
++    vuRectValue.y = rect.y();
++    vuRectValue.width = vuplPositiveOrFallback(rect.width(), 1);
++    vuRectValue.height = vuplPositiveOrFallback(rect.height(), 1);
++    VUGLES_SetPosition(clientId, vuRectValue, true);
++}
++
++bool QEglFSlibvuplIntegration::hasCapability(QPlatformIntegration::Capability cap) const
++{
++    if (vuplSafeCompositorEnabled()) {
++        switch (cap) {
++        case QPlatformIntegration::ThreadedOpenGL:
++        case QPlatformIntegration::BufferQueueingOpenGL:
++        case QPlatformIntegration::RasterGLSurface:
++        case QPlatformIntegration::OpenGLOnRasterSurface:
++            return false;
++        default:
++            break;
++        }
++    }
++
++    switch (cap) {
++    case QPlatformIntegration::ThreadedPixmaps:
++    case QPlatformIntegration::OpenGL:
++        return true;
++    default:
++        return false;
++    }
++}
++
++QT_END_NAMESPACE
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplintegration.h b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplintegration.h
+new file mode 100644
+index 00000000000..cd1c04ae9ef
+--- /dev/null
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplintegration.h
+@@ -0,0 +1,78 @@
++/****************************************************************************
++**
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the plugins of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:LGPL$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU Lesser General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU Lesser
++** General Public License version 3 as published by the Free Software
++** Foundation and appearing in the file LICENSE.LGPL3 included in the
++** packaging of this file. Please review the following information to
++** ensure the GNU Lesser General Public License version 3 requirements
++** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 2.0 or (at your option) the GNU General
++** Public license version 3 or any later version approved by the KDE Free
++** Qt Foundation. The licenses are as published by the Free Software
++** Foundation and appearing in the file LICENSE.GPL2 and LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-2.0.html and
++** https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef QEGLFSLIBVUPLINTEGRATION_H
++#define QEGLFSLIBVUPLINTEGRATION_H
++
++#include "private/qeglfsdeviceintegration_p.h"
++
++#include <QImage>
++#include <QRect>
++#include <QSurfaceFormat>
++
++#include <eglvuplus.h>
++
++QT_BEGIN_NAMESPACE
++
++class QEglFSlibvuplIntegration : public QEglFSDeviceIntegration
++{
++public:
++    QSize screenSize() const Q_DECL_OVERRIDE;
++    int screenDepth() const Q_DECL_OVERRIDE;
++    QImage::Format screenFormat() const Q_DECL_OVERRIDE;
++    qreal refreshRate() const Q_DECL_OVERRIDE;
++    QSurfaceFormat surfaceFormatFor(const QSurfaceFormat &inputFormat) const Q_DECL_OVERRIDE;
++    void platformInit() Q_DECL_OVERRIDE;
++    void platformDestroy() Q_DECL_OVERRIDE;
++    EGLDisplay createDisplay(EGLNativeDisplayType nativeDisplay) Q_DECL_OVERRIDE;
++    EGLNativeDisplayType platformDisplay() const Q_DECL_OVERRIDE;
++    EGLNativeWindowType createNativeWindow(QPlatformWindow *window, const QSize &size, const QSurfaceFormat &format) Q_DECL_OVERRIDE;
++    void destroyNativeWindow(EGLNativeWindowType window) Q_DECL_OVERRIDE;
++
++    void setNativeWindowVisible(EGLNativeWindowType window, bool visible) Q_DECL_OVERRIDE;
++    void setNativeWindowGeometry(EGLNativeWindowType window, const QRect &rect) Q_DECL_OVERRIDE;
++
++    bool hasCapability(QPlatformIntegration::Capability cap) const Q_DECL_OVERRIDE;
++private:
++    QSize mScreenSize;
++};
++
++QT_END_NAMESPACE
++
++#endif
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplmain.cpp b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplmain.cpp
+new file mode 100644
+index 00000000000..d9f7ebb2897
+--- /dev/null
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_libvupl/qeglfslibvuplmain.cpp
+@@ -0,0 +1,56 @@
++/****************************************************************************
++**
++** Copyright (C) 2016 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the qmake spec of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:LGPL$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU Lesser General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU Lesser
++** General Public License version 3 as published by the Free Software
++** Foundation and appearing in the file LICENSE.LGPL3 included in the
++** packaging of this file. Please review the following information to
++** ensure the GNU Lesser General Public License version 3 requirements
++** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 2.0 or (at your option) the GNU General
++** Public license version 3 or any later version approved by the KDE Free
++** Qt Foundation. The licenses are as published by the Free Software
++** Foundation and appearing in the file LICENSE.GPL2 and LICENSE.GPL3
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-2.0.html and
++** https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#include "private/qeglfsdeviceintegration_p.h"
++#include "qeglfslibvuplintegration.h"
++
++QT_BEGIN_NAMESPACE
++
++class QEglFSlibvuplIntegrationPlugin : public QEglFSDeviceIntegrationPlugin
++{
++    Q_OBJECT
++    Q_PLUGIN_METADATA(IID QEglFSDeviceIntegrationFactoryInterface_iid FILE "eglfs_libvupl.json")
++
++public:
++    QEglFSDeviceIntegration *create() Q_DECL_OVERRIDE { return new QEglFSlibvuplIntegration; }
++};
++
++QT_END_NAMESPACE
++
++#include "qeglfslibvuplmain.moc"
+-- 
+2.45.2.windows.1
+

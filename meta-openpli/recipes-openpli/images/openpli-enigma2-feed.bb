@@ -302,6 +302,14 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-satipserver \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "kodi22", "kodi-addons-meta enigma2-plugin-extensions-stbkodilauncher", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "qthbbtv", "enigma2-plugin-extensions-hbbtv-qt libxml2-qt qtwebkit", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "openhbbtv", "enigma2-plugin-extensions-openhbbtvbrowser openhbbtvbrowser qtwebengine", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "qtstalker", "enigma2-plugin-extensions-stalker-qt libxml2-qt qtwebkit", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "qtwebbrowser", "qtwebbrowser qtwebengine", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "qtwebflix", "qtwebflix qtwebengine", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "qtflashplayer", "qtflashplayer qtwebengine", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "qtwidevine", "qtwidevine qtwebengine", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "qt5", "packagegroup-qt5", "", d)} \
 	alsa-plugins \
 	enigma2-plugins \
 	meta-enigma2-dvdburn \
