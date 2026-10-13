@@ -1,0 +1,15 @@
+Subject: [PATCH] Tools: install DAB metadata helper required at startup
+
+Upstream-Status: Pending
+
+--- a/lib/python/Tools/Makefile.am
++++ b/lib/python/Tools/Makefile.am
+@@ -1,7 +1,7 @@
+ installdir = $(pkglibdir)/python/Tools
+ 
+ install_PYTHON = \
+-	FuzzyDate.py XMLTools.py Directories.py NumericalTextInput.py \
++	DAB.py FuzzyDate.py XMLTools.py Directories.py NumericalTextInput.py \
+ 	KeyBindings.py BoundFunction.py ISO639.py Notifications.py __init__.py \
+ 	RedirectOutput.py StbHardware.py Import.py Event.py CList.py CIHelper.py \
+ 	LoadPixmap.py Profile.py HardwareInfo.py Transponder.py ASCIItranslit.py \
