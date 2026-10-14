@@ -30,6 +30,8 @@ OPTIONAL_PACKAGES += " \
 	dvbsnoop \
 	dvdfs \
 	edid-decode \
+	extundelete \
+	exfatprogs \
 	dnscrypt-proxy \
 	eti-tools \
 	evtest \
@@ -37,6 +39,7 @@ OPTIONAL_PACKAGES += " \
 	exteplayer3 \
 	f2fs-tools \
 	fio \
+	fuse-exfat \
 	gdb \
 	gerbera \
 	grep \
@@ -127,6 +130,7 @@ OPTIONAL_PACKAGES += " \
 	tsanalyze \
 	tsduck \
 	mediamtx \
+	mergerfs \
 	udpxy \
 	upx \
 	ubuntu-font-family \
