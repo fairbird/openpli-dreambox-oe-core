@@ -45,3 +45,5 @@ do_install:append() {
 pkg_postinst:${PN}-u-boot() {
 [ -n "$D" ] || update-autoexec
 }
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
