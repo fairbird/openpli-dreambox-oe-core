@@ -301,6 +301,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-systemplugins-misplslcnscan \
 	enigma2-plugin-systemplugins-newvirtualkeyboard \
 	enigma2-plugin-systemplugins-satipserver \
+	enigma2-plugin-systemplugins-weathercomponenthandler \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "kodi22", "kodi-addons-meta enigma2-plugin-extensions-stbkodilauncher", "", d)} \
 	${@bb.utils.contains('MACHINE_FEATURES', 'retrogaming', ' enigma2-plugin-extensions-retrogaming', '', d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "webkithbbtv", "enigma2-plugin-extensions-webkithbbtv", "", d)} \
