@@ -297,6 +297,8 @@ TARGET_CFLAGS += "-DGLIBC_64BIT_TIME_FLAGS"
 
 do_install:append() {
 	install -d ${D}${datadir}/keymaps
+	ln -s ${libdir}/enigma2/python/Tools/StbHardware.pyc ${D}${libdir}/enigma2/python/Tools/DreamboxHardware.pyc
+	ln -s ${libdir}/enigma2/python/Components/PackageInfo.pyc ${D}${libdir}/enigma2/python/Components/DreamboxInfoHandler.pyc
 	if [ "${base_libdir}" = "/lib64" ] ; then
         	install -d ${D}/usr/lib
         	ln -s ${libdir}/enigma2 ${D}/usr/lib/enigma2
