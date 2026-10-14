@@ -327,3 +327,12 @@ RRECOMMENDS:${PN}:append:dreamtwo = " enigma2-plugin-systemplugins-amlfrq enigma
 INSANE_SKIP:enigma2-plugin-extensions-streamlinkwrapper += "build-deps"
 INSANE_SKIP:enigma2-plugin-extensions-ytdlwrapper += "build-deps"
 INSANE_SKIP:enigma2-plugin-extensions-ytdlpwrapper += "build-deps"
+
+# Fail packaging rather than produce an image that crashes during startup.
+python verify_dab_runtime_package() {
+    import os
+    runtime_module = os.path.join(d.getVar('PKGDEST'), d.getVar('PN'), d.getVar('libdir').lstrip('/'), 'enigma2/python/Tools/DAB.pyc')
+    if not os.path.isfile(runtime_module):
+        bb.fatal('Required Tools.DAB bytecode is missing from the enigma2 runtime package')
+}
+do_package[postfuncs] += "verify_dab_runtime_package"
