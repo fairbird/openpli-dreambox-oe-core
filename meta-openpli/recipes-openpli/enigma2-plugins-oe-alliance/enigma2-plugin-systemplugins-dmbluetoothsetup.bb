@@ -24,5 +24,3 @@ INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INSANE_SKIP:${PN} += "ldflags"
 INSANE_SKIP = "32bit-time"
-
-SRC_URI += "file://0001-bluetooth-openpli-helpers.patch"
