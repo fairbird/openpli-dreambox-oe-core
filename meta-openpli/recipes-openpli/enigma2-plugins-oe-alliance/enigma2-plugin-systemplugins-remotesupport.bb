@@ -23,3 +23,5 @@ RPROVIDES:${PN} += "remotesupport"
 do_install:append() {
 	chmod 0755 ${D}${bindir}/remotesupport
 }
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
