@@ -16,7 +16,8 @@ PV = "git"
 PKGV = "${GITPKGVTAG}"
 PR = "r0"
 
-SRC_URI = "gitsm://github.com/oe-alliance/OpenRecoveryManager.git;protocol=https;branch=master"
+SRC_URI = "gitsm://github.com/oe-alliance/OpenRecoveryManager.git;protocol=https;branch=master \
+    file://orm-mediafire-distributions.patch"
 
 EXTRA_OEMAKE = "LOCALEDIR=${datadir}/locale"
 

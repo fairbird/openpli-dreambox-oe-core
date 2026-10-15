@@ -1,0 +1,320 @@
+diff --git a/src/flash.c b/src/flash.c
+index 69971f1..4f8bbdb 100644
+--- a/src/flash.c
++++ b/src/flash.c
+@@ -32,10 +32,12 @@
+ #define USER_AGENT "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+ #define OPENATV_FEED "https://images.mynonpublic.com/openatv/json/"
+ #define DISTRIBUTIONS "https://raw.githubusercontent.com/OpenATV/FlashImage/gh-pages/"
++#define MEDIAFIRE_API "https://www.mediafire.com/api/1.5/folder/get_content.php?content_type=files&chunk_size=1000&response_format=json&folder_key="
++#define MEDIAFIRE_PAGE "/tmp/orm-mediafire.html"
+ #define DUAL_BOOT_FILE "/dev/block/by-name/flag"
+ #define DREAM_BOOT_FILE "/data/bootconfig.txt"
+ #define MAX_IMAGES 500
+-#define MAX_FEEDS 16
++#define MAX_FEEDS 24
+ #define MAX_SLOTS 24
+ #define MAX_ARGS 12
+ #define MB (1024LL * 1024LL)
+@@ -654,6 +656,30 @@ static int for_box(const char *name)
+ 	return (box[0] && strstr(name, box)) || (machine[0] && strstr(name, machine)) || (model[0] && strstr(name, model));
+ }
+ 
++/* The length of the extension of an image archive: .zip, or a tarball of the images that are not zipped. */
++static size_t archive_ext(const char *name)
++{
++	static const char *const extensions[] = {".zip", ".tar.bz2", ".tar.xz"};
++	size_t length = strlen(name);
++	for (size_t i = 0; i < sizeof(extensions) / sizeof(extensions[0]); ++i) {
++		size_t n = strlen(extensions[i]);
++		if (length > n && !strcasecmp(name + length - n, extensions[i]))
++			return n;
++	}
++	return 0;
++}
++
++static int is_tarball(const char *name)
++{
++	return archive_ext(name) > 4;
++}
++
++/* A zip or a tarball of an image; a plain rootfs tarball holds no kernel, ofgwrite cannot flash it alone. */
++static int is_image_archive(const char *name)
++{
++	return archive_ext(name) && (!is_tarball(name) || !strstr(name, ".rootfs."));
++}
++
+ static void scan_zips(const char *dir, struct image *images, int *count)
+ {
+ 	DIR *d = opendir(dir);
+@@ -662,14 +688,13 @@ static void scan_zips(const char *dir, struct image *images, int *count)
+ 		return;
+ 	while ((entry = readdir(d)) && *count < MAX_IMAGES) {
+ 		const char *name = entry->d_name;
+-		size_t length = strlen(name);
+ 		struct image *image = &images[*count];
+ 		struct stat info;
+-		if (name[0] == '.' || length < 5 || strcmp(name + length - 4, ".zip") || !for_box(name))
++		if (name[0] == '.' || !is_image_archive(name) || !for_box(name))
+ 			continue;
+ 		memset(image, 0, sizeof(*image));
+ 		snprintf(image->link, sizeof(image->link), "%s/%.255s", dir, name);
+-		if (stat(image->link, &info) != 0 || !S_ISREG(info.st_mode) || !valid_zip(image->link))
++		if (stat(image->link, &info) != 0 || !S_ISREG(info.st_mode) || (!is_tarball(name) && !valid_zip(image->link)))
+ 			continue;
+ 		snprintf(image->name, sizeof(image->name), "%.159s", name);
+ 		snprintf(image->category, sizeof(image->category), "%s", strstr(name, "backup") ? N_("Backup images") :
+@@ -979,11 +1004,148 @@ static char *read_file(const char *path, size_t *length)
+ 	return text;
+ }
+ 
++/* The distributions with their images on MediaFire: one folder for every box, or one for all boxes. */
++struct mediafire_folder {
++	const char *name;
++	const char *model;  /* NULL for every box. */
++	const char *key;
++};
++
++static const char *const mediafire_names[] = {"BlackHole", "OpenTSimage", "OpenPli"};
++
++static const struct mediafire_folder mediafire_folders[] = {
++	{"BlackHole", "dm920", "cdmen9tqtpwxk"},
++	{"BlackHole", "dm520", "gkhsdcxiikosk"},
++	{"BlackHole", "dm7080", "5cmni3i0rch9e"},
++	{"OpenTSimage", "dm920", "sbrjw60if73re"},
++	{"OpenTSimage", "dm520", "gnxuy5xl3vmjo"},
++	{"OpenTSimage", "dm7080", "tb1x6tmtglyw4"},
++	{"OpenPli", NULL, "5mqob16bb176n"},
++};
++
++/* The distribution of /etc/issue when it is one of them, enigma.info does not name these images. */
++static const char *custom_distro(void)
++{
++	char text[1024];
++	size_t length;
++	FILE *file = fopen("/etc/issue", "r");
++	if (!file)
++		return NULL;
++	length = fread(text, 1, sizeof(text) - 1, file);
++	fclose(file);
++	text[length] = '\0';
++	for (size_t i = 0; i < sizeof(mediafire_names) / sizeof(mediafire_names[0]); ++i)
++		if (strcasestr(text, mediafire_names[i]))
++			return mediafire_names[i];
++	return NULL;
++}
++
++static int mediafire_key(const char *name, char *key, size_t size)
++{
++	char model[32];
++	boxinfo_value("model", model, sizeof(model));
++	for (size_t i = 0; i < sizeof(mediafire_folders) / sizeof(mediafire_folders[0]); ++i) {
++		const struct mediafire_folder *f = &mediafire_folders[i];
++		if (!strcasecmp(f->name, name) && (!f->model || !strcmp(f->model, model))) {
++			snprintf(key, size, "%s", f->key);
++			return 1;
++		}
++	}
++	return 0;
++}
++
++/* The text of the value of key in from..end, a string or a number. */
++static int json_field(const char *from, const char *end, const char *key, char *out, size_t size)
++{
++	char quoted[32];
++	const char *found;
++	struct json j;
++	snprintf(quoted, sizeof(quoted), "\"%s\"", key);
++	out[0] = '\0';
++	found = memmem(from, (size_t)(end - from), quoted, strlen(quoted));
++	if (!found)
++		return 0;
++	j.p = found + strlen(quoted);
++	j.end = end;
++	return eat(&j, ':') && read_scalar(&j, out, size);
++}
++
++/* The zips of this box in the MediaFire folder of the distribution, 0 for a folder that could not be read. */
++static int mediafire_images(const char *name, struct image *images, int *count)
++{
++	char key[32];
++	char url[256];
++	size_t length = 0;
++	char *text = NULL;
++	const char *end;
++	const char *p;
++	if (!mediafire_key(name, key, sizeof(key)))
++		return 1;  /* No folder for this box. */
++	snprintf(url, sizeof(url), MEDIAFIRE_API "%s", key);
++	unlink(FEED_FILE);
++	if (download_file(url, FEED_FILE, 30))
++		text = read_file(FEED_FILE, &length);
++	unlink(FEED_FILE);
++	if (!text)
++		return 0;
++	end = text + length;
++	p = memmem(text, length, "\"filename\"", 10);
++	while (p && *count < MAX_IMAGES) {
++		const char *next = memmem(p + 10, (size_t)(end - p - 10), "\"filename\"", 10);
++		const char *stop = next ? next : end;  /* The fields of this file, up to the next one. */
++		struct image *image = &images[*count];
++		char file[160];
++		char link[512];
++		char size[24];
++		if (json_field(p, stop, "filename", file, sizeof(file)) && is_image_archive(file) && for_box(file) &&
++			json_field(p, stop, "normal_download", link, sizeof(link)) && link[0]) {
++			memset(image, 0, sizeof(*image));
++			snprintf(image->category, sizeof(image->category), "%s", name);
++			snprintf(image->name, sizeof(image->name), "%s", file);
++			snprintf(image->link, sizeof(image->link), "%s", link);
++			if (json_field(p, stop, "size", size, sizeof(size)))
++				image->size = strtoll(size, NULL, 10);
++			(*count)++;
++		}
++		p = next;
++	}
++	free(text);
++	return 1;
++}
++
++/* The link of a file of MediaFire is its page, the download button of the page holds the link of the file. */
++static void mediafire_direct(const char *link, char *url, size_t size)
++{
++	size_t length = 0;
++	char *text = NULL;
++	const char *found;
++	snprintf(url, size, "%s", link);
++	if (!strstr(link, "mediafire.com"))
++		return;
++	unlink(MEDIAFIRE_PAGE);
++	if (download_file(link, MEDIAFIRE_PAGE, 30))
++		text = read_file(MEDIAFIRE_PAGE, &length);
++	unlink(MEDIAFIRE_PAGE);
++	if (!text)
++		return;
++	found = strstr(text, "href=\"https://download");
++	if (found) {
++		size_t n = strcspn(found + 6, "\"");
++		if (n + 1 < size) {
++			memcpy(url, found + 6, n);
++			url[n] = '\0';
++		}
++	}
++	free(text);
++}
++
+ static int feed_images(const struct feed *feed, struct image *images, int *count)
+ {
+ 	size_t length = 0;
+ 	char *text = NULL;
+ 	int ok;
++	if (!strncmp(feed->url, "mediafire:", 10))
++		return mediafire_images(feed->url + 10, images, count);
+ 	unlink(FEED_FILE);
+ 	if (download_file(feed->url, FEED_FILE, 30))
+ 		text = read_file(FEED_FILE, &length);
+@@ -1022,6 +1184,17 @@ static void default_feed(struct feed *feed)
+ 	snprintf(feed->url, sizeof(feed->url), OPENATV_FEED "%s", box);
+ }
+ 
++/* The distributions with their images on MediaFire, after the default one. */
++static int add_custom_feeds(struct feed *feeds, int count)
++{
++	for (size_t i = 0; i < sizeof(mediafire_names) / sizeof(mediafire_names[0]) && count < MAX_FEEDS; ++i) {
++		snprintf(feeds[count].name, sizeof(feeds[count].name), "%s", mediafire_names[i]);
++		snprintf(feeds[count].url, sizeof(feeds[count].url), "mediafire:%s", mediafire_names[i]);
++		count++;
++	}
++	return count;
++}
++
+ /* The index of the default feed, which load_feeds() always lists; 0 only guards against -1. */
+ static int default_feed_index(const struct feed *feeds, int count)
+ {
+@@ -1040,7 +1213,7 @@ static int read_distributions(const char *text, size_t length, struct feed *feed
+ 		if (!eat(&j, '[') || !read_string(&j, f.name, sizeof(f.name)) || !eat(&j, ',') ||
+ 			!read_string(&j, f.url, sizeof(f.url)) || !eat(&j, ']'))
+ 			break;
+-		if (count < MAX_FEEDS && strcasecmp(f.name, "OpenATV"))
++		if (count < MAX_FEEDS && strcasecmp(f.name, "OpenATV") && find_feed(feeds, count, f.name) < 0)
+ 			feeds[count++] = f;
+ 	} while (eat(&j, ','));
+ 	return count;
+@@ -1056,6 +1229,7 @@ static int load_feeds(struct feed *feeds, const char *distro)
+ 	int count = 1;
+ 	boxinfo_value("machinebuild", machine, sizeof(machine));
+ 	default_feed(&feeds[0]);
++	count = add_custom_feeds(feeds, count);
+ 	snprintf(url, sizeof(url), DISTRIBUTIONS "%s.json", machine);
+ 	unlink(FEED_FILE);
+ 	if (download_file(url, FEED_FILE, 10))
+@@ -1298,6 +1472,7 @@ static int has_size(const char *part, long long size)
+ static int fetch_image(const struct ui_context *ui, struct input_context *input, const volatile sig_atomic_t *stop,
+ 	const struct image *image, const char *path)
+ {
++	char direct[512];
+ 	char url[640];
+ 	char part[620];
+ 	char tool[64];
+@@ -1306,7 +1481,9 @@ static int fetch_image(const struct ui_context *ui, struct input_context *input,
+ 	int curl = process_find("curl", tool, sizeof(tool));
+ 	if (!curl && !process_find("wget", tool, sizeof(tool)))
+ 		return 0;
+-	encode_spaces(image->link, url, sizeof(url));
++	ui_progress(ui, TITLE, image->name, 0, _("Please wait..."), _("Please wait..."));
++	mediafire_direct(image->link, direct, sizeof(direct));
++	encode_spaces(direct, url, sizeof(url));
+ 	snprintf(part, sizeof(part), "%s.part", path);
+ 	unlink(part);  /* NOSONAR the image chosen from the feed or the media */
+ 	pid = start_download(tool, curl, part, url);
+@@ -1432,12 +1609,13 @@ static int unzip_image(const struct ui_context *ui, const char *zip, const char
+ 	snprintf(source, sizeof(source), "%s", zip);
+ 	snprintf(target, sizeof(target), "%s", dir);
+ 	char *const unzip[] = {"unzip", "-o", source, "-d", target, NULL};
++	char *const untar[] = {"tar", strcasestr(name, ".tar.bz2") ? "-xjf" : "-xJf", source, "-C", target, NULL};
+ 	remove_tree(dir);  /* Only a leftover of before is removed, ofgwrite may still read the new one. */
+ 	if (mkdir(dir, 0755) != 0)  /* NOSONAR the folder the chosen image is unzipped to */
+ 		return 0;
+ 	snprintf(u.body, sizeof(u.body), _("Unzipping %s"), name);
+ 	unzip_tick(&u);
+-	return process_run_with_updates(unzip, NULL, unzip_line, unzip_tick, 200, &u) == 0;
++	return process_run_with_updates(is_tarball(name) ? untar : unzip, NULL, unzip_line, unzip_tick, 200, &u) == 0;
+ }
+ 
+ struct kept_lines {
+@@ -1789,9 +1967,9 @@ static void prepare(struct ui_context *ui, struct input_context *input, const vo
+ 	size_t length;
+ 	snprintf(folder, sizeof(folder), "%s/images", media);
+ 	snprintf(base, sizeof(base), "%s", image->name);
+-	length = strlen(base);
+-	if (length > 4 && !strcasecmp(base + length - 4, ".zip"))
+-		base[length - 4] = '\0';
++	length = archive_ext(base);
++	if (length)
++		base[strlen(base) - length] = '\0';
+ 	snprintf(dir, sizeof(dir), "%s/%s.unzipped", folder, base);
+ 	if (image->local)
+ 		snprintf(zip, sizeof(zip), "%s", image->link);
+@@ -1829,6 +2007,9 @@ static void prepare(struct ui_context *ui, struct input_context *input, const vo
+ static int start_feeds(const struct ui_context *ui, struct feed *feeds, const char *distro, int *current)
+ {
+ 	int feed_count;
++	const char *custom = custom_distro();
++	if (custom)
++		distro = custom;
+ 	if (strcasecmp(distro, "openatv") && distro[0]) {  /* The feed of the running distribution. */
+ 		ui_progress(ui, TITLE, _("Loading the list of distributions."), 10, _("Please wait..."), _("Please wait..."));
+ 		feed_count = load_feeds(feeds, distro);
+diff --git a/src/i18n.c b/src/i18n.c
+index b44d2c0..94f2d44 100644
+--- a/src/i18n.c
++++ b/src/i18n.c
+@@ -36,7 +36,7 @@ static int setting(const char *key, char *value, size_t size)
+ static void language(char *locale, size_t size)
+ {
+ 	char brand[64];
+-	const char *fallback = "de_DE";
++	const char *fallback = "en_US";
+ 	if (setting("config.osd.language", locale, size) || setting("config.misc.locale", locale, size))
+ 		return;
+ 	boxinfo_value("displaybrand", brand, sizeof(brand));
