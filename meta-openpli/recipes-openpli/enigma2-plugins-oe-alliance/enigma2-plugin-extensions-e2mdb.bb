@@ -32,3 +32,5 @@ do_install:append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${S}/init.d/e2mdbd ${D}${sysconfdir}/init.d/e2mdbd
 }
+
+INSANE_SKIP:${PN} = "installed-vs-shipped"
