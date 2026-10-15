@@ -39,7 +39,6 @@ ENIGMA2_PLUGINS = " \
 	enigma2-plugin-systemplugins-serviceapp \
 	enigma2-plugin-systemplugins-softwaremanager \
 	enigma2-plugin-systemplugins-videoenhancement \
-	enigma2-plugin-systemplugins-videomode \
 	enigma2-plugin-systemplugins-videotune \
 	"
 
