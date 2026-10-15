@@ -6,14 +6,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
 
 inherit gitpkgv
 SRCREV = "${AUTOREV}"
-PKGV = "4.x+git${GITPKGV}"
-PV = "4.x+git"
+PKGV = "5.x+git${GITPKGV}"
+PV = "5.x+git"
 
 DEPENDS = "openssl"
 
-SRC_URI = "git://github.com/oe-alliance/ofgwrite.git;protocol=https;branch=master"
+SRC_URI = "gitsm://github.com/oe-alliance/ofgwrite.git;protocol=https;branch=5.0"
 
-inherit pkgconfig
+inherit autotools-brokensep pkgconfig
 
 CFLAGS += "-std=gnu17 -Wno-error=format-security"
 
