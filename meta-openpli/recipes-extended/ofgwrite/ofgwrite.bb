@@ -13,7 +13,7 @@ DEPENDS = "openssl"
 
 SRC_URI = "gitsm://github.com/oe-alliance/ofgwrite.git;protocol=https;branch=5.0"
 
-inherit autotools-brokensep pkgconfig
+inherit pkgconfig
 
 CFLAGS += "-std=gnu17 -Wno-error=format-security"
 
