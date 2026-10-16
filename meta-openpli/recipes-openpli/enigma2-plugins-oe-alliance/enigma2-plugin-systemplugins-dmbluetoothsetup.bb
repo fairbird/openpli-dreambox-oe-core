@@ -2,7 +2,7 @@ DESCRIPTION = "Dreambox bluetooth plugin"
 require conf/license/license-gplv2.inc
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "^(dm900|dm920|dreamone|dreamtwo)$"
+COMPATIBLE_MACHINE = "^(dm7080|dm900|dm920|dreamone|dreamtwo)$"
 
 PN = "enigma2-plugin-systemplugins-bluetoothsetup"
 
