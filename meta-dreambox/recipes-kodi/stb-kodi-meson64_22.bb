@@ -14,4 +14,4 @@ EXTRA_OECMAKE += " \
 # Dream's Amlogic 4.9 amstream driver has no GET_VDEC_INFO ioctl.  Its
 # libamcodec wrapper retries the unsupported ioctl indefinitely instead of
 # returning ENOTTY, so Kodi must not call that optional API on DreamOne/Two.
-CXXFLAGS:append = " -DSTB_AMLOGIC_NO_VDEC_INFO -DSTB_AMLOGIC_LEGACY_AMSTREAM"
+CXXFLAGS:append = " -DSTB_AMLOGIC_NO_VDEC_INFO -DSTB_AMLOGIC_LEGACY_AMSTREAM -DEGL_OPENGL_ES3_BIT=0x00000040 -DEGL_CONTEXT_OPENGL_DEBUG=0x31B0"
