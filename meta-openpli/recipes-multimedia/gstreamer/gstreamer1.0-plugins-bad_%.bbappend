@@ -19,6 +19,7 @@ SRC_URI:append = " \
         file://0011-dash-expose-track-labels.patch \
         file://0012-adaptivedemux-cancel-safe-manifest-update.patch \
         file://0013-adaptivedemux-async-source-error.patch \
+        file://0014-hls-time-renditions-against-one-reference.patch \
 "
 
 SRC_URI:remove = "file://0001-uvcgadget-Use-g_path_get_basename-instead-of-libc-ba.patch"
