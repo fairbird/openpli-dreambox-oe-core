@@ -10,6 +10,7 @@ SRC_URI:append = " \
            file://0001-gstrtpmp4gpay-set-dafault-value-for-MPEG4-without-co.patch \
            file://0002-Revert-souphttpsrc-Always-use-the-content-decoder.patch \
            file://0003-qtdemux-preserve-adaptive-track-title.patch \
+           file://0004-hlsdemux2-exact-segment-time.patch \
 "
 
 PACKAGECONFIG:remove = "soup3"
