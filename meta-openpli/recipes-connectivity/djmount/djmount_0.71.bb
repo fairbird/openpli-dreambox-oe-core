@@ -28,6 +28,7 @@ SRC_URI:append = " \
 	file://06-use-settype.patch \
 	file://07-get-rid-of-proto-list.patch \
 	file://08-cast-structure-to-unsigned-char.patch \
+	file://09-fix-upnp-read-size.patch \
 	"
 EXTRA_OECONF = "--with-external-libupnp-prefix='${STAGING_LIBDIR}' --with-fuse-prefix='${STAGING_LIBDIR}'"
 

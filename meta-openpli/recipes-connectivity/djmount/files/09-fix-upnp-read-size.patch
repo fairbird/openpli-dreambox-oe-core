@@ -1,0 +1,12 @@
+--- a/djmount/file_buffer.c
++++ b/djmount/file_buffer.c
+@@ -220,7 +220,7 @@ FileBuffer_Read (FileBuffer* file, char* buffer,
+ 		 * perform a loop because I am not sure that HTTP GET guaranty
+ 		 * to return the exact number of bytes requested.
+ 		 */
+ 		do {
+-			size_t read_size = size - n;
++			unsigned int read_size = (size - n > UINT_MAX) ? UINT_MAX : (unsigned int)(size - n);
+ 			if (n > 0) {
+ 				Log_Printf (LOG_DEBUG, 
+ 					    "UpnpReadHttpGet loop ! url '%s' "
