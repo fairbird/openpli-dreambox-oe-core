@@ -199,18 +199,21 @@ RPROVIDES:${PN} += " \
     enigma2-plugin-systemplugins-wirelesslan \
     enigma2-plugin-systemplugins-networkwizard \
     enigma2-plugin-systemplugins-networkbrowser \
+    enigma2-plugin-systemplugins-videomode \
 "
 
 RREPLACES:${PN} += " \
     enigma2-plugin-systemplugins-wirelesslan \
     enigma2-plugin-systemplugins-networkwizard \
     enigma2-plugin-systemplugins-networkbrowser \
+    enigma2-plugin-systemplugins-videomode \
 "
 
 RCONFLICTS:${PN} += " \
     enigma2-plugin-systemplugins-wirelesslan \
     enigma2-plugin-systemplugins-networkwizard \
     enigma2-plugin-systemplugins-networkbrowser \
+    enigma2-plugin-systemplugins-videomode \
 "
 
 inherit gitpkgv python3native python3targetconfig
