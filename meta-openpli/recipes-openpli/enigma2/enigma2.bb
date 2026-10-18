@@ -54,7 +54,6 @@ RDEPENDS:${PN} = " \
 RRECOMMENDS:${PN} = " \
 	enigma2-plugin-skins-pli-hd \
 	glibc-gconv-utf-16 \
-	python3-sendfile \
 	${GST_BASE_RDEPS} \
 	${GST_GOOD_RDEPS} \
 	${GST_BAD_RDEPS} \
