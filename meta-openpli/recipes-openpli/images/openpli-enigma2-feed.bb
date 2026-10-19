@@ -266,6 +266,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-freechannels \
 	enigma2-plugin-extensions-e2mdb \
 	enigma2-plugin-extensions-fritzcall \
+	enigma2-plugin-extensions-jukebox \
 	enigma2-plugin-extensions-infobarweather \
 	enigma2-plugin-extensions-iptv-org-playlists \
 	enigma2-plugin-extensions-managerautofs \
