@@ -29,6 +29,7 @@ OPTIONAL_PACKAGES += " \
 	dvblast \
 	dvbsnoop \
 	dvdfs \
+	${@bb.utils.contains_any("MACHINEBUILD", "dreamone dreamtwo", "dreambox-bootmenu", "", d)} \
 	edid-decode \
 	extundelete \
 	exfatprogs \
