@@ -8,6 +8,7 @@ SRC_URI:append = " \
            file://0003-qtdemux-preserve-adaptive-track-title.patch \
            file://0004-hlsdemux2-exact-segment-time.patch \
            file://0005-matroskademux-avs2.patch \
+           file://0006-qtdemux-avs.patch \
 "
 
 PACKAGECONFIG:remove = "soup3"
