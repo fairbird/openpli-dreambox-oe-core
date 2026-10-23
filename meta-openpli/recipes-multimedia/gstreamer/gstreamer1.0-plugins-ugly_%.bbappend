@@ -1,7 +1,3 @@
 PACKAGECONFIG:append = " cdio"
 
 PACKAGE_NO_LOCALE = "1"
-
-PV = "1.28.7"
-
-SRC_URI[sha256sum] = "2b681170ddc22b6b283cafeed48f427c30a17056974a6a9ed137c354e0f7730c"
