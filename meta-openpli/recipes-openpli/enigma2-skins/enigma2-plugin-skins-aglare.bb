@@ -2,7 +2,6 @@ DESCRIPTION = "Aglare-skin"
 MAINTAINER = "lululla"
 SECTION = "base"
 PRIORITY = "required"
-LICENSE = "LicenseRef-proprietary"
 
 require conf/license/license-gplv2.inc
 
