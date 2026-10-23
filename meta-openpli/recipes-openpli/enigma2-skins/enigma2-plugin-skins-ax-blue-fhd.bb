@@ -7,7 +7,6 @@ inherit gitpkgv python3-compileall
 
 PV = "3.4+git"
 PKGV = "3.4+git${GITPKGV}"
-VER = "3.4"
 
 RDEPENDS:${PN} = "enigma2-plugin-extensions-weatherplugin"
 

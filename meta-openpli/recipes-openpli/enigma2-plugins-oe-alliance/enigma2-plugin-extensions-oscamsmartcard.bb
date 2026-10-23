@@ -10,7 +10,6 @@ inherit gitpkgv python3native python3-compileall
 SRCREV = "${AUTOREV}"
 PV = "2.4+git"
 PKGV = "2.4+git${GITPKGV}"
-VER = "2.4"
 PR = "r0"
 
 SRC_URI = "git://github.com/gigablue-support-org/oscamsmartcard.git;protocol=https;branch=master"
