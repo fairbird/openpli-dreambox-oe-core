@@ -2,15 +2,12 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 DEPENDS:append = " cxxopts libzip libzippp"
 
-PV = "3.2.1"
 PKGV = "3.2.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
            file://config.xml \
            file://init \
 "
-
-SRCREV = "d63e666a0874ff953751f882bd10771717420408"
 
 inherit update-rc.d gitpkgv
 
