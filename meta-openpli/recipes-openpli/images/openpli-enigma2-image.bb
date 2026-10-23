@@ -182,4 +182,4 @@ ssh_allow_empty_password () {
 license_create_manifest() {
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "removeopkgleftovers; "
+ROOTFS_POSTPROCESS_COMMAND += "removeopkgleftovers "
