@@ -4,6 +4,9 @@ SRC_URI += "file://use-legacy-path-for-pycs.patch"
 
 SRC_URI:remove = "file://CVE-2026-11940.patch file://CVE-2026-11972.patch file://CVE-2026-4360.patch"
 
+PV = "3.14.9"
+SRC_URI[sha256sum] = "e02d9ac21cebda6e46435369744a92c65cc7cd8669697694122cf97ffacd1e53"
+
 PACKAGECONFIG = "readline gdbm ${@bb.utils.filter('DISTRO_FEATURES', 'lto', d)}"
 
 inherit python3-dir
