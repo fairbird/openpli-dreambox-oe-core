@@ -101,5 +101,5 @@ python openpli_image_info() {
         bb.note('Added %s to %s' % (info.name, archive.name))
 }
 
-IMAGE_POSTPROCESS_COMMAND:append = " openpli_image_info;"
+IMAGE_POSTPROCESS_COMMAND:append = " openpli_image_info"
 do_image_complete[depends] += "zip-native:do_populate_sysroot"
