@@ -9,6 +9,7 @@ SRC_URI:append = " \
            file://0004-hlsdemux2-exact-segment-time.patch \
            file://0005-matroskademux-avs2.patch \
            file://0006-qtdemux-avs.patch \
+           file://0007-aacparse-wait-for-the-rest-of-a-split-frame.patch \
 "
 
 PACKAGECONFIG:remove = "soup3"
