@@ -1,0 +1,15 @@
+diff --git a/src/PlutoTV/plugin.py b/src/PlutoTV/plugin.py
+--- a/src/PlutoTV/plugin.py
++++ b/src/PlutoTV/plugin.py
+@@ -521,9 +521,8 @@
+ 			"favorite": self.keyFavorite,
+ 		}, prio=0, description=_("Pluto TV Actions"))
+ 		self["favoriteAction"].setEnabled(False)
+-		if not config.misc.actionLeftRightToPageUpPageDown.value:  # Add the "left" and "right" navigation options.
+-			self["menuActions"].addAction(self, "NavigationActions", "right", (self.keySelect, _("Select the current menu item")))
+-			self["previousMenuAction"].addAction(self, "NavigationActions", "left", (self.keyPreviousMenu, _("Go back to the previous menu")))
++		self["menuActions"].addAction(self, "NavigationActions", "right", (self.keySelect, _("Select the current menu item")))
++		self["previousMenuAction"].addAction(self, "NavigationActions", "left", (self.keyPreviousMenu, _("Go back to the previous menu")))
+ 		self.region = config.plugins.PlutoTV.region.value
+ 		self.categories = {}
+ 		self.categoryMenu = []

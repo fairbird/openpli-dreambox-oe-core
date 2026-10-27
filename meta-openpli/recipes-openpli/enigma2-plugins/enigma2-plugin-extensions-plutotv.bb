@@ -10,4 +10,6 @@ S = "${UNPACKDIR}/${BP}/src"
 PV = "git"
 PKGV = "${GITPKGVTAG}"
 
-SRC_URI = "git://github.com/oe-alliance/PlutoTV.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/oe-alliance/PlutoTV.git;protocol=https;branch=main \
+           file://removing-inappropriate-code.patch \
+           "
