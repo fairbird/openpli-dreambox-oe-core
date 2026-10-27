@@ -6,9 +6,7 @@ LICENSE = "GPL-3.0-only AND MIT"
 LIC_FILES_CHKSUM = "file://../LICENSE.txt;md5=1ebbd3e34237af26da5dc08a4e440464 \
                     file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-require conf/python/python3-compileall.inc
-
-inherit gittag setuptools3-openplugins
+inherit gittag setuptools3-openplugins python3-compileall
 
 S = "${UNPACKDIR}/${BP}/src"
 
