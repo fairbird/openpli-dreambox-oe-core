@@ -6,14 +6,16 @@ LICENSE = "GPL-3.0-only AND MIT"
 LIC_FILES_CHKSUM = "file://../LICENSE.txt;md5=1ebbd3e34237af26da5dc08a4e440464 \
                     file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-inherit gittag setuptools3-openplugins python3-compileall
+require conf/python/python3-compileall.inc
+
+inherit gittag setuptools3-openplugins
 
 S = "${UNPACKDIR}/${BP}/src"
 
 SRCREV = "${AUTOREV}"
 PV = "git"
 PKGV = "V${GITPKGVTAG}"
-PR = "r1"
+PR = "r3"
 
 SRC_URI = "git://github.com/oe-alliance-plugins/RetroGaming.git;protocol=https;branch=main \
            file://openatv-retrogaming-launch \
@@ -38,6 +40,9 @@ RDEPENDS:${PN} += " \
 # Module packages are optional when a machine already builds the support in.
 # HID_DRAGONRISE builds hid-dr.ko, not a module named hid-dragonrise.
 RRECOMMENDS:${PN} += "kernel-module-joydev kernel-module-hid-dr"
+# These Vu+ kernels carry the Xbox One S backport as a loadable module.
+RRECOMMENDS:${PN}:append:vuzero4k = " kernel-module-xpad"
+RRECOMMENDS:${PN}:append:vuuno4kse = " kernel-module-xpad"
 
 # Installing this frontend must not replace a live DVB kernel module.
 # The image's NexTV graphics mode is checked separately before launching.
@@ -66,6 +71,11 @@ do_install:append() {
     if ${@bb.utils.contains('MACHINE_FEATURES', 'retrogaming-highperformance', 'true', 'false', d)}; then
         install -d ${D}${datadir}/retrogaming
         touch ${D}${datadir}/retrogaming/high-performance
+    fi
+
+    # Keep the plugin's Flycast catalogue in sync with the core recipe.
+    if ${@bb.utils.contains_any('MACHINE_FEATURES', 'retrogaming-hisi4k retrogaming-highperformance', 'true', 'false', d)}; then
+        touch ${D}${datadir}/retrogaming/flycast
     fi
 
     if ${@bb.utils.contains('MACHINE_FEATURES', 'retrogaming-bcm-nxpl', 'true', 'false', d)}; then
@@ -106,5 +116,3 @@ FILES:${PN} = " \
     ${datadir}/retrogaming \
     ${libdir}/enigma2/python/Plugins/Extensions/RetroGaming \
 "
-
-SRC_URI += "file://0001-retrogaming-openpli-video-backend.patch"
