@@ -36,7 +36,7 @@ KERNEL_IMAGETYPES = "Image.gz"
 
 # KCFLAGS, not EXTRA_CFLAGS on the command line: that would override the
 # EXTRA_CFLAGS the kernel Makefiles add to (fs/sdcardfs)
-export KCFLAGS = "-Wno-error -Wno-attribute-alias"
+export KCFLAGS = "-Wno-error -Wno-error=incompatible-pointer-types -Wno-attribute-alias"
 
 KERNEL_FLASH_ARGS = "-c '${CMDLINE}'"
 
