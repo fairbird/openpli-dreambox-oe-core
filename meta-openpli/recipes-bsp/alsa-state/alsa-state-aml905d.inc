@@ -7,8 +7,8 @@ SRC_URI:append = " \
 
 do_install:append() {
    install -d ${D}${datadir}/alsa/cards
-   install -m 0644 ${WORKDIR}/SOC-Audio.conf  ${D}${datadir}/alsa/cards
-   install -m 0644 ${WORKDIR}/AML-M8AUDIO.conf  ${D}${datadir}/alsa/cards
+   install -m 0644 ${UNPACKDIR}/SOC-Audio.conf  ${D}${datadir}/alsa/cards
+   install -m 0644 ${UNPACKDIR}/AML-M8AUDIO.conf  ${D}${datadir}/alsa/cards
 }
 
 FILES:${PN}:append = " ${datadir}/alsa/cards/* "
