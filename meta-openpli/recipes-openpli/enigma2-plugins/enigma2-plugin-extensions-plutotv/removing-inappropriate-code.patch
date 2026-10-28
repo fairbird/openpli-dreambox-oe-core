@@ -1,6 +1,6 @@
-diff --git a/src/PlutoTV/plugin.py b/src/PlutoTV/plugin.py
---- a/src/PlutoTV/plugin.py
-+++ b/src/PlutoTV/plugin.py
+diff --git a/PlutoTV/plugin.py b/PlutoTV/plugin.py
+--- a/PlutoTV/plugin.py
++++ b/PlutoTV/plugin.py
 @@ -521,9 +521,8 @@
  			"favorite": self.keyFavorite,
  		}, prio=0, description=_("Pluto TV Actions"))
