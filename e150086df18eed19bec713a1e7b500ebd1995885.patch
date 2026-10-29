@@ -1,0 +1,110 @@
+From e150086df18eed19bec713a1e7b500ebd1995885 Mon Sep 17 00:00:00 2001
+From: atvcaptain <openatv@gmail.com>
+Date: Wed, 28 Oct 2026 19:40:18 +0100
+Subject: [PATCH] tbs: use existing CX231xx firmware package after archive
+ update
+
+The updated TBS firmware archive no longer contains
+v4l-cx231xx-avcore-01.fw, causing do_install to fail.
+
+Remove the missing file and its package from tbs-tuner-firmwares.
+Use firmware-cx231xx for the TBS5990 driver and firmware collection.
+Add Provides/Replaces/Conflicts for firmware-tbs-cx231xx to preserve
+existing dependencies and avoid duplicate file ownership on upgrades.
+Bump the affected package revisions.
+
+Verified both firmware install tasks in isolation and checked all
+12 remaining TBS firmware files against the updated archive.
+---
+ .../recipes-linux/linux-firmwares/firmware-cx231xx.bb   | 7 +++++++
+ .../linux-firmwares/tbs-tuner-firmwares_1.0.bb           | 9 ++++-----
+ .../tbs-usb-drivers/tbs-cx231xx-stack_git.bb             | 4 +++-
+ 3 files changed, 14 insertions(+), 6 deletions(-)
+
+diff --git a/meta-openpli/recipes-linux/linux-firmwares/firmware-cx231xx.bb b/meta-openpli/recipes-linux/linux-firmwares/firmware-cx231xx.bb
+index f3aae27671a..659a0145ab2 100644
+--- a/meta-openpli/recipes-linux/linux-firmwares/firmware-cx231xx.bb
++++ b/meta-openpli/recipes-linux/linux-firmwares/firmware-cx231xx.bb
+@@ -2,8 +2,15 @@ require linux-firmware.inc
+ 
+ SUMMARY = "Firmware for cx231xx"
+ 
++PR = "r1"
++
+ SRCREV = "6dda26f406b6eb85c5a364a85a83a73f217395ad"
+ 
++# The TBS archive no longer includes this firmware; use a single package owner.
++RPROVIDES:${PN} += "firmware-tbs-cx231xx"
++RREPLACES:${PN} += "firmware-tbs-cx231xx"
++RCONFLICTS:${PN} += "firmware-tbs-cx231xx"
++
+ do_install() {
+     install -d ${D}${nonarch_base_libdir}/firmware
+     install -m 0644 v4l-cx231xx-avcore-01.fw ${D}${nonarch_base_libdir}/firmware
+diff --git a/meta-openpli/recipes-linux/linux-firmwares/tbs-tuner-firmwares_1.0.bb b/meta-openpli/recipes-linux/linux-firmwares/tbs-tuner-firmwares_1.0.bb
+index bd7ab2ac31c..546f1d5d9b7 100644
+--- a/meta-openpli/recipes-linux/linux-firmwares/tbs-tuner-firmwares_1.0.bb
++++ b/meta-openpli/recipes-linux/linux-firmwares/tbs-tuner-firmwares_1.0.bb
+@@ -2,6 +2,8 @@ SUMMARY = "Firmware collection for TBS USB DVB tuners"
+ HOMEPAGE = "https://www.tbsdtv.com/"
+ require conf/license/license-close.inc
+ 
++PR = "r1"
++
+ SRC_URI = "https://www.tbsdtv.com/download/document/linux/tbs-tuner-firmwares_v1.0.tar.bz2"
+ SRC_URI[md5sum] = "701d6cca4a3480d203890eef82fd80e6"
+ SRC_URI[sha256sum] = "23ecf817383dc29881ac9cb6f704239969e5f711270ad2073497653ba08791cc"
+@@ -24,7 +26,6 @@ PACKAGES = " \
+     firmware-dvb-usb-tbs5980 \
+     firmware-dvb-demod-m88rs6060 \
+     firmware-dvb-demod-si2183 \
+-    firmware-tbs-cx231xx \
+ "
+ 
+ ALLOW_EMPTY:${PN} = "1"
+@@ -41,7 +42,7 @@ RRECOMMENDS:${PN} = " \
+     firmware-dvb-usb-tbs5980 \
+     firmware-dvb-demod-m88rs6060 \
+     firmware-dvb-demod-si2183 \
+-    firmware-tbs-cx231xx \
++    firmware-cx231xx \
+ "
+ 
+ FILES:firmware-dvb-usb-tbs5931 = "${nonarch_base_libdir}/firmware/dvb-usb-id5931.fw"
+@@ -56,7 +57,6 @@ FILES:firmware-dvb-usb-tbs5925 = "${nonarch_base_libdir}/firmware/dvb-usb-tbsqbo
+ FILES:firmware-dvb-usb-tbs5980 = "${nonarch_base_libdir}/firmware/dvb-usb-tbsqbox-id5980.fw"
+ FILES:firmware-dvb-demod-m88rs6060 = "${nonarch_base_libdir}/firmware/dvb-demod-m88rs6060.fw"
+ FILES:firmware-dvb-demod-si2183 = "${nonarch_base_libdir}/firmware/dvb-demod-si2183-b60-01.fw"
+-FILES:firmware-tbs-cx231xx = "${nonarch_base_libdir}/firmware/v4l-cx231xx-avcore-01.fw"
+ 
+ do_install() {
+ 	install -d ${D}${nonarch_base_libdir}/firmware
+@@ -72,8 +72,7 @@ do_install() {
+ 		dvb-usb-tbsqbox-id5925.fw \
+ 		dvb-usb-tbsqbox-id5980.fw \
+ 		dvb-demod-m88rs6060.fw \
+-		dvb-demod-si2183-b60-01.fw \
+-		v4l-cx231xx-avcore-01.fw; do
++		dvb-demod-si2183-b60-01.fw; do
+ 		install -m 0644 ${S}/$firmware ${D}${nonarch_base_libdir}/firmware/
+ 	done
+ }
+diff --git a/meta-openpli/recipes-kernel/tbs-usb-drivers/tbs-cx231xx-stack_git.bb b/meta-openpli/recipes-kernel/tbs-usb-drivers/tbs-cx231xx-stack_git.bb
+index f4c3642d65d..a6cd5fa3733 100644
+--- a/meta-openpli/recipes-kernel/tbs-usb-drivers/tbs-cx231xx-stack_git.bb
++++ b/meta-openpli/recipes-kernel/tbs-usb-drivers/tbs-cx231xx-stack_git.bb
+@@ -2,6 +2,8 @@ SUMMARY = "TBS-modified CX231xx stack for the TBS5990 dual DVB-S/S2 CI tuner"
+ 
+ require tbs-module.inc
+ 
++PR = "r1"
++
+ TBS_MODULE_DEPENDS = "tbs-frontend-tas2101 tbs-tuner-av201x"
+ TBS_SOURCE_FILES = " \
+     drivers/media/usb/cx231xx/cx231xx-i2c.c \
+@@ -31,4 +33,4 @@ TBS_INSTALL_MODULES = "cx231xx cx231xx-dvb-ci"
+ TBS_CCFLAGS = "-DCONFIG_DVB_TAS2101=1 -DCONFIG_MEDIA_TUNER_AV201X=1 -DTBS_CX231XX_5990_ONLY=1"
+ TBS_KBUILD_EXTRA_SYMBOLS = "${STAGING_DATADIR}/tbs-module-symvers/tbs-frontend-tas2101/Module.symvers ${STAGING_DATADIR}/tbs-module-symvers/tbs-tuner-av201x/Module.symvers"
+ 
+-RDEPENDS:${PN} += "tbs-frontend-tas2101 tbs-tuner-av201x firmware-tbs-cx231xx"
++RDEPENDS:${PN} += "tbs-frontend-tas2101 tbs-tuner-av201x firmware-cx231xx"
