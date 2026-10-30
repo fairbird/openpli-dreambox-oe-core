@@ -27,7 +27,7 @@ require conf/machine/include/arm/arch-armv8a.inc
 MACHINE_EXTRA_RRECOMMENDS += "\
     ffmpeg \
     enigma2-plugin-systemplugins-serviceapp \
-    gstreamer1.0-plugin-multibox-dvbmediasink \
+    gstreamer1.0-plugin-dvbmediasink \
     gstreamer1.0-plugins-ugly-realmedia \
     gstreamer1.0-libav \
     kernel-module-cifs \
