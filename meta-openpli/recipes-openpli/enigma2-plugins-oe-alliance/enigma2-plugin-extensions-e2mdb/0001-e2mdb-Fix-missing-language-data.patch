@@ -1,0 +1,11 @@
+diff --git a/e2MDB/__init__.py b/e2MDB/__init__.py
+--- a/e2MDB/__init__.py
++++ b/e2MDB/__init__.py
+@@ -70,6 +70,6 @@ langs = [
+ 	"uz", "cy", "xh", "yi", "yo", "zu", "et"
+ 	]
+-langs = [(x, international.LANGUAGE_DATA[x][1]) for x in langs]
++langs = [(x, international.LANGUAGE_DATA[x][1]) for x in langs if x in international.LANGUAGE_DATA]
+ langs.sort(key=lambda x: x[1])
+ 
+ default = config.misc.locale.value.split("_")[0]

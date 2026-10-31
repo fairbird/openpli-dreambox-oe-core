@@ -14,7 +14,9 @@ PKGV = "V${GITPKGVTAG}"
 
 inherit setuptools3-openplugins pkgconfig update-rc.d python3-compileall
 
-SRC_URI = "git://github.com/openatv/e2MDB.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/openatv/e2MDB.git;protocol=https;branch=main \
+	file://0001-e2mdb-Fix-missing-language-data.patch \
+"
 
 INITSCRIPT_NAME = "e2mdbd"
 INITSCRIPT_PARAMS = "defaults 90 10"
