@@ -117,6 +117,8 @@ sudo ln -s /home/<your username>/openpli-dreambox-oe-core/build/tmp/deploy/ipk/m
 With recent Apache2, fix file permission problem with symlinks:
 ```
 sudo chown -Rf <username> openpli-dm920-python3/build/tmp/deploy/ipk
+
+sudo chmod +x /home/<username>
 ```
 <br>Add hostname or ip address to the site.conf file (file exist after make command), e.g. at the end of the file.
 ```
