@@ -9,5 +9,6 @@ DEPENDS = " \
 	enigma2-plugin-softcams-oscam \
 	enigma2-plugin-softcams-oscam-emu \
 	enigma2-plugin-softcams-ncam \
+	enigma2-plugin-softcams-icam-whitelist \
 	enigma2-plugin-softcams-streamrelay-whitelist \
 	"
