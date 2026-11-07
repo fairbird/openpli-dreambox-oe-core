@@ -1,7 +1,6 @@
 DESCRIPTION = "iCAM (SoftCSA) descramble whitelist"
 MAINTAINER = "E2OpenPlugins"
-LICENSE = "LicenseRef-LICENSE-CLOSED"
-LIC_FILES_CHKSUM = "file://${OPENPLI_BASE}/meta-openpli/licenses/LICENSE-CLOSED;md5=2d5b03b35d4612637d67724b35738dd7"
+require conf/license/license-close.inc
 
 PV = "2.1+git${SRCPV}"
 PKGV = "2.1+git${GITPKGV}"
