@@ -6,6 +6,7 @@ inherit gittag setuptools3-openplugins gettext python3-compileall
 
 PV = "git"
 PKGV = "${GITPKGVTAG}"
+PR = "r1"
 
 SRC_URI = "git://github.com/fairbird/WeatherPlugin.git;protocol=https;branch=master"
 FILES:${PN} = "${prefix}/"
