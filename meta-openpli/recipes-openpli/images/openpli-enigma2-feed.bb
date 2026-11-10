@@ -359,6 +359,7 @@ RETROGAMING_FEED_PACKAGES = "\
 	libretro-mrboom \
 	libretro-mupen64plus-next \
 	libretro-ppsspp \
+	${@bb.utils.contains_any("MACHINE_FEATURES", "e2egl", "enigma2-plugin-systemplugins-hbbtv2", "", d)} \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "retrogaming-hisi4k retrogaming-highperformance", "libretro-flycast", "", d)} \
 	"
 
