@@ -12,7 +12,15 @@ PKGV = "git${GITPKGV}"
 SRC_URI = "git://github.com/fairbird/NCam.git;protocol=https;branch=master"
 
 DEPENDS = "libusb openssl libdvbcsa pcsc-lite"
-RDEPENDS:${PN} += "enigma2-plugin-softcams-oscam-whitelist enigma2-plugin-extensions-oscamstatus libdvbcsa libusb1 pcsc-lite pcsc-tools"
+RDEPENDS:${PN} += " \
+	libdvbcsa \
+	libusb1 \
+	pcsc-lite \
+	pcsc-tools \
+	enigma2-plugin-extensions-oscamstatus \
+	enigma2-plugin-softcams-icam-whitelist \
+	enigma2-plugin-softcams-streamrelay-whitelist \
+"
 
 LDFLAGS:prepend = "-ldvbcsa "
 
