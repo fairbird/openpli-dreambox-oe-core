@@ -261,7 +261,7 @@ EXTRA_OECONF = "\
 	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd390", "--with-colorlcd390" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "colorlcd400", "--with-colorlcd400" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "nolcd", "--with-nolcd" , "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "e2egl", "--with-egl" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "e2egl", "--with-egl --with-gles" , "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "skins1440", "--with-egl" , "", d)} \
 	"
 
