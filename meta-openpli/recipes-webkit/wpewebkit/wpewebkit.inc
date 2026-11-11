@@ -122,12 +122,14 @@ PACKAGECONFIG:remove:riscv32 = "jit"
 PACKAGECONFIG:remove:riscv64 = "jit"
 PACKAGECONFIG:remove:mipsarchn64 = "jit"
 PACKAGECONFIG:remove:mipsarchn32 = "jit"
+PACKAGECONFIG:remove:mipsel = "jit dfg-jit"
 PACKAGECONFIG:remove:loongarch64 = "jit"
 
 # Javascript JIT is not supported on x86
 PACKAGECONFIG:remove:x86 = "jit"
 
 LDFLAGS:append:riscv64 = " -pthread"
+LDFLAGS:append:mipsel = " -latomic"
 
 FULL_OPTIMIZATION:remove = "-g"
 

@@ -313,6 +313,7 @@ ENIGMA2_OPTIONAL = " \
 	${@bb.utils.contains("MACHINE_FEATURES", "webkithbbtv", "enigma2-plugin-extensions-webkithbbtv", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "hbbtv-browser-webkit", "enigma2-plugin-extensions-hbbtv-webkit", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "chromiumos", "enigma2-plugin-extensions-chromium2" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "e2egl", "enigma2-plugin-systemplugins-hbbtv2", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "qthbbtv", "enigma2-plugin-extensions-hbbtv-qt libxml2-qt qtwebkit", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "openhbbtv", "enigma2-plugin-extensions-openhbbtvbrowser openhbbtvbrowser qtwebengine", "", d)} \
 	${@bb.utils.contains("MACHINE_FEATURES", "qtstalker", "enigma2-plugin-extensions-stalker-qt libxml2-qt qtwebkit", "", d)} \
@@ -359,7 +360,6 @@ RETROGAMING_FEED_PACKAGES = "\
 	libretro-mrboom \
 	libretro-mupen64plus-next \
 	libretro-ppsspp \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "e2egl", "enigma2-plugin-systemplugins-hbbtv2", "", d)} \
 	${@bb.utils.contains_any("MACHINE_FEATURES", "retrogaming-hisi4k retrogaming-highperformance", "libretro-flycast", "", d)} \
 	"
 
