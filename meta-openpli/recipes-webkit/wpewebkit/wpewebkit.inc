@@ -138,6 +138,9 @@ do_configure:prepend:mipsel() {
 		-e 's/^#if PAS_COMPILER(CLANG) || PAS_ARM32$/#if PAS_COMPILER(CLANG) || PAS_ARM32 || __SIZEOF_POINTER__ == 4/' \
 		-e 's/^#elif PAS_ARM32$/#elif PAS_ARM32 || __SIZEOF_POINTER__ == 4/' \
 		${S}/Source/bmalloc/libpas/src/libpas/pas_utils.h
+	# 32-bit mips has no lock-free 64-bit atomics; libatomic provides them with a lock.
+	sed -i 's/^\(\s*\)static_assert(std::atomic<uint64_t>::is_always_lock_free);$/\1\/\/ static_assert(std::atomic<uint64_t>::is_always_lock_free);/' \
+		${S}/Source/WTF/wtf/SequenceLocked.h
 }
 LDFLAGS:append:mipsel = " -latomic"
 
