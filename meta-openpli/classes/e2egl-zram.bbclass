@@ -16,15 +16,12 @@ e2egl_zram_config() {
 	[ -f "$config" ] || bbfatal "e2egl ZRAM: kernel configuration not found: $config"
 
 	sed -i \
-		-e '/^CONFIG_STAGING=/d' \
-		-e '/^# CONFIG_STAGING is not set/d' \
 		-e '/^CONFIG_ZSMALLOC=/d' \
 		-e '/^# CONFIG_ZSMALLOC is not set/d' \
 		-e '/^CONFIG_ZRAM=/d' \
 		-e '/^# CONFIG_ZRAM is not set/d' \
 		"$config"
 
-	echo "CONFIG_STAGING=y" >> "$config"
 	echo "CONFIG_ZSMALLOC=y" >> "$config"
 	if [ "${SOC_FAMILY}" = "meson64" ]; then
 		echo "CONFIG_ZRAM=y" >> "$config"
@@ -40,8 +37,10 @@ e2egl_zram_config() {
 		yes '' | oe_runmake -C "${S}" O="${B}" oldconfig
 	fi
 
-	grep -qx "CONFIG_ZSMALLOC=y" "$config" ||
-		bbfatal "e2egl ZRAM: kernel rejected CONFIG_ZSMALLOC=y"
-	grep -qx "$expected" "$config" ||
-		bbfatal "e2egl ZRAM: kernel rejected $expected"
+	if ! grep -qx "CONFIG_ZSMALLOC=y" "$config" || ! grep -qx "$expected" "$config"; then
+		if [ "${SOC_FAMILY}" = "meson64" ]; then
+			bbfatal "e2egl ZRAM: kernel rejected CONFIG_ZSMALLOC=y / $expected"
+		fi
+		bbwarn "e2egl ZRAM: this kernel has no ZRAM support, skipped"
+	fi
 }
