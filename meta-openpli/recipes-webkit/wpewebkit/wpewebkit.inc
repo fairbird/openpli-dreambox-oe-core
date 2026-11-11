@@ -129,6 +129,16 @@ PACKAGECONFIG:remove:loongarch64 = "jit"
 PACKAGECONFIG:remove:x86 = "jit"
 
 LDFLAGS:append:riscv64 = " -pthread"
+
+# libpas builds into bmalloc even when mimalloc is the allocator in use, and
+# pas_utils.h only has a 32-bit pas_pair for clang/ARM32, otherwise it needs
+# __uint128_t, which 32-bit mips does not have.
+do_configure:prepend:mipsel() {
+	sed -i \
+		-e 's/^#if PAS_COMPILER(CLANG) || PAS_ARM32$/#if PAS_COMPILER(CLANG) || PAS_ARM32 || __SIZEOF_POINTER__ == 4/' \
+		-e 's/^#elif PAS_ARM32$/#elif PAS_ARM32 || __SIZEOF_POINTER__ == 4/' \
+		${S}/Source/bmalloc/libpas/src/libpas/pas_utils.h
+}
 LDFLAGS:append:mipsel = " -latomic"
 
 FULL_OPTIMIZATION:remove = "-g"
