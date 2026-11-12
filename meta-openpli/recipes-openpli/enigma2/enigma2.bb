@@ -17,6 +17,8 @@ DEPENDS = " \
 	openssl libudfread \
 	python3-treq python3-twisted \
 	procps \
+	ffmpeg \
+	harfbuzz \
 	swig-native \
 	tuxtxt-enigma2 \
 	${@bb.utils.contains("MACHINE_FEATURES", "alsamixer", "ffmpeg" , "", d)} \
