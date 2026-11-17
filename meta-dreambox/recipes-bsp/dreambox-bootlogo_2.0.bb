@@ -10,6 +10,7 @@ inherit allarch opendreambox-git update-rc.d
 DEPENDS += "u-boot-tools-native"
 
 OPENDREAMBOX_PROJECT = "bootlogo"
+
 do_configure() {
 }
 
@@ -27,6 +28,7 @@ do_install () {
 PACKAGES =+ "${PN}-u-boot ${PN}-osdclear"
 
 FILES:${PN}-u-boot = "${sysconfdir}/u-boot.scr.d /boot/autoexec.img"
+FILES:${PN}-osdclear = "${sysconfdir}/init.d/osdclear"
 FILES:${PN} = "/boot/bootlogo.bmp"
 
 RDEPENDS:${PN}-u-boot = "flash-scripts"
@@ -48,5 +50,3 @@ do_install:append() {
 pkg_postinst:${PN}-u-boot() {
 [ -n "$D" ] || update-autoexec
 }
-
-INSANE_SKIP:${PN} = "installed-vs-shipped"
