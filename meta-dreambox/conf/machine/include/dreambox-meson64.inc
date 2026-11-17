@@ -30,6 +30,8 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     gstreamer1.0-plugin-dvbmediasink \
     gstreamer1.0-plugins-ugly-realmedia \
     gstreamer1.0-libav \
+    gstreamer1.0-plugins-ugly-dvdlpcmdec \
+    gstreamer1.0-plugins-ugly-realmedia \
     kernel-module-cifs \
     kernel-module-autofs4 \
     kernel-module-hmac \
@@ -72,8 +74,8 @@ MACHINEOVERRIDES .= ":dreambox"
 
 PREFERRED_PROVIDER_virtual/kodi = "stb-kodi-${SOC_FAMILY}"
 
-PREFERRED_PROVIDER_virtual/blindscan-dvbs = "dreambox-blindscan-utils"
-PREFERRED_PROVIDER_virtual/blindscan-dvbc = "dreambox-blindscan-utils"
+VIRTUAL-RUNTIME_blindscan_dvbs = "dreambox-blindscan-utils"
+VIRTUAL-RUNTIME_blindscan_dvbc = "dreambox-blindscan-utils"
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
 PREFERRED_PROVIDER_virtual/fftw = "fftw"
