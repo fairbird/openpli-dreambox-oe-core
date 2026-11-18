@@ -9,6 +9,7 @@ SRC_URI += " \
 	file://0006-reuse-the-installed_files-list-when-possible.patch \
 	file://0007-Revert-libopkg-track-the-number-of-packages-installi.patch \
 	file://0008-fix-installed-time-not-written-with-libsolv.patch \
+	file://0009-protect-picon-storage.patch \
 	file://filter.patch \
 	file://timeout.patch \
 	file://modprobe \
@@ -19,4 +20,4 @@ do_install:prepend() {
 	install -m 755 ${UNPACKDIR}/modprobe ${D}${datadir}/opkg/intercept/
 }
 
-PR = "r11"
+PR = "r12"
