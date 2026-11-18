@@ -4,6 +4,4 @@ CURRENT_FW = "central-one-noreset-220114-1.15.hex"
 
 include nrf52-firmware.inc
 
-COMPATIBLE_MACHINE = "^(dreamone)$"
-
-
+COMPATIBLE_MACHINE = "^(dms922x)$"

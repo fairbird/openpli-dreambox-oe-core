@@ -66,9 +66,9 @@ do_install() {
         DRIVERSDATE="20200226"
     elif [ "${MACHINE}" = "dm920" ]; then
         DRIVERSDATE="20200321"
-    elif [ "${MACHINE}" = "dreamone" ]; then
+    elif [ "${MACHINEBUILD}" = "dreamone" ]; then
         DRIVERSDATE="20230404"
-    elif [ "${MACHINE}" = "dreamtwo" ]; then
+    elif [ "${MACHINEBUILD}" = "dreamtwo" ]; then
         DRIVERSDATE="20230404"
     fi
 
