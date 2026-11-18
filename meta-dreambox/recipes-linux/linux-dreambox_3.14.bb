@@ -2,7 +2,11 @@ inherit kernel machine_kernel_pr kernel-fixups
 
 MACHINE_KERNEL_PR:append = ".30"
 
-COMPATIBLE_MACHINE = "^(dm900|dm920)$"
+COMPATIBLE_MACHINE = "^(dm7252s)$"
+
+# Kernel differs per MACHINEBUILD (CONFIG_DREAMBOX_DM900 vs DM920), so
+# scope build/deploy per MACHINEBUILD instead of MACHINE_ARCH.
+PACKAGE_ARCH = "${MACHINEBUILD}"
 
 PATCHREV = "6fa88d2001194cbff63ad94cb713b6cd5ea02739"
 PATCHLEVEL = "79"
@@ -51,7 +55,7 @@ B = "${UNPACKDIR}/build"
 
 CMDLINE = "bmem=640M@384M bmem=384M@2048M console=ttyS0,1000000 root=/dev/mmcblk0p2 rootwait rootfstype=ext4 coherent_pool=2M"
 
-DEFCONFIG = "${MACHINE}"
+DEFCONFIG = "${MACHINEBUILD}"
 
 do_configure:prepend() {
 	sed -i 's/\bconstexpr\b/is_constexpr/g' ${S}/scripts/unifdef.c
@@ -64,7 +68,7 @@ kernel_do_configure:prepend() {
 
 BRCM_PATCHLEVEL = "1.17"
 
-LINUX_VERSION = "${PV}-${BRCM_PATCHLEVEL}-${MACHINE}"
+LINUX_VERSION = "${PV}-${BRCM_PATCHLEVEL}-${MACHINEBUILD}"
 KERNEL_IMAGETYPE = "zImage"
 KERNEL_DEVICETREE = "dreambox-dm900.dtb"
 

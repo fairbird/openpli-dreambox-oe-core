@@ -323,13 +323,10 @@ python populate_packages:prepend() {
     do_split_packages(d, enigma2_podir, '^(\w+)/[a-zA-Z0-9_/]+.*$', 'enigma2-locale-%s', '%s', recursive=True, match_path=True, prepend=True, extra_depends="enigma2")
 }
 
-RRECOMMENDS:${PN}:append:dm900 = " enigma2-plugin-systemplugins-fsblupdater"
-RRECOMMENDS:${PN}:append:dm920 = " enigma2-plugin-systemplugins-fsblupdater"
-RRECOMMENDS:${PN}:append:dreamone = " enigma2-plugin-systemplugins-amlfrq enigma2-plugin-systemplugins-bluetoothsetup enigma2-plugin-extensions-quadpip"
-RRECOMMENDS:${PN}:append:dreamtwo = " enigma2-plugin-systemplugins-amlfrq enigma2-plugin-systemplugins-bluetoothsetup enigma2-plugin-extensions-quadpip"
+RRECOMMENDS:${PN}:append:dm7252s = " enigma2-plugin-systemplugins-fsblupdater"
+RRECOMMENDS:${PN}:append:dms922x = " enigma2-plugin-systemplugins-amlfrq enigma2-plugin-systemplugins-bluetoothsetup enigma2-plugin-extensions-quadpip"
 RRECOMMENDS:${PN}:append:dm7080 = " enigma2-plugin-systemplugins-bluetoothsetup"
-RRECOMMENDS:${PN}:append:dm900 = " enigma2-plugin-systemplugins-bluetoothsetup"
-RRECOMMENDS:${PN}:append:dm920 = " enigma2-plugin-systemplugins-bluetoothsetup"
+RRECOMMENDS:${PN}:append:dm7252s = " enigma2-plugin-systemplugins-bluetoothsetup"
 
 # Fix QA build-deps errors for wrapper sub-packages
 # These are runtime-only dependencies, not needed at enigma2 build time
