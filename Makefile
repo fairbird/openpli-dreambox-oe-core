@@ -33,6 +33,16 @@ NR_CPU := $(shell [ -f /proc/cpuinfo ] && grep -c '^processor\s*:' /proc/cpuinfo
 BB_NUMBER_THREADS ?= $(NR_CPU)
 PARALLEL_MAKE ?= -j $(NR_CPU)
 
+MACHINEBUILD := $(MACHINE)
+export MACHINEBUILD
+
+METADIR = $(CURDIR)/meta-dreambox
+
+_FOUND_CONF := $(shell grep -rl "^\# MACHINEBUILDS:.*\b$(MACHINEBUILD)\b" $(METADIR)/conf/machine/*.conf 2>/dev/null | head -1)
+ifneq ($(_FOUND_CONF),)
+  override MACHINE := $(basename $(notdir $(_FOUND_CONF)))
+endif
+
 XSUM ?= md5sum
 ONLINECHECK_URL ?= "http://google.com"
 ONLINECHECK_TIMEOUT ?= 2
@@ -132,13 +142,15 @@ update:
 BITBAKE_ENV_HASH := $(call hash, \
 	'BITBAKE_ENV_VERSION = "0"' \
 	'CURDIR = "$(CURDIR)"' \
+	'MACHINE = "$(MACHINE)"' \
+	'MACHINEBUILD = "$(MACHINEBUILD)"' \
 	)
 
 $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'Generating $@'
-	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE"' > $@
-	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE BB_SRCREV_POLICY BB_NO_NETWORK"' > $@
-	@echo 'export MACHINE' >> $@
+	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE MACHINEBUILD BB_SRCREV_POLICY BB_NO_NETWORK"' > $@
+	@echo 'export MACHINE="$(MACHINE)"' >> $@
+	@echo 'export MACHINEBUILD="$(MACHINEBUILD)"' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
 	@echo 'if [[ $$BB_NO_NETWORK -eq 1 ]]; then' >> $@
 	@echo ' export BB_SRCREV_POLICY="cache"' >> $@
