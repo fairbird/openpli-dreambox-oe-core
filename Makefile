@@ -140,7 +140,7 @@ update:
 .PHONY: all image init initialize update usage
 
 BITBAKE_ENV_HASH := $(call hash, \
-	'BITBAKE_ENV_VERSION = "0"' \
+	'BITBAKE_ENV_VERSION = "1"' \
 	'CURDIR = "$(CURDIR)"' \
 	'MACHINE = "$(MACHINE)"' \
 	'MACHINEBUILD = "$(MACHINEBUILD)"' \
@@ -151,6 +151,19 @@ $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE MACHINEBUILD BB_SRCREV_POLICY BB_NO_NETWORK"' > $@
 	@echo 'export MACHINE="$(MACHINE)"' >> $@
 	@echo 'export MACHINEBUILD="$(MACHINEBUILD)"' >> $@
+	@echo 'bitbake() {' >> $@
+	@echo '    local requested_machine="$${MACHINE:-}"' >> $@
+	@echo '    local mapped_machine="$$requested_machine"' >> $@
+	@echo '    local machinebuild="$${MACHINEBUILD:-$$requested_machine}"' >> $@
+	@echo '    case "$$requested_machine" in' >> $@
+	@echo '        dm900|dm920) mapped_machine=dm7252s; machinebuild="$$requested_machine" ;;' >> $@
+	@echo '        dm820|dm7080) mapped_machine=dm7435; machinebuild="$$requested_machine" ;;' >> $@
+	@echo '        dreamone|dreamtwo) mapped_machine=dms922x; machinebuild="$$requested_machine" ;;' >> $@
+	@echo '        dm500hd|dm800se) mapped_machine=dm7405nand; machinebuild="$$requested_machine" ;;' >> $@
+	@echo '        dm500hdv2|dm800sev2|dm7020hdv2) mapped_machine=dm7405ubi; machinebuild="$$requested_machine" ;;' >> $@
+	@echo '    esac' >> $@
+	@echo '    MACHINE="$$mapped_machine" MACHINEBUILD="$$machinebuild" command bitbake "$$@"' >> $@
+	@echo '}' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
 	@echo 'if [[ $$BB_NO_NETWORK -eq 1 ]]; then' >> $@
 	@echo ' export BB_SRCREV_POLICY="cache"' >> $@
