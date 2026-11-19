@@ -242,6 +242,7 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-dlnaserver \
 	enigma2-plugin-extensions-e2embyclient \
 	enigma2-plugin-extensions-keyadder \
+	enigma2-plugin-extensions-kidssafebouquets \
 	enigma2-plugin-extensions-raedquicksignal \
 	enigma2-plugin-extensions-backupsuite \
 	enigma2-plugin-extensions-autobouquets \
