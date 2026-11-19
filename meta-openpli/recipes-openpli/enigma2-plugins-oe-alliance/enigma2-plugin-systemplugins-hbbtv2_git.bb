@@ -8,7 +8,9 @@ HOMEPAGE = "https://github.com/OpenViX/HbbTv2.0"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-3.0-only;md5=c79ff39f19dfec6d293b95dea7b07891"
 
-SRC_URI = "git://github.com/OpenViX/HbbTv2.0.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/OpenViX/HbbTv2.0.git;protocol=https;branch=master \
+	file://Fix-EGL-GLES.patch \
+"
 SRCREV = "${AUTOREV}"
 PV = "1.0+git"
 PKGV = "1.0+git${GITPKGV}"

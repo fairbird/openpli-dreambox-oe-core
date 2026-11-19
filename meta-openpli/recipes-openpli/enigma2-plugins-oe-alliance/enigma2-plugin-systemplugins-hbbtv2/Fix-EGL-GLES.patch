@@ -1,0 +1,60 @@
+diff --git a/src/channel.py b/src/channel.py
+index 618ae96..917667b 100644
+--- a/src/channel.py
++++ b/src/channel.py
+@@ -6,7 +6,7 @@ import threading
+ from sys import maxsize
+ from urllib.parse import urlparse
+ 
+-from enigma import eActionMap, eTimer, iPlayableService, iServiceInformation
++from enigma import eActionMap, eTimer, iPlayableService, iServiceInformation, getGraphicsInfo
+ from Screens.ChoiceBox import ChoiceBox
+ from Screens.MessageBox import MessageBox
+ 
+@@ -15,14 +15,6 @@ from .ait import AIT_TIMEOUT, AitCollection, appName, currentChannel, locatorOf,
+ from .screen import KEY_NAMES, REPEAT_KEYS, WPEScreen, claimedKeys, pageChosen, screens
+ from .settings import readSettings
+ 
+-try:
+-	from enigma import getEGLVersionString, getGLESVersionString
+-except ImportError:  # an enigma2 that does not report them
+-	def getEGLVersionString():
+-		return ""
+-
+-	def getGLESVersionString():
+-		return ""
+ 
+ MIN_EGL = (1, 4)  # what WPE WebKit needs of the driver
+ MIN_GLES = (2, 0)
+@@ -36,13 +28,27 @@ def versionOf(text, pattern):
+ def glSupport():
+ 	"""(True, "") when enigma2 reports an EGL and an OpenGL ES version that WPE WebKit can use, else (False, a message for the user).
+ 	enigma2 reports what its own EGL renderer got from the driver (getEGLVersionString / getGLESVersionString): nothing when it does not run on EGL."""
+-	egl, gles = getEGLVersionString().strip(), getGLESVersionString().strip()
+-	eglVersion = versionOf(egl, r"^(\d+)\.(\d+)")
+-	glesVersion = versionOf(gles, r"OpenGL ES(?:-\w+)? (\d+)\.(\d+)")
++	graphicsInfo = getGraphicsInfo()
++	print("[HbbTV2] GraphicsInfo: %s" % graphicsInfo)
++
++	eglMajor = graphicsInfo.get("egl_major", 0)
++	eglMinor = graphicsInfo.get("egl_minor", 0)
++	glesMajor = graphicsInfo.get("gles_version", 0)
++
++	eglVersion = (eglMajor, eglMinor) if eglMajor else None
++	glesVersion = (glesMajor, 0) if glesMajor else None
++
++	print("[HbbTV2] EGL Version: %s" % (eglVersion,))
++	print("[HbbTV2] GLES Version: %s" % (glesVersion,))
++
+ 	if eglVersion and glesVersion and eglVersion >= MIN_EGL and glesVersion >= MIN_GLES:
+ 		return True, ""
++
++	egl = "%d.%d" % eglVersion if eglVersion else "none"
++	gles = "%d.0" % glesMajor if glesVersion else "none"
++
+ 	return False, _("HbbTV is not supported on this system.\n\nIt needs EGL %d.%d and OpenGL ES %d.%d or newer.\nenigma2 reports: EGL %s, OpenGL ES %s.") % (
+-		MIN_EGL + MIN_GLES + (egl or "none", gles.split(' "', 1)[0] or "none"))
++		MIN_EGL + MIN_GLES + (egl, gles))
+ 
+ 
+ def currentServiceAppUrl(session):
