@@ -217,7 +217,7 @@ RCONFLICTS:${PN} += " \
     enigma2-plugin-systemplugins-videomode \
 "
 
-inherit gitpkgv python3native python3targetconfig
+inherit gitpkgv autotools pkgconfig python3native python3targetconfig upx-compress
 
 PV = "${PYTHON_BASEVERSION}+git"
 PKGV = "${PYTHON_BASEVERSION}+git${GITPKGV}"
@@ -233,8 +233,6 @@ FILES:${PN} += "${datadir}/keymaps"
 FILES:${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-
-inherit autotools pkgconfig
 
 PACKAGES =+ "enigma2-fonts"
 PKGV:enigma2-fonts = "2020.10.17"
