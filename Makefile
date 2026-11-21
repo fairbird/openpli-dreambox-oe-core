@@ -39,9 +39,7 @@ export MACHINEBUILD
 METADIR = $(CURDIR)/meta-dreambox
 
 _FOUND_CONF := $(shell grep -rl "^\# MACHINEBUILDS:.*\b$(MACHINEBUILD)\b" $(METADIR)/conf/machine/*.conf 2>/dev/null | head -1)
-ifneq ($(_FOUND_CONF),)
-  override MACHINE := $(basename $(notdir $(_FOUND_CONF)))
-endif
+export MACHINE
 
 XSUM ?= md5sum
 ONLINECHECK_URL ?= "http://google.com"
@@ -140,17 +138,13 @@ update:
 .PHONY: all image init initialize update usage
 
 BITBAKE_ENV_HASH := $(call hash, \
-	'BITBAKE_ENV_VERSION = "1"' \
+	'BITBAKE_ENV_VERSION = "3"' \
 	'CURDIR = "$(CURDIR)"' \
-	'MACHINE = "$(MACHINE)"' \
-	'MACHINEBUILD = "$(MACHINEBUILD)"' \
 	)
 
 $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'Generating $@'
 	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE MACHINEBUILD BB_SRCREV_POLICY BB_NO_NETWORK"' > $@
-	@echo 'export MACHINE="$(MACHINE)"' >> $@
-	@echo 'export MACHINEBUILD="$(MACHINEBUILD)"' >> $@
 	@echo 'bitbake() {' >> $@
 	@echo '    local requested_machine="$${MACHINE:-}"' >> $@
 	@echo '    local mapped_machine="$$requested_machine"' >> $@
