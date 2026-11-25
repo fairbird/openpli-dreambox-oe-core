@@ -24,6 +24,7 @@ OPTIONAL_PACKAGES += " \
 	davfs2 \
 	diffutils \
 	dabstreamer \
+	dmxcsa \
 	dosfstools \
 	dvb-apps \
 	dvblast \
