@@ -20,4 +20,6 @@ do_install:prepend() {
 	install -m 755 ${UNPACKDIR}/modprobe ${D}${datadir}/opkg/intercept/
 }
 
+SRC_URI:append:class-native = " file://0010-opkg-keep-solver-job-name-stable.patch"
+
 PR = "r12"
